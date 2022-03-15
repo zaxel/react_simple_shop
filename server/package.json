@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,4 +17,4 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.17.0"
   }
-}
+} 
