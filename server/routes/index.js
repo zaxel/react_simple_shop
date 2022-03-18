@@ -11,4 +11,4 @@ router.use('/device', deviceRouter);
 router.use('/type', typeRouter);
 router.use('/brand', brandRouter);
 
-module.exports = router
+module.exports = router;
