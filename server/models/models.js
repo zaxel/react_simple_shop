@@ -58,7 +58,7 @@ const TypeBrand = sequelize.define('type_brand', {
   Basket.hasMany(BasketDevice)
   BasketDevice.belongsTo(Basket)
 
-  Device.hasMany(DeviceInfo)
+  Device.hasMany(DeviceInfo, {as: 'info'})
   DeviceInfo.belongsTo(Device)
 
   Type.hasMany(Device)
