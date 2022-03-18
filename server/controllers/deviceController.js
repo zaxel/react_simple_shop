@@ -2,6 +2,8 @@
 const path = require('path');
 const {Device} = require('../models/models');
 const ApiError = require('../error/ApiError');
+const startPage = 1;
+const defaultLimit = 9;
 
 class DeviceController {
     async create(req, res, next){
@@ -19,19 +21,22 @@ class DeviceController {
         
     }
     async getAll(req, res){
-        const {brandId, typeId} = req.query;
+        let {brandId, typeId, limit, page} = req.query;
+        page = page || startPage;
+        limit = limit || defaultLimit;
+        let offset = page * limit - limit;
         let devices;
         if(!brandId && !typeId){
-            devices = await Device.findAll();
+            devices = await Device.findAndCountAll({limit, offset});
         }
         if(brandId && !typeId){
-            devices = await Device.findAll({where:{brandId}});
+            devices = await Device.findAndCountAll({where:{brandId}, limit, offset});
         }
         if(!brandId && typeId){
-            devices = await Device.findAll({where:{typeId}});
+            devices = await Device.findAndCountAll({where:{typeId}, limit, offset});
         }
         if(brandId && typeId){
-            devices = await Device.findAll({where:{brandId, typeId}});
+            devices = await Device.findAndCountAll({where:{brandId, typeId}, limit, offset});
         }
         return res.json(devices);
     }
