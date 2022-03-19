@@ -1,8 +1,28 @@
 ﻿const ApiError = require('../error/ApiError');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {User, Basket} = require('../models/models');
 
 class UserController {
-    async registration(req, res){
-        
+    async registration(req, res, next){
+        const {email, password, role} = req.body;
+        if(!email || !password){
+            return next(ApiError.badRequest('email or password is incorrect.'));
+        }
+        const candidate = await User.findOne({where: {email}});
+        if(candidate){
+            return next(ApiError.badRequest('user with this email already exist.'));
+        }
+        const hashPassword = await bcrypt.hash(password, 5);
+        const user = await User.create({email, password: hashPassword, role});
+        const basket = await Basket.create({userId: user.id});
+        // const token = {test: 'test'};
+        const token = jwt.sign(
+                { id: user.id, email, role },
+                process.env.SECRET_KEY,
+                {expiresIn: '2h'}
+        );
+        return res.json({token});
     }
     async login(req, res){
 
@@ -10,7 +30,7 @@ class UserController {
     async check(req, res, next){
         const {id} = req.query;
         if(!id){
-            return next(ApiError.badRequest('no id stated'));
+            return next(ApiError.badRequest('no id stated.'));
         }
         res.json(id);
     }
