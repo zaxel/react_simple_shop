@@ -5,14 +5,14 @@ module.exports = function (req, res, next){
         next();
     }
     try{
-        const token = req.headers.authorization.split(' ')[1];  // Bearer
+        const token = req.headers.authorization?.split(' ')[1];  // Bearer
         if(!token){
-            return res.status(401).json({message: 'user not authorized!'});
+            return res.status(401).json({message: 'user not authorized!(no token in header)'});
         }
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decoded;
         next();
     }catch(e){
-        res.status(401).json({message: 'user not authorized!'});
+        res.status(401).json({message: e.message});
     }
 }
