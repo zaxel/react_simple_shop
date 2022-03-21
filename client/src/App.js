@@ -1,8 +1,10 @@
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import AppRouter from "./components/AppRouter";
 function App() {
   return (
-    <div>
-      Arazone shop content
-    </div>
+    <BrowserRouter>
+      <AppRouter/>
+    </BrowserRouter>
   );
 }
 
