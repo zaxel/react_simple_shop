@@ -61,7 +61,54 @@ code {
   background-color: transparent;
   font-weight: 500;
 }
+.btn-outline-light:hover {
+  color: #000;
+  background-color: darkgray;
+  border-color: darkgray;
+}
 /* auth end */
+/* shop start */
+.shop{
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+}
+.shop__container{
+  display: flex;
+}
+.shop__devices-cont{
+  flex: 0 1 84%;
+}
+/* shop end */
+/*typebar start*/
+.typebar{
+  flex: 0 1 16%;
+  margin-top: 40px;
+  background: #C4C4C4;
+
+}
+.list-group{
+  padding: 20px 0;
+}
+.list-group-item{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: roboto, sans-serif;
+  font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+}
+.list-group-item:hover{
+  background-color: darkgrey;
+}
+.list-group-item.active {
+  color: black;
+  background-color: darkgrey;;
+  border-color: darkgrey;;
+}
+/*typebar end*/
 
 /* media start */
 @media (max-width: 1312px){
