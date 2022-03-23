@@ -6,6 +6,7 @@ import { SHOP_ROUTE, ERROR_ROUTE } from '../utils/consts';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context);
+    
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
             <div className="container-fluid">
