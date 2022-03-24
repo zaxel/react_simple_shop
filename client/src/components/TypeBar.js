@@ -7,7 +7,6 @@ const TypeBar = observer(() => {
     return (
         <div className='typebar'>
             <ul className="list-group">
-            
                 {device.types.map(li_item => {
                    return <li
                     key={li_item.id} 

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import TypeBar from '../components/TypeBar';
 import BrandBar from '../components/BrandBar';
+import DeviceItems from '../components/DeviceItems';
 
 const Shop = () => {
     return (
@@ -8,8 +9,8 @@ const Shop = () => {
             <div className='shop__container'>
                 <TypeBar/>
                 <div className='shop__devices-cont'>
-                <BrandBar/>
-                    <div>devices cards</div>
+                    <BrandBar/>
+                    <DeviceItems/>
                 </div>
             </div>
         </div>
