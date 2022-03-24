@@ -12,7 +12,7 @@ const TypeBar = observer(() => {
                    return <li
                     key={li_item.id} 
                     onClick={()=>device.setTypeActive(li_item.id)}
-                    className={"list-group-item " + (device.typeActive === li_item.id && 'active')}>{li_item.name}</li>
+                    className={"list-group-item" + (device.typeActive === li_item.id ? ' active' : '')}>{li_item.name}</li>
                 })}
             </ul>
         </div>

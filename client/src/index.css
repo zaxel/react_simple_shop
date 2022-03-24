@@ -71,19 +71,21 @@ code {
 .shop{
   width: 100%;
   height: 100%;
-  padding: 8px;
+  padding: 8px 20px;
 }
 .shop__container{
   display: flex;
 }
 .shop__devices-cont{
   flex: 0 1 84%;
+  margin-left: 20px;
+
 }
 /* shop end */
 /*typebar start*/
 .typebar{
   flex: 0 1 16%;
-  margin-top: 40px;
+  margin-top: 90px;
   background: #C4C4C4;
 
 }
@@ -96,9 +98,8 @@ code {
   cursor: pointer;
   font-family: roboto, sans-serif;
   font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 21px;
+  font-weight: 400;
+  font-size: 18px;
 }
 .list-group-item:hover{
   background-color: darkgrey;
@@ -109,6 +110,28 @@ line-height: 21px;
   border-color: darkgrey;;
 }
 /*typebar end*/
+/* brandbar start */
+.brandBar .list-group{
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.brandBar__li{
+  list-style: none;
+  background-color: #C4C4C4;
+  margin: 0 0 8px 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+}
+.brandBar__li:hover,
+.brandBar__li.active{
+  background-color: darkgray;
+}
+
+/* brandbar end */
 
 /* media start */
 @media (max-width: 1312px){

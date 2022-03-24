@@ -105,6 +105,7 @@ export default class DeviceStore{
             ]
         }
         this._typeActive = null;
+        this._brandActive = null;
         makeAutoObservable(this);
     }
     setTypes(types){
@@ -119,6 +120,9 @@ export default class DeviceStore{
     setTypeActive(typeId){
         this._typeActive = typeId;
     }
+    setBrandActive(typeId){
+        this._brandActive = typeId;
+    }
     get types(){
         return this._types;
     }
@@ -130,5 +134,8 @@ export default class DeviceStore{
     }
     get typeActive(){
         return this._typeActive;
+    }
+    get brandActive(){
+        return this._brandActive;
     }
 }
