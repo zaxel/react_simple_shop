@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
-import { SHOP_ROUTE, ERROR_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE, ADMIN_ROUTE } from '../utils/consts';
+import { SHOP_ROUTE, ERROR_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE, ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE } from '../utils/consts';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context);
@@ -17,13 +17,13 @@ const NavBar = observer(() => {
                         <Link className="nav-link" to={SHOP_ROUTE}>Home</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to={SHOP_ROUTE}>About</Link>
+                        <Link className="nav-link" to={ABOUT_ROUTE}>About</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to={SHOP_ROUTE}>Shop</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to={ERROR_ROUTE}>Contacts</Link>
+                        <Link className="nav-link" to={CONTACT_ROUTE}>Contacts</Link>
                     </li>
                 </ul>
                 {user.isAuth ?

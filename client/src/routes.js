@@ -4,7 +4,10 @@ import Basket from "./pages/Basket";
 import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
 import ErrorPage from "./pages/ErrorPage";
-import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE } from "./utils/consts";
+import About from "./pages/About";
+import Contacts from "./pages/Contacts";
+import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
+        LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE } from "./utils/consts";
 
 export const authRoutes = [
     {
@@ -20,6 +23,14 @@ export const publicRoutes = [
     {
         path: SHOP_ROUTE,
         Component: Shop
+    },
+    {
+        path: ABOUT_ROUTE,
+        Component: About
+    },
+    {
+        path: CONTACT_ROUTE,
+        Component: Contacts
     },
     {
         path: LOGIN_ROUTE,
