@@ -1,11 +1,12 @@
 ﻿import { observer } from "mobx-react-lite";
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
-import { SHOP_ROUTE, ERROR_ROUTE } from '../utils/consts';
+import { SHOP_ROUTE, ERROR_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE, ADMIN_ROUTE } from '../utils/consts';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context);
+    const navigate = useNavigate();
     
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
@@ -28,10 +29,10 @@ const NavBar = observer(() => {
                 {user.isAuth ?
                     <ul className="navbar-nav navbar-user-data-cont flex-row">
                         <li className="nav-item">
-                            <button className='btn btn-outline-secondary'>Admin panel</button> 
+                            <button onClick={()=>navigate(ADMIN_ROUTE)} className='btn btn-outline-secondary'>Admin panel</button> 
                         </li>
                         <li className="nav-item">
-                            <button className='btn btn-outline-secondary'>Basket</button> 
+                            <button onClick={()=>navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>Basket</button> 
                         </li>
                         <li className="nav-item">
                             <button onClick={()=>user.setIsAuth(false)} className='btn btn-outline-secondary'>Exit</button> 
@@ -39,13 +40,13 @@ const NavBar = observer(() => {
                     </ul>  :
                     <ul className="navbar-nav navbar-user-data-cont flex-row">
                         <li className="nav-item">
-                            <button className='btn btn-outline-secondary'>Basket</button> 
+                            <button onClick={()=>navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>Basket</button> 
                         </li>
                         <li className="nav-item">
                             <button onClick={()=>user.setIsAuth(true)} className='btn btn-outline-secondary'>Login</button> 
                         </li>
                         <li className="nav-item">
-                            <button className='btn btn-outline-secondary'>Sigh up</button> 
+                            <button onClick={()=>navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>Sigh up</button> 
                         </li>
                     </ul>
                 }

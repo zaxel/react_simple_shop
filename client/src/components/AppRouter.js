@@ -1,12 +1,13 @@
-﻿import React, { useContext } from 'react';
+﻿import { observer } from 'mobx-react-lite';
+import React, { useContext } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Context } from '..';
 import Basket from '../pages/Basket';
 import { authRoutes, publicRoutes } from '../routes';
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
     const {user, device} = useContext(Context);
-
+    
     return (
         <Routes>
             {user.isAuth && authRoutes.map(({path, Component})=>{
@@ -17,6 +18,6 @@ const AppRouter = () => {
             })}
         </Routes>
     );
-};
+});
 
 export default AppRouter;

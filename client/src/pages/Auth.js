@@ -13,7 +13,6 @@ const Auth = () => {
     }, [width, height])
     return (
         <div ref={authForm} className='auth'>
-            {console.log('render')}
             <form className='auth__form'>
                 <h3 className='auth__title'>
                     {isLogin ? 'Login' : 'Sign Up'}
