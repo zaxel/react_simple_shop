@@ -298,6 +298,18 @@ code {
     background-color: white;
 }
 /*device end*/
+/*admin page start*/
+.admin__container{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.admin__container .btn{
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    max-width: 300px;
+}
+/*admin page end*/
 
 /* media start */
 @media (max-width: 1312px) {}
