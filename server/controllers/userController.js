@@ -31,13 +31,14 @@ class UserController {
     }
     async login(req, res, next){
         const {email, password} = req.body;
+
         const user = await User.findOne({where: {email}});
         if(!user){
-            return next(ApiError.internal('wrong email or password(email)'));
+            return next(ApiError.unauthorized('wrong email or password(email)'));
         }
         let comparePasswords = bcrypt.compareSync(password, user.password);
         if(!comparePasswords){
-            return next(ApiError.internal('wrong email or password(password)'));
+            return next(ApiError.unauthorized('wrong email or password(password)'));
         }
         const token = generateJwt(user.id, user.email, user.role);
         return res.json({token});
