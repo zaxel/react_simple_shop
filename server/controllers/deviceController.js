@@ -3,7 +3,7 @@ const path = require('path');
 const {Device, DeviceInfo} = require('../models/models');
 const ApiError = require('../error/ApiError');
 const startPage = 1;
-const defaultLimit = 9;
+const defaultLimit = 3;
 
 class DeviceController {
     async create(req, res, next){
