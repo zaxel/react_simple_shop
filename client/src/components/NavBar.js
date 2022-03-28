@@ -2,11 +2,17 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
-import { SHOP_ROUTE, ERROR_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE, ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE } from '../utils/consts';
+import { SHOP_ROUTE, ERROR_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE, 
+    ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context);
     const navigate = useNavigate();
+
+    const logout = () => {
+        user.setUser({});
+        user.setIsAuth(false);
+    }
     
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
@@ -35,7 +41,7 @@ const NavBar = observer(() => {
                             <button onClick={()=>navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>Basket</button> 
                         </li>
                         <li className="nav-item">
-                            <button onClick={()=>user.setIsAuth(false)} className='btn btn-outline-secondary'>Exit</button> 
+                            <button onClick={logout} className='btn btn-outline-secondary'>Logout</button> 
                         </li>
                     </ul>  :
                     <ul className="navbar-nav navbar-user-data-cont flex-row">
@@ -43,7 +49,7 @@ const NavBar = observer(() => {
                             <button onClick={()=>navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>Basket</button> 
                         </li>
                         <li className="nav-item">
-                            <button onClick={()=>user.setIsAuth(true)} className='btn btn-outline-secondary'>Login</button> 
+                            <button onClick={()=>navigate(LOGIN_ROUTE)} className='btn btn-outline-secondary'>Login</button> 
                         </li>
                         <li className="nav-item">
                             <button onClick={()=>navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>Sigh up</button> 

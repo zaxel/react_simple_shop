@@ -1,10 +1,13 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+﻿import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
 import { registration, login } from '../http/userAPI';
-import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT } from '../utils/consts';
+import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../utils/consts';
+import {observer} from 'mobx-react-lite';
+import {Context} from '..';
 
-const Auth = () => {
+const Auth = observer(() => {
+    const {user} = useContext(Context);
     const params = useLocation();
     let isLogin = params.pathname === LOGIN_ROUTE;
     const authForm = useRef(null);
@@ -12,19 +15,27 @@ const Auth = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     useEffect(()=>{
         authForm.current.style.height = height - NAVBAR_HEIGHT +'px';
     }, [width, height])
 
     const auth = async(e) => {
-        if(isLogin){
-            e.preventDefault();
-            const response = await login(email, password);
-            console.log(66, response);
-        }else{
-            e.preventDefault();
-            const response = await registration(email, password);
-            console.log(66, response);
+        try{
+            let data;
+            if(isLogin){
+                e.preventDefault();
+                data = await login(email, password);
+            }else{
+                e.preventDefault();
+                data = await registration(email, password);
+            }
+            user.setUser(data);
+            user.setIsAuth(true);
+            navigate(SHOP_ROUTE);
+        }catch(e){
+            alert(e.response.data.message);
         }
         
     }
@@ -53,6 +64,6 @@ const Auth = () => {
             </form>
         </div>
     );
-};
+});
 
 export default Auth;

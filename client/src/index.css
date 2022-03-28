@@ -10,6 +10,16 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+/*Spinner Start*/
+.spinner{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*Spinner End*/
+
 
 /* navbar start */
 .nav-item {
