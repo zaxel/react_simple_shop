@@ -315,6 +315,10 @@ code {
 .device__specification li:nth-child(odd){
     background-color: white;
 }
+.device__img-cont .spinner{
+    width: 100%;
+    height: 100%;
+}
 /*device end*/
 /*admin page start*/
 .admin__container{

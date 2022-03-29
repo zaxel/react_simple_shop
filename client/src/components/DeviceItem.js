@@ -1,11 +1,12 @@
 ﻿import React from 'react';
-import plugImage from '../assets/iPhone11.jpg';
 import star from '../assets/rating_star.png';
+import { useNavigate } from "react-router-dom";
+import { DEVICE_ROUTE } from '../utils/consts';
 
 const DeviceItem = ({device}) => {
-    console.log(process.env.REACT_APP_API_URL+device.img)
+    const navigate = useNavigate();
     return ( 
-        <div className = 'deviceItem'>
+        <div onClick={()=>navigate(DEVICE_ROUTE + '/' + device.id)} className = 'deviceItem'>
             <div className = 'deviceItem__image-cont'>
                 <img src = { process.env.REACT_APP_API_URL + device.img } alt = 'item photo' />
             </div> 

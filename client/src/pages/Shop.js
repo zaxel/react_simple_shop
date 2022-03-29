@@ -17,7 +17,6 @@ const Shop = observer(() => {
         device.setBrands(data)
     })
     fetchAllDevices().then(data=>{
-        console.log(data)
         device.setDevices(data)
     })
    }, [])
