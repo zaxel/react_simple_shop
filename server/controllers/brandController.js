@@ -4,9 +4,9 @@ const ApiError = require('../error/ApiError');
 
 class BrandController {
     async create(req, res){
-        const {name} = req.body;
-        const brand = await Brand.create({name}); 
-        return res.json(brand);
+        const {brand} = req.body;
+        const data = await Brand.create({name: brand}); 
+        return res.json(data);
     }
     async getAll(req, res){
         const brands = await Brand.findAll();

@@ -1,9 +1,15 @@
 ﻿import React, { useRef, useState } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
+import { createBrand } from '../http/deviceAPI';
 
 const BrandModal = ({show, onHide}) => {
-    const [inputValue, setInputValue] = useState('');
+    const [brand, setBrand] = useState('');
     const inputRef = useRef(null);
+
+    const setNewBrand = () => {
+      onHide();
+      createBrand(brand).then(_=>setBrand(''));
+    }
 
     return (
       <Modal centered show={show} onHide={onHide}>
@@ -13,7 +19,7 @@ const BrandModal = ({show, onHide}) => {
         <Modal.Body>
           
         <Form.Group className="mb-3">
-          <Form.Control ref={inputRef} value={inputValue} onChange={(e)=>setInputValue(e.currentTarget.value)} placeholder="new brand"/>
+          <Form.Control ref={inputRef} value={brand} onChange={(e)=>setBrand(e.currentTarget.value)} placeholder="new brand"/>
         </Form.Group>
           
         </Modal.Body>
@@ -21,7 +27,7 @@ const BrandModal = ({show, onHide}) => {
           <Button variant="secondary" onClick={onHide}>
             Close
           </Button>
-          <Button variant="primary" onClick={onHide}>
+          <Button variant="primary" onClick={setNewBrand}>
             Save
           </Button>
         </Modal.Footer>
