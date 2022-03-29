@@ -1,9 +1,16 @@
 ﻿import React, { useRef, useState } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
+import { createType } from '../http/deviceAPI';
 
 const TypeModal = ({show, onHide}) => {
-    const [inputValue, setInputValue] = useState('');
+    const [type, setTypeValue] = useState('');
     const inputRef = useRef(null);
+
+    const setNewType = () => {
+      onHide();
+      createType(type).then(data=>setTypeValue(''));
+    }
+
     return (
       <Modal centered show={show} onHide={onHide}>
         <Modal.Header closeButton>
@@ -12,7 +19,7 @@ const TypeModal = ({show, onHide}) => {
         <Modal.Body>
           
         <Form.Group className="mb-3">
-          <Form.Control ref={inputRef} value={inputValue} onChange={(e)=>setInputValue(e.currentTarget.value)} placeholder="new type"/>
+          <Form.Control ref={inputRef} value={type} onChange={(e)=>setTypeValue(e.currentTarget.value)} placeholder="new type"/>
         </Form.Group>
           
         </Modal.Body>
@@ -20,7 +27,7 @@ const TypeModal = ({show, onHide}) => {
           <Button variant="secondary" onClick={onHide}>
             Close
           </Button>
-          <Button variant="primary" onClick={onHide}>
+          <Button variant="primary" onClick={setNewType}>
             Save
           </Button>
         </Modal.Footer>
