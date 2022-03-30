@@ -44,12 +44,10 @@ const DeviceModal = observer(({show, onHide}) => {
         formData.append('typeId', device.typeActive);
         formData.append('info', JSON.stringify(specs));
         formData.append('img', img);
-        await createDevice(formData);
+        const data = await createDevice(formData);
       }catch(e){
         alert(e.response.data.message)
       }
-      
-
         
     }
     useEffect(()=>{
