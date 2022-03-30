@@ -34,6 +34,15 @@ const DeviceModal = observer(({show, onHide}) => {
     const delSpec = (id) => {
       setSpecs(prev=>prev.filter(spec=>spec.id!==id));
     }
+    const formReset = () => {
+      setSelectedType('');
+      setSelectedBrand('');
+      setTitle('');
+      setPrice('');
+      setSpecs([]);
+      device.setTypeActive(null);
+      device.setBrandActive(null);
+    }
     const setNewDevice = async() => {
       try{
         onHide();
@@ -45,6 +54,7 @@ const DeviceModal = observer(({show, onHide}) => {
         formData.append('info', JSON.stringify(specs));
         formData.append('img', img);
         const data = await createDevice(formData);
+        formReset();
       }catch(e){
         alert(e.response.data.message)
       }
