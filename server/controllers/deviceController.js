@@ -3,13 +3,13 @@ const path = require('path');
 const {Device, DeviceInfo} = require('../models/models');
 const ApiError = require('../error/ApiError');
 const startPage = 1;
-const defaultLimit = 6;
+const defaultLimit = 20;
 
 class DeviceController {
     async create(req, res, next){
         try{
-            const {name, price, brandId, typeId, info} = req.body;
-            const {img} = req.files;
+            let {name, price, brandId, typeId, info} = req.body;
+            let {img} = req.files;
             let fileName = uuid.v4()+".jpg";
             img.mv(path.resolve(__dirname, '..', 'static', fileName));
     
@@ -27,7 +27,7 @@ class DeviceController {
             }
             return res.json(device);
         }catch(e){
-            next(ApiError.badRequest(e.message));
+            next(ApiError.forbidden(e.message));
         }
         
     }

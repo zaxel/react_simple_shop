@@ -1,16 +1,30 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import { Context } from '..';
+import { createDevice, fetchTypes, fetchBrands, fetchAllDevices } from '../http/deviceAPI';
+import { observer } from 'mobx-react-lite';
 
-const DeviceModal = ({show, onHide}) => {
+const DeviceModal = observer(({show, onHide}) => {
     const [selectedType, setSelectedType] = useState('');
     const [selectedBrand, setSelectedBrand] = useState('');
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [specs, setSpecs] = useState([]);
+    const [img, setImg] = useState('');
 
     const {device} = useContext(Context);
-    
+
+    const onTypePickHandler = (e) => {
+      const pickedTypeValue = e.currentTarget.value;
+      setSelectedType(pickedTypeValue);
+      device.setTypeActive(device.types.find(type=>type.name===pickedTypeValue).id);
+    }
+    const onBrandPickHandler = (e) => {
+      const pickedBrandValue = e.currentTarget.value;
+      setSelectedBrand(pickedBrandValue);
+      device.setBrandActive(device.brands.find(type=>type.name===pickedBrandValue).id);
+    }
+
     const addSpec = () => {setSpecs(prev=>
         [...prev, {id: Date.now(), title: '', descr: ''}]
     )}
@@ -20,6 +34,37 @@ const DeviceModal = ({show, onHide}) => {
     const delSpec = (id) => {
       setSpecs(prev=>prev.filter(spec=>spec.id!==id));
     }
+    const setNewDevice = async() => {
+      try{
+        onHide();
+        const formData = new FormData();
+        formData.append('name', title);
+        formData.append('price', price);
+        formData.append('brandId', device.brandActive);
+        formData.append('typeId', device.typeActive);
+        formData.append('info', JSON.stringify(specs));
+        formData.append('img', img);
+        await createDevice(formData);
+      }catch(e){
+        alert(e.response.data.message)
+      }
+      
+
+        
+    }
+    useEffect(()=>{
+      fetchTypes().then(data=>{
+          device.setTypes(data)
+      })
+      fetchBrands().then(data=>{
+          device.setBrands(data)
+      })
+      fetchAllDevices().then(data=>{
+          device.setDevices(data)
+      })
+     }, [])
+
+
     return (
       <Modal className="device-modal" centered show={show} onHide={onHide}>
         <Modal.Header closeButton>
@@ -28,13 +73,13 @@ const DeviceModal = ({show, onHide}) => {
         <Modal.Body>
           
         <Form.Group className="mb-3">
-            <Form.Select value={selectedType} onChange={(e)=>setSelectedType(e.currentTarget.value)} className="device-modal__select">
+            <Form.Select value={selectedType} onChange={onTypePickHandler} className="device-modal__select">
                 <option>Choose Type</option>
                 {device.types.map(type=>
                     <option key={type.id}>{type.name}</option>    
                 )}
             </Form.Select>
-            <Form.Select value={selectedBrand} onChange={(e)=>setSelectedBrand(e.currentTarget.value)} className="device-modal__select">
+            <Form.Select value={selectedBrand} onChange={onBrandPickHandler} className="device-modal__select">
                 <option>Choose Brand</option>
                 {device.brands.map(brand=>
                     <option key={brand.id}>{brand.name}</option>    
@@ -42,7 +87,7 @@ const DeviceModal = ({show, onHide}) => {
             </Form.Select>
           <Form.Control value={title} onChange={(e)=>setTitle(e.currentTarget.value)} placeholder="Add Device Title"/>
           <Form.Control type="number" step="0.01" value={price} onChange={(e)=>setPrice(e.currentTarget.value)} placeholder="Add Price"/>
-          <Form.Control type="file" className="device-modal__file"/>
+          <Form.Control type="file" onChange={e=>setImg(e.target.files[0])} className="device-modal__file"/>
           <hr/>
           <ul className='device-modal__spec-container'>
                 {specs.map(spec=>
@@ -68,12 +113,12 @@ const DeviceModal = ({show, onHide}) => {
           <Button variant="secondary" onClick={onHide}>
             Close
           </Button>
-          <Button variant="primary" onClick={onHide}>
+          <Button variant="primary" onClick={setNewDevice}>
             Save
           </Button>
         </Modal.Footer>
       </Modal>
     );
-};
+});
 
 export default DeviceModal;
