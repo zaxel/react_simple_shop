@@ -371,7 +371,25 @@ code {
 }
 
 /*device modal end*/
-
+/*pagination start*/
+.pagination__cont{
+    padding: 10px;
+}
+.pagination{
+    width: fit-content;
+    margin: 0 auto;
+}
+.pagination .page-item .page-link{
+    color: black;
+}
+.pagination .page-link:focus{
+    box-shadow: 0 0 0 1px rgb(13 110 253 / 25%);
+}
+.pagination .page-item.active .page-link{
+    background-color: #a9a9a9;
+    border-color: #000;
+}
+/*pagination end*/
 /* media start */
 @media (max-width: 1312px) {}
 
