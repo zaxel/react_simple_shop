@@ -11,7 +11,10 @@ const BrandBar = observer(() => {
             {device.brands.map(brand => {
                return <li
                 key={brand.id} 
-                onClick={()=>device.setBrandActive(brand.id)}
+                onClick={()=>{
+                    device.setBrandActive(brand.id);
+                    device.setActivePage(1);
+                }}
                 className={"brandBar__li" + (device.brandActive === brand.id ? ' active' : '')}>{brand.name}</li>
             })}
         </ul>

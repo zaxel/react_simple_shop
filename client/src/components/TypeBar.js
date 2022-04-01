@@ -10,7 +10,10 @@ const TypeBar = observer(() => {
                 {device.types.map(li_item => {
                    return <li
                     key={li_item.id} 
-                    onClick={()=>device.setTypeActive(li_item.id)}
+                    onClick={()=>{
+                        device.setTypeActive(li_item.id);
+                        device.setActivePage(1);
+                        }}
                     className={"list-group-item" + (device.typeActive === li_item.id ? ' active' : '')}>{li_item.name}</li>
                 })}
             </ul>
