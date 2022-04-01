@@ -17,10 +17,17 @@ const Shop = observer(() => {
     fetchBrands().then(data=>{
         device.setBrands(data)
     })
-    fetchAllDevices().then(data=>{
-        device.setDevices(data)
-    })
+    fetchAllDevices(null, null, device.itemsPerPage, device.activePage)
+        .then(data=>device.setDevices(data))
+        .then(data=>device.setPagesTotal(Math.ceil(device.devices.count/device.itemsPerPage)))
    }, [])
+
+   useEffect(()=>{
+    fetchAllDevices(device.brandActive, device.typeActive, device.itemsPerPage, device.activePage)
+    .then(data=>device.setDevices(data))
+    .then(data=>device.setPagesTotal(Math.ceil(device.devices.count/device.itemsPerPage)))
+   }, [device.activePage, device.brandActive, device.typeActive])
+
     return (
         <div className='shop'>
             <div className='shop__container'>
