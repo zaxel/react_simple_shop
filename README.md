@@ -4,13 +4,13 @@
 
 
 *************************************************
-### *** you are welcome to try it ***
+### *** check things ***
 
 **`DEMO front`** ------ [https://saelex.com/shop](https://saelex.com/shop)
 * login - test@gmail.com
 * pass - 1111
 
-**`Try backend`** ----- [https://apple-sundae-74995.herokuapp.com/](https://apple-sundae-74995.herokuapp.com/)
+**`Backend`** ----- [https://apple-sundae-74995.herokuapp.com/](https://apple-sundae-74995.herokuapp.com/)
 few endpoints for test:
 * /api/devices - get all devices
 * /api/device/:id - get single device
