@@ -1,4 +1,4 @@
-﻿export const BASE_ROUTE = '/shop';
+﻿export const BASE_ROUTE = '';
 export const ADMIN_ROUTE = BASE_ROUTE+'/admin';
 export const LOGIN_ROUTE = BASE_ROUTE+'/login';
 export const CONTACT_ROUTE = BASE_ROUTE+'/contacts';
