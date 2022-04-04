@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import BasketItem from '../components/BasketItem';
-import SponsoredItem from './SponsoredItem';
+import SponsoredItem from '../components/SponsoredItem';
 import { Button, Modal, Form } from 'react-bootstrap';
 
 const Basket = () => {
