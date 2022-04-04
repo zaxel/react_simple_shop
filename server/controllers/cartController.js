@@ -5,14 +5,19 @@ class cartController {
     async createOrUpdate(req, res, next) {
         try {
             const { body } = req;
-            const foundItem = await BasketDevice.findOne({ where: {basketId: body.basketId} });
+            const foundItem = await BasketDevice.findOne({ 
+                where: { 
+                    basketId: body.basketId, 
+                    deviceId: body.deviceId
+                } 
+            });
             if (!foundItem) {
                 // Item not found, create a new one
                 const item = await BasketDevice.create(body);
                 return res.json({ item, created: true });
             }
             // Found an item, update it
-            const item = await BasketDevice.update({device_amount: body.device_amount}, { where: {basketId: body.basketId}});
+            const item = await BasketDevice.update({ device_amount: body.device_amount }, { where: { basketId: body.basketId } });
             return res.json({ item, created: false });
 
         } catch (e) {
@@ -20,10 +25,28 @@ class cartController {
         }
 
     }
-    async get(req, res) {
-        // const BasketDevice = await BasketDevice.findAll();
-        // res.json(types)
-        console.log(req.user)
+    async getAll(req, res) {
+        try {
+            const { body } = req;
+            const item = await BasketDevice.findAndCountAll({ where: { basketId: body.basketId } });
+            res.json(item)
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+    async deleteOne(req, res) {
+        try {
+            const { body } = req;
+            const item = await BasketDevice.destroy({ 
+                where: { 
+                    basketId: body.basketId, 
+                    deviceId: body.deviceId
+                } 
+            });
+            res.json(item)
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
     }
 
 }

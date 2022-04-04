@@ -4,6 +4,7 @@ const cartController = require('../controllers/cartController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 router.post('/', authMiddleware, cartController.createOrUpdate);
-router.get('/', authMiddleware, cartController.get);
+router.get('/', authMiddleware, cartController.getAll);
+router.delete('/', authMiddleware, cartController.deleteOne);
 
 module.exports = router;
