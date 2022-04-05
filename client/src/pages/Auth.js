@@ -5,6 +5,7 @@ import { registration, login } from '../http/userAPI';
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../utils/consts';
 import {observer} from 'mobx-react-lite';
 import {Context} from '..';
+import { isSuperUser } from '../utils/isSuperUser';
 
 const Auth = observer(() => {
     const {user} = useContext(Context);
@@ -33,6 +34,10 @@ const Auth = observer(() => {
             }
             user.setUser(data);
             user.setIsAuth(true);
+            user.setIsSuperUser(isSuperUser(data.role))
+            // user.setIsSuperUser(true)
+            console.log(data.role)
+            console.log(user.isSuperUser)
             navigate(SHOP_ROUTE);
         }catch(e){
             alert(e.response.data.message);

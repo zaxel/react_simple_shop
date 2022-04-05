@@ -7,11 +7,18 @@ import ErrorPage from "./pages/ErrorPage";
 import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
-        LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE } from "./utils/consts";
+        LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, ACCOUNT_ROUTE } from "./utils/consts";
 
-export const authRoutes = [
+export const adminRoutes = [
     {
         path: ADMIN_ROUTE,
+        Component: Admin
+    },
+    
+];
+export const authRoutes = [
+    {
+        path: ACCOUNT_ROUTE,
         Component: Admin
     },
     
