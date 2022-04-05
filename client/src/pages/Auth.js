@@ -15,6 +15,7 @@ const Auth = observer(() => {
     const [width, height] = useWindowSize();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    let { from } = params.state || { from: { pathname: "/" } }
 
     const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ const Auth = observer(() => {
             user.setUser(data);
             user.setIsAuth(true);
             user.setIsSuperUser(isSuperUser(data.role))
-            navigate(SHOP_ROUTE);
+            navigate(from);
         }catch(e){
             alert(e.response.data.message);
         }
