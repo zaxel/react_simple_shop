@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, ACCOUNT_ROUTE } from "./utils/consts";
+import AccountPage from "./pages/AccountPage";
 
 export const adminRoutes = [
     {
@@ -19,7 +20,7 @@ export const adminRoutes = [
 export const authRoutes = [
     {
         path: ACCOUNT_ROUTE,
-        Component: Admin
+        Component: AccountPage
     },
     
 ];

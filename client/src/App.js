@@ -6,6 +6,7 @@ import { useState, useContext, useEffect } from "react";
 import { Context } from ".";
 import { check } from "./http/userAPI";
 import { Spinner } from "react-bootstrap";
+import { isSuperUser } from "./utils/isSuperUser";
 
 
 const App = observer(() => {
@@ -17,6 +18,7 @@ const App = observer(() => {
       .then(data=>{
         user.setUser(data);
         user.setIsAuth(true);
+        user.setIsSuperUser(isSuperUser(data.role));
     })
       .finally(()=>setLoading(false));
   }, [])
