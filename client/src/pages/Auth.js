@@ -35,9 +35,6 @@ const Auth = observer(() => {
             user.setUser(data);
             user.setIsAuth(true);
             user.setIsSuperUser(isSuperUser(data.role))
-            // user.setIsSuperUser(true)
-            console.log(data.role)
-            console.log(user.isSuperUser)
             navigate(SHOP_ROUTE);
         }catch(e){
             alert(e.response.data.message);
