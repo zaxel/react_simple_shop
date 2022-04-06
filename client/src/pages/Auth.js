@@ -8,19 +8,23 @@ import {Context} from '..';
 import { isSuperUser } from '../utils/isSuperUser';
 
 const Auth = observer(() => {
-    const {user} = useContext(Context);
+    const {user, navigation} = useContext(Context);
     const params = useLocation();
+    const authFromPath = navigation.authFrom;
+
     let isLogin = params.pathname === LOGIN_ROUTE;
     const authForm = useRef(null);
     const [width, height] = useWindowSize();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    let { from } = params.state || { from: { pathname: "/" } }
-
+    let from = { pathname:  authFromPath} || { pathname: "/" } 
     const navigate = useNavigate();
 
     useEffect(()=>{
         authForm.current.style.height = height - NAVBAR_HEIGHT +'px';
+        return ()=>{
+            navigation.setAuthFrom("/");
+        }
     }, [width, height])
 
     const auth = async(e) => {
@@ -33,7 +37,6 @@ const Auth = observer(() => {
                 e.preventDefault();
                 data = await registration(email, password);
             }
-            console.log(data)
             user.setUser(data);
             user.setIsAuth(true);
             user.setIsSuperUser(isSuperUser(data.role))
@@ -43,8 +46,6 @@ const Auth = observer(() => {
         }
         
     }
-
-
     return (
         <div ref={authForm} className='auth'>
             <form className='auth__form'>

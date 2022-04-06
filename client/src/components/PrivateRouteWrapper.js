@@ -1,4 +1,4 @@
-﻿import React, { useContext } from "react"
+﻿import React, { useContext, useEffect } from "react"
 import { Navigate, useLocation } from "react-router-dom"
 import { Context } from "..";
 import { LOGIN_ROUTE } from "../utils/consts";
@@ -9,12 +9,16 @@ import { LOGIN_ROUTE } from "../utils/consts";
  * If not authenticated, redirects the user to Login page.
  */
 const PrivateElement = ({ children }) => {
-  let location = useLocation();
-  const {user} = useContext(Context);
+  let {pathname} = useLocation();
+  const {user, navigation} = useContext(Context);
+
+  useEffect(()=>{
+    navigation.setAuthFrom(pathname);
+  },[])
   return user.isAuth ? (
     children
   ) : (
-    <Navigate to={LOGIN_ROUTE} state={{ from: location }} />
+    <Navigate to={LOGIN_ROUTE}/>
   )
 }
 
