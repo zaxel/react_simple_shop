@@ -14,32 +14,27 @@ const App = observer(() => {
   const { user, cart } = useContext(Context);
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
-    try {
-      const userData = await check();
-      user.setUser(userData);
-      user.setIsAuth(true);
-      user.setIsSuperUser(isSuperUser(userData.role));
-      const cartData = await getCart(9);
-      console.log(cartData)
+  useEffect(() => {
+    const fetchData = async()=> {
+      try {
+        const fetchArr = [check(), getCart(9)]
+        const promises = await Promise.all(fetchArr);
 
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setLoading(false)
+        user.setUser(promises[0]);
+        user.setIsAuth(true);
+        user.setIsSuperUser(isSuperUser(promises[0].role));
+        console.log(promises[1])
+  
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setLoading(false)
+      }
     }
+    fetchData();
+    
 
   }, [])
-
-  // useEffect(()=>{
-  //     check()
-  //     .then(data=>{
-  //       user.setUser(data);
-  //       user.setIsAuth(true);
-  //       user.setIsSuperUser(isSuperUser(data.role));
-  //   })
-  //     .finally(()=>setLoading(false));
-  // }, [])
 
   if (loading) {
     return (
