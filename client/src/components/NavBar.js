@@ -9,7 +9,7 @@ import {
 } from '../utils/consts';
 
 const NavBar = observer(() => {
-    const { user } = useContext(Context);
+    const { user, cart } = useContext(Context);
     const navigate = useNavigate();
 
     const logout = () => {
@@ -17,7 +17,6 @@ const NavBar = observer(() => {
         user.setIsAuth(false);
         user.setIsSuperUser(false);
     }
-
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
             <div className="container-fluid">
@@ -48,7 +47,7 @@ const NavBar = observer(() => {
                             <button onClick={() => navigate(ACCOUNT_ROUTE)} className='btn btn-outline-secondary'>{`User ${user.user.id}`}</button>
                         </li>
                         <li className="nav-item">
-                            <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>Basket</button>
+                            <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>{cart.itemsCount} Basket</button>
                         </li>
                         <li className="nav-item">
                             <button onClick={logout} className='btn btn-outline-secondary'>Logout</button>
@@ -57,7 +56,7 @@ const NavBar = observer(() => {
                     <ul className="navbar-nav navbar-user-data-cont flex-row">
                         
                         <li className="nav-item">
-                            <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>Basket</button>
+                            <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>{cart.itemsCount} Basket</button>
                         </li>
 
                         <li className="nav-item">

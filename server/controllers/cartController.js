@@ -1,4 +1,4 @@
-﻿const { BasketDevice } = require('../models/models');
+﻿const { BasketDevice, Basket } = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class cartController {
@@ -28,7 +28,11 @@ class cartController {
     async getAll(req, res, next) {
         try {
             const { body } = req;
-            const item = await BasketDevice.findAndCountAll({ where: { basketId: body.basketId } });
+            const cart = await Basket.findOne({where: {userId: body.userId}});
+            if(!cart){
+                return next(ApiError.badRequest(e.message+': no user with provided id found'));
+            }
+            const item = await BasketDevice.findAndCountAll({ where: { basketId: cart.id } });
             res.json(item)
         } catch (e) {
             next(ApiError.badRequest(e.message));
