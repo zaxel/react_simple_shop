@@ -25,7 +25,7 @@ class cartController {
         }
 
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         try {
             const { body } = req;
             const item = await BasketDevice.findAndCountAll({ where: { basketId: body.basketId } });
@@ -34,7 +34,7 @@ class cartController {
             next(ApiError.badRequest(e.message));
         }
     }
-    async deleteOne(req, res) {
+    async deleteOne(req, res, next) {
         try {
             const { body } = req;
             const item = await BasketDevice.destroy({ 
