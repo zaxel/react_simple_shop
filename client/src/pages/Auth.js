@@ -17,7 +17,7 @@ const Auth = observer(() => {
     const [width, height] = useWindowSize();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    let from = { pathname:  authFromPath} || { pathname: "/" } 
+    let from = { pathname:  authFromPath ||  "/" } 
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -29,6 +29,7 @@ const Auth = observer(() => {
 
     const auth = async(e) => {
         try{
+            console.log(from)
             let data;
             if(isLogin){
                 e.preventDefault();
