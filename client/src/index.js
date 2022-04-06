@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import UserStore from './store/UserStore';
 import DeviceStore from './store/DeviceStore';
-import NavigateStore from './store/NavigateStore';
+import HistoryStore from './store/HistoryStore';
 
 export const Context = createContext(null);
 
@@ -13,7 +13,7 @@ ReactDOM.render(
   <Context.Provider value={{
       user: new UserStore(),
       device: new DeviceStore(),
-      navigation: new NavigateStore(),
+      history: new HistoryStore(),
     }}>
     <App />
   </Context.Provider>,

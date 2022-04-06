@@ -8,9 +8,9 @@ import {Context} from '..';
 import { isSuperUser } from '../utils/isSuperUser';
 
 const Auth = observer(() => {
-    const {user, navigation} = useContext(Context);
+    const {user, history} = useContext(Context);
     const params = useLocation();
-    const authFromPath = navigation.authFrom;
+    const authFromPath = history.authFrom;
 
     let isLogin = params.pathname === LOGIN_ROUTE;
     const authForm = useRef(null);
@@ -23,7 +23,7 @@ const Auth = observer(() => {
     useEffect(()=>{
         authForm.current.style.height = height - NAVBAR_HEIGHT +'px';
         return ()=>{
-            navigation.setAuthFrom("/");
+            history.setAuthFrom("/");
         }
     }, [width, height])
 

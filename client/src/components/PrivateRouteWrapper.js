@@ -10,10 +10,10 @@ import { LOGIN_ROUTE } from "../utils/consts";
  */
 const PrivateElement = ({ children }) => {
   let {pathname} = useLocation();
-  const {user, navigation} = useContext(Context);
+  const {user, history} = useContext(Context);
 
   useEffect(()=>{
-    navigation.setAuthFrom(pathname);
+    history.setAuthFrom(pathname);
   },[])
   return user.isAuth ? (
     children
@@ -22,4 +22,4 @@ const PrivateElement = ({ children }) => {
   )
 }
 
-export default PrivateElement
+export default PrivateElement;

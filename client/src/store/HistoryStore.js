@@ -1,6 +1,6 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class NavigateStore{
+export default class HistoryStore{
     constructor(){
         this._authFrom = '';
         
