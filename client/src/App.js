@@ -4,11 +4,9 @@ import NavBar from "./components/NavBar";
 import { observer } from "mobx-react-lite";
 import { useState, useContext, useEffect } from "react";
 import { Context } from ".";
-import { check } from "./http/userAPI";
-import { getCart } from "./http/cartAPI";
-import { fetchSingleDevice } from "./http/deviceAPI";
 import { Spinner } from "react-bootstrap";
-import { isSuperUser } from "./utils/isSuperUser";
+import { setUserIfAuth } from "./utils/setUserIfAuth";
+import { fetchSetCart } from "./utils/fetchSetCart";
 
 
 const App = observer(() => {
@@ -17,25 +15,8 @@ const App = observer(() => {
 
   useEffect(async () => {
     try {
-      const userData = await check();
-      user.setUser(userData);
-      user.setIsAuth(true);
-      user.setIsSuperUser(isSuperUser(userData.role));
-      
-
-      const cartData = await getCart(user.user.id);
-      cart.setCart(cartData.rows);
-      cart.setItemsCount(cartData.count);
-
-      const fetchDevices = cartData.rows.map(device=>fetchSingleDevice(device.deviceId));
-      const basketDevices = await Promise.all(fetchDevices);
-      cart.setCartDevices(basketDevices);
-      console.log(basketDevices)
-      
-      // const cartDevices = await getCart(user.user.id);
-      // cart.setCart(cartData.rows)
-      // cart.setItemsCount(cartData.count)
-
+      await setUserIfAuth(user);
+      await fetchSetCart(user, cart);
     } catch (e) {
       console.log(e)
     } finally {
@@ -44,15 +25,6 @@ const App = observer(() => {
 
   }, [])
 
-  // useEffect(()=>{
-  //     check()
-  //     .then(data=>{
-  //       user.setUser(data);
-  //       user.setIsAuth(true);
-  //       user.setIsSuperUser(isSuperUser(data.role));
-  //   })
-  //     .finally(()=>setLoading(false));
-  // }, [])
 
   if (loading) {
     return (

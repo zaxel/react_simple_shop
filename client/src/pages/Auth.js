@@ -6,8 +6,7 @@ import { getCart } from '../http/cartAPI';
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
-import { isSuperUser } from '../utils/isSuperUser';
-
+import { setUserIfAuth } from '../utils/setUserIfAuth';
 const Auth = observer(() => {
     const { user, history, cart } = useContext(Context);
     const params = useLocation();
@@ -38,9 +37,8 @@ const Auth = observer(() => {
                 e.preventDefault();
                 data = await registration(email, password);
             }
-            user.setUser(data);
-            user.setIsAuth(true);
-            user.setIsSuperUser(isSuperUser(data.role));
+            await setUserIfAuth(user);
+            
 
             const cartData = await getCart(user.user.id);
             cart.setCart(cartData.rows)

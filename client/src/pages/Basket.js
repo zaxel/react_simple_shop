@@ -3,8 +3,9 @@ import { Context } from '..';
 import BasketItem from '../components/BasketItem';
 import SponsoredItem from '../components/SponsoredItem';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
 
-const Basket = () => {
+const Basket = observer(() => {
     const { cart, user } = useContext(Context);
     return (
         <div className='basket'>
@@ -44,6 +45,6 @@ const Basket = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Basket;
