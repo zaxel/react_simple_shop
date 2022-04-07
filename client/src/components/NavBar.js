@@ -18,6 +18,7 @@ const NavBar = observer(() => {
         user.setIsSuperUser(false);
 
         cart.setItemsCount(0);
+        cart.setCartDevices({});
     }
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">

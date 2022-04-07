@@ -7,6 +7,8 @@ import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../u
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { setUserIfAuth } from '../utils/setUserIfAuth';
+import { fetchSetCart } from '../utils/fetchSetCart';
+
 const Auth = observer(() => {
     const { user, history, cart } = useContext(Context);
     const params = useLocation();
@@ -38,11 +40,7 @@ const Auth = observer(() => {
                 data = await registration(email, password);
             }
             await setUserIfAuth(user);
-            
-
-            const cartData = await getCart(user.user.id);
-            cart.setCart(cartData.rows)
-            cart.setItemsCount(cartData.count)
+            await fetchSetCart(user, cart);
 
             navigate(from);
         } catch (e) {
