@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
 import { observer } from "mobx-react-lite";
@@ -6,6 +6,7 @@ import { useState, useContext, useEffect } from "react";
 import { Context } from ".";
 import { check } from "./http/userAPI";
 import { getCart } from "./http/cartAPI";
+import { fetchSingleDevice } from "./http/deviceAPI";
 import { Spinner } from "react-bootstrap";
 import { isSuperUser } from "./utils/isSuperUser";
 
@@ -23,8 +24,17 @@ const App = observer(() => {
       
 
       const cartData = await getCart(user.user.id);
-      cart.setCart(cartData.rows)
-      cart.setItemsCount(cartData.count)
+      cart.setCart(cartData.rows);
+      cart.setItemsCount(cartData.count);
+
+      const fetchDevices = cartData.rows.map(device=>fetchSingleDevice(device.deviceId));
+      const basketDevices = await Promise.all(fetchDevices);
+      cart.setCartDevices(basketDevices);
+      console.log(basketDevices)
+      
+      // const cartDevices = await getCart(user.user.id);
+      // cart.setCart(cartData.rows)
+      // cart.setItemsCount(cartData.count)
 
     } catch (e) {
       console.log(e)

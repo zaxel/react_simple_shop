@@ -3,7 +3,7 @@ import item from '../assets/iPhone11.jpg';
 import { Button, Modal, Form } from 'react-bootstrap';
 
 
-const BasketItem = ({deviceId}) => {
+const BasketItem = ({device}) => {
     const amount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const [selectedValue, setSelectedValue] = useState(1);
     const selectHandler = (e) =>{
@@ -13,15 +13,15 @@ const BasketItem = ({deviceId}) => {
         };
         setSelectedValue(e.target.value)
     }
-    console.log(deviceId)
+    console.log(device.id)
     return (
         <div className='basket-item'>
             <div className='basket-item__img'>
-                <img src={item} alt='basket item' />
+                <img src={process.env.REACT_APP_API_URL + device.img} alt='basket item' />
             </div>
             <div className='basket-item__descr-cont'>
                 <div className='basket-item__descr-subcont'>
-                    <h2>Z-Edge U28I4K 28-inch Gaming Monitor Ultra HD 4K 3840x2160 IPS LED Monitor, 300 cd/m², 4 ms Response Time, HDMI+DP+Type-C+USB-B+USB2, Built-in Speakers, FreeSync TechnologyZ-Edge U28I4K 28-inch Gaming Monitor Ultra HD 4K 3840x2160 IPS LED Monitor, 300 cd/m²</h2>
+                    <h2>{device.name}</h2>
 
                     <div className='basket-item__buttons-cont'>
                         <Form.Select value={selectedValue} onChange={selectHandler} className="device-modal__select">
@@ -36,7 +36,7 @@ const BasketItem = ({deviceId}) => {
 
                 </div>
                 <div className='basket-item__price-cont'>
-                    <h3>$289.54</h3>
+                    <h3>${device.price}</h3>
                 </div>
 
             </div>

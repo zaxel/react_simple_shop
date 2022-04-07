@@ -15,11 +15,9 @@ const Basket = () => {
                             <h2 className='basket__main-title'>Shopping Cart</h2>
                             <h4>Price</h4>
                         </div>
-                        {cart.cart.map(el=>{
-                            return <BasketItem key={el.deviceId} deviceId={el.deviceId}/>
+                        {cart.cartDevices.map(device=>{
+                            return <BasketItem key={device.id} device={device}/>
                         })}
-                        {/* <BasketItem />
-                        <BasketItem /> */}
                         <h3 className='basket__main-subtotal'>Subtotal (4 items): <span>$845.54</span></h3>
                     </div> :
                     <div className='basket__main'>
