@@ -3,7 +3,7 @@ import item from '../assets/iPhone11.jpg';
 import { Button, Modal, Form } from 'react-bootstrap';
 
 
-const BasketItem = () => {
+const BasketItem = ({deviceId}) => {
     const amount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const [selectedValue, setSelectedValue] = useState(1);
     const selectHandler = (e) =>{
@@ -13,6 +13,7 @@ const BasketItem = () => {
         };
         setSelectedValue(e.target.value)
     }
+    console.log(deviceId)
     return (
         <div className='basket-item'>
             <div className='basket-item__img'>
