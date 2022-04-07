@@ -9,13 +9,15 @@ import {
 } from '../utils/consts';
 
 const NavBar = observer(() => {
-    const { user, cart } = useContext(Context);
+    const { cart, user } = useContext(Context);
     const navigate = useNavigate();
 
     const logout = () => {
         user.setUser({});
         user.setIsAuth(false);
         user.setIsSuperUser(false);
+
+        cart.setItemsCount(0);
     }
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
