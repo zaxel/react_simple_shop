@@ -5,7 +5,7 @@ import SponsoredItem from '../components/SponsoredItem';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 
-const Basket = observer(() => {
+const Basket = () => {
     const { cart, user } = useContext(Context);
     return (
         <div className='basket'>
@@ -45,6 +45,6 @@ const Basket = observer(() => {
             </div>
         </div>
     );
-});
+};
 
 export default Basket;

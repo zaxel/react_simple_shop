@@ -41,35 +41,25 @@ const NavBar = observer(() => {
                         <Link className="nav-link" to={CONTACT_ROUTE}>Contacts</Link>
                     </li>
                 </ul>
-                {user.isAuth ?
                     <ul className="navbar-nav navbar-user-data-cont flex-row">
                         {user.isSuperUser && <li className="nav-item">
                             <button onClick={() => navigate(ADMIN_ROUTE)} className='btn btn-outline-secondary'>Admin panel</button>
                         </li>}
-                        <li className="nav-item">
-                            <button onClick={() => navigate(ACCOUNT_ROUTE)} className='btn btn-outline-secondary'>{`User ${user.user.id}`}</button>
-                        </li>
-                        <li className="nav-item">
-                            <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>{cart.itemsCount} Basket</button>
-                        </li>
-                        <li className="nav-item">
-                            <button onClick={logout} className='btn btn-outline-secondary'>Logout</button>
-                        </li>
-                    </ul> :
-                    <ul className="navbar-nav navbar-user-data-cont flex-row">
-                        
+
+
                         <li className="nav-item">
                             <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>{cart.itemsCount} Basket</button>
                         </li>
 
+
                         <li className="nav-item">
-                            <button onClick={() => navigate(LOGIN_ROUTE)} className='btn btn-outline-secondary'>Login</button>
+                            <button onClick={() => navigate(user.isAuth ? ACCOUNT_ROUTE : LOGIN_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? `User ${user.user.id}` : 'Login'}</button>
                         </li>
+                        
                         <li className="nav-item">
-                            <button onClick={() => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>Sigh up</button>
+                            <button onClick={user.isAuth ? logout : () => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? 'Logout' :  'Sigh up'}</button>
                         </li>
-                    </ul>
-                }
+                    </ul> 
 
             </div>
         </nav>
