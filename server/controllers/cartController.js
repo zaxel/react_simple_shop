@@ -11,13 +11,20 @@ class cartController {
                     deviceId: body.deviceId
                 } 
             });
+
             if (!foundItem) {
                 // Item not found, create a new one
                 const item = await BasketDevice.create(body);
                 return res.json({ item, created: true });
             }
             // Found an item, update it
-            const item = await BasketDevice.update({ device_amount: body.device_amount }, { where: { basketId: body.basketId } });
+            const item = await BasketDevice.update(
+                    { device_amount: body.device_amount }, 
+                    { where: { 
+                        basketId: body.basketId,
+                        deviceId: body.deviceId
+                     } }
+                );
             return res.json({ item, created: false });
 
         } catch (e) {
