@@ -1,19 +1,31 @@
-﻿import React, { useState } from 'react';
-import item from '../assets/iPhone11.jpg';
+﻿import React, { useContext, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
+import { Context } from '..';
+import { updateDeviceAmount } from '../utils/fetchSetCart';
 
 
-const BasketItem = ({device}) => {
+const BasketItem = observer(({device, basketDevice}) => {
+    const { cart } = useContext(Context);
     const amount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    const [selectedValue, setSelectedValue] = useState(1);
-    const selectHandler = (e) =>{
-        if(e.target.selectedIndex === amount.length-1){
-            console.log(66);
-            return;
-        };
-        setSelectedValue(e.target.value)
+    const [selectedValue, setSelectedValue] = useState(basketDevice.device_amount);
+    const selectHandler = async(event) =>{
+        
+        try{
+            if(event.target.selectedIndex === amount.length-1){
+                console.log(66);
+                setSelectedValue(event.target.value)
+                return;
+            };
+            setSelectedValue(event.target.value)
+            await updateDeviceAmount(cart, basketDevice.basketId, device.id, +event.target.value);
+        }catch(e){
+            console.log(e);
+        }
+        
     }
-    console.log(device.id)
+    
+    
     return (
         <div className='basket-item'>
             <div className='basket-item__img'>
@@ -26,8 +38,9 @@ const BasketItem = ({device}) => {
                     <div className='basket-item__buttons-cont'>
                         <Form.Select value={selectedValue} onChange={selectHandler} className="device-modal__select">
                             {amount.map(el =>
-                                <option key={el}>Qty: {el ? el : el+' (remove)'}</option>
+                                <option key={el} value={el} >Qty: {el ? el : el+' (remove)'}</option>
                             )}
+                            
                         </Form.Select>
                         <Button variant="danger" onClick={() => console.log(22)}>
                             Delete
@@ -43,6 +56,6 @@ const BasketItem = ({device}) => {
 
         </div>
     );
-};
+});
 
 export default BasketItem;
