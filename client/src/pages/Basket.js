@@ -1,12 +1,20 @@
-﻿import React, { useContext } from 'react';
+﻿import React, { useContext, useEffect } from 'react';
 import { Context } from '..';
+import {  useLocation } from "react-router-dom"
 import BasketItem from '../components/BasketItem';
 import SponsoredItem from '../components/SponsoredItem';
-import { Button, Modal, Form } from 'react-bootstrap';
-import { observer } from 'mobx-react-lite';
+import { Button } from 'react-bootstrap';
 
 const Basket = () => {
-    const { cart, user } = useContext(Context);
+
+    let {pathname} = useLocation();
+    const {cart, history} = useContext(Context);
+  
+    useEffect(()=>{
+      history.setAuthFrom(pathname);
+    },[])
+
+
     return (
         <div className='basket'>
             <div className='basket__container'>
