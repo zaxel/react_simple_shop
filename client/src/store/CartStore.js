@@ -1,11 +1,10 @@
 ﻿import {makeAutoObservable} from "mobx";
 
 export default class CartStore{
+    _cart = [];
+    _cartDevices = [];
+    _itemsCount = 0;
     constructor(){
-        this._cart = [];
-        this._cartDevices = [];
-        this._itemsCount = 0;
-        
         makeAutoObservable(this);
     }
     setCart(data){
@@ -29,6 +28,12 @@ export default class CartStore{
             ? {basketId: el.basketId, deviceId: el.deviceId, device_amount: amount}
             : el
         });
+    }
+    deleteCart(deviceId){
+        this._cart = this._cart.filter(el=>el.deviceId!==deviceId);
+    }
+    deleteCartDevices(deviceId){
+        this._cartDevices = this._cartDevices.filter(el=>el.id!==deviceId);
     }
     
     get cart(){

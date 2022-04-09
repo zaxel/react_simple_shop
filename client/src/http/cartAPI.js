@@ -8,3 +8,7 @@ export const createOrUpdateCartDevice = async (basketId, deviceId, device_amount
     const {data} = await $authHost.post('api/cart', { basketId, deviceId, device_amount });
     return data;
 }
+export const deleteCartDevice = async (basketId, deviceId) => {
+    const {data} = await $authHost.delete('api/cart', { params: {basketId, deviceId} });
+    return data;
+}

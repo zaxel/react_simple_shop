@@ -1,4 +1,4 @@
-﻿import { getCart,  createOrUpdateCartDevice} from "../http/cartAPI";
+﻿import { getCart,  createOrUpdateCartDevice, deleteCartDevice} from "../http/cartAPI";
 import { fetchSingleDevice } from "../http/deviceAPI";
 
 export const fetchSetCart = async(user, cart)=>{
@@ -14,4 +14,9 @@ export const updateDeviceAmount = async(cart, basketId, deviceId, device_amount)
     const cartData = await createOrUpdateCartDevice(basketId, deviceId, device_amount);
 
     cart.setDeviceAmount(device_amount, deviceId);
+}
+export const deleteDevice = async(cart, basketId, deviceId)=>{
+    const cartData = await deleteCartDevice(basketId, deviceId);
+    cart.deleteCart(deviceId);
+    cart.deleteCartDevices(deviceId);
 }

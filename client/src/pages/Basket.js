@@ -3,9 +3,11 @@ import { Context } from '..';
 import {  useLocation } from "react-router-dom"
 import BasketItem from '../components/BasketItem';
 import SponsoredItem from '../components/SponsoredItem';
+import { deleteDevice } from '../utils/fetchSetCart';
 import { Button } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
 
-const Basket = () => {
+const Basket = observer(() => {
 
     let {pathname} = useLocation();
     const {cart, history} = useContext(Context);
@@ -13,7 +15,6 @@ const Basket = () => {
     useEffect(()=>{
       history.setAuthFrom(pathname);
     },[])
-
 
     return (
         <div className='basket'>
@@ -26,7 +27,6 @@ const Basket = () => {
                         </div>
                         {cart.cartDevices.map(device=>{
                             const basketDevice = cart.cart.find(el=>el.deviceId === device.id);
-                            
                             return <BasketItem key={device.id} device={device} basketDevice={basketDevice}/>
                         })}
                         <h3 className='basket__main-subtotal'>Subtotal (4 items): <span>$845.54</span></h3>
@@ -55,6 +55,6 @@ const Basket = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Basket;

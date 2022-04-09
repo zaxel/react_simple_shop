@@ -47,11 +47,11 @@ class cartController {
     }
     async deleteOne(req, res, next) {
         try {
-            const { body } = req;
+            const { query } = req;
             const item = await BasketDevice.destroy({ 
                 where: { 
-                    basketId: body.basketId, 
-                    deviceId: body.deviceId
+                    basketId: query.basketId, 
+                    deviceId: query.deviceId
                 } 
             });
             res.json(item)
