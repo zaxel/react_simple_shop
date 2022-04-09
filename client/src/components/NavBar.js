@@ -19,6 +19,7 @@ const NavBar = observer(() => {
 
         cart.setItemsCount(0);
         cart.setCartDevices({});
+        localStorage.removeItem('token');
     }
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
