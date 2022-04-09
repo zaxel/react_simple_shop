@@ -17,7 +17,7 @@ const Basket = observer(() => {
     },[])
 
     return (
-        <div className='basket'>
+        <div className='basket'>{console.log(cart.itemsCount)}
             <div className='basket__container'>
                 {cart.itemsCount ?
                     <div className='basket__main'>

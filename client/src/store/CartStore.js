@@ -13,6 +13,9 @@ export default class CartStore{
     setItemsCount(count){
         this._itemsCount = count;
     }
+    decreaseItemsCount(){
+        this._itemsCount--;
+    }
     setCartDevices(devices){
         this._cartDevices = devices;
     }

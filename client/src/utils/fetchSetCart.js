@@ -19,4 +19,5 @@ export const deleteDevice = async(cart, basketId, deviceId)=>{
     const cartData = await deleteCartDevice(basketId, deviceId);
     cart.deleteCart(deviceId);
     cart.deleteCartDevices(deviceId);
+    cart.decreaseItemsCount();
 }

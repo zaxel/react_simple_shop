@@ -1,15 +1,16 @@
 ﻿import {makeAutoObservable} from "mobx";
 
 export default class DeviceStore{
+    _types = [];
+    _brands = [];
+    _devices = {};
+    _typeActive = null;
+    _brandActive = null;
+    _activePage = 1;
+    _pagesTotal = 1;
+    _itemsPerPage = 4;
     constructor(){
-        this._types = [];
-        this._brands = [];
-        this._devices = {};
-        this._typeActive = null;
-        this._brandActive = null;
-        this._activePage = 1;
-        this._pagesTotal = 1;
-        this._itemsPerPage = 4;
+        
         makeAutoObservable(this);
     }
     setTypes(types){
