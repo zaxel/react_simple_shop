@@ -4,6 +4,7 @@ export default class CartStore{
     _cart = [];
     _cartDevices = [];
     _itemsCount = 0;
+    _cartId = 0;
     constructor(){
         makeAutoObservable(this);
     }
@@ -38,7 +39,9 @@ export default class CartStore{
     deleteCartDevices(deviceId){
         this._cartDevices = this._cartDevices.filter(el=>el.id!==deviceId);
     }
-    
+    setCartId(id){
+        this._cartId = id;
+    }
     get cart(){
         return this._cart;
     }
@@ -47,6 +50,9 @@ export default class CartStore{
     }
     get cartDevices(){
         return this._cartDevices;
+    }
+    get cartId(){
+        return this._cartId;
     }
     
 }

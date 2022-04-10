@@ -12,3 +12,7 @@ export const deleteCartDevice = async (basketId, deviceId) => {
     const {data} = await $authHost.delete('api/cart', { params: {basketId, deviceId} });
     return data;
 }
+export const getBasketId = async (userId) => {
+    const {data} = await $authHost.get('api/cart/basketId');
+    return data;
+}

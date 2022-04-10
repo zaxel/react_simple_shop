@@ -6,7 +6,7 @@ import { useState, useContext, useEffect } from "react";
 import { Context } from ".";
 import { Spinner } from "react-bootstrap";
 import { setUserIfAuth } from "./utils/setUserIfAuth";
-import { fetchSetCart } from "./utils/fetchSetCart";
+import { fetchSetCart, setCartId } from "./utils/fetchSetCart";
 
 
 const App = observer(() => {
@@ -17,6 +17,7 @@ const App = observer(() => {
     try {
       await setUserIfAuth(user);
       await fetchSetCart(user, cart);
+      await setCartId(cart);
     } catch (e) {
       console.log(e)
     } finally {

@@ -10,9 +10,7 @@ const BasketItem = observer(({device, basketDevice}) => {
     const amount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const [selectedValue, setSelectedValue] = useState(basketDevice?.device_amount || 1);
 
-    const delDevice = () => {
-        deleteDevice( cart, basketDevice.basketId, device.id )
-    }
+    
     const selectHandler = async(event) =>{
         
         try{

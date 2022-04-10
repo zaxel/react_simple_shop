@@ -1,12 +1,16 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import bigStar from '../assets/rating_star_b.png';
 import star from '../assets/rating_star.png';
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { fetchSingleDevice } from '../http/deviceAPI';
 import { Spinner } from 'react-bootstrap';
+import { addToCart } from '../utils/addToCart';
+import { Context } from '..';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({});
+    const { user, cart } = useContext(Context);
+
   let {id} = useParams();
     useEffect(()=>{
         fetchSingleDevice(id).then(data=>{
@@ -36,7 +40,7 @@ const DevicePage = () => {
                     </div>
                     <div className='device__price-cont'>
                         <h2>${device.price}</h2>
-                        <button className='btn btn-outline-light auth__button device__button'>add to basket</button>
+                        <button onClick={()=>addToCart(user.isAuth)} className='btn btn-outline-light auth__button device__button'>add to basket</button>
                     </div>
                 </div>
                 <div className='device__specification'>

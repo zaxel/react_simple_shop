@@ -19,6 +19,7 @@ const NavBar = observer(() => {
 
         cart.setItemsCount(0);
         cart.setCartDevices({});
+        cart.setCartId(0);
         localStorage.removeItem('token');
     }
     return (

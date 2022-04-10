@@ -59,6 +59,18 @@ class cartController {
             next(ApiError.badRequest(e.message));
         }
     }
+    async getBasketId(req, res, next) {
+        try {
+            const cart = await Basket.findOne({where: {userId: req.user.id}});
+            if(!cart){
+                return next(ApiError.badRequest(e.message+': no user with provided id found'));
+            }
+            res.json(cart.id);
+            
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
 
 }
 
