@@ -1,21 +1,65 @@
 ﻿import {makeAutoObservable} from "mobx";
 
 export default class CartStore{
-    _cart = [];
-    _cartDevices = [];
+    _cart = [];          //{id, deviceId, basketId, device_amount}
+    _cartDevices = [];   //{id, brandId, createdAt, img, info, name, price, rate, typeId, updatedAt}
     _itemsCount = 0;
     _cartId = 0;
     constructor(){
         makeAutoObservable(this);
     }
+
     setCart(data){
+        
         this._cart = data;
+
+
+
+
+    }
+    updateCart(devices){
+        this._cart.map(el=>{
+            console.log('basketId: '+el.basketId)
+            console.log('deviceId: '+el.deviceId)
+            console.log('device_amount: '+ el.device_amount)
+            console.log('------------------')
+        })
+        this._cart = [...this._cart, ...devices];
+        
+        this._cart.map(el=>{
+            console.log('basketId: '+el.basketId)
+            console.log('deviceId: '+el.deviceId)
+            console.log('device_amount: '+ el.device_amount)
+            console.log('------------------')
+        })
+        console.log('====================')
+
+    }
+
+    addDevice(basketId, deviceId, device_amount, id = 0){
+        const exist = this._cart.find(el=>el.deviceId === deviceId);
+        if(exist){
+            exist.device_amount++;
+        }else{
+            this._cart.push({basketId, deviceId, device_amount, id});
+        }
+    }
+
+
+    calcItemsCount(){
+        const count = this._cart.reduce((prev, next)=>{
+            return prev + next.device_amount
+        },0)
+        this._itemsCount = count;
     }
     setItemsCount(count){
         this._itemsCount = count;
     }
     decreaseItemsCount(){
         this._itemsCount--;
+    }
+    increaseItemsCount(){
+        this._itemsCount++;
     }
     setCartDevices(devices){
         this._cartDevices = devices;

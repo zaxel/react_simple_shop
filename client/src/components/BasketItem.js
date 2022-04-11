@@ -3,10 +3,11 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { deleteDevice, updateDeviceAmount } from '../utils/fetchSetCart';
+import { setLocalStoreCart } from '../utils/setLocalStoreCart';
 
 
 const BasketItem = observer(({device, basketDevice}) => {
-    const { cart } = useContext(Context);
+    const { user, cart } = useContext(Context);
     const amount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const [selectedValue, setSelectedValue] = useState(basketDevice?.device_amount || 1);
 
@@ -15,11 +16,15 @@ const BasketItem = observer(({device, basketDevice}) => {
         
         try{
             if(event.target.selectedIndex === amount.length-1){
-                deleteDevice( cart, basketDevice.basketId, device.id );
+                deleteDevice(user, cart, basketDevice.basketId, device.id );
                 return;
             };
             setSelectedValue(event.target.value);
-            await updateDeviceAmount(cart, basketDevice.basketId, device.id, +event.target.value);
+            await updateDeviceAmount(user, cart, basketDevice.basketId, device.id, +event.target.value);
+            
+            cart.calcItemsCount();
+            
+            setLocalStoreCart(cart);
         }catch(e){
             console.log(e);
         }
@@ -43,7 +48,7 @@ const BasketItem = observer(({device, basketDevice}) => {
                             )}
                             
                         </Form.Select>
-                        <Button variant="danger" onClick={()=>deleteDevice( cart, basketDevice.basketId, device.id )}>
+                        <Button variant="danger" onClick={()=>deleteDevice(user, cart, basketDevice.basketId, device.id )}>
                             Delete
                         </Button>
                     </div>

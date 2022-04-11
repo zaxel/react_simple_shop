@@ -7,6 +7,7 @@ import {
     ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
     PROTECTED_ROUTE
 } from '../utils/consts';
+import { deleteLocalStoreCart } from "../utils/setLocalStoreCart";
 
 const NavBar = observer(() => {
     const { cart, user } = useContext(Context);
@@ -17,9 +18,12 @@ const NavBar = observer(() => {
         user.setIsAuth(false);
         user.setIsSuperUser(false);
 
-        cart.setItemsCount(0);
-        cart.setCartDevices({});
+        cart.setCartDevices([]);
+        cart.setCart([]);
         cart.setCartId(0);
+        cart.setItemsCount(0);
+
+        deleteLocalStoreCart();
         localStorage.removeItem('token');
     }
     return (

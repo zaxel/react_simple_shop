@@ -10,6 +10,7 @@ import { Context } from '..';
 const DevicePage = () => {
     const [device, setDevice] = useState({});
     const { user, cart } = useContext(Context);
+    const device_amount = 1;
 
   let {id} = useParams();
     useEffect(()=>{
@@ -40,7 +41,7 @@ const DevicePage = () => {
                     </div>
                     <div className='device__price-cont'>
                         <h2>${device.price}</h2>
-                        <button onClick={()=>addToCart(user.isAuth)} className='btn btn-outline-light auth__button device__button'>add to basket</button>
+                        <button onClick={()=>addToCart(cart, user.isAuth, cart.cartId, device.id, device_amount)} className='btn btn-outline-light auth__button device__button'>add to basket</button>
                     </div>
                 </div>
                 <div className='device__specification'>

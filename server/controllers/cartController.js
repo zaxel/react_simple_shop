@@ -17,9 +17,10 @@ class cartController {
                 const item = await BasketDevice.create(body);
                 return res.json({ item, created: true });
             }
-            // Found an item, update it
+            // Found an item, update it 
+            const newDeviceAmount = body.addAmountToExisted ? foundItem.device_amount + body.device_amount : body.device_amount;
             const item = await BasketDevice.update(
-                    { device_amount: body.device_amount }, 
+                    { device_amount: newDeviceAmount }, 
                     { where: { 
                         basketId: body.basketId,
                         deviceId: body.deviceId

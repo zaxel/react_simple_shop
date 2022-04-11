@@ -7,6 +7,7 @@ import { Context } from ".";
 import { Spinner } from "react-bootstrap";
 import { setUserIfAuth } from "./utils/setUserIfAuth";
 import { fetchSetCart, setCartId } from "./utils/fetchSetCart";
+import { setCartFromLocalStore } from "./utils/setLocalStoreCart";
 
 
 const App = observer(() => {
@@ -15,9 +16,11 @@ const App = observer(() => {
 
   useEffect(async () => {
     try {
+      !user.isAuth && setCartFromLocalStore(cart);
+
       await setUserIfAuth(user);
-      await fetchSetCart(user, cart);
       await setCartId(cart);
+      await fetchSetCart(user, cart);
     } catch (e) {
       console.log(e)
     } finally {
