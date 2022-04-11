@@ -20,12 +20,13 @@ export const createDevice = async (formData) => {
     const {data} = await $authHost.post('api/device', formData);
     return data;
 }
-export const fetchAllDevices = async (brandId, typeId, limit, page) => {
+export const fetchAllDevices = async (brandId, typeId, limit, page, id) => {
     const {data} = await $host.get('api/device', {params:{
         brandId, 
         typeId, 
         limit, 
-        page
+        page,
+        id
     }});
     return data;
 }

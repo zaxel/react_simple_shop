@@ -1,6 +1,6 @@
 ﻿import { getCart,  createOrUpdateCartDevice, deleteCartDevice, getBasketId} from "../http/cartAPI";
-import { fetchSingleDevice } from "../http/deviceAPI";
-import { deleteLocalStoreCart, setLocalStoreCart } from "./setLocalStoreCart";
+import { fetchAllDevices } from "../http/deviceAPI";
+import { setLocalStoreCart } from "./setLocalStoreCart";
 
 export const setCartId = async(cart) => {
     const basketId = await getBasketId();
@@ -8,10 +8,11 @@ export const setCartId = async(cart) => {
 }
 
 export const fetchCartDevices = async(cart) => {
-    const fetchDevices = cart.cart.map(device=>fetchSingleDevice(device.deviceId));
-    const basketDevices = await Promise.all(fetchDevices);
-    cart.setCartDevices(basketDevices);
+    const fetchDevicesId = cart.cart.map(device=>device.deviceId);
+    const basketDevices = await fetchAllDevices(null, null, null, null, fetchDevicesId)
+    cart.setCartDevices(basketDevices.rows);
 }
+
 export const fetchSetCart = async(user, cart)=>{
     const cartData = await getCart(user.user.id);
     cart.setCart(cartData.rows);
