@@ -1,7 +1,7 @@
 ﻿import { $authHost, $host } from ".";
 
 export const getCart = async (userId) => {
-    const {data} = await $authHost.post('api/cart/get', { userId });
+    const {data} = await $authHost.get('api/cart/get', {params: { userId }});
     return data;
 }
 export const createOrUpdateCartDevice = async (basketId, deviceId, device_amount, addAmountToExisted = false) => {

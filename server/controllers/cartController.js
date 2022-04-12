@@ -35,8 +35,8 @@ class cartController {
     }
     async getAll(req, res, next) {
         try {
-            const { body } = req;
-            const cart = await Basket.findOne({where: {userId: body.userId}});
+            const { query } = req;
+            const cart = await Basket.findOne({where: {userId: query.userId}});
             if(!cart){
                 return next(ApiError.badRequest(e.message+': no user with provided id found'));
             }
