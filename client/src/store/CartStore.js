@@ -10,30 +10,10 @@ export default class CartStore{
     }
 
     setCart(data){
-        
         this._cart = data;
-
-
-
-
     }
     updateCart(devices){
-        this._cart.map(el=>{
-            console.log('basketId: '+el.basketId)
-            console.log('deviceId: '+el.deviceId)
-            console.log('device_amount: '+ el.device_amount)
-            console.log('------------------')
-        })
         this._cart = [...this._cart, ...devices];
-        
-        this._cart.map(el=>{
-            console.log('basketId: '+el.basketId)
-            console.log('deviceId: '+el.deviceId)
-            console.log('device_amount: '+ el.device_amount)
-            console.log('------------------')
-        })
-        console.log('====================')
-
     }
 
     addDevice(basketId, deviceId, device_amount, id = 0){
