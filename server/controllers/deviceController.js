@@ -44,20 +44,16 @@ class DeviceController {
         }
         if(!brandId && !typeId){
             devices = await Device.findAndCountAll({limit, offset});
-            console.log(55)
         }
         if(brandId && !typeId){
             devices = await Device.findAndCountAll({where:{brandId}, limit, offset});
-            console.log(66)
 
         }
         if(!brandId && typeId){
             devices = await Device.findAndCountAll({where:{typeId}, limit, offset});
-            console.log(77)
         }
         if(brandId && typeId){
             devices = await Device.findAndCountAll({where:{brandId, typeId}, limit, offset});
-            console.log(88)
         }
         return res.json(devices);
     }

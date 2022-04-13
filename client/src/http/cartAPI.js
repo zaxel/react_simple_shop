@@ -4,8 +4,8 @@ export const getCart = async (userId) => {
     const {data} = await $authHost.get('api/cart/get', {params: { userId }});
     return data;
 }
-export const createOrUpdateCartDevice = async (basketId, deviceId, device_amount, addAmountToExisted = false) => {
-    const {data} = await $authHost.post('api/cart', { basketId, deviceId, device_amount, addAmountToExisted });
+export const createOrUpdateCartDevice = async (items, addAmountToExisted) => {
+    const {data} = await $authHost.post('api/cart', { items, addAmountToExisted});
     return data;
 }
 export const deleteCartDevice = async (basketId, deviceId) => {

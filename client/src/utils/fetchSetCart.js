@@ -1,6 +1,7 @@
 ﻿import { getCart,  createOrUpdateCartDevice, deleteCartDevice, getBasketId} from "../http/cartAPI";
 import { fetchAllDevices } from "../http/deviceAPI";
 import { setLocalStoreCart } from "./setLocalStoreCart";
+const addAmountToExisted = false;
 
 export const setCartId = async(cart) => {
     const basketId = await getBasketId();
@@ -31,10 +32,14 @@ export const fetchUpdateCart = async(user, cart)=>{
 }
 export const fetchCartOnAuth = async(user, cart)=>{
     const setDevices = cart.cart.map(device=>{
-        console.log(cart.cartId, device.deviceId, device.device_amount)
-        createOrUpdateCartDevice(cart.cartId, device.deviceId, device.device_amount, true)
+        return {
+            basketId: cart.cartId, 
+            deviceId: device.deviceId, 
+            device_amount: device.device_amount
+        }
     });
-    const data = await Promise.all(setDevices);
+            
+    const data = await createOrUpdateCartDevice(setDevices, true);
     const cartData = await getCart(user.user.id);
     cart.setCart(cartData.rows);
     cart.calcItemsCount();
@@ -42,7 +47,8 @@ export const fetchCartOnAuth = async(user, cart)=>{
 }
 export const updateDeviceAmount = async(user, cart, basketId, deviceId, device_amount)=>{
     if(user.isAuth){
-        await createOrUpdateCartDevice(basketId, deviceId, device_amount);
+        const cartItem = [{basketId, deviceId, device_amount}];
+        await createOrUpdateCartDevice(cartItem, addAmountToExisted);
     }
 
     cart.setDeviceAmount(device_amount, deviceId);

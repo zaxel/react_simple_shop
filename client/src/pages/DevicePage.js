@@ -15,7 +15,7 @@ const DevicePage = () => {
   let {id} = useParams();
     useEffect(()=>{
         fetchSingleDevice(id).then(data=>{
-            setTimeout(()=>setDevice(data), 2000) 
+            setDevice(data); 
         })
     }, [])
 
