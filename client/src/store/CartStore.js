@@ -5,6 +5,7 @@ export default class CartStore{
     _cartDevices = [];   //{id, brandId, createdAt, img, info, name, price, rate, typeId, updatedAt}
     _itemsCount = 0;
     _cartId = 0;
+    _cartTotal = 0;
     constructor(){
         makeAutoObservable(this);
     }
@@ -66,6 +67,13 @@ export default class CartStore{
     setCartId(id){
         this._cartId = id;
     }
+    setCartTotal(){
+        this._cartTotal = this._cart.reduce((prev, next)=>{
+            const device = this._cartDevices.find(el=>el.id===next.deviceId);
+            
+            return prev+device.price*next.device_amount;
+        }, 0)
+    }
     get cart(){
         return this._cart;
     }
@@ -78,5 +86,7 @@ export default class CartStore{
     get cartId(){
         return this._cartId;
     }
-    
+    get cartTotal(){
+        return this._cartTotal;
+    }
 }

@@ -26,7 +26,7 @@ const BasketItem = observer(({device, basketDevice}) => {
             await updateDeviceAmount(user, cart, basketDevice.basketId, device.id, +event.target.value);
             
             cart.calcItemsCount();
-            
+            cart.setCartTotal();
             setLocalStoreCart(cart);
         }catch(e){
             console.log(e);

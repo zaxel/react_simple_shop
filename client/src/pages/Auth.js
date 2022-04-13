@@ -46,7 +46,7 @@ const Auth = observer(() => {
 
             await fetchCartOnAuth(user, cart);
 
-            
+            cart.setCartTotal();
             setLocalStoreCart(cart);
             navigate(from);
         } catch (e) {

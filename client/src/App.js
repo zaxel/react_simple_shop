@@ -21,6 +21,7 @@ const App = observer(() => {
       await setUserIfAuth(user);
       await setCartId(cart);
       await fetchSetCart(user, cart);
+      cart.setCartTotal();
     } catch (e) {
       console.log(e)
     } finally {

@@ -17,7 +17,7 @@ const SponsoredItem = () => {
                     </div>
                     <h5>$140.50</h5>
                 </div>
-                <Button variant="warning" className='basket-aside__button'>Add to Cartt</Button>
+                <Button variant="warning" className='basket-aside__button'>Add to Cart</Button>
             </div>
         </div>
     );

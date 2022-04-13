@@ -5,7 +5,8 @@ const addAmountToExisted = true;
 export const addToCart = async (cart, isAuth, basketId, deviceId, device_amount) => {
     cart.addDevice(basketId, deviceId, device_amount);
     cart.increaseItemsCount();
-    fetchCartDevices(cart);
+    await fetchCartDevices(cart);
+    cart.setCartTotal();
     setLocalStoreCart(cart);
 
     if (isAuth) {

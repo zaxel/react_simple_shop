@@ -43,7 +43,7 @@ export const fetchCartOnAuth = async(user, cart)=>{
     const cartData = await getCart(user.user.id);
     cart.setCart(cartData.rows);
     cart.calcItemsCount();
-    fetchCartDevices(cart);
+    await fetchCartDevices(cart);
 }
 export const updateDeviceAmount = async(user, cart, basketId, deviceId, device_amount)=>{
     if(user.isAuth){
@@ -60,5 +60,6 @@ export const deleteDevice = async(user, cart, basketId, deviceId)=>{
     cart.deleteCart(deviceId);
     cart.deleteCartDevices(deviceId);
     cart.calcItemsCount();
+    cart.setCartTotal();
     setLocalStoreCart(cart);
 }
