@@ -4,10 +4,13 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { deleteDevice, updateDeviceAmount } from '../utils/fetchSetCart';
 import { setLocalStoreCart } from '../utils/setLocalStoreCart';
+import { useNavigate } from 'react-router-dom';
+import { DEVICE_ROUTE } from '../utils/consts';
 
 
 const BasketItem = observer(({device, basketDevice}) => {
     const { user, cart } = useContext(Context);
+    const navigate = useNavigate();
     const amount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const [selectedValue, setSelectedValue] = useState(basketDevice?.device_amount || 1);
 
@@ -30,16 +33,18 @@ const BasketItem = observer(({device, basketDevice}) => {
         }
         
     }
-    
+    const navigateToItem = () =>{
+        navigate(DEVICE_ROUTE + '/' + device.id)
+    }
     
     return (
         <div className='basket-item'>
-            <div className='basket-item__img'>
+            <div onClick={navigateToItem} className='basket-item__img'>
                 <img src={process.env.REACT_APP_API_URL + device.img} alt='basket item' />
             </div>
             <div className='basket-item__descr-cont'>
                 <div className='basket-item__descr-subcont'>
-                    <h2>{device.name}</h2>
+                    <h2 onClick={navigateToItem}>{device.name}</h2>
 
                     <div className='basket-item__buttons-cont'>
                         <Form.Select value={selectedValue} onChange={selectHandler} className="device-modal__select">

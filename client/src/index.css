@@ -420,8 +420,6 @@ code {
 }
 .basket__main-title{
     font-size: 30px;
-    
-    
 }
 .basket-item{
     display: flex;
@@ -432,6 +430,7 @@ code {
 .basket-item__img{
     flex: 0 0 150px;
     height: 150px;
+    cursor: pointer;
 }
 .basket-item__img img{
     width: 100%;
@@ -543,6 +542,7 @@ code {
 }
 .basket-item__descr-subcont h2{
     margin-bottom: 6px;
+    cursor: pointer;
 }
 /*basket end*/
 
