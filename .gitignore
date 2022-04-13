@@ -14,6 +14,9 @@
 /client/build
 /server/build
 
+/goodsGenerator/imgRename
+/goodsGenerator/node_modules
+
 /heroku
 npm-debug.log*
 yarn-debug.log*
