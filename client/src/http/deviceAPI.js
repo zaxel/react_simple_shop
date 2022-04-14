@@ -20,6 +20,10 @@ export const createDevice = async (formData) => {
     const {data} = await $authHost.post('api/device', formData);
     return data;
 }
+export const createBulkDevices = async (formData) => {
+    const {data} = await $authHost.post('api/device/bulk', formData);
+    return data;
+}
 export const fetchAllDevices = async (brandId, typeId, limit, page, id) => {
     const {data} = await $host.get('api/device', {params:{
         brandId, 

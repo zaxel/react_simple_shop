@@ -2,32 +2,25 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
-import { createDevice, fetchTypes, fetchBrands, fetchAllDevices } from '../http/deviceAPI';
+import { createBulkDevices} from '../http/deviceAPI';
 import { observer } from 'mobx-react-lite';
 import {SAMPLE_ROUTE} from '../utils/consts';
 
 const DeviceBulkModal = observer(({ show, onHide }) => {
-  const [img, setImg] = useState('');
-
+  const [file, setFile] = useState('');
   const { device } = useContext(Context);
-  
-
-
-  const setNewDevice = async () => {
+  const setBulkDevice = async () => {
     try {
       onHide();
       const formData = new FormData();
-      formData.append('img', img);
-      const data = await createDevice(formData);
-      // formReset();
+      formData.append('file', file);
+      const data = await createBulkDevices(formData);
+      alert(JSON.stringify(data))
     } catch (e) {
       alert(e.response.data.message)
     }
 
   }
-
-
-
   return (
     <Modal className="device-modal" centered show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -37,13 +30,11 @@ const DeviceBulkModal = observer(({ show, onHide }) => {
 
         <Form.Group className="mb-3">
 
-          <Form.Control type="file" onChange={e => setImg(e.target.files[0])} className="device-modal__file" />
+          <Form.Control type="file" onChange={e => setFile(e.target.files[0])} className="device-modal__file" />
           <hr />
           <div className='device-modal__descr'>
             <p>file must be .txt</p>
             <p>file instance: <Link to={SAMPLE_ROUTE} target="_blank">sample</Link></p>
-            
-
           </div>
 
         </Form.Group>
@@ -53,7 +44,7 @@ const DeviceBulkModal = observer(({ show, onHide }) => {
         <Button variant="secondary" onClick={onHide}>
           Close
         </Button>
-        <Button variant="primary" onClick={setNewDevice}>
+        <Button variant="primary" onClick={setBulkDevice}>
           Save
         </Button>
       </Modal.Footer>
