@@ -8,14 +8,19 @@ import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import Protected from "./pages/Protected";
 import AccountPage from "./pages/AccountPage";
+import Sample from "./pages/Sample";
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
-        ACCOUNT_ROUTE, PROTECTED_ROUTE } from "./utils/consts";
+        ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE } from "./utils/consts";
 
 export const adminRoutes = [
     {
         path: ADMIN_ROUTE,
         Component: Admin
+    },
+    {
+        path: SAMPLE_ROUTE,
+        Component: Sample
     },
     
 ];

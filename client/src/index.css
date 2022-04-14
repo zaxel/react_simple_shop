@@ -371,6 +371,16 @@ code {
 }
 
 /*device modal end*/
+/*device bulk modal start*/
+.device-modal__descr{
+    line-height: 1.6;
+}
+/*device bulk modal end*/
+/*sample page start*/
+.sample pre{
+    padding: 8px;
+}
+/*sample page end*/
 /*pagination start*/
 .pagination__cont{
     padding: 10px;
