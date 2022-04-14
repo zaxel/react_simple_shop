@@ -8,7 +8,10 @@ const BrandModal = ({show, onHide}) => {
 
     const setNewBrand = () => {
       onHide();
-      createBrand(brand).then(_=>setBrand(''));
+      createBrand(brand)
+        .then(data=>alert(`new brand "${data.name}" added`))
+        .then(_=>setBrand(''))
+        .catch(e=> alert(e + ': \n\r'+ e.response.data.message));
     }
 
     return (

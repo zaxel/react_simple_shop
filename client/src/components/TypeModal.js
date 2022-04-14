@@ -8,7 +8,10 @@ const TypeModal = ({show, onHide}) => {
 
     const setNewType = () => {
       onHide();
-      createType(type).then(data=>setTypeValue(''));
+      createType(type)
+      .then(data=>alert(`new type "${data.name}" added`))
+      .then(_=>setTypeValue(''))
+      .catch(e=> alert(e + ': \n\r'+ e.response.data.message));
     }
 
     return (
