@@ -1,8 +1,14 @@
 ﻿const rename = require('./imgRename');
+const create = require('./createItems');
+
 const fileExtension = '.jpg'
 
-const renameImg = true;
+const renameImg = false;
+const createItems = true;
 
-
-rename(fileExtension);
-
+if(renameImg){
+    rename(fileExtension);
+}
+if(createItems){
+    create();
+}

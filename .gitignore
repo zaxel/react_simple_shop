@@ -4,6 +4,8 @@
 /client/node_modules
 /client/.pnp
 /server/node_modules
+/server/static
+
 /server/.pnp
 
 # testing

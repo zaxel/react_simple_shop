@@ -9,10 +9,10 @@ let i = 0;
 const rename = (inputName, outputName) => {
     fs.rename(inputName, outputName, (error) => {
         if (error) {
-            console.log(error);
+            throw error
         }
         else {
-            process.stdout.write("+");
+            process.stdout.write(".");
         }
     });
 }
