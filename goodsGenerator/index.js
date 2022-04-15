@@ -1,9 +1,10 @@
 ﻿const rename = require('./rename/imgRename');
 const create = require('./generator/createItems');
+const writeToFile = require('./generator/writeToFile');
 
 const fileExtension = '.jpg'
 
-const itemsNumber = 10;
+const itemsNumber = 2;
 
 const renameImg = false;
 const createItems = true;
@@ -12,5 +13,6 @@ if(renameImg){
     rename(fileExtension);
 }
 if(createItems){
-    console.log(create(itemsNumber));
+    const devices = create(itemsNumber, fileExtension);
+    writeToFile(JSON.stringify(devices));
 }

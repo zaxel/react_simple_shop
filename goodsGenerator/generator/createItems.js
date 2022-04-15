@@ -1,22 +1,23 @@
-﻿const renderName = require("./fields/renderName");
+﻿const makeDevice = require("./makeDevice");
+const renderName = require("./fields/renderName");
 const renderPrice = require("./fields/renderPrice");
-const makeDevice = require("./makeDevice");
+const renderRate = require("./fields/renderRate");
+const renderTypeId = require("./fields/renderTypeId");
+const renderImg = require("./fields/renderImg");
+const renderInfo = require("./fields/renderInfo");
 
-
-
-
-
-
-
-
-
-
-const create = (amount) => {
+const create = (amount, fileExtension) => {
     const items = [];
-    for (let i = 1; i < amount; i++) {
-        const name = renderName();
+    for (let i = 1; i <= amount; i++) {
+
+        const {name, brandId} = renderName();
         const price = renderPrice();
-        const device = makeDevice(name, price);
+        const rate = renderRate();
+        const typeId = renderTypeId();
+        const img = renderImg(i-1, fileExtension);
+        const info = renderInfo();
+        
+        const device = makeDevice(name, price, rate, brandId, typeId, img, info);
 
         items.push(device);
     }

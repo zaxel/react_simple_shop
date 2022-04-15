@@ -1,22 +1,12 @@
-﻿const makeDevice = (name, price) => {
+﻿const makeDevice = (name, price, rate, brandId, typeId, img, info) => {
     let device = {
         name,
         price,
-        rate: 4.2,
-        brandId: 10,
-        typeId: 5,
-        img: 'image.jpg',
-        info:
-            [
-                {
-                    title: 'size',
-                    description: 'L'
-                },
-                {
-                    title: 'color',
-                    description: 'black'
-                },
-            ]
+        rate,
+        brandId,
+        typeId,
+        img,
+        info
     }
     return device;
 }
