@@ -4,7 +4,8 @@ require('dotenv').config();
 const HASH = process.env.PICTURE_NAME_HASH;
 
 
-const imgFolderPath = path.join(__dirname, 'imgRename');
+const imgFolderPath = path.join(__dirname, '..', 'imgRename');
+console.log(imgFolderPath)
 let i = 0;
 const rename = (inputName, outputName) => {
     fs.rename(inputName, outputName, (error) => {
