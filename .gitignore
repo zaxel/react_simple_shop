@@ -16,7 +16,7 @@
 /client/build
 /server/build
 
-
+/goodsGenerator/imgRename
 /goodsGenerator/node_modules
 
 /heroku
