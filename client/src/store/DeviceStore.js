@@ -8,7 +8,7 @@ export default class DeviceStore{
     _brandActive = null;
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 4;
+    _itemsPerPage = 30;
     constructor(){
         
         makeAutoObservable(this);
