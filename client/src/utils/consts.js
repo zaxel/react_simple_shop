@@ -10,6 +10,7 @@ export const BASKET_ROUTE = BASE_ROUTE+'/basket';
 export const DEVICE_ROUTE = BASE_ROUTE+'/device';
 export const ACCOUNT_ROUTE = BASE_ROUTE+'/account';
 export const SAMPLE_ROUTE = BASE_ROUTE+'/sample';
+export const CHECKOUT_ROUTE = BASE_ROUTE+'/checkout';
 export const ERROR_ROUTE = BASE_ROUTE+'*';
 export const NAVBAR_HEIGHT = 60;
 

@@ -9,9 +9,10 @@ import Contacts from "./pages/Contacts";
 import Protected from "./pages/Protected";
 import AccountPage from "./pages/AccountPage";
 import Sample from "./pages/Sample";
+import CheckoutPage from "./pages/CheckoutPage";
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
-        ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE } from "./utils/consts";
+        ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE } from "./utils/consts";
 
 export const adminRoutes = [
     {
@@ -25,6 +26,10 @@ export const adminRoutes = [
     
 ];
 export const authRoutes = [
+    {
+        path: CHECKOUT_ROUTE,
+        Component: CheckoutPage
+    },
     {
         path: ACCOUNT_ROUTE,
         Component: AccountPage

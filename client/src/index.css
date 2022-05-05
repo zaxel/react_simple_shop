@@ -555,6 +555,63 @@ code {
     cursor: pointer;
 }
 /*basket end*/
+/*checkout start*/
+.checkout__container{
+    padding: 10px;
+    margin: 10px;
+    max-width: 600px;
+    background-color: #fff;
+}
+.checkout__main-title{
+    font-size: 30px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+.checkout__button{
+    font-size: 22px;
+    padding: 5px 25px;
+}
+.checkout__total{
+    margin-bottom: 10px;
+}
+.checkout__total h2{
+    font-size: 20px;
+    font-weight: 500;
+}
+.checkout__total h2 span{
+    font-size: 23px;
+    font-weight: 500;
+}
+.checkout__cards{
+    margin-bottom: 35px;
+}
+.checkout__cards h4{
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.checkout__card{
+    width: 190px;
+    height: 125px;
+    position: relative;
+}
+.checkout__card{
+    border: none;
+}
+.checkout__card img{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    object-fit: contain;
+}
+.checkout__card:hover,
+.checkout__card:active,
+.checkout__card:focus{
+    background-color: #FFC107;
+}
+/*checkout end*/
 
 
 
