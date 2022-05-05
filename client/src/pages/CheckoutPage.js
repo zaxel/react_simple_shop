@@ -11,25 +11,28 @@ const CheckoutPage = () => {
                 <div className='checkout__main-title'>
                     <h2>Checkout</h2>
                 </div>
-                <div className='checkout__cards'>
-                    <h4>Payment Methods:</h4>
-                    <button className='checkout__card'>
-                        <img alt='card' src={card1}/>
-                    </button>
-                    <button className='checkout__card'>
-                        <img alt='card' src={card2}/>
-                    </button>
-                    <button className='checkout__card'>
-                        <img alt='card' src={card3}/>
-                    </button>
+                <div className='checkout__pays'>
+                    <div className='checkout__cards'>
+                        <h4>Payment Methods:</h4>
+                        <button className='checkout__card'>
+                            <img alt='card' src={card1} />
+                        </button>
+                        <button className='checkout__card'>
+                            <img alt='card' src={card2} />
+                        </button>
+                        <button className='checkout__card'>
+                            <img alt='card' src={card3} />
+                        </button>
+                    </div>
+                    <div className='checkout__total'>
+                        <h2>Total: <span>$900.00</span></h2>
+                    </div>
+                    <div className='checkout__button-cont'>
+                        <Button variant="warning" className='checkout__button'>Pay</Button>
+                    </div>
                 </div>
-                <div className='checkout__total'>
-                    <h2>Total: <span>$900.00</span></h2>
-                </div>
-                <div className='checkout__button-cont'>
-                    <Button variant="warning" className='checkout__button'>Pay</Button>
-                </div>
-                
+                <h2 className='checkout__message'>Thank you! Your order has been placed!</h2>
+
             </div>
         </div>
     );

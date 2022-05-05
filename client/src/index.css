@@ -622,6 +622,12 @@ code {
 .checkout__card:focus{
     background-color: #FFC107;
 }
+.checkout__message{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    padding: 50px 8px;
+}
 /*checkout end*/
 
 
