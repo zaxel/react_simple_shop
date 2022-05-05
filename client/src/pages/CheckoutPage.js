@@ -9,7 +9,7 @@ const CheckoutPage = () => {
         <div className='checkout'>
             <div className='checkout__container'>
                 <div className='checkout__main-title'>
-                    <h2>Shopping Cart</h2>
+                    <h2>Checkout</h2>
                 </div>
                 <div className='checkout__cards'>
                     <h4>Payment Methods:</h4>
