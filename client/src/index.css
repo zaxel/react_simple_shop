@@ -393,11 +393,22 @@ code {
     color: black;
 }
 .pagination .page-link:focus{
-    box-shadow: 0 0 0 1px rgb(13 110 253 / 25%);
+    /* box-shadow: 0 0 0 1px rgb(13 110 253 / 25%); */
+    box-shadow: none;
+    background-color: #fff;
+
 }
+.pagination .page-link:hover{
+    background-color: #F3F3F3;
+    box-shadow: 0 0 0 1px rgb(13 110 253 / 25%);
+    /* background-color: white; */
+
+}
+
 .pagination .page-item.active .page-link{
+    box-shadow: 0 0 0 1px rgb(13 110 253 / 25%);
     background-color: #a9a9a9;
-    border-color: #000;
+    border-color: #A9A9A9;
 }
 /*pagination end*/
 
