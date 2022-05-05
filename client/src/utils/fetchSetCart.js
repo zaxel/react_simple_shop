@@ -39,7 +39,7 @@ export const fetchCartOnAuth = async(user, cart)=>{
         }
     });
             
-    const data = await createOrUpdateCartDevice(setDevices, true);
+    const data = await createOrUpdateCartDevice(setDevices, true, user.user.id);
     const cartData = await getCart(user.user.id);
     cart.setCart(cartData.rows);
     cart.calcItemsCount();
@@ -48,14 +48,14 @@ export const fetchCartOnAuth = async(user, cart)=>{
 export const updateDeviceAmount = async(user, cart, basketId, deviceId, device_amount)=>{
     if(user.isAuth){
         const cartItem = [{basketId, deviceId, device_amount}];
-        await createOrUpdateCartDevice(cartItem, addAmountToExisted);
+        await createOrUpdateCartDevice(cartItem, addAmountToExisted, user.user.id);
     }
 
     cart.setDeviceAmount(device_amount, deviceId);
 }
 export const deleteDevice = async(user, cart, basketId, deviceId)=>{
     if(user.isAuth){
-        const cartData = await deleteCartDevice(basketId, deviceId);
+        const cartData = await deleteCartDevice(basketId, deviceId, user.user.id);
     }
     cart.deleteCart(deviceId);
     cart.deleteCartDevices(deviceId);

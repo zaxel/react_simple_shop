@@ -41,7 +41,7 @@ const DevicePage = () => {
                     </div>
                     <div className='device__price-cont'>
                         <h2>${device.price}</h2>
-                        <button onClick={()=>addToCart(cart, user.isAuth, cart.cartId, device.id, device_amount)} className='btn btn-outline-light auth__button device__button'>add to basket</button>
+                        <button onClick={()=>addToCart(cart, user.isAuth, cart.cartId, device.id, device_amount, user.user.id)} className='btn btn-outline-light auth__button device__button'>add to basket</button>
                     </div>
                 </div>
                 <div className='device__specification'>

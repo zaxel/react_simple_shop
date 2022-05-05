@@ -2,10 +2,11 @@
 const router = new Router();
 const cartController = require('../controllers/cartController');
 const authMiddleware = require('../middleware/authMiddleware');
+const correctUserIdMiddleware = require('../middleware/correctUserIdMiddleware');
 
-router.post('/', authMiddleware, cartController.createOrUpdate);
-router.get('/get', authMiddleware, cartController.getAll);
+router.post('/', authMiddleware, correctUserIdMiddleware, cartController.createOrUpdate);
+router.get('/get', authMiddleware, correctUserIdMiddleware, cartController.getAll);
 router.get('/basketId', authMiddleware, cartController.getBasketId);
-router.delete('/', authMiddleware, cartController.deleteOne);
+router.delete('/', authMiddleware, correctUserIdMiddleware, cartController.deleteOne);
 
 module.exports = router;
