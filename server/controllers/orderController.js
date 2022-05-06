@@ -1,7 +1,9 @@
-﻿const { BasketDevice, Basket } = require('../models/models');
+﻿const { Order, OrderDevice } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const { Op } = require("sequelize");
-class cartController {
+
+class orderController {
+
     async createOrUpdate(req, res, next) {
         try {
             const { items, addAmountToExisted } = req.body;
