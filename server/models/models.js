@@ -17,6 +17,16 @@ const BasketDevice = sequelize.define('basket_device', {
   device_amount: {type: DataTypes.INTEGER, allowNull: false},
 })
 
+
+const OrderHistory = sequelize.define('order_history', {
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+})
+
+const OrderHistoryDevice = sequelize.define('order_history_device', {
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  device_amount: {type: DataTypes.INTEGER, allowNull: false},
+})
+
 const Device = sequelize.define('device', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   name: {type: DataTypes.STRING, unique: true, allowNull: false},
@@ -52,12 +62,20 @@ const TypeBrand = sequelize.define('type_brand', {
 
   User.hasOne(Basket)
   Basket.belongsTo(User)
+  
+  User.hasMany(OrderHistory)
+  OrderHistory.belongsTo(User)
 
   User.hasMany(Rate)
   Rate.belongsTo(User)
 
   Basket.hasMany(BasketDevice)
   BasketDevice.belongsTo(Basket)
+
+
+
+  OrderHistory.hasMany(OrderHistoryDevice)
+  OrderHistoryDevice.belongsTo(OrderHistory)
 
   Device.hasMany(DeviceInfo, {as: 'info'})
   DeviceInfo.belongsTo(Device)
@@ -73,6 +91,9 @@ const TypeBrand = sequelize.define('type_brand', {
 
   Device.hasOne(BasketDevice)
   BasketDevice.belongsTo(Device)
+  
+  Device.hasOne(OrderHistoryDevice)
+  OrderHistoryDevice.belongsTo(Device)
 
   Type.belongsToMany(Brand, {through: TypeBrand})
   Brand.belongsToMany(Type, {through: TypeBrand})
@@ -81,6 +102,8 @@ const TypeBrand = sequelize.define('type_brand', {
       User,
       Basket,
       BasketDevice,
+      OrderHistory,
+      OrderHistoryDevice,
       Device,
       Type,
       Brand,
