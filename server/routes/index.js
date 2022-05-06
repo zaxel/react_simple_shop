@@ -6,7 +6,7 @@ const brandRouter = require('./brandRouter');
 const typeRouter = require('./typeRouter');
 const userRouter = require('./userRouter');
 const cartRouter = require('./cartRouter');
-const orderRouter = require('./cartRouter');
+const orderRouter = require('./orderRouter');
 
 router.use('/user', userRouter);
 router.use('/device', deviceRouter);
