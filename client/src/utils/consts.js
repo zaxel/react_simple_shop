@@ -13,6 +13,7 @@ export const SAMPLE_ROUTE = BASE_ROUTE+'/sample';
 export const CHECKOUT_ROUTE = BASE_ROUTE+'/checkout';
 export const ERROR_ROUTE = BASE_ROUTE+'*';
 export const NAVBAR_HEIGHT = 60;
+export const RANDOM_DEVICES_COUNT = 6;
 
 export const USER = 'USER';
 export const ADMIN = 'ADMIN';

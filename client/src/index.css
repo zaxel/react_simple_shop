@@ -539,6 +539,7 @@ code {
 }
 .basket-sponsored__descr-cont{
     max-width: 250px;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 3px;

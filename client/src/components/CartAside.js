@@ -1,17 +1,25 @@
-﻿import React, {useContext} from 'react';
+﻿import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '..';
 import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import SponsoredItem from './SponsoredItem';
-import { CHECKOUT_ROUTE } from '../utils/consts';
+import { CHECKOUT_ROUTE, RANDOM_DEVICES_COUNT } from '../utils/consts';
+import { fetchRandomDevices } from '../http/deviceAPI';
 
 const CartAside = () => {
     const {cart, history} = useContext(Context);
     const navigate = useNavigate();
+    const [randomDevices, setRandomDevices] = useState([]);
 
     const checkout = () => {
         navigate(CHECKOUT_ROUTE)
     }
+
+    useEffect(async()=>{
+        const devices = await fetchRandomDevices(RANDOM_DEVICES_COUNT);
+        setRandomDevices(devices);
+    }, []);
+
     return (
         <aside className='basket__aside basket-aside'>
             {!!cart.itemsCount &&
@@ -21,11 +29,9 @@ const CartAside = () => {
                 </div>}
             <div className='basket-aside__related-cont'>
                 <h4 className='basket-aside__title'>Customers Who Bought Items in Your Recent History Also Bought</h4>
-                <SponsoredItem />
-                <SponsoredItem />
-                <SponsoredItem />
-                <SponsoredItem />
-                <SponsoredItem />
+                {randomDevices.map(el=>{
+                    return <SponsoredItem key={el.id} el={el}/>
+                })}
             </div>
         </aside>
     );

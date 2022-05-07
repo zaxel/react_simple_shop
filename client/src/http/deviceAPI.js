@@ -38,3 +38,7 @@ export const fetchSingleDevice = async (id) => {
     const {data} = await $host.get(`api/device/${id}`);
     return data;
 }
+export const fetchRandomDevices = async (amount) => {
+    const {data} = await $host.get('api/device/random', {params:{amount}});
+    return data;
+}
