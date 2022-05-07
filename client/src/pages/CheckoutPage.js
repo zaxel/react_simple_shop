@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '..';
 import { Button } from 'react-bootstrap';
 import card1 from '../assets/card_example1.png';
@@ -7,8 +7,9 @@ import card3 from '../assets/card_example3.jpg';
 import { createOrder } from '../http/orderAPI';
 
 const CheckoutPage = () => {
-    const {cart} = useContext(Context);
+    const {cart, cartDevices} = useContext(Context);
     const [payed, setPayed] = useState(false);
+    const [items, setItems] = useState([]);
 
 
     const makeOrder = async() => {
@@ -19,7 +20,21 @@ const CheckoutPage = () => {
         cart.clearCart();
         setPayed(true);
     }
-    
+    const makeItems = () => {
+        const items = cart.cartDevices.map((device, i)=>{
+            const count = cart.cart.find(el=>el.deviceId===device.id).device_amount;
+            return <div key={device.id} className='checkout__item-row'>
+                <div className='checkout__item-title'>{device.name}</div>
+                <div className='checkout__count'>x {count}</div>
+                <div className='checkout__price'>${device.price}</div>
+            </div>
+        })
+        return items;
+    }
+    useEffect(()=>{
+        
+        setItems(makeItems());
+    }, [])
 
     return (
         <div className='checkout'>
@@ -33,7 +48,7 @@ const CheckoutPage = () => {
                         <div className='checkout__items-cont'>
                             <h4>Your Items:</h4>
                             <div className='checkout__items'>
-                                <div className='checkout__item-row'>
+                                {/* <div className='checkout__item-row'>
                                     <div className='checkout__item-title'>Thank you! Your order has been placed! Thank you! Your order has been placed! Thank you! Your order has been placed!</div>
                                     <div className='checkout__count'>x 2</div>
                                     <div className='checkout__price'>$88.90</div>
@@ -52,8 +67,8 @@ const CheckoutPage = () => {
                                     <div className='checkout__item-title'>Siemens -"lX6</div>
                                     <div className='checkout__count'>x 5</div>
                                     <div className='checkout__price'>$88.90</div>
-                                </div>
-                                
+                                </div> */}
+                                {items}
                             </div>
                         </div>
 
