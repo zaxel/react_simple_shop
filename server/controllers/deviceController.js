@@ -1,6 +1,6 @@
 ﻿const uuid = require('uuid');
 const path = require('path');
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 const { Device, DeviceInfo } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const acceptedFileType = 'text/plain';
@@ -100,6 +100,16 @@ class DeviceController {
             include: [{ model: DeviceInfo, as: 'info' }]
         });
         return res.json(device);
+    }
+
+    async getRandom(req, res, next) {
+        try {
+            const {amount} = req.query;
+            const devices = await Device.findAll({ order: Sequelize.literal('random()'), limit: amount }); 
+            return res.json(devices);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
     }
 
 }
