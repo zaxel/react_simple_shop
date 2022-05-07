@@ -30,16 +30,19 @@ const Shop = observer(() => {
     })
    }, [device.activePage, device.brandActive, device.typeActive])
 
+   console.log(device.devices.rows)
+
+
     return (
         <div className='shop'>
-            <div className='shop__container'>
+            {device.devices.rows && <div className='shop__container'>
                 <TypeBar/>
                 <div className='shop__devices-cont'>
                     <BrandBar/>
                     <DeviceItems/>
                     <PaginationCont/>
                 </div>
-            </div>
+            </div>}
         </div>
     );
 });
