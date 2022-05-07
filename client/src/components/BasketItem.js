@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
@@ -14,6 +14,9 @@ const BasketItem = observer(({device, basketDevice}) => {
     const amount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const [selectedValue, setSelectedValue] = useState(basketDevice?.device_amount || 1);
 
+    useEffect(()=>{
+        setSelectedValue(basketDevice?.device_amount || 1);
+    }, [basketDevice?.device_amount])
     
     const selectHandler = async(event) =>{
         

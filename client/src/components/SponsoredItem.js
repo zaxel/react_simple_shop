@@ -1,9 +1,16 @@
-﻿import React from 'react';
-import image from '../assets/iPhone11.jpg';
+﻿import React, {useContext} from 'react';
+import { Context } from '..';
+import { addToCart } from '../utils/addToCart';
 import star from '../assets/rating_star.png';
 import { Button, Modal, Form } from 'react-bootstrap';
 
 const SponsoredItem = ({el}) => {
+    const { user, cart } = useContext(Context);
+    const device_amount = 1;
+
+    const onAddToCartPressed = () => {
+        addToCart(cart, user.isAuth, cart.cartId, el.id, device_amount, user.user.id)
+    }
     
     return (
         <div className='basket-sponsored'>
@@ -18,7 +25,7 @@ const SponsoredItem = ({el}) => {
                     </div>
                     <h5>${el.price}</h5>
                 </div>
-                <Button variant="warning" className='basket-aside__button'>Add to Cart</Button>
+                <Button onClick={onAddToCartPressed} variant="warning" className='basket-aside__button'>Add to Cart</Button>
             </div>
         </div>
     );
