@@ -1,12 +1,24 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useContext, useState } from 'react';
+import { Context } from '..';
 import { Button } from 'react-bootstrap';
 import card1 from '../assets/card_example1.png';
 import card2 from '../assets/card_example2.jpg';
 import card3 from '../assets/card_example3.jpg';
+import { createOrder } from '../http/orderAPI';
 
 const CheckoutPage = () => {
+    const {cart} = useContext(Context);
     const [payed, setPayed] = useState(false);
-    
+
+
+    const makeOrder = async() => {
+        const orderDevices = cart.cart.map(device=> { 
+            return {deviceId: device.deviceId, amount: device.device_amount} 
+        })
+        const data = await createOrder(orderDevices, cart.cartId);
+        cart.clearCart();
+        setPayed(true);
+    }
     
 
     return (
@@ -31,10 +43,10 @@ const CheckoutPage = () => {
                             </button>
                         </div>
                         <div className='checkout__total'>
-                            <h2>Total: <span>$900.00</span></h2>
+                            <h2>Total: <span>${cart.cartTotal}</span></h2>
                         </div>
                         <div className='checkout__button-cont'>
-                            <Button onClick={()=>setPayed(true)} variant="warning" className='checkout__button'>Pay</Button>
+                            <Button onClick={makeOrder} variant="warning" className='checkout__button'>Pay</Button>
                         </div>
                     </div>
                 }

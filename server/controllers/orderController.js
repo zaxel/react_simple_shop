@@ -1,4 +1,4 @@
-﻿const { Order, OrderDevice } = require('../models/models');
+﻿const { Order, OrderDevice, BasketDevice } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const { Op } = require("sequelize");
 
@@ -6,11 +6,12 @@ class orderController {
 
     async create(req, res, next) {
         try {
-            const {order} = req.body;
+            const {order, basketId} = req.body;
             const {id} = req.user;
             if(order.length === 0){
                 return next(ApiError.badRequest('no devices or it\'s amount received in request'));
             }
+
             const newOrder = await Order.create({userId: id});
 
             const ordersData = order.map(el => {
@@ -18,7 +19,12 @@ class orderController {
             })
 
             const orderDevice = await OrderDevice.bulkCreate(ordersData);
-            
+
+
+            const deletedAmount = await BasketDevice.destroy({
+                where: {basketId}
+            });
+
             return res.json(orderDevice);
 
         } catch (e) {

@@ -74,6 +74,12 @@ export default class CartStore{
             return prev+device.price*next.device_amount;
         }, 0)
     }
+    clearCart(){
+        this._cart = [];          
+        this._cartDevices = [];   
+        this._itemsCount = 0;
+        this._cartTotal = 0;
+    }
     get cart(){
         return this._cart;
     }
