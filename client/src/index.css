@@ -628,6 +628,29 @@ code {
     font-weight: 500;
     padding: 50px 8px;
 }
+.checkout__items-cont{
+    margin-bottom: 15px;
+}
+.checkout__items-cont h4{
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.checkout__item-row{
+    display: flex;
+    background-color: #f3f3f3;
+    font-style: italic;
+    margin-bottom: 1px;
+    padding-left: 15px;
+}
+.checkout__item-title{
+    flex: 1 0 75%;
+}
+.checkout__count{
+    flex: 1 0 10%;
+}
+.checkout__price{
+    flex: 1 0 15%;
+}
 /*checkout end*/
 
 
@@ -746,6 +769,30 @@ code {
     
     /*basket end*/
 }
-
+@media (max-width: 420px) {
+    /* navbar start */
+    .flex-row.navbar-nav.me-auto{
+        display: block;
+    }
+    .flex-row.navbar-nav.me-auto li{
+        display: inline-block;
+    }
+    .navbar-nav.navbar-user-data-cont.flex-row{
+        display: block;
+    }
+    .navbar-nav.navbar-user-data-cont.flex-row li{
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+    /* navbar end */
+    /* checkout start */
+    .checkout__item-title {
+        flex: 1 0 65%;
+    }
+    .checkout__item-row{
+        padding-left: 0;
+    }
+    /* checkout end */
+}
 
 /* media end */

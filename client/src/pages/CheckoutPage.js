@@ -30,6 +30,34 @@ const CheckoutPage = () => {
                 {payed ? 
                     <h2 className='checkout__message'>Thank you! Your order has been placed!</h2> :
                     <div className='checkout__pays'>
+                        <div className='checkout__items-cont'>
+                            <h4>Your Items:</h4>
+                            <div className='checkout__items'>
+                                <div className='checkout__item-row'>
+                                    <div className='checkout__item-title'>Thank you! Your order has been placed! Thank you! Your order has been placed! Thank you! Your order has been placed!</div>
+                                    <div className='checkout__count'>x 2</div>
+                                    <div className='checkout__price'>$88.90</div>
+                                </div>
+                                <div className='checkout__item-row'>
+                                    <div className='checkout__item-title'>iPhone -apt95</div>
+                                    <div className='checkout__count'>x 1</div>
+                                    <div className='checkout__price'>$20.00</div>
+                                </div>
+                                <div className='checkout__item-row'>
+                                    <div className='checkout__item-title'>Nokia AZ16=LS</div>
+                                    <div className='checkout__count'>x 1</div>
+                                    <div className='checkout__price'>$10.90</div>
+                                </div>
+                                <div className='checkout__item-row'>
+                                    <div className='checkout__item-title'>Siemens -"lX6</div>
+                                    <div className='checkout__count'>x 5</div>
+                                    <div className='checkout__price'>$88.90</div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+
                         <div className='checkout__cards'>
                             <h4>Payment Methods:</h4>
                             <button className='checkout__card'>
