@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Context } from '..';
 import { authRoutes, publicRoutes, adminRoutes } from '../routes';
-import PrivateRouteWrapper from './PrivateRouteWrapper';
+import PrivateRouteWrapper from '../utils/PrivateRouteWrapper';
 
 
 const AppRouter = observer(() => {

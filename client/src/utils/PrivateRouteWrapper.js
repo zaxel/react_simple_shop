@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useEffect } from "react"
 import { Navigate, useLocation } from "react-router-dom"
 import { Context } from "..";
-import { LOGIN_ROUTE } from "../utils/consts";
+import { LOGIN_ROUTE } from "./consts";
 
 /**
  * A wrapper around the element which checks if the user is authenticated
