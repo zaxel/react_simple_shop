@@ -10,10 +10,38 @@ import Protected from "./pages/Protected";
 import AccountPage from "./pages/AccountPage";
 import Sample from "./pages/Sample";
 import CheckoutPage from "./pages/CheckoutPage";
+
+import UserDelivery from "./components/userProfileComponents/UserDelivery";
+import UserInfo from "./components/userProfileComponents/UserInfo";
+import UserPayment from "./components/userProfileComponents/UserPayment";
+import UserOrders from "./components/userProfileComponents/UserOrders";
+import UserAccountRouter from "./components/userProfileComponents/UserAccountRouter";
+
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
-        ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE } from "./utils/consts";
+        ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
+        ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE } from "./utils/consts";
 
+
+export const userNavRoutes = [
+    {
+        path: ACCOUNT_INFO_ROUTE,
+        Component: UserInfo
+    },
+    {
+        path: ACCOUNT_DELIVERY_ROUTE,
+        Component: UserDelivery
+    },
+    {
+        path: ACCOUNT_PAYMENT_ROUTE,
+        Component: UserPayment
+    },
+    {
+        path: ACCOUNT_ORDERS_ROUTE,
+        Component: UserOrders
+    },
+    
+];
 export const adminRoutes = [
     {
         path: ADMIN_ROUTE,
@@ -32,7 +60,8 @@ export const authRoutes = [
     },
     {
         path: ACCOUNT_ROUTE,
-        Component: AccountPage
+        Component: AccountPage,
+        NestedComponent: UserAccountRouter
     },
     {
         path: PROTECTED_ROUTE,
