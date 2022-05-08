@@ -1,10 +1,10 @@
 ﻿import React, {useContext, useEffect, useState} from 'react';
-import { Context } from '..';
+import { Context } from '../..';
 import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
-import SponsoredItem from './SponsoredItem';
-import { CHECKOUT_ROUTE, RANDOM_DEVICES_COUNT } from '../utils/consts';
-import { fetchRandomDevices } from '../http/deviceAPI';
+import SponsoredItem from '../SponsoredItem';
+import { CHECKOUT_ROUTE, RANDOM_DEVICES_COUNT } from '../../utils/consts';
+import { fetchRandomDevices } from '../../http/deviceAPI';
 
 const CartAside = () => {
     const {cart, history} = useContext(Context);
