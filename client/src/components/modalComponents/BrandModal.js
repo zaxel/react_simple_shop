@@ -1,28 +1,28 @@
 ﻿import React, { useRef, useState } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
-import { createType } from '../http/deviceAPI';
+import { createBrand } from '../../http/deviceAPI';
 
-const TypeModal = ({show, onHide}) => {
-    const [type, setTypeValue] = useState('');
+const BrandModal = ({show, onHide}) => {
+    const [brand, setBrand] = useState('');
     const inputRef = useRef(null);
 
-    const setNewType = () => {
+    const setNewBrand = () => {
       onHide();
-      createType(type)
-      .then(data=>alert(`new type "${data.name}" added`))
-      .then(_=>setTypeValue(''))
-      .catch(e=> alert(e + ': \n\r'+ e.response.data.message));
+      createBrand(brand)
+        .then(data=>alert(`new brand "${data.name}" added`))
+        .then(_=>setBrand(''))
+        .catch(e=> alert(e + ': \n\r'+ e.response.data.message));
     }
 
     return (
       <Modal centered show={show} onHide={onHide}>
         <Modal.Header closeButton>
-          <Modal.Title>Add New Type</Modal.Title>
+          <Modal.Title>Add New Brand</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           
         <Form.Group className="mb-3">
-          <Form.Control ref={inputRef} value={type} onChange={(e)=>setTypeValue(e.currentTarget.value)} placeholder="new type"/>
+          <Form.Control ref={inputRef} value={brand} onChange={(e)=>setBrand(e.currentTarget.value)} placeholder="new brand"/>
         </Form.Group>
           
         </Modal.Body>
@@ -30,7 +30,7 @@ const TypeModal = ({show, onHide}) => {
           <Button variant="secondary" onClick={onHide}>
             Close
           </Button>
-          <Button variant="primary" onClick={setNewType}>
+          <Button variant="primary" onClick={setNewBrand}>
             Save
           </Button>
         </Modal.Footer>
@@ -38,4 +38,4 @@ const TypeModal = ({show, onHide}) => {
     );
 };
 
-export default TypeModal;
+export default BrandModal;

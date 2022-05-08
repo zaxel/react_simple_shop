@@ -1,10 +1,10 @@
 ﻿import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { Context } from '..';
-import { createBulkDevices} from '../http/deviceAPI';
+import { Context } from '../..';
+import { createBulkDevices} from '../../http/deviceAPI';
 import { observer } from 'mobx-react-lite';
-import {SAMPLE_ROUTE} from '../utils/consts';
+import {SAMPLE_ROUTE} from '../../utils/consts';
 
 const DeviceBulkModal = observer(({ show, onHide }) => {
   const [file, setFile] = useState('');

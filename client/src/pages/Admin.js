@@ -1,8 +1,8 @@
 ﻿import React, { useState } from 'react';
-import TypeModal from '../components/TypeModal';
-import BrandModal from '../components/BrandModal';
-import DeviceModal from '../components/DeviceModal';
-import DeviceBulkModal from '../components/DeviceBulkModal';
+import TypeModal from '../components/modalComponents/TypeModal';
+import BrandModal from '../components/modalComponents/BrandModal';
+import DeviceModal from '../components/modalComponents/DeviceModal';
+import DeviceBulkModal from '../components/modalComponents/DeviceBulkModal';
 
 const Admin = () => {
     const [typeVisible, setTypeVisible] = useState(false);

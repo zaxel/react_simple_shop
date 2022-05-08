@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
-import { Context } from '..';
-import { createDevice, fetchTypes, fetchBrands, fetchAllDevices } from '../http/deviceAPI';
+import { Context } from '../..';
+import { createDevice, fetchTypes, fetchBrands, fetchAllDevices } from '../../http/deviceAPI';
 import { observer } from 'mobx-react-lite';
 
 const DeviceModal = observer(({show, onHide}) => {
