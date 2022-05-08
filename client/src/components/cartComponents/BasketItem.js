@@ -1,11 +1,11 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
-import { Context } from '..';
-import { deleteDevice, updateDeviceAmount } from '../utils/fetchSetCart';
-import { setLocalStoreCart } from '../utils/setLocalStoreCart';
+import { Context } from '../..';
+import { deleteDevice, updateDeviceAmount } from '../../utils/fetchSetCart';
+import { setLocalStoreCart } from '../../utils/setLocalStoreCart';
 import { useNavigate } from 'react-router-dom';
-import { DEVICE_ROUTE } from '../utils/consts';
+import { DEVICE_ROUTE } from '../../utils/consts';
 
 
 const BasketItem = observer(({device, basketDevice}) => {
