@@ -24,7 +24,7 @@ const Auth = observer(() => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        authForm.current.style.height = height - NAVBAR_HEIGHT + 'px';
+        // authForm.current.style.height = height - NAVBAR_HEIGHT + 'px';
         return () => {
             history.setAuthFrom(SHOP_ROUTE);
         }

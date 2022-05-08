@@ -8,6 +8,7 @@ import { Spinner } from "react-bootstrap";
 import { setUserIfAuth } from "./utils/setUserIfAuth";
 import { fetchSetCart, setCartId } from "./utils/fetchSetCart";
 import { setCartFromLocalStore } from "./utils/setLocalStoreCart";
+import Footer from "./components/Footer";
 
 
 const App = observer(() => {
@@ -43,6 +44,7 @@ const App = observer(() => {
     <BrowserRouter>
       <NavBar />
       <AppRouter />
+      <Footer />
     </BrowserRouter>
   );
 });

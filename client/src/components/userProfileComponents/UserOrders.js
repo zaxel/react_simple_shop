@@ -2,7 +2,7 @@
 
 const UserOrders = () => {
     return (
-        <div>
+        <div className='account__orders'>
             UserOrders page!
         </div>
     );

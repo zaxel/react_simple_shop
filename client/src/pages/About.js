@@ -2,7 +2,7 @@
 
 const About = () => {
     return (
-        <div>
+        <div className='about'>
             About panel page
         </div>
     );

@@ -2,7 +2,7 @@
 
 const Protected = () => {
     return (
-        <div>
+        <div className='protected'>
             Protected panel page
         </div>
     );

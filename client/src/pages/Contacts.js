@@ -2,7 +2,7 @@
 
 const Contacts = () => {
     return (
-        <div>
+        <div className='contacts'>
             Contacts panel page
         </div>
     );

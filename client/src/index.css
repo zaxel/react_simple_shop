@@ -1,3 +1,12 @@
+HTML,
+body{
+    height: 100%;
+}
+#root{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 body {
     margin: 0;
     background-color: #f3f3f3;
@@ -30,6 +39,7 @@ code {
 
 /* auth start */
 .auth {
+    flex: 1 1 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +101,7 @@ code {
 /* shop start */
 .shop {
     width: 100%;
-    height: 100%;
+    flex: 1 1 auto;
     padding: 8px 20px;
 }
 
@@ -106,7 +116,21 @@ code {
 
 
 /* shop end */
-
+/*about start*/
+.about{
+    flex: 1 1 auto;
+}
+/*about end*/
+/*protected start*/
+.protected{
+    flex: 1 1 auto;
+}
+/*protected end*/
+/*contacts start*/
+.contacts{
+    flex: 1 1 auto;
+}
+/*contacts end*/
 
 /*typebar start*/
 .typebar {
@@ -247,7 +271,7 @@ code {
 /*device start*/
 .device{
     width: 100%;
-    height: 100%;
+    flex: 1 1 auto;
 }
 .device__cont{
     width: 100%;
@@ -321,6 +345,9 @@ code {
 }
 /*device end*/
 /*admin page start*/
+.admin{
+    flex: 1 1 auto;
+}
 .admin__container{
     padding: 20px;
     display: flex;
@@ -413,6 +440,9 @@ code {
 /*pagination end*/
 
 /*basket start*/
+.basket{
+    flex: 1 1 auto;
+}
 .basket__container{
     display: flex;
     justify-content: center;
@@ -568,6 +598,9 @@ code {
 }
 /*basket end*/
 /*checkout start*/
+.checkout{
+    flex: 1 1 auto;
+}
 .checkout__container{
     padding: 10px;
     margin: 10px;
@@ -653,6 +686,21 @@ code {
     flex: 1 0 15%;
 }
 /*checkout end*/
+/*user account start*/
+
+.account,
+.account__orders,
+.account__payment,
+.account__delivery{
+    flex: 1 1 auto;
+}
+/*user account end*/
+/*footer start*/
+.footer{
+    min-height: 40px;
+    background-color: #212529;
+}
+/*footer end*/
 
 
 

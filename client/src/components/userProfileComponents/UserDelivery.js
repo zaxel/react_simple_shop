@@ -2,7 +2,7 @@
 
 const UserDelivery = () => {
     return (
-        <div>
+        <div className='account__delivery'>
             UserDelivery page!
         </div>
     );
