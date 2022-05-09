@@ -749,6 +749,9 @@ code {
 .modal-table .modal-dialog{
     min-width: fit-content;
 }
+
+/*account orders end*/
+/*stripped table start*/
 .stripped-table{
     background-color: #F3F3F3;
 }
@@ -763,16 +766,43 @@ code {
     text-align: center;
     cursor: pointer;
 }
-.stripped-table tr:hover{
+.stripped-table tr:hover:not(:first-child){
     text-decoration: underline;
+}
+.stripped-table th{
+    position: relative;
+    padding-right: 24px;
+    border-right: 1px solid #F3F3F3;
+}
+.stripped-table th::after{
+    
+    position: absolute;
+    top: 3px;
+    right: 0;
+    padding: 1px 3px 2px;
+    margin: 0 3px;
+    height: auto;
+    content: '^';
+}
+.stripped-table th::before{
+    position: absolute;
+    top: 5px;
+    right: 0;
+    padding: 1px 3px;
+    margin: 0 3px;
+    height: auto;
+    content: '^';
+    transform: rotateZ(180deg);
+}
+.stripped-table th:hover::after{
+    cursor: pointer;
+    outline: 1px solid #A9A9A9;
+    border-radius: 2px;
 }
 .stripped-table tr:nth-child(odd){
     background-color: #fff;
 }
-/*account orders end*/
-/*account order modal start*/
-
-/*account order modal end*/
+/*stripped table end*/
 
 /*footer start*/
 .footer{
