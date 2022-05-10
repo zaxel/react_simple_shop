@@ -766,12 +766,14 @@ code {
     text-align: center;
     cursor: pointer;
 }
-.stripped-table tr:hover:not(:first-child){
+.stripped-table tbody tr:hover{
     text-decoration: underline;
 }
 .stripped-table th{
     position: relative;
     padding-right: 24px;
+}
+.stripped-table th:not(:last-child){
     border-right: 1px solid #F3F3F3;
 }
 .stripped-table th::after{
