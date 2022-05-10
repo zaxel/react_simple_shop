@@ -1,42 +1,54 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
 import UserOrderModal from '../modalComponents/UserOrderModal';
-import TrThead from '../modalComponents/strippedTablesComponents/ThThead';
+import ThTable from '../modalComponents/strippedTablesComponents/ThTable';
 import TrTable from '../modalComponents/strippedTablesComponents/TrTable';
+import { v4 as uuidv4 } from 'uuid';
 
 const UserOrders = () => {
     const [orderModalVisible, setOrderModalVisible] = useState(false);
-    
+
     const ths = ['order id', 'ordered at', 'amount ordered', 'total'];
 
-    const tds1 = ['3655', '2022-05-04 20:24', '2', '$165.00'];
-    const tds2 = ['3657', '2022-08-12 19:24', '7', '$65.00'];
-    const tds3 = ['3659', '2022-09-15 15:00', '1', '$25.00'];
-    const tds4 = ['3675', '2022-09-15 18:15', '10', '$3.00'];
-    const tds5 = ['3695', '2022-10-04 12:10', '3', '$8605.00'];
-    const tds6 = ['3755', '2022-10-04 20:24', '1', '$715.00'];
-    const tds7 = ['3759', '2022-12-01 23:55', '5', '$115.00'];
+    const tds = [
+        ['3655', '2022-05-04 20:24', '2', '$165.00'],
+        ['3657', '2022-08-12 19:24', '7', '$65.00'],
+        ['3659', '2022-09-15 15:00', '1', '$25.00'],
+        ['3675', '2022-09-15 18:15', '10', '$3.00'],
+        ['3695', '2022-10-04 12:10', '3', '$8605.00'],
+        ['3755', '2022-10-04 20:24', '1', '$715.00'],
+        ['3759', '2022-12-01 23:55', '5', '$115.00'],
+    ]
 
     const onRowClickHandler = () => {
         setOrderModalVisible(true)
     }
 
+    let thRefs = useRef([]);
+    let tdRefs = useRef([]);
+
+    const thsWithTooltip = ths.map((el, i) => {
+        const myKey = uuidv4();
+        let ref = (el) => (thRefs.current[i] = el);
+        return <ThTable iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} data={el} />
+    })
+    const tdsWithTooltip = tds.map((el, i) => {
+        const myKey = uuidv4();
+        let ref = (el) => (tdRefs.current[i] = el);
+        return <TrTable iteration={i} myRefs={tdRefs} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
+    })
+
     return (
         <div className='account__orders acc-orders'>
-            
+
             <table className='stripped-table'>
                 <thead>
-                    <TrThead data={ths}/>
+                    <tr>
+                        {thsWithTooltip}
+                    </tr>
                 </thead>
                 <tbody>
-                    <TrTable onRowClickHandler={onRowClickHandler} data={tds1}/>
-                    <TrTable onRowClickHandler={onRowClickHandler} data={tds2}/>
-                    <TrTable onRowClickHandler={onRowClickHandler} data={tds3}/>
-                    <TrTable onRowClickHandler={onRowClickHandler} data={tds4}/>
-                    <TrTable onRowClickHandler={onRowClickHandler} data={tds5}/>
-                    <TrTable onRowClickHandler={onRowClickHandler} data={tds6}/>
-                    <TrTable onRowClickHandler={onRowClickHandler} data={tds7}/>
-                    
+                    {tdsWithTooltip}
                 </tbody>
             </table>
             <UserOrderModal show={orderModalVisible} onHide={() => setOrderModalVisible(false)} />

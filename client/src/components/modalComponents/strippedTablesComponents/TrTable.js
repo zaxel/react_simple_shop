@@ -1,10 +1,11 @@
-﻿import React from 'react';
+﻿import React, {useEffect} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import withTooltip from '../../../hocs/withTooltip';
 
 
-const TrTable = ({data, onRowClickHandler}) => {
+const TrTable =  ({data, onRowClickHandler, innerRef}) => {
     return (
-        <tr onClick={onRowClickHandler}>
+        <tr ref={innerRef} onClick={onRowClickHandler}>
             {data.map(tds=>{
                 const key = uuidv4();
                 return <td key={key}>{tds}</td>
@@ -13,4 +14,5 @@ const TrTable = ({data, onRowClickHandler}) => {
     );
 };
 
-export default TrTable;
+export default withTooltip(TrTable);
+// export default TrTable;
