@@ -7,6 +7,7 @@ import UserStore from './store/UserStore';
 import DeviceStore from './store/DeviceStore';
 import HistoryStore from './store/HistoryStore';
 import CartStore from './store/CartStore';
+import ToolTipStore from './store/ToolTipStore';
 
 export const Context = createContext(null);
 
@@ -16,6 +17,7 @@ ReactDOM.render(
       device: new DeviceStore(),
       history: new HistoryStore(),
       cart: new CartStore(),
+      toolTip: new ToolTipStore(),
     }}>
     <App />
   </Context.Provider>,

@@ -1,6 +1,6 @@
 ﻿import React, {useEffect} from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import withTooltip from '../../../hocs/withTooltip';
+import withTooltip from '../../../hocs/withTooltip/withTooltip';
 
 
 const TrTable =  ({data, onRowClickHandler, innerRef}) => {

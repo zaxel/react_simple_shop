@@ -9,6 +9,7 @@ import { setUserIfAuth } from "./utils/setUserIfAuth";
 import { fetchSetCart, setCartId } from "./utils/fetchSetCart";
 import { setCartFromLocalStore } from "./utils/setLocalStoreCart";
 import Footer from "./components/Footer";
+import ShopToolTip from "./components/ShopToolTip";
 
 
 const App = observer(() => {
@@ -45,6 +46,7 @@ const App = observer(() => {
       <NavBar />
       <AppRouter />
       <Footer />
+      <ShopToolTip />
     </BrowserRouter>
   );
 });

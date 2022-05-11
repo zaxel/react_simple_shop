@@ -5,10 +5,8 @@ import UserAccountRouter from '../components/userProfileComponents/UserAccountRo
 const AccountPage = () => {
     return (
         <div className='account'>
-            <div className='account__container'>
-                <AccountNavbar />
-                <Outlet />
-            </div>
+            <AccountNavbar />
+            <Outlet />
         </div>
     );
 };

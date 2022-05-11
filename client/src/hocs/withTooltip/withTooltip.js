@@ -2,14 +2,15 @@
 
 
 const withTooltip = Component => ({ ...props }) => {
+
+
+
     useEffect(()=>{
         const i = props.iteration;
         const myRefs = props.myRefs;
-        console.log(myRefs.current[i])
-        // console.log(props)
+        console.log(myRefs.current[i].getBoundingClientRect().top)
     },[])
     return(
-        
         <Component {...props} />
     )
 }
