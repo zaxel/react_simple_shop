@@ -693,6 +693,11 @@ code {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+
+
+    height: 2000px;
+
+
 }
 
 /*user account end*/
@@ -800,6 +805,7 @@ code {
 
 /*tooltip start*/
 .tool-tip {
+    opacity: 0;
     position: absolute;
     padding: 10px 20px;
     border: 1px solid #b3c9ce;

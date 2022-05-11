@@ -5,7 +5,8 @@ import withTooltip from '../../../hocs/withTooltip/withTooltip';
 
 const TrTable =  ({data, onRowClickHandler, innerRef}) => {
     return (
-        <tr ref={innerRef} onClick={onRowClickHandler}>
+        <tr ref={innerRef} >
+        {/* <tr ref={innerRef} onClick={onRowClickHandler}> */}
             {data.map(tds=>{
                 const key = uuidv4();
                 return <td key={key}>{tds}</td>

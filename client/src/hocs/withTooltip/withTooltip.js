@@ -1,14 +1,32 @@
-﻿import React, { useEffect } from 'react';
+﻿import React, { useEffect, useContext } from 'react';
+import { HoverIntent } from './hoverIntent';
+import { Context } from '../..';
 
 
 const withTooltip = Component => ({ ...props }) => {
 
+    const {toolTip} = useContext(Context);
+
+    
+
+    const toolTipHandler = () => {
+        const i = props.iteration;
+        const myRefs = props.myRefs;
+        const elem = myRefs.current[i];
+        console.log(toolTip.isToolTipShown)
+
+
+        setTimeout(function() {
+            new HoverIntent({
+                elem,
+                toolTip
+            });
+          }, 2000);
+    }
 
 
     useEffect(()=>{
-        const i = props.iteration;
-        const myRefs = props.myRefs;
-        console.log(myRefs.current[i].getBoundingClientRect().top)
+        toolTipHandler();
     },[])
     return(
         <Component {...props} />
