@@ -2,7 +2,7 @@
 
 export default class ToolTipStore{
     _isToolTipShown = true;
-    _toolTipText = 'some help tooltips';
+    _toolTipText = '';
     _top = 0;
     _left = 0;
     _offsetWidth = 0;

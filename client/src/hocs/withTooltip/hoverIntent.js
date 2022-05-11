@@ -4,12 +4,14 @@ export class HoverIntent {
         sensitivity = 0.1, // if speed slower then ...px/ms means cursor on element
         interval = 500,    // change speed every ...ms 
         elem,
-        toolTip
+        toolTip,
+        text
     }) {
         this._sensitivity = sensitivity;
         this._interval = interval;
         this._elem = elem;
         this._toolTip = toolTip;
+        this._text = text;
 
         this.onMouseMove = this.onMouseMove.bind(this);
         this.onMouseOver = this.onMouseOver.bind(this);
@@ -22,6 +24,8 @@ export class HoverIntent {
         this._elem.addEventListener("mouseover", this.onMouseOver);
 
         this._elem.addEventListener("mouseout", this.onMouseOut);
+
+        console.log(this._text)
     }
     onMouseOver(event) {
 
@@ -78,6 +82,7 @@ export class HoverIntent {
     }
 
     over() {
+        this._toolTip.setToolTipText(this._text);
         let coords = this._elem.getBoundingClientRect();
         this._toolTip.setTop(coords.top + 5);
         let left = coords.left + (this._elem.offsetWidth - this._toolTip.offsetWidth) / 2;
@@ -93,6 +98,7 @@ export class HoverIntent {
     }
 
     out() {
+        this._toolTip.setToolTipText('');
         this._toolTip.setIsToolTipShown(false);
     }
 
