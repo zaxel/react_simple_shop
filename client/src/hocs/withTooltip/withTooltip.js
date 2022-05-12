@@ -6,6 +6,7 @@ import { Context } from '../..';
 const withTooltip = Component => ({ ...props }) => {
 
     const {toolTip} = useContext(Context);
+    
 
     
 
@@ -14,16 +15,16 @@ const withTooltip = Component => ({ ...props }) => {
         const myRefs = props.myRefs;
         const elem = myRefs.current[i];
         const text = props.text;
-        console.log(toolTip.isToolTipShown)
-
-
+        
         setTimeout(function() {
-            new HoverIntent({
+            const hoverIntent = new HoverIntent({
                 elem,
                 toolTip,
                 text
             });
+            toolTip.setHoverIntentDestroy(hoverIntent.destroy);
           }, 1000);
+        
     }
 
 

@@ -20,12 +20,11 @@ export class HoverIntent {
         this.trackSpeed = this.trackSpeed.bind(this);
         this.over = this.over.bind(this);
         this.out = this.out.bind(this);
+        this.destroy = this.destroy.bind(this);
 
         this._elem.addEventListener("mouseover", this.onMouseOver);
 
         this._elem.addEventListener("mouseout", this.onMouseOut);
-
-        console.log(this._text)
     }
     onMouseOver(event) {
 
@@ -103,9 +102,10 @@ export class HoverIntent {
     }
 
     destroy() {
-        //   elem.removeEventListener('mousemove', this.onMouseMove);
-        //   elem.removeEventListener('mouseover', this.onMouseOver);
-        //   elem.removeEventListener('mouseout', this.onMouseOut);
+        console.log('destroyed')
+          this._elem.removeEventListener('mousemove', this.onMouseMove);
+          this._elem.removeEventListener('mouseover', this.onMouseOver);
+          this._elem.removeEventListener('mouseout', this.onMouseOut);
     }
 
 }

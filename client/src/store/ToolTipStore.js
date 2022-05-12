@@ -7,6 +7,7 @@ export default class ToolTipStore{
     _left = 0;
     _offsetWidth = 0;
     _offsetHeight = 0;
+    _hoverIntentDestroy = {};
     constructor(){
         makeAutoObservable(this);
     }
@@ -29,6 +30,9 @@ export default class ToolTipStore{
     setOffsetHeight(height){
         this._offsetHeight = height;
     }
+    setHoverIntentDestroy(f){
+        this._hoverIntentDestroy = f;
+    }
     
     get isToolTipShown(){
         return this._isToolTipShown;
@@ -47,6 +51,9 @@ export default class ToolTipStore{
     }
     get offsetHeight(){
         return this._offsetHeight;
+    }
+    get hoverIntentDestroy(){
+        return this._hoverIntentDestroy;
     }
     
 }
