@@ -12,10 +12,6 @@ const ShopToolTip = observer(() => {
         tooltipRef.current.style.opacity = 1;
     }
     useEffect(()=>{
-        
-        // toolTip.isToolTipShown && setToolTipPosition();
-        tooltipRef.current.offsetWidth && toolTip.setOffsetWidth(tooltipRef.current.offsetWidth);
-        tooltipRef.current.offsetHeight && toolTip.setOffsetHeight(tooltipRef.current.offsetHeight);
         toolTip.setIsToolTipShown(false)
     }, [])
 

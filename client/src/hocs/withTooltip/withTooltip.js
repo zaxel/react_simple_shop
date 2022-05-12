@@ -8,14 +8,13 @@ const withTooltip = Component => ({ ...props }) => {
     const {toolTip} = useContext(Context);
     
 
-    
-
     const toolTipHandler = () => {
         const i = props.iteration;
         const myRefs = props.myRefs;
         const elem = myRefs.current[i];
         const text = props.text;
-        
+
+
         setTimeout(function() {
             const hoverIntent = new HoverIntent({
                 elem,

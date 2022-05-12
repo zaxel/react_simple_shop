@@ -1,7 +1,47 @@
-﻿import React from 'react';
+﻿import React, {useContext, useEffect, useRef} from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { Context } from '../..';
+import { v4 as uuidv4 } from 'uuid';
+import ThTable from '../userProfileComponents/strippedTablesComponents/ThTable';
+import TrTable from '../userProfileComponents/strippedTablesComponents/TrTable';
 
 const UserOrderModal = ({ show, onHide }) => {
+    const {toolTip} = useContext(Context);
+
+    const ths = ['device', 'amount ordered', 'rating', 'price'];
+
+    const tds = [
+        ['Siemens * M', '1', '4.2', '$165.00'],
+        ['Samsung * m', '2', '2.5', '$200.00'],
+        ['Samsung * 8lqvZ2k', '1', '5.0', '$155.00'],
+        ['Nokia 8998', '2', '4.2', '$30.00'],
+        ['LG -- 3775', '5', '3.5', '$15.00'],
+        ['Nokia 45885', '1', '4.7', '$5.00'],
+    ]
+
+    useEffect(()=>{
+        toolTip.setIsToolTipShown(false);
+    },[])
+    const onRowClickHandler = () => {
+        toolTip.setIsToolTipShown(false);
+        alert('item detail')
+    }
+
+    let thRefs = useRef([]);
+    let tdRefs = useRef([]);
+
+    const thsWithTooltip = ths.map((el, i) => {
+        const myKey = uuidv4();
+        let ref = (el) => (thRefs.current[i] = el);
+        return <ThTable text={'click arrows to sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} data={el} />
+    })
+    const tdsWithTooltip = tds.map((el, i) => {
+        const myKey = uuidv4();
+        let ref = (el) => (tdRefs.current[i] = el);
+        return <TrTable text={'click for detailed device info'} iteration={i} myRefs={tdRefs} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
+    })
+
+
     return (
         <Modal className='modal-table' centered show={show} onHide={onHide}>
             <Modal.Header closeButton>
@@ -13,49 +53,11 @@ const UserOrderModal = ({ show, onHide }) => {
                     <table className='stripped-table'>
                         <thead>
                             <tr>
-                                <th>device</th>
-                                <th>amount ordered</th>
-                                <th>rating</th>
-                                <th>price</th>
+                                {thsWithTooltip}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Siemens * M</td>
-                                <td>1</td>
-                                <td>4.2</td>
-                                <td>$365.00</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung * m</td>
-                                <td>2</td>
-                                <td>2.5</td>
-                                <td>$200.00</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung * 8lqvZ2k</td>
-                                <td>1</td>
-                                <td>5.0</td>
-                                <td>$155.00</td>
-                            </tr>
-                            <tr>
-                                <td>Nokia 8998</td>
-                                <td>2</td>
-                                <td>4.2</td>
-                                <td>$30.00</td>
-                            </tr>
-                            <tr>
-                                <td>LG -- 3775</td>
-                                <td>5</td>
-                                <td>3.5</td>
-                                <td>$15.00</td>
-                            </tr>
-                            <tr>
-                                <td>Nokia 45885</td>
-                                <td>1</td>
-                                <td>4.7</td>
-                                <td>$5.00</td>
-                            </tr>
+                            {tdsWithTooltip}
                         </tbody>
                     </table>
                 </Form.Group>

@@ -25,6 +25,7 @@ export class HoverIntent {
         this._elem.addEventListener("mouseover", this.onMouseOver);
 
         this._elem.addEventListener("mouseout", this.onMouseOut);
+
     }
     onMouseOver(event) {
 
@@ -83,11 +84,11 @@ export class HoverIntent {
     over() {
         this._toolTip.setToolTipText(this._text);
         let coords = this._elem.getBoundingClientRect();
-        this._toolTip.setTop(coords.top + 5);
-        let left = coords.left + (this._elem.offsetWidth - this._toolTip.offsetWidth) / 2;
+        let left = coords.left + 5;
         if (left < 0) left = 0;
         this._toolTip.setLeft(left);
-        let top = coords.top - this._toolTip.offsetHeight - 5;
+        
+        let top = coords.top - 40;
 
         if (top < 0) { 
             top = coords.bottom + window.pageYOffset + 5;

@@ -1,8 +1,8 @@
 ﻿import React, { useState, useRef, useContext } from 'react';
 import PaginationCont from '../PaginationCont';
 import UserOrderModal from '../modalComponents/UserOrderModal';
-import ThTable from '../modalComponents/strippedTablesComponents/ThTable';
-import TrTable from '../modalComponents/strippedTablesComponents/TrTable';
+import ThTable from './strippedTablesComponents/ThTable';
+import TrTable from './strippedTablesComponents/TrTable';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
 
@@ -32,11 +32,13 @@ const UserOrders = () => {
     let tdRefs = useRef([]);
 
     const thsWithTooltip = ths.map((el, i) => {
+
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         return <ThTable text={'click arrows to sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} data={el} />
     })
     const tdsWithTooltip = tds.map((el, i) => {
+
         const myKey = uuidv4();
         let ref = (el) => (tdRefs.current[i] = el);
         return <TrTable text={'click for detailed info'} iteration={i} myRefs={tdRefs} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />

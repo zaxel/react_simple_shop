@@ -5,8 +5,6 @@ export default class ToolTipStore{
     _toolTipText = '';
     _top = 0;
     _left = 0;
-    _offsetWidth = 0;
-    _offsetHeight = 0;
     _hoverIntentDestroy = {};
     constructor(){
         makeAutoObservable(this);
@@ -24,12 +22,6 @@ export default class ToolTipStore{
     setLeft(coordX){
         this._left = coordX;
     }
-    setOffsetWidth(width){
-        this._offsetWidth = width;
-    }
-    setOffsetHeight(height){
-        this._offsetHeight = height;
-    }
     setHoverIntentDestroy(f){
         this._hoverIntentDestroy = f;
     }
@@ -45,12 +37,6 @@ export default class ToolTipStore{
     }
     get left(){
         return this._left;
-    }
-    get offsetWidth(){
-        return this._offsetWidth;
-    }
-    get offsetHeight(){
-        return this._offsetHeight;
     }
     get hoverIntentDestroy(){
         return this._hoverIntentDestroy;
