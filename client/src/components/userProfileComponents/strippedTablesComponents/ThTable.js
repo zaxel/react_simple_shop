@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 import { Context } from '../../..';
 
-const ThTable = ({ data, innerRef }) => {
+const ThTable = ({ data, innerRef, onThClickHandler }) => {
     const { toolTip } = useContext(Context);
 
     useEffect(() => {
@@ -12,7 +12,7 @@ const ThTable = ({ data, innerRef }) => {
     }, [])
 
     return (
-        <th ref={innerRef}>{data}</th>
+        <th onClick={onThClickHandler} ref={innerRef}>{data}</th>
     );
 };
 

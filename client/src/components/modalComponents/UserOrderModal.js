@@ -7,6 +7,8 @@ import TrTable from '../userProfileComponents/strippedTablesComponents/TrTable';
 
 const UserOrderModal = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);
+    let thRefs = useRef([]);
+    let tdRefs = useRef([]);
 
     const ths = ['device', 'amount ordered', 'rating', 'price'];
 
@@ -22,18 +24,23 @@ const UserOrderModal = ({ show, onHide }) => {
     useEffect(()=>{
         toolTip.setIsToolTipShown(false);
     },[])
+
     const onRowClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         alert('item detail')
     }
 
-    let thRefs = useRef([]);
-    let tdRefs = useRef([]);
+    const onThClickHandler = () => {
+        toolTip.setIsToolTipShown(false);
+        alert('sort')
+    }
+
+    
 
     const thsWithTooltip = ths.map((el, i) => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
-        return <ThTable text={'click arrows to sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} data={el} />
+        return <ThTable text={'sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} onThClickHandler={onThClickHandler} data={el} />
     })
     const tdsWithTooltip = tds.map((el, i) => {
         const myKey = uuidv4();

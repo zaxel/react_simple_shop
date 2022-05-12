@@ -8,6 +8,8 @@ import { Context } from '../..';
 
 
 const UserOrders = () => {
+    let thRefs = useRef([]);
+    let tdRefs = useRef([]);
     const {toolTip} = useContext(Context);
     const [orderModalVisible, setOrderModalVisible] = useState(false);
 
@@ -24,18 +26,21 @@ const UserOrders = () => {
     ]
 
     const onRowClickHandler = () => {
-        setOrderModalVisible(true);
         toolTip.setIsToolTipShown(false);
+        setOrderModalVisible(true);
+    }
+    const onThClickHandler = () => {
+        toolTip.setIsToolTipShown(false);
+        alert('sort')
     }
 
-    let thRefs = useRef([]);
-    let tdRefs = useRef([]);
+    
 
     const thsWithTooltip = ths.map((el, i) => {
 
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
-        return <ThTable text={'click arrows to sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} data={el} />
+        return <ThTable text={'sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} onThClickHandler={onThClickHandler} data={el} />
     })
     const tdsWithTooltip = tds.map((el, i) => {
 
