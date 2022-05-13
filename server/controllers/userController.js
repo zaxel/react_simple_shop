@@ -20,11 +20,12 @@ class UserController {
         try{
             const { email, password, role } = req.body;
             const userData = await userService.registration(email, password, role);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true});
             return res.json(userData);
         }catch(e){
             console.log(e)
             next(ApiError.badRequest(e.message + ': could not complete registration.'));
-        }
+        } 
 
 
 
