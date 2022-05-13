@@ -50,7 +50,6 @@ const Auth = observer(() => {
             setLocalStoreCart(cart);
             navigate(from);
         } catch (e) {
-            console.log(e)
             alert(e.message);
         }
 

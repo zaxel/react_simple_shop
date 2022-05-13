@@ -7,25 +7,12 @@ import {
     ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
     PROTECTED_ROUTE
 } from '../utils/consts';
-import { deleteLocalStoreCart } from "../utils/setLocalStoreCart";
+import { logout } from "../utils/logout";
 
 const NavBar = observer(() => {
     const { cart, user } = useContext(Context);
     const navigate = useNavigate();
 
-    const logout = () => {
-        user.setUser({});
-        user.setIsAuth(false);
-        user.setIsSuperUser(false);
-
-        cart.setCartDevices([]);
-        cart.setCart([]);
-        cart.setCartId(0);
-        cart.setItemsCount(0);
-
-        deleteLocalStoreCart();
-        localStorage.removeItem('token');
-    }
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
             <div className="container-fluid">
@@ -63,7 +50,7 @@ const NavBar = observer(() => {
                         </li>
                         
                         <li className="nav-item">
-                            <button onClick={user.isAuth ? logout : () => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? 'Logout' :  'Sigh up'}</button>
+                            <button onClick={user.isAuth ? logout.bind(this, cart, user) : () => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? 'Logout' :  'Sigh up'}</button>
                         </li>
                     </ul> 
 

@@ -6,6 +6,8 @@ module.exports = function (req, res, next){
     }
     try{
         const token = req.headers.authorization?.split(' ')[1];  // Bearer
+        console.log('authMiddleware', token)
+
         if(!token){
             return res.status(401).json({message: 'user not authorized!(no token in header)'});
         }
@@ -13,6 +15,6 @@ module.exports = function (req, res, next){
         req.user = decoded;
         next();
     }catch(e){
-        res.status(401).json({message: e.message});
+        res.status(404).json({message: e.message});
     }
 }
