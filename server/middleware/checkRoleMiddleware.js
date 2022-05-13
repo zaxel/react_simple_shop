@@ -12,7 +12,7 @@ module.exports = function (role){
             }
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
             if(decoded.role !== role){
-                return res.status(403).json({message: 'access denied!'})
+                return res.status(403).json({message: 'access denied! you must have an ADMIN permissions to fulfill this request!'})
             }
             req.user = decoded;
             next();
