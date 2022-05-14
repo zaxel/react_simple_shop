@@ -21,7 +21,7 @@ class UserService {
         const basket = await Basket.create({ userId: user.id });
 
         const activationLink = uuidv4();
-        await mailService.sendActivationMail(email, activationLink);
+        await mailService.sendActivationMail(email, `${process.env.API_URL}api/activate/${activationLink}`);
         
         const userDto = new UserDto(user); //email; id; role; isActivated;
         const tokens = tokenService.generateJwt({...userDto});
