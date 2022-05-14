@@ -7,6 +7,7 @@ class TokenService {
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {expiresIn: process.env.AUTH_REFRESH_TOKEN_MAX_AGE});
         return {accessToken, refreshToken};
     }
+    
     saveTokenToDb = async(userId, refreshToken) => {
         const tokenData = await Token.findOne({ where: { userId } });
         if (tokenData) {
@@ -15,6 +16,15 @@ class TokenService {
         }
         const token = await Token.create({userId, refresh_token: refreshToken});
         return token;
+    }
+    
+    removeToken = async(refreshToken) => {
+        const tokenData = await Token.destroy({
+            where: {
+                refresh_token: refreshToken
+            }
+        });
+        return tokenData;
     }
 }
 

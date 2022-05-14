@@ -18,16 +18,11 @@ class UserService {
         const hashPassword = await bcrypt.hash(password, 5);
         const activationLink = uuidv4();
         const user = await User.create({ email, password: hashPassword, role, activation_link: activationLink });
-
         const basket = await Basket.create({ userId: user.id });
-
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`);
-        
         const userDto = new UserDto(user); //email; id; role; isActivated;
         const tokens = tokenService.generateJwt({...userDto});
-
         await tokenService.saveTokenToDb(userDto.id, tokens.refreshToken);
-
         return { ...tokens, user: userDto };
     }
 
@@ -40,6 +35,26 @@ class UserService {
         }
         user.is_activated = true;
         await user.save();
+    }
+
+    login = async(email, password) => {
+        const user = await User.findOne({where: {email}});
+        if(!user){
+            return next(ApiError.unauthorized('wrong email or password(email)'));
+        }
+        let comparePasswords = await bcrypt.compareSync(password, user.password);
+        if(!comparePasswords){
+            return next(ApiError.unauthorized('wrong email or password(password)'));
+        }
+        const userDto = new UserDto(user); //email; id; role; isActivated;
+        const tokens = tokenService.generateJwt({...userDto});
+        await tokenService.saveTokenToDb(userDto.id, tokens.refreshToken);
+        return { ...tokens, user: userDto };
+    }
+
+    logout = async(refreshToken) => {
+        const token = await tokenService.removeToken(refreshToken);
+        return token;
     }
 }
 

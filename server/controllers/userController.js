@@ -36,32 +36,38 @@ class UserController {
         
     }
     async login(req, res, next){
-        // try{
+        try{
+            const { email, password } = req.body;
+            const userData = await userService.login(email, password);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true});
+            return res.json(userData);
+        }catch(e){
+            next(ApiError.badRequest(e.message + ': could not complete login.'));
+        }
 
-        // }catch(e){
 
+        // const {email, password} = req.body;
+
+        // const user = await User.findOne({where: {email}});
+        // if(!user){
+        //     return next(ApiError.unauthorized('wrong email or password(email)'));
         // }
-
-
-        const {email, password} = req.body;
-
-        const user = await User.findOne({where: {email}});
-        if(!user){
-            return next(ApiError.unauthorized('wrong email or password(email)'));
-        }
-        let comparePasswords = bcrypt.compareSync(password, user.password);
-        if(!comparePasswords){
-            return next(ApiError.unauthorized('wrong email or password(password)'));
-        }
-        const token = generateJwt(user.id, user.email, user.role);
-        return res.json({token});
+        // let comparePasswords = bcrypt.compareSync(password, user.password);
+        // if(!comparePasswords){
+        //     return next(ApiError.unauthorized('wrong email or password(password)'));
+        // }
+        // const token = generateJwt(user.id, user.email, user.role);
+        // return res.json({token});
     }
 
     async logout(req, res, next){
         try{
-
+            const { refreshToken } = req.cookies;
+            const token = await userService.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            return res.json(token);
         }catch(e){
-            
+            next(ApiError.badRequest(e.message + ': could not complete logout.'));
         }
     }
     async activate(req, res, next){
