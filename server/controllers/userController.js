@@ -77,17 +77,20 @@ class UserController {
             await userService.activate(activationLink);
             return res.redirect(process.env.CLIENT_URL);
         }catch(e){
-            console.log(e)
             next(ApiError.badRequest(e.message + ': could not complete activation.'));
         }
     }
 
     async refresh(req, res, next){
-        // try{
+        try{
+            const { refreshToken } = req.cookies;
+            const userData = await userService.refresh(refreshToken);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true});
+            return res.json(userData);
 
-        // }catch(e){
-
-        // }
+        }catch(e){
+            next(ApiError.badRequest(e.message + ': could not refresh tokens.'));
+        }
 
         // const token = generateJwt(req.user.id, req.user.email, req.user.role);
         // res.json({token});

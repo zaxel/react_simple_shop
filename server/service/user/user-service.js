@@ -56,6 +56,23 @@ class UserService {
         const token = await tokenService.removeToken(refreshToken);
         return token;
     }
+
+
+    refresh = async(refreshToken) => {
+        if(!refreshToken)
+            return ApiError.unauthorized('wrong/no refresh token.');
+        const userData = tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb = tokenService.findToken(refreshToken);
+
+        if(!userData || !tokenFromDb)
+            return next(ApiError.unauthorized('wrong/no refresh token'));
+        
+        const user = await User.findOne({where: {id: userData.id}});
+        const userDto = new UserDto(user); //email; id; role; isActivated;
+        const tokens = tokenService.generateJwt({...userDto});
+        await tokenService.saveTokenToDb(userDto.id, tokens.refreshToken);
+        return { ...tokens, user: userDto };
+    }
 }
 
 module.exports = new UserService();
