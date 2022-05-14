@@ -5,6 +5,7 @@
 /client/.pnp
 /server/node_modules
 /server/static
+/server/.env
 
 /server/.pnp
 

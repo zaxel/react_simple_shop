@@ -16,12 +16,12 @@ class UserService {
             throw ApiError.badRequest('user with this email already exist.');
         }
         const hashPassword = await bcrypt.hash(password, 5);
-        const user = await User.create({ email, password: hashPassword, role });
+        const activationLink = uuidv4();
+        const user = await User.create({ email, password: hashPassword, role, activation_link: activationLink });
 
         const basket = await Basket.create({ userId: user.id });
 
-        const activationLink = uuidv4();
-        await mailService.sendActivationMail(email, `${process.env.API_URL}api/activate/${activationLink}`);
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`);
         
         const userDto = new UserDto(user); //email; id; role; isActivated;
         const tokens = tokenService.generateJwt({...userDto});
@@ -31,7 +31,16 @@ class UserService {
         return { ...tokens, user: userDto };
     }
 
+    activate = async(activationLink) => {
 
+        const user = await User.findOne({ where: { activation_link: activationLink } });
+
+        if(!user){
+            throw ApiError.badRequest('wrong activation link.');
+        }
+        user.is_activated = true;
+        await user.save();
+    }
 }
 
 module.exports = new UserService();
