@@ -9,11 +9,11 @@ const UserDto = require('../../dtos/user-dto');
 class UserService {
     registration = async (email, password, role) => {
         if (!email || !password) {
-            throw ApiError.badRequest('email or password is incorrect.');
+            return ApiError.badRequest('email or password is incorrect.');
         }
         const candidate = await User.findOne({ where: { email } });
         if (candidate) {
-            throw ApiError.badRequest('user with this email already exist.');
+            return ApiError.badRequest('user with this email already exist.');
         }
         const hashPassword = await bcrypt.hash(password, 5);
         const activationLink = uuidv4();

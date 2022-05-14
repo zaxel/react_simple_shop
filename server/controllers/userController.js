@@ -5,6 +5,7 @@ const userService = require('../service/user/user-service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {User, Basket} = require('../models/models');
+const { validationResult } = require('express-validator');
 
 const generateJwt = (id, email, role) => {
     return jwt.sign(
@@ -18,12 +19,15 @@ const generateJwt = (id, email, role) => {
 class UserController {
     async registration(req, res, next){
         try{
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
             const { email, password, role } = req.body;
             const userData = await userService.registration(email, password, role);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true});
             return res.json(userData);
         }catch(e){
-            console.log(e)
             next(ApiError.badRequest(e.message + ': could not complete registration.'));
         } 
 
