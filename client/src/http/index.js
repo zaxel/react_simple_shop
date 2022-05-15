@@ -33,7 +33,7 @@ const authResponseErrorCb = async (error) => {
             console.log(e.message);
         }
     }
-    throw error('check unsuccessful twice');
+    throw new Error('check unsuccessful on both tokens');
 }
 $authHost.interceptors.request.use(authRequestInterceptor);
 $authHost.interceptors.response.use(authResponseInterceptor, authResponseErrorCb);

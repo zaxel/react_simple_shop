@@ -9,6 +9,7 @@ import { Context } from '..';
 import { setUserIfAuth } from '../utils/setUserIfAuth';
 import { fetchCartOnAuth, setCartId } from '../utils/fetchSetCart';
 import { setLocalStoreCart } from '../utils/setLocalStoreCart';
+import { isActivated } from '../utils/isActivated';
 
 const Auth = observer(() => {
     const { user, history, cart } = useContext(Context);
@@ -48,6 +49,7 @@ const Auth = observer(() => {
 
             cart.setCartTotal();
             setLocalStoreCart(cart);
+            isActivated(user);
             navigate(from);
         } catch (e) {
             // console.log(e)

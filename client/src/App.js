@@ -10,25 +10,29 @@ import { fetchSetCart, setCartId } from "./utils/fetchSetCart";
 import { setCartFromLocalStore } from "./utils/setLocalStoreCart";
 import Footer from "./components/Footer";
 import ShopToolTip from "./components/ShopToolTip";
+import { isActivated } from "./utils/isActivated";
 
 
 const App = observer(() => {
   const { user, cart } = useContext(Context);
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
-    try {
-      !user.isAuth && setCartFromLocalStore(cart);
-
-      await setUserIfAuth(user);
-      await setCartId(cart);
-      await fetchSetCart(user, cart);
-      cart.setCartTotal();
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setLoading(false)
-    }
+  useEffect(() => {
+    (async () => {
+      try {
+        !user.isAuth && setCartFromLocalStore(cart);
+        await setUserIfAuth(user);
+        await setCartId(cart);
+        await fetchSetCart(user, cart);
+        cart.setCartTotal();
+        isActivated(user);
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setLoading(false)
+      }
+    })()
+    
 
   }, [])
 
