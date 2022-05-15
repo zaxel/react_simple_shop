@@ -1,6 +1,8 @@
 ﻿import { deleteLocalStoreCart } from "./setLocalStoreCart";
+import { logout as logoutAPI } from "../http/userAPI";
 
-export const logout = (cart, user) => {
+export const logout = async(cart, user) => {
+    await logoutAPI();
     user.setUser({});
     user.setIsAuth(false);
     user.setIsSuperUser(false);

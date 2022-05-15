@@ -65,7 +65,7 @@ class UserService {
         const tokenFromDb = tokenService.findToken(refreshToken);
 
         if(!userData || !tokenFromDb)
-            return next(ApiError.unauthorized('wrong/no refresh token'));
+            return ApiError.unauthorized('wrong/no refresh token');
         
         const user = await User.findOne({where: {id: userData.id}});
         const userDto = new UserDto(user); //email; id; role; isActivated;

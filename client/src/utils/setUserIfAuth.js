@@ -1,10 +1,10 @@
 ﻿import { check } from "../http/userAPI";
 import { isSuperUser } from "./isSuperUser";
 
-export const setUserIfAuth = async(user)=>{
+export const setUserIfAuth = async(userStore)=>{
 
-    const userData = await check();
-      user.setUser(userData);
-      user.setIsAuth(true);
-      user.setIsSuperUser(isSuperUser(userData.role));
+    const user = await check();
+      userStore.setUser(user);
+      userStore.setIsAuth(true);
+      userStore.setIsSuperUser(isSuperUser(user.role));
 }

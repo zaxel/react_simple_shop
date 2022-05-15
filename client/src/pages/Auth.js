@@ -36,6 +36,7 @@ const Auth = observer(() => {
             if (isLogin) {
                 e.preventDefault();
                 data = await login(email, password);
+                console.log(data)
             } else {
                 e.preventDefault();
                 data = await registration(email, password);
@@ -50,7 +51,8 @@ const Auth = observer(() => {
             setLocalStoreCart(cart);
             navigate(from);
         } catch (e) {
-            alert(e.message);
+            console.log(e)
+            // alert(e.message);
         }
 
     }
