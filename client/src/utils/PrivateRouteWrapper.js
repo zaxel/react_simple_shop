@@ -15,6 +15,8 @@ const PrivateElement = ({ children }) => {
   useEffect(()=>{
     history.setAuthFrom(pathname);
   },[])
+  // return children
+  
   return user.isAuth ? (
     children
   ) : (

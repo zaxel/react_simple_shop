@@ -11,6 +11,7 @@ router.post('/registration',
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/activate/:link', userController.activate);
-router.get('/auth', userController.refresh);
+router.get('/check', authMiddleware, userController.refresh);
+router.get('/refresh', userController.refresh);
 
 module.exports = router;

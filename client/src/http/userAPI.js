@@ -15,8 +15,9 @@ export const logout = async () => {
     const {data} = await $host.post('api/user/logout');
     return data;
 }
+
 export const check = async () => {
-    const {data} = await $authHost.get('api/user/auth');
+    const {data} = await $authHost.get('api/user/check');
     localStorage.setItem('token', data.accessToken);
     return jwt_decode(data.accessToken);
 }

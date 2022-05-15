@@ -2,19 +2,7 @@
 const userService = require('../service/user/user-service');
 
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const {User, Basket} = require('../models/models');
 const { validationResult } = require('express-validator');
-
-const generateJwt = (id, email, role) => {
-    return jwt.sign(
-        { id, email, role },
-        process.env.SECRET_KEY,
-        {expiresIn: '10s'}
-    );
-}
-
 
 class UserController {
     async registration(req, res, next){
@@ -30,10 +18,6 @@ class UserController {
         }catch(e){
             next(ApiError.badRequest(e.message + ': could not complete registration.'));
         } 
-
-
-
-        
     }
     async login(req, res, next){
         try{
@@ -44,20 +28,6 @@ class UserController {
         }catch(e){
             next(ApiError.badRequest(e.message + ': could not complete login.'));
         }
-
-
-        // const {email, password} = req.body;
-
-        // const user = await User.findOne({where: {email}});
-        // if(!user){
-        //     return next(ApiError.unauthorized('wrong email or password(email)'));
-        // }
-        // let comparePasswords = bcrypt.compareSync(password, user.password);
-        // if(!comparePasswords){
-        //     return next(ApiError.unauthorized('wrong email or password(password)'));
-        // }
-        // const token = generateJwt(user.id, user.email, user.role);
-        // return res.json({token});
     }
 
     async logout(req, res, next){
@@ -92,10 +62,10 @@ class UserController {
         }catch(e){
             next(ApiError.badRequest(e.message + ': could not refresh tokens.'));
         }
-
-        // const token = generateJwt(req.user.id, req.user.email, req.user.role);
-        // res.json({token});
+    
     }
+
+    
 
 }
 
