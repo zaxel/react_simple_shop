@@ -1,70 +1,21 @@
-﻿const { BasketDevice, Basket } = require('../models/models');
-const ApiError = require('../error/ApiError');
-const { Op } = require("sequelize");
+﻿const ApiError = require('../error/ApiError');
+const cartService = require('../service/cart/cart-service');
+
 class cartController {
     async createOrUpdate(req, res, next) {
         try {
             const { items, addAmountToExisted } = req.body;
-            const itemsExistPromises = items.map(el => {
-                return BasketDevice.findOne({
-                    where: {
-                        basketId: el.basketId,
-                        deviceId: el.deviceId
-                    }
-                });
-            })
-            let foundItems = await Promise.all(itemsExistPromises);
-            foundItems = foundItems.filter(el=>el!==null);
-
-            if (foundItems.length !== 0) {
-                const updateExistedPromises = foundItems.map(el => {
-                    const amountInRequest = items.find(item =>item.basketId === el.basketId && item.deviceId === el.deviceId);
-                    const newDeviceAmount = addAmountToExisted ? el.device_amount + amountInRequest.device_amount : amountInRequest.device_amount;
-                    return BasketDevice.update(
-                        { device_amount: newDeviceAmount },
-                        {
-                            where: {
-                                basketId: el.basketId,
-                                deviceId: el.deviceId
-                            }
-                        }
-                    );
-
-                })
-                const updateExisted = await Promise.all(updateExistedPromises);
-            }
-            let createNewPromises = [];
-            if (foundItems.length === 0) {
-                createNewPromises = items;
-            } else {
-                items.forEach(el => {
-                    for (let device of foundItems) {
-                        if (el.basketId === device.basketId && el.deviceId === device.deviceId) {
-                            continue;
-                        }
-                        createNewPromises.push(el);
-                    }
-                })
-            }
-            const createNew = await BasketDevice.bulkCreate(createNewPromises);
-
+            await cartService.createOrUpdate(items, addAmountToExisted);
             return res.json({updated: true});
-
         } catch (e) {
             next(ApiError.badRequest(e.message + ': could not create or update cart'));
         }
-
     }
     async getAll(req, res, next) {
         try {
             const { query } = req;
-            // console.log(req.user, query.userId)
-            const cart = await Basket.findOne({ where: { userId: query.userId } });
-            if (!cart) {
-                return next(ApiError.badRequest(e.message + ': no user with provided id found'));
-            }
-            const item = await BasketDevice.findAndCountAll({ where: { basketId: cart.id } });
-            res.json(item)
+            const item = await cartService.getAll(query);
+            res.json(item);
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
@@ -72,12 +23,7 @@ class cartController {
     async deleteOne(req, res, next) {
         try {
             const { query } = req;
-            const item = await BasketDevice.destroy({
-                where: {
-                    basketId: query.basketId,
-                    deviceId: query.deviceId
-                }
-            });
+            const item = await cartService.deleteOne(query);
             res.json(item)
         } catch (e) {
             next(ApiError.badRequest(e.message));
@@ -85,17 +31,13 @@ class cartController {
     }
     async getBasketId(req, res, next) {
         try {
-            const cart = await Basket.findOne({ where: { userId: req.user.id } });
-            if (!cart) {
-                return next(ApiError.badRequest(e.message + ': no user with provided id found'));
-            }
+            const { id } = req.user;
+            const cart = await cartService.getCartId(id);
             res.json(cart.id);
-
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
     }
-
 }
 
 module.exports = new cartController();
