@@ -13,7 +13,6 @@ module.exports = function (role){
             }
 
             const decodedData = tokenService.validateAccessToken(accessToken); 
-        console.log(78, decodedData.role);
             if(decodedData.role !== role){
                 return res.status(401).json({message: 'access denied! you must have an ADMIN permissions to fulfill this request!'});
             }
