@@ -1,22 +1,24 @@
-﻿const {Type} = require('../models/models');
-const ApiError = require('../error/ApiError');
+﻿const ApiError = require('../error/ApiError');
+const typeService = require('../service/type/type-service');
 
 class TypeController {
     async create(req, res, next){
         try{
             const {type} = req.body;
-            const data = await Type.bulkCreate([{name: type}],{
-                ignoreDuplicates: true,
-            }); 
-            if(!data[0].id) throw new Error('this type already exist!')
-            return res.json(data[0]);
+            const data = await typeService.create(type);
+            return res.json(data);
         }catch(e){
             next(ApiError.forbidden(e.message));
         }
     }
     async getAll(req, res){
-        const types = await Type.findAll();
-        return res.json(types)
+        try{
+            const types = await typeService.getAll();
+            return res.json(types)
+        }catch(e){
+            next(ApiError.forbidden(e.message));
+        }
+        
     }
     
 }
