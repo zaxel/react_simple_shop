@@ -1,25 +1,24 @@
-﻿const {Brand} = require('../models/models');
-const ApiError = require('../error/ApiError');
-
+﻿const ApiError = require('../error/ApiError');
+const brandService = require('../service/brand/brand-service');
 
 class BrandController {
     async create(req, res, next){
         try{
             const {brand} = req.body;
-            const data = await Brand.bulkCreate([{name: brand}],{
-                ignoreDuplicates: true,
-            }); 
-            if(!data[0].id) throw new Error('this brand already exist!')
-            return res.json(data[0]);
+            const data = await brandService.create(brand);
+            return res.json(data);
         }catch(e){
             next(ApiError.forbidden(e.message));
         }
-       
     }
     async getAll(req, res){
-        const brands = await Brand.findAll();
-        return res.json(brands)
-
+        try{
+            const brands = await brandService.getAll();
+            return res.json(brands)
+        }catch(e){
+            next(ApiError.forbidden(e.message));
+        }
+        
     }
     
 }
