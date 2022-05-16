@@ -4,7 +4,7 @@ const writeToFile = require('./generator/writeToFile');
 
 const fileExtension = '.jpg'
 
-const itemsNumber = 800;
+const itemsNumber = 10;
 
 const renameImg = false;
 const createItems = true;

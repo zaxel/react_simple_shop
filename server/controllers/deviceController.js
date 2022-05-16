@@ -4,7 +4,7 @@ const { Op, Sequelize } = require("sequelize");
 const { Device, DeviceInfo } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const deviceService = require('../service/device/device-service');
-const acceptedFileType = 'text/plain';
+
 const startPage = 1;
 const defaultLimit = 8;
 
@@ -21,31 +21,7 @@ class DeviceController {
 
     async createBulk(req, res, next) {
         try {
-            let { file } = req.files;
-            if (file.mimetype !== acceptedFileType) throw new Error('unaccepted file type. must be .txt')
-            const data = JSON.parse(file.data);
-
-            const bulkPromises = data.map(el => {
-                (async function () {
-                    let { name, price, brandId, typeId, rate, img, info } = el;
-                    const device = await Device.bulkCreate([{ name, price, brandId, typeId, rate, img }],
-                        {
-                            ignoreDuplicates: true,
-                        });
-                    if (info) {
-                        if(!device[0].id) return;
-                        info.forEach(i => {
-                            DeviceInfo.create({
-                                title: i.title,
-                                description: i.description,
-                                deviceId: device[0].id
-                            })
-                        });
-                    }
-                })()
-
-            })
-            let bulkItems = await Promise.all(bulkPromises);
+            const data = await deviceService.createBulk(req);
             return res.json({ created_updated: data.length + ' devices' });
         } catch (e) {
             next(ApiError.forbidden(e.message));
