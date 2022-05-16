@@ -1,12 +1,12 @@
 ﻿const fileService = require("../file/file-service");
 const { Device, DeviceInfo } = require('../../models/models');
+const { Op, Sequelize } = require("sequelize");
 const acceptedFileType = 'text/plain';
 
 class DeviceService {
-    create = async (req) => {
-        let { name, price, brandId, typeId, info } = req.body;
-        let img = req?.files?.img || null;
+    create = async (name, price, brandId, typeId, info, img) => {
         let fileName = 'no-image.jpg'
+        
         if(img) {
             fileName = await fileService.imageResolve(img);
         }
@@ -50,6 +50,42 @@ class DeviceService {
         })
         let bulkItems = await Promise.all(bulkPromises);
         return data;
+    }
+    getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit) => {
+        
+        page = page || startPage;
+        limit = limit || defaultLimit;
+        let offset = page * limit - limit;
+        let devices;
+        if (id) {
+            devices = await Device.findAndCountAll({ where: { id: { [Op.or]: id } }, limit, offset });
+            return devices;
+        }
+        if (!brandId && !typeId) {
+            devices = await Device.findAndCountAll({ limit, offset });
+        }
+        if (brandId && !typeId) {
+            devices = await Device.findAndCountAll({ where: { brandId }, limit, offset });
+
+        }
+        if (!brandId && typeId) {
+            devices = await Device.findAndCountAll({ where: { typeId }, limit, offset });
+        }
+        if (brandId && typeId) {
+            devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
+        }
+        return devices;
+    }
+    getSingle = async (id) => {
+        const device = await Device.findOne({
+            where: { id },
+            include: [{ model: DeviceInfo, as: 'info' }]
+        });
+        return device;
+    }
+    getRandom = async (amount) => {
+        const devices = await Device.findAll({ order: Sequelize.literal('random()'), limit: amount }); 
+        return devices;
     }
 }
 module.exports = new DeviceService();
