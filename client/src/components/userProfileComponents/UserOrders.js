@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useContext } from 'react';
+﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
 import UserOrderModal from '../modalComponents/UserOrderModal';
 import ThTable from './strippedTablesComponents/ThTable';
@@ -27,13 +27,22 @@ const UserOrders = () => {
 
     const onRowClickHandler = () => {
         toolTip.setIsToolTipShown(false);
+        toolTip.setIsAvailable(false);
         setOrderModalVisible(true);
     }
     const onThClickHandler = () => {
         toolTip.setIsToolTipShown(false);
+        toolTip.setIsAvailable(false);
         alert('sort')
+        toolTip.setIsAvailable(true);
     }
 
+    useEffect(()=>{
+        toolTip.setIsAvailable(true);
+    }, [])
+    useEffect(()=>{
+        return ()=> toolTip.setIsAvailable(true);
+    }, [])
     
 
     const thsWithTooltip = ths.map((el, i) => {

@@ -94,7 +94,7 @@ export class HoverIntent {
             top = coords.bottom + window.pageYOffset + 5;
         }
         this._toolTip.setTop(top);
-        this._toolTip.setIsToolTipShown(true);
+        this._toolTip.isAvailable && this._toolTip.setIsToolTipShown(true);
     }
 
     out() {
@@ -103,7 +103,6 @@ export class HoverIntent {
     }
 
     destroy() {
-        console.log('destroyed')
           this._elem.removeEventListener('mousemove', this.onMouseMove);
           this._elem.removeEventListener('mouseover', this.onMouseOver);
           this._elem.removeEventListener('mouseout', this.onMouseOut);

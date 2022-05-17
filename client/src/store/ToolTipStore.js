@@ -1,7 +1,8 @@
 ﻿import {makeAutoObservable} from "mobx";
 
 export default class ToolTipStore{
-    _isToolTipShown = true;
+    _isToolTipShown = false;
+    _isAvailable = false;
     _toolTipText = '';
     _top = 0;
     _left = 0;
@@ -12,6 +13,9 @@ export default class ToolTipStore{
 
     setIsToolTipShown(condition){
         this._isToolTipShown = condition;
+    }
+    setIsAvailable(condition){
+        this._isAvailable = condition;
     }
     setToolTipText(text){
         this._toolTipText = text;
@@ -28,6 +32,9 @@ export default class ToolTipStore{
     
     get isToolTipShown(){
         return this._isToolTipShown;
+    }
+    get isAvailable(){
+        return this._isAvailable;
     }
     get toolTipText(){
         return this._toolTipText;

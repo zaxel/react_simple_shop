@@ -23,16 +23,25 @@ const UserOrderModal = ({ show, onHide }) => {
 
     useEffect(()=>{
         toolTip.setIsToolTipShown(false);
+        toolTip.setIsAvailable(true);
     },[])
 
+    useEffect(()=>{
+        return ()=> toolTip.setIsAvailable(true);
+    }, [])
+
     const onRowClickHandler = () => {
+        toolTip.setIsAvailable(false);
         toolTip.setIsToolTipShown(false);
-        alert('item detail')
+        alert('item detail');
+        toolTip.setIsAvailable(true);
     }
 
     const onThClickHandler = () => {
+        toolTip.setIsAvailable(false);
         toolTip.setIsToolTipShown(false);
-        alert('sort')
+        alert('sort');
+        toolTip.setIsAvailable(true);
     }
 
     
