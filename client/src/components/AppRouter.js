@@ -21,11 +21,14 @@ const AppRouter = observer(() => {
                     {NestedComponent && NestedComponent()}
                 </Route>
             })}
-            {user.isAuth && user.isSuperUser && adminRoutes.map(({ path, Component }) => {
+            {user.isAuth && user.isSuperUser && adminRoutes.map(({ path, Component, NestedComponent }) => {
                 return <Route key={path} path={path} element={
                     <PrivateRouteWrapper>
                         <Component />
-                    </PrivateRouteWrapper>} ></Route>
+                    </PrivateRouteWrapper>} >
+                        //nested routes - user account routes
+                        {NestedComponent && NestedComponent()}
+                    </Route>
             })}
             {publicRoutes.map(({ path, Component }) => {
                 return <Route key={path} path={path} element={<Component />} ></Route>
