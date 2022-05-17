@@ -1,8 +1,8 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
 import UserOrderModal from '../modalComponents/UserOrderModal';
-import ThTable from './strippedTablesComponents/ThTable';
-import TrTable from './strippedTablesComponents/TrTable';
+import ThTable from '../strippedTablesComponents/ThTable';
+import TrTable from '../strippedTablesComponents/TrTable';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
 
@@ -26,9 +26,10 @@ const UserOrders = () => {
     ]
 
     const onRowClickHandler = () => {
+        toolTip.setIsAvailable(true);
+        setOrderModalVisible(true);
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
-        setOrderModalVisible(true);
     }
     const onThClickHandler = () => {
         toolTip.setIsToolTipShown(false);
@@ -37,13 +38,14 @@ const UserOrders = () => {
         toolTip.setIsAvailable(true);
     }
 
+    const onModalHideHandler = () => {
+        toolTip.setIsAvailable(true);
+        setOrderModalVisible(false);
+    }
+
     useEffect(()=>{
         toolTip.setIsAvailable(true);
     }, [])
-    useEffect(()=>{
-        return ()=> toolTip.setIsAvailable(true);
-    }, [])
-    
 
     const thsWithTooltip = ths.map((el, i) => {
 
@@ -71,7 +73,7 @@ const UserOrders = () => {
                     {tdsWithTooltip}
                 </tbody>
             </table>
-            <UserOrderModal show={orderModalVisible} onHide={() => setOrderModalVisible(false)} />
+            <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} />
             <PaginationCont />
         </div>
     );

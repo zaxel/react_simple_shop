@@ -2,8 +2,8 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../..';
 import { v4 as uuidv4 } from 'uuid';
-import ThTable from '../userProfileComponents/strippedTablesComponents/ThTable';
-import TrTable from '../userProfileComponents/strippedTablesComponents/TrTable';
+import ThTable from '../strippedTablesComponents/ThTable';
+import TrTable from '../strippedTablesComponents/TrTable';
 
 const UserOrderModal = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);
@@ -21,14 +21,7 @@ const UserOrderModal = ({ show, onHide }) => {
         ['Nokia 45885', '1', '4.7', '$5.00'],
     ]
 
-    useEffect(()=>{
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(true);
-    },[])
-
-    useEffect(()=>{
-        return ()=> toolTip.setIsAvailable(true);
-    }, [])
+    
 
     const onRowClickHandler = () => {
         toolTip.setIsAvailable(false);

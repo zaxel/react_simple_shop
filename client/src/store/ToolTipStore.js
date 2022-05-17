@@ -2,7 +2,7 @@
 
 export default class ToolTipStore{
     _isToolTipShown = false;
-    _isAvailable = false;
+    _isAvailable = true;
     _toolTipText = '';
     _top = 0;
     _left = 0;
