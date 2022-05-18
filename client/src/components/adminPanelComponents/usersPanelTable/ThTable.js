@@ -25,7 +25,7 @@ const ThTable = ({ data, innerRef}) => {
     }, [])
 
     return (
-        <th className={!data.sortBy ? 'no-before' : null} onClick={onThClickHandler.bind(this, data.sortBy)} ref={innerRef}>{data.title}</th>
+        <th className={!data.sortBy ? 'no-before' : null} onClick={data.sortBy && onThClickHandler.bind(this, data.sortBy)} ref={innerRef}>{data.title}</th>
     );
 };
 
