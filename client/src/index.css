@@ -796,6 +796,11 @@ code {
 .stripped-table tr:nth-child(odd){
     background-color: #fff;
 }
+
+.no-before::after,
+.no-before::before{
+    display: none;
+}
 /*stripped table end*/
 
 /*tooltip start*/
