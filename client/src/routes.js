@@ -17,17 +17,18 @@ import UserPayment from "./components/userProfileComponents/UserPayment";
 import UserOrders from "./components/userProfileComponents/UserOrders";
 import UserAccountRouter from "./components/userProfileComponents/UserAccountRouter";
 
-import UserDeliveryTemp from "./components/adminPanelComponents/UserDeliveryTemp";
-import UserInfoTemp from "./components/adminPanelComponents/UserInfoTemp";
-import UserPaymentTemp from "./components/adminPanelComponents/UserPaymentTemp";
-import UserOrdersTemp from "./components/adminPanelComponents/UserOrdersTemp";
+import OrdersAdminPanel from "./components/adminPanelComponents/OrdersAdminPanel";
+import UsersAdminPanel from "./components/adminPanelComponents/UsersAdminPanel";
+import DevicesAdminPanel from "./components/adminPanelComponents/DevicesAdminPanel";
+import TypesAdminPanel from "./components/adminPanelComponents/TypesAdminPanel";
+import BrandsAdminPanel from "./components/adminPanelComponents/BrandsAdminPanel";
 import AdminPanelRouter from "./components/adminPanelComponents/AdminPanelRouter";
 
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
         ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
         ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE,
-        ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE } from "./utils/consts";
+        ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE } from "./utils/consts";
 
 
 export const userNavRoutes = [
@@ -56,19 +57,23 @@ export const userNavRoutes = [
 export const adminNavRoutes = [
     {
         path: ADMIN_USER_ROUTE,
-        Component: UserInfoTemp
+        Component: UsersAdminPanel
     },
     {
         path: ADMIN_ORDERS_ROUTE,
-        Component: UserDeliveryTemp
+        Component: OrdersAdminPanel
+    },
+    {
+        path: ADMIN_DEVICES_ROUTE,
+        Component: DevicesAdminPanel
     },
     {
         path: ADMIN_TYPES_ROUTE,
-        Component: UserPaymentTemp
+        Component: TypesAdminPanel
     },
     {
         path: ADMIN_BRANDS_ROUTE,
-        Component: UserOrdersTemp
+        Component: BrandsAdminPanel
     },
     
 ];

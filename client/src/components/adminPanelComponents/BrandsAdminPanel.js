@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
 
 
-const UserOrdersTemp = () => {
+const BrandsAdminPanel = () => {
     let thRefs = useRef([]);
     let tdRefs = useRef([]);
     const {toolTip} = useContext(Context);
@@ -79,4 +79,4 @@ const UserOrdersTemp = () => {
     );
 };
 
-export default UserOrdersTemp;
+export default BrandsAdminPanel;

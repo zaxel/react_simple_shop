@@ -1,11 +1,11 @@
 ﻿import React from 'react';
 
-const UserDeliveryTemp = () => {
+const DevicesAdminPanel = () => {
     return (
         <div className='account__delivery'>
-            UserDelivery page!
+            DevicesAdminPanel page!
         </div>
     );
 };
 
-export default UserDeliveryTemp;
+export default DevicesAdminPanel;

@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-const UserInfoTemp = () => {
+const UsersAdminPanel = () => {
     return (
         <div className='account__main'>
             <div>User main info page!</div>
@@ -39,4 +39,4 @@ const UserInfoTemp = () => {
     );
 };
 
-export default UserInfoTemp;
+export default UsersAdminPanel;

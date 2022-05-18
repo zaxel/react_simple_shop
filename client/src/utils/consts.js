@@ -18,6 +18,7 @@ export const ACCOUNT_ORDERS_ROUTE = BASE_ROUTE+'/account/orders';
 
 export const ADMIN_USER_ROUTE = BASE_ROUTE+'/admin/admin-users';
 export const ADMIN_ORDERS_ROUTE = BASE_ROUTE+'/admin/admin-orders';
+export const ADMIN_DEVICES_ROUTE = BASE_ROUTE+'/admin/admin-devices';
 export const ADMIN_TYPES_ROUTE = BASE_ROUTE+'/admin/admin-types';
 export const ADMIN_BRANDS_ROUTE = BASE_ROUTE+'/admin/admin-brands';
 

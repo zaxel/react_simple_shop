@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE } from '../../utils/consts';
+import { ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE } from '../../utils/consts';
 import AdminPanelRouter from './AdminPanelRouter';
 
 const AdminPanelNavbar = () => {
@@ -12,6 +12,9 @@ const AdminPanelNavbar = () => {
                 </li>
                 <li className="account__nav-item">
                     <Link className="account__nav-link" to={ADMIN_ORDERS_ROUTE}>orders</Link>
+                </li>
+                <li className="account__nav-item">
+                    <Link className="account__nav-link" to={ADMIN_DEVICES_ROUTE}>devices</Link>
                 </li>
                 <li className="account__nav-item">
                     <Link className="account__nav-link" to={ADMIN_TYPES_ROUTE}>devices types</Link>
