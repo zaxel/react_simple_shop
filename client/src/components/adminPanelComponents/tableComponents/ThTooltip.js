@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 
-const ThTable = ({ data, innerRef}) => {
+const ThTooltip = ({ data, innerRef}) => {
     const { toolTip } = useContext(Context);
 
     const sortBackwards = useRef(false);
@@ -29,4 +29,4 @@ const ThTable = ({ data, innerRef}) => {
     );
 };
 
-export default withTooltip(ThTable);
+export default withTooltip(ThTooltip);

@@ -756,11 +756,14 @@ code {
 .stripped-table td{
     padding: 3px 16px;
     text-align: center;
+}
+.stripped-table .td-active{
     cursor: pointer;
 }
-.stripped-table tbody tr:hover{
+.stripped-table .td-active:hover{
     text-decoration: underline;
 }
+
 .stripped-table th{
     position: relative;
     padding-right: 24px;

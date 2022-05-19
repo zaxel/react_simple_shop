@@ -4,15 +4,15 @@ import { Context } from '../..';
 
 
 const withTooltip = Component => ({ ...props }) => {
-
+console.log(props)
     const {toolTip} = useContext(Context);
     
 
     const toolTipHandler = () => {
-        const i = props.iteration;
-        const myRefs = props.myRefs;
+        const i = props.toolTipInfo.i;
+        const myRefs = props.toolTipInfo.myRefs;
         const elem = myRefs.current[i];
-        const text = props.text;
+        const text = props.toolTipInfo.text;
 
 
         setTimeout(function() {
