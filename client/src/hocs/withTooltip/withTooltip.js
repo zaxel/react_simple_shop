@@ -4,7 +4,6 @@ import { Context } from '../..';
 
 
 const withTooltip = Component => ({ ...props }) => {
-console.log(props)
     const {toolTip} = useContext(Context);
     
 

@@ -33,7 +33,7 @@ const TrUsers = ({ data }) => {
             <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={data[2]}/>
             <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={data[3]}/>
             <td>{data[4]}</td>
-            <TdModalLink toolTipInfo={toolTipInfo3} innerRef={ref3}/>
+            <TdModalLink toolTipInfo={toolTipInfo3} innerRef={ref3} data={data[5]}/>
             <TdDelete toolTipInfo={toolTipInfo4} innerRef={ref4}/>
         </tr>
     );

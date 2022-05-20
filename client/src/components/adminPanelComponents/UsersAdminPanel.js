@@ -1,6 +1,6 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
-import UserOrderModal from '../modalComponents/UserOrderModal';
+import AdminOrdersModal from '../modalComponents/AdminOrdersModal';
 import ThTooltip from './tableComponents/ThTooltip';
 import TrUsers from './tableComponents/TrUsers';
 import { v4 as uuidv4 } from 'uuid';
@@ -38,6 +38,10 @@ const UsersAdminPanel = () => {
         setOrderModalVisible(false);
     }
 
+    const onOrderClickHandler = () => {
+        setOrderModalVisible(true);
+    }
+
     useEffect(() => {
         toolTip.setIsAvailable(true);
     }, [])
@@ -51,7 +55,8 @@ const UsersAdminPanel = () => {
     })
 
     const trs = tds.map((el, i) => {
-        return <TrUsers key={el[0]} data={el} />
+        const row = [...el, onOrderClickHandler];
+        return <TrUsers key={el[0]} data={row} />
     })
     return (
             <div className='user-admin__main account__orders acc-orders'>
@@ -65,7 +70,7 @@ const UsersAdminPanel = () => {
                         {trs}
                     </tbody>
                 </table>
-                <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} />
+                <AdminOrdersModal show={orderModalVisible} onHide={onModalHideHandler} />
                 <PaginationCont />
             </div>
     );

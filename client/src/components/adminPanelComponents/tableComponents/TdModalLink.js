@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 
-const TdModalLink = ({ innerRef }) => {
+const TdModalLink = ({ data, innerRef }) => {
 
     const { toolTip } = useContext(Context);
 
@@ -11,7 +11,8 @@ const TdModalLink = ({ innerRef }) => {
     const onClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
-        alert('modal orders here');
+
+        data(); //show order modal
         toolTip.setIsAvailable(true);
     }
 
