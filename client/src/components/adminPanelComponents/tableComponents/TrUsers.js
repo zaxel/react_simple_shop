@@ -1,5 +1,9 @@
 ﻿import React, { useRef } from 'react';
+import TdDelete from './TdDelete';
 import TdInputText from './TdInputText';
+import TdIsActivatedSelect from './TdIsActivatedSelect';
+import TdModalLink from './TdModalLink';
+import TdUserRoleSelect from './TdUserRoleSelect';
 
 
 
@@ -26,11 +30,11 @@ const TrUsers = ({ data }) => {
         <tr >
             <td>{data[0]}</td>
             <TdInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={data[1]}/>
-            <TdInputText toolTipInfo={toolTipInfo1} innerRef={ref1} data={data[2]}/>
-            <TdInputText toolTipInfo={toolTipInfo2} innerRef={ref2} data={data[3]}/>
+            <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={data[2]}/>
+            <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={data[3]}/>
             <td>{data[4]}</td>
-            <TdInputText toolTipInfo={toolTipInfo3} innerRef={ref3} data={data[5]}/>
-            <TdInputText toolTipInfo={toolTipInfo4} innerRef={ref4} data={data[6]}/>
+            <TdModalLink toolTipInfo={toolTipInfo3} innerRef={ref3}/>
+            <TdDelete toolTipInfo={toolTipInfo4} innerRef={ref4}/>
         </tr>
     );
 };

@@ -24,13 +24,13 @@ const UsersAdminPanel = () => {
         
 
     const tds = [
-        ['18', 'test@gmail.com', 'USER', 'true', '2022-05-04 20:24', 'orders', 'X'],
-        ['22', 'admin@gmail.com', 'ADMIN', 'true', '2022-08-12 19:24', 'orders', 'X'],
-        ['56', 'mega_client@gmail.com', 'MODER', 'true', '2022-09-15 15:00', 'orders', 'X'],
-        ['75', 'tempemail@gmail.com', 'USER', 'true', '2022-09-15 18:15', 'orders', 'X'],
-        ['29', 'jenny9009@gmail.com', 'MODER', 'true', '2022-10-04 12:10', 'orders', 'X'],
-        ['11', 'startrack@gmail.com', 'USER', 'false', '2022-10-04 20:24', 'orders', 'X'],
-        ['12', 'moonlight@gmail.com', 'USER', 'true', '2022-12-01 23:55', 'orders', 'X'],
+        ['18', 'test@gmail.com', 'USER', 'true', '2022-05-04 20:24'],
+        ['22', 'admin@gmail.com', 'ADMIN', 'true', '2022-08-12 19:24'],
+        ['56', 'mega_client@gmail.com', 'MODER', 'true', '2022-09-15 15:00'],
+        ['75', 'tempemail@gmail.com', 'USER', 'true', '2022-09-15 18:15'],
+        ['29', 'jenny9009@gmail.com', 'MODER', 'true', '2022-10-04 12:10'],
+        ['11', 'startrack@gmail.com', 'USER', 'false', '2022-10-04 20:24'],
+        ['12', 'moonlight@gmail.com', 'USER', 'true', '2022-12-01 23:55'],
     ]
 
     const onModalHideHandler = () => {
