@@ -60,12 +60,14 @@ const UserOrderModal = ({ show, onHide }) => {
     const thsWithTooltip = ths.map((el, i) => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
-        return <ThTable text={'sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} onThClickHandler={onThClickHandler} data={el} />
+        let toolTipInfo = {i, myRefs: thRefs, text: 'sort'};
+        return <ThTable toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} onThClickHandler={onThClickHandler} data={el} />
     })
     const tdsWithTooltip = tds.map((el, i) => {
         const myKey = uuidv4();
         let ref = (el) => (tdRefs.current[i] = el);
-        return <TrTable text={'click for detailed device info'} iteration={i} myRefs={tdRefs} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
+        let toolTipInfo = {i, myRefs: tdRefs, text: 'click for detailed device info'};
+        return <TrTable toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
     })
 
 

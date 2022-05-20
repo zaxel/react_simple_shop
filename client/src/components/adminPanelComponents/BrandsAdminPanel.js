@@ -1,80 +1,15 @@
-﻿import React, { useState, useRef, useContext, useEffect } from 'react';
-import PaginationCont from '../PaginationCont';
-import UserOrderModal from '../modalComponents/UserOrderModal';
-import ThTable from '../strippedTablesComponents/ThTable';
-import TrTable from '../strippedTablesComponents/TrTable';
-import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../..';
+﻿import React from 'react';
+
 
 
 const BrandsAdminPanel = () => {
-    let thRefs = useRef([]);
-    let tdRefs = useRef([]);
-    const {toolTip} = useContext(Context);
-    const [orderModalVisible, setOrderModalVisible] = useState(false);
-
-    const ths = ['order id', 'ordered at', 'amount ordered', 'total'];
-
-    const tds = [
-        ['3655', '2022-05-04 20:24', '2', '$165.00'],
-        ['3657', '2022-08-12 19:24', '7', '$65.00'],
-        ['3659', '2022-09-15 15:00', '1', '$25.00'],
-        ['3675', '2022-09-15 18:15', '10', '$3.00'],
-        ['3695', '2022-10-04 12:10', '3', '$8605.00'],
-        ['3755', '2022-10-04 20:24', '1', '$715.00'],
-        ['3759', '2022-12-01 23:55', '5', '$115.00'],
-    ]
-
-    const onRowClickHandler = () => {
-        toolTip.setIsAvailable(true);
-        setOrderModalVisible(true);
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-    }
-    const onThClickHandler = () => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        alert('sort')
-        toolTip.setIsAvailable(true);
-    }
-
-    const onModalHideHandler = () => {
-        toolTip.setIsAvailable(true);
-        setOrderModalVisible(false);
-    }
-
-    useEffect(()=>{
-        toolTip.setIsAvailable(true);
-    }, [])
-
-    const thsWithTooltip = ths.map((el, i) => {
-
-        const myKey = uuidv4();
-        let ref = (el) => (thRefs.current[i] = el);
-        return <ThTable text={'sort'} iteration={i} myRefs={thRefs} innerRef={ref} key={myKey} onThClickHandler={onThClickHandler} data={el} />
-    })
-    const tdsWithTooltip = tds.map((el, i) => {
-
-        const myKey = uuidv4();
-        let ref = (el) => (tdRefs.current[i] = el);
-        return <TrTable text={'click for detailed info'} iteration={i} myRefs={tdRefs} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
-    })
-
     return (
-        <div className='account__orders acc-orders'>
+        <div className='account__payment'>
+            <div>Types page. The standard Lorem Ipsum passage, used since the 1500s
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
 
-            <table className='stripped-table'>
-                <thead>
-                    <tr>
-                        {thsWithTooltip}
-                    </tr>
-                </thead>
-                <tbody>
-                    {tdsWithTooltip}
-                </tbody>
-            </table>
-            <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} />
-            <PaginationCont />
+            <div>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</div>
         </div>
     );
 };

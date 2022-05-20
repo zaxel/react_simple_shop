@@ -12,7 +12,7 @@ const ThTable = ({ data, innerRef, onThClickHandler }) => {
     }, [])
 
     return (
-        <th onClick={onThClickHandler} ref={innerRef}>{data}</th>
+        <th className='td-active' onClick={onThClickHandler} ref={innerRef}>{data}</th>
     );
 };
 
