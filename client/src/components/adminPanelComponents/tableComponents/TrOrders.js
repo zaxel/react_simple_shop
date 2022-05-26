@@ -1,6 +1,7 @@
 ﻿import React, { useContext, useEffect } from 'react';
 import { Context } from '../../..';
 import { v4 as uuidv4 } from 'uuid';
+import withTooltip from '../../../hocs/withTooltip/withTooltip';
 
 
 const TrOrders = ({ data, onRowClickHandler, innerRef}) => {
@@ -25,4 +26,4 @@ const TrOrders = ({ data, onRowClickHandler, innerRef}) => {
     );
 };
 
-export default TrOrders;
+export default withTooltip(TrOrders);
