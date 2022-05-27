@@ -28,7 +28,7 @@ class DeviceController {
         }
 
     }
-    async getAll(req, res) {
+    async getAll(req, res, next) {
         try {
             const startPage = process.env.START_PAGE;
             const defaultLimit = process.env.DEFAULT_LIMIT;
@@ -39,7 +39,7 @@ class DeviceController {
             next(ApiError.forbidden(e.message));
         }
     }
-    async getSingle(req, res) {
+    async getSingle(req, res, next) {
         try {
             const { id } = req.params;
             const device = await deviceService.getSingle(id);

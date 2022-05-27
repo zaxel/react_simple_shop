@@ -3,6 +3,7 @@ const { body } = require('express-validator');
 const router = new Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
+const checkRole = require('../middleware/checkRoleMiddleware');
 
 router.post('/registration',
     body('email').isEmail(),
@@ -13,5 +14,6 @@ router.post('/logout', userController.logout);
 router.get('/activate/:link', userController.activate);
 router.get('/check', authMiddleware, userController.refresh);
 router.get('/refresh', userController.refresh);
+router.get('/', checkRole(['ADMIN', 'MODERATOR']), userController.getAll);
 
 module.exports = router;

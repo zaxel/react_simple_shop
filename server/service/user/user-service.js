@@ -73,6 +73,18 @@ class UserService {
         await tokenService.saveTokenToDb(userDto.id, tokens.refreshToken);
         return { ...tokens, user: userDto };
     }
+
+    getAll = async (sortBy, sortDirection = 'ASC', limit, page) => {
+        const startPage = process.env.START_ADMIN_PAGE;
+        const defaultLimit = process.env.DEFAULT_ADMIN_LIMIT;
+        page = page || startPage;
+        limit = limit || defaultLimit;
+        let offset = page * limit - limit;
+        let users = await User.findAndCountAll({order: [
+            [sortBy, sortDirection],
+         ], limit, offset });
+        return users;
+    }
 }
 
 module.exports = new UserService();
