@@ -13,21 +13,16 @@ module.exports = function (role){
             }
 
             const decodedData = tokenService.validateAccessToken(accessToken); 
+            if(Array.isArray(role)){
+                if(!role.includes(decodedData.role)){
+                    return res.status(401).json({message: `access denied! you must have ${role.join(', ')} permissions to fulfill this request!`});
+                }
+            }
             if(decodedData.role !== role){
                 return res.status(401).json({message: 'access denied! you must have an ADMIN permissions to fulfill this request!'});
             }
             req.user = decodedData;
             next();
-
-
-
-
-            // const decoded = jwt.verify(token, process.env.SECRET_KEY);
-            // if(decoded.role !== role){
-            //     return res.status(403).json({message: 'access denied! you must have an ADMIN permissions to fulfill this request!'})
-            // }
-            // req.user = decoded;
-            // next();
         }catch(e){
             res.status(401).json({message: e.message});
         }
