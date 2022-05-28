@@ -32,16 +32,16 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
         return () => toolTip?.hoverIntentDestroy();
     }, [])
 
-
+console.log('is active render')
 
     return (
         <td ref={innerRef}>
             {!edit
-                ? <div className='td-active' onClick={onDivClickHandler}>{selectData === true ? 'activated' : 'not activated'}</div>
+                ? <div className='td-active' onClick={onDivClickHandler}>{selectData === 'true' ? 'activated' : 'not activated'}</div>
                 : <div className='display-flex'>
                     <select value={selectData} onChange={onSelectChange}>
-                        <option value={true}>activated</option>
-                        <option value={false}>not activated</option>
+                        <option value={'true'}>activated</option>
+                        <option value={'false'}>not activated</option>
                     </select>
                     <button onClick={onButtonClickHandler}>V</button>
                   </div>}
