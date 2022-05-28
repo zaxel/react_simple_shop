@@ -83,6 +83,10 @@ class UserService {
         let users = await User.findAndCountAll({order: [
             [sortBy, sortDirection],
          ], limit, offset });
+        users = {
+            count: users.count,
+            rows: users.rows.map(user=>new UserDto(user))
+        }
         return users;
     }
 }
