@@ -24,13 +24,13 @@ const UsersAdminPanel = () => {
         
 
     const tds = [
-        {id: 18, email: 'test@gmail.com', role: 'USER', is_activated: 'true', createdAt: '2022-05-04 20:24'},
-        {id: 22, email: 'admin@gmail.com', role: 'ADMIN', is_activated: 'true', createdAt: '2022-08-12 19:24'},
-        {id: 56, email: 'mega_client@gmail.com', role: 'MODER', is_activated: 'true', createdAt: '2022-09-15 15:00'},
-        {id: 75, email: 'tempemail@gmail.com', role: 'USER', is_activated: 'true', createdAt: '2022-09-15 18:15'},
-        {id: 29, email: 'jenny9009@gmail.com', role: 'MODER', is_activated: 'true', createdAt: '2022-10-04 12:10'},
-        {id: 11, email: 'startrack@gmail.com', role: 'USER', is_activated: 'false',createdAt:  '2022-10-04 20:24'},
-        {id: 12, email: 'moonlight@gmail.com', role: 'USER', is_activated: 'true', createdAt: '2022-12-01 23:55'},
+        {id: 18, email: 'test@gmail.com', role: 'USER', isActivated: 'true', createdAt: '2022-05-04 20:24'},
+        {id: 22, email: 'admin@gmail.com', role: 'ADMIN', isActivated: 'true', createdAt: '2022-08-12 19:24'},
+        {id: 56, email: 'mega_client@gmail.com', role: 'MODER', isActivated: 'true', createdAt: '2022-09-15 15:00'},
+        {id: 75, email: 'tempemail@gmail.com', role: 'USER', isActivated: 'true', createdAt: '2022-09-15 18:15'},
+        {id: 29, email: 'jenny9009@gmail.com', role: 'MODER', isActivated: 'true', createdAt: '2022-10-04 12:10'},
+        {id: 11, email: 'startrack@gmail.com', role: 'USER', isActivated: 'false',createdAt:  '2022-10-04 20:24'},
+        {id: 12, email: 'moonlight@gmail.com', role: 'USER', isActivated: 'true', createdAt: '2022-12-01 23:55'},
     ]
 
     const onModalHideHandler = () => {
