@@ -10,6 +10,6 @@
         this.id = model.id;
         this.role = model.role;
         this.isActivated = model.is_activated;
-        this.createdAt = model.createdAt;
+        this.createdAt = Date.parse(model.createdAt);
     }
 }
