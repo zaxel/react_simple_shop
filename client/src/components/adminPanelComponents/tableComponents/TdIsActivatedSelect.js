@@ -4,6 +4,7 @@ import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 
 const TdIsActivatedSelect = ({ data, innerRef }) => {
+    console.log(data)
 
     const { toolTip } = useContext(Context);
     const [edit, setEdit] = useState(false);
@@ -36,7 +37,7 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
     return (
         <td ref={innerRef}>
             {!edit
-                ? <div className='td-active' onClick={onDivClickHandler}>{selectData === 'true' ? 'activated' : 'not activated'}</div>
+                ? <div className='td-active' onClick={onDivClickHandler}>{selectData === true ? 'activated' : 'not activated'}</div>
                 : <div className='display-flex'>
                     <select value={selectData} onChange={onSelectChange}>
                         <option value={true}>activated</option>

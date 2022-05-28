@@ -31,7 +31,7 @@ const TrUsers = ({ data }) => {
             <td>{data.id}</td>
             <TdInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={data.email}/>
             <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={data.role}/>
-            <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={data.is_activated}/>
+            <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={data.isActivated}/>
             <td>{data.createdAt}</td>
             <TdModalLink toolTipInfo={toolTipInfo3} innerRef={ref3} data={data.onOrderClickHandler}/>
             <TdDelete toolTipInfo={toolTipInfo4} innerRef={ref4}/>
