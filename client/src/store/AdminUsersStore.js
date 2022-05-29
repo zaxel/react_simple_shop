@@ -7,7 +7,7 @@ export default class AdminUsersStore{
     _sortRevers = false;
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 20;
+    _itemsPerPage = 4;
     constructor(){
         
         makeAutoObservable(this);

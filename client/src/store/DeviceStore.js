@@ -20,7 +20,6 @@ export default class DeviceStore{
         this._brands = brands;
     }
     setDevices(devices){
-        console.log(devices)
         this._devices = devices;
     }
     setTypeActive(typeId){

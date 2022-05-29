@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
 import { Spinner } from 'react-bootstrap';
 import { getUsers } from '../../http/userAPI';
+import { fetchAllUsers } from '../../utils/adminUsers';
 
 const UsersAdminPanel = () => {
     let thRefs = useRef([]);
@@ -15,23 +16,25 @@ const UsersAdminPanel = () => {
     const [orderModalVisible, setOrderModalVisible] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const fetchAllUsers = async() => {
-        const fetchedServerUsers = await getUsers('id', 'ASC', 10, 1); //sortBy, sortDirection, limit, page
-        await users.setUsers(fetchedServerUsers);
-        console.log(users.users.rows);
-    }
+    // const fetchAllUsers = async() => {
+    //     const fetchedServerUsers = await getUsers('id', 'ASC', 10, 1); //sortBy, sortDirection, limit, page
+    //     await users.setUsers(fetchedServerUsers);
+    //     console.log(users.users.rows);
+    // }
 
     useEffect(() => {
         (async () => {
           try {
-            await fetchAllUsers();
+            await fetchAllUsers(users, 'id', 'ASC', users.itemsPerPage, 1);
+            console.log(users.users.count, users.itemsPerPage)
+            await users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
           } catch (e) {
             console.log(e)
           } finally {
             setLoading(false)
           }
         })()
-        
+        toolTip.setIsAvailable(true);
     
       }, [])
 
@@ -65,9 +68,6 @@ const UsersAdminPanel = () => {
         setOrderModalVisible(true);
     }
 
-    useEffect(() => {
-        toolTip.setIsAvailable(true);
-    }, [])
 
     const thsWithTooltip = ths.map((el, i) => {
 

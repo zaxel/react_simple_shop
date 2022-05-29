@@ -4,7 +4,6 @@ import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 
 const TdIsActivatedSelect = ({ data, innerRef }) => {
-    console.log(data)
 
     const { toolTip } = useContext(Context);
     const [edit, setEdit] = useState(false);
@@ -32,7 +31,6 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
         return () => toolTip?.hoverIntentDestroy();
     }, [])
 
-console.log('is active render')
 
     return (
         <td ref={innerRef}>
