@@ -106,7 +106,7 @@ const UsersAdminPanel = () => {
                     </tbody>
                 </table>
                 <AdminOrdersModal show={orderModalVisible} onHide={onModalHideHandler} />
-                <PaginationCont />
+                <PaginationCont currentStore={users}/>
             </div>
     );
 };

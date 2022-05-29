@@ -37,7 +37,7 @@ const Shop = observer(() => {
                 <div className='shop__devices-cont'>
                     <BrandBar/>
                     <DeviceItems/>
-                    <PaginationCont/>
+                    <PaginationCont currentStore={device}/>
                 </div>
             </div>}
         </div>
