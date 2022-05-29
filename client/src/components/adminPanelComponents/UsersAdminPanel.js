@@ -8,8 +8,9 @@ import { Context } from '../..';
 import { Spinner } from 'react-bootstrap';
 import { getUsers } from '../../http/userAPI';
 import { fetchAllUsers } from '../../utils/adminUsers';
+import { observer } from 'mobx-react-lite';
 
-const UsersAdminPanel = () => {
+const UsersAdminPanel = observer(() => {
     let thRefs = useRef([]);
     let tdRefs = useRef([]);
     const { toolTip, users } = useContext(Context);
@@ -25,9 +26,8 @@ const UsersAdminPanel = () => {
     useEffect(() => {
         (async () => {
           try {
-            await fetchAllUsers(users, 'id', 'ASC', users.itemsPerPage, 1);
-            console.log(users.users.count, users.itemsPerPage)
-            await users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
+            await fetchAllUsers(users, 'id', 'ASC', users.itemsPerPage, users.activePage);
+            users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
           } catch (e) {
             console.log(e)
           } finally {
@@ -37,6 +37,21 @@ const UsersAdminPanel = () => {
         toolTip.setIsAvailable(true);
     
       }, [])
+
+      useEffect(()=>{
+        (async () => {
+          try {
+            setLoading(true);
+            await fetchAllUsers(users, 'id', 'ASC', users.itemsPerPage, users.activePage);
+            users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
+          } catch (e) {
+            console.log(e)
+          } finally {
+            setLoading(false);
+          }
+        })()
+
+      }, [users.activePage])
 
     const ths = [
         {title: 'user id', sortBy: 'id'}, 
@@ -109,6 +124,6 @@ const UsersAdminPanel = () => {
                 <PaginationCont currentStore={users}/>
             </div>
     );
-};
+});
 
 export default UsersAdminPanel;

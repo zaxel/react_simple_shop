@@ -21,7 +21,11 @@ const ThTooltip = ({ data, innerRef}) => {
 
     useEffect(() => {
         //   destroy all event listeners tooltips
-        return () => toolTip?.hoverIntentDestroy();
+        
+        return () => {
+            if(typeof toolTip.hoverIntentDestroy === 'function')
+                return toolTip?.hoverIntentDestroy()
+        };
     }, [])
 
     return (
