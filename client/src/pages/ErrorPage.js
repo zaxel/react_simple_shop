@@ -2,7 +2,7 @@
 
 const ErrorPage = () => {
     return (
-        <h1 style={{color: "red"}}>404 page not found</h1>
+        <h1 className='error__page'>ERROR 404: page not found</h1>
     );
 };
 

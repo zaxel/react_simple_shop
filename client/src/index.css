@@ -40,6 +40,16 @@ code {
 }
 /*Spinner End*/
 
+/*Error Page Start*/
+.error__page{
+    color: red;
+    flex: 1 1 auto;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*Error Page End*/
 
 /* navbar start */
 .nav-item {
