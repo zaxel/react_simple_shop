@@ -2,18 +2,22 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
+import { fetchAllUsers } from '../../../utils/adminUsers';
 
 const ThTooltip = ({ data, innerRef}) => {
-    const { toolTip } = useContext(Context);
+    const { toolTip, users } = useContext(Context);
 
-    const sortBackwards = useRef(false);
-
-    const onThClickHandler = (data) => {
+    const onThClickHandler = async(data) => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
-        alert(data +': ' + sortBackwards.current);
-        
-        sortBackwards.current = !sortBackwards.current;
+        if(users.sortBy === data){
+            users.sortDirection === 'ASC' ? users.setSortDirection('DESC') : users.setSortDirection('ASC');
+        }else{
+            users.setSortDirection('ASC');
+        }
+        users.setSortBy(data);
+        await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage);
+        await users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
         toolTip.setIsAvailable(true);
     }
 

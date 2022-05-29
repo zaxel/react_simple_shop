@@ -26,7 +26,7 @@ const UsersAdminPanel = observer(() => {
     useEffect(() => {
         (async () => {
           try {
-            await fetchAllUsers(users, 'id', 'ASC', users.itemsPerPage, users.activePage);
+            await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage);
             users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
           } catch (e) {
             console.log(e)
@@ -42,7 +42,7 @@ const UsersAdminPanel = observer(() => {
         (async () => {
           try {
             setLoading(true);
-            await fetchAllUsers(users, 'id', 'ASC', users.itemsPerPage, users.activePage);
+            await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage);
             users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
           } catch (e) {
             console.log(e)

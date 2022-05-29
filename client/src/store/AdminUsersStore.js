@@ -3,6 +3,7 @@
 export default class AdminUsersStore{
     
     _users = {};
+    _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
     _activePage = 1;
@@ -15,6 +16,12 @@ export default class AdminUsersStore{
     
     setUsers(users){
         this._users = users;
+    }
+    setSortDirection(direction){
+        this._sortDirection = direction;
+    }
+    setSortBy(by){
+        this._sortBy = by;
     }
     
     setActivePage(page){
@@ -30,7 +37,12 @@ export default class AdminUsersStore{
     get users(){
         return this._users;
     }
-    
+    get sortDirection(){
+        return this._sortDirection;
+    }
+    get sortBy(){
+        return this._sortBy;
+    }
     get activePage(){
         return this._activePage;
     }
