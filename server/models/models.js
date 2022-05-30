@@ -11,8 +11,9 @@ const User = sequelize.define('user', {
 })
 
 const Token = sequelize.define('token', {
+  
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  refresh_token: {type: DataTypes.STRING, allowNull: false},
+  refresh_token: {type: DataTypes.STRING, allowNull: true},
 })
 const Basket = sequelize.define('basket', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},

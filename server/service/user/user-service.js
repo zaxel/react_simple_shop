@@ -38,6 +38,7 @@ class UserService {
     }
 
     login = async(email, password) => {
+
         const user = await User.findOne({where: {email}});
         if(!user){
             return next(ApiError.unauthorized('wrong email or password(email)'));

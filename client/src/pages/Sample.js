@@ -40,7 +40,7 @@ const Sample = () => {
               },
               {
                 title: 'style',
-                description: 'modern'
+                description: 'MODERATORn'
               },
             ]
         },
