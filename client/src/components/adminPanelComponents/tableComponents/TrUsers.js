@@ -4,7 +4,7 @@ import TdInputText from './TdInputText';
 import TdIsActivatedSelect from './TdIsActivatedSelect';
 import TdModalLink from './TdModalLink';
 import TdUserRoleSelect from './TdUserRoleSelect';
-
+import { adminPageFormatDate } from '../../../utils/adminPageFormatDate';
 
 
 const TrUsers = ({ data }) => {
@@ -32,7 +32,7 @@ const TrUsers = ({ data }) => {
             <TdInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={data.email}/>
             <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={data.role}/>
             <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={data.isActivated.toString()}/>
-            <td>{data.createdAt}</td>
+            <td>{adminPageFormatDate(data.createdAt*1000)}</td>
             <TdModalLink toolTipInfo={toolTipInfo3} innerRef={ref3} data={data.onOrderClickHandler}/>
             <TdDelete toolTipInfo={toolTipInfo4} innerRef={ref4}/>
         </tr>

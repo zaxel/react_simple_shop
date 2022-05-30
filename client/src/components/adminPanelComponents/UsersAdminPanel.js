@@ -17,11 +17,6 @@ const UsersAdminPanel = observer(() => {
     const [orderModalVisible, setOrderModalVisible] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    // const fetchAllUsers = async() => {
-    //     const fetchedServerUsers = await getUsers('id', 'ASC', 10, 1); //sortBy, sortDirection, limit, page
-    //     await users.setUsers(fetchedServerUsers);
-    //     console.log(users.users.rows);
-    // }
 
     useEffect(() => {
         (async () => {
