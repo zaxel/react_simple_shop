@@ -10,6 +10,10 @@ const ShopToolTip = observer(() => {
         tooltipRef.current.style.top = toolTip.top + 'px';
         tooltipRef.current.style.left = toolTip.left + 'px';
         tooltipRef.current.style.opacity = 1;
+
+        //does not show tooltip if it shown in left top corner(crutch). in most cases those coordinates not what we expected, it is just side effect.
+        if (toolTip.top < 10 || toolTip.left < 10)
+            tooltipRef.current.style.opacity = 0;
     }
     useEffect(()=>{
         toolTip.setIsToolTipShown(false)
