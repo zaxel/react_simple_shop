@@ -28,3 +28,7 @@ export const getUsers = async (sortBy, sortDirection, limit, page) => {
     }});
     return data;
 }
+export const updateUser = async (id, dbFieldName, data) => {
+    const {updatedData} = await $authHost.put('api/user/' , {id, [dbFieldName]: data});
+    return updatedData;
+}

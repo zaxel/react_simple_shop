@@ -29,7 +29,7 @@ const TrUsers = ({ data }) => {
     return (
         <tr >
             <td>{data.id}</td>
-            <TdInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={data.email}/>
+            <TdInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={{inputData: data.email, userId: data.id, dbFieldName: 'email'}}/>
             <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={data.role}/>
             <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={data.isActivated.toString()}/>
             <td>{adminPageFormatDate(data.createdAt*1000)}</td>

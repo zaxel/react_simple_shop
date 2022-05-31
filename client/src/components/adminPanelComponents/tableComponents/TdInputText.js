@@ -2,43 +2,52 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
+import { changeUserData } from '../../../utils/adminUsers';
+import { Spinner } from 'react-bootstrap';
 
 const TdInputText = ({ data, innerRef }) => {
 
-    const { toolTip } = useContext(Context);
+    const {inputData, userId, dbFieldName } = data;
+    const { toolTip, users } = useContext(Context);
     const [edit, setEdit] = useState(false);
-    const [inputData, setInputData] = useState(data);
-
-
-
+    const [input, setInput] = useState(inputData);
+    const [loading, setLoading] = useState(false);
 
     const onDivClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         setEdit(true);
     }
-    const onButtonClickHandler = () => {
+    const onButtonClickHandler = async() => {
+        setLoading(true);
+        await changeUserData(userId, dbFieldName, input);
+        setLoading(false);
+        users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
         setEdit(false);
         toolTip.setIsAvailable(true);
     }
     const onInputChange = (e) => {
-        setInputData(prev => e.target.value)
+        setInput(prev => e.target.value)
     }
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips
         return () => toolTip?.hoverIntentDestroy();
     }, [])
 
-
-
+    if (loading) {
+        return (
+          <td className="td-spinner">
+            <Spinner animation="border" />
+          </td>
+        )
+      }
     return (
         <td ref={innerRef}>
             {!edit 
-                ? <div className='td-active' onClick={onDivClickHandler}>{inputData}</div> 
+                ? <div className='td-active' onClick={onDivClickHandler}>{input}</div> 
                 : <div className='display-flex'>
-                    <input type='text' value={inputData} onChange={onInputChange} />
+                    <input type='text' value={input} onChange={onInputChange} />
                     <button onClick={onButtonClickHandler}>V</button>
                   </div>}
 

@@ -46,7 +46,7 @@ const UsersAdminPanel = observer(() => {
           }
         })()
 
-      }, [users.activePage])
+      }, [users.activePage, users.updateDataTrigger])
 
     const ths = [
         {title: 'user id', sortBy: 'id'}, 

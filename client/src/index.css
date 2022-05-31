@@ -38,6 +38,10 @@ code {
     justify-content: center;
     align-items: center;
 }
+.td-spinner .spinner-border{
+    width: 16px;
+    height: 16px;
+}
 /*Spinner End*/
 
 /*Error Page Start*/

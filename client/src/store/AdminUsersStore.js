@@ -9,6 +9,7 @@ export default class AdminUsersStore{
     _activePage = 1;
     _pagesTotal = 1;
     _itemsPerPage = 4;
+    _updateDataTrigger = false;
     constructor(){
         
         makeAutoObservable(this);
@@ -33,6 +34,9 @@ export default class AdminUsersStore{
     setItemsPerPage(number){
         this._itemsPerPage = number;
     }
+    setUpdateDataTrigger(bool){
+        this._updateDataTrigger = bool;
+    }
     
     get users(){
         return this._users;
@@ -51,5 +55,8 @@ export default class AdminUsersStore{
     }
     get itemsPerPage(){
         return this._itemsPerPage;
+    }
+    get updateDataTrigger(){
+        return this._updateDataTrigger;
     }
 }
