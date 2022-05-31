@@ -74,6 +74,30 @@ class UserController {
             next(ApiError.forbidden(e.message));
         }
     }
+    async update(req, res, next){
+        try {
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { id, email, role, is_activated } = req.body;
+            let field = null;
+            let newData = email ?? role ?? is_activated;
+            if(email){
+                field = 'email';
+            }else if(role){
+                field = 'role';
+            }else if(is_activated){
+                field = 'is_activated';
+            }else{
+                return next(ApiError.badRequest('no required field in req body'));
+            }
+            const data = await userService.update(id, field, newData);
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
 
 }
 

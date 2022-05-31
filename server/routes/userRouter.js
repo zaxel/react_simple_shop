@@ -15,5 +15,9 @@ router.get('/activate/:link', userController.activate);
 router.get('/check', authMiddleware, userController.refresh);
 router.get('/refresh', userController.refresh);
 router.get('/', checkRole(['ADMIN', 'MODERATOR']), userController.getAll);
-
+router.put('/',
+    body('email').optional().isEmail(),
+    body('role').optional().isLength({min: 4, max: 15}),
+    body('is_activated').optional().isLength({min: 4, max: 5}),
+    userController.update);
 module.exports = router;

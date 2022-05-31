@@ -90,6 +90,12 @@ class UserService {
         }
         return users;
     }
+    update = async (id, field, newData) => {
+        const updatedData = await User.update({ [field]: newData }, {
+            where: { id }
+          });
+        return {updatedData};
+    }
 }
 
 module.exports = new UserService();
