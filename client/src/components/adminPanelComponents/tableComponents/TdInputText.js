@@ -4,6 +4,7 @@ import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 import { changeUserData } from '../../../utils/adminUsers';
 import { Spinner } from 'react-bootstrap';
+import { isStateChanged } from '../../../utils/isStateChanged';
 
 const TdInputText = ({ data, innerRef }) => {
 
@@ -18,11 +19,15 @@ const TdInputText = ({ data, innerRef }) => {
         toolTip.setIsAvailable(false);
         setEdit(true);
     }
+    
+
     const onButtonClickHandler = async() => {
-        setLoading(true);
-        await changeUserData(userId, dbFieldName, input);
-        setLoading(false);
-        users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+        if(isStateChanged(users, userId, dbFieldName, input)){
+            setLoading(true);
+            await changeUserData(userId, dbFieldName, input);
+            setLoading(false);
+            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+        }
         setEdit(false);
         toolTip.setIsAvailable(true);
     }
