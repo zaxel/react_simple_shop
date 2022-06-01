@@ -19,5 +19,6 @@ router.put('/',
     body('email').optional().isEmail(),
     body('role').optional().isLength({min: 4, max: 15}),
     body('is_activated').optional().isLength({min: 4, max: 5}),
+    checkRole('ADMIN'),
     userController.update);
 module.exports = router;
