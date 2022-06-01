@@ -1,5 +1,6 @@
 ﻿const jwt = require('jsonwebtoken');
 const { Token } = require('../../models/models');
+const ApiError = require("../../error/ApiError");
 
 class TokenService {
     generateJwt = (payload) => {
@@ -9,13 +10,21 @@ class TokenService {
     }
     
     saveTokenToDb = async(userId, refreshToken) => {
-        const tokenData = await Token.findOne({ where: { userId } });
-        if (tokenData) {
-            const token = await Token.update({refresh_token: refreshToken}, {where: { userId }});
+        try{
+            const tokenData = await Token.findOne({ where: { userId } });
+            if (tokenData) {
+                const token = await Token.update({refresh_token: refreshToken}, {where: { userId }});
+                return token;
+            }
+            const token = await Token.create({userId, refresh_token: refreshToken});
             return token;
+        }catch(e){
+            console.log('--------------')
+            console.log(e);
+            console.log('--------------')
+            return next(ApiError.badRequest(e.message + ': could not save token to db.'))
         }
-        const token = await Token.create({userId, refresh_token: refreshToken});
-        return token;
+        
     }
     
     removeToken = async(refreshToken) => {

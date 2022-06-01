@@ -32,7 +32,7 @@ const TrUsers = ({ data }) => {
             <TdInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={{inputData: data.email, userId: data.id, dbFieldName: 'email'}}/>
             <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={data.role}/>
             <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={data.isActivated.toString()}/>
-            <td>{adminPageFormatDate(data.createdAt*1000)}</td>
+            <td>{adminPageFormatDate(data.createdAt)}</td>
             <TdModalLink toolTipInfo={toolTipInfo3} innerRef={ref3} data={data.onOrderClickHandler}/>
             <TdDelete toolTipInfo={toolTipInfo4} innerRef={ref4}/>
         </tr>
