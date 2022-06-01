@@ -33,8 +33,17 @@ const authResponseErrorCb = async (error) => {
             console.log(e.message);
         }
     }
+    if(error.response.status === 403){
+        try{
+            alert(error.response.data.message);
+            return 'error';
+        }catch(e){
+            console.log(e.message);
+        }
+    }
     throw new Error('error in rejection interceptor cb');
 }
+
 $authHost.interceptors.request.use(authRequestInterceptor);
 $authHost.interceptors.response.use(authResponseInterceptor, authResponseErrorCb);
 

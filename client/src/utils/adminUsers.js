@@ -7,4 +7,5 @@ export const fetchAllUsers = async(currentStore, sortBy, sortDirection, limit, p
 
 export const changeUserData = async(id, dbFieldName, data) => {
     const updated = await updateUser(id, dbFieldName, data); 
+    return updated;
 }
