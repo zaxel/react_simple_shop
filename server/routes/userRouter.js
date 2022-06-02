@@ -21,4 +21,7 @@ router.put('/',
     body('is_activated').optional().isLength({min: 4, max: 5}),
     checkRole('ADMIN'),
     userController.update);
+router.delete('/',
+    checkRole('ADMIN'),
+    userController.delete);
 module.exports = router;

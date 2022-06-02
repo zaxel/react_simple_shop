@@ -95,6 +95,12 @@ class UserService {
           });
         return {updatedData};
     }
+    delete = async (id) => {
+        const updatedData = await User.destroy({
+            where: { id }
+          });
+        return {updatedData};
+    }
 }
 
 module.exports = new UserService();
