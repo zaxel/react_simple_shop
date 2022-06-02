@@ -1,23 +1,30 @@
-﻿import React, { useEffect, useContext, useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+﻿import React, { useEffect, useContext, useState } from 'react';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
+import { isStateChanged } from '../../../utils/isStateChanged';
+import { Spinner } from 'react-bootstrap';
+import { changeUserData } from '../../../utils/adminUsers';
 
 const TdUserRoleSelect = ({ data, innerRef }) => {
 
-    const { toolTip } = useContext(Context);
+    const {inputData, userId, dbFieldName } = data;
+    const { toolTip, users } = useContext(Context);
     const [edit, setEdit] = useState(false);
-    const [selectData, setSelectData] = useState(data);
-
-
-
+    const [selectData, setSelectData] = useState(inputData);
+    const [loading, setLoading] = useState(false);
 
     const onDivClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         setEdit(true);
     }
-    const onButtonClickHandler = () => {
+    const onButtonClickHandler = async() => {
+        if(isStateChanged(users, userId, dbFieldName, selectData)){
+            setLoading(true);
+            await changeUserData(userId, dbFieldName, selectData);
+            setLoading(false);
+            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+        }
         setEdit(false);
         toolTip.setIsAvailable(true);
     }
@@ -25,14 +32,18 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
         setSelectData(prev => e.target.value)
     }
 
-
     useEffect(() => {
         //   destroy all event listeners tooltips
         return () => toolTip?.hoverIntentDestroy();
     }, [])
 
-
-
+    if (loading) {
+        return (
+          <td className="td-spinner">
+            <Spinner animation="border" />
+          </td>
+        )
+      }
     return (
         <td ref={innerRef}>
             {!edit
@@ -45,14 +56,8 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
                     </select>
                     <button onClick={onButtonClickHandler}>V</button>
                   </div>}
-                
-                
-                
-                
-
         </td>
     );
 };
 
-// export default TdInputText;
 export default withTooltip(TdUserRoleSelect);
