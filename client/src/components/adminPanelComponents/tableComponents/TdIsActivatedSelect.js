@@ -2,22 +2,36 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
+import { isStateChanged } from '../../../utils/isStateChanged';
+import { Spinner } from 'react-bootstrap';
+import { changeUserData } from '../../../utils/adminUsers';
 
 const TdIsActivatedSelect = ({ data, innerRef }) => {
 
-    const { toolTip } = useContext(Context);
+    const {inputData, userId, dbFieldName } = data;
+    const { toolTip, users } = useContext(Context);
     const [edit, setEdit] = useState(false);
-    const [selectData, setSelectData] = useState(data);
+    const [selectData, setSelectData] = useState(inputData);
+    const [loading, setLoading] = useState(false);
 
 
 
-
+    const strToBool = (str) => {
+        if(str === 'true')return true;
+        return false;
+    }
     const onDivClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         setEdit(true);
     }
-    const onButtonClickHandler = () => {
+    const onButtonClickHandler = async() => {
+        if(isStateChanged(users, userId, 'isActivated', strToBool(selectData))){
+            setLoading(true);
+            await changeUserData(userId, dbFieldName, selectData);
+            setLoading(false);
+            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+        }
         setEdit(false);
         toolTip.setIsAvailable(true);
     }
@@ -31,7 +45,13 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
         return () => toolTip?.hoverIntentDestroy();
     }, [])
 
-
+    if (loading) {
+        return (
+          <td className="td-spinner">
+            <Spinner animation="border" />
+          </td>
+        )
+      }
     return (
         <td ref={innerRef}>
             {!edit
@@ -48,5 +68,4 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
     );
 };
 
-// export default TdInputText;
 export default withTooltip(TdIsActivatedSelect);
