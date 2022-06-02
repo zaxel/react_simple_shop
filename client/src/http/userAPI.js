@@ -32,3 +32,9 @@ export const updateUser = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/user/' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
+export const deleteUserReq = async (id) => {
+    const deletedUser = await $authHost.delete('api/user/' , {
+        data: {id}
+      });
+    return deletedUser.data;
+}

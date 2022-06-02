@@ -2,17 +2,21 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
+import { deleteUser } from '../../../utils/adminUsers';
+import { Spinner } from 'react-bootstrap';
 
-const TdDelete = ({ innerRef }) => {
-
-    const { toolTip } = useContext(Context);
-
-
-    const onButtonClickHandler = () => {
+const TdDelete = ({data , innerRef }) => {
+    const { userId } = data;
+    const { toolTip, users } = useContext(Context);
+    const [loading, setLoading] = useState(false);
+    const onButtonClickHandler = async() => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
-        if(window.confirm('your sure you wanna permanently remove this user?')){
-            alert('user removed!');
+        if(window.confirm('are your sure you wanna permanently remove this user?')){
+            setLoading(true);
+            await deleteUser(userId);
+            setLoading(false);
+            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
         }
         toolTip.setIsAvailable(true);
     }
@@ -24,7 +28,13 @@ const TdDelete = ({ innerRef }) => {
     }, [])
 
 
-
+    if (loading) {
+        return (
+          <td className="td-spinner">
+            <Spinner animation="border" />
+          </td>
+        )
+      }
     return (
         <td ref={innerRef}>
             <button onClick={onButtonClickHandler}>X</button>
