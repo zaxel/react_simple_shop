@@ -28,6 +28,13 @@ code {
 .display-flex{
     display: flex;
 }
+button:hover {
+    opacity: .8;
+}
+
+button:active {
+  transform: translate(1px, 1px);
+}
 /*general styles end*/
 
 /*Spinner Start*/
@@ -759,6 +766,9 @@ code {
     justify-content: space-between;
     padding: 8px;
 }
+.acc-orders .search{
+    margin-bottom: 4px;
+}
 .acc-orders .pagination__cont{
     margin: 0 auto;
 }
@@ -837,6 +847,29 @@ code {
 }
 
 /*stripped table end*/
+
+/*search start*/
+.search__container{
+    padding: 2px 6px;
+    background-color: #fff;
+    width: fit-content;
+}
+.search input{
+    width: 150px;
+    height: 25px;
+    border: 1px solid #A9A9A9;
+}
+.search select{
+    height: 25px;
+    margin-left: 5px;
+    border: 1px solid #A9A9A9;
+}
+.search button{
+    height: 25px;
+    margin-left: 5px;
+    border: 1px solid #A9A9A9;
+}
+/*search end*/
 
 /*tooltip start*/
 .tool-tip {

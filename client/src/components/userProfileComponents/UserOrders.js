@@ -76,7 +76,7 @@ const UserOrders = () => {
                 </tbody>
             </table>
             <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} />
-            <PaginationCont />
+            {/* <PaginationCont /> */}
         </div>
     );
 };
