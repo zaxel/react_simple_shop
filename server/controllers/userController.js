@@ -67,8 +67,8 @@ class UserController {
 
     async getAll(req, res, next){
         try {
-            let { sortBy, sortDirection, limit, page } = req.query;
-            const users = await userService.getAll(sortBy, sortDirection, limit, page);
+            let { sortBy, sortDirection, limit, page, searchBy, searchPrase } = req.query;
+            const users = await userService.getAll(sortBy, sortDirection, limit, page, searchBy, searchPrase);
             return res.json(users);
         } catch (e) {
             next(ApiError.forbidden(e.message));

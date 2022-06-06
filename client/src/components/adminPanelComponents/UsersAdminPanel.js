@@ -107,7 +107,7 @@ const UsersAdminPanel = observer(() => {
   return (
     <div className='user-admin__main account__orders acc-orders'>
       <div>
-        <Search />
+        <Search options={['id', 'email']} store={users}/>
         <table className='stripped-table'>
           <thead>
             <tr>

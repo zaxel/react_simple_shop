@@ -5,6 +5,9 @@ const {v4: uuidv4} = require('uuid');
 const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../../dtos/user-dto');
+const searchOptions = require('../../utils/searchOptions');
+
+const { Op } = require("sequelize");
 
 class UserService {
     registration = async (email, password, role) => {
@@ -74,15 +77,24 @@ class UserService {
         return { ...tokens, user: userDto };
     }
 
-    getAll = async (sortBy, sortDirection = 'ASC', limit, page) => {
+    getAll = async (sortBy, sortDirection = 'ASC', limit, page, searchBy, searchPrase) => {
         const startPage = process.env.START_ADMIN_PAGE;
         const defaultLimit = process.env.DEFAULT_ADMIN_LIMIT;
         page = page || startPage;
         limit = limit || defaultLimit;
         let offset = page * limit - limit;
-        let users = await User.findAndCountAll({order: [
+
+        
+        console.log(56, searchOptions(searchBy, searchPrase))
+        let where = searchOptions(searchBy, searchPrase);
+
+        let users = await User.findAndCountAll({where,
+          order: [
             [sortBy, sortDirection],
          ], limit, offset });
+
+
+
         users = {
             count: users.count,
             rows: users.rows.map(user=>new UserDto(user))

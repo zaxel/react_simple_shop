@@ -1,30 +1,30 @@
-﻿import React from 'react';
+﻿import { observer } from 'mobx-react-lite';
+import React from 'react';
 import { useState } from 'react';
 
-const Search = () => {
+const Search = observer(({store, options}) => {
     const [input, setInput] = useState('');
-    const [select, setSelect] = useState('value1');
 
     const submitSearch = () => {
-        console.log(select)
+        console.log(store.searchBy)
     }
     const onSelectChange = (e) => {
-        setSelect(prev => e.target.value)
+        store.setSearchBy(e.target.value)
     }
+    const opti = options.map(op=> <option key={op} value={op}>{op}</option>)
+    opti.unshift(<option key={222} value={''}>{'search by: '}</option>)
     return (
         <div className='search'>
             <div className='search__container'>
             <input value={input} onChange={(e)=>setInput(e.currentTarget.value)} type='text' placeholder='Search'></input>
-              <select value={select} onChange={onSelectChange}>
-                  <option value={'ID'}>ID</option>
-                  <option value={'ROLE'}>ROLE</option>
-                  <option value={'email'}>ADMINISTRATOR</option>
+              <select value={store.searchBy} onChange={onSelectChange}>
+                {opti}
               </select>
               <button onClick={submitSearch}>Go</button>
             </div>
               
         </div>
     );
-};
+});
 
 export default Search;

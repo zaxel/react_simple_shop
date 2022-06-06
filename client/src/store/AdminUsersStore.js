@@ -10,8 +10,9 @@ export default class AdminUsersStore{
     _pagesTotal = 1;
     _itemsPerPage = 4;
     _updateDataTrigger = false;
+    _searchBy = '';
+
     constructor(){
-        
         makeAutoObservable(this);
     }
     
@@ -37,6 +38,9 @@ export default class AdminUsersStore{
     setUpdateDataTrigger(bool){
         this._updateDataTrigger = bool;
     }
+    setSearchBy(val){
+        this._searchBy = val;
+    }
     
     get users(){
         return this._users;
@@ -58,5 +62,8 @@ export default class AdminUsersStore{
     }
     get updateDataTrigger(){
         return this._updateDataTrigger;
+    }
+    get searchBy(){
+        return this._searchBy;
     }
 }
