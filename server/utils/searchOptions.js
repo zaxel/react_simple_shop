@@ -1,11 +1,13 @@
 ﻿const isNumeric = require('./isNumeric');
 const { Op } = require("sequelize");
-module.exports = function searchOptions(searchBy, searchPrase) {
+module.exports = function searchUsersOptions(searchBy, searchPrase) {
     let where = {};
     if (searchBy) {
-        if (isNumeric(searchPrase)) {
+        if (isNumeric(searchPrase)&&searchBy==='id') {
             where[searchBy] = searchPrase;
-        } else if (searchPrase === 'true') {
+        } else if (searchPrase === '') {
+            where = null;
+        }else if (searchPrase === 'true') {
             where[searchBy] = true;
 
         } else if (searchPrase === 'false') {

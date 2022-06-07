@@ -11,6 +11,10 @@ export default class AdminUsersStore{
     _itemsPerPage = 4;
     _updateDataTrigger = false;
     _searchBy = '';
+    _searchByLast = '';
+    _searchByPrase = '';
+    _searchByLastPrase = '';
+    _loading = true;
 
     constructor(){
         makeAutoObservable(this);
@@ -41,6 +45,18 @@ export default class AdminUsersStore{
     setSearchBy(val){
         this._searchBy = val;
     }
+    setSearchByLast(val){
+        this._searchByLast = val;
+    }
+    setSearchByPrase(val){
+        this._searchByPrase = val;
+    }
+    setSearchByLastPrase(val){
+        this._searchByLastPrase = val;
+    }
+    setLoading(bool){
+        this._loading = bool;
+    }
     
     get users(){
         return this._users;
@@ -65,5 +81,17 @@ export default class AdminUsersStore{
     }
     get searchBy(){
         return this._searchBy;
+    }
+    get searchByLast(){
+        return this._searchByLast;
+    }
+    get searchByPrase(){
+        return this._searchByPrase;
+    }
+    get searchByLastPrase(){
+        return this._searchByLastPrase;
+    }
+    get loading(){
+        return this._loading;
     }
 }

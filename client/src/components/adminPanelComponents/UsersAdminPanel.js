@@ -6,28 +6,21 @@ import TrUsers from './tableComponents/TrUsers';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
 import { Spinner } from 'react-bootstrap';
-import { getUsers } from '../../http/userAPI';
-import { fetchAllUsers } from '../../utils/adminUsers';
 import { observer } from 'mobx-react-lite';
 import Search from '../Search';
+import { fetchPage } from '../../utils/adminUsers';
 
 const UsersAdminPanel = observer(() => {
   let thRefs = useRef([]);
-  let tdRefs = useRef([]);
   const { toolTip, users } = useContext(Context);
   const [orderModalVisible, setOrderModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     (async () => {
       try {
-        await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage);
-        users.setPagesTotal(Math.ceil(users.users.count / users.itemsPerPage));
+        await fetchPage(users);
       } catch (e) {
         console.log(e)
-      } finally {
-        setLoading(false)
       }
     })()
     toolTip.setIsAvailable(true);
@@ -35,18 +28,7 @@ const UsersAdminPanel = observer(() => {
   }, [])
 
   useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage);
-        users.setPagesTotal(Math.ceil(users.users.count / users.itemsPerPage));
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setLoading(false);
-      }
-    })()
-
+    fetchPage(users);
   }, [users.activePage, users.updateDataTrigger])
 
   const ths = [
@@ -79,6 +61,9 @@ const UsersAdminPanel = observer(() => {
     setOrderModalVisible(true);
   }
 
+  const onSubmitSearch = async() => {
+    fetchPage(users);
+  }
 
   const thsWithTooltip = ths.map((el, i) => {
 
@@ -95,7 +80,7 @@ const UsersAdminPanel = observer(() => {
   })
 
 
-  if (loading) {
+  if (users.loading) {
     return (
       <div className="spinner">
         <Spinner animation="border" />
@@ -107,7 +92,7 @@ const UsersAdminPanel = observer(() => {
   return (
     <div className='user-admin__main account__orders acc-orders'>
       <div>
-        <Search options={['id', 'email']} store={users}/>
+        <Search options={['id', 'email']} store={users} onSubmitSearch={onSubmitSearch}/>
         <table className='stripped-table'>
           <thead>
             <tr>

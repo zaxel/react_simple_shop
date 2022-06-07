@@ -1,5 +1,4 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 import { fetchAllUsers } from '../../../utils/adminUsers';
@@ -8,6 +7,7 @@ const ThTooltip = ({ data, innerRef}) => {
     const { toolTip, users } = useContext(Context);
 
     const onThClickHandler = async(data) => {
+        users.setLoading(true);
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(users.sortBy === data){
@@ -16,8 +16,9 @@ const ThTooltip = ({ data, innerRef}) => {
             users.setSortDirection('ASC');
         }
         users.setSortBy(data);
-        await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage);
+        await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage, users.searchBy, users.searchByPrase);
         await users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
+        users.setLoading(false);
         toolTip.setIsAvailable(true);
     }
 
