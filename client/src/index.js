@@ -9,6 +9,7 @@ import HistoryStore from './store/HistoryStore';
 import CartStore from './store/CartStore';
 import ToolTipStore from './store/ToolTipStore';
 import AdminUsersStore from './store/AdminUsersStore';
+import AdminOrdersStore from './store/AdminOrdersStore';
 
 export const Context = createContext(null);
 
@@ -20,6 +21,7 @@ ReactDOM.render(
       cart: new CartStore(),
       toolTip: new ToolTipStore(),
       users: new AdminUsersStore(),
+      orders: new AdminOrdersStore(),
     }}>
     <App />
   </Context.Provider>,
