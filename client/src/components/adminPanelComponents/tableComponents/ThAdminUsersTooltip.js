@@ -3,7 +3,7 @@ import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 import { fetchAllUsers } from '../../../utils/adminUsers';
 
-const ThTooltip = ({ data, innerRef}) => {
+const ThAdminUsersTooltip = ({ data, innerRef}) => {
     const { toolTip, users } = useContext(Context);
 
     const onThClickHandler = async(data) => {
@@ -38,4 +38,4 @@ const ThTooltip = ({ data, innerRef}) => {
     );
 };
 
-export default withTooltip(ThTooltip);
+export default withTooltip(ThAdminUsersTooltip);

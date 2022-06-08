@@ -4,8 +4,8 @@ import { Context } from '../..';
 import { v4 as uuidv4 } from 'uuid';
 import ThTable from '../strippedTablesComponents/ThTable';
 import TrTable from '../strippedTablesComponents/TrTable';
-import TrOrders from '../adminPanelComponents/tableComponents/TrOrders';
-import ThTooltip from '../adminPanelComponents/tableComponents/ThTooltip';
+import TrUsersOrders from '../adminPanelComponents/tableComponents/TrUsersOrders';
+import ThAdminUsersTooltip from '../adminPanelComponents/tableComponents/ThAdminUsersTooltip';
 
 const AdminOrdersModal = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);
@@ -52,7 +52,7 @@ const AdminOrdersModal = ({ show, onHide }) => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = {i, myRefs: thRefs, text: 'sort'};
-        return <ThTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        return <ThAdminUsersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
 
@@ -60,7 +60,7 @@ const AdminOrdersModal = ({ show, onHide }) => {
         const myKey = uuidv4();
         let ref = (el) => (tdRefs.current[i] = el);
         let toolTipInfo = {i, myRefs: tdRefs, text: 'click for detailed order info'};
-        return <TrOrders toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
+        return <TrUsersOrders toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
     })
 
 

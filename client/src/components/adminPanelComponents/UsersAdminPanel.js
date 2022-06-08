@@ -1,7 +1,7 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
 import AdminOrdersModal from '../modalComponents/AdminOrdersModal';
-import ThTooltip from './tableComponents/ThTooltip';
+import ThAdminUsersTooltip from './tableComponents/ThAdminUsersTooltip';
 import TrUsers from './tableComponents/TrUsers';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
@@ -70,7 +70,7 @@ const UsersAdminPanel = observer(() => {
     const myKey = uuidv4();
     let ref = (el) => (thRefs.current[i] = el);
     let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-    return <ThTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+    return <ThAdminUsersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
   })
 
   // const trs = tds.map((el, i) => {
