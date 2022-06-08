@@ -17,8 +17,8 @@ import UserPayment from "./components/userProfileComponents/UserPayment";
 import UserOrders from "./components/userProfileComponents/UserOrders";
 import UserAccountRouter from "./components/userProfileComponents/UserAccountRouter";
 
-import OrdersAdminPanel from "./components/adminPanelComponents/OrdersAdminPanel";
-import UsersAdminPanel from "./components/adminPanelComponents/UsersAdminPanel";
+import OrdersAdminPanel from "./components/adminPanelComponents/orders/OrdersAdminPanel";
+import UsersAdminPanel from "./components/adminPanelComponents/users/UsersAdminPanel";
 import DevicesAdminPanel from "./components/adminPanelComponents/DevicesAdminPanel";
 import TypesAdminPanel from "./components/adminPanelComponents/TypesAdminPanel";
 import BrandsAdminPanel from "./components/adminPanelComponents/BrandsAdminPanel";

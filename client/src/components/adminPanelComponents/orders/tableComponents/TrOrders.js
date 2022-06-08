@@ -1,13 +1,16 @@
 ﻿import React, { useRef } from 'react';
-import TdDelete from './TdDelete';
-import TdInputNumber from './TdInputNumber';
-import TdIsActivatedSelect from './TdIsActivatedSelect';
-import TdModalLink from './TdModalLink';
-import TdUserRoleSelect from './TdUserRoleSelect';
-import { adminPageFormatDate } from '../../../utils/formatDate';
+// import TdDelete from '../../users/tableComponents/TdDelete';
+// import TdInputNumber from '../../users/tableComponents/TdInputNumber';
+// import TdIsActivatedSelect from '../../users/tableComponents/TdIsActivatedSelect';
+// import TdModalLink from '../../users/tableComponents/TdModalLink';
+// import TdUserRoleSelect from '../../users/tableComponents/TdUserRoleSelect';
+// import { adminPageFormatDate } from '../../../utils/formatDate';
+import { adminPageFormatDate } from '../../../../utils/formatDate';
+
 
 
 const TrOrders = ({ data }) => {
+    console.log(data)
     let tdRefs = useRef([]);
 
     let ref0 = (el) => (tdRefs.current[0] = el);

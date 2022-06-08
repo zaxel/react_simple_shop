@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useEffect } from 'react';
-import { Context } from '../../..';
+import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
-import withTooltip from '../../../hocs/withTooltip/withTooltip';
+import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 
 
 const TrUsersOrders = ({ data, onRowClickHandler, innerRef}) => {

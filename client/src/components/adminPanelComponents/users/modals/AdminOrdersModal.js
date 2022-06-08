@@ -1,11 +1,9 @@
 ﻿import React, {useContext, useEffect, useRef} from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { Context } from '../..';
+import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
-import ThTable from '../strippedTablesComponents/ThTable';
-import TrTable from '../strippedTablesComponents/TrTable';
-import TrUsersOrders from '../adminPanelComponents/tableComponents/TrUsersOrders';
-import ThAdminUsersTooltip from '../adminPanelComponents/tableComponents/ThAdminUsersTooltip';
+import TrUsersOrders from '../tableComponents/TrUsersOrders';
+import ThAdminUsersTooltip from '../tableComponents/ThAdminUsersTooltip';
 
 const AdminOrdersModal = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);

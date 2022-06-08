@@ -1,14 +1,16 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
-import PaginationCont from '../PaginationCont';
-import AdminOrdersModal from '../modalComponents/AdminOrdersModal';
-import ThAdminUsersTooltip from './tableComponents/ThAdminUsersTooltip';
+import PaginationCont from '../../PaginationCont';
+import AdminOrdersModal from '../users/modals/AdminOrdersModal';
+import ThAdminUsersTooltip from '../users/tableComponents/ThAdminUsersTooltip';
+import ThAdminOrdersTooltip from './tableComponents/ThAdminOrdersTooltip';
+// import TrOrders from './tableComponents/TrOrders';
 import TrOrders from './tableComponents/TrOrders';
 import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../..';
+import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
-import Search from '../Search';
-import { fetchPage } from '../../utils/adminUsers';
+import Search from '../../Search';
+import { fetchPage } from '../../../utils/adminUsers';
 
 const OrdersAdminPanel = observer(() => {
     let thRefs = useRef([]);
@@ -69,7 +71,7 @@ const OrdersAdminPanel = observer(() => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-        return <ThAdminUsersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        return <ThAdminOrdersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
     const trs = tds.map((el, i) => {

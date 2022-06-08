@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Route } from "react-router-dom";
 import { adminNavRoutes } from '../../routes';
-import UsersAdminPanel from './UsersAdminPanel';
+import UsersAdminPanel from './users/UsersAdminPanel';
 
 const AdminPanelRouter = () => {
     const userAdminRouts = adminNavRoutes.map(({ path, Component }) => {
