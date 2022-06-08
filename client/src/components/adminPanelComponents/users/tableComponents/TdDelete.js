@@ -1,8 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../../..';
-import withTooltip from '../../../hocs/withTooltip/withTooltip';
-import { deleteUser } from '../../../utils/adminUsers';
+import { Context } from '../../../..';
+import withTooltip from '../../../../hocs/withTooltip/withTooltip';
+import { deleteUser } from '../../../../utils/adminUsers';
 import { Spinner } from 'react-bootstrap';
 
 const TdDelete = ({data , innerRef }) => {

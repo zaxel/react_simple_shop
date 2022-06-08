@@ -2,7 +2,8 @@
 import PaginationCont from '../../PaginationCont';
 import AdminOrdersModal from './modals/AdminOrdersModal';
 import ThAdminUsersTooltip from './tableComponents/ThAdminUsersTooltip';
-import TrUsers from '../tableComponents/TrUsers';
+// import TrUsers from '../tableComponents/TrUsers';
+import TrUsers from './tableComponents/TrUsers';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';

@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useContext, useState } from 'react';
-import { Context } from '../../..';
-import withTooltip from '../../../hocs/withTooltip/withTooltip';
-import { isStateChanged } from '../../../utils/isStateChanged';
+import { Context } from '../../../..';
+import withTooltip from '../../../../hocs/withTooltip/withTooltip';
+import { isStateChanged } from '../../../../utils/isStateChanged';
 import { Spinner } from 'react-bootstrap';
-import { changeUserData } from '../../../utils/adminUsers';
+import { changeUserData } from '../../../../utils/adminUsers';
 
 const TdUserRoleSelect = ({ data, innerRef }) => {
 
