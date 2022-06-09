@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useState } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { isStateChanged } from '../../../../utils/isStateChanged';
+import { isUserStateChanged } from '../../../../utils/isStateChanged';
 import { Spinner } from 'react-bootstrap';
 import { changeUserData } from '../../../../utils/adminUsers';
 
@@ -19,7 +19,7 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
         setEdit(true);
     }
     const onButtonClickHandler = async() => {
-        if(isStateChanged(users, userId, dbFieldName, selectData)){
+        if(isUserStateChanged(users, userId, dbFieldName, selectData)){
             setLoading(true);
             await changeUserData(userId, dbFieldName, selectData);
             setLoading(false);

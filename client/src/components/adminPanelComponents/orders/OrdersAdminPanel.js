@@ -11,10 +11,12 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
 import { fetchPage } from '../../../utils/adminUsers';
+import OrderDetail from './modals/OrderDetail';
 
 const OrdersAdminPanel = observer(() => {
     let thRefs = useRef([]);
     const { toolTip, orders } = useContext(Context);
+    const [orderModalVisible, setOrderModalVisible] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -55,11 +57,11 @@ const OrdersAdminPanel = observer(() => {
 
     const onModalHideHandler = () => {
         toolTip.setIsAvailable(true);
-        // setOrderModalVisible(false);
+        setOrderModalVisible(false);
     }
 
     const onOrderClickHandler = () => {
-        // setOrderModalVisible(true);
+        setOrderModalVisible(true);
     }
 
     const onSubmitSearch = async () => {
@@ -104,6 +106,7 @@ const OrdersAdminPanel = observer(() => {
                         {trs}
                     </tbody>
                 </table>
+                <OrderDetail show={orderModalVisible} onHide={onModalHideHandler} />
             </div>
 
             <PaginationCont currentStore={orders} />

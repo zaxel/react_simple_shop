@@ -1,14 +1,14 @@
-﻿import React, { useEffect, useContext, useRef, useState } from 'react';
+﻿import React, { useEffect, useContext, useState } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { changeUserData } from '../../../../utils/adminUsers';
+import { changeOrderData } from '../../../../utils/adminOrders';
 import { Spinner } from 'react-bootstrap';
-import { isUserStateChanged } from '../../../../utils/isStateChanged';
+import { isOrderStateChanged } from '../../../../utils/isStateChanged';
 
 const TdInputText = ({ data, innerRef }) => {
 
-    const {inputData, userId, dbFieldName } = data;
-    const { toolTip, users } = useContext(Context);
+    const {inputData, orderId, dbFieldName } = data;
+    const { toolTip, orders } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
@@ -21,11 +21,11 @@ const TdInputText = ({ data, innerRef }) => {
     
 
     const onButtonClickHandler = async() => {
-        if(isUserStateChanged(users, userId, dbFieldName, input)){
+        if(isOrderStateChanged(orders, orderId, dbFieldName, input)){
             setLoading(true);
-            await changeUserData(userId, dbFieldName, input);
+            await changeOrderData(orderId, dbFieldName, input);
             setLoading(false);
-            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+            orders.setUpdateDataTrigger(prev=>!orders.updateDataTrigger());
         }
         setEdit(false);
         toolTip.setIsAvailable(true);

@@ -4,7 +4,7 @@ import { Context } from '../../..';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 import { changeUserData } from '../../../utils/adminUsers';
 import { Spinner } from 'react-bootstrap';
-import { isStateChanged } from '../../../utils/isStateChanged';
+import { isUserStateChanged } from '../../../utils/isStateChanged';
 
 const TdInputNumber = ({ data, innerRef }) => {
 
@@ -22,7 +22,7 @@ const TdInputNumber = ({ data, innerRef }) => {
     
 
     const onButtonClickHandler = async() => {
-        if(isStateChanged(users, userId, dbFieldName, input)){
+        if(isUserStateChanged(users, userId, dbFieldName, input)){
             setLoading(true);
             await changeUserData(userId, dbFieldName, input);
             setLoading(false);

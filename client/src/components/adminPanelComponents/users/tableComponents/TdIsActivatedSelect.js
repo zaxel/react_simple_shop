@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef, useState } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { isStateChanged } from '../../../../utils/isStateChanged';
+import { isUserStateChanged } from '../../../../utils/isStateChanged';
 import { Spinner } from 'react-bootstrap';
 import { changeUserData } from '../../../../utils/adminUsers';
 
@@ -25,7 +25,7 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
         setEdit(true);
     }
     const onButtonClickHandler = async() => {
-        if(isStateChanged(users, userId, 'isActivated', strToBool(selectData))){
+        if(isUserStateChanged(users, userId, 'isActivated', strToBool(selectData))){
             setLoading(true);
             await changeUserData(userId, dbFieldName, selectData);
             setLoading(false);
