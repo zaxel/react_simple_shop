@@ -13,6 +13,11 @@ const NavBar = observer(() => {
     const { cart, user } = useContext(Context);
     const navigate = useNavigate();
 
+    const onLogoutPressed = () => {
+        logout(cart, user);
+        navigate(LOGIN_ROUTE);
+    }
+
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
             <div className="container-fluid">
@@ -50,7 +55,7 @@ const NavBar = observer(() => {
                         </li>
                         
                         <li className="nav-item">
-                            <button onClick={user.isAuth ? logout.bind(this, cart, user) : () => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? 'Logout' :  'Sigh up'}</button>
+                            <button onClick={user.isAuth ? onLogoutPressed : () => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? 'Logout' :  'Sigh up'}</button>
                         </li>
                     </ul> 
 
