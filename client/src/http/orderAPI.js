@@ -8,11 +8,10 @@ export const createOrder = async (order, basketId) => {
 }
 
 export const getOrders = async (sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
-    // const {data} = await $authHost.get('api/user/' , {params:{
-    //     sortBy, sortDirection, limit, page, searchBy, searchPrase
-    // }});
-    // return data;
-    console.log('getOrders')
+    const {data} = await $authHost.get('api/order/' , {params:{
+        sortBy, sortDirection, limit, page, searchBy, searchPrase
+    }});
+    return data;
 }
 export const updateOrder = async (id, dbFieldName, data) => {
     // const updatedData = await $authHost.put('api/user/' , {id, [dbFieldName]: data});

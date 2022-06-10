@@ -10,7 +10,7 @@ import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
-import { fetchPage } from '../../../utils/adminUsers';
+import { fetchPage } from '../../../utils/adminOrders';
 import OrderDetail from './modals/OrderDetail';
 
 const OrdersAdminPanel = observer(() => {
@@ -21,7 +21,7 @@ const OrdersAdminPanel = observer(() => {
     useEffect(() => {
         (async () => {
             try {
-                // await fetchPage(orders);
+                await fetchPage(orders);
             } catch (e) {
                 console.log(e)
             }
@@ -31,7 +31,7 @@ const OrdersAdminPanel = observer(() => {
     }, [])
 
     useEffect(() => {
-        // fetchPage(orders);
+        fetchPage(orders);
     }, [orders.activePage, orders.updateDataTrigger])
 
     const ths = [
@@ -76,8 +76,8 @@ const OrdersAdminPanel = observer(() => {
         return <ThAdminOrdersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
-    const trs = tds.map((el, i) => {
-    // const trs = orders.orders?.rows?.map((el, i) => {
+    // const trs = tds.map((el, i) => {
+    const trs = orders.orders?.rows?.map((el, i) => {
         const row = { ...el, onOrderClickHandler };
         return <TrOrders key={el.id} data={row} />
     })

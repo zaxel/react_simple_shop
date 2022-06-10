@@ -23,7 +23,7 @@ const TrOrders = ({ data }) => {
         <tr >
             <td>{data.id}</td>
             <td>{adminPageFormatDate(data.createdAt)}</td>
-            <td>{data.ordered}</td>
+            <td>{data.amountOrdered}</td>
             <td>{data.userId}</td>
             <td>{data.email}</td>
             <TdModalLink toolTipInfo={toolTipInfo1} innerRef={ref1} data={data.onOrderClickHandler}/>
