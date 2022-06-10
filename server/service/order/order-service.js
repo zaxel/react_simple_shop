@@ -1,6 +1,7 @@
 ﻿const { Order, OrderDevice, BasketDevice, User } = require('../../models/models');
 const { Op } = require("sequelize");
 const OrderDto = require('../../dtos/order-dto');
+const searchOrdersOptions = require('../../utils/searchOptions');
 
 class OrderService {
     create = async (order, basketId, id) => {
@@ -21,8 +22,8 @@ class OrderService {
         page = page || startPage;
         limit = limit || defaultLimit;
         let offset = page * limit - limit;
-        // let where = searchUsersOptions(searchBy, searchPrase);
-        let where = null;
+        let where = searchOrdersOptions(searchBy, searchPrase);
+        // let where = null;
 
         let ordersGeneral = await Order.findAndCountAll({
             where,

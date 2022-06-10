@@ -65,7 +65,7 @@ const OrdersAdminPanel = observer(() => {
     }
 
     const onSubmitSearch = async () => {
-        // fetchPage(orders);
+        fetchPage(orders);
     }
 
     const thsWithTooltip = ths.map((el, i) => {
