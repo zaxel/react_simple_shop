@@ -16,6 +16,15 @@ class orderController {
             next(ApiError.badRequest(e.message + ': could not create order'));
         }
     }
+    async getAll(req, res, next){
+        try {
+            let { sortBy, sortDirection, limit, page, searchBy, searchPrase } = req.query;
+            const orders = await orderService.getAll(sortBy, sortDirection, limit, page, searchBy, searchPrase);
+            return res.json(orders);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
 }
 
 module.exports = new orderController();
