@@ -25,7 +25,7 @@ const TrOrders = ({ data }) => {
             <td>{adminPageFormatDate(data.createdAt)}</td>
             <td>{data.ordered}</td>
             <td>{data.userId}</td>
-            <TdInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={{inputData: data.email, orderId: data.id, dbFieldName: 'email'}}/>
+            <td>{data.email}</td>
             <TdModalLink toolTipInfo={toolTipInfo1} innerRef={ref1} data={data.onOrderClickHandler}/>
             <TdDelete toolTipInfo={toolTipInfo2} innerRef={ref2} data={{orderId: data.id}}/>
         </tr>
