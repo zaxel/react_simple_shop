@@ -52,6 +52,13 @@ class OrderService {
         }
         return orders;
     }
+
+    delete = async (id) => {
+        const updatedData = await Order.destroy({
+            where: { id }
+          });
+        return {updatedData};
+    }
 }
 
 module.exports = new OrderService();

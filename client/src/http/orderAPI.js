@@ -19,9 +19,9 @@ export const updateOrder = async (id, dbFieldName, data) => {
     console.log('updateOrder')
 }
 export const deleteOrderReq = async (id) => {
-    // const deletedUser = await $authHost.delete('api/user/' , {
-    //     data: {id}
-    //   });
-    // return deletedUser.data;
-    console.log('deleteOrderReq')
+    
+    const deletedOrder = await $authHost.delete('api/order/' , {
+        data: {id}
+      });
+    return deletedOrder.data;
 }
