@@ -83,19 +83,19 @@ const OrdersAdminPanel = observer(() => {
     })
 
 
-    // if (orders.loading) {
-    //     return (
-    //         <div className="spinner">
-    //             <Spinner animation="border" />
-    //         </div>
-    //     )
-    // }
+    if (orders.loading) {
+        return (
+            <div className="spinner">
+                <Spinner animation="border" />
+            </div>
+        )
+    }
 
 
     return (
         <div className='user-admin__main account__orders acc-orders'>
             <div>
-                <Search options={['id', 'email']} store={orders} onSubmitSearch={onSubmitSearch} />
+                <Search options={[{id: 'order id'}, {userId : 'user id'}]} store={orders} onSubmitSearch={onSubmitSearch} />
                 <table className='stripped-table'>
                     <thead>
                         <tr>

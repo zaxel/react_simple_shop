@@ -17,7 +17,11 @@ const Search = observer(({store, options, onSubmitSearch}) => {
         onSubmitSearch();
         store.setActivePage(1);
     }
-    const opti = options.map(op=> <option key={op} value={op}>{op}</option>)
+
+    const opti = options.map(op=> {
+        const key = Object.keys(op)[0]
+        return <option key={key} value={key}>{op[key]}</option>
+    })
     opti.unshift(<option key={222} value={''}>{'search by: '}</option>)
     return (
         <div className='search'>
