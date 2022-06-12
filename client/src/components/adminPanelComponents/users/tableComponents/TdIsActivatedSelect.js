@@ -7,6 +7,9 @@ import { changeUserData } from '../../../../utils/adminUsers';
 
 const TdIsActivatedSelect = ({ data, innerRef }) => {
 
+    const selectRef = useRef(null);
+    const buttonRef = useRef(null);
+
     const {inputData, userId, dbFieldName } = data;
     const { toolTip, users } = useContext(Context);
     const [edit, setEdit] = useState(false);
@@ -23,6 +26,18 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         setEdit(true);
+    }
+    const onSelectBlurHandler = (e) => {
+        if (!(e.relatedTarget === buttonRef.current)) {
+            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+            setEdit(false);
+            toolTip.setIsAvailable(true);
+        }
+    }
+    const onButtonBlurHandler = (e) => {
+        users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+        setEdit(false);
+        toolTip.setIsAvailable(true);
     }
     const onButtonClickHandler = async() => {
         if(isUserStateChanged(users, userId, 'isActivated', strToBool(selectData))){
@@ -56,11 +71,11 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{selectData === 'true' ? 'activated' : 'not activated'}</div>
                 : <div className='display-flex'>
-                    <select value={selectData} onChange={onSelectChange}>
+                    <select autoFocus ref={selectRef} value={selectData} onChange={onSelectChange} onBlur={onSelectBlurHandler}>
                         <option value={'true'}>activated</option>
                         <option value={'false'}>not activated</option>
                     </select>
-                    <button onClick={onButtonClickHandler}>V</button>
+                    <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                   </div>}
                 
         </td>

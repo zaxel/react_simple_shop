@@ -67,7 +67,7 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{selectData}</div>
                 : <div className='display-flex'>
-                    <select ref={selectRef} value={selectData} onChange={onSelectChange} onBlur={onSelectBlurHandler}>
+                    <select autoFocus ref={selectRef} value={selectData} onChange={onSelectChange} onBlur={onSelectBlurHandler}>
                         <option value="ADMIN">ADMIN</option>
                         <option value="MODERATOR">MODERATOR</option>
                         <option value="USER">USER</option>
