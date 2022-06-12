@@ -7,7 +7,11 @@ import { isUserStateChanged } from '../../../../utils/isStateChanged';
 
 const TdInputText = ({ data, innerRef }) => {
 
-    const {inputData, userId, dbFieldName } = data;
+    const inputRef = useRef(null);
+    const buttonRef = useRef(null);
+    const containerRef = useRef(null);
+
+    const { inputData, userId, dbFieldName } = data;
     const { toolTip, users } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
@@ -18,18 +22,30 @@ const TdInputText = ({ data, innerRef }) => {
         toolTip.setIsAvailable(false);
         setEdit(true);
     }
-    
 
-    const onButtonClickHandler = async() => {
-        if(isUserStateChanged(users, userId, dbFieldName, input)){
+    const onInputBlurHandler = (e) => {
+        if (!(e.relatedTarget === buttonRef.current)) {
+            setEdit(false);
+            toolTip.setIsAvailable(true);
+        }
+    }
+
+    const onButtonBlurHandler = (e) => {
+        setEdit(false);
+        toolTip.setIsAvailable(true);
+    }
+
+    const onButtonClickHandler = async () => {
+        if (isUserStateChanged(users, userId, dbFieldName, input)) {
             setLoading(true);
             await changeUserData(userId, dbFieldName, input);
             setLoading(false);
-            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+            users.setUpdateDataTrigger(prev => !users.updateDataTrigger());
         }
         setEdit(false);
         toolTip.setIsAvailable(true);
     }
+
     const onInputChange = (e) => {
         setInput(prev => e.target.value)
     }
@@ -41,23 +57,21 @@ const TdInputText = ({ data, innerRef }) => {
 
     if (loading) {
         return (
-          <td className="td-spinner">
-            <Spinner animation="border" />
-          </td>
+            <td className="td-spinner">
+                <Spinner animation="border" />
+            </td>
         )
-      }
+    }
     return (
         <td ref={innerRef}>
-            {!edit 
-                ? <div className='td-active' onClick={onDivClickHandler}>{input}</div> 
+            {!edit
+                ? <div className='td-active' onClick={onDivClickHandler}>{input}</div>
                 : <div className='display-flex'>
-                    <input type='text' value={input} onChange={onInputChange} />
-                    <button onClick={onButtonClickHandler}>V</button>
-                  </div>}
-
+                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
+                    <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
+                </div>}
         </td>
     );
 };
 
-// export default TdInputText;
 export default withTooltip(TdInputText);
