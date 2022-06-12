@@ -5,6 +5,7 @@ import CartStore from "./CartStore";
 import ToolTipStore from "./ToolTipStore";
 import AdminUsersStore from "./AdminUsersStore";
 import AdminOrdersStore from "./AdminOrdersStore";
+import AdminDevicesStore from "./AdminDevicesStore";
 
 export default class RootStore {
     constructor() {
@@ -15,5 +16,6 @@ export default class RootStore {
       this.toolTip = new ToolTipStore(this);
       this.users = new AdminUsersStore(this);
       this.orders = new AdminOrdersStore(this);
+      this.adminDevices = new AdminDevicesStore(this);
     }
 } 
