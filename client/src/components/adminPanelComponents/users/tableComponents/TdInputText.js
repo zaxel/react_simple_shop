@@ -9,7 +9,6 @@ const TdInputText = ({ data, innerRef }) => {
 
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
-    const containerRef = useRef(null);
 
     const { inputData, userId, dbFieldName } = data;
     const { toolTip, users } = useContext(Context);
