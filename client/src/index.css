@@ -845,6 +845,33 @@ button:active {
     border: 1px solid cadetblue;
     margin-left: 1px;
 }
+.stripped-table__device-img{
+    width: 16px;
+    height: 16px;
+}
+.stripped-table__input-file{
+    max-width: 200px;
+}
+.stripped-table__input-file button{
+    height: 15px;
+}
+.device-img__modal-body{
+    text-align: center;
+}
+.device-img__modal{
+    width: 30vw;
+    height: 30vw;
+}
+.stripped-table td .stripped-table__button-edit,
+.stripped-table td .stripped-table__button-confirm{
+    width: auto;
+    height: auto;
+}
+.stripped-table td .stripped-table__button-edit,
+.stripped-table td .stripped-table__button-delete{
+    margin-left: 6px;
+}
+
 
 /*stripped table end*/
 
