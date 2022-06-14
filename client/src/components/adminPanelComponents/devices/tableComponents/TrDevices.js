@@ -3,6 +3,7 @@ import TdNameInputText from './TdNameInputText';
 import TdPriceInputNumber from './TdPriceInputNumber';
 import TdRateInputNumber from './TdRateInputNumber';
 import TdImgInputFile from './TdImgInputFile';
+import { adminPageFormatDate } from '../../../../utils/formatDate';
 
 const TrDevices = ({ data }) => {
     let tdRefs = useRef([]);
@@ -30,6 +31,8 @@ const TrDevices = ({ data }) => {
             <TdPriceInputNumber toolTipInfo={toolTipInfo1} innerRef={ref1} data={{inputData: data.price, deviceId: data.id, dbFieldName: 'price'}}/>
             <TdRateInputNumber toolTipInfo={toolTipInfo2} innerRef={ref2} data={{inputData: data.rate, deviceId: data.id, dbFieldName: 'rate'}}/>
             <TdImgInputFile toolTipInfo={toolTipInfo3} innerRef={ref3} data={{inputData: data.image, deviceId: data.id, dbFieldName: 'img'}}/>
+            <td>{adminPageFormatDate(data.createdAt)}</td>
+
             {/* <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={{inputData: data.role, userId: data.id, dbFieldName: 'role'}}/> */}
             {/* <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={{inputData: data.isActivated.toString(), userId: data.id, dbFieldName: 'is_activated'}}/> */}
             {/* <td>{adminPageFormatDate(data.createdAt)}</td> */}
