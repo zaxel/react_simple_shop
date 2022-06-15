@@ -1,4 +1,4 @@
-﻿import { getDevices, updateDevice, deleteDeviceReq } from "../http/deviceAPI";
+﻿import { getDevices, updateDevice, deleteDeviceReq, fetchTypes } from "../http/deviceAPI";
 
 export const fetchAllDevices = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   console.log('fetch all devices admin device')  
@@ -33,4 +33,13 @@ export const fetchPage = async(adminDevicesStore) => {
     // } finally {
     //     adminDevicesStore.setLoading(false);
     // }
+  }
+export const fetchSetTypes = async(adminDevicesStore) => {
+  try {
+      const types = await fetchTypes();
+      const data = await adminDevicesStore.setTypes(types);
+      return types;
+    } catch (e) {
+      console.log(e)
+    } 
   }

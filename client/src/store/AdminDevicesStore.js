@@ -15,6 +15,8 @@ export default class AdminDevicesStore{
     _searchByPrase = '';
     _searchByLastPrase = '';
     _loading = true;
+    _types = [];
+    _brands = [];
 
     constructor(){
         makeAutoObservable(this);
@@ -57,6 +59,12 @@ export default class AdminDevicesStore{
     setLoading(bool){
         this._loading = bool;
     }
+    setTypes(types){
+        this._types = types;
+    }
+    setBrands(brands){
+        this._brands = brands;
+    }
     
     get devices(){
         return this._devices;
@@ -93,5 +101,11 @@ export default class AdminDevicesStore{
     }
     get loading(){
         return this._loading;
+    }
+    get types(){
+        return this._types;
+    }
+    get brands(){
+        return this._brands;
     }
 }
