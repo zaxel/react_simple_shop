@@ -4,7 +4,6 @@ import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
 import { Spinner } from 'react-bootstrap';
 import { changeDeviceData } from '../../../../utils/adminDevices';
-import { fetchSetTypes } from '../../../../utils/adminDevices';
 import { observer } from 'mobx-react-lite';
 
 const TdTypeSelect = observer(({ data, innerRef }) => {
@@ -63,7 +62,6 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
     }
 
     useEffect(() => {
-        // setOptionsName();
         setLoading(true);
         //   destroy all event listeners tooltips
         return () => toolTip?.hoverIntentDestroy();

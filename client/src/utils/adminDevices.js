@@ -2,8 +2,6 @@
 
 export const fetchAllDevices = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   const  [brandId, typeId, id, startPage, defaultLimit] = [null, null, null, null, null]; 
-  // brandId, typeId, limit, page, id, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase
-  
   const fetchedServerDevices = await getDevices( brandId, typeId, limit, page, id, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase); 
     if(fetchedServerDevices.count === 0) alert('Nothing found!')
     await currentStore.setDevices(fetchedServerDevices);

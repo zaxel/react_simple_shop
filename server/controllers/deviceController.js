@@ -61,7 +61,6 @@ class DeviceController {
 
     async update(req, res, next){
         try {
-            console.log(88)
             const errors = validationResult(req);
             if(!errors.isEmpty()){
                 return next(ApiError.badRequest('validation error: ', errors.array()));

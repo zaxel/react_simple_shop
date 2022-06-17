@@ -53,34 +53,7 @@ class DeviceService {
         let bulkItems = await Promise.all(bulkPromises);
         return data;
     }
-    _getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit) => {
-        console.log(id, brandId, typeId, limit, page, startPage, defaultLimit)
-        
-        page = page || startPage;
-        limit = limit || defaultLimit;
-        let offset = page * limit - limit;
-        let devices;
-        if (id) {
-            devices = await Device.findAndCountAll({ where: { id: { [Op.or]: id } }, limit, offset });
-            return devices;
-        }
-        if (!brandId && !typeId) {
-            devices = await Device.findAndCountAll({ limit, offset });
-        }
-        if (brandId && !typeId) {
-            devices = await Device.findAndCountAll({ where: { brandId }, limit, offset });
-
-        }
-        if (!brandId && typeId) {
-            devices = await Device.findAndCountAll({ where: { typeId }, limit, offset });
-        }
-        if (brandId && typeId) {
-            devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
-        }
-        return devices;
-    }
     getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
-        console.log(99, sortBy)
         page = page || startPage;
         limit = limit || defaultLimit;
         let offset = page * limit - limit;
