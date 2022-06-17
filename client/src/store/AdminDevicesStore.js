@@ -8,7 +8,7 @@ export default class AdminDevicesStore{
     _sortRevers = false;
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 4;
+    _itemsPerPage = 12;
     _updateDataTrigger = false;
     _searchBy = '';
     _searchByLast = '';
@@ -22,7 +22,7 @@ export default class AdminDevicesStore{
         makeAutoObservable(this);
     }
     
-    setUsers(devices){
+    setDevices(devices){
         this._devices = devices;
     }
     setSortDirection(direction){

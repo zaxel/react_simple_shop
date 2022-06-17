@@ -42,14 +42,14 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
 
     const onButtonClickHandler = async() => {
 
-        // if(isDeviceStateChanged(adminDevices, deviceId, dbFieldName, selectData)){
-        //     setLoading(true);
-        //     await changeDeviceData(deviceId, dbFieldName, selectData);
-        //     setLoading(false);
-        //     adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
-        // }
-        // setEdit(false);
-        // toolTip.setIsAvailable(true);
+        if(isDeviceStateChanged(adminDevices, deviceId, dbFieldName, selectData)){
+            setLoading(true);
+            await changeDeviceData(deviceId, dbFieldName, selectData);
+            setLoading(false);
+            adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
+        }
+        setEdit(false);
+        toolTip.setIsAvailable(true);
     }
     const onSelectChange = (e) => {
         setSelectData(prev => e.target.value)
@@ -72,7 +72,6 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
     useEffect(()=>{
         if(adminDevices.types.length){
         changeInit();
-
         setLoading(false);
         }
     }, [adminDevices.types])

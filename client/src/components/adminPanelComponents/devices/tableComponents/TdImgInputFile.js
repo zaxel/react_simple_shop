@@ -60,7 +60,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
         <td>
             {!edit
                 ? <div className='td-active' >
-                    <img className='stripped-table__device-img' onClick={onImgClickHandler} src={inputData} />
+                    <img className='stripped-table__device-img' onClick={onImgClickHandler} src={process.env.REACT_APP_API_URL + inputData} />
                     <button className='td-active stripped-table__button-edit' onClick={onEditClickHandler}>edit</button>
                     <button className='td-active stripped-table__button-delete' onClick={onDeleteClickHandler}>X</button>
                 </div>
@@ -68,7 +68,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
                     <input className='stripped-table__input-file' type='file' ref={fileRef} onChange={onInputChange} />
                     <button className='stripped-table__button-confirm' ref={confirmRef} onClick={onConfirmClickHandler} onBlur={onConfirmBlurHandler}>update</button>
                 </div>}
-            <AdminDeviceImgModal src={inputData} show={showModalImg} onHide={() => setShowModalImg(false)} />
+            <AdminDeviceImgModal src={process.env.REACT_APP_API_URL + inputData} show={showModalImg} onHide={() => setShowModalImg(false)} />
         </td>
     );
 };

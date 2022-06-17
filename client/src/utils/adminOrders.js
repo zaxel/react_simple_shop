@@ -2,7 +2,6 @@
 
 export const fetchAllOrders = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
     const fetchedServerOrders = await getOrders( sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
-    console.log(fetchedServerOrders)
     if(fetchedServerOrders.count === 0) alert('Nothing found!')
     await currentStore.setOrders(fetchedServerOrders);
 }

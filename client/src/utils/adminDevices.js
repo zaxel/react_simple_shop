@@ -1,18 +1,18 @@
-﻿import { getDevices, updateDevice, deleteDeviceReq, fetchTypes } from "../http/deviceAPI";
+﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes } from "../http/deviceAPI";
 
 export const fetchAllDevices = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
-  console.log('fetch all devices admin device')  
-  return {}
-  // const fetchedServerDevices = await getDevices( sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
-    // if(fetchedServerDevices.count === 0) alert('Nothing found!')
-    // await currentStore.setDevices(fetchedServerDevices);
+  const  [brandId, typeId, id, startPage, defaultLimit] = [null, null, null, null, null]; 
+  // brandId, typeId, limit, page, id, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase
+  
+  const fetchedServerDevices = await getDevices( brandId, typeId, limit, page, id, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase); 
+    if(fetchedServerDevices.count === 0) alert('Nothing found!')
+    await currentStore.setDevices(fetchedServerDevices);
 }
 
 export const changeDeviceData = async(id, dbFieldName, data) => {
-  console.log('change device data admin device')  
-  return {}
-  // const updated = await updateDevice(id, dbFieldName, data); 
-    // return updated;
+ 
+  const updated = await updateDevice(id, dbFieldName, data); 
+    return updated;
 }
 export const deleteDevice = async(id) => {
   console.log('delete device admin device')  
@@ -22,17 +22,15 @@ export const deleteDevice = async(id) => {
 }
 
 export const fetchPage = async(adminDevicesStore) => {
-  console.log('fetchPage admin device')  
-  return {}
-  // try {
-    //     adminDevicesStore.setLoading(true);
-    //   await fetchAllDevices(adminDevicesStore, adminDevicesStore.sortBy, adminDevicesStore.sortDirection, adminDevicesStore.itemsPerPage, adminDevicesStore.activePage, adminDevicesStore.searchBy, adminDevicesStore.searchByPrase);
-    //   adminDevicesStore.setPagesTotal(Math.ceil(adminDevicesStore.adminDevices.count / adminDevicesStore.itemsPerPage));
-    // } catch (e) {
-    //   console.log(e)
-    // } finally {
-    //     adminDevicesStore.setLoading(false);
-    // }
+  try {
+        adminDevicesStore.setLoading(true);
+      await fetchAllDevices(adminDevicesStore, adminDevicesStore.sortBy, adminDevicesStore.sortDirection, adminDevicesStore.itemsPerPage, adminDevicesStore.activePage, adminDevicesStore.searchBy, adminDevicesStore.searchByPrase);
+      adminDevicesStore.setPagesTotal(Math.ceil(adminDevicesStore.devices.count / adminDevicesStore.itemsPerPage));
+    } catch (e) {
+      console.log(e)
+    } finally {
+        adminDevicesStore.setLoading(false);
+    }
   }
 export const fetchSetTypes = async(adminDevicesStore) => {
   try {

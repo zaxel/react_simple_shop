@@ -80,6 +80,7 @@ class DeviceService {
         return devices;
     }
     getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
+        console.log(99, sortBy)
         page = page || startPage;
         limit = limit || defaultLimit;
         let offset = page * limit - limit;
@@ -98,6 +99,12 @@ class DeviceService {
     getRandom = async (amount) => {
         const devices = await Device.findAll({ order: Sequelize.literal('random()'), limit: amount }); 
         return devices;
+    }
+    update = async (id, field, newData) => {
+        const updatedData = await Device.update({ [field]: newData }, {
+            where: { id }
+          });
+        return {updatedData};
     }
 }
 module.exports = new DeviceService();
