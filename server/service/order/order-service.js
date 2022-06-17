@@ -1,7 +1,7 @@
 ﻿const { Order, OrderDevice, BasketDevice, User } = require('../../models/models');
 const { Op } = require("sequelize");
 const OrderDto = require('../../dtos/order-dto');
-const searchOrdersOptions = require('../../utils/searchOptions');
+const { searchOrdersOptions } = require('../../utils/searchOptions');
 
 class OrderService {
     create = async (order, basketId, id) => {

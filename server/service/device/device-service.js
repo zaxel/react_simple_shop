@@ -2,6 +2,8 @@
 const { Device, DeviceInfo } = require('../../models/models');
 const { Op, Sequelize } = require("sequelize");
 const acceptedFileType = 'text/plain';
+const {searchDevicesOptions, orderDevicesOptions} = require('../../utils/searchOptions');
+// const orderDevicesOptions = require('../../utils/searchOptions');
 
 class DeviceService {
     create = async (name, price, brandId, typeId, info, img) => {
@@ -51,7 +53,8 @@ class DeviceService {
         let bulkItems = await Promise.all(bulkPromises);
         return data;
     }
-    getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit) => {
+    _getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit) => {
+        console.log(id, brandId, typeId, limit, page, startPage, defaultLimit)
         
         page = page || startPage;
         limit = limit || defaultLimit;
@@ -74,6 +77,15 @@ class DeviceService {
         if (brandId && typeId) {
             devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
         }
+        return devices;
+    }
+    getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
+        page = page || startPage;
+        limit = limit || defaultLimit;
+        let offset = page * limit - limit;
+        let where = searchDevicesOptions(id, brandId, typeId, searchBy, searchPrase);
+        let order = orderDevicesOptions(sortBy, sortDirection);
+        let devices = await Device.findAndCountAll({where, order, limit, offset });
         return devices;
     }
     getSingle = async (id) => {

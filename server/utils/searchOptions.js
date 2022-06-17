@@ -1,8 +1,8 @@
 ﻿const isNumeric = require('./isNumeric');
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const ApiError = require('../error/ApiError');
 
-module.exports = function searchUsersOptions(searchBy, searchPrase) {
+exports.searchUsersOptions = (searchBy, searchPrase) => {
     let where = {};
     if (searchBy) {
         if (isNumeric(searchPrase)&&searchBy==='id') {
@@ -21,7 +21,7 @@ module.exports = function searchUsersOptions(searchBy, searchPrase) {
     }
     return where;
 }
-module.exports = function searchOrdersOptions(searchBy, searchPrase) {
+exports.searchOrdersOptions = (searchBy, searchPrase) => {
     let where = {};
     if (!searchBy) return where;
     if (!isNumeric(searchPrase) && searchPrase !== '') throw ApiError.badRequest('request must be a number!');
@@ -31,4 +31,36 @@ module.exports = function searchOrdersOptions(searchBy, searchPrase) {
         where[searchBy] = searchPrase;
     }
     return where;
+}
+exports.searchDevicesOptions = (id, brandId, typeId, searchBy, searchPrase) => {
+    let where = {};
+    if (id) {
+        where =  { id: { [Op.or]: id } };
+        return where;
+    }
+    if (!brandId && !typeId) {
+        return where;
+    }
+    if (brandId && !typeId) {
+        where = { brandId };
+        return where;
+    }
+    if (!brandId && typeId) {
+        where = { typeId };
+        return where;
+    }
+    if (brandId && typeId) {
+        where = { brandId, typeId };
+        return where;
+    }
+}
+exports.orderDevicesOptions = (sortBy, sortDirection) => {
+    let order;
+
+    if (!sortBy) {
+        return order = [];
+    }
+    return order = [
+        [sortBy, sortDirection],
+    ]
 }

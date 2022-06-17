@@ -5,7 +5,7 @@ const {v4: uuidv4} = require('uuid');
 const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../../dtos/user-dto');
-const searchUsersOptions = require('../../utils/searchOptions');
+const {searchUsersOptions} = require('../../utils/searchOptions');
 
 class UserService {
     registration = async (email, password, role) => {
