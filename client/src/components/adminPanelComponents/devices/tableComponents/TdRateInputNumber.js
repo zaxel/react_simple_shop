@@ -4,6 +4,7 @@ import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
 import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
+import { correctRateRange } from '../../../../utils/correctRateRange';
 
 const TdRateInputNumber = ({ data, innerRef }) => {
 
@@ -16,14 +17,7 @@ const TdRateInputNumber = ({ data, innerRef }) => {
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
 
-    const correctRateToRange = (rate) => {
-        if(rate < 0){
-            return 0;
-        }else if(rate > 5){
-            return 5;
-        }
-        return rate !== '' &&  Number.parseInt(rate * 10)/10;
-    }
+    
 
     const onDivClickHandler = () => {
         toolTip.setIsToolTipShown(false);
@@ -56,7 +50,7 @@ const TdRateInputNumber = ({ data, innerRef }) => {
 
     const onInputChange = (e) => {
         setInput(prev => {
-           return correctRateToRange(e.target.value);
+           return correctRateRange(e.target.value);
         })
     }
 
@@ -77,7 +71,7 @@ const TdRateInputNumber = ({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{input}</div>
                 : <div className='display-flex'>
-                    <input ref={inputRef} autoFocus type='number' min='0' max='5' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
+                    <input ref={inputRef} autoFocus type='number' min='0' max='5' step='0.1' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                 </div>}
         </td>
