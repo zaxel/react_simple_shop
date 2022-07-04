@@ -65,15 +65,15 @@ class DeviceController {
             if(!errors.isEmpty()){
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, typeId, role, is_activated } = req.body;
+            let { id, typeId, name } = req.body;
+            console.log(req.body)
+
             let field = null;
-            let newData = typeId ?? role ?? is_activated;
+            let newData = typeId ?? name;
             if(typeId){
                 field = 'typeId';
-            }else if(role){
-                field = 'role';
-            }else if(is_activated){
-                field = 'is_activated';
+            }else if(name){
+                field = 'name';
             }else{
                 return next(ApiError.badRequest('no required field in req body'));
             }
