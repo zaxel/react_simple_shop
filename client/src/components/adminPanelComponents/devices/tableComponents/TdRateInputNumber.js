@@ -16,6 +16,15 @@ const TdRateInputNumber = ({ data, innerRef }) => {
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
 
+    const correctRateToRange = (rate) => {
+        if(rate < 0){
+            return 0;
+        }else if(rate > 5){
+            return 5;
+        }
+        return rate !== '' &&  Number.parseInt(rate * 10)/10;
+    }
+
     const onDivClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
@@ -37,7 +46,7 @@ const TdRateInputNumber = ({ data, innerRef }) => {
     const onButtonClickHandler = async () => {
         if (isDeviceStateChanged(adminDevices, deviceId, dbFieldName, input)) {
             setLoading(true);
-            await changeDeviceData(deviceId, dbFieldName, input);
+            await changeDeviceData(deviceId, dbFieldName, +input);
             setLoading(false);
             adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
         }
@@ -46,7 +55,9 @@ const TdRateInputNumber = ({ data, innerRef }) => {
     }
 
     const onInputChange = (e) => {
-        setInput(prev => e.target.value)
+        setInput(prev => {
+           return correctRateToRange(e.target.value);
+        })
     }
 
     useEffect(() => {
@@ -66,7 +77,7 @@ const TdRateInputNumber = ({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{input}</div>
                 : <div className='display-flex'>
-                    <input ref={inputRef} autoFocus type='number' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
+                    <input ref={inputRef} autoFocus type='number' min='0' max='5' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                 </div>}
         </td>
