@@ -63,19 +63,22 @@ class DeviceController {
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()){
+                console.log(99)
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, typeId, name } = req.body;
+            let { id, typeId, name, rate } = req.body;
             console.log(req.body)
 
             let field = null;
-            let newData = typeId ?? name;
+            let newData = typeId ?? name ?? rate;
             if(typeId){
                 field = 'typeId';
             }else if(name){
                 field = 'name';
+            }else if(rate){
+                field = 'rate';
             }else{
-                return next(ApiError.badRequest('no required field in req body'));
+                return next(ApiError.badRequest('update device error'));
             }
             const data = await deviceService.update(id, field, newData);
             return res.json(data);

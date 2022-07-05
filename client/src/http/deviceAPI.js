@@ -40,6 +40,7 @@ export const fetchRandomDevices = async (amount) => {
     return data;
 }
 export const updateDevice = async (id, dbFieldName, data) => {
+    console.log(id, dbFieldName, data)
     const updatedData = await $authHost.put('api/device/' , {id, [dbFieldName]: data});
     return updatedData.data; 
 }

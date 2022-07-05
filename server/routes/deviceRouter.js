@@ -11,6 +11,7 @@ router.get('/random', deviceController.getRandom);
 router.get('/:id', deviceController.getSingle);
 router.put('/',
     body('typeId').optional().isNumeric(),
+    body('rate').optional().isNumeric(),
     checkRole('ADMIN'), 
     deviceController.update);
 

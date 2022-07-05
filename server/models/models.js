@@ -38,7 +38,7 @@ const Device = sequelize.define('device', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   name: {type: DataTypes.STRING, unique: true, allowNull: false},
   price: {type: DataTypes.INTEGER, allowNull: false},
-  rate: {type: DataTypes.INTEGER, defaultValue: 0},
+  rate: {type: DataTypes.FLOAT, defaultValue: 0},
   img: {type: DataTypes.STRING, allowNull: false},
 })
 
