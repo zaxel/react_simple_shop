@@ -4,6 +4,7 @@ import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
 import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
+import { correctPriceRange } from '../../../../utils/correctInputNumbers';
 
 const TdPriceInputNumber = ({ data, innerRef }) => {
 
@@ -37,7 +38,7 @@ const TdPriceInputNumber = ({ data, innerRef }) => {
     const onButtonClickHandler = async () => {
         if (isDeviceStateChanged(adminDevices, deviceId, dbFieldName, input)) {
             setLoading(true);
-            await changeDeviceData(deviceId, dbFieldName, input);
+            await changeDeviceData(deviceId, dbFieldName, +input);
             setLoading(false);
             adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
         }
@@ -46,7 +47,10 @@ const TdPriceInputNumber = ({ data, innerRef }) => {
     }
 
     const onInputChange = (e) => {
-        setInput(prev => e.target.value)
+        // setInput(prev => e.target.value)
+        setInput(prev => {
+            return correctPriceRange(e.target.value);
+         })
     }
 
     useEffect(() => {
@@ -66,7 +70,7 @@ const TdPriceInputNumber = ({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{input}</div>
                 : <div className='display-flex'>
-                    <input ref={inputRef} autoFocus type='number' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
+                    <input ref={inputRef} autoFocus type='number' step='1' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                 </div>}
         </td>

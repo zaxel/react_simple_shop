@@ -4,7 +4,7 @@ import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
 import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
-import { correctRateRange } from '../../../../utils/correctRateRange';
+import { correctRateRange } from '../../../../utils/correctInputNumbers';
 
 const TdRateInputNumber = ({ data, innerRef }) => {
 
