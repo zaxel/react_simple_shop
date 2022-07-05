@@ -12,6 +12,7 @@ router.get('/:id', deviceController.getSingle);
 router.put('/',
     body('typeId').optional().isNumeric(),
     body('rate').optional().isNumeric(),
+    body('price').optional().isNumeric(),
     checkRole('ADMIN'), 
     deviceController.update);
 
