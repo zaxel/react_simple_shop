@@ -9,7 +9,7 @@ const AdminPanelRouter = () => {
             <Component />
         } />
     })
-    userAdminRouts.push(<Route key={Math.random()} index element={<UsersAdminPanel />} />)
+    userAdminRouts.push(<Route key={Date.now()} index element={<UsersAdminPanel />} />)
     return userAdminRouts;
 };
 
