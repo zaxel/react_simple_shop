@@ -66,13 +66,15 @@ class DeviceController {
                 console.log(99)
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, typeId, name, price, rate } = req.body;
+            let { id, typeId, brandId, name, price, rate } = req.body;
             console.log(req.body)
 
             let field = null;
-            let newData = typeId ?? name ?? price ?? rate;
+            let newData = typeId ?? brandId ?? name ?? price ?? rate;
             if(typeId){
                 field = 'typeId';
+            }else if(brandId){
+                field = 'brandId';
             }else if(name){
                 field = 'name';
             }else if(price){
