@@ -6,7 +6,7 @@ import { Spinner } from 'react-bootstrap';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { observer } from 'mobx-react-lite';
 
-const TdTypeSelect = observer(({ data, innerRef }) => {
+const TdBrandSelect = observer(({ data, innerRef }) => {
     
 
     const selectRef = useRef(null);
@@ -53,10 +53,10 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
     const onSelectChange = (e) => {
         setSelectData(prev => e.target.value)
     }
-
-    const opt = adminDevices.types.map(option=><option key={option.id} value={option.id}>{option.name.toLowerCase()}</option>)
+    const opt = adminDevices.brands.map(option=><option key={option.id} value={option.id}>{option.name.toLowerCase()}</option>)
+    
     const changeInit = () => {
-        const init = adminDevices.types.find(op=>op.id===inputData).name;
+        const init = adminDevices.brands.find(op=>op.id===inputData).name;
         setInitValue(init);
     }
 
@@ -67,11 +67,11 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
     }, [])
 
     useEffect(()=>{
-        if(adminDevices.types.length){
+        if(adminDevices.brands.length){
         changeInit();
         setLoading(false);
         }
-    }, [adminDevices.types])
+    }, [adminDevices.brands])
     
 
     if (loading) {
@@ -95,4 +95,4 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
     );
 });
 
-export default withTooltip(TdTypeSelect);
+export default withTooltip(TdBrandSelect);

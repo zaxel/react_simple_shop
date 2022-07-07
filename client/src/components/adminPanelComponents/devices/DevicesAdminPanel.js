@@ -9,7 +9,7 @@ import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
-import { fetchPage, fetchSetTypes } from '../../../utils/adminDevices';
+import { fetchPage, fetchSetTypes, fetchSetBrands } from '../../../utils/adminDevices';
 
 
 const DevicesAdminPanel = observer(() => {
@@ -21,7 +21,8 @@ const DevicesAdminPanel = observer(() => {
   useEffect(() => {
     (async () => {
       try {
-        await fetchSetTypes(adminDevices);
+        fetchSetTypes(adminDevices);
+        fetchSetBrands(adminDevices);
         await fetchPage(adminDevices);
 
       } catch (e) {

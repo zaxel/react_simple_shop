@@ -1,4 +1,4 @@
-﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes } from "../http/deviceAPI";
+﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes, fetchBrands } from "../http/deviceAPI";
 
 export const fetchAllDevices = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   const  [brandId, typeId, id, startPage, defaultLimit] = [null, null, null, null, null]; 
@@ -8,7 +8,6 @@ export const fetchAllDevices = async(currentStore, sortBy, sortDirection, limit,
 }
 
 export const changeDeviceData = async(id, dbFieldName, data) => {
- 
   const updated = await updateDevice(id, dbFieldName, data); 
     return updated;
 }
@@ -35,6 +34,15 @@ export const fetchSetTypes = async(adminDevicesStore) => {
       const types = await fetchTypes();
       const data = await adminDevicesStore.setTypes(types);
       return types;
+    } catch (e) {
+      console.log(e)
+    } 
+  }
+export const fetchSetBrands = async(adminDevicesStore) => {
+  try {
+      const brands = await fetchBrands();
+      const data = await adminDevicesStore.setBrands(brands);
+      return brands;
     } catch (e) {
       console.log(e)
     } 
