@@ -27,14 +27,12 @@ const TdBrandSelect = observer(({ data, innerRef }) => {
 
     const onSelectBlurHandler = (e) => {
         if (!(e.relatedTarget === buttonRef.current)) {
-            adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
             setEdit(false);
             toolTip.setIsAvailable(true);
         }
     }
 
     const onButtonBlurHandler = (e) => {
-        adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
         setEdit(false);
         toolTip.setIsAvailable(true);
     }
