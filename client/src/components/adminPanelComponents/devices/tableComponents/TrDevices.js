@@ -5,6 +5,7 @@ import TdRateInputNumber from './TdRateInputNumber';
 import TdImgInputFile from './TdImgInputFile';
 import TdTypeSelect from './TdTypeSelect';
 import TdBrandSelect from './TdBrandSelect';
+import TdDescriptionLink from './TdDescriptionLink';
 import { adminPageFormatDate } from '../../../../utils/formatDate';
 
 const TrDevices = ({ data }) => {
@@ -27,6 +28,9 @@ const TrDevices = ({ data }) => {
     
     let ref5 = (el) => (tdRefs.current[5] = el);
     let toolTipInfo5 = {i:5, myRefs: tdRefs, text: 'edit device brand'};
+    
+    let ref6 = (el) => (tdRefs.current[6] = el);
+    let toolTipInfo6 = {i:6, myRefs: tdRefs, text: 'edit device descriptions'};
 
     return (
         <tr >
@@ -38,7 +42,7 @@ const TrDevices = ({ data }) => {
             <td>{adminPageFormatDate(Date.parse(data.createdAt))}</td>
             <TdTypeSelect toolTipInfo={toolTipInfo4} innerRef={ref4} data={{inputData: data.typeId, deviceId: data.id, dbFieldName: 'typeId'}}/>
             <TdBrandSelect toolTipInfo={toolTipInfo5} innerRef={ref5} data={{inputData: data.brandId, deviceId: data.id, dbFieldName: 'brandId'}}/>
-            
+            <TdDescriptionLink toolTipInfo={toolTipInfo6} innerRef={ref6} data={data.onDescriptionClickHandler}/>
 
             {/* <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={{inputData: data.role, userId: data.id, dbFieldName: 'role'}}/> */}
             {/* <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={{inputData: data.isActivated.toString(), userId: data.id, dbFieldName: 'is_activated'}}/> */}

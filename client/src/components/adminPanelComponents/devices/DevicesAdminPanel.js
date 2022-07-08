@@ -70,7 +70,7 @@ const DevicesAdminPanel = observer(() => {
     setDeviceInfoModalVisible(false);
   }
 
-  const onDeviceClickHandler = () => {
+  const onDescriptionClickHandler = () => {
     setDeviceInfoModalVisible(true);
   }
 
@@ -88,7 +88,7 @@ const DevicesAdminPanel = observer(() => {
 
   // const trs = tds.map((el, i) => {
   const trs = adminDevices.devices?.rows?.map((el, i) => {
-    const row = { ...el, onDeviceClickHandler };
+    const row = { ...el, onDescriptionClickHandler };
     return <TrDevices key={el.id} data={row} />
   })
 
@@ -116,7 +116,7 @@ const DevicesAdminPanel = observer(() => {
             {trs}
           </tbody>
         </table>
-        <AdminDeviceInfoModal show={deviceInfoModalVisible} onHide={setDeviceInfoModalVisible} />
+        <AdminDeviceInfoModal show={deviceInfoModalVisible} onHide={onModalHideHandler} />
       </div>
 
       <PaginationCont currentStore={adminDevices} />
