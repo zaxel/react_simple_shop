@@ -1,33 +1,31 @@
-﻿import React, {useContext, useEffect, useRef} from 'react';
+﻿import React, { useContext, useEffect, useRef } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
-import TrUsersOrders from '../tableComponents/TrUsersOrders';
-import ThAdminUsersTooltip from '../tableComponents/ThAdminDevicesTooltip';
+import ThDescriptionTooltip from './components/ThDescriptionTooltip';
+import TrDescriptions from './components/TrDescriptions';
 
 const AdminDeviceInfoModal = ({ show, onHide }) => {
-    const {toolTip} = useContext(Context);
+    const { toolTip } = useContext(Context);
     let thRefs = useRef([]);
-    let tdRefs = useRef([]);
 
     const ths = [
-        {title: 'order id', sortBy: 'id'}, 
-        {title: 'ordered at', sortBy: 'createdAt'}, 
-        {title: 'amount ordered', sortBy: null}, 
-        {title: 'total', sortBy: null}, 
+        { title: 'title', sortBy: 'title' },
+        { title: 'description', sortBy: null },
+        { title: 'destroy', sortBy: null },
     ];
 
     const tds = [
-        ['3655', '2022-05-04 20:24', '2', '$165.00'],
-        ['3657', '2022-08-12 19:24', '7', '$65.00'],
-        ['3659', '2022-09-15 15:00', '1', '$25.00'],
-        ['3675', '2022-09-15 18:15', '10', '$3.00'],
-        ['3695', '2022-10-04 12:10', '3', '$8605.00'],
-        ['3755', '2022-10-04 20:24', '1', '$715.00'],
-        ['3759', '2022-12-01 23:55', '5', '$115.00'],
+        { id: 18, title: 'tester', description: 'some descrioption' },
+        { id: 2, title: 'router', description: 'other descrioption' },
+        { id: 22, title: 'fixer', description: 'some descrioption' },
+        { id: 1, title: 'box', description: 'some descrioption' },
+        { id: 16, title: 'jam', description: 'some descrioption' },
+        { id: 4, title: 'butter', description: 'some descrioption'},
+        { id: 5, title: 'table', description: 'some descrioption' },
     ]
 
-    
+
 
     const onRowClickHandler = () => {
         toolTip.setIsAvailable(false);
@@ -43,29 +41,27 @@ const AdminDeviceInfoModal = ({ show, onHide }) => {
         toolTip.setIsAvailable(true);
     }
 
-    
+
 
     const thsWithTooltip = ths.map((el, i) => {
 
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
-        let toolTipInfo = {i, myRefs: thRefs, text: 'sort'};
-        return <ThAdminUsersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
+        return <ThDescriptionTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
 
-    const trsWithTooltip = tds.map((el, i) => {
-        const myKey = uuidv4();
-        let ref = (el) => (tdRefs.current[i] = el);
-        let toolTipInfo = {i, myRefs: tdRefs, text: 'click for detailed order info'};
-        return <TrUsersOrders toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
+    const trs = tds.map((el, i) => {
+        //   const trs = adminDevices.devices?.rows?.map((el, i) => {
+        return <TrDescriptions key={el.id} data={el} />
     })
 
 
     return (
         <Modal className='modal-table' centered show={show} onHide={onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Order Detail</Modal.Title>
+                <Modal.Title>Change Device Descriptions</Modal.Title>
             </Modal.Header>
             <Modal.Body>
 
@@ -77,7 +73,7 @@ const AdminDeviceInfoModal = ({ show, onHide }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {trsWithTooltip}
+                            {trs}
                         </tbody>
                     </table>
                 </Form.Group>

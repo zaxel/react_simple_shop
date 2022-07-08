@@ -1,7 +1,7 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../../PaginationCont';
 import AdminDeviceInfoModal from './modals/AdminDeviceInfoModal';
-import ThAdminDevicesTooltip from './tableComponents/ThAdminDevicesTooltip';
+import ThAdminDevicesTooltip from './modals/components/ThDescriptionTooltip';
 // import Trdevices from '../tableComponents/Trdevices';
 import TrDevices from './tableComponents/TrDevices';
 import { v4 as uuidv4 } from 'uuid';
