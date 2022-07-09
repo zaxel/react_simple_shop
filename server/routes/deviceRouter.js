@@ -16,5 +16,5 @@ router.put('/',
     body('price').optional().isNumeric(),
     checkRole('ADMIN'), 
     deviceController.update);
-
+router.get('/descriptions/:deviceId', deviceController.getDescriptions);
 module.exports = router;

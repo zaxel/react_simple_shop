@@ -4,6 +4,7 @@ const { Op, Sequelize } = require("sequelize");
 const { Device, DeviceInfo } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const deviceService = require('../service/device/device-service');
+const descriptionsService = require('../service/device/descriptions-service');
 const { validationResult } = require('express-validator');
 
 
@@ -54,6 +55,17 @@ class DeviceController {
             const { amount } = req.query;
             const devices = await deviceService.getRandom(amount);
             return res.json(devices);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+
+    async getDescriptions(req, res, next) {
+        try {
+            const { deviceId } = req.params;
+            const {sortBy, sortDirection} = req.query;
+            const descriptions = await descriptionsService.getDescriptions(deviceId, sortBy, sortDirection);
+            return res.json(descriptions);
         } catch (e) {
             next(ApiError.forbidden(e.message));
         }

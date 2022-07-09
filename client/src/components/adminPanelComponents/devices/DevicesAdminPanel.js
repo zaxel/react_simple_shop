@@ -88,6 +88,9 @@ const DevicesAdminPanel = observer(() => {
 
   // const trs = tds.map((el, i) => {
   const trs = adminDevices.devices?.rows?.map((el, i) => {
+    el.info?.map(spec => 
+      console.log(spec.description)
+  )
     const row = { ...el, onDescriptionClickHandler };
     return <TrDevices key={el.id} data={row} />
   })

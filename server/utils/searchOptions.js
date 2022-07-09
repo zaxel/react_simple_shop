@@ -64,3 +64,13 @@ exports.orderDevicesOptions = (sortBy, sortDirection) => {
         [sortBy, sortDirection],
     ]
 }
+exports.orderDescriptionsOptions = (sortBy, sortDirection) => {
+    let description;
+
+    if (!sortBy) {
+        return description = [];
+    }
+    return description = [
+        [sortBy, sortDirection],
+    ]
+}
