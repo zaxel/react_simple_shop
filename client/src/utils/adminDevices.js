@@ -1,4 +1,4 @@
-﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes, fetchBrands } from "../http/deviceAPI";
+﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes, fetchBrands, fetchDeviceInfo } from "../http/deviceAPI";
 
 export const fetchAllDevices = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   const  [brandId, typeId, id, startPage, defaultLimit] = [null, null, null, null, null]; 
@@ -47,3 +47,20 @@ export const fetchSetBrands = async(adminDevicesStore) => {
       console.log(e)
     } 
   }
+
+  export const fetchAllInfo = async(currentStore, deviceId, sortBy, sortDirection) => {
+    const fetchedDeviceInfo = await fetchDeviceInfo( deviceId, sortBy, sortDirection = 'ASC');
+      if(fetchedDeviceInfo.count === 0) console.log('Nothing found!')
+      await currentStore.setInfo(fetchedDeviceInfo.rows);
+  }
+
+  export const fetchInfo = async(adminDevicesStore, deviceId, sortBy, sortDirection) => {
+    try {
+          adminDevicesStore.setLoading(true);
+        await fetchAllInfo(adminDevicesStore, deviceId, sortBy = null, sortDirection = null);
+      } catch (e) {
+        console.log(e)
+      } finally {
+          adminDevicesStore.setLoading(false);
+      }
+    }

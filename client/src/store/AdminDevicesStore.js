@@ -17,6 +17,7 @@ export default class AdminDevicesStore{
     _loading = true;
     _types = [];
     _brands = [];
+    _info = [];
 
     constructor(){
         makeAutoObservable(this);
@@ -65,6 +66,9 @@ export default class AdminDevicesStore{
     setBrands(brands){
         this._brands = brands;
     }
+    setInfo(info){
+        this._info = info;
+    }
     
     get devices(){
         return this._devices;
@@ -107,5 +111,8 @@ export default class AdminDevicesStore{
     }
     get brands(){
         return this._brands;
+    }
+    get info(){
+        return this._info;
     }
 }

@@ -31,6 +31,7 @@ export const fetchAllDevices = async (brandId, typeId, limit, page, id, startPag
     }}); 
     return data;
 }
+
 export const fetchSingleDevice = async (id) => {
     const {data} = await $host.get(`api/device/${id}`);
     return data;
@@ -43,4 +44,12 @@ export const updateDevice = async (id, dbFieldName, data) => {
     console.log(id, dbFieldName, data)
     const updatedData = await $authHost.put('api/device/' , {id, [dbFieldName]: data});
     return updatedData.data; 
+}
+
+
+export const fetchDeviceInfo = async (deviceId, sortBy, sortDirection) => {
+    const {data} = await $host.get(`api/device/descriptions/${deviceId}`, {params:{
+        sortBy, sortDirection
+    }}); 
+    return data;
 }

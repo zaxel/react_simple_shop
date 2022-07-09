@@ -9,7 +9,7 @@ import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
-import { fetchPage, fetchSetTypes, fetchSetBrands } from '../../../utils/adminDevices';
+import { fetchPage, fetchSetTypes, fetchSetBrands, fetchInfo } from '../../../utils/adminDevices';
 
 
 const DevicesAdminPanel = observer(() => {
@@ -70,7 +70,11 @@ const DevicesAdminPanel = observer(() => {
     setDeviceInfoModalVisible(false);
   }
 
-  const onDescriptionClickHandler = () => {
+  const onDescriptionClickHandler = (deviceId) => {
+    
+    
+    
+    fetchInfo(adminDevices, deviceId)
     setDeviceInfoModalVisible(true);
   }
 
@@ -79,7 +83,6 @@ const DevicesAdminPanel = observer(() => {
   }
 
   const thsWithTooltip = ths.map((el, i) => {
-
     const myKey = uuidv4();
     let ref = (el) => (thRefs.current[i] = el);
     let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
@@ -88,10 +91,8 @@ const DevicesAdminPanel = observer(() => {
 
   // const trs = tds.map((el, i) => {
   const trs = adminDevices.devices?.rows?.map((el, i) => {
-    el.info?.map(spec => 
-      console.log(spec.description)
-  )
-    const row = { ...el, onDescriptionClickHandler };
+    
+    const row = { ...el, onDescriptionClickHandler: onDescriptionClickHandler.bind(this, el.id) };
     return <TrDevices key={el.id} data={row} />
   })
 

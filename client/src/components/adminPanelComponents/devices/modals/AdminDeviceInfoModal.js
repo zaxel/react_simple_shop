@@ -6,8 +6,12 @@ import ThDescriptionTooltip from './components/ThDescriptionTooltip';
 import TrDescriptions from './components/TrDescriptions';
 
 const AdminDeviceInfoModal = ({ show, onHide }) => {
-    const { toolTip } = useContext(Context);
+    const { toolTip, adminDevices } = useContext(Context);
     let thRefs = useRef([]);
+
+    useEffect(()=>{
+        console.log(88)
+    }, [])
 
     const ths = [
         { title: 'title', sortBy: 'title' },
@@ -52,8 +56,8 @@ const AdminDeviceInfoModal = ({ show, onHide }) => {
     })
 
 
-    const trs = tds.map((el, i) => {
-        //   const trs = adminDevices.devices?.rows?.map((el, i) => {
+    // const trs = tds.map((el, i) => {
+          const trs = adminDevices.info?.map((el, i) => {
         return <TrDescriptions key={el.id} data={el} />
     })
 
