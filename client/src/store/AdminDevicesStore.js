@@ -15,6 +15,7 @@ export default class AdminDevicesStore{
     _searchByPrase = '';
     _searchByLastPrase = '';
     _loading = true;
+    _descriptionsLoading = true;
     _types = [];
     _brands = [];
     _info = [];
@@ -59,6 +60,9 @@ export default class AdminDevicesStore{
     }
     setLoading(bool){
         this._loading = bool;
+    }
+    setDescriptionsLoading(bool){
+        this._descriptionsLoading = bool;
     }
     setTypes(types){
         this._types = types;
@@ -105,6 +109,9 @@ export default class AdminDevicesStore{
     }
     get loading(){
         return this._loading;
+    }
+    get descriptionsLoading(){
+        return this._descriptionsLoading;
     }
     get types(){
         return this._types;

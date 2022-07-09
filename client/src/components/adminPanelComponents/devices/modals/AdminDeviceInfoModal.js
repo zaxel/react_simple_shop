@@ -4,8 +4,10 @@ import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
 import ThDescriptionTooltip from './components/ThDescriptionTooltip';
 import TrDescriptions from './components/TrDescriptions';
+import { Spinner } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
 
-const AdminDeviceInfoModal = ({ show, onHide }) => {
+const AdminDeviceInfoModal = observer(({ show, onHide }) => {
     const { toolTip, adminDevices } = useContext(Context);
     let thRefs = useRef([]);
 
@@ -61,6 +63,14 @@ const AdminDeviceInfoModal = ({ show, onHide }) => {
         return <TrDescriptions key={el.id} data={el} />
     })
 
+    // if (adminDevices.descriptionsLoading) {
+    //     return (
+    //       <div className="spinner">
+    //         <Spinner animation="border" />
+    //       </div>
+    //     )
+    //   }
+
 
     return (
         <Modal className='modal-table' centered show={show} onHide={onHide}>
@@ -68,8 +78,11 @@ const AdminDeviceInfoModal = ({ show, onHide }) => {
                 <Modal.Title>Change Device Descriptions</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
-                <Form.Group className="mb-3">
+            {adminDevices.descriptionsLoading 
+                ? <div className="spinner">
+                    <Spinner animation="border" />
+                    </div>
+                : <Form.Group className="mb-3">
                     <table className='stripped-table'>
                         <thead>
                             <tr>
@@ -80,7 +93,9 @@ const AdminDeviceInfoModal = ({ show, onHide }) => {
                             {trs}
                         </tbody>
                     </table>
-                </Form.Group>
+                </Form.Group>}
+            
+                
 
             </Modal.Body>
             <Modal.Footer>
@@ -92,6 +107,6 @@ const AdminDeviceInfoModal = ({ show, onHide }) => {
 
 
     );
-};
+});
 
 export default AdminDeviceInfoModal;
