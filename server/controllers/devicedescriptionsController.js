@@ -4,11 +4,27 @@ const { Op, Sequelize } = require("sequelize");
 const { Device, DeviceInfo } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const deviceService = require('../service/device/device-service');
+const descriptionsService = require('../service/device/descriptions-service');
 const { validationResult } = require('express-validator');
 
 
 
-class DeviceController {
+class DeviceDescriptionsController {
+    
+    
+
+    async getDescriptions(req, res, next) {
+        try {
+            const { deviceId } = req.params;
+            const {sortBy, sortDirection} = req.query;
+            const descriptions = await descriptionsService.getDescriptions(deviceId, sortBy, sortDirection);
+            return res.json(descriptions);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+
+
     async create(req, res, next) {
         try {
             let { name, price, brandId, typeId, info } = req.body;
@@ -20,45 +36,6 @@ class DeviceController {
         }
 
     }
-    async createBulk(req, res, next) {
-        try {
-            const data = await deviceService.createBulk(req);
-            return res.json({ created_updated: data.length + ' devices' });
-        } catch (e) {
-            next(ApiError.forbidden(e.message));
-        }
-
-    }
-    async getAll(req, res, next) {
-        try {
-            const startPage = process.env.START_PAGE;
-            const defaultLimit = process.env.DEFAULT_LIMIT;
-            let { id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase } = req.query;
-            const devices = await deviceService.getAll(id, brandId, typeId, limit, page, startPage, defaultLimit, sortBy, sortDirection, searchBy, searchPrase);
-            return res.json(devices);
-        } catch (e) {
-            next(ApiError.forbidden(e.message));
-        }
-    }
-    async getSingle(req, res, next) {
-        try {
-            const { id } = req.params;
-            const device = await deviceService.getSingle(id);
-            return res.json(device);
-        } catch (e) {
-            next(ApiError.forbidden(e.message));
-        }
-    }
-    async getRandom(req, res, next) {
-        try {
-            const { amount } = req.query;
-            const devices = await deviceService.getRandom(amount);
-            return res.json(devices);
-        } catch (e) {
-            next(ApiError.forbidden(e.message));
-        }
-    }
-
     async update(req, res, next){
         try {
             const errors = validationResult(req);
@@ -93,4 +70,4 @@ class DeviceController {
 
 }
 
-module.exports = new DeviceController();
+module.exports = new DeviceDescriptionsController();
