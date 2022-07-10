@@ -15,7 +15,7 @@ import { fetchPage, fetchSetTypes, fetchSetBrands, fetchInfo } from '../../../ut
 const DevicesAdminPanel = observer(() => {
   
   let thRefs = useRef([]);
-  const { toolTip, adminDevices } = useContext(Context);
+  const { toolTip, adminDevices, adminDevicesInfo } = useContext(Context);
   const [deviceInfoModalVisible, setDeviceInfoModalVisible] = useState(false);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const DevicesAdminPanel = observer(() => {
     
     
     
-    fetchInfo(adminDevices, deviceId)
+    fetchInfo(adminDevicesInfo, deviceId)
     setDeviceInfoModalVisible(true);
   }
 

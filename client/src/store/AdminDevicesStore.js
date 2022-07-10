@@ -15,10 +15,8 @@ export default class AdminDevicesStore{
     _searchByPrase = '';
     _searchByLastPrase = '';
     _loading = true;
-    _descriptionsLoading = true;
     _types = [];
     _brands = [];
-    _info = [];
 
     constructor(){
         makeAutoObservable(this);
@@ -33,7 +31,6 @@ export default class AdminDevicesStore{
     setSortBy(by){
         this._sortBy = by;
     }
-    
     setActivePage(page){
         this._activePage = page;
     }
@@ -61,18 +58,13 @@ export default class AdminDevicesStore{
     setLoading(bool){
         this._loading = bool;
     }
-    setDescriptionsLoading(bool){
-        this._descriptionsLoading = bool;
-    }
     setTypes(types){
         this._types = types;
     }
     setBrands(brands){
         this._brands = brands;
     }
-    setInfo(info){
-        this._info = info;
-    }
+    
     
     get devices(){
         return this._devices;
@@ -110,16 +102,11 @@ export default class AdminDevicesStore{
     get loading(){
         return this._loading;
     }
-    get descriptionsLoading(){
-        return this._descriptionsLoading;
-    }
     get types(){
         return this._types;
     }
     get brands(){
         return this._brands;
     }
-    get info(){
-        return this._info;
-    }
+    
 }

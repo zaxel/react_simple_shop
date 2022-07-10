@@ -54,13 +54,13 @@ export const fetchSetBrands = async(adminDevicesStore) => {
       await currentStore.setInfo(fetchedDeviceInfo.rows);
   }
 
-  export const fetchInfo = async(adminDevicesStore, deviceId, sortBy, sortDirection) => {
+  export const fetchInfo = async(currentStore, deviceId, sortBy, sortDirection) => {
     try {
-          adminDevicesStore.setDescriptionsLoading(true);
-        await fetchAllInfo(adminDevicesStore, deviceId, sortBy = null, sortDirection = null);
+      currentStore.setLoading(true);
+        await fetchAllInfo(currentStore, deviceId, sortBy = null, sortDirection = null);
       } catch (e) {
         console.log(e)
       } finally {
-          adminDevicesStore.setDescriptionsLoading(false);
+        currentStore.setLoading(false);
       }
     }

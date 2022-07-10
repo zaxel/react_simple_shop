@@ -8,7 +8,7 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 
 const AdminDeviceInfoModal = observer(({ show, onHide }) => {
-    const { toolTip, adminDevices } = useContext(Context);
+    const { toolTip, adminDevicesInfo } = useContext(Context);
     let thRefs = useRef([]);
 
     useEffect(()=>{
@@ -59,18 +59,9 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
 
 
     // const trs = tds.map((el, i) => {
-          const trs = adminDevices.info?.map((el, i) => {
+          const trs = adminDevicesInfo.info?.map((el, i) => {
         return <TrDescriptions key={el.id} data={el} />
     })
-
-    // if (adminDevices.descriptionsLoading) {
-    //     return (
-    //       <div className="spinner">
-    //         <Spinner animation="border" />
-    //       </div>
-    //     )
-    //   }
-
 
     return (
         <Modal className='modal-table' centered show={show} onHide={onHide}>
@@ -78,7 +69,7 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
                 <Modal.Title>Change Device Descriptions</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            {adminDevices.descriptionsLoading 
+            {adminDevicesInfo.loading 
                 ? <div className="spinner">
                     <Spinner animation="border" />
                     </div>
