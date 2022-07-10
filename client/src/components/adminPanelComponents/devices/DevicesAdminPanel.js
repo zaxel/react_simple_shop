@@ -9,7 +9,8 @@ import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
-import { fetchPage, fetchSetTypes, fetchSetBrands, fetchInfo } from '../../../utils/adminDevices';
+import { fetchPage, fetchSetTypes, fetchSetBrands } from '../../../utils/adminDevices';
+import { fetchInfo } from '../../../utils/adminDeviceInfo';
 
 
 const DevicesAdminPanel = observer(() => {
