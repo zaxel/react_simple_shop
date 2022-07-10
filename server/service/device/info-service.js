@@ -1,0 +1,14 @@
+﻿const { DeviceInfo } = require('../../models/models');
+const {orderInfoOptions} = require('../../utils/searchOptions');
+
+class InfoService {
+    
+    getInfo = async (deviceId, sortBy, sortDirection = 'ASC') => {
+        let where = { deviceId };
+        let order = orderInfoOptions(sortBy, sortDirection);
+        let info = await DeviceInfo.findAndCountAll({where, order});
+        return info;
+    }
+    
+}
+module.exports = new InfoService();

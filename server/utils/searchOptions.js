@@ -64,7 +64,7 @@ exports.orderDevicesOptions = (sortBy, sortDirection) => {
         [sortBy, sortDirection],
     ]
 }
-exports.orderDescriptionsOptions = (sortBy, sortDirection) => {
+exports.orderInfoOptions = (sortBy, sortDirection) => {
     let description;
 
     if (!sortBy) {

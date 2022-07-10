@@ -1,7 +1,7 @@
 ﻿import {$host, $authHost} from ".";
 
 export const fetchDeviceInfo = async (deviceId, sortBy, sortDirection) => {
-    const {data} = await $host.get(`api/device/descriptions/${deviceId}`, {params:{
+    const {data} = await $host.get(`api/device/info/${deviceId}`, {params:{
         sortBy, sortDirection
     }}); 
     return data;

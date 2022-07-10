@@ -37,7 +37,7 @@ const TdDescriptionInputText = ({ data, innerRef }) => {
     const onButtonClickHandler = async () => {
         if (isDeviceInfoStateChanged(adminDevicesInfo, infoId, dbFieldName, input)) {
             setLoading(true);
-            // await changeDeviceInfoData(infoId, dbFieldName, input);
+            await changeDeviceInfoData(infoId, dbFieldName, input);
             setLoading(false);
             adminDevicesInfo.setUpdateDataTrigger(prev => !adminDevicesInfo.updateDataTrigger());
         }
