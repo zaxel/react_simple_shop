@@ -7,7 +7,7 @@ export default class AdminDevicesStore{
     _sortRevers = false;
     _updateDataTrigger = false;
     _loading = true;
-    _info = [];
+    _info = {};
 
     constructor(){
         makeAutoObservable(this);

@@ -59,7 +59,7 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
 
 
     // const trs = tds.map((el, i) => {
-          const trs = adminDevicesInfo.info?.map((el, i) => {
+          const trs = adminDevicesInfo.info?.rows?.map((el, i) => {
         return <TrDescriptions key={el.id} data={el} />
     })
 

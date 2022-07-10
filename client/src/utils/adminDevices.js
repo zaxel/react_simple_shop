@@ -51,7 +51,7 @@ export const fetchSetBrands = async(adminDevicesStore) => {
   export const fetchAllInfo = async(currentStore, deviceId, sortBy, sortDirection) => {
     const fetchedDeviceInfo = await fetchDeviceInfo( deviceId, sortBy, sortDirection = 'ASC');
       if(fetchedDeviceInfo.count === 0) console.log('Nothing found!')
-      await currentStore.setInfo(fetchedDeviceInfo.rows);
+      await currentStore.setInfo(fetchedDeviceInfo);
   }
 
   export const fetchInfo = async(currentStore, deviceId, sortBy, sortDirection) => {
