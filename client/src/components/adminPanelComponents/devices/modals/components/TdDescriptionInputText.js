@@ -1,17 +1,17 @@
 ﻿import React, { useEffect, useContext, useRef, useState } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { changeDeviceData } from '../../../../../utils/adminDevices';
+import { changeDeviceInfoData } from '../../../../../utils/adminDeviceInfo';
 import { Spinner } from 'react-bootstrap';
-import { isDeviceStateChanged } from '../../../../../utils/isStateChanged';
+import { isDeviceInfoStateChanged } from '../../../../../utils/isStateChanged';
 
 const TdDescriptionInputText = ({ data, innerRef }) => {
 
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
 
-    const { inputData, deviceId, dbFieldName } = data;
-    const { toolTip, adminDevices } = useContext(Context);
+    const { inputData, infoId, deviceId, dbFieldName } = data;
+    const { toolTip, adminDevicesInfo } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
@@ -35,11 +35,11 @@ const TdDescriptionInputText = ({ data, innerRef }) => {
     }
 
     const onButtonClickHandler = async () => {
-        if (isDeviceStateChanged(adminDevices, deviceId, dbFieldName, input)) {
+        if (isDeviceInfoStateChanged(adminDevicesInfo, infoId, dbFieldName, input)) {
             setLoading(true);
-            await changeDeviceData(deviceId, dbFieldName, input);
+            // await changeDeviceInfoData(infoId, dbFieldName, input);
             setLoading(false);
-            adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
+            adminDevicesInfo.setUpdateDataTrigger(prev => !adminDevicesInfo.updateDataTrigger());
         }
         setEdit(false);
         toolTip.setIsAvailable(true);
