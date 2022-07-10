@@ -43,25 +43,17 @@ class DeviceInfoController {
                 console.log(99)
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, typeId, brandId, name, price, rate } = req.body;
-            console.log(req.body)
-
+            let {id, title, description } = req.body;
             let field = null;
-            let newData = typeId ?? brandId ?? name ?? price ?? rate;
-            if(typeId){
-                field = 'typeId';
-            }else if(brandId){
-                field = 'brandId';
-            }else if(name){
-                field = 'name';
-            }else if(price){
-                field = 'price';
-            }else if(rate){
-                field = 'rate';
+            let newData = title ?? description;
+            if(title){
+                field = 'title';
+            }else if(description){
+                field = 'description';
             }else{
                 return next(ApiError.badRequest('update device error'));
             }
-            const data = await deviceService.update(id, field, newData);
+            const data = await infoService.update(id, field, newData);
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));
