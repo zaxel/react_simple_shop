@@ -45,11 +45,3 @@ export const updateDevice = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/device/' , {id, [dbFieldName]: data});
     return updatedData.data; 
 }
-
-
-export const fetchDeviceInfo = async (deviceId, sortBy, sortDirection) => {
-    const {data} = await $host.get(`api/device/descriptions/${deviceId}`, {params:{
-        sortBy, sortDirection
-    }}); 
-    return data;
-}
