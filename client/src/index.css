@@ -49,6 +49,10 @@ button:active {
     width: 16px;
     height: 16px;
 }
+.spinner__device-info{
+    width: 100%;
+    height: 100%;
+}
 /*Spinner End*/
 
 /*Error Page Start*/
@@ -391,6 +395,8 @@ button:active {
     max-width: 300px;
 }
 /*admin page end*/
+
+
 /*device modal start*/
 .device-modal__select{
     max-width: 300px;
@@ -773,9 +779,6 @@ button:active {
     margin: 0 auto;
 }
 
-.modal-table .modal-dialog{
-    min-width: fit-content;
-}
 
 /*account orders end*/
 /*stripped table start*/
