@@ -6,14 +6,19 @@ import ThDescriptionTooltip from './components/ThDescriptionTooltip';
 import TrDescriptions from './components/TrDescriptions';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
+import { fetchInfo } from '../../../../utils/adminDeviceInfo';
 
 const AdminDeviceInfoModal = observer(({ show, onHide }) => {
     const { toolTip, adminDevicesInfo } = useContext(Context);
     let thRefs = useRef([]);
 
     useEffect(()=>{
-        console.log(88)
-    }, [])
+        const deviceId = adminDevicesInfo.info?.rows?.[0].deviceId;
+
+        if(deviceId){
+            fetchInfo(adminDevicesInfo, deviceId)
+        }  
+    }, [adminDevicesInfo.updateDataTrigger])
 
     const ths = [
         { title: 'title', sortBy: 'title' },
@@ -70,7 +75,7 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
             </Modal.Header>
             <Modal.Body>
             {adminDevicesInfo.loading 
-                ? <div className="spinner">
+                ? <div className="spinner spinner__device-info">
                     <Spinner animation="border" />
                     </div>
                 : <Form.Group className="mb-3">

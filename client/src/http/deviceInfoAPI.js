@@ -8,6 +8,11 @@ export const fetchDeviceInfo = async (deviceId, sortBy, sortDirection) => {
 }
 
 export const updateDeviceInfo = async (id, dbFieldName, data) => {
-    const updatedData = await $authHost.put('api/device/info' , {id, [dbFieldName]: data});
-    return updatedData.data; 
+    try{
+        const updatedData = await $authHost.put('api/device/info' , {id, [dbFieldName]: data});
+        return updatedData.data; 
+    }catch(e){
+        console.log(e)
+    }
+    
 }
