@@ -8,6 +8,7 @@ export default class AdminDevicesStore{
     _updateDataTrigger = false;
     _loading = true;
     _info = {};
+    _newInfo = [];  // [{ id: 18, title: 'tester', description: 'some description' }, ... ]
 
     constructor(){
         makeAutoObservable(this);
@@ -15,6 +16,18 @@ export default class AdminDevicesStore{
     
     setInfo(info){
         this._info = info;
+    }
+    refreshNewInfo(){
+        this._newInfo = [];
+    }
+    setNewInfoInput(id, fieldName, value){
+        this._newInfo.find(field=>field.id===id)[fieldName] = value;
+    }
+    addNewInfoLine(id){
+        this._newInfo.push({ id, title: '', description: '' });
+    }
+    dropNewInfoLine(id){
+        this._newInfo = this._newInfo.filter(line => line.id !== id);
     }
     setSortDirection(direction){
         this._sortDirection = direction;
@@ -34,6 +47,10 @@ export default class AdminDevicesStore{
     get info(){
         return this._info;
     }
+    get newInfo(){
+        return this._newInfo;
+    }
+    
     get sortDirection(){
         return this._sortDirection;
     }

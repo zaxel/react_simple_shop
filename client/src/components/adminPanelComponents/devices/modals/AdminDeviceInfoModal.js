@@ -7,17 +7,19 @@ import TrDescriptions from './components/TrDescriptions';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { fetchInfo } from '../../../../utils/adminDeviceInfo';
+import TrDescNewLine from './components/TrDescNewLine';
 
 const AdminDeviceInfoModal = observer(({ show, onHide }) => {
-    const { toolTip, adminDevicesInfo } = useContext(Context);
+    
+    const { adminDevicesInfo, toolTip } = useContext(Context);
     let thRefs = useRef([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         const deviceId = adminDevicesInfo.info?.rows?.[0].deviceId;
 
-        if(deviceId){
+        if (deviceId) {
             fetchInfo(adminDevicesInfo, deviceId)
-        }  
+        }
     }, [adminDevicesInfo.updateDataTrigger])
 
     const ths = [
@@ -32,11 +34,14 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
         { id: 22, title: 'fixer', description: 'some descrioption' },
         { id: 1, title: 'box', description: 'some descrioption' },
         { id: 16, title: 'jam', description: 'some descrioption' },
-        { id: 4, title: 'butter', description: 'some descrioption'},
+        { id: 4, title: 'butter', description: 'some descrioption' },
         { id: 5, title: 'table', description: 'some descrioption' },
     ]
 
-
+    const onHidePressed = () => {
+        onHide();
+        adminDevicesInfo.refreshNewInfo();
+    }
 
     const onRowClickHandler = () => {
         toolTip.setIsAvailable(false);
@@ -64,38 +69,63 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
 
 
     // const trs = tds.map((el, i) => {
-          const trs = adminDevicesInfo.info?.rows?.map((el, i) => {
+    const trs = adminDevicesInfo.info?.rows?.map((el, i) => {
         return <TrDescriptions key={el.id} data={el} />
     })
+    
+   
+
+    const addNewLine = () => {
+        const id = uuidv4();
+        adminDevicesInfo.addNewInfoLine(id);
+    }
+    const dropNewLine = (id) => {
+        adminDevicesInfo.dropNewInfoLine(id);
+    }
+
+    const trsNewLine = adminDevicesInfo.newInfo?.map((el, i) => {
+        return <TrDescNewLine key={el.id} data={{ id: el.id , dropNewLine}} /> 
+    })
+
 
     return (
-        <Modal className='modal-table' centered show={show} onHide={onHide}>
+        <Modal className='modal-table' centered show={show} onHide={onHidePressed}>
             <Modal.Header closeButton>
                 <Modal.Title>Change Device Descriptions</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            {adminDevicesInfo.loading 
-                ? <div className="spinner spinner__device-info">
-                    <Spinner animation="border" />
+                {adminDevicesInfo.loading
+                    ? <div className="spinner spinner__device-info">
+                        <Spinner animation="border" />
                     </div>
-                : <Form.Group className="mb-3">
-                    <table className='stripped-table'>
-                        <thead>
-                            <tr>
-                                {thsWithTooltip}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {trs}
-                        </tbody>
-                    </table>
-                </Form.Group>}
-            
-                
+                    : <Form.Group className="mb-3">
+                        <table className='stripped-table'>
+                            <thead>
+                                <tr>
+                                    {thsWithTooltip}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {trs}
+                                {trsNewLine}
+                            </tbody>
+                        </table>
+                    </Form.Group>}
+
+
 
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={onHide}>
+            <Modal.Footer className="admin-device__footer-modal">
+                <div>
+                    <Button className="admin-device__add-button" variant="primary" onClick={addNewLine}>
+                        Add new info line
+                    </Button>
+                    <Button variant="primary" onClick={onHide}>
+                        Save
+                    </Button>
+                </div>
+
+                <Button variant="secondary" onClick={onHidePressed}>
                     Close
                 </Button>
             </Modal.Footer>
