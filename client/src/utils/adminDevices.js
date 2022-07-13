@@ -12,10 +12,8 @@ export const changeDeviceData = async(id, dbFieldName, data) => {
     return updated;
 }
 export const deleteDevice = async(id) => {
-  console.log('delete device admin device')  
-  return {}
-  // const deleted = await deleteDeviceReq(id); 
-    // return deleted;
+  const deleted = await deleteDeviceReq(id); 
+  return deleted;
 }
 
 export const fetchPage = async(adminDevicesStore) => {

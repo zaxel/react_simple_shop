@@ -6,6 +6,7 @@ import TdImgInputFile from './TdImgInputFile';
 import TdTypeSelect from './TdTypeSelect';
 import TdBrandSelect from './TdBrandSelect';
 import TdDescriptionLink from './TdDescriptionLink';
+import TdDelete from './TdDelete';
 import { adminPageFormatDate } from '../../../../utils/formatDate';
 
 const TrDevices = ({ data }) => {
@@ -31,6 +32,9 @@ const TrDevices = ({ data }) => {
     
     let ref6 = (el) => (tdRefs.current[6] = el);
     let toolTipInfo6 = {i:6, myRefs: tdRefs, text: 'edit device descriptions'};
+    
+    let ref7 = (el) => (tdRefs.current[7] = el);
+    let toolTipInfo7 = {i:7, myRefs: tdRefs, text: 'delete device'};
 
     return (
         <tr >
@@ -43,12 +47,7 @@ const TrDevices = ({ data }) => {
             <TdTypeSelect toolTipInfo={toolTipInfo4} innerRef={ref4} data={{inputData: data.typeId, deviceId: data.id, dbFieldName: 'typeId'}}/>
             <TdBrandSelect toolTipInfo={toolTipInfo5} innerRef={ref5} data={{inputData: data.brandId, deviceId: data.id, dbFieldName: 'brandId'}}/>
             <TdDescriptionLink toolTipInfo={toolTipInfo6} innerRef={ref6} data={data.onDescriptionClickHandler}/>
-
-            {/* <TdUserRoleSelect toolTipInfo={toolTipInfo1} innerRef={ref1} data={{inputData: data.role, userId: data.id, dbFieldName: 'role'}}/> */}
-            {/* <TdIsActivatedSelect toolTipInfo={toolTipInfo2} innerRef={ref2} data={{inputData: data.isActivated.toString(), userId: data.id, dbFieldName: 'is_activated'}}/> */}
-            {/* <td>{adminPageFormatDate(data.createdAt)}</td> */}
-            {/* <TdModalLink toolTipInfo={toolTipInfo3} innerRef={ref3} data={data.onOrderClickHandler}/> */}
-            {/* <TdDelete toolTipInfo={toolTipInfo4} innerRef={ref4} data={{userId: data.id}}/> */}
+            <TdDelete toolTipInfo={toolTipInfo7} innerRef={ref7} data={{deviceId: data.id}}/>
         </tr>
     );
 };
