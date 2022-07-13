@@ -1,21 +1,21 @@
 ﻿import React, { useEffect, useContext, useRef, useState } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-// import { deleteDescription } from '../../../../../utils/adminDevices';
+import { deleteDeviceInfoLine } from '../../../../../utils/adminDeviceInfo';
 import { Spinner } from 'react-bootstrap';
 
 const TdDelete = ({data , innerRef }) => {
     const { descriptionId } = data;
-    const { toolTip, adminDevices } = useContext(Context);
+    const { toolTip, adminDevicesInfo } = useContext(Context);
     const [loading, setLoading] = useState(false);
     const onButtonClickHandler = async() => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this description?')){
             setLoading(true);
-            setTimeout(()=>setLoading(false), 2000);
-            // await deleteDescription(descriptionId);
-            // adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
+            await deleteDeviceInfoLine(descriptionId);
+            adminDevicesInfo.setUpdateDataTrigger(prev=>!adminDevicesInfo.updateDataTrigger());
+            setLoading(false);
         }
         toolTip.setIsAvailable(true);
     }

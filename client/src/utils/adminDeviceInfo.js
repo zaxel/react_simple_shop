@@ -1,4 +1,4 @@
-﻿import { fetchDeviceInfo, updateDeviceInfo } from "../http/deviceInfoAPI";
+﻿import { fetchDeviceInfo, updateDeviceInfo, deleteDeviceInfoLineReq } from "../http/deviceInfoAPI";
 
 export const fetchAllInfo = async (currentStore, deviceId, sortBy, sortDirection) => {
   const fetchedDeviceInfo = await fetchDeviceInfo(deviceId, sortBy, sortDirection = 'ASC');
@@ -21,9 +21,7 @@ export const changeDeviceInfoData = async (deviceId, dbFieldName, data) => {
   const updated = await updateDeviceInfo(deviceId, dbFieldName, data);
   return updated;
 }
-export const deleteDeviceInfo = async (deviceId) => {
-  console.log('delete device info')
-  return {}
-  // const deleted = await deleteDeviceReq(id); 
-  // return deleted;
+export const deleteDeviceInfoLine = async (lineId) => {
+  const deleted = await deleteDeviceInfoLineReq(lineId); 
+  return deleted;
 }

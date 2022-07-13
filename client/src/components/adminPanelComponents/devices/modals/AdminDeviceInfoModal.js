@@ -59,19 +59,7 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
 
 
 
-    const thsWithTooltip = ths.map((el, i) => {
-
-        const myKey = uuidv4();
-        let ref = (el) => (thRefs.current[i] = el);
-        let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-        return <ThDescriptionTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
-    })
-
-
-    // const trs = tds.map((el, i) => {
-    const trs = adminDevicesInfo.info?.rows?.map((el, i) => {
-        return <TrDescriptions key={el.id} data={el} />
-    })
+    
     
    
 
@@ -102,6 +90,18 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
         triggerModalUpdate();
     }
 
+    
+    const thsWithTooltip = ths.map((el, i) => {
+        const myKey = uuidv4();
+        let ref = (el) => (thRefs.current[i] = el);
+        let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
+        return <ThDescriptionTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+    })
+
+    // const trs = tds.map((el, i) => {
+    const trs = adminDevicesInfo.info?.rows?.map((el, i) => {
+        return <TrDescriptions key={el.id} data={el} />
+    })
     const trsNewLine = adminDevicesInfo.newInfo?.map((el, i) => {
         return <TrDescNewLine key={el.id} data={{ id: el.id , dropNewLine}} /> 
     })

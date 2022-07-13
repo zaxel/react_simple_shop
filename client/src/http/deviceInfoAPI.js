@@ -6,7 +6,6 @@ export const fetchDeviceInfo = async (deviceId, sortBy, sortDirection) => {
     }}); 
     return data;
 }
-
 export const updateDeviceInfo = async (id, dbFieldName, data) => {
     try{
         const updatedData = await $authHost.put('api/device/info' , {id, [dbFieldName]: data});
@@ -14,9 +13,7 @@ export const updateDeviceInfo = async (id, dbFieldName, data) => {
     }catch(e){
         console.log(e)
     }
-    
 }
-
 export const createDeviceInfos = async (newInfos) => {
     try{
         const {data} = await $authHost.post('api/device/info', newInfos);
@@ -24,6 +21,10 @@ export const createDeviceInfos = async (newInfos) => {
     }catch(e){
         console.log(e);
     }
-
-    
+}
+export const deleteDeviceInfoLineReq = async (id) => {
+    const deletedOrder = await $authHost.delete('api/device/info' , {
+        data: {id}
+      });
+    return deletedOrder.data;
 }
