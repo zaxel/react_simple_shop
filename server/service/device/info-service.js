@@ -19,5 +19,11 @@ class InfoService {
         const updatedData = await DeviceInfo.bulkCreate(newInfoLines);
         return { updatedData };
     }
+    delete = async (id) => {
+        const updatedData = await DeviceInfo.destroy({
+            where: { id }
+          });
+        return {updatedData};
+    }
 }
 module.exports = new InfoService();

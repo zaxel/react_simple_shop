@@ -33,7 +33,7 @@ class DeviceInfoController {
             const info = await infoService.createBulk(newInfoLines);
             return res.json(info); 
         } catch (e) {
-            next(ApiError.forbidden(e.message));
+            next(ApiError.forbidden(e.message)); 
         }
 
     }
@@ -60,7 +60,15 @@ class DeviceInfoController {
             next(ApiError.forbidden(e.message));
         }
     }
-
+    async delete(req, res, next){
+        try{
+            const { id } = req.body;
+            const data = await infoService.delete(id);
+            return res.json(data);
+        }catch(e){
+            next(ApiError.badRequest(e.message + ': could not delete device info.'));
+        }
+    }
 }
 
 module.exports = new DeviceInfoController();
