@@ -15,7 +15,7 @@ const TdDelete = ({data , innerRef }) => {
             setLoading(true);
             await deleteDevice(deviceId);
             setLoading(false)
-            // adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
+            adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
         }
         toolTip.setIsAvailable(true);
     }

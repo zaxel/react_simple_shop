@@ -79,5 +79,11 @@ class DeviceService {
           });
         return {updatedData};
     }
+    delete = async (id) => {
+        const updatedData = await Device.destroy({
+            where: { id }
+          });
+        return {updatedData};
+    }
 }
 module.exports = new DeviceService();

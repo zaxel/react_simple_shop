@@ -16,4 +16,5 @@ router.put('/',
     body('price').optional().isNumeric(),
     checkRole('ADMIN'), 
     deviceController.update);
+router.delete('/', checkRole('ADMIN'), deviceController.delete);
 module.exports = router;
