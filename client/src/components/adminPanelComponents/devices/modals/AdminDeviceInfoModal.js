@@ -8,14 +8,14 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { fetchInfo } from '../../../../utils/adminDeviceInfo';
 import TrDescNewLine from './components/TrDescNewLine';
+import { createDeviceInfos } from '../../../../http/deviceInfoAPI';
 
 const AdminDeviceInfoModal = observer(({ show, onHide }) => {
     
     const { adminDevicesInfo, toolTip } = useContext(Context);
     let thRefs = useRef([]);
-
+    const deviceId = adminDevicesInfo.deviceId;
     useEffect(() => {
-        const deviceId = adminDevicesInfo.info?.rows?.[0].deviceId;
 
         if (deviceId) {
             fetchInfo(adminDevicesInfo, deviceId)
@@ -82,6 +82,25 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
     const dropNewLine = (id) => {
         adminDevicesInfo.dropNewInfoLine(id);
     }
+    const triggerModalUpdate = () => {
+        adminDevicesInfo.setUpdateDataTrigger(!adminDevicesInfo.updateDataTrigger);
+    }
+    const onSaveClickHandler = async() => {
+        const newLinesNoEmptyFields = adminDevicesInfo.newInfo
+            .filter(el=>el.description !== '' && el.title !== '')
+            .map(el => {
+                return {deviceId: deviceId, description: el.description, title:el.title};
+            })
+
+        if(!newLinesNoEmptyFields.length){
+            alert('no data to be updated');
+            adminDevicesInfo.refreshNewInfo();
+            return;
+        }
+        await createDeviceInfos(newLinesNoEmptyFields);
+        adminDevicesInfo.refreshNewInfo();
+        triggerModalUpdate();
+    }
 
     const trsNewLine = adminDevicesInfo.newInfo?.map((el, i) => {
         return <TrDescNewLine key={el.id} data={{ id: el.id , dropNewLine}} /> 
@@ -120,9 +139,9 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
                     <Button className="admin-device__add-button" variant="primary" onClick={addNewLine}>
                         Add new info line
                     </Button>
-                    <Button variant="primary" onClick={onHide}>
-                        Save
-                    </Button>
+                    {!!adminDevicesInfo.newInfo.length && <Button variant="primary" onClick={onSaveClickHandler}>
+                        Save new info lines
+                    </Button>}
                 </div>
 
                 <Button variant="secondary" onClick={onHidePressed}>

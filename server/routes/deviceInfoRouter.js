@@ -4,6 +4,8 @@ const router = new Router();
 const deviceInfoController = require('../controllers/deviceInfoController');
 const checkRole = require('../middleware/checkRoleMiddleware');
 
+router.post('/', deviceInfoController.createBulk);
+// router.post('/', checkRole('ADMIN'), deviceInfoController.create);
 router.get('/:deviceId', deviceInfoController.getInfo);
 router.put('/',
     body('description').optional().isLength({min: 1}),

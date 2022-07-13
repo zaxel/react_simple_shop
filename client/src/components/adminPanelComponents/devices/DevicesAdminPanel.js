@@ -73,8 +73,7 @@ const DevicesAdminPanel = observer(() => {
 
   const onDescriptionClickHandler = (deviceId) => {
     
-    
-    
+    adminDevicesInfo.setDeviceId(deviceId);
     fetchInfo(adminDevicesInfo, deviceId)
     setDeviceInfoModalVisible(true);
   }

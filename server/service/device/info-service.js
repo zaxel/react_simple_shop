@@ -15,5 +15,9 @@ class InfoService {
         });
         return { updatedData };
     }
+    createBulk = async (newInfoLines) => {
+        const updatedData = await DeviceInfo.bulkCreate(newInfoLines);
+        return { updatedData };
+    }
 }
 module.exports = new InfoService();

@@ -9,6 +9,7 @@ export default class AdminDevicesStore{
     _loading = true;
     _info = {};
     _newInfo = [];  // [{ id: 18, title: 'tester', description: 'some description' }, ... ]
+    _deviceId = null;
 
     constructor(){
         makeAutoObservable(this);
@@ -41,6 +42,9 @@ export default class AdminDevicesStore{
     setLoading(bool){
         this._loading = bool;
     }
+    setDeviceId(deviceId){
+        this._deviceId = deviceId;
+    }
     
    
     
@@ -62,5 +66,8 @@ export default class AdminDevicesStore{
     }
     get loading(){
         return this._loading;
+    }
+    get deviceId(){
+        return this._deviceId;
     }
 }

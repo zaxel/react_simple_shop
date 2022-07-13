@@ -16,3 +16,14 @@ export const updateDeviceInfo = async (id, dbFieldName, data) => {
     }
     
 }
+
+export const createDeviceInfos = async (newInfos) => {
+    try{
+        const {data} = await $authHost.post('api/device/info', newInfos);
+        return data;
+    }catch(e){
+        console.log(e);
+    }
+
+    
+}

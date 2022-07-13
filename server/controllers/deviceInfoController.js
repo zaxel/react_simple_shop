@@ -25,12 +25,13 @@ class DeviceInfoController {
     }
 
 
-    async create(req, res, next) {
+    async createBulk(req, res, next) {
         try {
-            let { name, price, brandId, typeId, info } = req.body;
-            let img = req?.files?.img || null;
-            const device = await deviceService.create(name, price, brandId, typeId, info, img);
-            return res.json(device);
+            // deviceId: 18, title: 'tester', description: 'some description'
+            let newInfoLines = req.body;
+            console.log(55, newInfoLines)
+            const info = await infoService.createBulk(newInfoLines);
+            return res.json(info); 
         } catch (e) {
             next(ApiError.forbidden(e.message));
         }
