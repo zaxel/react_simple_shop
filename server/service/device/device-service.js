@@ -79,6 +79,19 @@ class DeviceService {
           });
         return {updatedData};
     }
+
+
+
+    updateImg = async (id, img) => {
+        if(!img) {
+            throw new Error('No image received!')
+        }
+        let fileName = await fileService.imageResolve(img);
+        const updatedData = await Device.update({ 'img': fileName }, {
+            where: { id }
+          });
+        return {updatedData};
+    }
     delete = async (id) => {
         const updatedData = await Device.destroy({
             where: { id }

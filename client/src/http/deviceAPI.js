@@ -45,6 +45,10 @@ export const updateDevice = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/device/' , {id, [dbFieldName]: data});
     return updatedData.data; 
 }
+export const updateImg = async (formData) => {
+    const updatedData = await $authHost.patch('api/device/img-update/' , formData);
+    return updatedData.data; 
+}
 export const deleteDeviceReq = async (id) => {
     const deletedOrder = await $authHost.delete('api/device/' , {
         data: {id}

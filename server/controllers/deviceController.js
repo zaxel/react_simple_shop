@@ -63,7 +63,6 @@ class DeviceController {
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()){
-                console.log(99)
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
             let { id, typeId, brandId, name, price, rate } = req.body;
@@ -85,6 +84,20 @@ class DeviceController {
                 return next(ApiError.badRequest('update device error'));
             }
             const data = await deviceService.update(id, field, newData);
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async updateImg(req, res, next){
+        try {
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { id } = req.body;
+            let img = req?.files?.img || null;
+            const data = await deviceService.updateImg(id, img);
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

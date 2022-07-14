@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useRef, useState } from 'react';
 import { Context } from '../../../..';
-import { changeDeviceData } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
+import { updateImg } from '../../../../http/deviceAPI';
 import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
 
@@ -22,11 +22,22 @@ const TdImgInputFile = ({ data, innerRef }) => {
     }
 
     const onConfirmBlurHandler = (e) => {
-         if (!(e.relatedTarget === fileRef.current)) {
+        if (!(e.relatedTarget === fileRef.current)) {
             setEdit(false);
         }
     }
+    const setNewImg = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('id', deviceId);
+            formData.append('img', input);
+            const data = await updateImg(formData);
 
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+
+    }
     const onConfirmClickHandler = async () => {
         // if (isDeviceStateChanged(adminDevices, deviceId, dbFieldName, input)) {
         //     setLoading(true);
@@ -34,8 +45,18 @@ const TdImgInputFile = ({ data, innerRef }) => {
         //     setLoading(false);
         //     adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
         // }
+        if (!input) {
+            alert('no file added')
+            return;
+        } else if (input.type !== "image/jpeg") {
+            alert('only jpg files accepted');
+            return;
+        }
+        setLoading(true);
         setEdit(false);
-        console.log('confirm')
+        await setNewImg();
+        setLoading(false);
+        adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
     }
     const onDeleteClickHandler = async () => {
         console.log('delete image')
@@ -60,12 +81,12 @@ const TdImgInputFile = ({ data, innerRef }) => {
         <td>
             {!edit
                 ? <div className='td-active' >
-                    <img className='stripped-table__device-img' onClick={onImgClickHandler} src={process.env.REACT_APP_API_URL + inputData} />
+                    <img alt='device' className='stripped-table__device-img' onClick={onImgClickHandler} src={process.env.REACT_APP_API_URL + inputData} />
                     <button className='td-active stripped-table__button-edit' onClick={onEditClickHandler}>edit</button>
                     <button className='td-active stripped-table__button-delete' onClick={onDeleteClickHandler}>X</button>
                 </div>
                 : <div className='display-flex'>
-                    <input className='stripped-table__input-file' type='file' ref={fileRef} onChange={onInputChange} />
+                    <input className='stripped-table__input-file' type='file' accept="image/*" ref={fileRef} onChange={onInputChange} />
                     <button className='stripped-table__button-confirm' ref={confirmRef} onClick={onConfirmClickHandler} onBlur={onConfirmBlurHandler}>update</button>
                 </div>}
             <AdminDeviceImgModal src={process.env.REACT_APP_API_URL + inputData} show={showModalImg} onHide={() => setShowModalImg(false)} />
