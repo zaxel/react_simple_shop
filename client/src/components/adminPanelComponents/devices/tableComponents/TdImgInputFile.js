@@ -1,10 +1,11 @@
-﻿import React, { useContext, useRef, useState } from 'react';
+﻿import React, { useContext, useRef, useState, useEffect } from 'react';
 import { Context } from '../../../..';
 import { Spinner } from 'react-bootstrap';
 import { updateImg } from '../../../../http/deviceAPI';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
+import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 
 const TdImgInputFile = ({ data, innerRef }) => {
 
@@ -19,12 +20,15 @@ const TdImgInputFile = ({ data, innerRef }) => {
     const [loading, setLoading] = useState(false);
 
     const onEditClickHandler = () => {
+        toolTip.setIsToolTipShown(false);
+        toolTip.setIsAvailable(false);
         setEdit(true);
     }
 
     const onConfirmBlurHandler = (e) => {
         if (!(e.relatedTarget === fileRef.current)) {
             setEdit(false);
+            toolTip.setIsAvailable(true);
         }
     }
     const setNewImg = async () => {
@@ -54,6 +58,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
         adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
     }
     const onDeleteClickHandler = async () => {
+        toolTip.setIsToolTipShown(false);
         const isDeleteConfirmed = window.confirm('delete device image permanently?')
         if(isDeleteConfirmed){
             setLoading(true);
@@ -72,6 +77,11 @@ const TdImgInputFile = ({ data, innerRef }) => {
         setInput(prev => e.target.files[0])
     }
 
+    useEffect(() => {
+        //   destroy all event listeners tooltips
+        return () => toolTip?.hoverIntentDestroy();
+    }, [])
+
     if (loading) {
         return (
             <td className="td-spinner">
@@ -80,7 +90,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
         )
     }
     return (
-        <td>
+        <td ref={innerRef}>
             {!edit
                 ? <div className='td-active' >
                     <img alt='device' className='stripped-table__device-img' onClick={onImgClickHandler} src={process.env.REACT_APP_API_URL + inputData} />
@@ -96,4 +106,4 @@ const TdImgInputFile = ({ data, innerRef }) => {
     );
 };
 
-export default TdImgInputFile;
+export default withTooltip(TdImgInputFile);
