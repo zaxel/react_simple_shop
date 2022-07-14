@@ -79,9 +79,6 @@ class DeviceService {
           });
         return {updatedData};
     }
-
-
-
     updateImg = async (id, img) => {
         if(!img) {
             throw new Error('No image received!')

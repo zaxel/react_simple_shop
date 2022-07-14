@@ -2,6 +2,7 @@
 import { Context } from '../../../..';
 import { Spinner } from 'react-bootstrap';
 import { updateImg } from '../../../../http/deviceAPI';
+import { changeDeviceData } from '../../../../utils/adminDevices';
 import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
 
@@ -39,12 +40,6 @@ const TdImgInputFile = ({ data, innerRef }) => {
 
     }
     const onConfirmClickHandler = async () => {
-        // if (isDeviceStateChanged(adminDevices, deviceId, dbFieldName, input)) {
-        //     setLoading(true);
-        //     await changeDeviceData(deviceId, dbFieldName, input);
-        //     setLoading(false);
-        //     adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
-        // }
         if (!input) {
             alert('no file added')
             return;
@@ -59,7 +54,14 @@ const TdImgInputFile = ({ data, innerRef }) => {
         adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
     }
     const onDeleteClickHandler = async () => {
-        console.log('delete image')
+        const isDeleteConfirmed = window.confirm('delete device image permanently?')
+        if(isDeleteConfirmed){
+            setLoading(true);
+            const noImageName = "no-image.jpg"
+            const data = await changeDeviceData(deviceId, dbFieldName, noImageName);
+            setLoading(false);
+            adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
+        } 
     }
     const onImgClickHandler = async () => {
         setShowModalImg(true);

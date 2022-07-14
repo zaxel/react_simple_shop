@@ -65,11 +65,9 @@ class DeviceController {
             if(!errors.isEmpty()){
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, typeId, brandId, name, price, rate } = req.body;
-            console.log(req.body)
-
+            let { id, typeId, brandId, name, price, rate, img } = req.body;
             let field = null;
-            let newData = typeId ?? brandId ?? name ?? price ?? rate;
+            let newData = typeId ?? brandId ?? name ?? price ?? rate ?? img;
             if(typeId){
                 field = 'typeId';
             }else if(brandId){
@@ -80,6 +78,8 @@ class DeviceController {
                 field = 'price';
             }else if(rate){
                 field = 'rate';
+            }else if(img){
+                field = 'img';
             }else{
                 return next(ApiError.badRequest('update device error'));
             }
