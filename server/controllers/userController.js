@@ -1,7 +1,5 @@
 ﻿const ApiError = require('../error/ApiError');
 const userService = require('../service/user/user-service');
-
-
 const { validationResult } = require('express-validator');
 
 class UserController {
@@ -42,7 +40,6 @@ class UserController {
     }
     async activate(req, res, next){
         try{
-            
             const activationLink = req.params.link;
             await userService.activate(activationLink);
             return res.redirect(process.env.CLIENT_URL);
@@ -54,15 +51,12 @@ class UserController {
     async refresh(req, res, next){
         try{
             const { refreshToken } = req.cookies;
-
             const userData = await userService.refresh(refreshToken);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true});
             return res.json(userData);
-
         }catch(e){
             next(ApiError.badRequest(e.message + ': could not refresh tokens.'));
         }
-    
     }
 
     async getAll(req, res, next){
@@ -80,18 +74,9 @@ class UserController {
             if(!errors.isEmpty()){
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, email, role, is_activated } = req.body;
-            let field = null;
-            let newData = email ?? role ?? is_activated;
-            if(email){
-                field = 'email';
-            }else if(role){
-                field = 'role';
-            }else if(is_activated){
-                field = 'is_activated';
-            }else{
-                return next(ApiError.badRequest('no required field in req body'));
-            }
+            const { id } = req.body;
+            const field = Object.keys(req.body)[1];
+            const newData = req.body[field]; 
             const data = await userService.update(id, field, newData);
             return res.json(data);
         } catch (e) {
