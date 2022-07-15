@@ -17,8 +17,8 @@ const AppRouter = observer(() => {
                         <Component />
                     </PrivateRouteWrapper>
                 } >
-                    //nested routes - user account routes
-                    {NestedComponent && NestedComponent()}
+                    {//nested routes - user account routes
+                    NestedComponent && NestedComponent()}
                 </Route>
             })}
             {user.isAuth && user.isSuperUser && adminRoutes.map(({ path, Component, NestedComponent }) => {
@@ -26,8 +26,8 @@ const AppRouter = observer(() => {
                     <PrivateRouteWrapper>
                         <Component />
                     </PrivateRouteWrapper>} >
-                        //nested routes - user account routes
-                        {NestedComponent && NestedComponent()}
+                        {//nested routes - user account routes
+                        NestedComponent && NestedComponent()}
                     </Route>
             })}
             {publicRoutes.map(({ path, Component }) => {

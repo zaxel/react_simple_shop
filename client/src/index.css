@@ -40,10 +40,13 @@ button:active {
 /*Spinner Start*/
 .spinner{
     width: 100vw;
-    height: 100vh;
+    height: 77vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.spinner__shop{
+    height: 100vh;
 }
 .td-spinner .spinner-border{
     width: 16px;

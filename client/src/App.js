@@ -39,7 +39,7 @@ const App = observer(() => {
 
   if (loading) {
     return (
-      <div className="spinner">
+      <div className="spinner spinner__shop">
         <Spinner animation="border" />
       </div>
     )
