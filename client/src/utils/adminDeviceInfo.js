@@ -1,7 +1,7 @@
 ﻿import { fetchDeviceInfo, updateDeviceInfo, deleteDeviceInfoLineReq } from "../http/deviceInfoAPI";
 
 export const fetchAllInfo = async (currentStore, deviceId, sortBy, sortDirection) => {
-  const fetchedDeviceInfo = await fetchDeviceInfo(deviceId, sortBy, sortDirection = 'ASC');
+  const fetchedDeviceInfo = await fetchDeviceInfo(deviceId, sortBy, sortDirection);
   if (fetchedDeviceInfo.count === 0) console.log('Nothing found!')
   await currentStore.setInfo(fetchedDeviceInfo);
 }

@@ -1,29 +1,25 @@
-﻿import React, { useEffect, useContext, useRef } from 'react';
+﻿import React, { useEffect, useContext } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { fetchAllDevices } from '../../../../../utils/adminDevices';
+import { fetchAllInfo } from '../../../../../utils/adminDeviceInfo';
 
 const ThDescriptionTooltip = ({ data, innerRef}) => {
-    const { toolTip, devices } = useContext(Context);
+    const { toolTip, adminDevicesInfo } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        console.log('sort')
-        // devices.setLoading(true);
-        // toolTip.setIsToolTipShown(false);
-        // toolTip.setIsAvailable(false);
-        // if(devices.sortBy === data){
-        //     devices.sortDirection === 'ASC' ? devices.setSortDirection('DESC') : devices.setSortDirection('ASC');
-        // }else{
-        //     devices.setSortDirection('ASC');
-        // }
-        // devices.setSortBy(data);
-        // await fetchAllDevices(devices, devices.sortBy, devices.sortDirection, devices.itemsPerPage, devices.activePage, devices.searchBy, devices.searchByPrase);
-        // await devices.setPagesTotal(Math.ceil(devices.devices.count/devices.itemsPerPage));
-        // devices.setLoading(false);
-        // toolTip.setIsAvailable(true);
+        adminDevicesInfo.setLoading(true);
+        toolTip.setIsToolTipShown(false);
+        toolTip.setIsAvailable(false);
+        if(adminDevicesInfo.sortBy === data){
+            adminDevicesInfo.sortDirection === 'ASC' ? adminDevicesInfo.setSortDirection('DESC') : adminDevicesInfo.setSortDirection('ASC');
+        }else{
+            adminDevicesInfo.setSortDirection('ASC');
+        }
+        adminDevicesInfo.setSortBy(data);
+        await fetchAllInfo(adminDevicesInfo, adminDevicesInfo.deviceId, adminDevicesInfo.sortBy, adminDevicesInfo.sortDirection);
+        adminDevicesInfo.setLoading(false);
+        toolTip.setIsAvailable(true);
     }
-
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips
