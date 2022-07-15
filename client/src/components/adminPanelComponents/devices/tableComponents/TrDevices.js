@@ -46,7 +46,7 @@ const TrDevices = ({ data }) => {
             <td>{adminPageFormatDate(Date.parse(data.createdAt))}</td>
             <TdTypeSelect toolTipInfo={toolTipInfo4} innerRef={ref4} data={{inputData: data.typeId, deviceId: data.id, dbFieldName: 'typeId'}}/>
             <TdBrandSelect toolTipInfo={toolTipInfo5} innerRef={ref5} data={{inputData: data.brandId, deviceId: data.id, dbFieldName: 'brandId'}}/>
-            <TdDescriptionLink toolTipInfo={toolTipInfo6} innerRef={ref6} data={data.onDescriptionClickHandler}/>
+            <TdDescriptionLink toolTipInfo={toolTipInfo6} innerRef={ref6} data={{onDescriptionClickHandler:data.onDescriptionClickHandler, name: data.name}}/>
             <TdDelete toolTipInfo={toolTipInfo7} innerRef={ref7} data={{deviceId: data.id}}/>
         </tr>
     );

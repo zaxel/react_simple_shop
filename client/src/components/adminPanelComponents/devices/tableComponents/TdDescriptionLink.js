@@ -3,11 +3,14 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 
 const TdDescriptionLink = ({ data, innerRef }) => {
-    const { toolTip } = useContext(Context);
+    const { toolTip, adminDevicesInfo } = useContext(Context);
+    const { onDescriptionClickHandler, name } = data;
+
     const onClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
-        data(); //show order modal
+        adminDevicesInfo.setDeviceName(name);
+        onDescriptionClickHandler(); //show order modal
         toolTip.setIsAvailable(true);
     }
     useEffect(() => {

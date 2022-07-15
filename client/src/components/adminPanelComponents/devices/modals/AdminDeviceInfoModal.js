@@ -12,8 +12,9 @@ import { createDeviceInfos } from '../../../../http/deviceInfoAPI';
 
 const AdminDeviceInfoModal = observer(({ show, onHide }) => {
     
-    const { adminDevicesInfo, toolTip } = useContext(Context);
+    const { adminDevicesInfo } = useContext(Context);
     let thRefs = useRef([]);
+    const deviceName = adminDevicesInfo.deviceName;
     const deviceId = adminDevicesInfo.deviceId;
     useEffect(() => {
 
@@ -42,26 +43,6 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
         onHide();
         adminDevicesInfo.refreshNewInfo();
     }
-
-    const onRowClickHandler = () => {
-        toolTip.setIsAvailable(false);
-        toolTip.setIsToolTipShown(false);
-        alert('order detail');
-        toolTip.setIsAvailable(true);
-    }
-
-    const onThClickHandler = () => {
-        toolTip.setIsAvailable(false);
-        toolTip.setIsToolTipShown(false);
-        alert('sort');
-        toolTip.setIsAvailable(true);
-    }
-
-
-
-    
-    
-   
 
     const addNewLine = () => {
         const id = uuidv4();
@@ -110,7 +91,7 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
     return (
         <Modal className='modal-table' centered show={show} onHide={onHidePressed}>
             <Modal.Header closeButton>
-                <Modal.Title>Change Device Descriptions</Modal.Title>
+                <Modal.Title>Change "{deviceName}" descriptions</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {adminDevicesInfo.loading
