@@ -1,7 +1,7 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../../PaginationCont';
 import AdminDeviceInfoModal from './modals/AdminDeviceInfoModal';
-import ThAdminDevicesTooltip from './modals/components/ThDescriptionTooltip';
+import ThAdminDevicesTooltip from './tableComponents/ThAdminDevicesTooltip';
 // import Trdevices from '../tableComponents/Trdevices';
 import TrDevices from './tableComponents/TrDevices';
 import { v4 as uuidv4 } from 'uuid';
@@ -45,8 +45,8 @@ const DevicesAdminPanel = observer(() => {
     { title: 'rate', sortBy: 'rate' },
     { title: 'image', sortBy: null },
     { title: 'created', sortBy: 'createdAt' },
-    { title: 'type', sortBy: 'type' },
-    { title: 'brand', sortBy: 'brand' },
+    { title: 'type', sortBy: 'typeId' },
+    { title: 'brand', sortBy: 'brandId' },
     { title: 'descriptions', sortBy: null },
     { title: 'destroy', sortBy: null },
   ]
