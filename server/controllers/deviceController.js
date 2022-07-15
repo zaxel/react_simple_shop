@@ -1,12 +1,6 @@
-﻿const uuid = require('uuid');
-const path = require('path');
-const { Op, Sequelize } = require("sequelize");
-const { Device, DeviceInfo } = require('../models/models');
-const ApiError = require('../error/ApiError');
+﻿const ApiError = require('../error/ApiError');
 const deviceService = require('../service/device/device-service');
 const { validationResult } = require('express-validator');
-
-
 
 class DeviceController {
     async create(req, res, next) {
@@ -18,7 +12,6 @@ class DeviceController {
         } catch (e) {
             next(ApiError.forbidden(e.message));
         }
-
     }
     async createBulk(req, res, next) {
         try {
@@ -65,24 +58,9 @@ class DeviceController {
             if(!errors.isEmpty()){
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, typeId, brandId, name, price, rate, img } = req.body;
-            let field = null;
-            let newData = typeId ?? brandId ?? name ?? price ?? rate ?? img;
-            if(typeId){
-                field = 'typeId';
-            }else if(brandId){
-                field = 'brandId';
-            }else if(name){
-                field = 'name';
-            }else if(price){
-                field = 'price';
-            }else if(rate){
-                field = 'rate';
-            }else if(img){
-                field = 'img';
-            }else{
-                return next(ApiError.badRequest('update device error'));
-            }
+            const { id } = req.body;
+            const field = Object.keys(req.body)[1];
+            const newData = req.body[field]; 
             const data = await deviceService.update(id, field, newData);
             return res.json(data);
         } catch (e) {
