@@ -109,7 +109,7 @@ const DevicesAdminPanel = observer(() => {
   return (
     <div className='user-admin__main account__orders acc-orders'>
       <div>
-        <Search options={[{id: 'id'}, {email: 'email'}]} store={adminDevices} onSubmitSearch={onSubmitSearch}/>
+        <Search options={[{id: 'id'}, {name: 'name'}, {price: 'price'}]} store={adminDevices} onSubmitSearch={onSubmitSearch}/>
         <table className='stripped-table'>
           <thead>
             <tr>

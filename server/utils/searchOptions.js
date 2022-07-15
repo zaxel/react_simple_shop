@@ -34,6 +34,17 @@ exports.searchOrdersOptions = (searchBy, searchPrase) => {
 }
 exports.searchDevicesOptions = (id, brandId, typeId, searchBy, searchPrase) => {
     let where = {};
+    if (searchBy) {
+        const isNumber = isNumeric(searchPrase); 
+        if (isNumber && searchBy==='id' || isNumber && searchBy==='price') {
+            where[searchBy] = searchPrase;
+        } else if (searchPrase === '') {
+            where = null;
+        } else {
+            where[searchBy] = { [Op.iLike]: `%${searchPrase}%` };
+        }
+        return where;
+    }
     if (id) {
         where =  { id: { [Op.or]: id } };
         return where;
