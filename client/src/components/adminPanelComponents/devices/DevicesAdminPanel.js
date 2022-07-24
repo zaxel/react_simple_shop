@@ -11,6 +11,8 @@ import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
 import { fetchPage, fetchSetTypes, fetchSetBrands } from '../../../utils/adminDevices';
 import { fetchInfo } from '../../../utils/adminDeviceInfo';
+import AddDevicesBarContainer from './searchBar/AddDevicesBarContainer';
+import AddDeviceModal from './modals/AddDeviceModal';
 
 
 const DevicesAdminPanel = observer(() => {
@@ -18,6 +20,7 @@ const DevicesAdminPanel = observer(() => {
   let thRefs = useRef([]);
   const { toolTip, adminDevices, adminDevicesInfo } = useContext(Context);
   const [deviceInfoModalVisible, setDeviceInfoModalVisible] = useState(false);
+  const [addDeviceVisible, setAddDeviceVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -109,7 +112,10 @@ const DevicesAdminPanel = observer(() => {
   return (
     <div className='user-admin__main account__orders acc-orders'>
       <div>
+      <div className='account__search-cont'>
         <Search options={[{id: 'id'}, {name: 'name'}, {price: 'price'}]} store={adminDevices} onSubmitSearch={onSubmitSearch}/>
+        <AddDevicesBarContainer setAddDeviceVisible={setAddDeviceVisible}/>
+      </div>
         <table className='stripped-table'>
           <thead>
             <tr>
@@ -121,6 +127,7 @@ const DevicesAdminPanel = observer(() => {
           </tbody>
         </table>
         <AdminDeviceInfoModal show={deviceInfoModalVisible} onHide={onModalHideHandler} />
+        <AddDeviceModal show={addDeviceVisible} onHide={()=>setAddDeviceVisible(false)}/>
       </div>
 
       <PaginationCont currentStore={adminDevices} />

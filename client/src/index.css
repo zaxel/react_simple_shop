@@ -439,6 +439,26 @@ button:active {
 }
 
 /*device modal end*/
+/*device add container start*/
+.account__search-cont{
+    display: flex;
+    justify-content: space-between;
+}
+.addDevices__container{
+    padding: 2px 6px;
+    background-color: #fff;
+    width: fit-content;
+}
+.addDevices__container button{
+    height: 25px;
+    border: 1px solid #A9A9A9;
+    text-transform: uppercase;
+}
+.addDevices__container button:not(:first-child){
+    margin-left: 5px;
+}
+/*device add container end*/
+
 /*device bulk modal start*/
 .device-modal__descr{
     line-height: 1.6;

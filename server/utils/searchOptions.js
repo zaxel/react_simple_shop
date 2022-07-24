@@ -36,7 +36,7 @@ exports.searchDevicesOptions = (id, brandId, typeId, searchBy, searchPrase) => {
     let where = {};
     if (searchBy) {
         const isNumber = isNumeric(searchPrase); 
-        if (!isNumeric(searchPrase) && searchPrase !== '' && (searchBy==='id' || searchBy==='price')) throw ApiError.badRequest('request must be a number!');
+        if ((searchBy==='id' || searchBy==='price') && !isNumeric(searchPrase)) throw ApiError.badRequest('request must be a number!');
         if (isNumber && searchBy==='id' || isNumber && searchBy==='price') {
             where[searchBy] = searchPrase;
         } else if (searchPrase === '') {
