@@ -22,7 +22,8 @@ export const fetchPage = async (adminDevicesStore) => {
     await fetchAllDevices(adminDevicesStore, adminDevicesStore.sortBy, adminDevicesStore.sortDirection, adminDevicesStore.itemsPerPage, adminDevicesStore.activePage, adminDevicesStore.searchBy, adminDevicesStore.searchByPrase);
     adminDevicesStore.setPagesTotal(Math.ceil(adminDevicesStore.devices.count / adminDevicesStore.itemsPerPage));
   } catch (e) {
-    console.log(e)
+    console.log(e);
+    alert(e.response.data.message);
   } finally {
     adminDevicesStore.setLoading(false);
   }
