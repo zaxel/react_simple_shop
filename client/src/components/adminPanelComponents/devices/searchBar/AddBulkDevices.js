@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 
-const AddBulkDevices = () => {
+const AddBulkDevices = (props) => {
     return (
-        <button>
+        <button onClick={props.setAddDeviceBulkVisible}>
             add bulk devices
         </button>
     );

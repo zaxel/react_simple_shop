@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 import AddBulkDevices from './AddBulkDevices';
-import AddSingleDevice from './AddSingleDevice copy';
+import AddSingleDevice from './AddSingleDevice';
 
 const AddDevicesBarContainer = (props) => {
     return (
         <div className='addDevices__container'>
             <AddSingleDevice setAddDeviceVisible={props.setAddDeviceVisible}/>
-            <AddBulkDevices/>
+            <AddBulkDevices setAddDeviceBulkVisible={props.setAddDeviceBulkVisible}/>
         </div>
     );
 };

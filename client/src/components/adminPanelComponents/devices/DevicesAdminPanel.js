@@ -13,6 +13,7 @@ import { fetchPage, fetchSetTypes, fetchSetBrands } from '../../../utils/adminDe
 import { fetchInfo } from '../../../utils/adminDeviceInfo';
 import AddDevicesBarContainer from './searchBar/AddDevicesBarContainer';
 import AddDeviceModal from './modals/AddDeviceModal';
+import AddDeviceBulkModal from './modals/AddDeviceBulkModal';
 
 
 const DevicesAdminPanel = observer(() => {
@@ -21,6 +22,7 @@ const DevicesAdminPanel = observer(() => {
   const { toolTip, adminDevices, adminDevicesInfo } = useContext(Context);
   const [deviceInfoModalVisible, setDeviceInfoModalVisible] = useState(false);
   const [addDeviceVisible, setAddDeviceVisible] = useState(false);
+  const [addDeviceBulkVisible, setAddDeviceBulkVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -114,7 +116,7 @@ const DevicesAdminPanel = observer(() => {
       <div>
       <div className='account__search-cont'>
         <Search options={[{id: 'id'}, {name: 'name'}, {price: 'price'}]} store={adminDevices} onSubmitSearch={onSubmitSearch}/>
-        <AddDevicesBarContainer setAddDeviceVisible={setAddDeviceVisible}/>
+        <AddDevicesBarContainer setAddDeviceVisible={setAddDeviceVisible} setAddDeviceBulkVisible={setAddDeviceBulkVisible}/>
       </div>
         <table className='stripped-table'>
           <thead>
@@ -128,6 +130,7 @@ const DevicesAdminPanel = observer(() => {
         </table>
         <AdminDeviceInfoModal show={deviceInfoModalVisible} onHide={onModalHideHandler} />
         <AddDeviceModal show={addDeviceVisible} onHide={()=>setAddDeviceVisible(false)}/>
+        <AddDeviceBulkModal show={addDeviceBulkVisible} onHide={()=>setAddDeviceBulkVisible(false)}/>
       </div>
 
       <PaginationCont currentStore={adminDevices} />

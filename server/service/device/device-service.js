@@ -2,14 +2,14 @@
 const { Device, DeviceInfo } = require('../../models/models');
 const { Op, Sequelize } = require("sequelize");
 const acceptedFileType = 'text/plain';
-const {searchDevicesOptions, orderDevicesOptions} = require('../../utils/searchOptions');
+const { searchDevicesOptions, orderDevicesOptions } = require('../../utils/searchOptions');
 // const orderDevicesOptions = require('../../utils/searchOptions');
 
 class DeviceService {
     create = async (name, price, brandId, typeId, info, img) => {
         let fileName = 'no-image.jpg'
-        
-        if(img) {
+
+        if (img) {
             fileName = await fileService.imageResolve(img);
         }
         const device = await Device.create({ name, price, brandId, typeId, img: fileName });
@@ -19,39 +19,44 @@ class DeviceService {
         }
         return device;
     }
-    createInfo = async(info, deviceId) => {
-        if(!info)
+    createInfo = async (info, deviceId) => {
+        if (!info)
             return new Error('no info received!')
         info.forEach(i => {
             DeviceInfo.create({
                 title: i.title,
-                description: i.descr,
+                description: i.description,
                 deviceId
             })
         });
     }
-    createBulk = async (req) => {
+    createBulk = async (req, next) => {
         let { file } = req.files;
-        if (file.mimetype !== acceptedFileType) 
+        if (file.mimetype !== acceptedFileType)
             throw new Error('unaccepted file type. must be .txt');
         const data = JSON.parse(file.data);
         let self = this;
         const bulkPromises = data.map(el => {
             (async function () {
                 let { name, price, brandId, typeId, rate, img, info } = el;
-                const device = await Device.bulkCreate([{ name, price, brandId, typeId, rate, img }],
-                    {
-                        ignoreDuplicates: true,
-                    });
+                let device = []; 
+                try{
+                    device = await Device.bulkCreate([{ name, price, brandId, typeId, rate, img }],
+                        {
+                            ignoreDuplicates: true,
+                        });
+                } catch (err) {
+                    console.log(66, err.message)
+                }
                 if (info) {
-                    if(!device[0].id) return;
+                    if (!device.length || !device[0].id) return;
                     self.createInfo(info, device[0].id);
                 }
             })()
 
         })
-        let bulkItems = await Promise.all(bulkPromises);
-        return data;
+            let bulkItems = await Promise.allSettled(bulkPromises);
+        return bulkItems;
     }
     getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
         page = page || startPage;
@@ -59,7 +64,7 @@ class DeviceService {
         let offset = page * limit - limit;
         let where = searchDevicesOptions(id, brandId, typeId, searchBy, searchPrase);
         let order = orderDevicesOptions(sortBy, sortDirection);
-        let devices = await Device.findAndCountAll({where, order, limit, offset });
+        let devices = await Device.findAndCountAll({ where, order, limit, offset });
         return devices;
     }
     getSingle = async (id) => {
@@ -70,30 +75,30 @@ class DeviceService {
         return device;
     }
     getRandom = async (amount) => {
-        const devices = await Device.findAll({ order: Sequelize.literal('random()'), limit: amount }); 
+        const devices = await Device.findAll({ order: Sequelize.literal('random()'), limit: amount });
         return devices;
     }
     update = async (id, field, newData) => {
         const updatedData = await Device.update({ [field]: newData }, {
             where: { id }
-          });
-        return {updatedData};
+        });
+        return { updatedData };
     }
     updateImg = async (id, img) => {
-        if(!img) {
+        if (!img) {
             throw new Error('No image received!')
         }
         let fileName = await fileService.imageResolve(img);
         const updatedData = await Device.update({ 'img': fileName }, {
             where: { id }
-          });
-        return {updatedData};
+        });
+        return { updatedData };
     }
     delete = async (id) => {
         const updatedData = await Device.destroy({
             where: { id }
-          });
-        return {updatedData};
+        });
+        return { updatedData };
     }
 }
 module.exports = new DeviceService();
