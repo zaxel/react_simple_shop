@@ -12,6 +12,18 @@ class TypeService {
         const types = await Type.findAll();
         return types;
     }
+    update = async (id, name) => {
+        const updatedData = await Type.update({ name }, {
+            where: { id }
+          });
+        return {updatedData};
+    }
+    delete = async (id) => {
+        const updatedData = await Type.destroy({
+            where: { id }
+          });
+        return {updatedData};
+    }
 }
 
 module.exports = new TypeService();

@@ -54,7 +54,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
         formData.append('info', JSON.stringify(specs));
         formData.append('img', img);
         const data = await createDevice(formData);
-        alert('device successfully created!');
+        data && alert('device successfully created!');
         formReset();
         adminDevices.setUpdateDataTrigger(!adminDevices.updateDataTrigger);
       }catch(e){
