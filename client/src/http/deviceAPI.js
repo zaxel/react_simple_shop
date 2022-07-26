@@ -8,6 +8,25 @@ export const fetchTypes = async () => {
     const {data} = await $host.get('api/type');
     return data;
 }
+
+export const fetchAllTypes = async (sortBy, sortDirection = 'ASC') => {
+    const {data} = await $host.get('api/type', {params:{
+        sortBy, sortDirection
+    }}); 
+    return data;
+}
+export const updateType = async (id, name) => {
+    const updatedData = await $authHost.put('api/type' , {id, name});
+    return updatedData.data; 
+}
+export const deleteTypeReq = async (id) => {
+    const deletedData = await $authHost.delete('api/type' , {
+        data: {id}
+      });
+    return deletedData.data;
+}
+
+
 export const createBrand = async (brand) => {
     const {data} = await $authHost.post('api/brand', {brand});
     return data;
@@ -49,8 +68,8 @@ export const updateImg = async (formData) => {
     return updatedData.data; 
 }
 export const deleteDeviceReq = async (id) => {
-    const deletedOrder = await $authHost.delete('api/device/' , {
+    const deletedData = await $authHost.delete('api/device/' , {
         data: {id}
       });
-    return deletedOrder.data;
+    return deletedData.data;
 }

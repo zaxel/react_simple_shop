@@ -20,8 +20,8 @@ import UserAccountRouter from "./components/userProfileComponents/UserAccountRou
 import OrdersAdminPanel from "./components/adminPanelComponents/orders/OrdersAdminPanel";
 import UsersAdminPanel from "./components/adminPanelComponents/users/UsersAdminPanel";
 import DevicesAdminPanel from "./components/adminPanelComponents/devices/DevicesAdminPanel";
-import TypesAdminPanel from "./components/adminPanelComponents/TypesAdminPanel";
-import BrandsAdminPanel from "./components/adminPanelComponents/BrandsAdminPanel";
+import TypesAdminPanel from "./components/adminPanelComponents/types/TypesAdminPanel";
+import BrandsAdminPanel from "./components/adminPanelComponents/brands/BrandsAdminPanel";
 import AdminPanelRouter from "./components/adminPanelComponents/AdminPanelRouter";
 
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
