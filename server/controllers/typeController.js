@@ -12,9 +12,10 @@ class TypeController {
             next(ApiError.forbidden(e.message));
         }
     }
-    async getAll(req, res){
+    async getAll(req, res, next){
         try{
-            const types = await typeService.getAll();
+            let { sortBy, sortDirection } = req.query;
+            const types = await typeService.getAll(sortBy, sortDirection);
             return res.json(types)
         }catch(e){
             next(ApiError.forbidden(e.message));

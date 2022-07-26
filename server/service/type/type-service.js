@@ -1,4 +1,5 @@
 ﻿const {Type} = require('../../models/models');
+const TypeDto = require('../../dtos/type-dto');
 
 class TypeService {
     create = async (type) => {
@@ -8,8 +9,11 @@ class TypeService {
         if (!data[0].id) throw new Error('this type already exist!')
         return data[0];
     }
-    getAll = async () => {
-        const types = await Type.findAll();
+    getAll = async (sortBy, sortDirection = 'ASC') => {
+        let types = await Type.findAll({order: [
+            [sortBy, sortDirection],
+        ]});
+        types = types.map(el=>new TypeDto(el))
         return types;
     }
     update = async (id, name) => {
