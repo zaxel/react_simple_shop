@@ -35,6 +35,9 @@ button:hover {
 button:active {
   transform: translate(1px, 1px);
 }
+.alert-button-self{
+    background-color: #c44900;
+}
 /*general styles end*/
 
 /*Spinner Start*/
@@ -444,18 +447,24 @@ button:active {
     display: flex;
     justify-content: space-between;
 }
-.addDevices__container{
+.addDevices__container,
+.addTypes-buttons__container{
     padding: 2px 6px;
     background-color: #fff;
     width: fit-content;
 }
-.addDevices__container button{
+.addDevices__container button,
+.addTypes-buttons__container button{
     height: 25px;
     border: 1px solid #A9A9A9;
     text-transform: uppercase;
 }
-.addDevices__container button:not(:first-child){
+.addDevices__container button:not(:first-child),
+.addTypes-buttons__container button:not(:first-child){
     margin-left: 5px;
+}
+.addTypes-buttons__container{
+    margin-top: 22px;
 }
 /*device add container end*/
 
@@ -808,6 +817,9 @@ button:active {
 .stripped-table{
     background-color: #F3F3F3;
 }
+.stripped-table tfoot{
+    background-color: #c44900;
+}
 .stripped-table th{
     padding: 5px 16px;
     background-color: #C4C4C4;
@@ -850,6 +862,9 @@ button:active {
 }
 .stripped-table tr:nth-child(odd){
     background-color: #fff;
+}
+.stripped-table tfoot tr:nth-child(odd){
+    background-color: #efd6ac;
 }
 
 

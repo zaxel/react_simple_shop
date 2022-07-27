@@ -1,8 +1,9 @@
 ﻿import {$host, $authHost} from ".";
 
-export const createType = async (type) => {
-    const {data} = await $authHost.post('api/type', {type});
-    return data;
+export const createTypes = async (types) => {
+    console.log(types) 
+    const {data} = await $authHost.post('api/type', {types});
+    return data; 
 }
 export const fetchTypes = async () => {
     const {data} = await $host.get('api/type');
@@ -27,7 +28,7 @@ export const deleteTypeReq = async (id) => {
 }
 
 
-export const createBrand = async (brand) => {
+export const createBrands = async (brand) => {
     const {data} = await $authHost.post('api/brand', {brand});
     return data;
 }

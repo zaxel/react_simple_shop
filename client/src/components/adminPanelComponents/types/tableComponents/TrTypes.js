@@ -1,7 +1,7 @@
 ﻿import React, { useRef } from 'react';
 import TdInputText from './TdInputText';
 import TdDelete from './TdDelete';
-import { adminPageFormatDate } from '../../../../utils/formatDate';
+import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 
 
 

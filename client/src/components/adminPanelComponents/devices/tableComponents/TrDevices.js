@@ -7,7 +7,7 @@ import TdTypeSelect from './TdTypeSelect';
 import TdBrandSelect from './TdBrandSelect';
 import TdDescriptionLink from './TdDescriptionLink';
 import TdDelete from './TdDelete';
-import { adminPageFormatDate } from '../../../../utils/formatDate';
+import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 
 const TrDevices = ({ data }) => {
     let tdRefs = useRef([]);

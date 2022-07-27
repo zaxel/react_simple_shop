@@ -2,7 +2,7 @@
 import TdInputText from './TdInputText';
 import TdModalLink from './TdModalLink';
 import TdDelete from './TdDelete';
-import { adminPageFormatDate } from '../../../../utils/formatDate';
+import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 
 
 

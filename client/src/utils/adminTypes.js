@@ -6,7 +6,7 @@ export const fetchAllTypes = async (currentStore, sortBy, sortDirection) => {
   await currentStore.setTypes(fetchedServerTypes);
 }
 
-export const changeTypesData = async (id, name) => {
+export const changeTypeData = async (id, name) => {
   const updated = await updateType(id, name);
   return updated;
 }

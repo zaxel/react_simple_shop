@@ -1,14 +1,14 @@
 ﻿import React, { useEffect, useContext, useState } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { changeOrderData } from '../../../../utils/adminOrders';
+import { changeTypeData } from '../../../../utils/adminTypes';
 import { Spinner } from 'react-bootstrap';
 import { isOrderStateChanged } from '../../../../utils/isStateChanged';
 
 const TdInputText = ({ data, innerRef }) => {
 
     const {inputData, id, dbFieldName } = data;
-    const { toolTip, orders } = useContext(Context);
+    const { toolTip, types } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
@@ -21,11 +21,11 @@ const TdInputText = ({ data, innerRef }) => {
     
 
     const onButtonClickHandler = async() => {
-        if(isOrderStateChanged(orders, id, dbFieldName, input)){
+        if(isOrderStateChanged(types, id, dbFieldName, input)){
             setLoading(true);
-            await changeOrderData(id, dbFieldName, input);
+            await changeTypeData(id, input);
             setLoading(false);
-            orders.setUpdateDataTrigger(prev=>!orders.updateDataTrigger());
+            types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
         }
         setEdit(false);
         toolTip.setIsAvailable(true);
@@ -59,5 +59,4 @@ const TdInputText = ({ data, innerRef }) => {
     );
 };
 
-// export default TdInputText;
 export default withTooltip(TdInputText);

@@ -6,6 +6,8 @@ import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { fetchPage } from '../../../utils/adminTypes';
+import TrTypesNewLine from './tableComponents/TrTypesNewLine';
+import { createTypes } from '../../../http/deviceAPI';
 
 const TypesAdminPanel = observer(() => {
     let thRefs = useRef([]);
@@ -46,6 +48,33 @@ const TypesAdminPanel = observer(() => {
         { id: 12, name: 'tv', createdAt: 1519129864400, updatedAt: 1519129864400 },
     ]
 
+    const addNewTypes = () => {
+        const id = uuidv4();
+        types.addNewTypesLine(id);
+    }
+    const dropNewLine = (id) => {
+        types.dropNewTypesLine(id);
+    }
+    const triggerTypesUpdate = () => {
+        types.setUpdateDataTrigger(!types.updateDataTrigger);
+    }
+    const onSaveClickHandler = async() => {
+        const newLinesNoEmptyFields = types.newTypes
+            .filter(el=>el.name !== '')
+            .map(el => {
+                return {name: el.name};
+            })
+
+        if(!newLinesNoEmptyFields.length){
+            alert('no data to be updated');
+            types.refreshNewInfo();
+            return;
+        }
+        await createTypes(newLinesNoEmptyFields);
+        types.refreshTypes(); 
+        triggerTypesUpdate();
+    }
+
     const thsWithTooltip = ths.map((el, i) => {
 
         const myKey = uuidv4();
@@ -58,6 +87,9 @@ const TypesAdminPanel = observer(() => {
     // const trs = tds.map((el, i) => {
     const trs = types.types.map((el, i) => {
         return <TrTypes key={el.id} data={el} />
+    })
+    const trsNewLine = types.newTypes?.map((el, i) => {
+        return <TrTypesNewLine key={el.id} data={{ el, dropNewLine}} /> 
     })
 
 
@@ -82,8 +114,20 @@ const TypesAdminPanel = observer(() => {
                     <tbody>
                         {trs}
                     </tbody>
+                    <tfoot>
+                        {trsNewLine}
+                    </tfoot>
                 </table>
+                <div className='addTypes-buttons__container'>
+                    <button className="admin-device__add-button" onClick={addNewTypes}>
+                        Add new type line
+                    </button>
+                    {!!types.newTypes.length && <button className='alert-button-self' onClick={onSaveClickHandler}>
+                        Save new type lines
+                    </button>}
+                </div>
             </div>
+            
         </div>
     );
 });

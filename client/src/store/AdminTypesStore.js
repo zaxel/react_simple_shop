@@ -8,6 +8,7 @@ export default class AdminTypesStore{
     _sortRevers = false;
     _updateDataTrigger = false;
     _loading = true;
+    _newTypes = [];
 
     constructor(){
         makeAutoObservable(this);
@@ -28,6 +29,18 @@ export default class AdminTypesStore{
     setLoading(bool){
         this._loading = bool;
     }
+    refreshTypes(){
+        this._newTypes = [];
+    }
+    setNewTypesInput(id, fieldName, value){
+        this._newTypes.find(field=>field.id===id)[fieldName] = value;
+    }
+    addNewTypesLine(id){
+        this._newTypes.push({ id, 'name': ''});
+    }
+    dropNewTypesLine(id){
+        this._newTypes = this._newTypes.filter(line => line.id !== id);
+    }
     
     get types(){
         return this._types;
@@ -43,5 +56,8 @@ export default class AdminTypesStore{
     }
     get loading(){
         return this._loading;
+    }
+    get newTypes(){
+        return this._newTypes;
     }
 }

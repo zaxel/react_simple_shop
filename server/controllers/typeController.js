@@ -5,8 +5,9 @@ const { validationResult } = require('express-validator');
 class TypeController {
     async create(req, res, next){
         try{
-            const {type} = req.body;
-            const data = await typeService.create(type);
+            const {types} = req.body;
+            console.log(66, types)
+            const data = await typeService.create(types);
             return res.json(data);
         }catch(e){
             next(ApiError.forbidden(e.message));

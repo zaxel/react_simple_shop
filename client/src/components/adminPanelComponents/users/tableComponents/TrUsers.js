@@ -4,7 +4,7 @@ import TdInputText from './TdInputText';
 import TdIsActivatedSelect from './TdIsActivatedSelect';
 import TdModalLink from './TdModalLink';
 import TdUserRoleSelect from './TdUserRoleSelect';
-import { adminPageFormatDate } from '../../../../utils/formatDate';
+import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 
 
 const TrUsers = ({ data }) => {

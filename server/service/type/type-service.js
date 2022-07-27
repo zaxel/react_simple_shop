@@ -2,14 +2,14 @@
 const TypeDto = require('../../dtos/type-dto');
 
 class TypeService {
-    create = async (type) => {
-        const data = await Type.bulkCreate([{ name: type }], {
+    create = async (types) => {
+        const data = await Type.bulkCreate(types, {
             ignoreDuplicates: true,
         });
-        if (!data[0].id) throw new Error('this type already exist!')
-        return data[0];
+        //bulkCreate returns id===null if type already exist in db.
+        return data.filter(type=> type.id);
     }
-    getAll = async (sortBy, sortDirection = 'ASC') => {
+    getAll = async (sortBy = 'id', sortDirection = 'ASC') => {
         let types = await Type.findAll({order: [
             [sortBy, sortDirection],
         ]});
