@@ -1,9 +1,8 @@
 ﻿import {$host, $authHost} from ".";
 
 export const createTypes = async (types) => {
-    console.log(types) 
     const {data} = await $authHost.post('api/type', {types});
-    return data; 
+    return data;
 }
 export const fetchTypes = async () => {
     const {data} = await $host.get('api/type');

@@ -15,3 +15,7 @@ export const isDeviceInfoStateChanged = (store, infoId, dbFieldName, data) => {
     const currentStoreValue = store.info.rows.find(el=>el.id === infoId)
     return currentStoreValue[dbFieldName] === data ? false : true
 }
+export const isTypesStateChanged = (store, id, dbFieldName, data) => {
+    const currentStoreValue = store.types.find(el=>el.id === id)
+    return currentStoreValue[dbFieldName] === data ? false : true
+}

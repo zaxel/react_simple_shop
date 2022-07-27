@@ -1,11 +1,14 @@
-﻿import React, { useEffect, useContext, useState } from 'react';
+﻿import React, { useEffect, useContext, useState, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeTypeData } from '../../../../utils/adminTypes';
 import { Spinner } from 'react-bootstrap';
-import { isOrderStateChanged } from '../../../../utils/isStateChanged';
+import { isTypesStateChanged } from '../../../../utils/isStateChanged';
 
 const TdInputText = ({ data, innerRef }) => {
+
+    const inputRef = useRef(null);
+    const buttonRef = useRef(null);
 
     const {inputData, id, dbFieldName } = data;
     const { toolTip, types } = useContext(Context);
@@ -19,10 +22,21 @@ const TdInputText = ({ data, innerRef }) => {
         setEdit(true);
     }
     
+    const onInputBlurHandler = (e) => {
+        if (!(e.relatedTarget === buttonRef.current)) {
+            setEdit(false);
+            toolTip.setIsAvailable(true);
+        }
+    }
+
+    const onButtonBlurHandler = (e) => {
+        setEdit(false);
+        toolTip.setIsAvailable(true);
+    }
 
     const onButtonClickHandler = async() => {
-        if(isOrderStateChanged(types, id, dbFieldName, input)){
-            setLoading(true);
+        if(isTypesStateChanged(types, id, dbFieldName, input)){
+            setLoading(true); 
             await changeTypeData(id, input);
             setLoading(false);
             types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
@@ -51,8 +65,8 @@ const TdInputText = ({ data, innerRef }) => {
             {!edit 
                 ? <div className='td-active' onClick={onDivClickHandler}>{input}</div> 
                 : <div className='display-flex'>
-                    <input type='text' value={input} onChange={onInputChange} />
-                    <button onClick={onButtonClickHandler}>V</button>
+                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlurHandler}/>
+                    <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                   </div>}
 
         </td>
