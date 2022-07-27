@@ -15,7 +15,7 @@ const TdDelete = ({data , innerRef }) => {
             setLoading(true);
             await deleteType(id);
             setLoading(false);
-            // types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
+            types.setUpdateDataTrigger(prev=>!types.updateDataTrigger);
         }
         toolTip.setIsAvailable(true);
     }
