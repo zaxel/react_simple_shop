@@ -40,6 +40,7 @@ const OrdersAdminPanel = observer(() => {
         { title: 'items ordered', sortBy: null },
         { title: 'user id', sortBy: 'userId' },
         { title: 'user email', sortBy: null },
+        { title: 'total', sortBy: null },
         { title: 'order detail', sortBy: null },
         { title: 'destroy', sortBy: null },
     ]

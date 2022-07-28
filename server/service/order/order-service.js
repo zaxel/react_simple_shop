@@ -1,4 +1,4 @@
-﻿const { Order, OrderDevice, BasketDevice, User } = require('../../models/models');
+﻿const { Order, OrderDevice, BasketDevice, User, Device } = require('../../models/models');
 const { Op } = require("sequelize");
 const OrderDto = require('../../dtos/order-dto');
 const { searchOrdersOptions } = require('../../utils/searchOptions');
@@ -31,16 +31,23 @@ class OrderService {
                 [sortBy, sortDirection],
             ], limit, offset
         });
-
         const ordersIds = ordersGeneral.rows.map(el => ({ orderId: el.id }));
         const usersIds = ordersGeneral.rows.map(el => ({ id: el.userId }));
-
         let ordersDetails = await OrderDevice.findAll({
             where: {
                 [Op.or]: ordersIds
             }
         });
+        const devicesIds = ordersDetails.map(el => ({ id: el.deviceId }));
+        const devicesInOrder = await Device.findAndCountAll({
+            where: {
+                [Op.or]: devicesIds
+            }
+        }); 
 
+        const ordersPricesTable = {};
+        devicesInOrder.rows.forEach(el=>(ordersPricesTable[el.id]=el.price)); 
+        
         let users = await User.findAll({
             where: {
                 [Op.or]: usersIds
@@ -48,7 +55,7 @@ class OrderService {
         });
         const orders = {
             count: ordersGeneral.count,
-            rows: ordersGeneral.rows.map(order=>new OrderDto({order, ordersDetails, users})) 
+            rows: ordersGeneral.rows.map(order=>new OrderDto({order, ordersDetails, users, ordersPricesTable})) 
         }
         return orders;
     }
