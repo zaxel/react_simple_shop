@@ -27,14 +27,33 @@ export const deleteTypeReq = async (id) => {
 }
 
 
-export const createBrands = async (brand) => {
-    const {data} = await $authHost.post('api/brand', {brand});
+export const createBrands = async (brands) => {
+    const {data} = await $authHost.post('api/brand', {brands});
     return data;
 }
 export const fetchBrands = async () => {
     const {data} = await $host.get('api/brand');
     return data;
 }
+export const fetchAllBrands = async (sortBy, sortDirection = 'ASC') => {
+    const {data} = await $host.get('api/brand', {params:{
+        sortBy, sortDirection
+    }}); 
+    return data;
+}
+export const updateBrand = async (id, name) => {
+    const updatedData = await $authHost.put('api/brand' , {id, name});
+    return updatedData.data; 
+}
+export const deleteBrandReq = async (id) => {
+    const deletedData = await $authHost.delete('api/brand' , {
+        data: {id}
+      });
+    return deletedData.data;
+}
+
+
+
 export const createDevice = async (formData) => {
     const {data} = await $authHost.post('api/device', formData);
     return data;

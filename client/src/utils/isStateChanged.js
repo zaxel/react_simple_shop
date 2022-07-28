@@ -19,3 +19,7 @@ export const isTypesStateChanged = (store, id, dbFieldName, data) => {
     const currentStoreValue = store.types.find(el=>el.id === id)
     return currentStoreValue[dbFieldName] === data ? false : true
 }
+export const isBrandsStateChanged = (store, id, dbFieldName, data) => {
+    const currentStoreValue = store.brands.find(el=>el.id === id)
+    return currentStoreValue[dbFieldName] === data ? false : true
+}

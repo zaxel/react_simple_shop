@@ -448,22 +448,26 @@ button:active {
     justify-content: space-between;
 }
 .addDevices__container,
-.addTypes-buttons__container{
+.addTypes-buttons__container,
+.addBrands-buttons__container{
     padding: 2px 6px;
     background-color: #fff;
     width: fit-content;
 }
 .addDevices__container button,
-.addTypes-buttons__container button{
+.addTypes-buttons__container button,
+.addBrands-buttons__container button{
     height: 25px;
     border: 1px solid #A9A9A9;
     text-transform: uppercase;
 }
 .addDevices__container button:not(:first-child),
-.addTypes-buttons__container button:not(:first-child){
+.addTypes-buttons__container button:not(:first-child),
+.addBrands-buttons__container button:not(:first-child){
     margin-left: 5px;
 }
-.addTypes-buttons__container{
+.addTypes-buttons__container,
+.addBrands-buttons__container{
     margin-top: 22px;
 }
 /*device add container end*/

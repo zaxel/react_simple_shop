@@ -1,17 +1,135 @@
-﻿import React from 'react';
+﻿import React, { useState, useRef, useContext, useEffect } from 'react';
+import ThAdminBrandsTooltip from './tableComponents/ThAdminBrandsTooltip';
+import TrBrands from './tableComponents/TrBrands';
+import { v4 as uuidv4 } from 'uuid';
+import { Context } from '../../..';
+import { Spinner } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
+import { fetchPage } from '../../../utils/adminBrands';
+import TrBrandsNewLine from './tableComponents/TrBrandsNewLine';
+import { createBrands } from '../../../http/deviceAPI';
+
+const BrandsAdminPanel = observer(() => {
+    let thRefs = useRef([]);
+    const { toolTip, brands } = useContext(Context);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                await fetchPage(brands);
+            } catch (e) {
+                console.log(e)
+            }
+        })()
+        toolTip.setIsAvailable(true);
+
+    }, [])
+
+    useEffect(() => {
+        fetchPage(brands);
+    }, [brands.updateDataTrigger])
+
+    const ths = [
+        { title: 'id', sortBy: 'id' },
+        { title: 'brand', sortBy: 'name' },
+        { title: 'created', sortBy: 'createdAt' },
+        { title: 'last updated', sortBy: 'updatedAt' },
+        { title: 'destroy', sortBy: null },
+    ]
 
 
+    const tds = [
+        { id: 18, name: 'tv', createdAt: 1519211809934, updatedAt: 1519211809934 },
+        { id: 22, name: 'tv', createdAt: 1519211810362, updatedAt: 1519211810362 },
+        { id: 56, name: 'tv', createdAt: 1519211811670, updatedAt: 1519211811670 },
+        { id: 75, name: 'tv', createdAt: 1519211809934, updatedAt: 1519211809934 },
+        { id: 29, name: 'tv', createdAt: 1519129853500, updatedAt: 1519129853500 },
+        { id: 11, name: 'tv', createdAt: 1519129858900, updatedAt: 1519129858900 },
+        { id: 12, name: 'tv', createdAt: 1519129864400, updatedAt: 1519129864400 },
+    ]
 
-const BrandsAdminPanel = () => {
+    const addNewBrands = () => {
+        const id = uuidv4();
+        brands.addNewBrandsLine(id);
+    }
+    const dropNewLine = (id) => {
+        brands.dropNewBrandsLine(id);
+    }
+    const triggerBrandsUpdate = () => {
+        brands.setUpdateDataTrigger(!brands.updateDataTrigger);
+    }
+    const onSaveClickHandler = async() => {
+        const newLinesNoEmptyFields = brands.newBrands
+            .filter(el=>el.name !== '')
+            .map(el => {
+                return {name: el.name};
+            })
+
+        if(!newLinesNoEmptyFields.length){
+            alert('no data to be updated');
+            brands.refreshNewInfo();
+            return;
+        }
+        await createBrands(newLinesNoEmptyFields);
+        brands.refreshBrands(); 
+        triggerBrandsUpdate();
+    }
+
+    const thsWithTooltip = ths.map((el, i) => {
+
+        const myKey = uuidv4();
+        let ref = (el) => (thRefs.current[i] = el);
+        let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
+        return <ThAdminBrandsTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+    })
+
+
+    // const trs = tds.map((el, i) => {
+    const trs = brands.brands.map((el, i) => {
+        return <TrBrands key={el.id} data={el} />
+    })
+    const trsNewLine = brands.newBrands?.map((el, i) => {
+        return <TrBrandsNewLine key={el.id} data={{ el, dropNewLine}} /> 
+    })
+
+
+    if (brands.loading) {
+        return (
+            <div className="spinner">
+                <Spinner animation="border" />
+            </div>
+        )
+    }
+
+
     return (
-        <div className='account__payment'>
-            <div>Types page. The standard Lorem Ipsum passage, used since the 1500s
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-
-            <div>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</div>
+        <div className='user-admin__main account__orders acc-orders'>
+            <div>
+                <table className='stripped-table'>
+                    <thead>
+                        <tr>
+                            {thsWithTooltip}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {trs}
+                    </tbody>
+                    <tfoot>
+                        {trsNewLine}
+                    </tfoot>
+                </table>
+                <div className='addBrands-buttons__container'>
+                    <button className="admin-device__add-button" onClick={addNewBrands}>
+                        Add new brand line
+                    </button>
+                    {!!brands.newBrands.length && <button className='alert-button-self' onClick={onSaveClickHandler}>
+                        Save new brand lines
+                    </button>}
+                </div>
+            </div>
+            
         </div>
     );
-};
+});
 
 export default BrandsAdminPanel;

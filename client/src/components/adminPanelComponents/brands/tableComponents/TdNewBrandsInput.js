@@ -2,13 +2,13 @@
 import React, { useContext } from 'react';
 import { Context } from '../../../..';
 
-const TdNewTypesInput = observer(({ data }) => {
+const TdNewBrandsInput = observer(({ data }) => {
 
-    const { types } = useContext(Context);
-    let input = types.newTypes.find(field=>field.id===data.id)[data.dbFieldName];
+    const { brands } = useContext(Context);
+    let input = brands.newBrands.find(field=>field.id===data.id)[data.dbFieldName];
 
     const onInputChange = (e) => {
-        types.setNewTypesInput(data.id, data.dbFieldName, e.target.value);
+        brands.setNewBrandsInput(data.id, data.dbFieldName, e.target.value);
     }
 
     return (
@@ -18,4 +18,4 @@ const TdNewTypesInput = observer(({ data }) => {
     );
 });
 
-export default TdNewTypesInput;
+export default TdNewBrandsInput;
