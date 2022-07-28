@@ -6,7 +6,6 @@ class TypeController {
     async create(req, res, next){
         try{
             const {types} = req.body;
-            console.log(66, types)
             const data = await typeService.create(types);
             return res.json(data);
         }catch(e){
@@ -38,6 +37,10 @@ class TypeController {
     }
     async delete(req, res, next){
         try{
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
             const { id } = req.body;
             const data = await typeService.delete(id);
             return res.json(data);
