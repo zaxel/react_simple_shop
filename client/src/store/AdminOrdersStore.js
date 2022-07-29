@@ -22,6 +22,7 @@ export default class AdminOrdersStore{
     
     setOrders(orders){
         this._orders = orders;
+        console.dir(this._orders.rows)
     }
     setSortDirection(direction){
         this._sortDirection = direction;
