@@ -9,6 +9,7 @@ import AdminDevicesStore from "./AdminDevicesStore";
 import AdminDevicesInfoStore from "./AdminDevicesInfoStore";
 import AdminTypesStore from "./AdminTypesStore";
 import AdminBrandsStore from "./AdminBrandsStore";
+import AdminOrderDetailsStore from "./AdminOrderDetailsStore";
 
 export default class RootStore {
     constructor() {
@@ -23,5 +24,6 @@ export default class RootStore {
       this.adminDevicesInfo = new AdminDevicesInfoStore(this);
       this.types = new AdminTypesStore(this);
       this.brands = new AdminBrandsStore(this);
+      this.orderDetails = new AdminOrderDetailsStore(this);
     }
 } 

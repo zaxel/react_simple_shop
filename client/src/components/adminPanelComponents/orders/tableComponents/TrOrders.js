@@ -1,5 +1,4 @@
 ﻿import React, { useRef } from 'react';
-import TdInputText from './TdInputText';
 import TdModalLink from './TdModalLink';
 import TdDelete from './TdDelete';
 import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
@@ -9,7 +8,6 @@ import { formatUsCurrency } from '../../../../utils/dataFormat/currencies';
 
 
 const TrOrders = ({ data }) => {
-    console.log(data)
     let tdRefs = useRef([]);
     
     let ref0 = (el) => (tdRefs.current[0] = el);

@@ -38,6 +38,14 @@ button:active {
 .alert-button-self{
     background-color: #c44900;
 }
+.table__link{
+    color: inherit;
+    text-decoration: none;
+}
+.table__link:hover{
+    color: inherit;
+    text-decoration: underline;
+}
 /*general styles end*/
 
 /*Spinner Start*/

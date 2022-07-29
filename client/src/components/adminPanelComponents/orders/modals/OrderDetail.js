@@ -1,41 +1,33 @@
-﻿import React, {useContext, useEffect, useRef} from 'react';
+﻿import React, {useContext, useRef} from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
-import TrOrderDetails from '../tableComponents/TrOrderDetails';
-import ThAdminOrdersTooltip from '../tableComponents/ThAdminOrdersTooltip';
+import TrOrderDetails from './components/TrOrderDetails';
+import ThOrderDetailsTooltip from './components/ThOrderDetailsTooltip';
 
 const OrderDetail = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);
     let thRefs = useRef([]);
-    let tdRefs = useRef([]);
 
     const ths = [
         {title: 'device id', sortBy: 'id'}, 
         {title: 'title', sortBy: 'name'}, 
         {title: 'amount ordered', sortBy: null}, 
         {title: 'rate', sortBy: 'rate'}, 
-        {title: 'price', sortBy: 'price'}, 
+        {title: 'price', sortBy: 'price/item'}, 
     ];
 
     const tds = [
-        ['3655', 'name f', '2', '1', '$165.00'],
-        ['3657', 'name f', '7', '3', '$65.00'],
-        ['3659', 'name f', '1', '4', '$25.00'],
-        ['3675', 'name f', '10', '1.5', '$3.00'],
-        ['3695', 'name f', '3', '3.2', '$8605.00'],
-        ['3755', 'name f', '1', '1.1', '$715.00'],
-        ['3759', 'name f', '5', '5', '$115.00'],
+        { deviceId: 3655, title: 'tester', device_amount: '2', rate: '1', price: 165},
+        { deviceId: 3657, title: 'router', device_amount: '7', rate: '3', price: 165 },
+        { deviceId: 3659, title: 'fixer', device_amount: '1', rate: '4', price: 165 },
+        { deviceId: 3675, title: 'box', device_amount: '10', rate: '1.5', price: 165 },
+        { deviceId: 3695, title: 'jam', device_amount: '3', rate: '3.4', price: 165 },
+        { deviceId: 3755, title: 'butter', device_amount: '1', rate: '1.8', price: 165 },
+        { deviceId: 3759, title: 'table', device_amount: '5', rate: '5', price: 165 },
     ]
+        
 
-    
-
-    const onRowClickHandler = () => {
-        toolTip.setIsAvailable(false);
-        toolTip.setIsToolTipShown(false);
-        alert('order detail');
-        toolTip.setIsAvailable(true);
-    }
 
     const onThClickHandler = () => {
         toolTip.setIsAvailable(false);
@@ -51,17 +43,13 @@ const OrderDetail = ({ show, onHide }) => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = {i, myRefs: thRefs, text: 'sort'};
-        return <ThAdminOrdersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        return <ThOrderDetailsTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
-
-    const trsWithTooltip = tds.map((el, i) => {
-        const myKey = uuidv4();
-        let ref = (el) => (tdRefs.current[i] = el);
-        let toolTipInfo = {i, myRefs: tdRefs, text: 'click for detailed order info'};
-        return <TrOrderDetails toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
-    })
-
+    const trs = tds.map((el, i) => {
+        // const trs = adminDevicesInfo.info?.rows?.map((el, i) => {
+            return <TrOrderDetails key={el.deviceId} data={el} />
+        })
 
     return (
         <Modal className='modal-table' centered show={show} onHide={onHide}>
@@ -78,7 +66,7 @@ const OrderDetail = ({ show, onHide }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {trsWithTooltip}
+                            {trs}
                         </tbody>
                     </table>
                 </Form.Group>
