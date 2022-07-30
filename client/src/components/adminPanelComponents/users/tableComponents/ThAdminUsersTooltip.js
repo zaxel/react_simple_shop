@@ -1,13 +1,12 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { fetchAllUsers } from '../../../../utils/adminUsers';
+import { fetchPage } from '../../../../utils/adminUsers';
 
 const ThAdminUsersTooltip = ({ data, innerRef}) => {
-    const { toolTip, users } = useContext(Context);
+    const { toolTip, users, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        users.setLoading(true);
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(users.sortBy === data){
@@ -16,9 +15,7 @@ const ThAdminUsersTooltip = ({ data, innerRef}) => {
             users.setSortDirection('ASC');
         }
         users.setSortBy(data);
-        await fetchAllUsers(users, users.sortBy, users.sortDirection, users.itemsPerPage, users.activePage, users.searchBy, users.searchByPrase);
-        await users.setPagesTotal(Math.ceil(users.users.count/users.itemsPerPage));
-        users.setLoading(false);
+        await fetchPage(users, cart, user);
         toolTip.setIsAvailable(true);
     }
 
