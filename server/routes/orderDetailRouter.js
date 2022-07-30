@@ -8,7 +8,7 @@ const ordersDetailsController = require('../controllers/ordersDetailsController'
 const checkRole = require('../middleware/checkRoleMiddleware');
 
 router.get('/:orderId',
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     ordersDetailsController.getOrderDescriptions);
 
 module.exports = router;

@@ -7,14 +7,15 @@ import {
     ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
     PROTECTED_ROUTE
 } from '../utils/consts';
-import { logout } from "../utils/logout";
+import { logoutOnClient, logoutOnServer } from "../utils/logout";
 
 const NavBar = observer(() => {
     const { cart, user } = useContext(Context);
     const navigate = useNavigate();
 
     const onLogoutPressed = () => {
-        logout(cart, user);
+        logoutOnClient(cart, user);
+        logoutOnServer();
         navigate(LOGIN_ROUTE);
     }
 

@@ -1,9 +1,11 @@
 ﻿import { getUsers, updateUser, deleteUserReq } from "../http/userAPI";
+import { logoutOnClient } from "./logout";
 
 export const fetchAllUsers = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
     const fetchedServerUsers = await getUsers( sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
     if(fetchedServerUsers.count === 0) alert('Nothing found!')
     await currentStore.setUsers(fetchedServerUsers);
+    return fetchedServerUsers;
 }
 
 export const changeUserData = async(id, dbFieldName, data) => {
@@ -15,14 +17,18 @@ export const deleteUser = async(id) => {
     return deleted;
 }
 
-export const fetchPage = async(usersStore) => {
+export const fetchPage = async(adminUsersStore, cartStore, userStore) => {
     try {
-        usersStore.setLoading(true);
-      await fetchAllUsers(usersStore, usersStore.sortBy, usersStore.sortDirection, usersStore.itemsPerPage, usersStore.activePage, usersStore.searchBy, usersStore.searchByPrase);
-      usersStore.setPagesTotal(Math.ceil(usersStore.users.count / usersStore.itemsPerPage));
+        adminUsersStore.setLoading(true);
+      const data = await fetchAllUsers(adminUsersStore, adminUsersStore.sortBy, adminUsersStore.sortDirection, adminUsersStore.itemsPerPage, adminUsersStore.activePage, adminUsersStore.searchBy, adminUsersStore.searchByPrase);
+      adminUsersStore.setPagesTotal(Math.ceil(adminUsersStore.users.count / adminUsersStore.itemsPerPage));
+      return data;
     } catch (e) {
-      console.log(e)
+      if(e.response.status === 401){
+        logoutOnClient(cartStore, userStore);
+      }
+      throw e;
     } finally {
-        usersStore.setLoading(false);
+        adminUsersStore.setLoading(false);
     }
   }

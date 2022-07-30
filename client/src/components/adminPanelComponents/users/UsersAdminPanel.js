@@ -13,23 +13,16 @@ import { fetchPage } from '../../../utils/adminUsers';
 
 const UsersAdminPanel = observer(() => {
   let thRefs = useRef([]);
-  const { toolTip, users } = useContext(Context);
+  const { toolTip, users, cart, user } = useContext(Context);
   const [orderModalVisible, setOrderModalVisible] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      try {
-        await fetchPage(users);
-      } catch (e) {
-        console.log(e)
-      }
-    })()
+    fetchPage(users, cart, user);
     toolTip.setIsAvailable(true);
-
   }, [])
 
   useEffect(() => {
-    fetchPage(users);
+    fetchPage(users, cart, user);
   }, [users.activePage, users.updateDataTrigger])
 
   const ths = [
@@ -63,7 +56,7 @@ const UsersAdminPanel = observer(() => {
   }
 
   const onSubmitSearch = async() => {
-    fetchPage(users);
+    fetchPage(users, cart, user);
   }
 
   const thsWithTooltip = ths.map((el, i) => {
