@@ -12,8 +12,8 @@ const TrOrderDetails = ({ data }) => {
 
     return (
         <tr>
-            <NavigationLink toolTipInfo={toolTipInfo0} innerRef={ref0} data={{linkText: data.deviceId}}/>
-            <NavigationLink toolTipInfo={toolTipInfo1} innerRef={ref1} data={{linkText: data.name}}/>
+            <NavigationLink toolTipInfo={toolTipInfo0} innerRef={ref0} data={{linkText: data.deviceId, deviceId: data.deviceId}}/>
+            <NavigationLink toolTipInfo={toolTipInfo1} innerRef={ref1} data={{linkText: data.name, deviceId: data.deviceId}}/>
             <td>{data.device_amount}</td>
             <td>{data.rate}</td>
             <td>{data.price}</td>
