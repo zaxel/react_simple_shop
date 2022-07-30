@@ -25,3 +25,9 @@ export const deleteOrderReq = async (id) => {
       });
     return deletedOrder.data;
 }
+export const fetchOrderDetailsReq = async (id, sortBy, sortDirection) => {
+    const {data} = await $authHost.get(`api/order/details/${id}` , {params:{
+        sortBy, sortDirection
+    }});
+    return data;
+}

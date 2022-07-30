@@ -7,8 +7,6 @@ class ordersDetailsController {
         try {
             const { orderId } = req.params;
             const {sortBy, sortDirection} = req.query;
-            // console.log(88, orderId, sortBy, sortDirection)
-
             const info = await orderDetailsService.getDetails(orderId, sortBy, sortDirection);
             return res.json(info);
         } catch (e) {

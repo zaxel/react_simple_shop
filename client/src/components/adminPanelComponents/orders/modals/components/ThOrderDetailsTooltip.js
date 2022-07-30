@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext } from 'react';
 import { Context } from '../../../../../';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-// import { fetchAllOrderDetails } from '../../../../../utils/adminOrders';
+import { fetchOrderDetails } from '../../../../../utils/adminOrders';
 
 const ThOrderDetailsTooltip = ({ data, innerRef}) => {
     const { toolTip, orderDetails } = useContext(Context);
@@ -16,7 +16,7 @@ const ThOrderDetailsTooltip = ({ data, innerRef}) => {
             orderDetails.setSortDirection('ASC');
         }
         orderDetails.setSortBy(data);
-        // await fetchAllOrderDetails(orderDetails, orderDetails.sortBy, orderDetails.sortDirection);
+        await fetchOrderDetails(orderDetails, orderDetails.orderId, orderDetails.sortBy, orderDetails.sortDirection);
         orderDetails.setLoading(false);
         toolTip.setIsAvailable(true);
     }

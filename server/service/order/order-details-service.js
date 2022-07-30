@@ -4,7 +4,7 @@ const OrderDetailsDto = require('../../dtos/order-details-dto');
 
 class OrderDetailsService {
     
-    getDetails = async (orderId) => {
+    getDetails = async (orderId, sortBy = 'id', sortDirection = 'ASC') => {
         let orderDevices = await OrderDevice.findAll({
             where:  {orderId}
         });
@@ -12,7 +12,10 @@ class OrderDetailsService {
         const devicesInOrder = await Device.findAndCountAll({
             where: {
                 [Op.or]: devicesIds
-            }
+            }, 
+            order: [
+                [sortBy, sortDirection],
+            ]
         }); 
         const orderDetails = {
             count: devicesInOrder.count,

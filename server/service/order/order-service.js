@@ -23,8 +23,6 @@ class OrderService {
         limit = limit || defaultLimit;
         let offset = page * limit - limit;
         let where = searchOrdersOptions(searchBy, searchPrase);
-        // let where = null;
-        console.log(44, sortBy, sortDirection)
         let ordersGeneral = await Order.findAndCountAll({
             where,
             order: [

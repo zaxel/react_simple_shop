@@ -15,7 +15,7 @@ import OrderDetail from './modals/OrderDetail';
 
 const OrdersAdminPanel = observer(() => {
     let thRefs = useRef([]);
-    const { toolTip, orders } = useContext(Context);
+    const { toolTip, orders, orderDetails } = useContext(Context);
     const [orderModalVisible, setOrderModalVisible] = useState(false);
 
     useEffect(() => {
@@ -59,10 +59,13 @@ const OrdersAdminPanel = observer(() => {
     const onModalHideHandler = () => {
         toolTip.setIsAvailable(true);
         setOrderModalVisible(false);
+        orderDetails.setOrderId(null);
     }
 
-    const onOrderClickHandler = () => {
+    const onOrderClickHandler = (orderId) => {
+        orderDetails.setOrderId(orderId);
         setOrderModalVisible(true);
+        orderDetails.setUpdateDataTrigger(!orderDetails.updateDataTrigger);
     }
 
     const onSubmitSearch = async () => {

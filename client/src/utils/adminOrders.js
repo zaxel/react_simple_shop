@@ -1,4 +1,4 @@
-﻿import { getOrders, updateOrder, deleteOrderReq } from "../http/orderAPI";
+﻿import { getOrders, updateOrder, deleteOrderReq, fetchOrderDetailsReq } from "../http/orderAPI";
 
 export const fetchAllOrders = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
     const fetchedServerOrders = await getOrders( sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
@@ -24,5 +24,25 @@ export const fetchPage = async(ordersStore) => {
       console.log(e)
     } finally {
         ordersStore.setLoading(false);
+    }
+  }
+
+  export const fetchDetails = async (currentStore, orderId, sortBy, sortDirection) => {
+    const fetchedOrderDetails = await fetchOrderDetailsReq(orderId, sortBy, sortDirection);
+    if (fetchedOrderDetails.count === 0) console.log('Nothing found!')
+    await currentStore.setOrderDetails(fetchedOrderDetails);
+    return fetchedOrderDetails;
+  }
+
+  export const fetchOrderDetails = async (currentStore, orderId, sortBy, sortDirection) => {
+    if(!orderId)return;
+    try {
+      currentStore.setLoading(true);
+      const data = await fetchDetails(currentStore, orderId, sortBy, sortDirection);
+      return data;
+    } catch (e) {
+      console.log(e)
+    } finally {
+      currentStore.setLoading(false);
     }
   }

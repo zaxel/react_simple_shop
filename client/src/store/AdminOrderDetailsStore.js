@@ -5,14 +5,16 @@ export default class AdminOrderDetailsStore{
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
-    _loading = true;
+    _loading = false;
     _orderDetails = {};
+    _orderId = null;
+    _updateDataTrigger = false;
 
     constructor(){
         makeAutoObservable(this);
     }
     setOrderDetails(order){
-        this._info = order;
+        this._orderDetails = order;
     }
     setSortDirection(direction){
         this._sortDirection = direction;
@@ -22,6 +24,12 @@ export default class AdminOrderDetailsStore{
     }
     setLoading(bool){
         this._loading = bool;
+    }
+    setOrderId(orderId){
+        this._orderId = orderId;
+    }
+    setUpdateDataTrigger(bool){
+        this._updateDataTrigger = bool;
     }
     
     get orderDetails(){
@@ -35,5 +43,11 @@ export default class AdminOrderDetailsStore{
     }
     get loading(){
         return this._loading;
+    }
+    get orderId(){
+        return this._orderId;
+    }
+    get updateDataTrigger(){
+        return this._updateDataTrigger;
     }
 }
