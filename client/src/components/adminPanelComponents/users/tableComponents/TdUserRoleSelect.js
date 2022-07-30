@@ -11,7 +11,7 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
     const buttonRef = useRef(null);
 
     const {inputData, userId, dbFieldName } = data;
-    const { toolTip, users } = useContext(Context);
+    const { toolTip, users, cart, user } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [selectData, setSelectData] = useState(inputData);
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
     const onButtonClickHandler = async() => {
         if(isUserStateChanged(users, userId, dbFieldName, selectData)){
             setLoading(true);
-            await changeUserData(userId, dbFieldName, selectData);
+            await changeUserData(userId, dbFieldName, selectData, cart, user);
             setLoading(false);
             users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
         }

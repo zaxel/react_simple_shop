@@ -8,13 +8,28 @@ export const fetchAllUsers = async(currentStore, sortBy, sortDirection, limit, p
     return fetchedServerUsers;
 }
 
-export const changeUserData = async(id, dbFieldName, data) => {
+export const changeUserData = async(id, dbFieldName, data, cartStore, userStore) => {
+  try{
     const updated = await updateUser(id, dbFieldName, data); 
     return updated;
+  }catch(e){
+    if(e.response.status === 401){
+      logoutOnClient(cartStore, userStore);
+    }
+    console.log(e)
+  }
+    
 }
-export const deleteUser = async(id) => {
-    const deleted = await deleteUserReq(id); 
-    return deleted;
+export const deleteUser = async(id, cartStore, userStore) => {
+    try{
+      const deleted = await deleteUserReq(id); 
+      return deleted;
+    }catch(e){
+      if(e.response.status === 401){
+        logoutOnClient(cartStore, userStore);
+      }
+      console.log(e)
+    }
 }
 
 export const fetchPage = async(adminUsersStore, cartStore, userStore) => {
