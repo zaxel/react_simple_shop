@@ -22,7 +22,7 @@ const App = observer(() => {
       try {
         !user.isAuth && setCartFromLocalStore(cart);
         await setUserIfAuth(user);
-        await setCartId(cart);
+        await setCartId(cart, user);
         await fetchSetCart(user, cart);
         cart.setCartTotal();
         isActivated(user);

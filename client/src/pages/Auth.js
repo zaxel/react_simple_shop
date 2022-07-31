@@ -2,7 +2,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
 import { registration, login } from '../http/userAPI';
-import { getCart } from '../http/cartAPI';
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
@@ -44,9 +43,7 @@ const Auth = observer(() => {
             await setUserIfAuth(user);
             cart.setCart(JSON.parse(localStorage.getItem('cart'))|| []);
             await setCartId(cart);
-
             await fetchCartOnAuth(user, cart);
-
             cart.setCartTotal();
             setLocalStoreCart(cart);
             isActivated(user);
@@ -55,7 +52,6 @@ const Auth = observer(() => {
             // console.log(e)
             alert(e.message);
         }
-
     }
     return (
         <div ref={authForm} className='auth'>
@@ -76,7 +72,6 @@ const Auth = observer(() => {
                             <button onClick={auth} className='btn btn-outline-light auth__button'>Sign Up</button>
                         </div>
                 }
-
             </form>
         </div>
     );

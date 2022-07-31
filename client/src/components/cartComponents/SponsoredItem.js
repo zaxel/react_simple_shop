@@ -2,7 +2,7 @@
 import { Context } from '../..';
 import { addToCart } from '../../utils/addToCart';
 import star from '../../assets/rating_star.png';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { DEVICE_ROUTE } from '../../utils/consts';
 
@@ -12,7 +12,7 @@ const SponsoredItem = ({el}) => {
     const navigate = useNavigate();
 
     const onAddToCartPressed = () => {
-        addToCart(cart, user.isAuth, cart.cartId, el.id, device_amount, user.user.id)
+        addToCart(cart, user, user.isAuth, cart.cartId, el.id, device_amount, user.user.id)
     }
     
     return (

@@ -55,6 +55,7 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
     } catch (e) {
       if(e.response.status === 401){
         logoutOnClient(cartStore, userStore);
+        alert('Session timed out. You have to login again to continue."');
       }
       throw e;
     } finally {
