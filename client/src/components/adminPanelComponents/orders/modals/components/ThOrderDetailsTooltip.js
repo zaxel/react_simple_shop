@@ -4,10 +4,9 @@ import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { fetchOrderDetails } from '../../../../../utils/adminOrders';
 
 const ThOrderDetailsTooltip = ({ data, innerRef}) => {
-    const { toolTip, orderDetails } = useContext(Context);
+    const { toolTip, orderDetails, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        orderDetails.setLoading(true);
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(orderDetails.sortBy === data){
@@ -16,12 +15,9 @@ const ThOrderDetailsTooltip = ({ data, innerRef}) => {
             orderDetails.setSortDirection('ASC');
         }
         orderDetails.setSortBy(data);
-        await fetchOrderDetails(orderDetails, orderDetails.orderId, orderDetails.sortBy, orderDetails.sortDirection);
-        orderDetails.setLoading(false);
+        await fetchOrderDetails(orderDetails, orderDetails.orderId, cart, user);
         toolTip.setIsAvailable(true);
     }
-
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips

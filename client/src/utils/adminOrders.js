@@ -46,14 +46,17 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
     return fetchedOrderDetails;
   }
 
-  export const fetchOrderDetails = async (currentStore, orderId, sortBy, sortDirection) => {
+  export const fetchOrderDetails = async (currentStore, orderId, cartStore, userStore) => {
     if(!orderId)return;
     try {
       currentStore.setLoading(true);
-      const data = await fetchDetails(currentStore, orderId, sortBy, sortDirection);
+      const data = await fetchDetails(currentStore, orderId, currentStore.sortBy, currentStore.sortDirection,);
       return data;
     } catch (e) {
-      console.log(e)
+      if(e.response.status === 401){
+        logoutOnClient(cartStore, userStore);
+      }
+      throw e;
     } finally {
       currentStore.setLoading(false);
     }

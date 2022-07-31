@@ -9,11 +9,11 @@ import { observer } from 'mobx-react-lite';
 import { Spinner } from 'react-bootstrap';
 
 const OrderDetail = observer(({ show, onHide }) => {
-    const { orderDetails} = useContext(Context);
+    const { orderDetails, cart, user } = useContext(Context);
     let thRefs = useRef([]); 
 
     useEffect(() => {
-        fetchOrderDetails(orderDetails, orderDetails.orderId);
+        fetchOrderDetails(orderDetails, orderDetails.orderId, cart, user);
     }, [orderDetails.updateDataTrigger])
 
     
