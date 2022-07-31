@@ -15,23 +15,17 @@ import OrderDetail from './modals/OrderDetail';
 
 const OrdersAdminPanel = observer(() => {
     let thRefs = useRef([]);
-    const { toolTip, orders, orderDetails } = useContext(Context);
+    const { toolTip, orders, orderDetails, cart, user } = useContext(Context);
     const [orderModalVisible, setOrderModalVisible] = useState(false);
 
     useEffect(() => {
-        (async () => {
-            try {
-                await fetchPage(orders);
-            } catch (e) {
-                console.log(e)
-            }
-        })()
+        fetchPage(orders, cart, user);
+           
         toolTip.setIsAvailable(true);
-
     }, [])
 
     useEffect(() => {
-        fetchPage(orders);
+        fetchPage(orders, cart, user);
     }, [orders.activePage, orders.updateDataTrigger])
 
     const ths = [
@@ -69,7 +63,7 @@ const OrdersAdminPanel = observer(() => {
     }
 
     const onSubmitSearch = async () => {
-        fetchPage(orders);
+        fetchPage(orders, cart, user);
     }
 
     const thsWithTooltip = ths.map((el, i) => {
