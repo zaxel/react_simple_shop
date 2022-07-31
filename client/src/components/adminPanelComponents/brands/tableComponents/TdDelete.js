@@ -6,14 +6,14 @@ import { Spinner } from 'react-bootstrap';
 
 const TdDelete = ({data , innerRef }) => {
     const { id } = data;
-    const { toolTip, brands } = useContext(Context);
+    const { toolTip, brands, cart, user } = useContext(Context);
     const [loading, setLoading] = useState(false);
     const onButtonClickHandler = async() => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this device brand?')){
             setLoading(true);
-            await deleteBrand(id);
+            await deleteBrand(id, cart, user);
             setLoading(false);
             brands.setUpdateDataTrigger(prev=>!brands.updateDataTrigger);
         }

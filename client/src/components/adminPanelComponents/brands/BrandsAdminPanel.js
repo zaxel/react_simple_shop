@@ -7,21 +7,21 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { fetchPage } from '../../../utils/adminBrands';
 import TrBrandsNewLine from './tableComponents/TrBrandsNewLine';
-import { createBrands } from '../../../http/deviceAPI';
+import { addNewBrands as addNewBrandsReq } from '../../../utils/adminBrands';
 
 const BrandsAdminPanel = observer(() => {
     let thRefs = useRef([]);
-    const { toolTip, brands } = useContext(Context);
+    const { toolTip, brands, cart, user } = useContext(Context);
 
     useEffect(() => {
         (async () => {
             try {
                 await fetchPage(brands);
+                toolTip.setIsAvailable(true);
             } catch (e) {
                 console.log(e)
             }
         })()
-        toolTip.setIsAvailable(true);
 
     }, [])
 
@@ -58,20 +58,20 @@ const BrandsAdminPanel = observer(() => {
     const triggerBrandsUpdate = () => {
         brands.setUpdateDataTrigger(!brands.updateDataTrigger);
     }
-    const onSaveClickHandler = async() => {
+    const onSaveClickHandler = async () => {
         const newLinesNoEmptyFields = brands.newBrands
-            .filter(el=>el.name !== '')
+            .filter(el => el.name !== '')
             .map(el => {
-                return {name: el.name};
+                return { name: el.name };
             })
 
-        if(!newLinesNoEmptyFields.length){
+        if (!newLinesNoEmptyFields.length) {
             alert('no data to be updated');
             brands.refreshNewInfo();
             return;
         }
-        await createBrands(newLinesNoEmptyFields);
-        brands.refreshBrands(); 
+        await addNewBrandsReq(newLinesNoEmptyFields, cart, user);
+        brands.refreshBrands();
         triggerBrandsUpdate();
     }
 
@@ -89,7 +89,7 @@ const BrandsAdminPanel = observer(() => {
         return <TrBrands key={el.id} data={el} />
     })
     const trsNewLine = brands.newBrands?.map((el, i) => {
-        return <TrBrandsNewLine key={el.id} data={{ el, dropNewLine}} /> 
+        return <TrBrandsNewLine key={el.id} data={{ el, dropNewLine }} />
     })
 
 
@@ -127,7 +127,7 @@ const BrandsAdminPanel = observer(() => {
                     </button>}
                 </div>
             </div>
-            
+
         </div>
     );
 });
