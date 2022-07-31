@@ -11,9 +11,17 @@ export const changeOrderData = async(id, dbFieldName, data) => {
     const updated = await updateOrder(id, dbFieldName, data); 
     return updated;
 }
-export const deleteOrder = async(id) => {
+export const deleteOrder = async(id, cartStore, userStore) => {
+  try{
     const deleted = await deleteOrderReq(id); 
     return deleted;
+  }catch (e) {
+    if(e.response.status === 401){
+      logoutOnClient(cartStore, userStore);
+    }
+    throw e;
+  }
+    
 }
 
 export const fetchPage = async(ordersStore, cartStore, userStore) => {
