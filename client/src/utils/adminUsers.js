@@ -1,11 +1,13 @@
 ﻿import { getUsers, updateUser, deleteUserReq } from "../http/userAPI";
 import { logoutOnClient } from "./logout";
 
-export const fetchAllUsers = async (currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
+export const fetchAllUsers = async (sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   const fetchedServerUsers = await getUsers(sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
   if (fetchedServerUsers.count === 0) alert('Nothing found!')
-  await currentStore.setUsers(fetchedServerUsers);
   return fetchedServerUsers;
+}
+export const setUsersToStore = async (store, users) => {
+  await store.setUsers(users);
 }
 
 export const changeUserData = async (id, dbFieldName, data, cartStore, userStore) => {
@@ -39,14 +41,15 @@ export const deleteUser = async (id, cartStore, userStore) => {
 export const fetchPage = async (adminUsersStore, cartStore, userStore) => {
   try {
     adminUsersStore.setLoading(true);
-    const data = await fetchAllUsers(adminUsersStore, adminUsersStore.sortBy, adminUsersStore.sortDirection, adminUsersStore.itemsPerPage, adminUsersStore.activePage, adminUsersStore.searchBy, adminUsersStore.searchByPrase);
+    const data = await fetchAllUsers(adminUsersStore.sortBy, adminUsersStore.sortDirection, adminUsersStore.itemsPerPage, adminUsersStore.activePage, adminUsersStore.searchBy, adminUsersStore.searchByPrase);
+    setUsersToStore(adminUsersStore, data);
     adminUsersStore.setPagesTotal(Math.ceil(adminUsersStore.users.count / adminUsersStore.itemsPerPage));
     return data;
   } catch (e) {
     if (e.response.status === 401) {
       logoutOnClient(cartStore, userStore);
+      alert('Session timed out. You have to login again to continue."');
     }
-    alert('Session timed out. You have to login again to continue."');
     throw e;
   } finally {
     adminUsersStore.setLoading(false);

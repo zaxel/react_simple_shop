@@ -1,10 +1,13 @@
 ﻿import { getOrders, updateOrder, deleteOrderReq, fetchOrderDetailsReq } from "../http/orderAPI";
 import { logoutOnClient } from "./logout";
 
-export const fetchAllOrders = async(currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
+export const fetchAllOrders = async(sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
     const fetchedServerOrders = await getOrders( sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
     if(fetchedServerOrders.count === 0) alert('Nothing found!')
-    await currentStore.setOrders(fetchedServerOrders);
+    return fetchedServerOrders;
+  }
+export const setOrdersToStore = async (store, orders) => {
+  await store.setOrders(orders);
 }
 
 export const changeOrderData = async(id, dbFieldName, data) => {
@@ -27,11 +30,13 @@ export const deleteOrder = async(id, cartStore, userStore) => {
 export const fetchPage = async(ordersStore, cartStore, userStore) => {
     try {
         ordersStore.setLoading(true);
-      await fetchAllOrders(ordersStore, ordersStore.sortBy, ordersStore.sortDirection, ordersStore.itemsPerPage, ordersStore.activePage, ordersStore.searchBy, ordersStore.searchByPrase);
+      const data = await fetchAllOrders(ordersStore.sortBy, ordersStore.sortDirection, ordersStore.itemsPerPage, ordersStore.activePage, ordersStore.searchBy, ordersStore.searchByPrase);
       ordersStore.setPagesTotal(Math.ceil(ordersStore.orders.count / ordersStore.itemsPerPage));
+      setOrdersToStore(ordersStore, data);
     } catch (e) {
       if(e.response.status === 401){
         logoutOnClient(cartStore, userStore);
+        alert('Session timed out. You have to login again to continue."');
       }
       throw e;
     } finally {
