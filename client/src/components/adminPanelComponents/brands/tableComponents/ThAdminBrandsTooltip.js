@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { fetchAllBrands } from '../../../../utils/adminBrands';
+import { fetchAllBrands, setBrandsToStore } from '../../../../utils/adminBrands';
 
 const ThAdminBrandsTooltip = ({ data, innerRef}) => {
     const { toolTip, brands } = useContext(Context);
@@ -16,7 +16,8 @@ const ThAdminBrandsTooltip = ({ data, innerRef}) => {
             brands.setSortDirection('ASC');
         }
         brands.setSortBy(data);
-        await fetchAllBrands(brands, brands.sortBy, brands.sortDirection);
+        const brandsRequested = await fetchAllBrands(brands.sortBy, brands.sortDirection);
+        await setBrandsToStore(brands, brandsRequested);
         brands.setLoading(false);
         toolTip.setIsAvailable(true);
     }

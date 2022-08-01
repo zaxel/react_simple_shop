@@ -31,11 +31,7 @@ export const createBrands = async (brands) => {
     const {data} = await $authHost.post('api/brand', {brands});
     return data;
 }
-export const fetchBrands = async () => {
-    const {data} = await $host.get('api/brand');
-    return data;
-}
-export const fetchAllBrands = async (sortBy, sortDirection = 'ASC') => {
+export const fetchAllBrands = async (sortBy = 'id', sortDirection = 'ASC') => {
     const {data} = await $host.get('api/brand', {params:{
         sortBy, sortDirection
     }}); 

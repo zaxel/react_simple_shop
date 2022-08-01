@@ -1,6 +1,6 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
-import UserOrderModal from '../modalComponents/UserOrderModal';
+import UserOrderModal from './UserOrderModal';
 import ThTable from '../strippedTablesComponents/ThTable';
 import TrTable from '../strippedTablesComponents/TrTable';
 import { v4 as uuidv4 } from 'uuid';
@@ -75,7 +75,7 @@ const UserOrders = () => {
                     {tdsWithTooltip}
                 </tbody>
             </table>
-            <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} />
+            {/* <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} /> */}
             {/* <PaginationCont /> */}
         </div>
     );

@@ -1,10 +1,13 @@
 ﻿import { fetchAllBrands as getBrands, updateBrand, deleteBrandReq, createBrands } from "../http/deviceAPI";
 import { logoutOnClient } from "./logout";
 
-export const fetchAllBrands = async (currentStore, sortBy, sortDirection) => {
+export const fetchAllBrands = async (sortBy, sortDirection) => {
   const fetchedServerBrands = await getBrands(sortBy, sortDirection);
   if (fetchedServerBrands.count === 0) alert('Nothing found!')
-  await currentStore.setBrands(fetchedServerBrands);
+  return fetchedServerBrands;
+}
+export const setBrandsToStore = async (store, brands) => {
+  await store.setBrands(brands); 
 }
 
 export const changeBrandData = async (id, name, cartStore, userStore) => {
@@ -32,15 +35,16 @@ export const deleteBrand = async (id, cartStore, userStore) => {
   }
 }
 
-export const fetchPage = async (adminBrandsStore) => {
+export const fetchPage = async (currentStore) => {
   try {
-    adminBrandsStore.setLoading(true);
-    await fetchAllBrands(adminBrandsStore, adminBrandsStore.sortBy, adminBrandsStore.sortDirection);
+    currentStore.setLoading(true);
+    const data = await fetchAllBrands(currentStore.sortBy, currentStore.sortDirection);
+    setBrandsToStore(currentStore, data);
   } catch (e) {
     console.log(e);
     alert(e.response.data.message);
   } finally {
-    adminBrandsStore.setLoading(false);
+    currentStore.setLoading(false);
   }
 }
 export const addNewBrands = async (brands, cartStore, userStore) => {

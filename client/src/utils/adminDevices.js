@@ -1,4 +1,5 @@
-﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes, fetchBrands } from "../http/deviceAPI";
+﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes } from "../http/deviceAPI";
+import { fetchAllBrands } from "./adminBrands";
 
 export const fetchAllDevices = async (currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   const [brandId, typeId, id, startPage, defaultLimit] = [null, null, null, null, null];
@@ -39,8 +40,8 @@ export const fetchSetTypes = async (adminDevicesStore) => {
 }
 export const fetchSetBrands = async (adminDevicesStore) => {
   try {
-    const brands = await fetchBrands();
-    const data = await adminDevicesStore.setBrands(brands);
+    const brands = await fetchAllBrands();
+    const data = await adminDevicesStore.setBrands(brands); 
     return brands;
   } catch (e) {
     console.log(e)
