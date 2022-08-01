@@ -11,7 +11,7 @@ const TdInputText = ({ data, innerRef }) => {
     const buttonRef = useRef(null);
 
     const {inputData, id, dbFieldName } = data;
-    const { toolTip, types } = useContext(Context);
+    const { toolTip, types, cart, user } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ const TdInputText = ({ data, innerRef }) => {
     const onButtonClickHandler = async() => {
         if(isTypesStateChanged(types, id, dbFieldName, input)){
             setLoading(true); 
-            await changeTypeData(id, input);
+            await changeTypeData(id, input, cart, user);
             setLoading(false);
             types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
         }

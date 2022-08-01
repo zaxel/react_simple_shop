@@ -7,21 +7,21 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { fetchPage } from '../../../utils/adminTypes';
 import TrTypesNewLine from './tableComponents/TrTypesNewLine';
-import { createTypes } from '../../../http/deviceAPI';
+import { addNewTypes as addNewTypesReq } from '../../../utils/adminTypes';
 
 const TypesAdminPanel = observer(() => {
     let thRefs = useRef([]);
-    const { toolTip, types } = useContext(Context);
+    const { toolTip, types, cart, user } = useContext(Context);
 
     useEffect(() => {
         (async () => {
             try {
                 await fetchPage(types);
+                toolTip.setIsAvailable(true);
             } catch (e) {
                 console.log(e)
             }
         })()
-        toolTip.setIsAvailable(true);
 
     }, [])
 
@@ -70,7 +70,7 @@ const TypesAdminPanel = observer(() => {
             types.refreshNewInfo();
             return;
         }
-        await createTypes(newLinesNoEmptyFields);
+        await addNewTypesReq(newLinesNoEmptyFields, cart, user); 
         types.refreshTypes(); 
         triggerTypesUpdate();
     }
