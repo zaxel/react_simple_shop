@@ -1,5 +1,6 @@
-﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, fetchTypes } from "../http/deviceAPI";
+﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq } from "../http/deviceAPI";
 import { fetchAllBrands } from "./adminBrands";
+import { fetchAllTypes } from "./adminTypes";
 
 export const fetchAllDevices = async (currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   const [brandId, typeId, id, startPage, defaultLimit] = [null, null, null, null, null];
@@ -31,7 +32,7 @@ export const fetchPage = async (adminDevicesStore) => {
 }
 export const fetchSetTypes = async (adminDevicesStore) => {
   try {
-    const types = await fetchTypes();
+    const types = await fetchAllTypes();
     const data = await adminDevicesStore.setTypes(types);
     return types;
   } catch (e) {

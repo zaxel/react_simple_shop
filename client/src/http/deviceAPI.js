@@ -4,11 +4,6 @@ export const createTypes = async (types) => {
     const {data} = await $authHost.post('api/type', {types});
     return data;
 }
-export const fetchTypes = async () => {
-    const {data} = await $host.get('api/type');
-    return data;
-}
-
 export const fetchAllTypes = async (sortBy, sortDirection = 'ASC') => {
     const {data} = await $host.get('api/type', {params:{
         sortBy, sortDirection

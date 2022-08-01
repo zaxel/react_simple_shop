@@ -1,7 +1,9 @@
 ﻿import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import { Context } from '../../../..';
-import { createDevice, fetchTypes, fetchAllBrands, fetchAllDevices } from '../../../../http/deviceAPI';
+import { createDevice, fetchAllDevices } from '../../../../http/deviceAPI';
+import { fetchAllBrands } from '../../../../utils/adminBrands';
+import { fetchAllTypes } from '../../../../utils/adminTypes';
 import { observer } from 'mobx-react-lite';
 
 const AddDeviceModal = observer(({show, onHide}) => {
@@ -63,7 +65,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
         
     }
     useEffect(()=>{
-      fetchTypes().then(data=>{
+      fetchAllTypes().then(data=>{
           device.setTypes(data)
       })
       fetchAllBrands().then(data=>{

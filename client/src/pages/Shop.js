@@ -4,7 +4,8 @@ import BrandBar from '../components/BrandBar';
 import DeviceItems from '../components/DeviceItems';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
-import { fetchAllDevices, fetchTypes } from '../http/deviceAPI';
+import { fetchAllDevices } from '../http/deviceAPI';
+import { fetchAllTypes } from '../utils/adminTypes';
 import { fetchAllBrands } from '../utils/adminBrands';
 import PaginationCont from '../components/PaginationCont';
 
@@ -12,7 +13,7 @@ const Shop = observer(() => {
    const {device} = useContext(Context);
 
    useEffect(()=>{
-    fetchTypes().then(data=>{
+    fetchAllTypes().then(data=>{
         device.setTypes(data);
     })
     fetchAllBrands().then(data=>{
