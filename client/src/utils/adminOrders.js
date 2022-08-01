@@ -19,7 +19,7 @@ export const deleteOrder = async(id, cartStore, userStore) => {
     const deleted = await deleteOrderReq(id); 
     return deleted;
   }catch (e) {
-    if(e.response.status === 401){
+    if(e.response.status === 401 && userStore.isAuth){
       logoutOnClient(cartStore, userStore);
     }
     throw e;
@@ -34,9 +34,9 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
       ordersStore.setPagesTotal(Math.ceil(ordersStore.orders.count / ordersStore.itemsPerPage));
       setOrdersToStore(ordersStore, data);
     } catch (e) {
-      if(e.response.status === 401){
+      if(e.response.status === 401 && userStore.isAuth){
         logoutOnClient(cartStore, userStore);
-        alert('Session timed out. You have to login again to continue."');
+        alert('Session timed out. You have to login again to continue. (adminOrders 1)');
       }
       throw e;
     } finally {
@@ -58,9 +58,9 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
       const data = await fetchDetails(currentStore, orderId, currentStore.sortBy, currentStore.sortDirection,);
       return data;
     } catch (e) {
-      if(e.response.status === 401){
+      if(e.response.status === 401 && userStore.isAuth){
         logoutOnClient(cartStore, userStore);
-        alert('Session timed out. You have to login again to continue."');
+        alert('Session timed out. You have to login again to continue. (adminOrders 2)');
       }
       throw e;
     } finally {

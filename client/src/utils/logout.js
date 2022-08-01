@@ -1,15 +1,15 @@
 ﻿import { deleteLocalStoreCart } from "./setLocalStoreCart";
 import { logout as logoutAPI } from "../http/userAPI";
 
-export const logoutOnClient = async(cart, user) => {
-    user.setUser({});
-    user.setIsAuth(false);
-    user.setIsSuperUser(false);
+export const logoutOnClient = async(cartStore, userStore) => {
+    userStore.setUser({});
+    userStore.setIsAuth(false);
+    userStore.setIsSuperUser(false);
 
-    cart.setCartDevices([]);
-    cart.setCart([]);
-    cart.setCartId(0);
-    cart.setItemsCount(0);
+    cartStore.setCartDevices([]);
+    cartStore.setCart([]);
+    cartStore.setCartId(0);
+    cartStore.setItemsCount(0);
 
     deleteLocalStoreCart();
     localStorage.removeItem('token');

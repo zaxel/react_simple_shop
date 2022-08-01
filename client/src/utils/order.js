@@ -10,9 +10,9 @@ export const makeOrder = async (setPayed, cartStore, userStore) => {
         cartStore.clearCart();
         setPayed(true);
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e.response.status === 401 && userStore.isAuth) {
             logoutOnClient(cartStore, userStore);
-            alert('Session timed out. You have to login again to continue."');
+            alert('Session timed out. You have to login again to continue. (orders 1)');
         }
         throw e;
     }

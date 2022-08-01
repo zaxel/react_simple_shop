@@ -9,27 +9,22 @@ export const setCartId = async (cartStore, userStore) => {
         const basketId = await getBasketId();
         cartStore.setCartId(basketId);
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e.response.status === 401 && userStore.isAuth) {
             logoutOnClient(cartStore, userStore);
+            alert('Session timed out. You have to login again to continue (fetchSetCart1).');
         }
         console.log(e);
-        alert('Session timed out. You have to login again to continue."');
         throw e;
     }
-
 }
 
-export const fetchCartDevices = async (cart, user) => {
+export const fetchCartDevices = async (cart) => {
     try {
         const fetchDevicesId = cart.cart.map(device => device.deviceId);
         const basketDevices = await fetchAllDevices(null, null, null, null, fetchDevicesId)
         cart.setCartDevices(basketDevices.rows);
     } catch (e) {
-        if (e.response.status === 401) {
-            logoutOnClient(cart, user);
-        }
         console.log(e)
-        alert('Session timed out. You have to login again to continue."');
         throw e;
     }
 }
@@ -42,22 +37,15 @@ export const fetchSetCart = async (userStore, cartStore) => {
 
         fetchCartDevices(cartStore);
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e.response.status === 401 && userStore.isAuth) {
             logoutOnClient(cartStore, userStore);
+            alert('Session timed out. You have to login again to continue. (fetchSetCart2)');
         }
         console.log(e)
-        alert('Session timed out. You have to login again to continue."');
         throw e;
     }
 }
-// export const fetchUpdateCart = async(user, cart)=>{
-//     const cartData = await getCart(user.user.id);
-//     cart.updateCart(cartData.rows);
-//     cart.calcItemsCount();
 
-//     fetchCartDevices(cart);
-
-// }
 export const fetchCartOnAuth = async (user, cart) => {
     const setDevices = cart.cart.map(device => {
         return {
@@ -73,39 +61,40 @@ export const fetchCartOnAuth = async (user, cart) => {
     cart.calcItemsCount();
     await fetchCartDevices(cart);
 }
-export const updateDeviceAmount = async (user, cart, basketId, deviceId, device_amount) => {
+
+export const updateDeviceAmount = async (userStore, cartStore, basketId, deviceId, device_amount) => {
     try {
-        if (user.isAuth) {
+        if (userStore.isAuth) {
             const cartItem = [{ basketId, deviceId, device_amount }];
-            await createOrUpdateCartDevice(cartItem, addAmountToExisted, user.user.id);
+            await createOrUpdateCartDevice(cartItem, addAmountToExisted, userStore.user.id);
         }
-        cart.setDeviceAmount(device_amount, deviceId);
+        cartStore.setDeviceAmount(device_amount, deviceId);
     } catch (e) {
-        if (e.response.status === 401) {
-            logoutOnClient(cart, user);
+        if (e.response.status === 401 && userStore.isAuth) {
+            logoutOnClient(cartStore, userStore);
+            alert('Session timed out. You have to login again to continue. (fetchSetCart3)');
         }
         console.log(e);
-        alert('Session timed out. You have to login again to continue."');
         throw e;
     }
 }
-export const deleteDevice = async (user, cart, basketId, deviceId) => {
 
+export const deleteDevice = async (userStore, cartStore, basketId, deviceId) => {
     try {
-        if (user.isAuth) {
-            const cartData = await deleteCartDevice(basketId, deviceId, user.user.id);
+        if (userStore.isAuth) {
+            const cartData = await deleteCartDevice(basketId, deviceId, userStore.user.id);
         }
-        cart.deleteCart(deviceId);
-        cart.deleteCartDevices(deviceId);
-        cart.calcItemsCount();
-        cart.setCartTotal();
-        setLocalStoreCart(cart);
+        cartStore.deleteCart(deviceId);
+        cartStore.deleteCartDevices(deviceId);
+        cartStore.calcItemsCount();
+        cartStore.setCartTotal();
+        setLocalStoreCart(cartStore);
     } catch (e) {
-        if (e.response.status === 401) {
-            logoutOnClient(cart, user);
+        if (e.response.status === 401 && userStore.isAuth){
+            logoutOnClient(cartStore, userStore);
+            alert('Session timed out. You have to login again to continue. (fetchSetCart4)');
         }
         console.log(e);
-        alert('Session timed out. You have to login again to continue."');
         throw e;
     }
 }

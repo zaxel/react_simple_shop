@@ -15,9 +15,9 @@ export const changeTypeData = async (id, name, cartStore, userStore) => {
     const updated = await updateType(id, name);
     return updated;
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 && userStore.isAuth) {
       logoutOnClient(cartStore, userStore);
-      alert('Session timed out. You have to login again to continue."');
+      alert('Session timed out. You have to login again to continue. (adminTypes 1)');
     }
     throw e;
   }
@@ -28,9 +28,9 @@ export const deleteType = async (id, cartStore, userStore) => {
     const deleted = await deleteTypeReq(id);
   return deleted;
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 && userStore.isAuth) {
       logoutOnClient(cartStore, userStore);
-      alert('Session timed out. You have to login again to continue."');
+      alert('Session timed out. You have to login again to continue. (adminTypes 2)');
     }
     throw e;
   }
@@ -57,9 +57,9 @@ export const addNewTypes = async (types, cartStore, userStore) => {
     const data = await createTypes(types);
     return data;
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 && userStore.isAuth) {
       logoutOnClient(cartStore, userStore);
-      alert('Session timed out. You have to login again to continue."');
+      alert('Session timed out. You have to login again to continue. (adminTypes 3)');
     }
     throw e;
   }
