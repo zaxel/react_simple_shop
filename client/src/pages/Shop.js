@@ -5,43 +5,43 @@ import DeviceItems from '../components/DeviceItems';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { fetchPage } from '../utils/adminDevices';
-import { fetchAllTypes } from '../utils/adminTypes';
-import { fetchAllBrands } from '../utils/adminBrands';
+import { fetchSetBrands, fetchSetTypes } from '../utils/adminDevices';
 import PaginationCont from '../components/PaginationCont';
 import { Spinner } from 'react-bootstrap';
 
 const Shop = observer(() => {
-   const {device} = useContext(Context);
+    const { device } = useContext(Context);
 
-   useEffect(()=>{
-    fetchAllTypes().then(data=>{
-        device.setTypes(data);
-    })
-    fetchAllBrands().then(data=>{
-        device.setBrands(data);
-    })
+    useEffect(() => {
+        try {
+            fetchSetTypes(device);
+            fetchSetBrands(device);
+            fetchPage(device);
+
+        } catch (e) {
+            console.log(e)
+        }
+    }, [])
+
+    useEffect(() => {
         fetchPage(device);
-   }, [])
+    }, [device.activePage, device.brandActive, device.typeActive])
 
-   useEffect(()=>{
-    fetchPage(device);
-   }, [device.activePage, device.brandActive, device.typeActive])
-
-   if (device.loading) {
-    return (
-      <div className="spinner spinner__shop">
-        <Spinner animation="border" />
-      </div>
-    )
-  }
+    if (device.loading) {
+        return (
+            <div className="spinner spinner__shop">
+                <Spinner animation="border" />
+            </div>
+        )
+    }
     return (
         <div className='shop'>
             {device.devices.rows && <div className='shop__container'>
-                <TypeBar/>
+                <TypeBar />
                 <div className='shop__devices-cont'>
-                    <BrandBar/>
-                    <DeviceItems/>
-                    <PaginationCont currentStore={device}/>
+                    <BrandBar />
+                    <DeviceItems />
+                    <PaginationCont currentStore={device} />
                 </div>
             </div>}
         </div>
