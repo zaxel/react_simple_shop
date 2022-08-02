@@ -1,21 +1,22 @@
-﻿import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
+﻿import React, { useContext, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Context } from '../../../..';
-import { createBulkDevices} from '../../../../http/deviceAPI';
+import { createBulkDevices } from '../../../../utils/adminDevices';
 import { observer } from 'mobx-react-lite';
 import {SAMPLE_ROUTE} from '../../../../utils/consts';
 
 const AddDeviceBulkModal = observer(({ show, onHide }) => {
   const [file, setFile] = useState('');
-  const { adminDevices } = useContext(Context);
+  const { adminDevices, cart, user } = useContext(Context);
   const setBulkDevice = async () => {
     try {
       onHide();
       const formData = new FormData();
       formData.append('file', file);
-      const data = await createBulkDevices(formData);
-      alert(JSON.stringify(data));
+      const { created_updated, loggedOut } = await createBulkDevices(formData, cart, user);
+      if(loggedOut)return;
+      created_updated && alert(created_updated + ' has been created!' );
       adminDevices.setUpdateDataTrigger(!adminDevices.updateDataTrigger);
     } catch (e) {
       alert(e.response.data.message)

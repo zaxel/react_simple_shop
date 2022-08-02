@@ -13,7 +13,7 @@ export const logoutOnClient = async(cartStore, userStore) => {
 
     deleteLocalStoreCart();
     localStorage.removeItem('token');
-    return {'loggedOut': true}
+    return {loggedOut: true}
 }
 export const logoutOnServer = async() => {
     await logoutAPI();

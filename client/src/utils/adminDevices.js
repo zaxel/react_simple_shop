@@ -1,4 +1,4 @@
-﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq } from "../http/deviceAPI";
+﻿import { fetchAllDevices as getDevices, updateDevice, deleteDeviceReq, createBulkDevices as createBulkDevicesReq } from "../http/deviceAPI";
 import { fetchAllBrands } from "./adminBrands";
 import { fetchAllTypes } from "./adminTypes";
 import { logoutOnClient } from "./logout";
@@ -13,13 +13,26 @@ export const setDevicesToStore = async (store, devices) => {
   await store.setDevices(devices);
 }
 
+export const createBulkDevices = async (formData, cartStore, userStore) => {
+  try {
+    const updated = await createBulkDevicesReq(formData);
+    return updated;
+  } catch (e) {
+    if (e.response.status === 401 && userStore.isAuth) {
+      alert('Session timed out. You have to login again to continue. (adminTypes 31)');
+      return logoutOnClient(cartStore, userStore);
+    }else{
+      throw e;
+    }
+  }
+}
 export const changeDeviceData = async (id, dbFieldName, data, cartStore, userStore) => {
   try {
     const updated = await updateDevice(id, dbFieldName, data);
     return updated;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminTypes 31)');
+      alert('Session timed out. You have to login again to continue. (adminTypes 32)');
       return logoutOnClient(cartStore, userStore);
     }else{
       throw e;
@@ -32,7 +45,7 @@ export const deleteDevice = async (id, cartStore, userStore) => {
     return updated;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminTypes 32)');
+      alert('Session timed out. You have to login again to continue. (adminTypes 33)');
       return logoutOnClient(cartStore, userStore);
     }else{
       throw e;
@@ -45,7 +58,7 @@ export const updateDeviceImg = async (data, cartStore, userStore) => {
     return updated;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminTypes 33)');
+      alert('Session timed out. You have to login again to continue. (adminTypes 34)');
       return logoutOnClient(cartStore, userStore);
     }else{
       throw e;
