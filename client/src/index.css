@@ -57,7 +57,7 @@ button:active {
     align-items: center;
 }
 .spinner__shop{
-    height: 100vh;
+    flex: 1 1 auto;
 }
 .td-spinner .spinner-border{
     width: 16px;
