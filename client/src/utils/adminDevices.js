@@ -26,9 +26,18 @@ export const changeDeviceData = async (id, dbFieldName, data, cartStore, userSto
     }
   }
 }
-export const deleteDevice = async (id) => {
-  const deleted = await deleteDeviceReq(id);
-  return deleted;
+export const deleteDevice = async (id, cartStore, userStore) => {
+  try {
+    const updated = await deleteDeviceReq(id);
+    return updated;
+  } catch (e) {
+    if (e.response.status === 401 && userStore.isAuth) {
+      alert('Session timed out. You have to login again to continue. (adminTypes 32)');
+      return logoutOnClient(cartStore, userStore);
+    }else{
+      throw e;
+    }
+  }
 }
 export const updateDeviceImg = async (data, cartStore, userStore) => {
   try {
@@ -36,7 +45,7 @@ export const updateDeviceImg = async (data, cartStore, userStore) => {
     return updated;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminTypes 32)');
+      alert('Session timed out. You have to login again to continue. (adminTypes 33)');
       return logoutOnClient(cartStore, userStore);
     }else{
       throw e;
