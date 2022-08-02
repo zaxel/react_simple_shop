@@ -4,10 +4,11 @@ import BrandBar from '../components/BrandBar';
 import DeviceItems from '../components/DeviceItems';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
-import { fetchAllDevices } from '../http/deviceAPI';
+import { fetchPage } from '../utils/adminDevices';
 import { fetchAllTypes } from '../utils/adminTypes';
 import { fetchAllBrands } from '../utils/adminBrands';
 import PaginationCont from '../components/PaginationCont';
+import { Spinner } from 'react-bootstrap';
 
 const Shop = observer(() => {
    const {device} = useContext(Context);
@@ -19,19 +20,20 @@ const Shop = observer(() => {
     fetchAllBrands().then(data=>{
         device.setBrands(data);
     })
-    fetchAllDevices(null, null, device.itemsPerPage, device.activePage)
-        .then(data=>device.setDevices(data))
-        .then(data=>device.setPagesTotal(Math.ceil(device.devices.count/device.itemsPerPage)))
+        fetchPage(device);
    }, [])
 
    useEffect(()=>{
-    fetchAllDevices(device.brandActive, device.typeActive, device.itemsPerPage, device.activePage)
-    .then(data=>device.setDevices(data))
-    .then(data=>{
-        device.setPagesTotal(Math.ceil(device.devices.count/device.itemsPerPage));
-    })
+    fetchPage(device);
    }, [device.activePage, device.brandActive, device.typeActive])
 
+   if (device.loading) {
+    return (
+      <div className="spinner">
+        <Spinner animation="border" />
+      </div>
+    )
+  }
     return (
         <div className='shop'>
             {device.devices.rows && <div className='shop__container'>

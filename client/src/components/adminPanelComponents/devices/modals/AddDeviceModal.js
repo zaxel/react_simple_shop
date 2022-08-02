@@ -1,9 +1,7 @@
 ﻿import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import { Context } from '../../../..';
-import { createDevice, fetchAllDevices } from '../../../../http/deviceAPI';
-import { fetchAllBrands } from '../../../../utils/adminBrands';
-import { fetchAllTypes } from '../../../../utils/adminTypes';
+import { createDevice, } from '../../../../http/deviceAPI';
 import { observer } from 'mobx-react-lite';
 
 const AddDeviceModal = observer(({show, onHide}) => {
@@ -47,6 +45,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
     }
     const setNewDevice = async() => {
       try{
+        console.log(99)
         onHide();
         const formData = new FormData();
         formData.append('name', title);
@@ -64,19 +63,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
       }
         
     }
-    useEffect(()=>{
-      fetchAllTypes().then(data=>{
-          device.setTypes(data)
-      })
-      fetchAllBrands().then(data=>{
-          device.setBrands(data) 
-      })
-      fetchAllDevices().then(data=>{
-          device.setDevices(data)
-      })
-     }, [])
-
-
+    
     return (
       <Modal className="device-modal" centered show={show} onHide={onHide}>
         <Modal.Header closeButton>

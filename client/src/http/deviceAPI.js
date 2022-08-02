@@ -54,9 +54,9 @@ export const createBulkDevices = async (formData) => {
     return data;
 }
 
-export const fetchAllDevices = async (brandId, typeId, limit, page, id, startPage = null, defaultLimit = null, sortBy, sortDirection = 'ASC', searchBy = null, searchPrase = null) => {
+export const fetchAllDevices = async (sortBy, sortDirection = 'ASC', page, searchBy = null, searchPrase = null, limit, id, brandId, typeId) => {
     const {data} = await $host.get('api/device', {params:{
-        brandId, typeId, limit, page, id, startPage, defaultLimit, sortBy, sortDirection, searchBy, searchPrase
+        brandId, typeId, limit, page, id, sortBy, sortDirection, searchBy, searchPrase
     }}); 
     return data;
 }

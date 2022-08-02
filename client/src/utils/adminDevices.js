@@ -2,11 +2,13 @@
 import { fetchAllBrands } from "./adminBrands";
 import { fetchAllTypes } from "./adminTypes";
 
-export const fetchAllDevices = async (currentStore, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
-  const [brandId, typeId, id, startPage, defaultLimit] = [null, null, null, null, null];
-  const fetchedServerDevices = await getDevices(brandId, typeId, limit, page, id, startPage, defaultLimit, sortBy, sortDirection, searchBy, searchPrase);
+export const fetchAllDevices = async (sortBy, sortDirection, page, searchBy, searchPrase, limit, id, brandId, typeId) => {
+  const fetchedServerDevices = await getDevices(sortBy, sortDirection, page, searchBy, searchPrase, limit, id, brandId, typeId);
   if (fetchedServerDevices.count === 0) alert('Nothing found!')
-  await currentStore.setDevices(fetchedServerDevices);
+  return fetchedServerDevices;
+}
+export const setDevicesToStore = async (store, devices) => {
+  await store.setDevices(devices); 
 }
 
 export const changeDeviceData = async (id, dbFieldName, data) => {
@@ -18,16 +20,17 @@ export const deleteDevice = async (id) => {
   return deleted;
 }
 
-export const fetchPage = async (adminDevicesStore) => {
+export const fetchPage = async (currentStore) => {
   try {
-    adminDevicesStore.setLoading(true);
-    await fetchAllDevices(adminDevicesStore, adminDevicesStore.sortBy, adminDevicesStore.sortDirection, adminDevicesStore.itemsPerPage, adminDevicesStore.activePage, adminDevicesStore.searchBy, adminDevicesStore.searchByPrase);
-    adminDevicesStore.setPagesTotal(Math.ceil(adminDevicesStore.devices.count / adminDevicesStore.itemsPerPage));
+    currentStore.setLoading(true);
+    const data = await fetchAllDevices(currentStore.sortBy, currentStore.sortDirection, currentStore.activePage, currentStore.searchBy, currentStore.searchByPrase, currentStore.itemsPerPage, null, currentStore.brandActive, currentStore.typeActive);
+    currentStore.setPagesTotal(Math.ceil(currentStore.devices.count / currentStore.itemsPerPage));
+    setDevicesToStore(currentStore, data);
   } catch (e) {
     console.log(e);
     alert(e.response.data.message);
   } finally {
-    adminDevicesStore.setLoading(false);
+    currentStore.setLoading(false);
   }
 }
 export const fetchSetTypes = async (adminDevicesStore) => {

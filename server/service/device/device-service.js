@@ -58,7 +58,9 @@ class DeviceService {
             let bulkItems = await Promise.allSettled(bulkPromises);
         return bulkItems;
     }
-    getAll = async (id, brandId, typeId, limit, page, startPage, defaultLimit, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
+    getAll = async (id, brandId, typeId, limit, page, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
+        const startPage = process.env.START_PAGE;
+        const defaultLimit = process.env.DEFAULT_LIMIT;
         page = page || startPage;
         limit = limit || defaultLimit;
         let offset = page * limit - limit;

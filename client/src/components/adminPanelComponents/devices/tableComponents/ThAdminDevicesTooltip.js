@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { fetchAllDevices } from '../../../../utils/adminDevices';
+import { fetchAllDevices, setDevicesToStore } from '../../../../utils/adminDevices';
 
 const ThAdminDevicesTooltip = ({ data, innerRef}) => {
     const { toolTip, adminDevices } = useContext(Context);
@@ -16,7 +16,8 @@ const ThAdminDevicesTooltip = ({ data, innerRef}) => {
             adminDevices.setSortDirection('ASC');
         }
         adminDevices.setSortBy(data);
-        await fetchAllDevices(adminDevices, adminDevices.sortBy, adminDevices.sortDirection, adminDevices.itemsPerPage, adminDevices.activePage, adminDevices.searchBy, adminDevices.searchByPrase);
+        const fetchedData = await fetchAllDevices(adminDevices.sortBy, adminDevices.sortDirection, adminDevices.activePage, adminDevices.searchBy, adminDevices.searchByPrase, adminDevices.itemsPerPage);
+        setDevicesToStore(adminDevices, fetchedData);
         await adminDevices.setPagesTotal(Math.ceil(adminDevices.devices.count/adminDevices.itemsPerPage));
         adminDevices.setLoading(false);
         toolTip.setIsAvailable(true);

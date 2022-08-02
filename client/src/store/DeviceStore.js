@@ -9,6 +9,7 @@ export default class DeviceStore{
     _activePage = 1;
     _pagesTotal = 1;
     _itemsPerPage = 30;
+    _loading = true;
     constructor(){
         
         makeAutoObservable(this);
@@ -37,6 +38,10 @@ export default class DeviceStore{
     setItemsPerPage(number){
         this._itemsPerPage = number;
     }
+    setLoading(bool){
+        this._loading = bool;
+    }
+
     get types(){
         return this._types;
     }
@@ -60,5 +65,8 @@ export default class DeviceStore{
     }
     get itemsPerPage(){
         return this._itemsPerPage;
+    }
+    get loading(){
+        return this._loading;
     }
 }
