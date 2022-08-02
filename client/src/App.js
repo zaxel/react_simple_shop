@@ -15,6 +15,7 @@ import { isActivated } from "./utils/isActivated";
 
 const App = observer(() => {
   const { user, cart } = useContext(Context);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -27,9 +28,19 @@ const App = observer(() => {
         isActivated(user);
       } catch (e) {
         console.log(e)
-      } 
+      } finally {
+        setLoading(false)
+      }
     })()
   }, [])
+
+  if (loading) {
+    return (
+      <div className="spinner spinner__shop">
+        <Spinner animation="border" />
+      </div>
+    )
+  }
 
   return (
     <BrowserRouter>

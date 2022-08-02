@@ -12,7 +12,7 @@ const TdPriceInputNumber = ({ data, innerRef }) => {
     const buttonRef = useRef(null);
 
     const { inputData, deviceId, dbFieldName } = data;
-    const { toolTip, adminDevices } = useContext(Context);
+    const { toolTip, adminDevices, cart, user } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
@@ -38,7 +38,8 @@ const TdPriceInputNumber = ({ data, innerRef }) => {
     const onButtonClickHandler = async () => {
         if (isDeviceStateChanged(adminDevices, deviceId, dbFieldName, input)) {
             setLoading(true);
-            await changeDeviceData(deviceId, dbFieldName, +input);
+            const { loggedOut } = await changeDeviceData(deviceId, dbFieldName, +input, cart, user);
+            if(loggedOut)return;
             setLoading(false);
             adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
         }

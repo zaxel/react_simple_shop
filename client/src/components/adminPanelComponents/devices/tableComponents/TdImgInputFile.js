@@ -1,9 +1,8 @@
 ﻿import React, { useContext, useRef, useState, useEffect } from 'react';
 import { Context } from '../../../..';
 import { Spinner } from 'react-bootstrap';
-import { updateImg } from '../../../../http/deviceAPI';
+import { updateDeviceImg } from '../../../../utils/adminDevices';
 import { changeDeviceData } from '../../../../utils/adminDevices';
-import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 
@@ -13,7 +12,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
     const confirmRef = useRef(null);
 
     const { inputData, deviceId, dbFieldName } = data;
-    const { toolTip, adminDevices } = useContext(Context);
+    const { toolTip, adminDevices, cart, user } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [showModalImg, setShowModalImg] = useState(false);
     const [input, setInput] = useState('');
@@ -36,7 +35,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
             const formData = new FormData();
             formData.append('id', deviceId);
             formData.append('img', input);
-            const data = await updateImg(formData);
+            return updateDeviceImg(formData, cart, user);
 
         } catch (e) {
             alert(e.response.data.message)
@@ -53,7 +52,8 @@ const TdImgInputFile = ({ data, innerRef }) => {
         }
         setLoading(true);
         setEdit(false);
-        await setNewImg();
+        const { loggedOut } = await setNewImg();
+        if(loggedOut)return;
         setLoading(false);
         adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
     }
@@ -63,7 +63,8 @@ const TdImgInputFile = ({ data, innerRef }) => {
         if(isDeleteConfirmed){
             setLoading(true);
             const noImageName = "no-image.jpg"
-            const data = await changeDeviceData(deviceId, dbFieldName, noImageName);
+            const { loggedOut } = await changeDeviceData(deviceId, dbFieldName, noImageName, cart, user);
+            if(loggedOut)return;
             setLoading(false);
             adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
         } 

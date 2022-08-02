@@ -69,13 +69,13 @@ export const fetchRandomDevices = async (amount) => {
     const {data} = await $host.get('api/device/random', {params:{amount}});
     return data;
 }
-export const updateDevice = async (id, dbFieldName, data) => {
-    const updatedData = await $authHost.put('api/device/' , {id, [dbFieldName]: data});
-    return updatedData.data; 
+export const updateDevice = async (id, dbFieldName, newData) => {
+    const { data } = await $authHost.put('api/device/' , {id, [dbFieldName]: newData});
+    return data; 
 }
 export const updateImg = async (formData) => {
-    const updatedData = await $authHost.patch('api/device/img-update/' , formData);
-    return updatedData.data; 
+    const { data } = await $authHost.patch('api/device/img-update/' , formData);
+    return data; 
 }
 export const deleteDeviceReq = async (id) => {
     const deletedData = await $authHost.delete('api/device/' , {

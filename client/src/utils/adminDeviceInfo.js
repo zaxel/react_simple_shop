@@ -18,10 +18,19 @@ export const fetchInfo = async (currentStore, deviceId, sortBy, sortDirection) =
 }
 
 export const changeDeviceInfoData = async (deviceId, dbFieldName, data) => {
-  const updated = await updateDeviceInfo(deviceId, dbFieldName, data);
-  return updated;
+  try{
+    const updated = await updateDeviceInfo(deviceId, dbFieldName, data);
+    return updated;
+  }catch(e){
+    console.log(e);
+  }
 }
+
 export const deleteDeviceInfoLine = async (lineId) => {
-  const deleted = await deleteDeviceInfoLineReq(lineId); 
-  return deleted;
+  try{
+    const deleted = await deleteDeviceInfoLineReq(lineId); 
+    return deleted;
+  }catch(e){
+    console.log(e);
+  }
 }

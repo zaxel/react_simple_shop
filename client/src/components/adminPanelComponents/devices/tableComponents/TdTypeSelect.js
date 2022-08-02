@@ -13,7 +13,7 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
     const buttonRef = useRef(null);
 
     const {inputData, deviceId, dbFieldName } = data;
-    const { toolTip, adminDevices } = useContext(Context);
+    const { toolTip, adminDevices, cart, user } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [selectData, setSelectData] = useState(inputData);
     const [initValue, setInitValue] = useState('');
@@ -41,7 +41,8 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
 
         if(isDeviceStateChanged(adminDevices, deviceId, dbFieldName, selectData)){
             setLoading(true);
-            await changeDeviceData(deviceId, dbFieldName, selectData);
+            const { loggedOut } = await changeDeviceData(deviceId, dbFieldName, selectData, cart, user);
+            if(loggedOut)return;
             setLoading(false);
             adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
         }
