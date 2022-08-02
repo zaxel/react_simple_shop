@@ -1,7 +1,7 @@
-﻿import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
+﻿import React, { useContext, useState } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import { Context } from '../../../..';
-import { createDevice, } from '../../../../http/deviceAPI';
+import { createDevice } from '../../../../utils/adminDevices';
 import { observer } from 'mobx-react-lite';
 
 const AddDeviceModal = observer(({show, onHide}) => {
@@ -12,7 +12,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
     const [specs, setSpecs] = useState([]);
     const [img, setImg] = useState('');
 
-    const {device, adminDevices} = useContext(Context);
+    const {device, adminDevices, cart, user} = useContext(Context);
 
     const onTypePickHandler = (e) => {
       const pickedTypeValue = e.currentTarget.value;
@@ -45,7 +45,6 @@ const AddDeviceModal = observer(({show, onHide}) => {
     }
     const setNewDevice = async() => {
       try{
-        console.log(99)
         onHide();
         const formData = new FormData();
         formData.append('name', title);
@@ -54,8 +53,9 @@ const AddDeviceModal = observer(({show, onHide}) => {
         formData.append('typeId', device.typeActive);
         formData.append('info', JSON.stringify(specs));
         formData.append('img', img);
-        const data = await createDevice(formData);
-        data && alert('device successfully created!');
+        const { loggedOut, name } = await createDevice(formData, cart, user);
+            if(loggedOut)return;
+        name && alert('device "' + name +'" successfully created!');
         formReset();
         adminDevices.setUpdateDataTrigger(!adminDevices.updateDataTrigger);
       }catch(e){
