@@ -1,6 +1,6 @@
-﻿import { Button, Modal, Form} from 'react-bootstrap';
+﻿import { Modal } from 'react-bootstrap';
 
-const AdminDeviceImgModal = ({ src, show, onHide }) => {
+const AdminDeviceImgModal = ({ alt, src, show, onHide }) => {
     
     return (
         <Modal className="device-modal" centered show={show} onHide={onHide}>
@@ -8,11 +8,9 @@ const AdminDeviceImgModal = ({ src, show, onHide }) => {
           <Modal.Title>image</Modal.Title>
         </Modal.Header>
         <Modal.Body className='device-img__modal-body'>
-            <img className='device-img__modal' src={src}/>
+            <img className='device-img__modal' src={src} alt={alt}/>
         </Modal.Body>
         </Modal>
-
-
     );
 };
 

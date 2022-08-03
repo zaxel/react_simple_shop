@@ -10,6 +10,8 @@ import TdDelete from './TdDelete';
 import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 
 const TrDevices = ({ data }) => {
+    console.log(data)
+
     let tdRefs = useRef([]);
 
     let ref0 = (el) => (tdRefs.current[0] = el);
@@ -42,7 +44,7 @@ const TrDevices = ({ data }) => {
             <TdNameInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={{inputData: data.name, deviceId: data.id, dbFieldName: 'name'}}/>
             <TdPriceInputNumber toolTipInfo={toolTipInfo1} innerRef={ref1} data={{inputData: data.price, deviceId: data.id, dbFieldName: 'price'}}/>
             <TdRateInputNumber toolTipInfo={toolTipInfo2} innerRef={ref2} data={{inputData: data.rate, deviceId: data.id, dbFieldName: 'rate'}}/>
-            <TdImgInputFile toolTipInfo={toolTipInfo3} innerRef={ref3} data={{inputData: data.img, deviceId: data.id, dbFieldName: 'img'}}/>
+            <TdImgInputFile toolTipInfo={toolTipInfo3} innerRef={ref3} data={{inputData: {src: data.img, alt: data.name}, deviceId: data.id, dbFieldName: 'img'}}/>
             <td>{adminPageFormatDate(Date.parse(data.createdAt))}</td>
             <TdTypeSelect toolTipInfo={toolTipInfo4} innerRef={ref4} data={{inputData: data.typeId, deviceId: data.id, dbFieldName: 'typeId'}}/>
             <TdBrandSelect toolTipInfo={toolTipInfo5} innerRef={ref5} data={{inputData: data.brandId, deviceId: data.id, dbFieldName: 'brandId'}}/>

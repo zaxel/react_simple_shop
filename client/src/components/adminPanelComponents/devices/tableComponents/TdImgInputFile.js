@@ -10,7 +10,6 @@ const TdImgInputFile = ({ data, innerRef }) => {
 
     const fileRef = useRef(null);
     const confirmRef = useRef(null);
-
     const { inputData, deviceId, dbFieldName } = data;
     const { toolTip, adminDevices, cart, user } = useContext(Context);
     const [edit, setEdit] = useState(false);
@@ -94,7 +93,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
         <td ref={innerRef}>
             {!edit
                 ? <div className='td-active' >
-                    <img alt='device' className='stripped-table__device-img' onClick={onImgClickHandler} src={process.env.REACT_APP_API_URL + inputData} />
+                    <img alt={inputData.alt} className='stripped-table__device-img' onClick={onImgClickHandler} src={process.env.REACT_APP_API_URL + inputData.src} />
                     <button className='td-active stripped-table__button-edit' onClick={onEditClickHandler}>edit</button>
                     <button className='td-active stripped-table__button-delete' onClick={onDeleteClickHandler}>X</button>
                 </div>
@@ -102,7 +101,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
                     <input className='stripped-table__input-file' type='file' accept="image/*" ref={fileRef} onChange={onInputChange} />
                     <button className='stripped-table__button-confirm' ref={confirmRef} onClick={onConfirmClickHandler} onBlur={onConfirmBlurHandler}>update</button>
                 </div>}
-            <AdminDeviceImgModal src={process.env.REACT_APP_API_URL + inputData} show={showModalImg} onHide={() => setShowModalImg(false)} />
+            <AdminDeviceImgModal src={process.env.REACT_APP_API_URL + inputData.src} alt={inputData.alt} show={showModalImg} onHide={() => setShowModalImg(false)} />
         </td>
     );
 };
