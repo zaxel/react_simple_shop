@@ -13,7 +13,8 @@ const TdDelete = ({data , innerRef }) => {
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this order?')){
             setLoading(true);
-            await deleteOrder(orderId, cart, user);
+            const { loggedOut } = await deleteOrder(orderId, cart, user); 
+            if(loggedOut)return;
             setLoading(false); 
             orders.setUpdateDataTrigger(prev=>!orders.updateDataTrigger());
         }

@@ -20,7 +20,8 @@ export const deleteOrder = async(id, cartStore, userStore) => {
     return deleted;
   }catch (e) {
     if(e.response.status === 401 && userStore.isAuth){
-      logoutOnClient(cartStore, userStore);
+      alert('Session timed out. You have to login again to continue. (adminOrders 0)');
+      return logoutOnClient(cartStore, userStore);
     }
     throw e;
   }
@@ -35,8 +36,8 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
       setOrdersToStore(ordersStore, data);
     } catch (e) {
       if(e.response.status === 401 && userStore.isAuth){
-        logoutOnClient(cartStore, userStore);
         alert('Session timed out. You have to login again to continue. (adminOrders 1)');
+        return logoutOnClient(cartStore, userStore);
       }
       throw e;
     } finally {
@@ -44,10 +45,9 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
     }
   }
 
-  export const fetchDetails = async (currentStore, orderId, sortBy, sortDirection) => {
+  export const fetchDetails = async (orderId, sortBy, sortDirection) => {
     const fetchedOrderDetails = await fetchOrderDetailsReq(orderId, sortBy, sortDirection);
     if (fetchedOrderDetails.count === 0) console.log('Nothing found!')
-    await currentStore.setOrderDetails(fetchedOrderDetails);
     return fetchedOrderDetails;
   }
 
@@ -55,12 +55,13 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
     if(!orderId)return;
     try {
       currentStore.setLoading(true);
-      const data = await fetchDetails(currentStore, orderId, currentStore.sortBy, currentStore.sortDirection,);
+      const data = await fetchDetails(orderId, currentStore.sortBy, currentStore.sortDirection,);
+      await currentStore.setOrderDetails(data);
       return data;
     } catch (e) {
       if(e.response.status === 401 && userStore.isAuth){
-        logoutOnClient(cartStore, userStore);
         alert('Session timed out. You have to login again to continue. (adminOrders 2)');
+        return logoutOnClient(cartStore, userStore);
       }
       throw e;
     } finally {

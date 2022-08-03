@@ -2,26 +2,21 @@
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 
-const TdModalLink = ({ data, innerRef }) => {
+const TdModalLink = ({ showOrderModal, innerRef }) => {
 
     const { toolTip } = useContext(Context);
-
 
     const onClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
-
-        data(); //show order modal
+        showOrderModal(); //show order modal
         toolTip.setIsAvailable(true);
     }
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips
         return () => toolTip?.hoverIntentDestroy();
     }, [])
-
-
 
     return (
         <td className='td-active' onClick={onClickHandler} ref={innerRef}>

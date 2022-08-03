@@ -15,7 +15,8 @@ const ThOrderDetailsTooltip = ({ data, innerRef}) => {
             orderDetails.setSortDirection('ASC');
         }
         orderDetails.setSortBy(data);
-        await fetchOrderDetails(orderDetails, orderDetails.orderId, cart, user);
+        const { loggedOut } = await fetchOrderDetails(orderDetails, orderDetails.orderId, cart, user); 
+        if(loggedOut)return;
         toolTip.setIsAvailable(true);
     }
 
