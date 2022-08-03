@@ -1,17 +1,18 @@
 ﻿import React, { useEffect, useContext, useRef, useState } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { changeDeviceInfoData } from '../../../../../utils/adminDeviceInfo';
+import { changeDeviceInfo } from '../../../../../utils/adminDeviceInfo';
 import { Spinner } from 'react-bootstrap';
 import { isDeviceInfoStateChanged } from '../../../../../utils/isStateChanged';
+import { observer } from 'mobx-react-lite';
 
-const TdDescriptionInputText = ({ data, innerRef }) => {
+const TdDescriptionInputText = observer(({ data, innerRef }) => {
 
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
 
     const { inputData, infoId, deviceId, dbFieldName } = data;
-    const { toolTip, adminDevicesInfo } = useContext(Context);
+    const { toolTip, adminDevicesInfo, user, cart } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
     const [loading, setLoading] = useState(false);
@@ -37,9 +38,9 @@ const TdDescriptionInputText = ({ data, innerRef }) => {
     const onButtonClickHandler = async () => {
         if (isDeviceInfoStateChanged(adminDevicesInfo, infoId, dbFieldName, input)) {
             setLoading(true);
-            await changeDeviceInfoData(infoId, dbFieldName, input);
+            const {loggedOut} = await changeDeviceInfo(infoId, dbFieldName, input, cart, user)
+            if(loggedOut)return;
             setLoading(false);
-            adminDevicesInfo.setUpdateDataTrigger(prev => !adminDevicesInfo.updateDataTrigger());
         }
         setEdit(false);
         toolTip.setIsAvailable(true);
@@ -53,7 +54,6 @@ const TdDescriptionInputText = ({ data, innerRef }) => {
         //   destroy all event listeners tooltips
         return () => toolTip?.hoverIntentDestroy();
     }, [])
-
     if (loading) {
         return (
             <td className="td-spinner">
@@ -71,6 +71,6 @@ const TdDescriptionInputText = ({ data, innerRef }) => {
                 </div>}
         </td>
     );
-};
+});
 
 export default withTooltip(TdDescriptionInputText);

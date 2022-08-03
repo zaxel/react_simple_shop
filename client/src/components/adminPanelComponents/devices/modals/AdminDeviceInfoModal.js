@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useRef } from 'react';
+﻿import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,21 +6,26 @@ import ThDescriptionTooltip from './components/ThDescriptionTooltip';
 import TrDescriptions from './components/TrDescriptions';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
-import { fetchInfo } from '../../../../utils/adminDeviceInfo';
+import { fetchInfo, setInfoToStore, createDeviceInfos } from '../../../../utils/adminDeviceInfo';
 import TrDescNewLine from './components/TrDescNewLine';
-import { createDeviceInfos } from '../../../../http/deviceInfoAPI';
+
 
 const AdminDeviceInfoModal = observer(({ show, onHide }) => {
     
-    const { adminDevicesInfo } = useContext(Context);
+    const { adminDevicesInfo, cart, user } = useContext(Context);
     let thRefs = useRef([]);
     const deviceName = adminDevicesInfo.deviceName;
     const deviceId = adminDevicesInfo.deviceId;
     useEffect(() => {
-
-        if (deviceId) {
-            fetchInfo(adminDevicesInfo, deviceId)
-        }
+        
+        (async()=>{
+            if (deviceId) {
+                const fetchedInfo = await fetchInfo(adminDevicesInfo, deviceId, null, null, cart, user);
+                if(fetchedInfo.loggedOut)return;
+                await setInfoToStore(adminDevicesInfo, fetchedInfo);
+            }
+        })()
+        
     }, [adminDevicesInfo.updateDataTrigger])
 
     const ths = [
@@ -66,8 +71,9 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
             adminDevicesInfo.refreshNewInfo();
             return;
         }
-        await createDeviceInfos(newLinesNoEmptyFields);
-        adminDevicesInfo.refreshNewInfo();
+        const { loggedOut } = await createDeviceInfos(adminDevicesInfo, newLinesNoEmptyFields, cart, user); 
+        if(loggedOut)return;
+        await adminDevicesInfo.refreshNewInfo();
         triggerModalUpdate();
     }
 

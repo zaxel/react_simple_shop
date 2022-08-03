@@ -1,13 +1,12 @@
 ﻿import React, { useEffect, useContext } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { fetchAllInfo } from '../../../../../utils/adminDeviceInfo';
+import { fetchInfo, setInfoToStore } from '../../../../../utils/adminDeviceInfo';
 
 const ThDescriptionTooltip = ({ data, innerRef}) => {
-    const { toolTip, adminDevicesInfo } = useContext(Context);
+    const { toolTip, adminDevicesInfo, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        adminDevicesInfo.setLoading(true);
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(adminDevicesInfo.sortBy === data){
@@ -16,9 +15,10 @@ const ThDescriptionTooltip = ({ data, innerRef}) => {
             adminDevicesInfo.setSortDirection('ASC');
         }
         adminDevicesInfo.setSortBy(data);
-        await fetchAllInfo(adminDevicesInfo, adminDevicesInfo.deviceId, adminDevicesInfo.sortBy, adminDevicesInfo.sortDirection);
-        adminDevicesInfo.setLoading(false);
-        toolTip.setIsAvailable(true);
+        const fetchedInfo = await fetchInfo(adminDevicesInfo, adminDevicesInfo.deviceId, adminDevicesInfo.sortBy, adminDevicesInfo.sortDirection, cart, user);
+        if(fetchedInfo.loggedOut)return;
+        setInfoToStore(adminDevicesInfo, fetchedInfo);
+        toolTip.setIsAvailable(true); 
     }
 
     useEffect(() => {

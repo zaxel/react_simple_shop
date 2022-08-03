@@ -2,7 +2,6 @@
 import PaginationCont from '../../PaginationCont';
 import AdminDeviceInfoModal from './modals/AdminDeviceInfoModal';
 import ThAdminDevicesTooltip from './tableComponents/ThAdminDevicesTooltip';
-// import Trdevices from '../tableComponents/Trdevices';
 import TrDevices from './tableComponents/TrDevices';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
@@ -10,7 +9,7 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
 import { fetchPage, fetchSetTypes, fetchSetBrands } from '../../../utils/adminDevices';
-import { fetchInfo } from '../../../utils/adminDeviceInfo';
+import { fetchInfo, setInfoToStore } from '../../../utils/adminDeviceInfo';
 import AddDevicesBarContainer from './searchBar/AddDevicesBarContainer';
 import AddDeviceModal from './modals/AddDeviceModal';
 import AddDeviceBulkModal from './modals/AddDeviceBulkModal';
@@ -19,7 +18,7 @@ import AddDeviceBulkModal from './modals/AddDeviceBulkModal';
 const DevicesAdminPanel = observer(() => {
   
   let thRefs = useRef([]);
-  const { toolTip, adminDevices, adminDevicesInfo } = useContext(Context);
+  const { toolTip, adminDevices, adminDevicesInfo, cart, user } = useContext(Context);
   const [deviceInfoModalVisible, setDeviceInfoModalVisible] = useState(false);
   const [addDeviceVisible, setAddDeviceVisible] = useState(false);
   const [addDeviceBulkVisible, setAddDeviceBulkVisible] = useState(false);
@@ -76,11 +75,12 @@ const DevicesAdminPanel = observer(() => {
     setDeviceInfoModalVisible(false);
   }
 
-  const onDescriptionClickHandler = (deviceId) => {
-    
-    adminDevicesInfo.setDeviceId(deviceId);
-    fetchInfo(adminDevicesInfo, deviceId)
+  const onDescriptionClickHandler = async(deviceId) => {
     setDeviceInfoModalVisible(true);
+    adminDevicesInfo.setDeviceId(deviceId);
+    const fetchedInfo = await fetchInfo(adminDevicesInfo, deviceId, null, null, cart, user)
+    if(fetchedInfo.loggedOut)return;
+    setInfoToStore(adminDevicesInfo, fetchedInfo);
   }
 
   const onSubmitSearch = async() => {

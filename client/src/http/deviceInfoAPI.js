@@ -7,24 +7,17 @@ export const fetchDeviceInfo = async (deviceId, sortBy, sortDirection) => {
     return data;
 }
 export const updateDeviceInfo = async (id, dbFieldName, data) => {
-    try{
-        const updatedData = await $authHost.put('api/device/info' , {id, [dbFieldName]: data});
-        return updatedData.data; 
-    }catch(e){
-        console.log(e)
-    }
+    const updated = await $authHost.put('api/device/info' , {id, [dbFieldName]: data});
+    return updated.data; 
+    
 }
 export const createDeviceInfos = async (newInfos) => {
-    try{
-        const {data} = await $authHost.post('api/device/info', newInfos);
-        return data;
-    }catch(e){
-        console.log(e);
-    }
+    const {data} = await $authHost.post('api/device/info', newInfos);
+    return data;
 }
-export const deleteDeviceInfoLineReq = async (id) => {
-    const deletedOrder = await $authHost.delete('api/device/info' , {
+export const deleteDeviceInfoLine = async (id) => {
+    const deleted = await $authHost.delete('api/device/info' , {
         data: {id}
       });
-    return deletedOrder.data;
+    return deleted.data;
 }

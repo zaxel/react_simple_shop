@@ -1,6 +1,6 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminDevicesStore{
+export default class AdminDevicesInfoStore{
     
     _sortDirection = 'ASC';
     _sortBy = 'id';
