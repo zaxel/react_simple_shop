@@ -17,7 +17,7 @@ export const changeUserData = async (id, dbFieldName, data, cartStore, userStore
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
       alert('Session timed out. You have to login again to continue. (adminUsers 1)');
-      logoutOnClient(cartStore, userStore);
+      return logoutOnClient(cartStore, userStore);
     }
     console.log(e);
     throw e;
@@ -30,8 +30,8 @@ export const deleteUser = async (id, cartStore, userStore) => {
     return deleted;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      logoutOnClient(cartStore, userStore);
       alert('Session timed out. You have to login again to continue. (adminUsers 2)');
+      return logoutOnClient(cartStore, userStore);
     }
     console.log(e);
     throw e;
@@ -47,8 +47,8 @@ export const fetchPage = async (adminUsersStore, cartStore, userStore) => {
     return data;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      logoutOnClient(cartStore, userStore);
       alert('Session timed out. You have to login again to continue. (adminUsers 3)');
+      return logoutOnClient(cartStore, userStore);
     }
     console.log(e);
     throw e;

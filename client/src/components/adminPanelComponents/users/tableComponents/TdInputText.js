@@ -37,14 +37,14 @@ const TdInputText = ({ data, innerRef }) => {
     const onButtonClickHandler = async () => {
         if (isUserStateChanged(users, userId, dbFieldName, input)) {
             setLoading(true);
-            await changeUserData(userId, dbFieldName, input, cart, user);
+            const { loggedOut, updatedData } = await changeUserData(userId, dbFieldName, input, cart, user);
+            if (loggedOut) return;
             setLoading(false);
             users.setUpdateDataTrigger(prev => !users.updateDataTrigger());
         }
         setEdit(false);
         toolTip.setIsAvailable(true);
     }
-
     const onInputChange = (e) => {
         setInput(prev => e.target.value)
     }

@@ -13,13 +13,13 @@ const TdDelete = ({data , innerRef }) => {
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this user?')){
             setLoading(true);
-            await deleteUser(userId, cart, user);
+            const { loggedOut } = await deleteUser(userId, cart, user);
+            if(loggedOut)return;
             setLoading(false);
             users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
         }
         toolTip.setIsAvailable(true);
     }
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips

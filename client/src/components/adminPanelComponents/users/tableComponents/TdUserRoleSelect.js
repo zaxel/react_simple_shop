@@ -39,9 +39,10 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
     const onButtonClickHandler = async() => {
         if(isUserStateChanged(users, userId, dbFieldName, selectData)){
             setLoading(true);
-            await changeUserData(userId, dbFieldName, selectData, cart, user);
+            const { loggedOut } = await changeUserData(userId, dbFieldName, selectData, cart, user); 
+            if(loggedOut)return;
             setLoading(false);
-            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+            users.setUpdateDataTrigger(prev => !users.updateDataTrigger());
         }
         setEdit(false);
         toolTip.setIsAvailable(true);

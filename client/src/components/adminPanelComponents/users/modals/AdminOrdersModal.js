@@ -61,7 +61,6 @@ const AdminOrdersModal = ({ show, onHide }) => {
         return <TrUsersOrders toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
     })
 
-
     return (
         <Modal className='modal-table' centered show={show} onHide={onHide}>
             <Modal.Header closeButton>
