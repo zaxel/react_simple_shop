@@ -16,8 +16,8 @@ export const changeBrandData = async (id, name, cartStore, userStore) => {
     return updated;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      logoutOnClient(cartStore, userStore);
       alert('Session timed out. You have to login again to continue. (adminBrands 1)');
+      return logoutOnClient(cartStore, userStore);
     }
     throw e;
   }
@@ -28,8 +28,8 @@ export const deleteBrand = async (id, cartStore, userStore) => {
   return deleted;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      logoutOnClient(cartStore, userStore);
       alert('Session timed out. You have to login again to continue. (adminBrands 2)');
+      return logoutOnClient(cartStore, userStore);
     }
     throw e;
   }
@@ -53,8 +53,8 @@ export const addNewBrands = async (brands, cartStore, userStore) => {
     return data;
   } catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {
-      logoutOnClient(cartStore, userStore);
       alert('Session timed out. You have to login again to continue. (adminBrands 3)');
+      return logoutOnClient(cartStore, userStore);
     }
     throw e;
   }

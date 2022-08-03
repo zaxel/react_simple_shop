@@ -70,7 +70,8 @@ const BrandsAdminPanel = observer(() => {
             brands.refreshNewInfo();
             return;
         }
-        await addNewBrandsReq(newLinesNoEmptyFields, cart, user);
+        const { loggedOut } = await addNewBrandsReq(newLinesNoEmptyFields, cart, user);
+        if(loggedOut)return;
         brands.refreshBrands();
         triggerBrandsUpdate();
     }

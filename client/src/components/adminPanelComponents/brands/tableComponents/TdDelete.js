@@ -13,7 +13,8 @@ const TdDelete = ({data , innerRef }) => {
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this device brand?')){
             setLoading(true);
-            await deleteBrand(id, cart, user);
+            const { loggedOut } = await deleteBrand(id, cart, user); 
+            if(loggedOut)return;
             setLoading(false);
             brands.setUpdateDataTrigger(prev=>!brands.updateDataTrigger);
         }

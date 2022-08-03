@@ -10,8 +10,6 @@ import TdDelete from './TdDelete';
 import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 
 const TrDevices = ({ data }) => {
-    console.log(data)
-
     let tdRefs = useRef([]);
 
     let ref0 = (el) => (tdRefs.current[0] = el);
