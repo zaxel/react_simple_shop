@@ -26,18 +26,25 @@ const TdInputText = ({ data, innerRef }) => {
         if (!(e.relatedTarget === buttonRef.current)) {
             setEdit(false);
             toolTip.setIsAvailable(true);
+            if(isTypesStateChanged(types, id, dbFieldName, input)){
+                types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
+            }
         }
     }
 
     const onButtonBlurHandler = (e) => {
         setEdit(false);
         toolTip.setIsAvailable(true);
+        if(isTypesStateChanged(types, id, dbFieldName, input)){
+            types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
+        }
     }
 
     const onButtonClickHandler = async() => {
         if(isTypesStateChanged(types, id, dbFieldName, input)){
             setLoading(true); 
-            await changeTypeData(id, input, cart, user);
+            const { loggedOut } = await changeTypeData(id, input, cart, user); 
+            if(loggedOut)return;
             setLoading(false);
             types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
         }
