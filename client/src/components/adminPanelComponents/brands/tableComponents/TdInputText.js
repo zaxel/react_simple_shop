@@ -26,7 +26,6 @@ const TdInputText = ({ data, innerRef }) => {
         if (!(e.relatedTarget === buttonRef.current)) {
             setEdit(false);
             toolTip.setIsAvailable(true);
-            console.log('blur')
             if(isBrandsStateChanged(brands, id, dbFieldName, input)){
                 brands.setUpdateDataTrigger(prev=>!brands.updateDataTrigger());
             }

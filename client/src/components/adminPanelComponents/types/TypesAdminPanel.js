@@ -70,7 +70,8 @@ const TypesAdminPanel = observer(() => {
             types.refreshNewInfo();
             return;
         }
-        await addNewTypesReq(newLinesNoEmptyFields, cart, user); 
+        const { loggedOut } = await addNewTypesReq(newLinesNoEmptyFields, cart, user); 
+        if(loggedOut)return;
         types.refreshTypes(); 
         triggerTypesUpdate();
     }
