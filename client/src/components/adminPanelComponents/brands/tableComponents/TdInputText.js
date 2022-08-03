@@ -26,18 +26,27 @@ const TdInputText = ({ data, innerRef }) => {
         if (!(e.relatedTarget === buttonRef.current)) {
             setEdit(false);
             toolTip.setIsAvailable(true);
+            console.log('blur')
+            if(isBrandsStateChanged(brands, id, dbFieldName, input)){
+                brands.setUpdateDataTrigger(prev=>!brands.updateDataTrigger());
+            }
         }
+        
     }
 
     const onButtonBlurHandler = (e) => {
         setEdit(false);
         toolTip.setIsAvailable(true);
+        if(isBrandsStateChanged(brands, id, dbFieldName, input)){
+            brands.setUpdateDataTrigger(prev=>!brands.updateDataTrigger());
+        }
     }
 
     const onButtonClickHandler = async() => {
         if(isBrandsStateChanged(brands, id, dbFieldName, input)){
             setLoading(true); 
-            await changeBrandData(id, input, cart, user);
+            const { loggedOut } = await changeBrandData(id, input, cart, user);
+            if(loggedOut)return;
             setLoading(false);
             brands.setUpdateDataTrigger(prev=>!brands.updateDataTrigger());
         }
