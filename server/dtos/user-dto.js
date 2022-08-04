@@ -2,14 +2,14 @@
     email;
     id;
     role;
-    isActivated;
+    is_activated;
     createdAt;
 
     constructor(model){
         this.email = model.email;
         this.id = model.id;
         this.role = model.role;
-        this.isActivated = model.is_activated;
+        this.is_activated = model.is_activated;
         this.createdAt = Date.parse(model.createdAt);
     }
 }

@@ -21,7 +21,7 @@ class UserService {
         const user = await User.create({ email, password: hashPassword, role, activation_link: activationLink });
         const basket = await Basket.create({ userId: user.id });
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`);
-        const userDto = new UserDto(user); //email; id; role; isActivated; createdAt
+        const userDto = new UserDto(user); //email; id; role; is_activated; createdAt
         const tokens = tokenService.generateJwt({...userDto});
         await tokenService.saveTokenToDb(userDto.id, tokens.refreshToken);
         return { ...tokens, user: userDto };
@@ -47,7 +47,7 @@ class UserService {
         if(!comparePasswords){
             return next(ApiError.unauthorized('wrong email or password(password)'));
         }
-        const userDto = new UserDto(user); //email; id; role; isActivated; createdAt
+        const userDto = new UserDto(user); //email; id; role; is_activated; createdAt
         const tokens = tokenService.generateJwt({...userDto});
         await tokenService.saveTokenToDb(userDto.id, tokens.refreshToken);
         return { ...tokens, user: userDto };
@@ -69,7 +69,7 @@ class UserService {
             return ApiError.unauthorized('wrong/no refresh token');
         
         const user = await User.findOne({where: {id: userData.id}});
-        const userDto = new UserDto(user); //email; id; role; isActivated; createdAt
+        const userDto = new UserDto(user); //email; id; role; is_activated; createdAt
         const tokens = tokenService.generateJwt({...userDto});
         await tokenService.saveTokenToDb(userDto.id, tokens.refreshToken);
         return { ...tokens, user: userDto };
