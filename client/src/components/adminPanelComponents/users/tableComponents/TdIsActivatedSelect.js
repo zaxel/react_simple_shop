@@ -3,6 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { Spinner } from 'react-bootstrap';
 import { changeUserData } from '../../../../utils/adminUsers';
+import { strToBool } from '../../../../utils/dataFormat/convertTypes';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onInputButtonClickHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdIsActivatedSelect = ({ data, innerRef }) => {
@@ -16,10 +17,7 @@ const TdIsActivatedSelect = ({ data, innerRef }) => {
     const [selectData, setSelectData] = useState(inputData);
     const [loading, setLoading] = useState(false);
 
-    const strToBool = (str) => {
-        if (str === 'true') return true;
-        return false;
-    }
+    
     const onDivClickHandler = () => {
         onTableCellClickHandler(toolTip, setEdit);
     }
