@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useContext, useState, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { isUserStateChanged } from '../../../../utils/isStateChanged';
 import { Spinner } from 'react-bootstrap';
 import { changeUserData } from '../../../../utils/adminUsers';
+import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onInputButtonClickHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdUserRoleSelect = ({ data, innerRef }) => {
 
@@ -17,35 +17,20 @@ const TdUserRoleSelect = ({ data, innerRef }) => {
     const [loading, setLoading] = useState(false);
 
     const onDivClickHandler = () => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        setEdit(true);
+        onTableCellClickHandler(toolTip, setEdit);
     }
 
     const onSelectBlurHandler = (e) => {
-        if (!(e.relatedTarget === buttonRef.current)) {
-            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
-            setEdit(false);
-            toolTip.setIsAvailable(true);
-        }
+        onInputBlurHandler(toolTip, setEdit, e, buttonRef, users, userId, dbFieldName, selectData);
     }
 
-    const onButtonBlurHandler = (e) => {
-        users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+    const onButtonBlurHandler = () => {
+        onInputButtonBlurHandler(toolTip, setEdit, users, userId, dbFieldName, selectData);
     }
 
     const onButtonClickHandler = async() => {
-        if(isUserStateChanged(users, userId, dbFieldName, selectData)){
-            setLoading(true);
-            const { loggedOut } = await changeUserData(userId, dbFieldName, selectData, cart, user); 
-            if(loggedOut)return;
-            setLoading(false);
-            users.setUpdateDataTrigger(prev => !users.updateDataTrigger());
-        }
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+        const cb = changeUserData.bind(this, userId, dbFieldName, selectData, cart, user);
+        onInputButtonClickHandler(toolTip, setEdit, setLoading, cb, users, userId, dbFieldName, selectData);
     }
     const onSelectChange = (e) => {
         setSelectData(prev => e.target.value)
