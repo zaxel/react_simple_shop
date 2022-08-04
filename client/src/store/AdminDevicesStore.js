@@ -3,6 +3,7 @@
 export default class AdminDevicesStore{
     
     _devices = {};
+    _mainStoreFieldName = 'devices';
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
@@ -107,6 +108,9 @@ export default class AdminDevicesStore{
     }
     get brands(){
         return this._brands;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
     
 }
