@@ -3,8 +3,8 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
-import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
 import { correctRateRange } from '../../../../utils/correctInputNumbers';
+import { onInputBlurHandler, onTableCellClickHandler, onInputButtonBlurHandler, onInputButtonClickHandler} from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdRateInputNumber = ({ data, innerRef }) => {
 
@@ -20,33 +20,20 @@ const TdRateInputNumber = ({ data, innerRef }) => {
     
 
     const onDivClickHandler = () => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        setEdit(true);
+        onTableCellClickHandler(toolTip, setEdit);
     }
 
-    const onInputBlurHandler = (e) => {
-        if (!(e.relatedTarget === buttonRef.current)) {
-            setEdit(false);
-            toolTip.setIsAvailable(true);
-        }
+    const onInputBlur = (e) => {
+        onInputBlurHandler(toolTip, setEdit, e, buttonRef, adminDevices, deviceId, dbFieldName, input);
     }
 
     const onButtonBlurHandler = (e) => {
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+        onInputButtonBlurHandler(toolTip, setEdit, adminDevices, deviceId, dbFieldName, input);
     }
 
     const onButtonClickHandler = async () => {
-        if (isDeviceStateChanged(adminDevices, deviceId, dbFieldName, input)) {
-            setLoading(true);
-            const { loggedOut } = await changeDeviceData(deviceId, dbFieldName, +input, cart, user);
-            if(loggedOut)return;
-            setLoading(false);
-            adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
-        }
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+        const cb = changeDeviceData.bind(this, deviceId, dbFieldName, +input, cart, user);
+        onInputButtonClickHandler(toolTip, setEdit, setLoading, cb, adminDevices, deviceId, dbFieldName, input);
     }
 
     const onInputChange = (e) => {
@@ -72,7 +59,7 @@ const TdRateInputNumber = ({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{input}</div>
                 : <div className='display-flex'>
-                    <input ref={inputRef} autoFocus type='number' min='0' max='5' step='0.1' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
+                    <input ref={inputRef} autoFocus type='number' min='0' max='5' step='0.1' value={input} onChange={onInputChange} onBlur={onInputBlur} />
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                 </div>}
         </td>
