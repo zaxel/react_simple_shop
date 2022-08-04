@@ -1,13 +1,13 @@
 ﻿export const isStateChangedTableFieldCommon = (store, storeFieldName, infoId, dbFieldName, value) => {
     store = ('rows' in store[storeFieldName]) ? store[storeFieldName].rows : store[storeFieldName];
-    const currentStoreInfoObj = store.find(el => el.id === infoId)
-    return currentStoreInfoObj[dbFieldName] === value ? false : true
+    const currentStoreInfoObj = store.find(el => el.id === infoId);
+    return currentStoreInfoObj[dbFieldName] === value ? false : true;
   }
 
 
 
 
-  
+
 export const isUserStateChanged = (store, userId, dbFieldName, data) => {
     const currentStoreValue = store.users.rows.find(el=>el.id === userId)
     return currentStoreValue[dbFieldName] === data ? false : true

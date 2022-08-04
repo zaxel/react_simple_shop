@@ -18,6 +18,7 @@ export default class AdminDevicesInfoStore{
     
     setInfo(info){
         this._info = info;
+        console.log(this)
     }
     refreshNewInfo(){
         this._newInfo = [];

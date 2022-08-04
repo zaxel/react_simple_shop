@@ -15,7 +15,7 @@ export default class AdminUsersStore{
     _searchByPrase = '';
     _searchByLastPrase = '';
     _loading = true;
-
+    _mainStoreFieldName = 'users';
     constructor(){
         makeAutoObservable(this);
     }
@@ -93,5 +93,8 @@ export default class AdminUsersStore{
     }
     get loading(){
         return this._loading;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }
