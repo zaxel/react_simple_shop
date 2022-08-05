@@ -10,8 +10,8 @@ export const onInputBlurHandler = (toolTip, setEdit, e, confirmButtonRef, compon
     if (!(e.relatedTarget === confirmButtonRef.current)) {
         setEdit(false);
         toolTip.setIsAvailable(true);
-        if(isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)){
-            componentStore.setUpdateDataTrigger(prev=>!componentStore.updateDataTrigger);
+        if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
+            componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
         }
     }
 }
@@ -19,8 +19,8 @@ export const onInputBlurHandler = (toolTip, setEdit, e, confirmButtonRef, compon
 export const onInputButtonBlurHandler = (toolTip, setEdit, componentStore, infoId, dbFieldName, value) => {
     setEdit(false);
     toolTip.setIsAvailable(true);
-    if(isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)){
-        componentStore.setUpdateDataTrigger(prev=>!componentStore.updateDataTrigger);
+    if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
+        componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
     }
 }
 
@@ -43,12 +43,10 @@ export const onFileButtonBlurHandler = (toolTip, setEdit, e, fileRef) => {
     }
 }
 export const onConfirmNoChangeCheckHandler = async (setLoading, cb, componentStore) => {
-   
-        setLoading(true);
-        const data = await cb();
-        console.log(data)
-        if (data.loggedOut) return;
-        setLoading(false);
-        componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
-    
+    setLoading(true);
+    const data = await cb();
+    if (data.loggedOut) return;
+    setLoading(false);
+    componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
+
 }

@@ -6,6 +6,7 @@ import { changeDeviceData } from '../../../../utils/adminDevices';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { onTableCellClickHandler, onFileButtonBlurHandler, onConfirmNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
+import { formDataImg, correctImgTypeCheck } from '../../../../utils/formsServing/imgServing';
 
 const TdImgInputFile = ({ data, innerRef }) => {
 
@@ -29,23 +30,14 @@ const TdImgInputFile = ({ data, innerRef }) => {
     }
     const setNewImg = async () => {
         try {
-            const formData = new FormData();
-            formData.append('id', deviceId);
-            formData.append('img', input);
+            const formData = formDataImg(deviceId, input);
             return updateDeviceImg(formData, cart, user);
-
         } catch (e) {
             alert(e.response.data.message)
         }
     }
     const onConfirmClickHandler = async () => {
-        if (!input) {
-            alert('no file added')
-            return;
-        } else if (input.type !== "image/jpeg") {
-            alert('only jpg files accepted');
-            return;
-        }
+        if(!correctImgTypeCheck(input)) return;
         const cb = setNewImg;
         onConfirmNoChangeCheckHandler(setLoading, cb, adminDevices);
     }
@@ -56,14 +48,11 @@ const TdImgInputFile = ({ data, innerRef }) => {
         if(isDeleteConfirmed){
             const cb = changeDeviceData.bind(this, deviceId, dbFieldName, noImageName, cart, user);
             onConfirmNoChangeCheckHandler(setLoading, cb, adminDevices);
-            
         } 
     }
     const onImgClickHandler = async () => {
         setShowModalImg(true);
     }
-
-
     const onInputChange = (e) => {
         setInput(prev => e.target.files[0])
     }
