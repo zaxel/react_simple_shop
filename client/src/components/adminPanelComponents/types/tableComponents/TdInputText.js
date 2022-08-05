@@ -3,7 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeTypeData } from '../../../../utils/adminTypes';
 import { Spinner } from 'react-bootstrap';
-import { isTypesStateChanged } from '../../../../utils/isStateChanged';
+import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onClickNoReloadHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdInputText = ({ data, innerRef }) => {
 
@@ -17,40 +17,24 @@ const TdInputText = ({ data, innerRef }) => {
     const [loading, setLoading] = useState(false);
 
     const onDivClickHandler = () => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        setEdit(true);
-    }
-    
-    const onInputBlurHandler = (e) => {
-        if (!(e.relatedTarget === buttonRef.current)) {
-            setEdit(false);
-            toolTip.setIsAvailable(true);
-            if(isTypesStateChanged(types, id, dbFieldName, input)){
-                types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
-            }
-        }
+        onTableCellClickHandler(toolTip, setEdit);
     }
 
-    const onButtonBlurHandler = (e) => {
-        setEdit(false);
-        toolTip.setIsAvailable(true);
-        if(isTypesStateChanged(types, id, dbFieldName, input)){
-            types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
-        }
+    const onInputBlur = (e) => {
+        onInputBlurHandler(toolTip, setEdit, e, buttonRef, types, id, dbFieldName, input);
     }
 
-    const onButtonClickHandler = async() => {
-        if(isTypesStateChanged(types, id, dbFieldName, input)){
-            setLoading(true); 
-            const { loggedOut } = await changeTypeData(id, input, cart, user); 
-            if(loggedOut)return;
-            setLoading(false);
-            types.setUpdateDataTrigger(prev=>!types.updateDataTrigger());
-        }
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+    const onButtonBlurHandler = () => {
+        onInputButtonBlurHandler(toolTip, setEdit, types, id, dbFieldName, input);
     }
+
+    const onButtonClickHandler = async () => {
+        const cb = changeTypeData.bind(this, id, input, cart, user);
+        onClickNoReloadHandler(toolTip, setEdit, setLoading, cb, types, id, dbFieldName, input);
+    }
+
+
+
     const onInputChange = (e) => {
         setInput(prev => e.target.value)
     }
@@ -72,7 +56,7 @@ const TdInputText = ({ data, innerRef }) => {
             {!edit 
                 ? <div className='td-active' onClick={onDivClickHandler}>{input}</div> 
                 : <div className='display-flex'>
-                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlurHandler}/>
+                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur}/>
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                   </div>}
 
