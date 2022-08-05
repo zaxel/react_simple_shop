@@ -5,7 +5,7 @@ import { updateDeviceImg } from '../../../../utils/adminDevices';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { onTableCellClickHandler, onFileButtonBlurHandler, onConfirmNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
+import { onTableCellClickHandler, onFileButtonBlurHandler, onClickNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 import { formDataImg, correctImgTypeCheck } from '../../../../utils/formsServing/imgServing';
 
 const TdImgInputFile = ({ data, innerRef }) => {
@@ -39,7 +39,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
     const onConfirmClickHandler = async () => {
         if(!correctImgTypeCheck(input)) return;
         const cb = setNewImg;
-        onConfirmNoChangeCheckHandler(setLoading, cb, adminDevices);
+        onClickNoChangeCheckHandler(setLoading, cb, adminDevices);
     }
     const onDeleteClickHandler = async () => {
         //not deleting image physically from server, but assigning no-image image instead 
@@ -47,7 +47,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
         const isDeleteConfirmed = window.confirm('delete device image permanently?')
         if(isDeleteConfirmed){
             const cb = changeDeviceData.bind(this, deviceId, dbFieldName, noImageName, cart, user);
-            onConfirmNoChangeCheckHandler(setLoading, cb, adminDevices);
+            onClickNoChangeCheckHandler(setLoading, cb, adminDevices);
         } 
     }
     const onImgClickHandler = async () => {

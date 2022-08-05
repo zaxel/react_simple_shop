@@ -3,6 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { deleteUser } from '../../../../utils/adminUsers';
 import { Spinner } from 'react-bootstrap';
+import { onClickNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdDelete = ({data , innerRef }) => {
     const { userId } = data;
@@ -12,11 +13,8 @@ const TdDelete = ({data , innerRef }) => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this user?')){
-            setLoading(true);
-            const { loggedOut } = await deleteUser(userId, cart, user);
-            if(loggedOut)return;
-            setLoading(false);
-            users.setUpdateDataTrigger(prev=>!users.updateDataTrigger());
+            const cb = deleteUser.bind(this, userId, cart, user);
+            onClickNoChangeCheckHandler(setLoading, cb, users)
         }
         toolTip.setIsAvailable(true);
     }

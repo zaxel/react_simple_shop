@@ -42,7 +42,7 @@ export const onFileButtonBlurHandler = (toolTip, setEdit, e, fileRef) => {
         toolTip.setIsAvailable(true);
     }
 }
-export const onConfirmNoChangeCheckHandler = async (setLoading, cb, componentStore) => {
+export const onClickNoChangeCheckHandler = async (setLoading, cb, componentStore) => {
     setLoading(true);
     const data = await cb();
     if (data.loggedOut) return;
