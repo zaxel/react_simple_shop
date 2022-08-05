@@ -3,8 +3,8 @@ import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { changeDeviceInfo } from '../../../../../utils/adminDeviceInfo';
 import { Spinner } from 'react-bootstrap';
-import { isDeviceInfoStateChanged } from '../../../../../utils/isStateChanged';
 import { observer } from 'mobx-react-lite';
+import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onClickNoReloadHandler } from '../../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdDescriptionInputText = observer(({ data, innerRef }) => {
 
@@ -18,32 +18,21 @@ const TdDescriptionInputText = observer(({ data, innerRef }) => {
     const [loading, setLoading] = useState(false);
 
     const onDivClickHandler = () => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        setEdit(true);
+        onTableCellClickHandler(toolTip, setEdit);
     }
 
-    const onInputBlurHandler = (e) => {
-        if (!(e.relatedTarget === buttonRef.current)) {
-            setEdit(false);
-            toolTip.setIsAvailable(true);
-        }
+    const onInputBlur = (e) => {
+        onInputBlurHandler(toolTip, setEdit, e, buttonRef, adminDevicesInfo, infoId, dbFieldName, input);
     }
 
-    const onButtonBlurHandler = (e) => {
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+    const onButtonBlurHandler = () => {
+        onInputButtonBlurHandler(toolTip, setEdit, adminDevicesInfo, infoId, dbFieldName, input);
     }
 
     const onButtonClickHandler = async () => {
-        if (isDeviceInfoStateChanged(adminDevicesInfo, infoId, dbFieldName, input)) {
-            setLoading(true);
-            const {loggedOut} = await changeDeviceInfo(infoId, dbFieldName, input, cart, user)
-            if(loggedOut)return;
-            setLoading(false);
-        }
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+        const cb = changeDeviceInfo.bind(this, infoId, dbFieldName, input, cart, user);
+        onClickNoReloadHandler(toolTip, setEdit, setLoading, cb, adminDevicesInfo, infoId, dbFieldName, input);
+        
     }
 
     const onInputChange = (e) => {
@@ -66,7 +55,7 @@ const TdDescriptionInputText = observer(({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{input}</div>
                 : <div className='display-flex'>
-                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlurHandler} />
+                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                 </div>}
         </td>

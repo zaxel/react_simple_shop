@@ -28,6 +28,7 @@ export const onInputButtonClickHandler = async (toolTip, setEdit, setLoading, cb
     if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
         setLoading(true);
         const data = await cb();
+        
         if (data.loggedOut) return;
         setLoading(false);
         componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
@@ -49,4 +50,15 @@ export const onClickNoChangeCheckHandler = async (setLoading, cb, componentStore
     setLoading(false);
     componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
 
+}
+export const onClickNoReloadHandler = async (toolTip, setEdit, setLoading, cb, componentStore, infoId, dbFieldName, value) => {
+    if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
+        setLoading(true);
+        const data = await cb();
+        
+        if (data.loggedOut) return;
+        setLoading(false);
+    }
+    setEdit(false);
+    toolTip.setIsAvailable(true);
 }

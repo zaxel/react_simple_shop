@@ -43,9 +43,9 @@ export const createDeviceInfos = async (currentStore, newRows, cartStore, userSt
 }
 
 
-export const changeDeviceInfo = async (deviceId, dbFieldName, data, cartStore, userStore) => {
+export const changeDeviceInfo = async (infoId, dbFieldName, data, cartStore, userStore) => {
   try {
-    const updated = await updateDeviceInfo(deviceId, dbFieldName, data);
+    const updated = await updateDeviceInfo(infoId, dbFieldName, data);
     return updated;
   }catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {

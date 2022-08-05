@@ -3,6 +3,7 @@
 export default class AdminDevicesInfoStore{
     
     _sortDirection = 'ASC';
+    _mainStoreFieldName = 'info';
     _sortBy = 'id';
     _sortRevers = false;
     _updateDataTrigger = false;
@@ -76,5 +77,8 @@ export default class AdminDevicesInfoStore{
     }
     get deviceName(){
         return this._deviceName;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }
