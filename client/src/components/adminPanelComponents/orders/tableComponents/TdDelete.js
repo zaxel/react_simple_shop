@@ -3,6 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { deleteOrder } from '../../../../utils/adminOrders';
 import { Spinner } from 'react-bootstrap';
+import { onClickNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdDelete = ({data , innerRef }) => {
     const { orderId } = data;
@@ -12,11 +13,8 @@ const TdDelete = ({data , innerRef }) => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this order?')){
-            setLoading(true);
-            const { loggedOut } = await deleteOrder(orderId, cart, user); 
-            if(loggedOut)return;
-            setLoading(false); 
-            orders.setUpdateDataTrigger(prev=>!orders.updateDataTrigger());
+            const cb = deleteOrder.bind(this, orderId, cart, user);
+            onClickNoChangeCheckHandler(setLoading, cb, orders);
         }
         toolTip.setIsAvailable(true);
     }
