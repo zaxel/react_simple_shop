@@ -3,6 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { deleteDevice } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
+import { onClickNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdDelete = ({data , innerRef }) => {
     const { deviceId } = data;
@@ -12,11 +13,8 @@ const TdDelete = ({data , innerRef }) => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently delete this device?')){
-            setLoading(true);
-            const { loggedOut } = await deleteDevice(deviceId, cart, user);
-            if(loggedOut)return;
-            setLoading(false)
-            adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
+            const cb = deleteDevice.bind(this, deviceId, cart, user);
+            onClickNoChangeCheckHandler(setLoading, cb, adminDevices);
         }
         toolTip.setIsAvailable(true);
     }
