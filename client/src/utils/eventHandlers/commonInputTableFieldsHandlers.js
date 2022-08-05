@@ -35,3 +35,20 @@ export const onInputButtonClickHandler = async (toolTip, setEdit, setLoading, cb
     setEdit(false);
     toolTip.setIsAvailable(true);
 }
+
+export const onFileButtonBlurHandler = (toolTip, setEdit, e, fileRef) => {
+    if (!(e.relatedTarget === fileRef.current)) {
+        setEdit(false);
+        toolTip.setIsAvailable(true);
+    }
+}
+export const onConfirmNoChangeCheckHandler = async (setLoading, cb, componentStore) => {
+   
+        setLoading(true);
+        const data = await cb();
+        console.log(data)
+        if (data.loggedOut) return;
+        setLoading(false);
+        componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
+    
+}

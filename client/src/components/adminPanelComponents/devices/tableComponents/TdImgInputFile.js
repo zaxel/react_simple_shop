@@ -5,6 +5,7 @@ import { updateDeviceImg } from '../../../../utils/adminDevices';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
+import { onTableCellClickHandler, onFileButtonBlurHandler, onConfirmNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdImgInputFile = ({ data, innerRef }) => {
 
@@ -16,18 +17,15 @@ const TdImgInputFile = ({ data, innerRef }) => {
     const [showModalImg, setShowModalImg] = useState(false);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
+    const noImageName = "no-image.jpg";
 
     const onEditClickHandler = () => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        setEdit(true);
+        onTableCellClickHandler(toolTip, setEdit);
     }
 
     const onConfirmBlurHandler = (e) => {
-        if (!(e.relatedTarget === fileRef.current)) {
-            setEdit(false);
-            toolTip.setIsAvailable(true);
-        }
+        onFileButtonBlurHandler(toolTip, setEdit, e, fileRef)
+        
     }
     const setNewImg = async () => {
         try {
@@ -39,7 +37,6 @@ const TdImgInputFile = ({ data, innerRef }) => {
         } catch (e) {
             alert(e.response.data.message)
         }
-
     }
     const onConfirmClickHandler = async () => {
         if (!input) {
@@ -49,23 +46,17 @@ const TdImgInputFile = ({ data, innerRef }) => {
             alert('only jpg files accepted');
             return;
         }
-        setLoading(true);
-        setEdit(false);
-        const { loggedOut } = await setNewImg();
-        if(loggedOut)return;
-        setLoading(false);
-        adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
+        const cb = setNewImg;
+        onConfirmNoChangeCheckHandler(setLoading, cb, adminDevices);
     }
     const onDeleteClickHandler = async () => {
+        //not deleting image physically from server, but assigning no-image image instead 
         toolTip.setIsToolTipShown(false);
         const isDeleteConfirmed = window.confirm('delete device image permanently?')
         if(isDeleteConfirmed){
-            setLoading(true);
-            const noImageName = "no-image.jpg"
-            const { loggedOut } = await changeDeviceData(deviceId, dbFieldName, noImageName, cart, user);
-            if(loggedOut)return;
-            setLoading(false);
-            adminDevices.setUpdateDataTrigger(prev => !adminDevices.updateDataTrigger());
+            const cb = changeDeviceData.bind(this, deviceId, dbFieldName, noImageName, cart, user);
+            onConfirmNoChangeCheckHandler(setLoading, cb, adminDevices);
+            
         } 
     }
     const onImgClickHandler = async () => {
