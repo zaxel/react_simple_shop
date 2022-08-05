@@ -3,6 +3,7 @@ import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { deleteDeviceInfoLine } from '../../../../../utils/adminDeviceInfo';
 import { Spinner } from 'react-bootstrap';
+import { onClickNoChangeCheckHandler } from '../../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdDelete = ({data , innerRef }) => {
     const { descriptionId } = data;
@@ -13,11 +14,8 @@ const TdDelete = ({data , innerRef }) => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
         if(window.confirm('are your sure you wanna permanently remove this description?')){
-            setLoading(true);
-            const { loggedOut } = await deleteDeviceInfoLine(descriptionId, cart, user);
-            if(loggedOut)return;
-            adminDevicesInfo.setUpdateDataTrigger(prev=>!adminDevicesInfo.updateDataTrigger);
-            setLoading(false);
+            const cb = deleteDeviceInfoLine.bind(this, descriptionId, cart, user);
+            onClickNoChangeCheckHandler(setLoading, cb, adminDevicesInfo);
         }
         toolTip.setIsAvailable(true);
     }
