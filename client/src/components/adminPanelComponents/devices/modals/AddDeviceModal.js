@@ -48,15 +48,6 @@ const AddDeviceModal = observer(({show, onHide}) => {
       try{
         onHide();
         const formData = formDataNewDevice(title, price, adminDevices.brandActive, adminDevices.typeActive, specs, img);
-
-        // const formData = new FormData();
-        // formData.append('name', title);
-        // formData.append('price', price);
-        // formData.append('brandId', adminDevices.brandActive);
-        // formData.append('typeId', adminDevices.typeActive);
-        // formData.append('info', JSON.stringify(specs));
-        // formData.append('img', img);
-        // console.log(specs)
         
         const { loggedOut, name } = await createDevice(formData, cart, user);
             if(loggedOut)return;
