@@ -3,6 +3,7 @@
 export default class AdminTypesStore{
     
     _types = [];
+    _mainStoreFieldName = 'types';
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
@@ -59,5 +60,8 @@ export default class AdminTypesStore{
     }
     get newTypes(){
         return this._newTypes;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }

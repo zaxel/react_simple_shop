@@ -1,10 +1,10 @@
 ﻿import React, { useEffect, useContext, useState, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { isDeviceStateChanged } from '../../../../utils/isStateChanged';
 import { Spinner } from 'react-bootstrap';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { observer } from 'mobx-react-lite';
+import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onInputButtonClickHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdTypeSelect = observer(({ data, innerRef }) => {
     
@@ -19,36 +19,24 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
     const [initValue, setInitValue] = useState('');
     const [loading, setLoading] = useState(false);
 
+
     const onDivClickHandler = () => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        setEdit(true);
+        onTableCellClickHandler(toolTip, setEdit);
     }
 
-    const onSelectBlurHandler = (e) => {
-        if (!(e.relatedTarget === buttonRef.current)) {
-            setEdit(false);
-            toolTip.setIsAvailable(true);
-        }
+    const onInputBlur = (e) => {
+        onInputBlurHandler(toolTip, setEdit, e, buttonRef, adminDevices, deviceId, dbFieldName, selectData);
     }
 
-    const onButtonBlurHandler = (e) => {
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+    const onButtonBlurHandler = () => {
+        onInputButtonBlurHandler(toolTip, setEdit, adminDevices, deviceId, dbFieldName, selectData);
     }
 
-    const onButtonClickHandler = async() => {
-
-        if(isDeviceStateChanged(adminDevices, deviceId, dbFieldName, selectData)){
-            setLoading(true);
-            const { loggedOut } = await changeDeviceData(deviceId, dbFieldName, selectData, cart, user);
-            if(loggedOut)return;
-            setLoading(false);
-            adminDevices.setUpdateDataTrigger(prev=>!adminDevices.updateDataTrigger());
-        }
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+    const onButtonClickHandler = async () => {
+        const cb = changeDeviceData.bind(this, deviceId, dbFieldName, selectData, cart, user);
+        onInputButtonClickHandler(toolTip, setEdit, setLoading, cb, adminDevices, deviceId, dbFieldName, selectData);
     }
+
     const onSelectChange = (e) => {
         setSelectData(prev => e.target.value)
     }
@@ -85,7 +73,7 @@ const TdTypeSelect = observer(({ data, innerRef }) => {
             {!edit
                 ? <div className='td-active' onClick={onDivClickHandler}>{initValue}</div>
                 : <div className='display-flex'>
-                    <select autoFocus ref={selectRef} value={selectData} onChange={onSelectChange} onBlur={onSelectBlurHandler}>
+                    <select autoFocus ref={selectRef} value={selectData} onChange={onSelectChange} onBlur={onInputBlur}>
                         {opt}
                     </select>
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>

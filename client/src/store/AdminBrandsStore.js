@@ -3,6 +3,7 @@
 export default class AdminBrandsStore{
     
     _brands = [];
+    _mainStoreFieldName = 'brands';
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
@@ -59,5 +60,8 @@ export default class AdminBrandsStore{
     }
     get newBrands(){
         return this._newBrands;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }

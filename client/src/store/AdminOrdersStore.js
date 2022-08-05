@@ -15,6 +15,7 @@ export default class AdminOrdersStore{
     _searchByPrase = '';
     _searchByLastPrase = '';
     _loading = true;
+    _mainStoreFieldName = 'orders';
 
     constructor(){
         makeAutoObservable(this);
@@ -93,5 +94,8 @@ export default class AdminOrdersStore{
     }
     get loading(){
         return this._loading;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }
