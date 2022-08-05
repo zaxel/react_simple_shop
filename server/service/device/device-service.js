@@ -8,7 +8,6 @@ const { searchDevicesOptions, orderDevicesOptions } = require('../../utils/searc
 class DeviceService {
     create = async (name, price, brandId, typeId, info, img) => {
         let fileName = 'no-image.jpg'
-
         if (img) {
             fileName = await fileService.imageResolve(img);
         }

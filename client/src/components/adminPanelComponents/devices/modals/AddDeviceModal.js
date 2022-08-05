@@ -3,6 +3,7 @@ import { Button, Modal, Form} from 'react-bootstrap';
 import { Context } from '../../../..';
 import { createDevice } from '../../../../utils/adminDevices';
 import { observer } from 'mobx-react-lite';
+import { formDataNewDevice } from '../../../../utils/formsServing/deivceServing';
 
 const AddDeviceModal = observer(({show, onHide}) => {
     const [selectedType, setSelectedType] = useState('');
@@ -12,21 +13,21 @@ const AddDeviceModal = observer(({show, onHide}) => {
     const [specs, setSpecs] = useState([]);
     const [img, setImg] = useState('');
 
-    const {device, adminDevices, cart, user} = useContext(Context);
+    const {adminDevices, cart, user} = useContext(Context);
 
     const onTypePickHandler = (e) => {
       const pickedTypeValue = e.currentTarget.value;
       setSelectedType(pickedTypeValue);
-      device.setTypeActive(device.types.find(type=>type.name===pickedTypeValue).id);
+      adminDevices.setTypeActive(adminDevices.types.find(type=>type.name===pickedTypeValue).id);
     }
     const onBrandPickHandler = (e) => {
       const pickedBrandValue = e.currentTarget.value;
       setSelectedBrand(pickedBrandValue);
-      device.setBrandActive(device.brands.find(type=>type.name===pickedBrandValue).id);
+      adminDevices.setBrandActive(adminDevices.brands.find(type=>type.name===pickedBrandValue).id);
     }
 
     const addSpec = () => {setSpecs(prev=>
-        [...prev, {id: Date.now(), title: '', descr: ''}]
+        [...prev, {id: Date.now(), title: '', description: ''}]
     )}
     const editSpec = (val, id, objKey) => {
       setSpecs(prev=>prev.map(spec=>spec.id===id ? {...spec, [objKey]: val}:spec));
@@ -40,19 +41,23 @@ const AddDeviceModal = observer(({show, onHide}) => {
       setTitle('');
       setPrice('');
       setSpecs([]);
-      device.setTypeActive(null);
-      device.setBrandActive(null);
+      adminDevices.setTypeActive(null);
+      adminDevices.setBrandActive(null);
     }
     const setNewDevice = async() => {
       try{
         onHide();
-        const formData = new FormData();
-        formData.append('name', title);
-        formData.append('price', price);
-        formData.append('brandId', device.brandActive);
-        formData.append('typeId', device.typeActive);
-        formData.append('info', JSON.stringify(specs));
-        formData.append('img', img);
+        const formData = formDataNewDevice(title, price, adminDevices.brandActive, adminDevices.typeActive, specs, img);
+
+        // const formData = new FormData();
+        // formData.append('name', title);
+        // formData.append('price', price);
+        // formData.append('brandId', adminDevices.brandActive);
+        // formData.append('typeId', adminDevices.typeActive);
+        // formData.append('info', JSON.stringify(specs));
+        // formData.append('img', img);
+        // console.log(specs)
+        
         const { loggedOut, name } = await createDevice(formData, cart, user);
             if(loggedOut)return;
         name && alert('device "' + name +'" successfully created!');
@@ -74,13 +79,13 @@ const AddDeviceModal = observer(({show, onHide}) => {
         <Form.Group className="mb-3">
             <Form.Select value={selectedType} onChange={onTypePickHandler} className="device-modal__select">
                 <option>Choose Type</option>
-                {device.types.map(type=>
-                    <option key={type.id}>{type.name}</option>    
+                {adminDevices.types.map(type=>
+                    <option key={type.id}>{type.name}</option> 
                 )}
             </Form.Select>
             <Form.Select value={selectedBrand} onChange={onBrandPickHandler} className="device-modal__select">
                 <option>Choose Brand</option>
-                {device.brands.map(brand=>
+                {adminDevices.brands.map(brand=>
                     <option key={brand.id}>{brand.name}</option>    
                 )}
             </Form.Select>
@@ -94,7 +99,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
                         <Form.Control value={spec.title} 
                           onChange={(e)=>editSpec(e.currentTarget.value, spec.id, Object.keys(spec)[1])} 
                           placeholder="Title"/>
-                        <Form.Control value={spec.descr} 
+                        <Form.Control value={spec.description} 
                           onChange={(e)=>editSpec(e.currentTarget.value, spec.id, Object.keys(spec)[2])} 
                           placeholder="Description"/>
                         <Button onClick={delSpec.bind(null, spec.id)} variant="danger">x</Button>

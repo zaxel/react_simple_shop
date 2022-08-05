@@ -18,6 +18,8 @@ export default class AdminDevicesStore{
     _loading = true;
     _types = [];
     _brands = [];
+    _typeActive = null;
+    _brandActive = null;
 
     constructor(){
         makeAutoObservable(this);
@@ -64,6 +66,12 @@ export default class AdminDevicesStore{
     }
     setBrands(brands){
         this._brands = brands;
+    }
+    setTypeActive(typeId){
+        this._typeActive = typeId;
+    }
+    setBrandActive(typeId){
+        this._brandActive = typeId;
     }
     
     
@@ -112,5 +120,10 @@ export default class AdminDevicesStore{
     get mainStoreFieldName(){
         return this._mainStoreFieldName;
     }
-    
+    get typeActive(){
+        return this._typeActive;
+    }
+    get brandActive(){
+        return this._brandActive;
+    }
 }
