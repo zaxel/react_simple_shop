@@ -1,4 +1,5 @@
 ﻿import { isStateChangedTableFieldCommon } from "../isStateChanged";
+import { offEditOnTooltip, loadingAndFetch } from "./commonAssistants";
 
 export const onTableCellClickHandler = (toolTip, setEdit) => {
     toolTip.setIsToolTipShown(false);
@@ -6,61 +7,46 @@ export const onTableCellClickHandler = (toolTip, setEdit) => {
     setEdit(true);
 }
 
-export const onInputBlurHandler = (toolTip, setEdit, e, confirmButtonRef, componentStore, infoId, dbFieldName, value) => {
-    if (!(e.relatedTarget === confirmButtonRef.current)) {
-        setEdit(false);
-        toolTip.setIsAvailable(true);
-        if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
-            componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
-        }
-    }
-}
-
 export const onInputButtonBlurHandler = (toolTip, setEdit, componentStore, infoId, dbFieldName, value) => {
-    setEdit(false);
-    toolTip.setIsAvailable(true);
+    offEditOnTooltip(setEdit, toolTip)
     if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
         componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
     }
 }
+
+export const onInputBlurHandler = (toolTip, setEdit, e, confirmButtonRef, componentStore, infoId, dbFieldName, value) => {
+    if (!(e.relatedTarget === confirmButtonRef.current)) {
+        onInputButtonBlurHandler(toolTip, setEdit, componentStore, infoId, dbFieldName, value);
+    }
+}
+
 export const onFileButtonBlurHandler = (toolTip, setEdit, e, fileRef) => {
     if (!(e.relatedTarget === fileRef.current)) {
-        setEdit(false);
-        toolTip.setIsAvailable(true);
+        offEditOnTooltip(setEdit, toolTip)
     }
 }
 
 // withCheckAndReload
 export const onInputButtonClickHandler = async (toolTip, setEdit, setLoading, cb, componentStore, infoId, dbFieldName, value) => {
     if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
-        setLoading(true);
-        const data = await cb();
-        if (data.loggedOut) return;
-        setLoading(false);
+        await loadingAndFetch(setLoading, cb);
         componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
+    }else{
+        offEditOnTooltip(setEdit, toolTip)
     }
-    setEdit(false);
-    toolTip.setIsAvailable(true);
 }
 
 // noReload
 export const onClickNoReloadHandler = async (toolTip, setEdit, setLoading, cb, componentStore, infoId, dbFieldName, value) => {
     if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
-        setLoading(true);
-        const data = await cb();
-        if (data.loggedOut) return;
-        setLoading(false);
+        const fetchedData = await loadingAndFetch(setLoading, cb);
+        if(!fetchedData)return;
     }
-    setEdit(false);
-    toolTip.setIsAvailable(true);
+    offEditOnTooltip(setEdit, toolTip)
 }
 
 // noChangeCheck
 export const onClickNoChangeCheckHandler = async (setLoading, cb, componentStore) => {
-    setLoading(true);
-    const data = await cb();
-    if (data.loggedOut) return;
-    setLoading(false);
+    await loadingAndFetch(setLoading, cb);
     componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
-
 }
