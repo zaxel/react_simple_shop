@@ -2,8 +2,8 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
-import TrUsersOrders from '../tableComponents/TrUsersOrders';
-import ThAdminUsersTooltip from '../tableComponents/ThAdminUsersTooltip';
+import TrUsersOrders from './components/TrUsersOrders';
+import ThAdminUserOrdersTooltip from './components/ThAdminUserOrdersTooltip';
 
 const AdminOrdersModal = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);
@@ -50,7 +50,7 @@ const AdminOrdersModal = ({ show, onHide }) => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = {i, myRefs: thRefs, text: 'sort'};
-        return <ThAdminUsersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        return <ThAdminUserOrdersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
 

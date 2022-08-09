@@ -3,7 +3,7 @@ import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { fetchPage } from '../../../../../utils/adminUsers';
 
-const ThAdminUsersTooltip = ({ data, innerRef}) => {
+const ThAdminUserOrdersTooltip = ({ data, innerRef}) => {
     const { toolTip, users, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
@@ -35,4 +35,4 @@ const ThAdminUsersTooltip = ({ data, innerRef}) => {
     );
 };
 
-export default withTooltip(ThAdminUsersTooltip);
+export default withTooltip(ThAdminUserOrdersTooltip);

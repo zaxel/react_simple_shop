@@ -1,5 +1,4 @@
-﻿import { isStateChangedTableFieldCommon } from "../isStateChanged";
-import { offEditOnTooltip, loadingAndFetch } from "./commonAssistants";
+﻿import { offEditOnTooltip, loadingAndFetch, isStateChangedTableFieldCommon } from "./commonAssistants";
 
 export const onTableCellClickHandler = (toolTip, setEdit) => {
     toolTip.setIsToolTipShown(false);

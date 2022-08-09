@@ -1,7 +1,7 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../../PaginationCont';
 import AdminOrdersModal from '../users/modals/AdminOrdersModal';
-import ThAdminUsersTooltip from '../users/tableComponents/ThAdminUsersTooltip';
+import ThAdminUsersTooltip from '../users/modals/components/ThAdminUserOrdersTooltip';
 import ThAdminOrdersTooltip from './tableComponents/ThAdminOrdersTooltip';
 // import TrOrders from './tableComponents/TrOrders';
 import TrOrders from './tableComponents/TrOrders';
