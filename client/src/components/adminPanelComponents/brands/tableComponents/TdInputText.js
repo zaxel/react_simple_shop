@@ -3,7 +3,6 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeBrandData } from '../../../../utils/adminBrands';
 import { Spinner } from 'react-bootstrap';
-import { isBrandsStateChanged } from '../../../../utils/isStateChanged';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onClickNoReloadHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdInputText = ({ data, innerRef }) => {
