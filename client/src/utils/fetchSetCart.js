@@ -1,5 +1,5 @@
 ﻿import { getCart, createOrUpdateCartDevice, deleteCartDevice, getBasketId } from "../http/cartAPI";
-import { fetchAllDevices } from "./adminDevices";
+import { fetchAllDevices } from "./administration/adminDevices";
 import { setLocalStoreCart } from "./setLocalStoreCart";
 import { logoutOnClient } from "./logout";
 const addAmountToExisted = false;

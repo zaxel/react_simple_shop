@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useState } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import { Context } from '../../../..';
-import { createDevice } from '../../../../utils/adminDevices';
+import { createDevice } from '../../../../utils/administration/adminDevices';
 import { observer } from 'mobx-react-lite';
 import { formDataNewDevice } from '../../../../utils/formsServing/deivceServing';
 

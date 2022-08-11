@@ -1,5 +1,5 @@
-﻿import { fetchAllTypes as getTypes, updateType, deleteTypeReq, createTypes } from "../http/deviceAPI";
-import { logoutOnClient } from "./logout";
+﻿import { fetchAllTypes as getTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
+import { logoutOnClient } from "../logout";
 
 export const fetchAllTypes = async (sortBy, sortDirection) => {
   const fetchedServerTypes = await getTypes(sortBy, sortDirection);

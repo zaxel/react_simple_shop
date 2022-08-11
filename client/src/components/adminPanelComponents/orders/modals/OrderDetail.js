@@ -4,7 +4,7 @@ import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
 import TrOrderDetails from './components/TrOrderDetails';
 import ThOrderDetailsTooltip from './components/ThOrderDetailsTooltip';
-import { fetchOrderDetails } from '../../../../utils/adminOrders';
+import { fetchOrderDetails } from '../../../../utils/administration/adminOrders';
 import { observer } from 'mobx-react-lite';
 import { Spinner } from 'react-bootstrap';
 

@@ -1,5 +1,5 @@
-﻿import { getOrders, updateOrder, deleteOrderReq, fetchOrderDetailsReq } from "../http/orderAPI";
-import { logoutOnClient } from "./logout";
+﻿import { getOrders, updateOrder, deleteOrderReq, fetchOrderDetailsReq } from "../../http/orderAPI";
+import { logoutOnClient } from "../logout";
 
 export const fetchAllOrders = async(sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
     const fetchedServerOrders = await getOrders( sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase

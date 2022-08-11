@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useState, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { changeTypeData } from '../../../../utils/adminTypes';
+import { changeTypeData } from '../../../../utils/administration/adminTypes';
 import { Spinner } from 'react-bootstrap';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onClickNoReloadHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 

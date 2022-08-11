@@ -1,5 +1,5 @@
-﻿import { fetchAllBrands as getBrands, updateBrand, deleteBrandReq, createBrands } from "../http/deviceAPI";
-import { logoutOnClient } from "./logout";
+﻿import { fetchAllBrands as getBrands, updateBrand, deleteBrandReq, createBrands } from "../../http/deviceAPI";
+import { logoutOnClient } from "../logout";
 
 export const fetchAllBrands = async (sortBy, sortDirection) => {
   const fetchedServerBrands = await getBrands(sortBy, sortDirection);

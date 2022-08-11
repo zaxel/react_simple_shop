@@ -10,7 +10,7 @@ import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
-import { fetchPage } from '../../../utils/adminOrders';
+import { fetchPage } from '../../../utils/administration/adminOrders';
 import OrderDetail from './modals/OrderDetail';
 
 const OrdersAdminPanel = observer(() => {

@@ -4,7 +4,7 @@ import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
 import NavigationRowLink from './components/NavigationRowLink';
 import ThAdminUserOrdersTooltip from './components/ThAdminUserOrdersTooltip';
-import { fetchUserOrders } from '../../../../utils/adminUserOrders';
+import { fetchUserOrders } from '../../../../utils/administration/adminUserOrders';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 

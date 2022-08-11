@@ -1,6 +1,6 @@
 ﻿import { fetchDeviceInfo, updateDeviceInfo, createDeviceInfos as createDeviceInfosReq, 
-        deleteDeviceInfoLine as deleteDeviceInfoLineReq } from "../http/deviceInfoAPI";
-import { logoutOnClient } from "./logout";
+        deleteDeviceInfoLine as deleteDeviceInfoLineReq } from "../../http/deviceInfoAPI";
+import { logoutOnClient } from "../logout";
 
 export const fetchAllInfo = async (deviceId, sortBy, sortDirection) => {
   const fetchedDeviceInfo = await fetchDeviceInfo(deviceId, sortBy, sortDirection);

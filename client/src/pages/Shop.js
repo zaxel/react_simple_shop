@@ -4,8 +4,8 @@ import BrandBar from '../components/BrandBar';
 import DeviceItems from '../components/DeviceItems';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
-import { fetchPage } from '../utils/adminDevices';
-import { fetchSetBrands, fetchSetTypes } from '../utils/adminDevices';
+import { fetchPage } from '../utils/administration/adminDevices';
+import { fetchSetBrands, fetchSetTypes } from '../utils/administration/adminDevices';
 import PaginationCont from '../components/PaginationCont';
 import { Spinner } from 'react-bootstrap';
 

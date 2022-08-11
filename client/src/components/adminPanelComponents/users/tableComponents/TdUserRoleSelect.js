@@ -2,7 +2,7 @@
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { Spinner } from 'react-bootstrap';
-import { changeUserData } from '../../../../utils/adminUsers';
+import { changeUserData } from '../../../../utils/administration/adminUsers';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onInputButtonClickHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdUserRoleSelect = ({ data, innerRef }) => {

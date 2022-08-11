@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef, useState } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { deleteDeviceInfoLine } from '../../../../../utils/adminDeviceInfo';
+import { deleteDeviceInfoLine } from '../../../../../utils/administration/adminDeviceInfo';
 import { Spinner } from 'react-bootstrap';
 import { onClickNoChangeCheckHandler } from '../../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 

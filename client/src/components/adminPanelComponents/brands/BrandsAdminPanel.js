@@ -5,9 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
-import { fetchPage } from '../../../utils/adminBrands';
+import { fetchPage, addNewBrands as addNewBrandsReq } from '../../../utils/administration/adminBrands';
 import TrBrandsNewLine from './tableComponents/TrBrandsNewLine';
-import { addNewBrands as addNewBrandsReq } from '../../../utils/adminBrands';
 
 const BrandsAdminPanel = observer(() => {
     let thRefs = useRef([]);

@@ -2,7 +2,7 @@
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { Spinner } from 'react-bootstrap';
-import { changeDeviceData } from '../../../../utils/adminDevices';
+import { changeDeviceData } from '../../../../utils/administration/adminDevices';
 import { observer } from 'mobx-react-lite';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onInputButtonClickHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 

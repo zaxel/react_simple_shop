@@ -1,8 +1,8 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { fetchPage } from '../../../../../utils/adminUsers';
-import { fetchUserOrders } from '../../../../../utils/adminUserOrders';
+import { fetchPage } from '../../../../../utils/administration/adminUsers';
+import { fetchUserOrders } from '../../../../../utils/administration/adminUserOrders';
 
 const ThAdminUserOrdersTooltip = ({ data, innerRef}) => {
     const { toolTip, userOrders, cart, user } = useContext(Context);

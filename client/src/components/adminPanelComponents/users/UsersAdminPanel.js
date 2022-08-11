@@ -9,8 +9,8 @@ import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
-import { fetchPage } from '../../../utils/adminUsers';
-import { fetchUserOrders } from '../../../utils/adminUserOrders';
+import { fetchPage } from '../../../utils/administration/adminUsers';
+import { fetchUserOrders } from '../../../utils/administration/adminUserOrders';
 
 const UsersAdminPanel = observer(() => {
   let thRefs = useRef([]);

@@ -1,10 +1,10 @@
 ﻿import { fetchAllDevices as getDevices, updateDevice, 
         deleteDeviceReq, createBulkDevices as createBulkDevicesReq,
-        createDevice as createDeviceReq } from "../http/deviceAPI";
+        createDevice as createDeviceReq } from "../../http/deviceAPI";
 import { fetchAllBrands } from "./adminBrands";
 import { fetchAllTypes } from "./adminTypes";
-import { logoutOnClient } from "./logout";
-import { updateImg } from "../http/deviceAPI";
+import { logoutOnClient } from "../logout";
+import { updateImg } from "../../http/deviceAPI";
 
 export const fetchAllDevices = async (sortBy, sortDirection, page, searchBy, searchPrase, limit, id, brandId, typeId) => {
   const fetchedServerDevices = await getDevices(sortBy, sortDirection, page, searchBy, searchPrase, limit, id, brandId, typeId);

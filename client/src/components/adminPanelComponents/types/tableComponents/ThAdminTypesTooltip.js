@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { fetchAllTypes, setTypesToStore } from '../../../../utils/adminTypes';
+import { fetchAllTypes, setTypesToStore } from '../../../../utils/administration/adminTypes';
 
 const ThAdminTypesTooltip = ({ data, innerRef}) => {
     const { toolTip, types } = useContext(Context);

@@ -1,5 +1,5 @@
-﻿import { getUsers, updateUser, deleteUserReq } from "../http/userAPI";
-import { logoutOnClient } from "./logout";
+﻿import { getUsers, updateUser, deleteUserReq } from "../../http/userAPI";
+import { logoutOnClient } from "../logout";
 
 export const fetchAllUsers = async (sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
   const fetchedServerUsers = await getUsers(sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase

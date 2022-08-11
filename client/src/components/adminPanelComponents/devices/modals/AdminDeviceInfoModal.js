@@ -6,7 +6,7 @@ import ThDescriptionTooltip from './components/ThDescriptionTooltip';
 import TrDescriptions from './components/TrDescriptions';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
-import { fetchInfo, setInfoToStore, createDeviceInfos } from '../../../../utils/adminDeviceInfo';
+import { fetchInfo, setInfoToStore, createDeviceInfos } from '../../../../utils/administration/adminDeviceInfo';
 import TrDescNewLine from './components/TrDescNewLine';
 
 

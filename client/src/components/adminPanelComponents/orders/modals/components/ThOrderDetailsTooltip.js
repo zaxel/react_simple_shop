@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext } from 'react';
 import { Context } from '../../../../../';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { fetchOrderDetails } from '../../../../../utils/adminOrders';
+import { fetchOrderDetails } from '../../../../../utils/administration/adminOrders';
 
 const ThOrderDetailsTooltip = ({ data, innerRef}) => {
     const { toolTip, orderDetails, cart, user } = useContext(Context);

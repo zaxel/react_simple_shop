@@ -2,7 +2,7 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Context } from '../../../..';
-import { createBulkDevices } from '../../../../utils/adminDevices';
+import { createBulkDevices } from '../../../../utils/administration/adminDevices';
 import { observer } from 'mobx-react-lite';
 import {SAMPLE_ROUTE} from '../../../../utils/consts';
 

@@ -2,7 +2,7 @@
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { Spinner } from 'react-bootstrap';
-import { changeUserData } from '../../../../utils/adminUsers';
+import { changeUserData } from '../../../../utils/administration/adminUsers';
 import { strToBool } from '../../../../utils/dataFormat/convertTypes';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onInputButtonClickHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 

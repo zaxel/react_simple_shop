@@ -1,8 +1,8 @@
 ﻿import React, { useContext, useRef, useState, useEffect } from 'react';
 import { Context } from '../../../..';
 import { Spinner } from 'react-bootstrap';
-import { updateDeviceImg } from '../../../../utils/adminDevices';
-import { changeDeviceData } from '../../../../utils/adminDevices';
+import { updateDeviceImg } from '../../../../utils/administration/adminDevices';
+import { changeDeviceData } from '../../../../utils/administration/adminDevices';
 import AdminDeviceImgModal from '../modals/AdminDeviceImgModal';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { onTableCellClickHandler, onFileButtonBlurHandler, onClickNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';

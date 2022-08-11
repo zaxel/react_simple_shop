@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
-import { fetchPage } from '../../../utils/adminTypes';
+import { fetchPage } from '../../../utils/administration/adminTypes';
 import TrTypesNewLine from './tableComponents/TrTypesNewLine';
-import { addNewTypes as addNewTypesReq } from '../../../utils/adminTypes';
+import { addNewTypes as addNewTypesReq } from '../../../utils/administration/adminTypes';
 
 const TypesAdminPanel = observer(() => {
     let thRefs = useRef([]);

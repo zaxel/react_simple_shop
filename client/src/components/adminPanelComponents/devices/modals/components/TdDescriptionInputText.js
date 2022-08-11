@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef, useState } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { changeDeviceInfo } from '../../../../../utils/adminDeviceInfo';
+import { changeDeviceInfo } from '../../../../../utils/administration/adminDeviceInfo';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onClickNoReloadHandler } from '../../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
