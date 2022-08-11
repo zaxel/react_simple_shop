@@ -1,9 +1,7 @@
-﻿import { $authHost, $host } from ".";
+﻿import { $authHost } from ".";
 
 export const createOrder = async (order, basketId) => {
-    
     const {data} = await $authHost.post('api/order', {order, basketId});
-
     return data;
 }
 
@@ -19,7 +17,6 @@ export const updateOrder = async (id, dbFieldName, data) => {
     console.log('updateOrder')
 }
 export const deleteOrderReq = async (id) => {
-    
     const deletedOrder = await $authHost.delete('api/order/' , {
         data: {id}
       });
