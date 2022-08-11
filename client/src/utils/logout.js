@@ -1,4 +1,4 @@
-﻿import { deleteLocalStoreCart } from "./setLocalStoreCart";
+﻿import { deleteLocalStoreCart } from "./cart/setLocalStoreCart";
 import { logout as logoutAPI } from "../http/userAPI";
 
 export const logoutOnClient = async(cartStore, userStore) => {

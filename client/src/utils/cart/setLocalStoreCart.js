@@ -1,4 +1,4 @@
-﻿import { fetchSingleDevice } from "../http/deviceAPI";
+﻿import { fetchSingleDevice } from "../../http/deviceAPI";
 import { fetchCartDevices } from "./fetchSetCart";
 
 export const setLocalStoreCart = (cart) => {

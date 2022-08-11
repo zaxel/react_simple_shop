@@ -6,8 +6,8 @@ import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../u
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { setUserIfAuth } from '../utils/setUserIfAuth';
-import { fetchCartOnAuth, setCartId } from '../utils/fetchSetCart';
-import { setLocalStoreCart } from '../utils/setLocalStoreCart';
+import { fetchCartOnAuth, setCartId } from '../utils/cart/fetchSetCart';
+import { setLocalStoreCart } from '../utils/cart/setLocalStoreCart';
 import { isActivated } from '../utils/isActivated';
 
 const Auth = observer(() => {

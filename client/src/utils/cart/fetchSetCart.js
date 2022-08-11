@@ -1,7 +1,7 @@
-﻿import { getCart, createOrUpdateCartDevice, deleteCartDevice, getBasketId } from "../http/cartAPI";
-import { fetchAllDevices } from "./administration/adminDevices";
+﻿import { getCart, createOrUpdateCartDevice, deleteCartDevice, getBasketId } from "../../http/cartAPI";
+import { fetchAllDevices } from "../administration/adminDevices";
 import { setLocalStoreCart } from "./setLocalStoreCart";
-import { logoutOnClient } from "./logout";
+import { logoutOnClient } from "../logout";
 const addAmountToExisted = false;
 
 export const setCartId = async (cartStore, userStore) => {

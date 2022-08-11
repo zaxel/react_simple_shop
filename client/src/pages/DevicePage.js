@@ -4,7 +4,7 @@ import star from '../assets/rating_star.png';
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { fetchSingleDevice } from '../http/deviceAPI';
 import { Spinner } from 'react-bootstrap';
-import { addToCart } from '../utils/addToCart';
+import { addToCart } from '../utils/cart/addToCart';
 import { Context } from '..';
 
 const DevicePage = () => {

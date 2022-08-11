@@ -1,7 +1,7 @@
-﻿import { createOrUpdateCartDevice } from "../http/cartAPI";
+﻿import { createOrUpdateCartDevice } from "../../http/cartAPI";
 import { setLocalStoreCart } from "./setLocalStoreCart";
 import { fetchCartDevices } from "./fetchSetCart";
-import { logoutOnClient } from "./logout";
+import { logoutOnClient } from "../logout";
 const addAmountToExisted = true;
 
 export const addToCart = async (cartStore, userStore, isAuth, basketId, deviceId, device_amount, userId) => {

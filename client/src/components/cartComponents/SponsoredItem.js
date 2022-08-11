@@ -1,6 +1,6 @@
 ﻿import React, {useContext} from 'react';
 import { Context } from '../..';
-import { addToCart } from '../../utils/addToCart';
+import { addToCart } from '../../utils/cart/addToCart';
 import star from '../../assets/rating_star.png';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
