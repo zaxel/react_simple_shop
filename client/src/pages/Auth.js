@@ -8,7 +8,7 @@ import { Context } from '..';
 import { setUserIfAuth } from '../utils/setUserIfAuth';
 import { fetchCartOnAuth, setCartId } from '../utils/cart/fetchSetCart';
 import { setLocalStoreCart } from '../utils/cart/setLocalStoreCart';
-import { isActivated } from '../utils/isActivated';
+import { isActivated } from '../utils/check/isActivated';
 
 const Auth = observer(() => {
     const { user, history, cart } = useContext(Context);

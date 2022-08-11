@@ -10,7 +10,7 @@ import { fetchSetCart, setCartId } from "./utils/cart/fetchSetCart";
 import { setCartFromLocalStore } from "./utils/cart/setLocalStoreCart";
 import Footer from "./components/Footer";
 import ShopToolTip from "./components/ShopToolTip";
-import { isActivated } from "./utils/isActivated";
+import { isActivated } from "./utils/check/isActivated";
 
 
 const App = observer(() => {
