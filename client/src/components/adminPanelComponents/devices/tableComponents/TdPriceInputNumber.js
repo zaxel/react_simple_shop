@@ -3,7 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
-import { correctPriceRange } from '../../../../utils/correctInputNumbers';
+import { correctPriceRange } from '../../../../utils/dataFormat/correctInputNumbers';
 import { onInputBlurHandler, onTableCellClickHandler, onInputButtonBlurHandler, onInputButtonClickHandler} from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdPriceInputNumber = ({ data, innerRef }) => {

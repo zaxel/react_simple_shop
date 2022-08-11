@@ -3,7 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { changeDeviceData } from '../../../../utils/adminDevices';
 import { Spinner } from 'react-bootstrap';
-import { correctRateRange } from '../../../../utils/correctInputNumbers';
+import { correctRateRange } from '../../../../utils/dataFormat/correctInputNumbers';
 import { onInputBlurHandler, onTableCellClickHandler, onInputButtonBlurHandler, onInputButtonClickHandler} from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdRateInputNumber = ({ data, innerRef }) => {
