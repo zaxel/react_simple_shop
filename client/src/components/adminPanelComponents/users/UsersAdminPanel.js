@@ -10,10 +10,11 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
 import { fetchPage } from '../../../utils/adminUsers';
+import { fetchUserOrders } from '../../../utils/adminUserOrders';
 
 const UsersAdminPanel = observer(() => {
   let thRefs = useRef([]);
-  const { toolTip, users, cart, user } = useContext(Context);
+  const { toolTip, userOrders, users, cart, user } = useContext(Context);
   const [orderModalVisible, setOrderModalVisible] = useState(false);
 
   useEffect(() => {
@@ -51,12 +52,14 @@ const UsersAdminPanel = observer(() => {
     setOrderModalVisible(false);
   }
 
-  const onOrderClickHandler = () => {
+  const onOrderClickHandler = (userId) => {
+    userOrders.setSearchByPrase(userId);
     setOrderModalVisible(true);
+    userOrders.setUpdateDataTrigger(!userOrders.updateDataTrigger);
   }
 
   const onSubmitSearch = async() => {
-    fetchPage(users, cart, user);
+    fetchPage(users, cart, user); 
   }
 
   const thsWithTooltip = ths.map((el, i) => {

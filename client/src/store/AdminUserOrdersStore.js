@@ -7,8 +7,10 @@ export default class AdminUserOrdersStore{
     _sortRevers = false;
     _loading = false;
     _userOrders = {};
-    _userId = null;
     _updateDataTrigger = false;
+    _searchBy = 'userId';
+    _searchByPrase = '';
+    _mainStoreFieldName = 'userOrders';
 
     constructor(){
         makeAutoObservable(this);
@@ -25,11 +27,11 @@ export default class AdminUserOrdersStore{
     setLoading(bool){
         this._loading = bool;
     }
-    setUserId(userId){
-        this._userId = userId;
-    }
     setUpdateDataTrigger(bool){
         this._updateDataTrigger = bool;
+    }
+    setSearchByPrase(userId){
+        this._searchByPrase = userId;
     }
     
     get userOrders(){
@@ -44,10 +46,16 @@ export default class AdminUserOrdersStore{
     get loading(){
         return this._loading;
     }
-    get userId(){
-        return this._userId;
-    }
     get updateDataTrigger(){
         return this._updateDataTrigger;
+    }
+    get searchByPrase(){
+        return this._searchByPrase;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
+    }
+    get searchBy(){
+        return this._searchBy;
     }
 }

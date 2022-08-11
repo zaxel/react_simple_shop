@@ -2,11 +2,14 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../../../..';
 import { v4 as uuidv4 } from 'uuid';
-import TrUsersOrders from './components/TrUsersOrders';
+import NavigationRowLink from './components/NavigationRowLink';
 import ThAdminUserOrdersTooltip from './components/ThAdminUserOrdersTooltip';
+import { fetchUserOrders } from '../../../../utils/adminUserOrders';
+import { Spinner } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
 
-const AdminOrdersModal = ({ show, onHide }) => {
-    const {toolTip} = useContext(Context);
+const AdminOrdersModal = observer(({ show, onHide }) => {
+    const {toolTip, userOrders, cart, user} = useContext(Context);
     let thRefs = useRef([]);
     let tdRefs = useRef([]);
 
@@ -27,15 +30,6 @@ const AdminOrdersModal = ({ show, onHide }) => {
         ['3759', '2022-12-01 23:55', '5', '$115.00'],
     ]
 
-    
-
-    const onRowClickHandler = () => {
-        toolTip.setIsAvailable(false);
-        toolTip.setIsToolTipShown(false);
-        alert('order detail');
-        toolTip.setIsAvailable(true);
-    }
-
     const onThClickHandler = () => {
         toolTip.setIsAvailable(false);
         toolTip.setIsToolTipShown(false);
@@ -43,7 +37,12 @@ const AdminOrdersModal = ({ show, onHide }) => {
         toolTip.setIsAvailable(true);
     }
 
-    
+    useEffect(() => {
+        fetchUserOrders(userOrders, cart, user);
+    }, [userOrders.updateDataTrigger]) 
+
+
+
 
     const thsWithTooltip = ths.map((el, i) => {
 
@@ -54,11 +53,12 @@ const AdminOrdersModal = ({ show, onHide }) => {
     })
 
 
-    const trsWithTooltip = tds.map((el, i) => {
+    // const trsWithTooltip = tds.map((el, i) => {
+    const trsWithTooltip = userOrders.userOrders?.rows?.map((el, i) => {
         const myKey = uuidv4();
         let ref = (el) => (tdRefs.current[i] = el);
         let toolTipInfo = {i, myRefs: tdRefs, text: 'click for detailed order info'};
-        return <TrUsersOrders toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
+        return <NavigationRowLink toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} data={el} />
     })
 
     return (
@@ -67,7 +67,10 @@ const AdminOrdersModal = ({ show, onHide }) => {
                 <Modal.Title>Order Detail</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
+            {userOrders.loading ?
+                    <div className="spinner spinner__device-info">
+                        <Spinner animation="border" />
+                    </div> :
                 <Form.Group className="mb-3">
                     <table className='stripped-table'>
                         <thead>
@@ -79,7 +82,7 @@ const AdminOrdersModal = ({ show, onHide }) => {
                             {trsWithTooltip}
                         </tbody>
                     </table>
-                </Form.Group>
+                </Form.Group>}
 
             </Modal.Body>
             <Modal.Footer>
@@ -91,6 +94,6 @@ const AdminOrdersModal = ({ show, onHide }) => {
 
 
     );
-};
+});
 
 export default AdminOrdersModal;
