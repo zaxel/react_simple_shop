@@ -35,6 +35,9 @@ button:hover {
 button:active {
   transform: translate(1px, 1px);
 }
+.modal-dialog-centered{
+    max-width: 550px;
+}
 .alert-button-self{
     background-color: #c44900;
 }
