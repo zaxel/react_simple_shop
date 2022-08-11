@@ -1,7 +1,7 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../../PaginationCont';
 import AdminOrdersModal from './modals/AdminOrdersModal';
-import ThAdminUsersTooltip from './modals/components/ThAdminUserOrdersTooltip';
+import ThAdminUsersTooltip from './tableComponents/ThAdminUsersTooltip';
 // import TrUsers from '../tableComponents/TrUsers';
 import TrUsers from './tableComponents/TrUsers';
 import { v4 as uuidv4 } from 'uuid';

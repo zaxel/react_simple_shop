@@ -2,20 +2,22 @@
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { fetchPage } from '../../../../../utils/adminUsers';
+import { fetchUserOrders } from '../../../../../utils/adminUserOrders';
 
 const ThAdminUserOrdersTooltip = ({ data, innerRef}) => {
-    const { toolTip, users, cart, user } = useContext(Context);
+    const { toolTip, userOrders, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);
-        if(users.sortBy === data){
-            users.sortDirection === 'ASC' ? users.setSortDirection('DESC') : users.setSortDirection('ASC');
+        if(userOrders.sortBy === data){
+            userOrders.sortDirection === 'ASC' ? userOrders.setSortDirection('DESC') : userOrders.setSortDirection('ASC');
         }else{
-            users.setSortDirection('ASC');
+            userOrders.setSortDirection('ASC');
         }
-        users.setSortBy(data);
-        await fetchPage(users, cart, user);
+        userOrders.setSortBy(data);
+        // await fetchPage(userOrders, cart, user);
+        await fetchUserOrders(userOrders, cart, user);
         toolTip.setIsAvailable(true);
     }
 
