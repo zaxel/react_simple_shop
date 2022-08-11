@@ -1,5 +1,6 @@
 ﻿import React, { useRef } from 'react';
 import NavigationLink from './NavigationLink';
+import { formatUsCurrency } from '../../../../../utils/dataFormat/currencies';
 
 const TrOrderDetails = ({ data }) => {
     let tdRefs = useRef([]);
@@ -16,7 +17,7 @@ const TrOrderDetails = ({ data }) => {
             <NavigationLink toolTipInfo={toolTipInfo1} innerRef={ref1} data={{linkText: data.name, deviceId: data.deviceId}}/>
             <td>{data.device_amount}</td>
             <td>{data.rate}</td>
-            <td>{data.price}</td>
+            <td>{formatUsCurrency(data.price)}</td>
         </tr>
 
     );
