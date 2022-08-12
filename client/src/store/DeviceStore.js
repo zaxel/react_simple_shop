@@ -4,6 +4,7 @@ export default class DeviceStore{
     _types = [];
     _brands = [];
     _devices = {};
+    _mainStoreFieldName = 'devices';
     _typeActive = null;
     _brandActive = null;
     _activePage = 1;
@@ -68,5 +69,8 @@ export default class DeviceStore{
     }
     get loading(){
         return this._loading;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }

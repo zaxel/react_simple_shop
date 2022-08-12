@@ -5,6 +5,7 @@ import { fetchAll } from "./common";
 
 
 export const fetchInfo = async (currentStore, deviceId, sortBy, sortDirection, cartStore, userStore) => {
+  
   try {
     currentStore.setLoading(true);
     const data = await fetchAll(fetchDeviceInfo, deviceId, sortBy, sortDirection);
@@ -19,6 +20,8 @@ export const fetchInfo = async (currentStore, deviceId, sortBy, sortDirection, c
     currentStore.setLoading(false);
   }
 }
+
+
 export const createDeviceInfos = async (currentStore, newRows, cartStore, userStore) => {
   try {
     currentStore.setLoading(true);
@@ -37,6 +40,7 @@ export const createDeviceInfos = async (currentStore, newRows, cartStore, userSt
 
 
 export const changeDeviceInfo = async (infoId, dbFieldName, data, cartStore, userStore) => {
+
   try {
     const updated = await updateDeviceInfo(infoId, dbFieldName, data);
     return updated;
@@ -50,6 +54,7 @@ export const changeDeviceInfo = async (infoId, dbFieldName, data, cartStore, use
 }
 
 export const deleteDeviceInfoLine = async (lineId, cartStore, userStore) => {
+  
   try {
     const data = await deleteDeviceInfoLineReq(lineId);
     return data;

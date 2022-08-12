@@ -3,6 +3,7 @@
 export default class CartStore{
     _cart = [];          //{id, deviceId, basketId, device_amount}
     _cartDevices = [];   //{id, brandId, createdAt, img, info, name, price, rate, typeId, updatedAt}
+    _mainStoreFieldName = 'cart';
     _itemsCount = 0;
     _cartId = 0;
     _cartTotal = 0;
@@ -94,5 +95,8 @@ export default class CartStore{
     }
     get cartTotal(){
         return this._cartTotal;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }

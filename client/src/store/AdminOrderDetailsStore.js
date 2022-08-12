@@ -2,6 +2,7 @@
 
 export default class AdminOrderDetailsStore{
     
+    _mainStoreFieldName = 'orderDetails';
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
@@ -49,5 +50,8 @@ export default class AdminOrderDetailsStore{
     }
     get updateDataTrigger(){
         return this._updateDataTrigger;
+    }
+    get mainStoreFieldName(){
+        return this._mainStoreFieldName;
     }
 }
