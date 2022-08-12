@@ -1,11 +1,7 @@
 ﻿import { getOrders, updateOrder, deleteOrderReq, fetchOrderDetailsReq } from "../../http/orderAPI";
 import { logoutOnClient } from "../logout";
+import { fetchAll } from "./common";
 
-export const fetchAllOrders = async(sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
-    const fetchedServerOrders = await getOrders( sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
-    if(fetchedServerOrders.count === 0) alert('Nothing found!')
-    return fetchedServerOrders;
-  }
 export const setOrdersToStore = async (store, orders) => {
   await store.setOrders(orders);
 }
@@ -31,7 +27,7 @@ export const deleteOrder = async(id, cartStore, userStore) => {
 export const fetchPage = async(ordersStore, cartStore, userStore) => {
     try {
         ordersStore.setLoading(true);
-      const data = await fetchAllOrders(ordersStore.sortBy, ordersStore.sortDirection, ordersStore.itemsPerPage, ordersStore.activePage, ordersStore.searchBy, ordersStore.searchByPrase);
+      const data = await fetchAll(getOrders, null, ordersStore.sortBy, ordersStore.sortDirection, ordersStore.itemsPerPage, ordersStore.activePage, ordersStore.searchBy, ordersStore.searchByPrase);
       ordersStore.setPagesTotal(Math.ceil(ordersStore.orders.count / ordersStore.itemsPerPage));
       setOrdersToStore(ordersStore, data);
     } catch (e) {

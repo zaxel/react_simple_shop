@@ -4,7 +4,7 @@ export const createTypes = async (types) => {
     const {data} = await $authHost.post('api/type', {types});
     return data;
 }
-export const fetchAllTypes = async (sortBy, sortDirection = 'ASC') => {
+export const fetchAllTypes = async (id, sortBy, sortDirection = 'ASC') => {
     const {data} = await $host.get('api/type', {params:{
         sortBy, sortDirection
     }}); 
@@ -26,7 +26,7 @@ export const createBrands = async (brands) => {
     const {data} = await $authHost.post('api/brand', {brands});
     return data;
 }
-export const fetchAllBrands = async (sortBy = 'id', sortDirection = 'ASC') => {
+export const fetchAllBrands = async (id, sortBy = 'id', sortDirection = 'ASC') => {
     const {data} = await $host.get('api/brand', {params:{
         sortBy, sortDirection
     }}); 
@@ -54,7 +54,7 @@ export const createBulkDevices = async (formData) => {
     return data;
 }
 
-export const fetchAllDevices = async (sortBy, sortDirection = 'ASC', page, searchBy = null, searchPrase = null, limit, id, brandId, typeId) => {
+export const fetchAllDevices = async (id, sortBy, sortDirection = 'ASC', limit, page, searchBy = null, searchPrase = null, brandId, typeId) => {
     const {data} = await $host.get('api/device', {params:{
         brandId, typeId, limit, page, id, sortBy, sortDirection, searchBy, searchPrase
     }}); 

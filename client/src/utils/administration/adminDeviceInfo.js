@@ -1,12 +1,8 @@
 ﻿import { fetchDeviceInfo, updateDeviceInfo, createDeviceInfos as createDeviceInfosReq, 
         deleteDeviceInfoLine as deleteDeviceInfoLineReq } from "../../http/deviceInfoAPI";
 import { logoutOnClient } from "../logout";
+import { fetchAll } from "./common";
 
-export const fetchAllInfo = async (deviceId, sortBy, sortDirection) => {
-  const fetchedDeviceInfo = await fetchDeviceInfo(deviceId, sortBy, sortDirection);
-  if (fetchedDeviceInfo.count === 0) console.log(fetchedDeviceInfo, 'Nothing found!')
-  return fetchedDeviceInfo;
-}
 export const setInfoToStore = async (store, info) => {
   await store.setInfo(info); 
 }
@@ -14,7 +10,7 @@ export const setInfoToStore = async (store, info) => {
 export const fetchInfo = async (currentStore, deviceId, sortBy, sortDirection, cartStore, userStore) => {
   try {
     currentStore.setLoading(true);
-    const data = await fetchAllInfo(deviceId, sortBy, sortDirection);
+    const data = await fetchAll(fetchDeviceInfo, deviceId, sortBy, sortDirection);
     return data;
   }catch (e) {
     if (e.response.status === 401 && userStore.isAuth) {

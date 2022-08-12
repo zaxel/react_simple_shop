@@ -1,7 +1,10 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { fetchAllTypes, setTypesToStore } from '../../../../utils/administration/adminTypes';
+import { setTypesToStore } from '../../../../utils/administration/adminTypes';
+import { fetchAll } from '../../../../utils/administration/common';
+import { fetchAllTypes } from '../../../../http/deviceAPI';
+
 
 const ThAdminTypesTooltip = ({ data, innerRef}) => {
     const { toolTip, types } = useContext(Context);
@@ -16,7 +19,7 @@ const ThAdminTypesTooltip = ({ data, innerRef}) => {
             types.setSortDirection('ASC');
         }
         types.setSortBy(data);
-        const typesRequested = await fetchAllTypes(types.sortBy, types.sortDirection);
+        const typesRequested = await fetchAll(fetchAllTypes, null, types.sortBy, types.sortDirection);
         await setTypesToStore(types, typesRequested);
         types.setLoading(false);
         toolTip.setIsAvailable(true);

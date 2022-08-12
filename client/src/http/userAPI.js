@@ -22,7 +22,7 @@ export const check = async () => {
     return jwt_decode(data.accessToken);
 }
 
-export const getUsers = async (sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
+export const getUsers = async (id, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
     const {data} = await $authHost.get('api/user/' , {params:{
         sortBy, sortDirection, limit, page, searchBy, searchPrase
     }});

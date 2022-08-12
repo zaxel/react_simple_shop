@@ -1,7 +1,9 @@
 ﻿import { getCart, createOrUpdateCartDevice, deleteCartDevice, getBasketId } from "../../http/cartAPI";
-import { fetchAllDevices } from "../administration/adminDevices";
 import { setLocalStoreCart } from "./setLocalStoreCart";
 import { logoutOnClient } from "../logout";
+import { fetchAll } from "../administration/common";
+import { fetchAllDevices } from "../../http/deviceAPI";
+
 const addAmountToExisted = false;
 
 export const setCartId = async (cartStore, userStore) => {
@@ -21,7 +23,7 @@ export const setCartId = async (cartStore, userStore) => {
 export const fetchCartDevices = async (cart) => {
     try {
         const fetchDevicesId = cart.cart.map(device => device.deviceId);
-        const basketDevices = await fetchAllDevices(null, null, null, null, null, null, fetchDevicesId)
+        const basketDevices = await fetchAll(fetchAllDevices, fetchDevicesId)
         cart.setCartDevices(basketDevices.rows);
     } catch (e) {
         console.log(e)

@@ -1,11 +1,7 @@
-﻿import { fetchAllTypes as getTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
+﻿import { fetchAllTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
 import { logoutOnClient } from "../logout";
+import { fetchAll } from "./common";
 
-export const fetchAllTypes = async (sortBy, sortDirection) => {
-  const fetchedServerTypes = await getTypes(sortBy, sortDirection);
-  if (fetchedServerTypes.count === 0) alert('Nothing found!')
-  return fetchedServerTypes;
-}
 export const setTypesToStore = async (store, types) => {
   await store.setTypes(types); 
 }
@@ -42,7 +38,7 @@ export const deleteType = async (id, cartStore, userStore) => {
 export const fetchPage = async (adminTypesStore) => {
   try {
     adminTypesStore.setLoading(true);
-    const data = await fetchAllTypes(adminTypesStore.sortBy, adminTypesStore.sortDirection);
+    const data = await fetchAll(fetchAllTypes, null, adminTypesStore.sortBy, adminTypesStore.sortDirection);
     setTypesToStore(adminTypesStore, data);
   } catch (e) {
     console.log(e);

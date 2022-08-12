@@ -1,11 +1,8 @@
 ﻿import { getUsers, updateUser, deleteUserReq } from "../../http/userAPI";
 import { logoutOnClient } from "../logout";
+import { fetchAll } from "./common";
 
-export const fetchAllUsers = async (sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
-  const fetchedServerUsers = await getUsers(sortBy, sortDirection, limit, page, searchBy, searchPrase); //sortBy, sortDirection, limit, page, searchBy, searchPrase
-  if (fetchedServerUsers.count === 0) alert('Nothing found!')
-  return fetchedServerUsers;
-}
+
 export const setUsersToStore = async (store, users) => {
   await store.setUsers(users);
 }
@@ -41,7 +38,7 @@ export const deleteUser = async (id, cartStore, userStore) => {
 export const fetchPage = async (adminUsersStore, cartStore, userStore) => {
   try {
     adminUsersStore.setLoading(true);
-    const data = await fetchAllUsers(adminUsersStore.sortBy, adminUsersStore.sortDirection, adminUsersStore.itemsPerPage, adminUsersStore.activePage, adminUsersStore.searchBy, adminUsersStore.searchByPrase);
+    const data = await fetchAll(getUsers, null, adminUsersStore.sortBy, adminUsersStore.sortDirection, adminUsersStore.itemsPerPage, adminUsersStore.activePage, adminUsersStore.searchBy, adminUsersStore.searchByPrase);
     setUsersToStore(adminUsersStore, data);
     adminUsersStore.setPagesTotal(Math.ceil(adminUsersStore.users.count / adminUsersStore.itemsPerPage));
     return data;
