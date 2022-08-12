@@ -40,18 +40,12 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
         ordersStore.setLoading(false);
     }
   }
-
-  export const fetchDetails = async (orderId, sortBy, sortDirection) => {
-    const fetchedOrderDetails = await fetchOrderDetailsReq(orderId, sortBy, sortDirection);
-    if (fetchedOrderDetails.count === 0) console.log('Nothing found!')
-    return fetchedOrderDetails;
-  }
-
+  
   export const fetchOrderDetails = async (currentStore, orderId, cartStore, userStore) => {
     if(!orderId)return;
     try {
       currentStore.setLoading(true);
-      const data = await fetchDetails(orderId, currentStore.sortBy, currentStore.sortDirection,);
+      const data = await fetchAll(fetchOrderDetailsReq, orderId, currentStore.sortBy, currentStore.sortDirection,);
       await currentStore.setOrderDetails(data);
       return data;
     } catch (e) {
