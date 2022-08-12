@@ -1,4 +1,5 @@
 ﻿import { fetchAllTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
+import { getMainSetterName } from "../getStoreSetterName";
 import { logoutOnClient } from "../logout";
 import { fetchAll, setDataToStore } from "./common";
 
