@@ -1,10 +1,6 @@
 ﻿import { fetchAllTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
 import { logoutOnClient } from "../logout";
-import { fetchAll } from "./common";
-
-export const setTypesToStore = async (store, types) => {
-  await store.setTypes(types); 
-}
+import { fetchAll, setDataToStore } from "./common";
 
 export const changeTypeData = async (id, name, cartStore, userStore) => {
   try {
@@ -39,7 +35,7 @@ export const fetchPage = async (adminTypesStore) => {
   try {
     adminTypesStore.setLoading(true);
     const data = await fetchAll(fetchAllTypes, null, adminTypesStore.sortBy, adminTypesStore.sortDirection);
-    setTypesToStore(adminTypesStore, data);
+    await setDataToStore(adminTypesStore, 'setTypes', data);
   } catch (e) {
     console.log(e);
     alert(e.response.data.message);

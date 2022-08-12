@@ -3,9 +3,6 @@
 import { logoutOnClient } from "../logout";
 import { fetchAll } from "./common";
 
-export const setInfoToStore = async (store, info) => {
-  await store.setInfo(info); 
-}
 
 export const fetchInfo = async (currentStore, deviceId, sortBy, sortDirection, cartStore, userStore) => {
   try {

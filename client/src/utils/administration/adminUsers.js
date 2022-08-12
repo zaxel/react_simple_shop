@@ -1,11 +1,7 @@
 ﻿import { getUsers, updateUser, deleteUserReq } from "../../http/userAPI";
 import { logoutOnClient } from "../logout";
-import { fetchAll } from "./common";
+import { fetchAll, setDataToStore } from "./common";
 
-
-export const setUsersToStore = async (store, users) => {
-  await store.setUsers(users);
-}
 
 export const changeUserData = async (id, dbFieldName, data, cartStore, userStore) => {
   try {
@@ -39,7 +35,7 @@ export const fetchPage = async (adminUsersStore, cartStore, userStore) => {
   try {
     adminUsersStore.setLoading(true);
     const data = await fetchAll(getUsers, null, adminUsersStore.sortBy, adminUsersStore.sortDirection, adminUsersStore.itemsPerPage, adminUsersStore.activePage, adminUsersStore.searchBy, adminUsersStore.searchByPrase);
-    setUsersToStore(adminUsersStore, data);
+    await setDataToStore(adminUsersStore, 'setUsers', data);
     adminUsersStore.setPagesTotal(Math.ceil(adminUsersStore.users.count / adminUsersStore.itemsPerPage));
     return data;
   } catch (e) {

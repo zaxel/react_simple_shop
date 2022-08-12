@@ -1,17 +1,13 @@
 ﻿import { fetchAllDevices, updateDevice, 
         deleteDeviceReq, createBulkDevices as createBulkDevicesReq,
         createDevice as createDeviceReq } from "../../http/deviceAPI";
-import { fetchAll } from "./common";
+import { fetchAll, setDataToStore } from "./common";
 import { fetchAllTypes, fetchAllBrands } from "../../http/deviceAPI";
 
 
 import { logoutOnClient } from "../logout";
 import { updateImg } from "../../http/deviceAPI";
 
-
-export const setDevicesToStore = async (store, devices) => {
-  await store.setDevices(devices);
-}
 
 export const createDevice = async (formData, cartStore, userStore) => {
   try {
@@ -84,7 +80,7 @@ export const fetchPage = async (currentStore) => {
     currentStore.setLoading(true);
     const data = await fetchAll(fetchAllDevices, null, currentStore.sortBy, currentStore.sortDirection, currentStore.itemsPerPage, currentStore.activePage, currentStore.searchBy, currentStore.searchByPrase, currentStore.brandActive, currentStore.typeActive);
     currentStore.setPagesTotal(Math.ceil(currentStore.devices.count / currentStore.itemsPerPage));
-    setDevicesToStore(currentStore, data);
+    await setDataToStore(currentStore, 'setDevices', data);
   } catch (e) {
     console.log(e);
     alert(e.response.data.message);

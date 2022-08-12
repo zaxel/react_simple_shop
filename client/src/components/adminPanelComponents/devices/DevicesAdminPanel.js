@@ -9,10 +9,11 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
 import { fetchPage, fetchSetTypes, fetchSetBrands } from '../../../utils/administration/adminDevices';
-import { fetchInfo, setInfoToStore } from '../../../utils/administration/adminDeviceInfo';
+import { fetchInfo } from '../../../utils/administration/adminDeviceInfo';
 import AddDevicesBarContainer from './searchBar/AddDevicesBarContainer';
 import AddDeviceModal from './modals/AddDeviceModal';
 import AddDeviceBulkModal from './modals/AddDeviceBulkModal';
+import { setDataToStore } from '../../../utils/administration/common';
 
 
 const DevicesAdminPanel = observer(() => {
@@ -80,7 +81,8 @@ const DevicesAdminPanel = observer(() => {
     adminDevicesInfo.setDeviceId(deviceId);
     const fetchedInfo = await fetchInfo(adminDevicesInfo, deviceId, null, null, cart, user)
     if(fetchedInfo.loggedOut)return;
-    setInfoToStore(adminDevicesInfo, fetchedInfo);
+    await setDataToStore(adminDevicesInfo, 'setInfo', fetchedInfo);
+    // setInfoToStore(adminDevicesInfo, fetchedInfo);
   }
 
   const onSubmitSearch = async() => {

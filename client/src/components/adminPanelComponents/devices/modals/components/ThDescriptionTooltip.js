@@ -1,7 +1,8 @@
 ﻿import React, { useEffect, useContext } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { fetchInfo, setInfoToStore } from '../../../../../utils/administration/adminDeviceInfo';
+import { fetchInfo } from '../../../../../utils/administration/adminDeviceInfo';
+import { setDataToStore } from '../../../../../utils/administration/common';
 
 const ThDescriptionTooltip = ({ data, innerRef}) => {
     const { toolTip, adminDevicesInfo, cart, user } = useContext(Context);
@@ -17,7 +18,7 @@ const ThDescriptionTooltip = ({ data, innerRef}) => {
         adminDevicesInfo.setSortBy(data);
         const fetchedInfo = await fetchInfo(adminDevicesInfo, adminDevicesInfo.deviceId, adminDevicesInfo.sortBy, adminDevicesInfo.sortDirection, cart, user);
         if(fetchedInfo.loggedOut)return;
-        setInfoToStore(adminDevicesInfo, fetchedInfo);
+        await setDataToStore(adminDevicesInfo, 'setInfo', fetchedInfo);
         toolTip.setIsAvailable(true); 
     }
 

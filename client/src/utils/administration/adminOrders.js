@@ -1,10 +1,7 @@
 ﻿import { getOrders, updateOrder, deleteOrderReq, fetchOrderDetailsReq } from "../../http/orderAPI";
 import { logoutOnClient } from "../logout";
-import { fetchAll } from "./common";
+import { fetchAll, setDataToStore } from "./common";
 
-export const setOrdersToStore = async (store, orders) => {
-  await store.setOrders(orders);
-}
 
 export const changeOrderData = async(id, dbFieldName, data) => {
     const updated = await updateOrder(id, dbFieldName, data); 
@@ -29,7 +26,7 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
         ordersStore.setLoading(true);
       const data = await fetchAll(getOrders, null, ordersStore.sortBy, ordersStore.sortDirection, ordersStore.itemsPerPage, ordersStore.activePage, ordersStore.searchBy, ordersStore.searchByPrase);
       ordersStore.setPagesTotal(Math.ceil(ordersStore.orders.count / ordersStore.itemsPerPage));
-      setOrdersToStore(ordersStore, data);
+      await setDataToStore(ordersStore, 'setOrders', data);
     } catch (e) {
       if(e.response.status === 401 && userStore.isAuth){
         alert('Session timed out. You have to login again to continue. (adminOrders 1)');
@@ -40,7 +37,7 @@ export const fetchPage = async(ordersStore, cartStore, userStore) => {
         ordersStore.setLoading(false);
     }
   }
-  
+
   export const fetchOrderDetails = async (currentStore, orderId, cartStore, userStore) => {
     if(!orderId)return;
     try {

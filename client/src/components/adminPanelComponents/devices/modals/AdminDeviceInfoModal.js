@@ -6,7 +6,8 @@ import ThDescriptionTooltip from './components/ThDescriptionTooltip';
 import TrDescriptions from './components/TrDescriptions';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
-import { fetchInfo, setInfoToStore, createDeviceInfos } from '../../../../utils/administration/adminDeviceInfo';
+import { fetchInfo, createDeviceInfos } from '../../../../utils/administration/adminDeviceInfo';
+import { setDataToStore } from '../../../../utils/administration/common';
 import TrDescNewLine from './components/TrDescNewLine';
 
 
@@ -22,7 +23,7 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
             if (deviceId) {
                 const fetchedInfo = await fetchInfo(adminDevicesInfo, deviceId, null, null, cart, user);
                 if(fetchedInfo.loggedOut)return;
-                await setInfoToStore(adminDevicesInfo, fetchedInfo);
+                await setDataToStore(adminDevicesInfo, 'setInfo', fetchedInfo);
             }
         })()
         

@@ -1,10 +1,6 @@
 ﻿import { fetchAllBrands, updateBrand, deleteBrandReq, createBrands } from "../../http/deviceAPI";
 import { logoutOnClient } from "../logout";
-import { fetchAll } from "./common";
-
-export const setBrandsToStore = async (store, brands) => {
-  await store.setBrands(brands); 
-}
+import { fetchAll, setDataToStore } from "./common";
 
 export const changeBrandData = async (id, name, cartStore, userStore) => {
   try {
@@ -35,7 +31,7 @@ export const fetchPage = async (currentStore) => {
   try {
     currentStore.setLoading(true);
     const data = await fetchAll(fetchAllBrands, null, currentStore.sortBy, currentStore.sortDirection);
-    setBrandsToStore(currentStore, data);
+    await setDataToStore(currentStore, 'setBrands', data);
   } catch (e) {
     console.log(e);
     alert(e.response.data.message);
