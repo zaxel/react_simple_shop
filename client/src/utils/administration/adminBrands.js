@@ -1,53 +1,26 @@
 ﻿import { fetchAllBrands, updateBrand, deleteBrandReq, createBrands } from "../../http/deviceAPI";
-import { logoutOnClient } from "../logout";
-import { fetchAll, setDataToStore } from "./common";
+import { fetchAll, fetchDataSetStore } from "./common";
 
 export const changeBrandData = async (id, name, cartStore, userStore) => {
-  try {
-    const updated = await updateBrand(id, name);
-    return updated;
-  } catch (e) {
-    if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminBrands 1)');
-      return logoutOnClient(cartStore, userStore);
-    }
-    throw e;
-  }
+  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+  const cb = updateBrand.bind(this, id, name);
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }
+
 export const deleteBrand = async (id, cartStore, userStore) => {
-  try {
-    const deleted = await deleteBrandReq(id);
-  return deleted;
-  } catch (e) {
-    if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminBrands 2)');
-      return logoutOnClient(cartStore, userStore);
-    }
-    throw e;
-  }
+  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+  const cb = deleteBrandReq.bind(this, id);
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }
 
 export const fetchPage = async (currentStore) => {
-  try {
-    currentStore.setLoading(true);
-    const data = await fetchAll(fetchAllBrands, null, currentStore.sortBy, currentStore.sortDirection);
-    await setDataToStore(currentStore, 'setBrands', data);
-  } catch (e) {
-    console.log(e);
-    alert(e.response.data.message);
-  } finally {
-    currentStore.setLoading(false);
-  }
+  const flags = { loadingOn: true, loadingOff: true, setToStore: true, setPageTotal: false, checkIfAuth: false };
+  const cb = fetchAll.bind(this, fetchAllBrands, null, currentStore.sortBy, currentStore.sortDirection);
+  return fetchDataSetStore(cb, currentStore, null, null, flags);
 }
+
 export const addNewBrands = async (brands, cartStore, userStore) => {
-  try {
-    const data = await createBrands(brands);
-    return data;
-  } catch (e) {
-    if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminBrands 3)');
-      return logoutOnClient(cartStore, userStore);
-    }
-    throw e;
-  }
+  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+  const cb = createBrands.bind(this, brands);
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }

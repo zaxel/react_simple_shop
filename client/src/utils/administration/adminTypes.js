@@ -1,59 +1,27 @@
 ﻿import { fetchAllTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
-import { getMainSetterName } from "../getStoreSetterName";
 import { logoutOnClient } from "../logout";
-import { fetchAll, setDataToStore } from "./common";
+import { fetchAll, setDataToStore, fetchDataSetStore } from "./common";
 
 export const changeTypeData = async (id, name, cartStore, userStore) => {
-  try {
-    const updated = await updateType(id, name);
-    return updated;
-  } catch (e) {
-    if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminTypes 1)');
-      return logoutOnClient(cartStore, userStore);
-    }
-    throw e;
-  }
+  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+  const cb = updateType.bind(this, id, name);
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }
 
 export const deleteType = async (id, cartStore, userStore) => {
-  try {
-    const deleted = await deleteTypeReq(id);
-  return deleted;
-  } catch (e) {
-    if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminTypes 2)');
-      return logoutOnClient(cartStore, userStore);
-    }
-    throw e;
-  }
+  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+  const cb = deleteTypeReq.bind(this, id);
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }
 
-
-
-
 export const fetchPage = async (adminTypesStore) => {
-  try {
-    adminTypesStore.setLoading(true);
-    const data = await fetchAll(fetchAllTypes, null, adminTypesStore.sortBy, adminTypesStore.sortDirection);
-    await setDataToStore(adminTypesStore, 'setTypes', data);
-  } catch (e) {
-    console.log(e);
-    alert(e.response.data.message);
-  } finally {
-    adminTypesStore.setLoading(false);
-  }
+  const flags = { loadingOn: true, loadingOff: true, setToStore: true, setPageTotal: false, checkIfAuth: false };
+  const cb = fetchAll.bind(this, fetchAllTypes, null, adminTypesStore.sortBy, adminTypesStore.sortDirection);
+  return fetchDataSetStore(cb, adminTypesStore, null, null, flags);
 }
 
 export const addNewTypes = async (types, cartStore, userStore) => {
-  try {
-    const data = await createTypes(types);
-    return data;
-  } catch (e) {
-    if (e.response.status === 401 && userStore.isAuth) {
-      alert('Session timed out. You have to login again to continue. (adminTypes 3)');
-      return logoutOnClient(cartStore, userStore);
-    }
-    throw e;
-  }
+  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+  const cb = createTypes.bind(this, types);
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }

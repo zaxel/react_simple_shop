@@ -25,10 +25,11 @@ export const fetchDataSetStore = async (cb, currentStore, cartStore, userStore, 
         return data;
     } catch (e) {
         if (e?.response?.status === 401 && userStore.isAuth && checkIfAuth) {
-            alert('Session timed out. You have to login again to continue. (adminUsers 3)');
+            alert('Session timed out. You have to login back to continue!');
             return logoutOnClient(cartStore, userStore);
         }
         console.log(e);
+        alert(e?.response?.data?.message);
         throw e;
     } finally {
         loadingOff && currentStore.setLoading(false);
