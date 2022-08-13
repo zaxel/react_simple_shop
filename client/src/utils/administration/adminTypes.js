@@ -1,6 +1,5 @@
 ﻿import { fetchAllTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
-import { logoutOnClient } from "../logout";
-import { fetchAll, setDataToStore, fetchDataSetStore } from "./common";
+import { fetchAll, fetchDataSetStore } from "./common";
 
 export const changeTypeData = async (id, name, cartStore, userStore) => {
   const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
