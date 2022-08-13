@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Outlet } from 'react-router-dom';
-import AccountNavbar from '../components/userProfileComponents/AccountNavbar';
-import UserAccountRouter from '../components/userProfileComponents/UserAccountRouter';
+import AccountNavbar from '../components/userProfile/AccountNavbar';
+import UserAccountRouter from '../components/userProfile/UserAccountRouter';
 const AccountPage = () => {
     return (
         <div className='account'>

@@ -2,8 +2,8 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../..';
 import { v4 as uuidv4 } from 'uuid';
-import ThTable from '../strippedTablesComponents/ThTable';
-import TrTable from '../strippedTablesComponents/TrTable';
+import ThTable from '../strippedTables/ThTable';
+import TrTable from '../strippedTables/TrTable';
 
 const UserOrderModal = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);

@@ -1,9 +1,9 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '..';
 import {  useLocation } from "react-router-dom"
-import BasketItem from '../components/cartComponents/BasketItem';
+import BasketItem from '../components/cart/BasketItem';
 import { observer } from 'mobx-react-lite';
-import CartAside from '../components/cartComponents/CartAside';
+import CartAside from '../components/cart/CartAside';
 
 const Basket = observer(() => {
     let {pathname} = useLocation();

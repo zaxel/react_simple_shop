@@ -1,8 +1,8 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
 import UserOrderModal from './UserOrderModal';
-import ThTable from '../strippedTablesComponents/ThTable';
-import TrTable from '../strippedTablesComponents/TrTable';
+import ThTable from '../strippedTables/ThTable';
+import TrTable from '../strippedTables/TrTable';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
 

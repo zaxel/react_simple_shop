@@ -11,11 +11,11 @@ import AccountPage from "./pages/AccountPage";
 import Sample from "./pages/Sample";
 import CheckoutPage from "./pages/CheckoutPage";
 
-import UserDelivery from "./components/userProfileComponents/UserDelivery";
-import UserInfo from "./components/userProfileComponents/UserInfo";
-import UserPayment from "./components/userProfileComponents/UserPayment";
-import UserOrders from "./components/userProfileComponents/UserOrders";
-import UserAccountRouter from "./components/userProfileComponents/UserAccountRouter";
+import UserDelivery from "./components/userProfile/UserDelivery";
+import UserInfo from "./components/userProfile/UserInfo";
+import UserPayment from "./components/userProfile/UserPayment";
+import UserOrders from "./components/userProfile/UserOrders";
+import UserAccountRouter from "./components/userProfile/UserAccountRouter";
 
 import OrdersAdminPanel from "./components/adminPanel/orders/OrdersAdminPanel";
 import UsersAdminPanel from "./components/adminPanel/users/UsersAdminPanel";
