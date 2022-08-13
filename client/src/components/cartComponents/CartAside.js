@@ -7,7 +7,7 @@ import { CHECKOUT_ROUTE, RANDOM_DEVICES_COUNT } from '../../utils/consts';
 import { fetchRandomDevices } from '../../http/deviceAPI';
 
 const CartAside = () => {
-    const {cart, history} = useContext(Context);
+    const { cart } = useContext(Context);
     const navigate = useNavigate();
     const [randomDevices, setRandomDevices] = useState([]);
 
@@ -15,9 +15,11 @@ const CartAside = () => {
         navigate(CHECKOUT_ROUTE)
     }
 
-    useEffect(async()=>{
-        const devices = await fetchRandomDevices(RANDOM_DEVICES_COUNT);
-        setRandomDevices(devices);
+    useEffect(()=>{
+         (async()=> {
+            const devices = await fetchRandomDevices(RANDOM_DEVICES_COUNT);
+            setRandomDevices(devices);  
+          })()
     }, []);
 
     return (
