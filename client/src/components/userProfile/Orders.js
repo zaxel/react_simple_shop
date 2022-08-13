@@ -1,13 +1,13 @@
 ﻿import React, { useState, useRef, useContext, useEffect } from 'react';
 import PaginationCont from '../PaginationCont';
-import UserOrderModal from './UserOrderModal';
-import ThTable from '../strippedTables/ThTable';
-import TrTable from '../strippedTables/TrTable';
+import UserOrderModal from './OrderModal';
+import ThTable from './strippedTables/ThTable';
+import TrTable from './strippedTables/TrTable';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../..';
 
 
-const UserOrders = () => {
+const Orders = () => {
     let thRefs = useRef([]);
     let tdRefs = useRef([]);
     const {toolTip} = useContext(Context);
@@ -81,4 +81,4 @@ const UserOrders = () => {
     );
 };
 
-export default UserOrders;
+export default Orders;

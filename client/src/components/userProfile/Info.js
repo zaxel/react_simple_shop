@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-const UserInfo = () => {
+const Info = () => {
     return (
         <div className='account__main'>
             <div>User main info page!</div>
@@ -39,4 +39,4 @@ const UserInfo = () => {
     );
 };
 
-export default UserInfo;
+export default Info;

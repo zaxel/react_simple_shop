@@ -2,10 +2,10 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../..';
 import { v4 as uuidv4 } from 'uuid';
-import ThTable from '../strippedTables/ThTable';
-import TrTable from '../strippedTables/TrTable';
+import ThTable from './strippedTables/ThTable';
+import TrTable from './strippedTables/TrTable';
 
-const UserOrderModal = ({ show, onHide }) => {
+const OrderModal = ({ show, onHide }) => {
     const {toolTip} = useContext(Context);
     let thRefs = useRef([]);
     let tdRefs = useRef([]);
@@ -103,4 +103,4 @@ const UserOrderModal = ({ show, onHide }) => {
     );
 };
 
-export default UserOrderModal;
+export default OrderModal;

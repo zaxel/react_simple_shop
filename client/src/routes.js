@@ -11,11 +11,11 @@ import AccountPage from "./pages/AccountPage";
 import Sample from "./pages/Sample";
 import CheckoutPage from "./pages/CheckoutPage";
 
-import UserDelivery from "./components/userProfile/UserDelivery";
-import UserInfo from "./components/userProfile/UserInfo";
-import UserPayment from "./components/userProfile/UserPayment";
-import UserOrders from "./components/userProfile/UserOrders";
-import UserAccountRouter from "./components/userProfile/UserAccountRouter";
+import Delivery from "./components/userProfile/Delivery";
+import Info from "./components/userProfile/Info";
+import Payment from "./components/userProfile/Payment";
+import Orders from "./components/userProfile/Orders";
+import AccountRouter from "./components/userProfile/AccountRouter";
 
 import OrdersAdminPanel from "./components/adminPanel/orders/OrdersAdminPanel";
 import UsersAdminPanel from "./components/adminPanel/users/UsersAdminPanel";
@@ -34,19 +34,19 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
 export const userNavRoutes = [
     {
         path: ACCOUNT_INFO_ROUTE,
-        Component: UserInfo
+        Component: Info
     },
     {
         path: ACCOUNT_DELIVERY_ROUTE,
-        Component: UserDelivery
+        Component: Delivery
     },
     {
         path: ACCOUNT_PAYMENT_ROUTE,
-        Component: UserPayment
+        Component: Payment
     },
     {
         path: ACCOUNT_ORDERS_ROUTE,
-        Component: UserOrders
+        Component: Orders
     },
     
 ];
@@ -97,7 +97,7 @@ export const authRoutes = [
     {
         path: ACCOUNT_ROUTE,
         Component: AccountPage,
-        NestedComponent: UserAccountRouter
+        NestedComponent: AccountRouter
     },
     {
         path: PROTECTED_ROUTE,

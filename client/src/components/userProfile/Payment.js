@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-const UserPayment = () => {
+const Payment = () => {
     return (
         <div className='account__payment'>
             <div>The standard Lorem Ipsum passage, used since the 1500s
@@ -12,4 +12,4 @@ const UserPayment = () => {
     );
 };
 
-export default UserPayment;
+export default Payment;

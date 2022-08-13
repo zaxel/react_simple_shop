@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-const UserDelivery = () => {
+const Delivery = () => {
     return (
         <div className='account__delivery'>
             UserDelivery page!
@@ -8,4 +8,4 @@ const UserDelivery = () => {
     );
 };
 
-export default UserDelivery;
+export default Delivery;
