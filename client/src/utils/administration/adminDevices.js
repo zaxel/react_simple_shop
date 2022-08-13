@@ -32,18 +32,6 @@ export const updateDeviceImg = async (data, cartStore, userStore) => {
   const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
   const cb = updateImg.bind(this, data);
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);  
-  
-  // try {
-  //   const updated = await updateImg(data);
-  //   return updated;
-  // } catch (e) {
-  //   if (e.response.status === 401 && userStore.isAuth) {
-  //     alert('Session timed out. You have to login again to continue. (adminTypes 35)');
-  //     return logoutOnClient(cartStore, userStore);
-  //   }else{
-  //     throw e;
-  //   }
-  // }
 }
 
 export const fetchPage = async (currentStore) => {

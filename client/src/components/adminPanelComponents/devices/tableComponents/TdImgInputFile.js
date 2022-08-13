@@ -26,7 +26,6 @@ const TdImgInputFile = ({ data, innerRef }) => {
 
     const onConfirmBlurHandler = (e) => {
         onFileButtonBlurHandler(toolTip, setEdit, e, fileRef)
-        
     }
     const setNewImg = async () => {
         try {

@@ -19,7 +19,6 @@ export const fetchDataSetStore = async (cb, currentStore, cartStore, userStore, 
         const setterName = getMainSetterName(currentStore);
         loadingOn && currentStore.setLoading(true);
         const data = await cb();
-        console.log(data)
         setToStore && await setDataToStore(currentStore, setterName, data);
         setPageTotal && currentStore.setPagesTotal(Math.ceil(currentStore[currentStore.mainStoreFieldName].count / currentStore.itemsPerPage));
         return data;

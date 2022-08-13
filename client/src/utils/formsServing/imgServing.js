@@ -13,4 +13,5 @@ export const correctImgTypeCheck = (input) => {
         alert('only jpg files accepted');
         return false;
     }
+    return true;
 }
