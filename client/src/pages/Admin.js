@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import AdminPanelNavbar from '../components/adminPanelComponents/AdminPanelNavbar';
+import AdminPanelNavbar from '../components/adminPanel/AdminPanelNavbar';
 import { Outlet } from 'react-router-dom';
 
 const Admin = () => {

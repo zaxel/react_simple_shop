@@ -17,12 +17,12 @@ import UserPayment from "./components/userProfileComponents/UserPayment";
 import UserOrders from "./components/userProfileComponents/UserOrders";
 import UserAccountRouter from "./components/userProfileComponents/UserAccountRouter";
 
-import OrdersAdminPanel from "./components/adminPanelComponents/orders/OrdersAdminPanel";
-import UsersAdminPanel from "./components/adminPanelComponents/users/UsersAdminPanel";
-import DevicesAdminPanel from "./components/adminPanelComponents/devices/DevicesAdminPanel";
-import TypesAdminPanel from "./components/adminPanelComponents/types/TypesAdminPanel";
-import BrandsAdminPanel from "./components/adminPanelComponents/brands/BrandsAdminPanel";
-import AdminPanelRouter from "./components/adminPanelComponents/AdminPanelRouter";
+import OrdersAdminPanel from "./components/adminPanel/orders/OrdersAdminPanel";
+import UsersAdminPanel from "./components/adminPanel/users/UsersAdminPanel";
+import DevicesAdminPanel from "./components/adminPanel/devices/DevicesAdminPanel";
+import TypesAdminPanel from "./components/adminPanel/types/TypesAdminPanel";
+import BrandsAdminPanel from "./components/adminPanel/brands/BrandsAdminPanel";
+import AdminPanelRouter from "./components/adminPanel/AdminPanelRouter";
 
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
