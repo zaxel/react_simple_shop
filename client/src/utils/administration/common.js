@@ -34,3 +34,24 @@ export const fetchDataSetStore = async (cb, currentStore, cartStore, userStore, 
         loadingOff && currentStore.setLoading(false);
     }
 }
+
+export const onSortTableClickHandler = async (cb, data, currentStore, toolTip, flags) => {
+    const { setLoading, setPageTotal } = flags;
+    const setterName = getMainSetterName(currentStore);
+
+    setLoading && currentStore.setLoading(true);
+    toolTip.setIsToolTipShown(false);
+    toolTip.setIsAvailable(false);
+    if (currentStore.sortBy === data) {
+        currentStore.sortDirection === 'ASC' ? currentStore.setSortDirection('DESC') : currentStore.setSortDirection('ASC');
+    } else {
+        currentStore.setSortDirection('ASC');
+    }
+    currentStore.setSortBy(data);
+    const fetchedData = await cb();
+    await setDataToStore(currentStore, setterName, fetchedData);
+    setPageTotal && await currentStore.setPagesTotal(Math.ceil(currentStore[currentStore.mainStoreFieldName].count / currentStore.itemsPerPage));
+    setLoading && currentStore.setLoading(false);
+    toolTip.setIsAvailable(true);
+    return fetchedData;
+}
