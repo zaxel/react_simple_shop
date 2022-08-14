@@ -1,42 +1,15 @@
-﻿import React, { useEffect, useContext, useRef, useState } from 'react';
+﻿import React, { useContext } from 'react';
 import { Context } from '../../../..';
-import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { deleteUser } from '../../../../utils/administration/adminUsers';
-import { Spinner } from 'react-bootstrap';
-import { onClickNoChangeCheckHandler } from '../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
+import TdDeleteCommon from '../../../commonTable/TdDeleteCommon';
 
-const TdDelete = ({data , innerRef }) => {
-    const { userId } = data;
-    const { toolTip, users, cart, user } = useContext(Context);
-    const [loading, setLoading] = useState(false);
-    const onButtonClickHandler = async() => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        if(window.confirm('are your sure you wanna permanently remove this user?')){
-            const cb = deleteUser.bind(this, userId, cart, user);
-            onClickNoChangeCheckHandler(setLoading, cb, users)
-        }
-        toolTip.setIsAvailable(true);
-    }
+const TdDelete = ({data, ...rest}) => {
+    const { users } = useContext(Context);
+    data.store = users;
+    data.deleteCb = deleteUser;
 
-    useEffect(() => {
-        //   destroy all event listeners tooltips
-        return () => toolTip?.hoverIntentDestroy();
-    }, [])
-
-
-    if (loading) {
-        return (
-          <td className="td-spinner">
-            <Spinner animation="border" />
-          </td>
-        )
-      }
     return (
-        <td ref={innerRef}>
-            <button onClick={onButtonClickHandler}>X</button>
-        </td>
+        <TdDeleteCommon data={data} {...rest}/>
     );
 };
-
-export default withTooltip(TdDelete);
+export default TdDelete;

@@ -19,7 +19,7 @@ const TrDescriptions = ({ data }) => {
         <tr >
             <TdDescriptionInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={{inputData: data.title, infoId: data.id, deviceId: data.deviceId, dbFieldName: 'title'}}/>
             <TdDescriptionInputText toolTipInfo={toolTipInfo1} innerRef={ref1} data={{inputData: data.description, infoId: data.id, deviceId: data.deviceId, dbFieldName: 'description'}}/>
-            <TdDelete toolTipInfo={toolTipInfo2} innerRef={ref2} data={{descriptionId: data.id}}/>
+            <TdDelete toolTipInfo={toolTipInfo2} innerRef={ref2} data={{id: data.id}}/>
         </tr>
     );
 };

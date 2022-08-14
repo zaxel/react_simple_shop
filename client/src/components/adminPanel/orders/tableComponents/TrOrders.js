@@ -26,7 +26,7 @@ const TrOrders = ({ data }) => {
             <td>{data.email}</td>
             <td>{formatUsCurrency(data.total)}</td>
             <TdModalLink toolTipInfo={toolTipInfo0} innerRef={ref0} showOrderModal={data.onOrderClickHandler.bind(this, data.id)}/>
-            <TdDelete toolTipInfo={toolTipInfo1} innerRef={ref1} data={{orderId: data.id}}/>
+            <TdDelete toolTipInfo={toolTipInfo1} innerRef={ref1} data={{id: data.id}}/>
         </tr>
     );
 };
