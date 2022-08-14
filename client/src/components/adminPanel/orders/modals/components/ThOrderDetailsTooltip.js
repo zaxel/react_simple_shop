@@ -2,27 +2,19 @@
 import { Context } from '../../../../../';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { fetchOrderDetails } from '../../../../../utils/administration/adminOrders';
+import { onSortTableClickHandler } from '../../../../../utils/administration/common';
 
 const ThOrderDetailsTooltip = ({ data, innerRef}) => {
     const { toolTip, orderDetails, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        if(orderDetails.sortBy === data){
-            orderDetails.sortDirection === 'ASC' ? orderDetails.setSortDirection('DESC') : orderDetails.setSortDirection('ASC');
-        }else{
-            orderDetails.setSortDirection('ASC');
-        }
-        orderDetails.setSortBy(data);
-        const { loggedOut } = await fetchOrderDetails(orderDetails, orderDetails.orderId, cart, user); 
-        if(loggedOut)return;
-        toolTip.setIsAvailable(true);
+        const cb = async() => await fetchOrderDetails(orderDetails, orderDetails.orderId, cart, user);
+        const flags = { setLoading: false, setPageTotal: false};
+        onSortTableClickHandler(cb, data, orderDetails, toolTip, flags);
     }
 
     useEffect(() => {
         //   destroy all event listeners tooltips
-        
         return () => {
             if(typeof toolTip.hoverIntentDestroy === 'function')
                 return toolTip?.hoverIntentDestroy()

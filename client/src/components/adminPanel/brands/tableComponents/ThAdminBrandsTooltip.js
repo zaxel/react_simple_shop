@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { fetchAll, setDataToStore } from '../../../../utils/administration/common';
+import { fetchAll, onSortTableClickHandler } from '../../../../utils/administration/common';
 import { fetchAllBrands } from '../../../../http/deviceAPI';
 
 
@@ -9,26 +9,13 @@ const ThAdminBrandsTooltip = ({ data, innerRef}) => {
     const { toolTip, brands } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        brands.setLoading(true);
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        if(brands.sortBy === data){
-            brands.sortDirection === 'ASC' ? brands.setSortDirection('DESC') : brands.setSortDirection('ASC');
-        }else{
-            brands.setSortDirection('ASC');
-        }
-        brands.setSortBy(data);
-        const brandsRequested = await fetchAll(fetchAllBrands, null, brands.sortBy, brands.sortDirection);
-        await setDataToStore(brands, 'setBrands', brandsRequested);
-        brands.setLoading(false);
-        toolTip.setIsAvailable(true);
+        const cb = async() => await fetchAll(fetchAllBrands, null, brands.sortBy, brands.sortDirection);
+        const flags = { setLoading: true, setPageTotal: false};
+        onSortTableClickHandler(cb, data, brands, toolTip, flags);
     }
-
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips
-        
         return () => {
             if(typeof toolTip.hoverIntentDestroy === 'function')
                 return toolTip?.hoverIntentDestroy()

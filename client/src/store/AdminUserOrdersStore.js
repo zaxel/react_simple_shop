@@ -11,6 +11,7 @@ export default class AdminUserOrdersStore{
     _searchBy = 'userId';
     _searchByPrase = '';
     _mainStoreFieldName = 'userOrders';
+    _itemsPerPage = 100;
 
     constructor(){
         makeAutoObservable(this);
@@ -57,5 +58,8 @@ export default class AdminUserOrdersStore{
     }
     get searchBy(){
         return this._searchBy;
+    }
+    get itemsPerPage(){
+        return this._itemsPerPage;
     }
 }

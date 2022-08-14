@@ -2,28 +2,19 @@
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { fetchPage } from '../../../../utils/administration/adminOrders';
+import { onSortTableClickHandler } from '../../../../utils/administration/common';
 
 const ThAdminOrdersTooltip = ({ data, innerRef}) => {
     const { toolTip, orders, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        if(orders.sortBy === data){
-            orders.sortDirection === 'ASC' ? orders.setSortDirection('DESC') : orders.setSortDirection('ASC');
-        }else{
-            orders.setSortDirection('ASC');
-        }
-        orders.setSortBy(data);
-        await fetchPage(orders, cart, user);
-        toolTip.setIsAvailable(true);
+        const cb = async() => await fetchPage(orders, cart, user)
+        const flags = { setLoading: false, setPageTotal: false};
+        onSortTableClickHandler(cb, data, orders, toolTip, flags);
     }
-
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips
-        
         return () => {
             if(typeof toolTip.hoverIntentDestroy === 'function')
                 return toolTip?.hoverIntentDestroy()

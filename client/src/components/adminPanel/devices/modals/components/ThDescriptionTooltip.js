@@ -2,29 +2,19 @@
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { fetchInfo } from '../../../../../utils/administration/adminDeviceInfo';
-import { setDataToStore } from '../../../../../utils/administration/common';
+import { onSortTableClickHandler } from '../../../../../utils/administration/common';
 
 const ThDescriptionTooltip = ({ data, innerRef}) => {
     const { toolTip, adminDevicesInfo, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        if(adminDevicesInfo.sortBy === data){
-            adminDevicesInfo.sortDirection === 'ASC' ? adminDevicesInfo.setSortDirection('DESC') : adminDevicesInfo.setSortDirection('ASC');
-        }else{
-            adminDevicesInfo.setSortDirection('ASC');
-        }
-        adminDevicesInfo.setSortBy(data);
-        const fetchedInfo = await fetchInfo(adminDevicesInfo, adminDevicesInfo.deviceId, adminDevicesInfo.sortBy, adminDevicesInfo.sortDirection, cart, user);
-        if(fetchedInfo.loggedOut)return;
-        await setDataToStore(adminDevicesInfo, 'setInfo', fetchedInfo);
-        toolTip.setIsAvailable(true); 
+        const cb = async() => await fetchInfo(adminDevicesInfo, adminDevicesInfo.deviceId, adminDevicesInfo.sortBy, adminDevicesInfo.sortDirection, cart, user);
+        const flags = { setLoading: false, setPageTotal: false};
+        onSortTableClickHandler(cb, data, adminDevicesInfo, toolTip, flags);
     }
 
     useEffect(() => {
         //   destroy all event listeners tooltips
-        
         return () => {
             if(typeof toolTip.hoverIntentDestroy === 'function')
                 return toolTip?.hoverIntentDestroy()

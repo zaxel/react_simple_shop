@@ -1,31 +1,20 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
-import { fetchPage } from '../../../../../utils/administration/adminUsers';
 import { fetchUserOrders } from '../../../../../utils/administration/adminUserOrders';
+import { onSortTableClickHandler } from '../../../../../utils/administration/common';
 
 const ThAdminUserOrdersTooltip = ({ data, innerRef}) => {
     const { toolTip, userOrders, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        if(userOrders.sortBy === data){
-            userOrders.sortDirection === 'ASC' ? userOrders.setSortDirection('DESC') : userOrders.setSortDirection('ASC');
-        }else{
-            userOrders.setSortDirection('ASC');
-        }
-        userOrders.setSortBy(data);
-        // await fetchPage(userOrders, cart, user);
-        await fetchUserOrders(userOrders, cart, user);
-        toolTip.setIsAvailable(true);
+        const cb = async() => await fetchUserOrders(userOrders, cart, user);
+        const flags = { setLoading: false, setPageTotal: false};
+        onSortTableClickHandler(cb, data, userOrders, toolTip, flags);
     }
-
-
 
     useEffect(() => {
         //   destroy all event listeners tooltips
-        
         return () => {
             if(typeof toolTip.hoverIntentDestroy === 'function')
                 return toolTip?.hoverIntentDestroy()

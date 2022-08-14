@@ -1,27 +1,16 @@
 ﻿import React, { useEffect, useContext, useRef } from 'react';
 import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
-import { fetchAll, setDataToStore } from '../../../../utils/administration/common';
+import { fetchAll, setDataToStore, onSortTableClickHandler } from '../../../../utils/administration/common';
 import { fetchAllDevices } from '../../../../http/deviceAPI';
 
 const ThAdminDevicesTooltip = ({ data, innerRef}) => {
     const { toolTip, adminDevices } = useContext(Context);
-    const onThClickHandler = async(data) => {
 
-        adminDevices.setLoading(true);
-        toolTip.setIsToolTipShown(false);
-        toolTip.setIsAvailable(false);
-        if(adminDevices.sortBy === data){
-            adminDevices.sortDirection === 'ASC' ? adminDevices.setSortDirection('DESC') : adminDevices.setSortDirection('ASC');
-        }else{
-            adminDevices.setSortDirection('ASC');
-        }
-        adminDevices.setSortBy(data);
-        const fetchedData = await fetchAll(fetchAllDevices, null, adminDevices.sortBy, adminDevices.sortDirection, adminDevices.itemsPerPage, adminDevices.activePage, adminDevices.searchBy, adminDevices.searchByPrase);
-        await setDataToStore(adminDevices, 'setDevices', fetchedData);
-        await adminDevices.setPagesTotal(Math.ceil(adminDevices.devices.count/adminDevices.itemsPerPage));
-        adminDevices.setLoading(false);
-        toolTip.setIsAvailable(true);
+    const onThClickHandler = (data) => {
+        const cb = async() => await fetchAll(fetchAllDevices, null, adminDevices.sortBy, adminDevices.sortDirection, adminDevices.itemsPerPage, adminDevices.activePage, adminDevices.searchBy, adminDevices.searchByPrase)
+        const flags = { setLoading: true, setPageTotal: true};
+        onSortTableClickHandler(cb, data, adminDevices, toolTip, flags);
     }
 
     useEffect(() => {
