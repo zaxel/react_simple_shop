@@ -1,7 +1,7 @@
 ﻿import { fetchAllTypes, updateType, deleteTypeReq, createTypes } from "../../http/deviceAPI";
 import { fetchAll, fetchDataSetStore } from "./common";
 
-export const changeTypeData = async (id, name, cartStore, userStore) => {
+export const changeTypeData = async (id, dbFieldName, name, cartStore, userStore) => {
   const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
   const cb = updateType.bind(this, id, name);
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);

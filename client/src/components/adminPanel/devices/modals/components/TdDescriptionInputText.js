@@ -7,11 +7,10 @@ import { observer } from 'mobx-react-lite';
 import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, onClickNoReloadHandler } from '../../../../../utils/eventHandlers/commonInputTableFieldsHandlers';
 
 const TdDescriptionInputText = observer(({ data, innerRef }) => {
-
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
 
-    const { inputData, infoId, deviceId, dbFieldName } = data;
+    const { inputData, id, dbFieldName } = data;
     const { toolTip, adminDevicesInfo, user, cart } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
@@ -22,16 +21,16 @@ const TdDescriptionInputText = observer(({ data, innerRef }) => {
     }
 
     const onInputBlur = (e) => {
-        onInputBlurHandler(toolTip, setEdit, e, buttonRef, adminDevicesInfo, infoId, dbFieldName, input);
+        onInputBlurHandler(toolTip, setEdit, e, buttonRef, adminDevicesInfo, id, dbFieldName, input);
     }
 
     const onButtonBlurHandler = () => {
-        onInputButtonBlurHandler(toolTip, setEdit, adminDevicesInfo, infoId, dbFieldName, input);
+        onInputButtonBlurHandler(toolTip, setEdit, adminDevicesInfo, id, dbFieldName, input);
     }
 
     const onButtonClickHandler = async () => {
-        const cb = changeDeviceInfo.bind(this, infoId, dbFieldName, input, cart, user);
-        onClickNoReloadHandler(toolTip, setEdit, setLoading, cb, adminDevicesInfo, infoId, dbFieldName, input);
+        const cb = changeDeviceInfo.bind(this, id, dbFieldName, input, cart, user);
+        onClickNoReloadHandler(toolTip, setEdit, setLoading, cb, adminDevicesInfo, id, dbFieldName, input);
         
     }
 

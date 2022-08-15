@@ -39,7 +39,7 @@ const TrDevices = ({ data }) => {
     return (
         <tr >
             <td>{data.id}</td>
-            <TdNameInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={{inputData: data.name, deviceId: data.id, dbFieldName: 'name'}}/>
+            <TdNameInputText toolTipInfo={toolTipInfo0} innerRef={ref0} data={{inputData: data.name, id: data.id, dbFieldName: 'name'}}/>
             <TdPriceInputNumber toolTipInfo={toolTipInfo1} innerRef={ref1} data={{inputData: data.price, deviceId: data.id, dbFieldName: 'price'}}/>
             <TdRateInputNumber toolTipInfo={toolTipInfo2} innerRef={ref2} data={{inputData: data.rate, deviceId: data.id, dbFieldName: 'rate'}}/>
             <TdImgInputFile toolTipInfo={toolTipInfo3} innerRef={ref3} data={{inputData: {src: data.img, alt: data.name}, deviceId: data.id, dbFieldName: 'img'}}/>
