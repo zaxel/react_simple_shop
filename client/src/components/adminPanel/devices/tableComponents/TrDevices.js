@@ -44,8 +44,8 @@ const TrDevices = ({ data }) => {
             <TdRateInputNumber toolTipInfo={toolTipInfo2} innerRef={ref2} data={{inputData: data.rate, id: data.id, dbFieldName: 'rate'}}/>
             <TdImgInputFile toolTipInfo={toolTipInfo3} innerRef={ref3} data={{inputData: {src: data.img, alt: data.name}, deviceId: data.id, dbFieldName: 'img'}}/>
             <td>{adminPageFormatDate(Date.parse(data.createdAt))}</td>
-            <TdTypeSelect toolTipInfo={toolTipInfo4} innerRef={ref4} data={{inputData: data.typeId, deviceId: data.id, dbFieldName: 'typeId'}}/>
-            <TdBrandSelect toolTipInfo={toolTipInfo5} innerRef={ref5} data={{inputData: data.brandId, deviceId: data.id, dbFieldName: 'brandId'}}/>
+            <TdTypeSelect toolTipInfo={toolTipInfo4} innerRef={ref4} data={{inputData: data.typeId, id: data.id, dbFieldName: 'typeId'}}/>
+            <TdBrandSelect toolTipInfo={toolTipInfo5} innerRef={ref5} data={{inputData: data.brandId, id: data.id, dbFieldName: 'brandId'}}/>
             <TdDescriptionLink toolTipInfo={toolTipInfo6} innerRef={ref6} data={{onDescriptionClickHandler:data.onDescriptionClickHandler, name: data.name}}/>
             <TdDelete toolTipInfo={toolTipInfo7} innerRef={ref7} data={{id: data.id}}/>
         </tr>

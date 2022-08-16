@@ -71,7 +71,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
     return (
         <td ref={innerRef}>
             {!edit
-                ? <div className='td-active' >
+                ? <div className='td-active display-flex' >
                     <img alt={inputData.alt} className='stripped-table__device-img' onClick={onImgClickHandler} src={process.env.REACT_APP_API_URL + inputData.src} />
                     <button className='td-active stripped-table__button-edit' onClick={onEditClickHandler}>edit</button>
                     <button className='td-active stripped-table__button-delete' onClick={onDeleteClickHandler}>X</button>
