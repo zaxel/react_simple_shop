@@ -3,7 +3,7 @@ import { Context } from '../..';
 import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import SponsoredItem from './SponsoredItem';
-import { CHECKOUT_ROUTE, RANDOM_DEVICES_COUNT } from '../../utils/consts';
+import { CHECKOUT_ROUTE, RANDOM_DEVICES_COUNT } from '../../utils/consts/routes';
 import { fetchRandomDevices } from '../../http/deviceAPI';
 
 const CartAside = () => {

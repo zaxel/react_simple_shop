@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE } from '../../utils/consts';
+import { ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE } from '../../utils/consts/routes';
 import AdminPanelRouter from './AdminPanelRouter';
 
 const AdminPanelNavbar = () => {

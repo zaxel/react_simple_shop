@@ -6,7 +6,7 @@ import {
     SHOP_ROUTE, ERROR_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE,
     ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
     PROTECTED_ROUTE
-} from '../utils/consts';
+} from '../utils/consts/routes';
 import { logoutOnClient, logoutOnServer } from "../utils/logout";
 
 const NavBar = observer(() => {

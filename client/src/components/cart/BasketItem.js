@@ -5,7 +5,7 @@ import { Context } from '../..';
 import { deleteDevice, updateDeviceAmount } from '../../utils/cart/fetchSetCart';
 import { setLocalStoreCart } from '../../utils/cart/setLocalStoreCart';
 import { useNavigate } from 'react-router-dom';
-import { DEVICE_ROUTE } from '../../utils/consts';
+import { DEVICE_ROUTE } from '../../utils/consts/routes';
 
 
 const BasketItem = observer(({device, basketDevice}) => {

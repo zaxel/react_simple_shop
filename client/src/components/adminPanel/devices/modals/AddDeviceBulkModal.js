@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Context } from '../../../..';
 import { createBulkDevices } from '../../../../utils/administration/adminDevices';
 import { observer } from 'mobx-react-lite';
-import {SAMPLE_ROUTE} from '../../../../utils/consts';
+import {SAMPLE_ROUTE} from '../../../../utils/consts/routes';
 
 const AddDeviceBulkModal = observer(({ show, onHide }) => {
   const [file, setFile] = useState('');

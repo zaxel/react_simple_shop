@@ -8,6 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { fetchPage } from '../../../utils/administration/adminTypes';
 import TrTypesNewLine from './tableComponents/TrTypesNewLine';
 import { addNewTypes as addNewTypesReq } from '../../../utils/administration/adminTypes';
+import { TypesThs as ths } from '../../../utils/consts/thTitles';
 
 const TypesAdminPanel = observer(() => {
     let thRefs = useRef([]);
@@ -28,25 +29,6 @@ const TypesAdminPanel = observer(() => {
     useEffect(() => {
         fetchPage(types);
     }, [types.updateDataTrigger])
-
-    const ths = [
-        { title: 'id', sortBy: 'id' },
-        { title: 'type', sortBy: 'name' },
-        { title: 'created', sortBy: 'createdAt' },
-        { title: 'last updated', sortBy: 'updatedAt' },
-        { title: 'destroy', sortBy: null },
-    ]
-
-
-    const tds = [
-        { id: 18, name: 'tv', createdAt: 1519211809934, updatedAt: 1519211809934 },
-        { id: 22, name: 'tv', createdAt: 1519211810362, updatedAt: 1519211810362 },
-        { id: 56, name: 'tv', createdAt: 1519211811670, updatedAt: 1519211811670 },
-        { id: 75, name: 'tv', createdAt: 1519211809934, updatedAt: 1519211809934 },
-        { id: 29, name: 'tv', createdAt: 1519129853500, updatedAt: 1519129853500 },
-        { id: 11, name: 'tv', createdAt: 1519129858900, updatedAt: 1519129858900 },
-        { id: 12, name: 'tv', createdAt: 1519129864400, updatedAt: 1519129864400 },
-    ]
 
     const addNewTypes = () => {
         const id = uuidv4();
@@ -77,22 +59,18 @@ const TypesAdminPanel = observer(() => {
     }
 
     const thsWithTooltip = ths.map((el, i) => {
-
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
         return <ThAdminTypesTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
-
-    // const trs = tds.map((el, i) => {
     const trs = types.types.map((el, i) => {
         return <TrTypes key={el.id} data={el} />
     })
     const trsNewLine = types.newTypes?.map((el, i) => {
         return <TrTypesNewLine key={el.id} data={{ el, dropNewLine}} /> 
     })
-
 
     if (types.loading) {
         return (
@@ -101,8 +79,6 @@ const TypesAdminPanel = observer(() => {
             </div>
         )
     }
-
-
     return (
         <div className='user-admin__main account__orders acc-orders'>
             <div>
@@ -128,7 +104,6 @@ const TypesAdminPanel = observer(() => {
                     </button>}
                 </div>
             </div>
-            
         </div>
     );
 });

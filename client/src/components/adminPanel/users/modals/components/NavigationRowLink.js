@@ -2,11 +2,9 @@
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { useNavigate } from "react-router-dom";
-import { ADMIN_ORDERS_ROUTE } from '../../../../../utils/consts';
+import { ADMIN_ORDERS_ROUTE } from '../../../../../utils/consts/routes';
 import { adminPageFormatDate } from '../../../../../utils/dataFormat/formatDate';
 import { formatUsCurrency } from '../../../../../utils/dataFormat/currencies';
-
-
 
 const NavigationRowLink = ({ data, innerRef}) => {
     const { toolTip, orders } = useContext(Context);

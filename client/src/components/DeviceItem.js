@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import star from '../assets/rating_star.png';
 import { useNavigate } from "react-router-dom";
-import { DEVICE_ROUTE } from '../utils/consts';
+import { DEVICE_ROUTE } from '../utils/consts/routes';
 
 const DeviceItem = ({device}) => {
     const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { addToCart } from '../../utils/cart/addToCart';
 import star from '../../assets/rating_star.png';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import { DEVICE_ROUTE } from '../../utils/consts';
+import { DEVICE_ROUTE } from '../../utils/consts/routes';
 
 const SponsoredItem = ({el}) => {
     const { user, cart } = useContext(Context);

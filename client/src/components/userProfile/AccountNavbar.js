@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE } from '../../utils/consts';
+import { ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE } from '../../utils/consts/routes';
 
 const AccountNavbar = () => {
     return (

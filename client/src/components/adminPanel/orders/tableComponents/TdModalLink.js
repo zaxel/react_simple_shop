@@ -3,9 +3,7 @@ import { Context } from '../../../..';
 import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 
 const TdModalLink = ({ showOrderModal, innerRef }) => {
-
     const { toolTip } = useContext(Context);
-
     const onClickHandler = () => {
         toolTip.setIsToolTipShown(false);
         toolTip.setIsAvailable(false);

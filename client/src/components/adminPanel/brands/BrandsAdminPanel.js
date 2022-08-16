@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useContext, useEffect } from 'react';
+﻿import React, { useRef, useContext, useEffect } from 'react';
 import ThAdminBrandsTooltip from './tableComponents/ThAdminBrandsTooltip';
 import TrBrands from './tableComponents/TrBrands';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,6 +7,7 @@ import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import { fetchPage, addNewBrands as addNewBrandsReq } from '../../../utils/administration/adminBrands';
 import TrBrandsNewLine from './tableComponents/TrBrandsNewLine';
+import { BrandsThs as ths } from '../../../utils/consts/thTitles';
 
 const BrandsAdminPanel = observer(() => {
     let thRefs = useRef([]);
@@ -21,31 +22,11 @@ const BrandsAdminPanel = observer(() => {
                 console.log(e)
             }
         })()
-
     }, [])
 
     useEffect(() => {
         fetchPage(brands);
     }, [brands.updateDataTrigger])
-
-    const ths = [
-        { title: 'id', sortBy: 'id' },
-        { title: 'brand', sortBy: 'name' },
-        { title: 'created', sortBy: 'createdAt' },
-        { title: 'last updated', sortBy: 'updatedAt' },
-        { title: 'destroy', sortBy: null },
-    ]
-
-
-    const tds = [
-        { id: 18, name: 'tv', createdAt: 1519211809934, updatedAt: 1519211809934 },
-        { id: 22, name: 'tv', createdAt: 1519211810362, updatedAt: 1519211810362 },
-        { id: 56, name: 'tv', createdAt: 1519211811670, updatedAt: 1519211811670 },
-        { id: 75, name: 'tv', createdAt: 1519211809934, updatedAt: 1519211809934 },
-        { id: 29, name: 'tv', createdAt: 1519129853500, updatedAt: 1519129853500 },
-        { id: 11, name: 'tv', createdAt: 1519129858900, updatedAt: 1519129858900 },
-        { id: 12, name: 'tv', createdAt: 1519129864400, updatedAt: 1519129864400 },
-    ]
 
     const addNewBrands = () => {
         const id = uuidv4();
@@ -76,22 +57,18 @@ const BrandsAdminPanel = observer(() => {
     }
 
     const thsWithTooltip = ths.map((el, i) => {
-
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
         return <ThAdminBrandsTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
-
-    // const trs = tds.map((el, i) => {
     const trs = brands.brands.map((el, i) => {
         return <TrBrands key={el.id} data={el} />
     })
     const trsNewLine = brands.newBrands?.map((el, i) => {
         return <TrBrandsNewLine key={el.id} data={{ el, dropNewLine }} />
     })
-
 
     if (brands.loading) {
         return (
@@ -100,7 +77,6 @@ const BrandsAdminPanel = observer(() => {
             </div>
         )
     }
-
 
     return (
         <div className='user-admin__main account__orders acc-orders'>

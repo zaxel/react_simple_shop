@@ -2,11 +2,9 @@
 import { Context } from '../../../../..';
 import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { NavLink } from 'react-router-dom';
-import { ADMIN_DEVICES_ROUTE } from '../../../../../utils/consts';
+import { ADMIN_DEVICES_ROUTE } from '../../../../../utils/consts/routes';
 
 const NavigationLink = ({ data, innerRef }) => {
-
-
     const { linkText, deviceId } = data;
     const { toolTip, adminDevices } = useContext(Context);
 

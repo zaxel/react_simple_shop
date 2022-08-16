@@ -2,7 +2,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
 import { registration, login } from '../http/userAPI';
-import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../utils/consts';
+import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../utils/consts/routes';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { setUserIfAuth } from '../utils/setUserIfAuth';
