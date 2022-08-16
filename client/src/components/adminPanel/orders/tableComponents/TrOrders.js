@@ -3,19 +3,12 @@ import TdModalLink from './TdModalLink';
 import TdDelete from './TdDelete';
 import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 import { formatUsCurrency } from '../../../../utils/dataFormat/currencies';
-
-
-
+import { makeInnerRefs } from '../../../../utils/toolTipServing/makeInnerRefs';
 
 const TrOrders = ({ data }) => {
     let tdRefs = useRef([]);
-    
-    let ref0 = (el) => (tdRefs.current[0] = el);
-    let toolTipInfo0 = {i:0, myRefs: tdRefs, text: 'check order details'};
-
-    let ref1 = (el) => (tdRefs.current[1] = el);
-    let toolTipInfo1 = {i:1, myRefs: tdRefs, text: 'delete order'};
-
+    const tipsTitles = ['check order details', 'delete order'];
+    const tipsRefs = makeInnerRefs(tipsTitles, tdRefs);
 
     return (
         <tr >
@@ -25,8 +18,8 @@ const TrOrders = ({ data }) => {
             <td>{data.userId}</td>
             <td>{data.email}</td>
             <td>{formatUsCurrency(data.total)}</td>
-            <TdModalLink toolTipInfo={toolTipInfo0} innerRef={ref0} showOrderModal={data.onOrderClickHandler.bind(this, data.id)}/>
-            <TdDelete toolTipInfo={toolTipInfo1} innerRef={ref1} data={{id: data.id}}/>
+            <TdModalLink {...tipsRefs[0]} showOrderModal={data.onOrderClickHandler.bind(this, data.id)}/>
+            <TdDelete {...tipsRefs[1]} data={{id: data.id}}/>
         </tr>
     );
 };

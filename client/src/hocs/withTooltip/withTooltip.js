@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useContext } from 'react';
-import { HoverIntent } from './hoverIntent';
+import { HoverIntent } from '../../utils/toolTipServing/hoverIntent';
 import { Context } from '../..';
 
 
