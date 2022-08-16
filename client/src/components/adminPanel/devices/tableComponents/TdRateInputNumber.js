@@ -10,7 +10,7 @@ const TdRateInputNumber = ({ data, ...rest }) => {
     data.store = adminDevices;
     data.inputCb = changeDeviceData;
     data.numberInputAttributes = {step: '.1', min: '0', max: '5'};
-    data.correctNumberFormat = correctRateRange;
+    data.inpNumFormat = correctRateRange;
 
     return (
         <TdInputNumberCommon data={data} {...rest}/>

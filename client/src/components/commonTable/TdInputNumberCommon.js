@@ -7,7 +7,7 @@ import { onTableCellClickHandler, onInputBlurHandler, onInputButtonBlurHandler, 
 const TdInputNumberCommon = ({ data, innerRef }) => {
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
-    const {store, inputCb, inputData, id, dbFieldName, numberInputAttributes, correctNumberFormat } = data;
+    const {store, inputCb, inputData, id, dbFieldName, numberInputAttributes, inpNumFormat, outNumFormat } = data;
     const { toolTip, cart, user } = useContext(Context);
     const [edit, setEdit] = useState(false);
     const [input, setInput] = useState(inputData);
@@ -27,7 +27,7 @@ const TdInputNumberCommon = ({ data, innerRef }) => {
         onInputButtonClickHandler(toolTip, setEdit, setLoading, cb, store, id, dbFieldName, input);
     }
     const onInputChange = (e) => {
-        setInput(prev => correctNumberFormat(e.target.value));
+        setInput(prev => inpNumFormat ? inpNumFormat(e.target.value) : e.target.value);
     }
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const TdInputNumberCommon = ({ data, innerRef }) => {
     return (
         <td ref={innerRef}>
             {!edit
-                ? <div className='td-active' onClick={onDivClickHandler}>{input}</div>
+                ? <div className='td-active' onClick={onDivClickHandler}>{outNumFormat ? outNumFormat(input) : input}</div>
                 : <div className='display-flex'>
                     <input ref={inputRef} autoFocus type='number' {...numberInputAttributes} value={input} onChange={onInputChange} onBlur={onInputBlur} />
                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
