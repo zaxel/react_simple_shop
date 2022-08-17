@@ -1,14 +1,9 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import {makeObservable, observable, action} from "mobx";
+import BaseStore from "./BaseStore";
 
-export default class UserOrdersStore{
+export default class UserOrdersStore extends BaseStore{
     _userOrders = {};
     _mainStoreFieldName = 'userOrders';
-
-    _sortDirection = 'ASC';
-    _sortBy = 'id';
-    _sortRevers = false;
-    _updateDataTrigger = false;
-    _loading = false;
 
     _searchBy = 'userId';
     _searchByPrase = '';
@@ -16,22 +11,20 @@ export default class UserOrdersStore{
     _itemsPerPage = 100;
 
     constructor(){
-        makeAutoObservable(this);
+        super();
+        makeObservable(this, {
+            _userOrders: observable,
+            _mainStoreFieldName: observable,
+            _searchBy: observable,
+            _searchByPrase: observable,
+            _itemsPerPage: observable,
+            
+            setUserOrders: action,
+            setSearchByPrase: action,
+        })
     }
     setUserOrders(orders){
         this._userOrders = orders;
-    }
-    setSortDirection(direction){
-        this._sortDirection = direction;
-    }
-    setSortBy(by){
-        this._sortBy = by;
-    }
-    setLoading(bool){
-        this._loading = bool;
-    }
-    setUpdateDataTrigger(bool){
-        this._updateDataTrigger = bool;
     }
     setSearchByPrase(userId){
         this._searchByPrase = userId;
@@ -39,18 +32,6 @@ export default class UserOrdersStore{
     
     get userOrders(){
         return this._userOrders;
-    }
-    get sortDirection(){
-        return this._sortDirection;
-    }
-    get sortBy(){
-        return this._sortBy;
-    }
-    get loading(){
-        return this._loading;
-    }
-    get updateDataTrigger(){
-        return this._updateDataTrigger;
     }
     get searchByPrase(){
         return this._searchByPrase;

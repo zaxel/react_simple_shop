@@ -1,23 +1,32 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import {makeObservable, observable, action, override} from "mobx";
+import BaseStore from "./BaseStore";
 
-export default class DevicesInfoStore{
+export default class DevicesInfoStore extends BaseStore{
     
     _info = {};
     _newInfo = [];  // [{ id: 18, title: 'tester', description: 'some description' }, ... ]
     _mainStoreFieldName = 'info';
 
-    _sortDirection = 'ASC';
-    _sortBy = 'id';
-    _sortRevers = false;
-    _updateDataTrigger = false;
-    _loading = true;
-
-    
     _deviceId = null;
     _deviceName = '';
 
     constructor(){
-        makeAutoObservable(this);
+        super();
+        makeObservable(this, {
+            _info: observable,
+            _newInfo: observable,
+            _mainStoreFieldName: observable,
+            _deviceId: observable,
+            _deviceName: observable,
+            
+            setInfo: action,
+            refreshNewInfo: action,
+            setNewInfoInput: action,
+            addNewInfoLine: action,
+            dropNewInfoLine: action,
+            setDeviceId: action,
+            setDeviceName: action,
+        })
     }
     
     setInfo(info){
@@ -35,45 +44,19 @@ export default class DevicesInfoStore{
     dropNewInfoLine(id){
         this._newInfo = this._newInfo.filter(line => line.id !== id);
     }
-    setSortDirection(direction){
-        this._sortDirection = direction;
-    }
-    setSortBy(by){
-        this._sortBy = by;
-    }
-    setUpdateDataTrigger(bool){
-        this._updateDataTrigger = bool;
-    }
-    setLoading(bool){
-        this._loading = bool;
-    }
     setDeviceId(deviceId){
         this._deviceId = deviceId;
     }
     setDeviceName(deviceName){
         this._deviceName = deviceName;
     }
-    
-   
+
     
     get info(){
         return this._info;
     }
     get newInfo(){
         return this._newInfo;
-    }
-    
-    get sortDirection(){
-        return this._sortDirection;
-    }
-    get sortBy(){
-        return this._sortBy;
-    }
-    get updateDataTrigger(){
-        return this._updateDataTrigger;
-    }
-    get loading(){
-        return this._loading;
     }
     get deviceId(){
         return this._deviceId;

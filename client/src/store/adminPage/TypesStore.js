@@ -1,36 +1,30 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import {makeObservable, observable, action} from "mobx";
+import BaseStore from "./BaseStore";
 
-export default class TypesStore{
+export default class TypesStore extends BaseStore{
     
     _types = [];
     _mainStoreFieldName = 'types';
 
-    _sortDirection = 'ASC';
-    _sortBy = 'id';
-    _sortRevers = false;
-    _updateDataTrigger = false;
-    _loading = true;
-    
     _newTypes = [];
 
     constructor(){
-        makeAutoObservable(this);
+        super();
+        makeObservable(this, {
+            _types: observable,
+            _mainStoreFieldName: observable,
+            _newTypes: observable,
+            
+            setTypes: action,
+            refreshTypes: action,
+            setNewTypesInput: action,
+            addNewTypesLine: action,
+            dropNewTypesLine: action,
+        })
     }
     
     setTypes(types){
         this._types = types;
-    }
-    setSortDirection(direction){
-        this._sortDirection = direction;
-    }
-    setSortBy(by){
-        this._sortBy = by;
-    }
-    setUpdateDataTrigger(bool){
-        this._updateDataTrigger = bool;
-    }
-    setLoading(bool){
-        this._loading = bool;
     }
     refreshTypes(){
         this._newTypes = [];
@@ -47,18 +41,6 @@ export default class TypesStore{
     
     get types(){
         return this._types;
-    }
-    get sortDirection(){
-        return this._sortDirection;
-    }
-    get sortBy(){
-        return this._sortBy;
-    }
-    get updateDataTrigger(){
-        return this._updateDataTrigger;
-    }
-    get loading(){
-        return this._loading;
     }
     get newTypes(){
         return this._newTypes;

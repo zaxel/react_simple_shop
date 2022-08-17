@@ -1,36 +1,29 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import {makeObservable, observable, computed, action, override} from "mobx";
+import BaseStore from "./BaseStore";
 
-export default class BrandsStore{
+export default class BrandsStore extends BaseStore{
     
     _brands = [];
     _mainStoreFieldName = 'brands';
-
-    _sortDirection = 'ASC';
-    _sortBy = 'id';
-    _sortRevers = false;
-    _updateDataTrigger = false;
-    _loading = true;
-    
     _newBrands = [];
 
     constructor(){
-        makeAutoObservable(this);
+        super();
+        makeObservable(this, {
+            _brands: observable,
+            _mainStoreFieldName: observable,
+            _newBrands: observable,
+            
+            setBrands: action,
+            refreshBrands: action,
+            setNewBrandsInput: action,
+            addNewBrandsLine: action,
+            dropNewBrandsLine: action,
+        })
     }
     
     setBrands(brands){
         this._brands = brands;
-    }
-    setSortDirection(direction){
-        this._sortDirection = direction;
-    }
-    setSortBy(by){
-        this._sortBy = by;
-    }
-    setUpdateDataTrigger(bool){
-        this._updateDataTrigger = bool;
-    }
-    setLoading(bool){
-        this._loading = bool;
     }
     refreshBrands(){
         this._newBrands = [];
@@ -44,21 +37,8 @@ export default class BrandsStore{
     dropNewBrandsLine(id){
         this._newBrands = this._newBrands.filter(line => line.id !== id);
     }
-    
     get brands(){
         return this._brands;
-    }
-    get sortDirection(){
-        return this._sortDirection;
-    }
-    get sortBy(){
-        return this._sortBy;
-    }
-    get updateDataTrigger(){
-        return this._updateDataTrigger;
-    }
-    get loading(){
-        return this._loading;
     }
     get newBrands(){
         return this._newBrands;

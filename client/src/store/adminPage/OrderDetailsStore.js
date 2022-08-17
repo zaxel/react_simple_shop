@@ -1,57 +1,36 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import {makeObservable, observable, action} from "mobx";
+import BaseStore from "./BaseStore";
 
-export default class OrderDetailsStore{
+export default class OrderDetailsStore extends BaseStore{
     
     _orderDetails = {};
     _mainStoreFieldName = 'orderDetails';
 
-    _sortDirection = 'ASC';
-    _sortBy = 'id';
-    _sortRevers = false;
-    _updateDataTrigger = false;
-    _loading = false;
-
     _orderId = null;
 
     constructor(){
-        makeAutoObservable(this);
+        super();
+        makeObservable(this, {
+            _orderDetails: observable,
+            _mainStoreFieldName: observable,
+            _orderId: observable,
+            
+            setOrderDetails: action,
+            setOrderId: action,
+        })
     }
     setOrderDetails(order){
         this._orderDetails = order;
     }
-    setSortDirection(direction){
-        this._sortDirection = direction;
-    }
-    setSortBy(by){
-        this._sortBy = by;
-    }
-    setLoading(bool){
-        this._loading = bool;
-    }
     setOrderId(orderId){
         this._orderId = orderId;
-    }
-    setUpdateDataTrigger(bool){
-        this._updateDataTrigger = bool;
     }
     
     get orderDetails(){
         return this._orderDetails;
     }
-    get sortDirection(){
-        return this._sortDirection;
-    }
-    get sortBy(){
-        return this._sortBy;
-    }
-    get loading(){
-        return this._loading;
-    }
     get orderId(){
         return this._orderId;
-    }
-    get updateDataTrigger(){
-        return this._updateDataTrigger;
     }
     get mainStoreFieldName(){
         return this._mainStoreFieldName;

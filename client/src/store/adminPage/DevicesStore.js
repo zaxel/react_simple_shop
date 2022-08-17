@@ -1,24 +1,14 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import {action, makeObservable, observable, override} from "mobx";
+import BaseWithSearchStore from "./BaseWithSearchStore";
 
-export default class DevicesStore{
+export default class DevicesStore extends BaseWithSearchStore{
     
     _devices = {};
     _mainStoreFieldName = 'devices';
 
-    _sortDirection = 'ASC';
-    _sortBy = 'id';
-    _sortRevers = false;
-    _updateDataTrigger = false;
-    _loading = true;
-    
     _activePage = 1;
     _pagesTotal = 1;
     _itemsPerPage = 12;
-
-    _searchBy = '';
-    _searchByLast = '';
-    _searchByPrase = '';
-    _searchByLastPrase = '';
     
     _types = [];
     _brands = [];
@@ -26,17 +16,31 @@ export default class DevicesStore{
     _brandActive = null;
 
     constructor(){
-        makeAutoObservable(this);
+        super();
+        makeObservable(this, {
+            _devices: observable,
+            _mainStoreFieldName: observable,
+            _activePage: observable,
+            _pagesTotal: observable,
+            _itemsPerPage: observable,
+            _types: observable,
+            _brands: observable,
+            _typeActive: observable,
+            _brandActive: observable,
+
+            setDevices: action,
+            setActivePage: action,
+            setPagesTotal: action,
+            setItemsPerPage: action,
+            setTypes: action,
+            setBrands: action,
+            setTypeActive: action,
+            setBrandActive: action,
+        })
     }
-    
+
     setDevices(devices){
         this._devices = devices;
-    }
-    setSortDirection(direction){
-        this._sortDirection = direction;
-    }
-    setSortBy(by){
-        this._sortBy = by;
     }
     setActivePage(page){
         this._activePage = page;
@@ -46,24 +50,6 @@ export default class DevicesStore{
     }
     setItemsPerPage(number){
         this._itemsPerPage = number;
-    }
-    setUpdateDataTrigger(bool){
-        this._updateDataTrigger = bool;
-    }
-    setSearchBy(val){
-        this._searchBy = val;
-    }
-    setSearchByLast(val){
-        this._searchByLast = val;
-    }
-    setSearchByPrase(val){
-        this._searchByPrase = val;
-    }
-    setSearchByLastPrase(val){
-        this._searchByLastPrase = val;
-    }
-    setLoading(bool){
-        this._loading = bool;
     }
     setTypes(types){
         this._types = types;
@@ -78,15 +64,8 @@ export default class DevicesStore{
         this._brandActive = typeId;
     }
     
-    
     get devices(){
         return this._devices;
-    }
-    get sortDirection(){
-        return this._sortDirection;
-    }
-    get sortBy(){
-        return this._sortBy;
     }
     get activePage(){
         return this._activePage;
@@ -96,24 +75,6 @@ export default class DevicesStore{
     }
     get itemsPerPage(){
         return this._itemsPerPage;
-    }
-    get updateDataTrigger(){
-        return this._updateDataTrigger;
-    }
-    get searchBy(){
-        return this._searchBy;
-    }
-    get searchByLast(){
-        return this._searchByLast;
-    }
-    get searchByPrase(){
-        return this._searchByPrase;
-    }
-    get searchByLastPrase(){
-        return this._searchByLastPrase;
-    }
-    get loading(){
-        return this._loading;
     }
     get types(){
         return this._types;
