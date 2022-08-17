@@ -1,22 +1,24 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminTypesStore{
+export default class BrandsStore{
     
-    _types = [];
-    _mainStoreFieldName = 'types';
+    _brands = [];
+    _mainStoreFieldName = 'brands';
+
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
     _updateDataTrigger = false;
     _loading = true;
-    _newTypes = [];
+    
+    _newBrands = [];
 
     constructor(){
         makeAutoObservable(this);
     }
     
-    setTypes(types){
-        this._types = types;
+    setBrands(brands){
+        this._brands = brands;
     }
     setSortDirection(direction){
         this._sortDirection = direction;
@@ -30,21 +32,21 @@ export default class AdminTypesStore{
     setLoading(bool){
         this._loading = bool;
     }
-    refreshTypes(){
-        this._newTypes = [];
+    refreshBrands(){
+        this._newBrands = [];
     }
-    setNewTypesInput(id, fieldName, value){
-        this._newTypes.find(field=>field.id===id)[fieldName] = value;
+    setNewBrandsInput(id, fieldName, value){
+        this._newBrands.find(field=>field.id===id)[fieldName] = value;
     }
-    addNewTypesLine(id){
-        this._newTypes.push({ id, 'name': ''});
+    addNewBrandsLine(id){
+        this._newBrands.push({ id, 'name': ''});
     }
-    dropNewTypesLine(id){
-        this._newTypes = this._newTypes.filter(line => line.id !== id);
+    dropNewBrandsLine(id){
+        this._newBrands = this._newBrands.filter(line => line.id !== id);
     }
     
-    get types(){
-        return this._types;
+    get brands(){
+        return this._brands;
     }
     get sortDirection(){
         return this._sortDirection;
@@ -58,8 +60,8 @@ export default class AdminTypesStore{
     get loading(){
         return this._loading;
     }
-    get newTypes(){
-        return this._newTypes;
+    get newBrands(){
+        return this._newBrands;
     }
     get mainStoreFieldName(){
         return this._mainStoreFieldName;

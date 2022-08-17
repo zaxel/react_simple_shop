@@ -1,15 +1,17 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminOrderDetailsStore{
+export default class OrderDetailsStore{
     
+    _orderDetails = {};
     _mainStoreFieldName = 'orderDetails';
+
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
-    _loading = false;
-    _orderDetails = {};
-    _orderId = null;
     _updateDataTrigger = false;
+    _loading = false;
+
+    _orderId = null;
 
     constructor(){
         makeAutoObservable(this);

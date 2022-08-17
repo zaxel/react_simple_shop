@@ -1,16 +1,18 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminUserOrdersStore{
-    
+export default class UserOrdersStore{
+    _userOrders = {};
+    _mainStoreFieldName = 'userOrders';
+
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
-    _loading = false;
-    _userOrders = {};
     _updateDataTrigger = false;
+    _loading = false;
+
     _searchBy = 'userId';
     _searchByPrase = '';
-    _mainStoreFieldName = 'userOrders';
+    
     _itemsPerPage = 100;
 
     constructor(){

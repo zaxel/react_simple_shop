@@ -3,14 +3,15 @@ import DeviceStore from "./DeviceStore";
 import HistoryStore from "./HistoryStore";
 import CartStore from "./CartStore";
 import ToolTipStore from "./ToolTipStore";
-import AdminUsersStore from "./AdminUsersStore";
-import AdminOrdersStore from "./AdminOrdersStore";
-import AdminDevicesStore from "./AdminDevicesStore";
-import AdminDevicesInfoStore from "./AdminDevicesInfoStore";
-import AdminTypesStore from "./AdminTypesStore";
-import AdminBrandsStore from "./AdminBrandsStore";
-import AdminOrderDetailsStore from "./AdminOrderDetailsStore";
-import AdminUserOrdersStore from "./AdminUserOrdersStore";
+
+import UsersStore from "./adminPage/UsersStore";
+import OrdersStore from "./adminPage/OrdersStore";
+import DevicesStore from "./adminPage/DevicesStore";
+import DevicesInfoStore from "./adminPage/DevicesInfoStore";
+import TypesStore from "./adminPage/TypesStore";
+import BrandsStore from "./adminPage/BrandsStore";
+import OrderDetailsStore from "./adminPage/OrderDetailsStore";
+import UserOrdersStore from "./adminPage/UserOrdersStore";
 
 export default class RootStore {
     constructor() {
@@ -19,13 +20,13 @@ export default class RootStore {
       this.history = new HistoryStore(this);
       this.cart = new CartStore(this);
       this.toolTip = new ToolTipStore(this);
-      this.users = new AdminUsersStore(this);
-      this.orders = new AdminOrdersStore(this);
-      this.adminDevices = new AdminDevicesStore(this);
-      this.adminDevicesInfo = new AdminDevicesInfoStore(this);
-      this.types = new AdminTypesStore(this);
-      this.brands = new AdminBrandsStore(this);
-      this.orderDetails = new AdminOrderDetailsStore(this);
-      this.userOrders = new AdminUserOrdersStore(this);
+      this.users = new UsersStore(this);
+      this.orders = new OrdersStore(this);
+      this.adminDevices = new DevicesStore(this);
+      this.adminDevicesInfo = new DevicesInfoStore(this);
+      this.types = new TypesStore(this);
+      this.brands = new BrandsStore(this);
+      this.orderDetails = new OrderDetailsStore(this);
+      this.userOrders = new UserOrdersStore(this);
     }
 } 

@@ -1,32 +1,31 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminDevicesStore{
+export default class OrdersStore{
     
-    _devices = {};
-    _mainStoreFieldName = 'devices';
+    _orders = {};
+    _mainStoreFieldName = 'orders';
+
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
+    _updateDataTrigger = false;
+    _loading = true;
+
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 12;
-    _updateDataTrigger = false;
+    _itemsPerPage = 4;
+
     _searchBy = '';
     _searchByLast = '';
     _searchByPrase = '';
     _searchByLastPrase = '';
-    _loading = true;
-    _types = [];
-    _brands = [];
-    _typeActive = null;
-    _brandActive = null;
 
     constructor(){
         makeAutoObservable(this);
     }
     
-    setDevices(devices){
-        this._devices = devices;
+    setOrders(orders){
+        this._orders = orders;
     }
     setSortDirection(direction){
         this._sortDirection = direction;
@@ -34,6 +33,7 @@ export default class AdminDevicesStore{
     setSortBy(by){
         this._sortBy = by;
     }
+    
     setActivePage(page){
         this._activePage = page;
     }
@@ -61,22 +61,9 @@ export default class AdminDevicesStore{
     setLoading(bool){
         this._loading = bool;
     }
-    setTypes(types){
-        this._types = types;
-    }
-    setBrands(brands){
-        this._brands = brands;
-    }
-    setTypeActive(typeId){
-        this._typeActive = typeId;
-    }
-    setBrandActive(typeId){
-        this._brandActive = typeId;
-    }
     
-    
-    get devices(){
-        return this._devices;
+    get orders(){
+        return this._orders;
     }
     get sortDirection(){
         return this._sortDirection;
@@ -111,19 +98,7 @@ export default class AdminDevicesStore{
     get loading(){
         return this._loading;
     }
-    get types(){
-        return this._types;
-    }
-    get brands(){
-        return this._brands;
-    }
     get mainStoreFieldName(){
         return this._mainStoreFieldName;
-    }
-    get typeActive(){
-        return this._typeActive;
-    }
-    get brandActive(){
-        return this._brandActive;
     }
 }

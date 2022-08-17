@@ -1,15 +1,18 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminDevicesInfoStore{
+export default class DevicesInfoStore{
     
-    _sortDirection = 'ASC';
+    _info = {};
+    _newInfo = [];  // [{ id: 18, title: 'tester', description: 'some description' }, ... ]
     _mainStoreFieldName = 'info';
+
+    _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
     _updateDataTrigger = false;
     _loading = true;
-    _info = {};
-    _newInfo = [];  // [{ id: 18, title: 'tester', description: 'some description' }, ... ]
+
+    
     _deviceId = null;
     _deviceName = '';
 

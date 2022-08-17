@@ -1,27 +1,36 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminUsersStore{
+export default class DevicesStore{
     
-    _users = {};
+    _devices = {};
+    _mainStoreFieldName = 'devices';
+
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
+    _updateDataTrigger = false;
+    _loading = true;
+    
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 4;
-    _updateDataTrigger = false;
+    _itemsPerPage = 12;
+
     _searchBy = '';
     _searchByLast = '';
     _searchByPrase = '';
     _searchByLastPrase = '';
-    _loading = true;
-    _mainStoreFieldName = 'users';
+    
+    _types = [];
+    _brands = [];
+    _typeActive = null;
+    _brandActive = null;
+
     constructor(){
         makeAutoObservable(this);
     }
     
-    setUsers(users){
-        this._users = users;
+    setDevices(devices){
+        this._devices = devices;
     }
     setSortDirection(direction){
         this._sortDirection = direction;
@@ -29,7 +38,6 @@ export default class AdminUsersStore{
     setSortBy(by){
         this._sortBy = by;
     }
-    
     setActivePage(page){
         this._activePage = page;
     }
@@ -57,9 +65,22 @@ export default class AdminUsersStore{
     setLoading(bool){
         this._loading = bool;
     }
+    setTypes(types){
+        this._types = types;
+    }
+    setBrands(brands){
+        this._brands = brands;
+    }
+    setTypeActive(typeId){
+        this._typeActive = typeId;
+    }
+    setBrandActive(typeId){
+        this._brandActive = typeId;
+    }
     
-    get users(){
-        return this._users;
+    
+    get devices(){
+        return this._devices;
     }
     get sortDirection(){
         return this._sortDirection;
@@ -94,7 +115,19 @@ export default class AdminUsersStore{
     get loading(){
         return this._loading;
     }
+    get types(){
+        return this._types;
+    }
+    get brands(){
+        return this._brands;
+    }
     get mainStoreFieldName(){
         return this._mainStoreFieldName;
+    }
+    get typeActive(){
+        return this._typeActive;
+    }
+    get brandActive(){
+        return this._brandActive;
     }
 }

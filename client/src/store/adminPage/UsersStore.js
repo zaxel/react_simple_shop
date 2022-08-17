@@ -1,28 +1,31 @@
 ﻿import {makeAutoObservable} from "mobx";
 
-export default class AdminOrdersStore{
+export default class UsersStore{
     
-    _orders = {};
+    _users = {};
+    _mainStoreFieldName = 'users';
+
     _sortDirection = 'ASC';
     _sortBy = 'id';
     _sortRevers = false;
+    _updateDataTrigger = false;
+    _loading = true;
+
     _activePage = 1;
     _pagesTotal = 1;
     _itemsPerPage = 4;
-    _updateDataTrigger = false;
+
     _searchBy = '';
     _searchByLast = '';
     _searchByPrase = '';
     _searchByLastPrase = '';
-    _loading = true;
-    _mainStoreFieldName = 'orders';
-
+    
     constructor(){
         makeAutoObservable(this);
     }
     
-    setOrders(orders){
-        this._orders = orders;
+    setUsers(users){
+        this._users = users;
     }
     setSortDirection(direction){
         this._sortDirection = direction;
@@ -59,8 +62,8 @@ export default class AdminOrdersStore{
         this._loading = bool;
     }
     
-    get orders(){
-        return this._orders;
+    get users(){
+        return this._users;
     }
     get sortDirection(){
         return this._sortDirection;
