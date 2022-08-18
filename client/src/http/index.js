@@ -1,4 +1,5 @@
 ﻿import axios from 'axios';
+import { removeEmptyParams } from '../utils/http/requestInterceptorServ';
 
 const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
@@ -8,13 +9,23 @@ const $authHost = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     withCredentials: true 
 })
+const requestInterceptor = config => {
+    removeEmptyParams(config);
+    return config;
+}
 const authRequestInterceptor = config => {
     config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
+    
+    removeEmptyParams(config);
+    
+    
+    
     return config;
 }
 
 
 const authResponseInterceptor = config => {
+    
     return config;
 }
 
@@ -39,6 +50,8 @@ const authResponseErrorCb = async (error) => {
     }
    throw error;
 }
+
+$host.interceptors.request.use(requestInterceptor);
 
 $authHost.interceptors.request.use(authRequestInterceptor);
 $authHost.interceptors.response.use(authResponseInterceptor, authResponseErrorCb);
