@@ -69,9 +69,12 @@ const AdminDeviceInfoModal = observer(({ show, onHide }) => {
         return <ThDescriptionTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
-    const trs = adminDevicesInfo.info?.rows?.map((el, i) => {
+    const trs = adminDevicesInfo.info.count ?
+     adminDevicesInfo.info?.rows?.map((el, i) => {
         return <TrDescriptions key={el.id} data={el} />
-    })
+    }) :
+    <tr className='td-active text-danger'><td>No specifications found!</td></tr>
+
     const trsNewLine = adminDevicesInfo.newInfo?.map((el, i) => {
         return <TrDescNewLine key={el.id} data={{ id: el.id , dropNewLine}} /> 
     })

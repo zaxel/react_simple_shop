@@ -25,12 +25,14 @@ const AdminOrdersModal = observer(({ show, onHide }) => {
         return <ThAdminUserOrdersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
     })
 
-    const trsWithTooltip = userOrders.userOrders?.rows?.map((el, i) => {
+    const trsWithTooltip = userOrders.userOrders.count ? 
+        userOrders.userOrders?.rows?.map((el, i) => {
         const myKey = uuidv4();
         let ref = (el) => (tdRefs.current[i] = el);
         let toolTipInfo = {i, myRefs: tdRefs, text: 'click for detailed order info'};
         return <NavigationRowLink toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} data={el} />
-    })
+    }) :
+    <tr className='td-active text-danger'><td>No orders found!</td></tr>
 
     return (
         <Modal className='modal-table' centered show={show} onHide={onHide}>

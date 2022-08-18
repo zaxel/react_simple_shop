@@ -47,15 +47,15 @@ const DevicesAdminPanel = observer(() => {
     setDeviceInfoModalVisible(false);
   }
 
-  const onDescriptionClickHandler = async(deviceId) => {
+  const onDescriptionClickHandler = async (deviceId) => {
     setDeviceInfoModalVisible(true);
     adminDevicesInfo.setDeviceId(deviceId);
     const fetchedInfo = await fetchInfo(adminDevicesInfo, deviceId, null, null, cart, user)
-    if(fetchedInfo.loggedOut)return;
+    if (fetchedInfo.loggedOut) return;
     await setDataToStore(adminDevicesInfo, 'setInfo', fetchedInfo);
   }
 
-  const onSubmitSearch = async() => {
+  const onSubmitSearch = async () => {
     fetchPage(adminDevices);
   }
 
@@ -66,10 +66,12 @@ const DevicesAdminPanel = observer(() => {
     return <ThAdminDevicesTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
   })
 
-  const trs = adminDevices.devices?.rows?.map((el, i) => {
-    const row = { ...el, onDescriptionClickHandler: onDescriptionClickHandler.bind(this, el.id) };
-    return <TrDevices key={el.id} data={row} />
-  })
+  const trs = adminDevices.devices.count ?
+    adminDevices.devices?.rows?.map((el, i) => {
+      const row = { ...el, onDescriptionClickHandler: onDescriptionClickHandler.bind(this, el.id) };
+      return <TrDevices key={el.id} data={row} />
+    }) :
+    <tr className='td-active text-danger'><td>Nothing found!</td></tr>
 
   if (adminDevices.loading) {
     return (
@@ -81,10 +83,10 @@ const DevicesAdminPanel = observer(() => {
   return (
     <div className='user-admin__main account__orders acc-orders'>
       <div>
-      <div className='account__search-cont'>
-        <Search options={[{id: 'id'}, {name: 'name'}, {price: 'price'}]} store={adminDevices} onSubmitSearch={onSubmitSearch}/>
-        <AddDevicesBarContainer setAddDeviceVisible={setAddDeviceVisible} setAddDeviceBulkVisible={setAddDeviceBulkVisible}/>
-      </div>
+        <div className='account__search-cont'>
+          <Search options={[{ id: 'id' }, { name: 'name' }, { price: 'price' }]} store={adminDevices} onSubmitSearch={onSubmitSearch} />
+          <AddDevicesBarContainer setAddDeviceVisible={setAddDeviceVisible} setAddDeviceBulkVisible={setAddDeviceBulkVisible} />
+        </div>
         <table className='stripped-table'>
           <thead>
             <tr>
@@ -96,8 +98,8 @@ const DevicesAdminPanel = observer(() => {
           </tbody>
         </table>
         <AdminDeviceInfoModal show={deviceInfoModalVisible} onHide={onModalHideHandler} />
-        <AddDeviceModal show={addDeviceVisible} onHide={()=>setAddDeviceVisible(false)}/>
-        <AddDeviceBulkModal show={addDeviceBulkVisible} onHide={()=>setAddDeviceBulkVisible(false)}/>
+        <AddDeviceModal show={addDeviceVisible} onHide={() => setAddDeviceVisible(false)} />
+        <AddDeviceBulkModal show={addDeviceBulkVisible} onHide={() => setAddDeviceBulkVisible(false)} />
       </div>
 
       <PaginationCont currentStore={adminDevices} />
