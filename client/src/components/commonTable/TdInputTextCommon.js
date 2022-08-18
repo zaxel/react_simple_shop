@@ -25,6 +25,7 @@ const TdInputTextCommon = ({ data, innerRef }) => {
     const onButtonClickHandler = () => {
         const cb = inputCb.bind(this, id, dbFieldName, input, cart, user);
         onInputButtonClickHandler(toolTip, setEdit, setLoading, cb, store, id, dbFieldName, input);
+        
     }
     const onInputChange = (e) => {
         setInput(prev => e.target.value)

@@ -7,7 +7,7 @@ export const changeTypeData = async (id, dbFieldName, name, cartStore, userStore
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }
 
-export const deleteType = async (id, cartStore, userStore) => {
+export const deleteType = async (id, currentStore, cartStore, userStore) => {
   const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
   const cb = deleteTypeReq.bind(this, id);
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);

@@ -6,8 +6,8 @@
 export const loadingAndFetch = async(setLoading, cb) => {
     setLoading(true);
     const data = await cb();
-    if (data.loggedOut) return;
-    setLoading(false);
+    !data?.loggedOut && setLoading(false);
+    if (data?.loggedOut) return;
     return data;
 }
 
