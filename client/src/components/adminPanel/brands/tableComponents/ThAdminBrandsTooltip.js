@@ -5,13 +5,13 @@ import { fetchAll, onSortTableClickHandler } from '../../../../utils/administrat
 import { fetchAllBrands } from '../../../../http/deviceAPI';
 
 
-const ThAdminBrandsTooltip = ({ data, innerRef}) => {
+const ThAdminBrandsTooltip = ({ data, innerRef, setSearchParams }) => {
     const { toolTip, brands } = useContext(Context);
 
     const onThClickHandler = async(data) => {
         const cb = async() => await fetchAll(fetchAllBrands, null, brands.sortBy, brands.sortDirection);
         const flags = { setLoading: true, setPageTotal: false};
-        onSortTableClickHandler(cb, data, brands, toolTip, flags);
+        onSortTableClickHandler(cb, data, brands, toolTip, flags, setSearchParams);
     }
 
     useEffect(() => {

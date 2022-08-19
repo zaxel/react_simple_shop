@@ -8,7 +8,7 @@ import PrivateRouteWrapper from '../utils/PrivateRouteWrapper';
 
 const AppRouter = observer(() => {
     const { user, device } = useContext(Context);
-
+    
     return (
         <Routes>
             {authRoutes.map(({ path, Component, NestedComponent }) => {

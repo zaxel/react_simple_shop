@@ -9,14 +9,18 @@ import { fetchPage } from '../../../utils/administration/adminTypes';
 import TrTypesNewLine from './tableComponents/TrTypesNewLine';
 import { addNewTypes as addNewTypesReq } from '../../../utils/administration/adminTypes';
 import { TypesThs as ths } from '../../../utils/consts/thTitles';
+import { useSearchParams } from 'react-router-dom';
+import { getQueryParamsString, setQueryParamsString } from '../../../utils/http/queryParams';
 
 const TypesAdminPanel = observer(() => {
     let thRefs = useRef([]);
     const { toolTip, types, cart, user } = useContext(Context);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         (async () => {
             try {
+                getQueryParamsString(searchParams, types);
                 await fetchPage(types);
                 toolTip.setIsAvailable(true);
             } catch (e) {
@@ -27,6 +31,7 @@ const TypesAdminPanel = observer(() => {
     }, [])
 
     useEffect(() => {
+        setQueryParamsString(setSearchParams, types);
         fetchPage(types);
     }, [types.updateDataTrigger])
 
@@ -62,7 +67,7 @@ const TypesAdminPanel = observer(() => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-        return <ThAdminTypesTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        return <ThAdminTypesTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} setSearchParams={setSearchParams}/>
     })
 
     const trs = types.types.map((el, i) => {

@@ -10,18 +10,23 @@ import Search from '../../Search';
 import { fetchPage } from '../../../utils/administration/adminOrders';
 import OrderDetail from './modals/OrderDetail';
 import { OrderThs as ths } from '../../../utils/consts/thTitles';
+import { useSearchParams } from 'react-router-dom';
+import { getQueryParamsString, setQueryParamsString } from '../../../utils/http/queryParams';
 
 const OrdersAdminPanel = observer(() => {
     let thRefs = useRef([]);
     const { toolTip, orders, orderDetails, cart, user } = useContext(Context);
     const [orderModalVisible, setOrderModalVisible] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
+        getQueryParamsString(searchParams, orders);
         fetchPage(orders, cart, user);
         toolTip.setIsAvailable(true);
     }, [])
 
     useEffect(() => {
+        setQueryParamsString(setSearchParams, orders);
         fetchPage(orders, cart, user);
     }, [orders.activePage, orders.updateDataTrigger])
 
@@ -45,7 +50,7 @@ const OrdersAdminPanel = observer(() => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-        return <ThAdminOrdersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        return <ThAdminOrdersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} setSearchParams={setSearchParams}/>
     })
 
     const trs = orders.orders?.rows?.map((el, i) => {

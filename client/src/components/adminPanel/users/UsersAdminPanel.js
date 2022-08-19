@@ -10,18 +10,23 @@ import { observer } from 'mobx-react-lite';
 import Search from '../../Search';
 import { fetchPage } from '../../../utils/administration/adminUsers';
 import { UsersThs as ths } from '../../../utils/consts/thTitles';
+import { useSearchParams } from 'react-router-dom';
+import { getQueryParamsString, setQueryParamsString } from '../../../utils/http/queryParams';
 
 const UsersAdminPanel = observer(() => {
   let thRefs = useRef([]);
   const { toolTip, userOrders, users, cart, user } = useContext(Context);
   const [orderModalVisible, setOrderModalVisible] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    getQueryParamsString(searchParams, users);
     fetchPage(users, cart, user);
     toolTip.setIsAvailable(true);
   }, [])
 
   useEffect(() => {
+    setQueryParamsString(setSearchParams, users);
     fetchPage(users, cart, user);
   }, [users.activePage, users.updateDataTrigger])
 
@@ -44,7 +49,7 @@ const UsersAdminPanel = observer(() => {
     const myKey = uuidv4();
     let ref = (el) => (thRefs.current[i] = el);
     let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-    return <ThAdminUsersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+    return <ThAdminUsersTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} setSearchParams={setSearchParams}/>
   })
 
   const trs = users.users?.rows?.map((el, i) => {

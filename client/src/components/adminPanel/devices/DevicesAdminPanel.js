@@ -15,6 +15,8 @@ import AddDeviceModal from './modals/AddDeviceModal';
 import AddDeviceBulkModal from './modals/AddDeviceBulkModal';
 import { setDataToStore } from '../../../utils/administration/common';
 import { DevicesThs as ths } from '../../../utils/consts/thTitles';
+import { useSearchParams } from 'react-router-dom';
+import { getQueryParamsString, setQueryParamsString } from '../../../utils/http/queryParams';
 
 const DevicesAdminPanel = observer(() => {
   let thRefs = useRef([]);
@@ -22,14 +24,16 @@ const DevicesAdminPanel = observer(() => {
   const [deviceInfoModalVisible, setDeviceInfoModalVisible] = useState(false);
   const [addDeviceVisible, setAddDeviceVisible] = useState(false);
   const [addDeviceBulkVisible, setAddDeviceBulkVisible] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+    
 
   useEffect(() => {
     (async () => {
       try {
         fetchSetTypes(adminDevices);
         fetchSetBrands(adminDevices);
+        getQueryParamsString(searchParams, adminDevices);
         await fetchPage(adminDevices);
-
       } catch (e) {
         console.log(e)
       }
@@ -39,6 +43,7 @@ const DevicesAdminPanel = observer(() => {
   }, [])
 
   useEffect(() => {
+    setQueryParamsString(setSearchParams, adminDevices);
     fetchPage(adminDevices);
   }, [adminDevices.activePage, adminDevices.updateDataTrigger])
 
@@ -63,7 +68,7 @@ const DevicesAdminPanel = observer(() => {
     const myKey = uuidv4();
     let ref = (el) => (thRefs.current[i] = el);
     let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-    return <ThAdminDevicesTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+    return <ThAdminDevicesTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} setSearchParams={setSearchParams}/>
   })
 
   const trs = adminDevices.devices.count ?

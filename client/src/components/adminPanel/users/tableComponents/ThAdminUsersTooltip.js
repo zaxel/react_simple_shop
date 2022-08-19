@@ -4,13 +4,13 @@ import withTooltip from '../../../../hocs/withTooltip/withTooltip';
 import { fetchPage } from '../../../../utils/administration/adminUsers';
 import { onSortTableClickHandler } from '../../../../utils/administration/common';
 
-const ThAdminUsersTooltip = ({ data, innerRef}) => {
+const ThAdminUsersTooltip = ({ data, innerRef, setSearchParams}) => {
     const { toolTip, users, cart, user } = useContext(Context);
 
     const onThClickHandler = async(data) => {
         const cb = async() => await fetchPage(users, cart, user);
         const flags = { setLoading: false, setPageTotal: false};
-        onSortTableClickHandler(cb, data, users, toolTip, flags);
+        onSortTableClickHandler(cb, data, users, toolTip, flags, setSearchParams);
     }
 
     useEffect(() => {

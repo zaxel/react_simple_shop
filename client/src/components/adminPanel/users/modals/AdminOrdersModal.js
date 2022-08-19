@@ -11,6 +11,7 @@ import { UserOrdersThs as ths } from '../../../../utils/consts/thTitles';
 
 const AdminOrdersModal = observer(({ show, onHide }) => {
     const { userOrders, cart, user} = useContext(Context);
+
     let thRefs = useRef([]);
     let tdRefs = useRef([]);
 

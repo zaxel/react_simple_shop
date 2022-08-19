@@ -8,14 +8,18 @@ import { observer } from 'mobx-react-lite';
 import { fetchPage, addNewBrands as addNewBrandsReq } from '../../../utils/administration/adminBrands';
 import TrBrandsNewLine from './tableComponents/TrBrandsNewLine';
 import { BrandsThs as ths } from '../../../utils/consts/thTitles';
+import { useSearchParams } from 'react-router-dom';
+import { getQueryParamsString, setQueryParamsString } from '../../../utils/http/queryParams';
 
 const BrandsAdminPanel = observer(() => {
     let thRefs = useRef([]);
     const { toolTip, brands, cart, user } = useContext(Context);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         (async () => {
             try {
+                getQueryParamsString(searchParams, brands);
                 await fetchPage(brands);
                 toolTip.setIsAvailable(true);
             } catch (e) {
@@ -25,6 +29,7 @@ const BrandsAdminPanel = observer(() => {
     }, [])
 
     useEffect(() => {
+        setQueryParamsString(setSearchParams, brands);
         fetchPage(brands);
     }, [brands.updateDataTrigger])
 
@@ -60,7 +65,7 @@ const BrandsAdminPanel = observer(() => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
         let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
-        return <ThAdminBrandsTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} />
+        return <ThAdminBrandsTooltip toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} data={el} setSearchParams={setSearchParams}/>
     })
 
     const trs = brands.brands.map((el, i) => {

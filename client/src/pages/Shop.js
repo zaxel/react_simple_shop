@@ -8,14 +8,18 @@ import { fetchPage } from '../utils/administration/adminDevices';
 import { fetchSetBrands, fetchSetTypes } from '../utils/administration/adminDevices';
 import PaginationCont from '../components/PaginationCont';
 import { Spinner } from 'react-bootstrap';
+import { useSearchParams } from 'react-router-dom';
+import { getQueryParamsString, setQueryParamsString } from '../utils/http/queryParams';
 
 const Shop = observer(() => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const { device } = useContext(Context);
 
     useEffect(() => {
         try {
             fetchSetTypes(device);
             fetchSetBrands(device);
+            getQueryParamsString(searchParams, device);
             fetchPage(device);
 
         } catch (e) {
@@ -24,6 +28,7 @@ const Shop = observer(() => {
     }, [])
 
     useEffect(() => {
+        setQueryParamsString(setSearchParams, device);
         fetchPage(device);
     }, [device.activePage, device.brandActive, device.typeActive])
 
