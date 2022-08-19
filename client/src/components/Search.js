@@ -1,7 +1,11 @@
 ﻿import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { setQueryParamsString } from '../utils/http/queryParams';
 
 const Search = observer(({store, options, onSubmitSearch}) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const onSelectChange = (e) => {
         store.setSearchBy(e.target.value)
     }
@@ -14,6 +18,7 @@ const Search = observer(({store, options, onSubmitSearch}) => {
         }
         store.setSearchByLastPrase(store.searchByPrase);
         store.setSearchByLast(store.searchBy);
+        setQueryParamsString(setSearchParams, store);
         onSubmitSearch();
         store.setActivePage(1);
     }
