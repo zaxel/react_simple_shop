@@ -26,6 +26,7 @@ class DeviceController {
         try {
             
             let { id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase } = req.query;
+            console.log(99, id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase)
             const devices = await deviceService.getAll(id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase);
             return res.json(devices);
         } catch (e) {

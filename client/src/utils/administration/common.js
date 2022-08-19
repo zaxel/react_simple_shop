@@ -1,4 +1,5 @@
 ﻿import { getMainSetterName } from "../getStoreSetterName";
+import { setQueryParamsString } from "../http/queryParams";
 import { logoutOnClient } from "../logout";
 
 export const setDataToStore = async (store, setterName, data) => {
@@ -34,7 +35,7 @@ export const fetchDataSetStore = async (cb, currentStore, cartStore, userStore, 
     }
 }
 
-export const onSortTableClickHandler = async (cb, data, currentStore, toolTip, flags) => {
+export const onSortTableClickHandler = async (cb, data, currentStore, toolTip, flags, setSearchParams) => {
     const { setLoading, setPageTotal } = flags;
     const setterName = getMainSetterName(currentStore);
 
@@ -47,6 +48,7 @@ export const onSortTableClickHandler = async (cb, data, currentStore, toolTip, f
         currentStore.setSortDirection('ASC');
     }
     currentStore.setSortBy(data);
+    setSearchParams && setQueryParamsString(setSearchParams, currentStore);
     const fetchedData = await cb();
     await setDataToStore(currentStore, setterName, fetchedData);
     setPageTotal && await currentStore.setPagesTotal(Math.ceil(currentStore[currentStore.mainStoreFieldName].count / currentStore.itemsPerPage));
