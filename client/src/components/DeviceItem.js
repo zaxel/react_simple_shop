@@ -8,7 +8,7 @@ const DeviceItem = ({device}) => {
     return ( 
         <div onClick={()=>navigate(DEVICE_ROUTE + '/' + device.id)} className = 'deviceItem'>
             <div className = 'deviceItem__image-cont'>
-                <img src = { process.env.REACT_APP_API_URL + device.img } alt = 'item photo' />
+                <img src = { process.env.REACT_APP_API_URL + device.img } alt = 'device item' />
             </div> 
             <div className = 'deviceItem__title-cont'>
                 <h4 className = 'deviceItem__title' >{device.name}</h4> 
