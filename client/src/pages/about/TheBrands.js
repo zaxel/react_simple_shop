@@ -1,9 +1,13 @@
 ﻿import React from 'react';
+import AboutSubPage from '../../components/about/AboutSubPage';
+import { brandData } from '../../utils/consts/aboutPageData';
 
 const TheBrands = () => {
     return (
-        <div>
-            the brands
+        <div className='sub-about'>
+            <div className='sub-about__container'>
+                <AboutSubPage {...brandData}/>
+            </div>
         </div>
     );
 };

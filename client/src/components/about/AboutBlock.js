@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 
-const  ExperienceBlock = ({title, descr, buttons, hero}) => {
+const  AboutBlock = ({title, descr, buttons, hero}) => {
     const btns = buttons.map(btn=><Link className="about-card__button experience-block__button" key={btn.buttonText} to={btn.to}>{btn.buttonText}</Link>)
     return (
         <div className='sub-about__block experience-block'>
@@ -19,4 +19,4 @@ const  ExperienceBlock = ({title, descr, buttons, hero}) => {
     );
 };
 
-export default ExperienceBlock;
+export default AboutBlock;
