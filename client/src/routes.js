@@ -4,12 +4,16 @@ import Basket from "./pages/Basket";
 import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
 import ErrorPage from "./pages/ErrorPage";
-import About from "./pages/About";
+import About from "./pages/about/About";
 import Contacts from "./pages/Contacts";
 import Protected from "./pages/Protected";
 import AccountPage from "./pages/AccountPage";
 import Sample from "./pages/Sample";
 import CheckoutPage from "./pages/CheckoutPage";
+
+import WhoWe from "./pages/about/WhoWe";
+import Experience from "./pages/about/Experience";
+import TheBrands from "./pages/about/TheBrands";
 
 import Delivery from "./components/userProfile/Delivery";
 import Info from "./components/userProfile/Info";
@@ -28,7 +32,8 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
         ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
         ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE,
-        ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE } from "./utils/consts/routes";
+        ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE,
+        ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE } from "./utils/consts/routes";
 
 
 export const userNavRoutes = [
@@ -113,6 +118,18 @@ export const publicRoutes = [
     {
         path: ABOUT_ROUTE,
         Component: About
+    },
+    {
+        path: ABOUT_CARD1_ROUTE,
+        Component: WhoWe
+    },
+    {
+        path: ABOUT_CARD2_ROUTE,
+        Component: TheBrands
+    },
+    {
+        path: ABOUT_CARD3_ROUTE,
+        Component: Experience
     },
     {
         path: CONTACT_ROUTE,

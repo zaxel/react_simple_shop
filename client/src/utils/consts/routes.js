@@ -9,7 +9,9 @@ export const SHOP_ROUTE = BASE_ROUTE+'/';
 export const BASKET_ROUTE = BASE_ROUTE+'/basket';
 export const DEVICE_ROUTE = BASE_ROUTE+'/device';
 
-// export const ABOUT_CARD1_ROUTE = BASE_ROUTE+'/about';
+export const ABOUT_CARD1_ROUTE = BASE_ROUTE+'/about/whoweare';
+export const ABOUT_CARD2_ROUTE = BASE_ROUTE+'/about/brands';
+export const ABOUT_CARD3_ROUTE = BASE_ROUTE+'/about/experience';
 
 export const ACCOUNT_ROUTE = BASE_ROUTE+'/account';
 
