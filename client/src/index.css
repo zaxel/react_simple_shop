@@ -400,13 +400,100 @@ button:active {
 .protected {
     flex: 1 1 auto;
 }
+.protected__container{
+    margin: 60px auto;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    line-height: 1.2;
+    background-color: white;
+    padding: 0 12vw;
+}
+.protected__title {
+    font-size: 63px;
+    font-weight: 700;
+    text-align: center;
+    margin: 35px auto 15px;
+    transition: all .3s ease-out;
+}
 
+.protected__descr {
+    font-size: 19px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.protected__cards {
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.prot-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    text-decoration: none;
+    transition: all .3s ease-out ;
+}
+.prot-card:nth-child(odd){
+    width: 15vw;
+}
+.prot-card:nth-child(even){
+    width: 30vw;
+}
+.prot-card__image-cont{
+    width: 100%;
+    height: 20vw;
+    margin-bottom: 15px;
+    transition: all .3s ease-out;
+}
+.prot-card__image-cont img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.prot-card__title{
+    font-size: 21px;
+    font-weight: 700;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+.prot-card__button-cont{
+    width: 112px;
+    height: 40px;
+}
+.prot-card__button-cont img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.prot-card__img-dark{
+    display: none;
+}
+
+.prot-card:hover{
+    transition: all .3s ease-out;
+}
+.prot-card:hover .prot-card__img{
+    display: none;
+    transition: all .3s ease-out;
+}
+.prot-card:hover .prot-card__img-dark{
+    display: block;
+    transition: all .3s ease-out;
+}
+.protected__cards:hover .prot-card:not(:hover) .prot-card__image-cont,
+.protected__cards:hover .prot-card:not(:hover) .prot-card__title{
+    opacity: .1;
+    transition: all .3s ease-out;
+}
 /*protected end*/
 /*contacts start*/
 .contacts {
     flex: 1 1 auto;
 }
-
 /*contacts end*/
 
 /*typebar start*/
@@ -1482,6 +1569,41 @@ button:active {
         max-width: 100vw;
     }
     /*about end*/
+    /*protected start*/
+    .protected__container{
+        margin: 10px auto;
+        padding: 8px;
+    }
+    .protected__title {
+        font-size: 33px;
+        margin: 10px auto;
+    }
+    
+    .protected__descr {
+        margin-bottom: 10px;
+    }
+    
+    .protected__cards {
+        margin-bottom: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .prot-card:nth-child(odd){
+        width: 95vw;
+    }
+    .prot-card:nth-child(even){
+        width: 95vw;
+    }
+    .prot-card__image-cont{
+        height: auto;
+        margin-bottom: 10px;
+    }
+    
+    .prot-card__title{
+        margin-bottom: 10px;
+    }
+    /*protected end*/
 }
 
 @media (max-width: 688px) {
