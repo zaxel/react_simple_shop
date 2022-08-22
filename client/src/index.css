@@ -490,11 +490,11 @@ button:active {
     transition: all .3s ease-out;
 }
 /*protected end*/
-/*contacts start*/
-.contacts {
+/*help start*/
+.help {
     flex: 1 1 auto;
 }
-/*contacts end*/
+/*help end*/
 
 /*typebar start*/
 .typebar {

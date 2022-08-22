@@ -5,7 +5,7 @@ import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
 import ErrorPage from "./pages/ErrorPage";
 import About from "./pages/about/About";
-import Contacts from "./pages/Contacts";
+import Help from "./pages/Help";
 import Protected from "./pages/Protected";
 import AccountPage from "./pages/AccountPage";
 import Sample from "./pages/Sample";
@@ -28,7 +28,7 @@ import TypesAdminPanel from "./components/adminPanel/types/TypesAdminPanel";
 import BrandsAdminPanel from "./components/adminPanel/brands/BrandsAdminPanel";
 import AdminPanelRouter from "./components/adminPanel/AdminPanelRouter";
 
-import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE,
+import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
         ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
         ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE,
@@ -132,8 +132,8 @@ export const publicRoutes = [
         Component: Experience
     },
     {
-        path: CONTACT_ROUTE,
-        Component: Contacts
+        path: HELP_ROUTE,
+        Component: Help
     },
     {
         path: LOGIN_ROUTE,

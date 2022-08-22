@@ -5,6 +5,7 @@ import heroMain2 from '../../assets/about/about_main_2.jpg';
 import heroMain3 from '../../assets/about/about_main_3.jpg';
 
 import AboutBlocks from '../../components/about/AboutBlocks';
+
 import heroExp1 from '../../assets/about/exp_hero_1.jpg'
 import heroExp2 from '../../assets/about/exp_hero_2.webp';
 import heroExp3 from '../../assets/about/exp_hero_3.jpg';

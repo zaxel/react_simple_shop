@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
 import {
     SHOP_ROUTE, ERROR_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE,
-    ADMIN_ROUTE, ABOUT_ROUTE, CONTACT_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
+    ADMIN_ROUTE, ABOUT_ROUTE, HELP_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
     PROTECTED_ROUTE
 } from '../utils/consts/routes';
 import { logoutOnClient, logoutOnServer } from "../utils/logout";
@@ -37,7 +37,7 @@ const NavBar = observer(() => {
                         <Link className="nav-link" to={PROTECTED_ROUTE}>Protected</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to={CONTACT_ROUTE}>Contacts</Link>
+                        <Link className="nav-link" to={HELP_ROUTE}>Help</Link>
                     </li>
                 </ul>
                     <ul className="navbar-nav navbar-user-data-cont flex-row">
