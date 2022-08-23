@@ -5,7 +5,7 @@ import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
 import ErrorPage from "./pages/ErrorPage";
 import About from "./pages/about/About";
-import Help from "./pages/Help";
+import Help from "./pages/help/Help";
 import Protected from "./pages/Protected";
 import AccountPage from "./pages/AccountPage";
 import Sample from "./pages/Sample";
