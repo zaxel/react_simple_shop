@@ -30,8 +30,11 @@ const AppRouter = observer(() => {
                         NestedComponent && NestedComponent()}
                     </Route>
             })}
-            {publicRoutes.map(({ path, Component }) => {
-                return <Route key={path} path={path} element={<Component />} ></Route>
+            {publicRoutes.map(({ path, Component, NestedComponent }) => {
+                return <Route key={path} path={path} element={<Component />} >
+                    {//nested routes - user account routes
+                    NestedComponent && NestedComponent()}
+                </Route>
             })}
         </Routes>
     );

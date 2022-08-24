@@ -1,18 +1,15 @@
 ﻿import React from 'react';
-import Banner from './Banner';
-import Cards from './Cards';
-import Footer from './Footer';
-import { helpCategories } from '../../utils/consts/helpPageData';
+import { Outlet } from 'react-router-dom';
 
 const Help = () => {
+
     return (
         <div className='help'>
             <div className='help__container'>
-                <Banner/>
-                <Cards helpCategories={helpCategories}/>
-                <Footer/>
+                <Outlet />
             </div>
         </div>
+
     );
 };
 
