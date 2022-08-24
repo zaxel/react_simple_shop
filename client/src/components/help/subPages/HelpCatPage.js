@@ -1,12 +1,18 @@
 ﻿import React from 'react';
-import { Link } from 'react-router-dom';
-import { SHOP_ROUTE } from '../../../utils/consts/routes';
+import BreadCrumbs from './BreadCrumbs';
+import MainContainer from './MainContainer';
+import HelpAside from './HelpAside';
+
 
 const HelpCatPage = () => {
     return (
-        <div className="breadcrumbs">
-            <Link to={SHOP_ROUTE}> home </Link> {'>'} <Link to={SHOP_ROUTE}> delivery </Link> {'>'} <Link to={SHOP_ROUTE}> how-can-I-track-shipping </Link>
-        </div>
+        <>
+            <BreadCrumbs/>
+            <div className='help__main-wrapper'>
+                <MainContainer/>
+                <HelpAside/>
+            </div>
+        </>
     );
 
 };
