@@ -11,9 +11,8 @@ import Sample from "./pages/Sample";
 import CheckoutPage from "./pages/CheckoutPage";
 
 import Help from "./pages/help/Help";
-import HelpCatPage from "./pages/help/subPages/HelpCatPage";
-import HelpMain from "./pages/help/subPages/HelpMain";
-import HelpRouter from "./pages/help/HelpRouter";
+import HelpCatPage from "./components/help/subPages/HelpCatPage";
+import HelpRouter from "./components/help/HelpRouter";
 
 import WhoWe from "./pages/about/WhoWe";
 import Experience from "./pages/about/Experience";
@@ -38,7 +37,8 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE,
         ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE,
         ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE, HELP_DELIVERY_ROUTE, HELP_RETURNS_ROUTE,
-        HELP_ORDER_ROUTE, HELP_STOCK_ROUTE, HELP_TECH_ROUTE, HELP_MAIN_ROUTE, HELP_TECH_ADMIN_ROUTE} from "./utils/consts/routes";
+        HELP_ORDER_ROUTE, HELP_STOCK_ROUTE, HELP_TECH_ROUTE, HELP_MAIN_ROUTE, HELP_TECH_ADMIN_ROUTE, 
+        HELP_PAYMENT_ROUTE} from "./utils/consts/routes";
 
 
 export const userNavRoutes = [
@@ -135,6 +135,10 @@ export const helpRoutes = [
     },
     {
         path: HELP_STOCK_ROUTE,
+        Component: HelpCatPage
+    },
+    {
+        path: HELP_PAYMENT_ROUTE,
         Component: HelpCatPage
     },
     {

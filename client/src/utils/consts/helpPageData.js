@@ -1,4 +1,4 @@
-﻿import { SHOP_ROUTE as to } from './routes';
+﻿import { SHOP_ROUTE as to, HELP_DELIVERY_ROUTE, HELP_RETURNS_ROUTE, HELP_ORDER_ROUTE, HELP_STOCK_ROUTE, HELP_PAYMENT_ROUTE, HELP_TECH_ROUTE } from './routes';
 
 import delivery_icon from '../../assets/icons/delivery.svg';
 import return_icon from '../../assets/icons/return.svg';
@@ -207,10 +207,10 @@ export const TechHelp = [
 ]
 
 export const helpCategories = [
-    { id: 1, title: 'Delivery', icon: delivery_icon, link: to, faqs: DeliveryHelp },
-    { id: 2, title: 'Returns & Refunds', icon: return_icon, link: to, faqs: DeliveryHelp },
-    { id: 3, title: 'Order issues', icon: order_icon, link: to, faqs: DeliveryHelp },
-    { id: 4, title: 'Product & Stock', icon: stock_icon, link: to, faqs: DeliveryHelp },
-    { id: 5, title: 'Payment, Promos & Gift Vouchers', icon: payments_icon, link: to, faqs: DeliveryHelp },
-    { id: 6, title: 'Technical', icon: tech_icon, link: to, faqs: DeliveryHelp },
+    { id: 1, title: 'Delivery', icon: delivery_icon, link: HELP_DELIVERY_ROUTE, faqs: DeliveryHelp },
+    { id: 2, title: 'Returns & Refunds', icon: return_icon, link: HELP_RETURNS_ROUTE, faqs: DeliveryHelp },
+    { id: 3, title: 'Order issues', icon: order_icon, link: HELP_ORDER_ROUTE, faqs: DeliveryHelp },
+    { id: 4, title: 'Product & Stock', icon: stock_icon, link: HELP_STOCK_ROUTE, faqs: DeliveryHelp },
+    { id: 5, title: 'Payment, Promos & Gift Vouchers', icon: payments_icon, link: HELP_PAYMENT_ROUTE, faqs: DeliveryHelp },
+    { id: 6, title: 'Technical', icon: tech_icon, link: HELP_TECH_ROUTE, faqs: DeliveryHelp },
 ]

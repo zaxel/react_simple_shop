@@ -14,6 +14,7 @@ export const HELP_DELIVERY_ROUTE = BASE_ROUTE+'/help/delivery';
 export const HELP_RETURNS_ROUTE = BASE_ROUTE+'/help/returns';
 export const HELP_ORDER_ROUTE = BASE_ROUTE+'/help/order';
 export const HELP_STOCK_ROUTE = BASE_ROUTE+'/help/stock';
+export const HELP_PAYMENT_ROUTE = BASE_ROUTE+'/help/payment';
 export const HELP_TECH_ROUTE = BASE_ROUTE+'/help/tech';
 
 export const HELP_TECH_ADMIN_ROUTE = BASE_ROUTE+'/help/tech/get-me-admin';

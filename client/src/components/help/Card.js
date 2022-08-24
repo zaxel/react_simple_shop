@@ -17,7 +17,7 @@ const Card = ({icon, link, title}) => {
                                 <li><Link to={ABOUT_ROUTE}>International deliveries</Link></li>
                             </ul>
                             <div className='faq-card__all'>
-                                <Link to={ABOUT_ROUTE}>View All</Link>
+                                <Link to={link}>View All</Link>
                             </div>
                         </div>
     );
