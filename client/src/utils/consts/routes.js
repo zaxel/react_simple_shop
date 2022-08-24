@@ -1,14 +1,23 @@
 ﻿export const BASE_ROUTE = '';
 export const ADMIN_ROUTE = BASE_ROUTE+'/admin';
 export const LOGIN_ROUTE = BASE_ROUTE+'/login';
-export const HELP_ROUTE = BASE_ROUTE+'/help';
-export const ABOUT_ROUTE = BASE_ROUTE+'/about';
 export const PROTECTED_ROUTE = BASE_ROUTE+'/protect';
 export const REGISTRATION_ROUTE = BASE_ROUTE+'/registration';
 export const SHOP_ROUTE = BASE_ROUTE+'/';
 export const BASKET_ROUTE = BASE_ROUTE+'/basket';
 export const DEVICE_ROUTE = BASE_ROUTE+'/device';
 
+
+export const HELP_ROUTE = BASE_ROUTE+'/help';
+export const HELP_DELIVERY_ROUTE = BASE_ROUTE+'/help/delivery';
+export const HELP_RETURNS_ROUTE = BASE_ROUTE+'/help/returns';
+export const HELP_ORDER_ROUTE = BASE_ROUTE+'/help/order';
+export const HELP_STOCK_ROUTE = BASE_ROUTE+'/help/stock';
+export const HELP_TECH_ROUTE = BASE_ROUTE+'/help/tech';
+
+
+
+export const ABOUT_ROUTE = BASE_ROUTE+'/about';
 export const ABOUT_CARD1_ROUTE = BASE_ROUTE+'/about/whoweare';
 export const ABOUT_CARD2_ROUTE = BASE_ROUTE+'/about/brands';
 export const ABOUT_CARD3_ROUTE = BASE_ROUTE+'/about/experience';
