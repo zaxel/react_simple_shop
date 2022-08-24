@@ -706,6 +706,7 @@ button:active {
 .popular-cont__cards li a:hover {
     text-decoration: underline;
 }
+
 .help__contact-cont {
     width: 100%;
     height: auto;
@@ -746,64 +747,83 @@ button:active {
     margin: 20px;
     transition: all .3s ease-out;
 }
+
 /**help breadcrumbs**/
-.help__breadcrumbs{
+.help__breadcrumbs {
     border-bottom: 1px solid #ddd;
     position: relative;
     top: -40px;
     padding-bottom: 20px;
 }
-.help__breadcrumbs a{
+
+.help__breadcrumbs a {
     font-size: 13px;
     color: black;
     text-decoration: none;
 }
+
 .help__breadcrumbs a:hover,
-.help__breadcrumbs a:focus{
+.help__breadcrumbs a:focus {
     text-decoration: underline;
 }
-.help__breadcrumbs .active{
+
+.help__breadcrumbs .active {
     color: #2d2d2d;
 }
+
 /**help subpage**/
-.help__main-wrapper{
+.aside-h3 {
+    color: #2d2d2d;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 13px 0;
+    text-transform: uppercase;
+}
+
+.help__main-wrapper {
     display: flex;
 }
-.help__category{
+
+.help__category {
     flex: 0 1 70%;
     background-color: #f3f3f3;
 }
-.help__aside{
+
+.help__aside {
     flex: 0 1 30%;
     margin-left: 20px;
 }
 
-.help-aside__topics{
+.help-aside__topics {
     background-color: #f3f3f3;
-    padding: 20px;
+    padding: 0 20px;
     margin-bottom: 10px;
 }
-.help-aside__search{
+
+.help-aside__search {
     background-color: #f3f3f3;
-    padding: 20px;
+    padding: 0 20px;
     margin-bottom: 10px;
 }
-.help-aside__contact{
+
+.help-aside__contact {
     background-color: #f3f3f3;
-    padding: 20px;
     margin-bottom: 10px;
 }
+
 /**help subpage banner**/
 .help__cat-banner {
     width: 100%;
     height: 20vh;
     position: relative;
 }
-.help__cat-banner img{
+
+.help__cat-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .help__cat-banner::before {
     position: absolute;
     top: 0;
@@ -826,8 +846,85 @@ button:active {
     text-align: center;
 }
 
+/**help categories list**/
+.cat-list li:first-child {
+    color: #2d2d2d;
+    font-weight: 500;
+}
+
+/**help progress bar**/
+.cat-list__progress {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
 
 
+/**help topics aside**/
+.topic-aside li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.topic-aside li:not(:last-child) {
+    border-bottom: 1px solid white;
+}
+
+.topic-aside li a {
+    width: 100%;
+    margin-left: 8px;
+    text-decoration: none;
+    color: black;
+}
+
+.topic-aside li a:hover {
+    text-decoration: underline;
+}
+
+.topic-aside__icon {
+    width: 50px;
+    height: 50px;
+}
+
+.topic-aside__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/**help aside search**/
+.aside-search__wrapper {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.aside-search__wrapper input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+    padding-left: 12px;
+}
+
+.aside-search__wrapper button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70px;
+    height: 50px;
+    border: none;
+    background-color: white;
+    background: url('./assets/icons/search.svg') no-repeat 30px 15px;
+}
+
+/**help aside search**/
+.help-aside__contact h3 {
+    margin-left: 20px;
+}
+
+.contact-cont__button-wrapper a {
+    margin: 0 20px 20px;
+}
 
 /*help end*/
 
@@ -1772,6 +1869,11 @@ button:active {
     }
 
     /*shop end*/
+    /*help start*/
+    .help__breadcrumbs {
+        top: -28px;
+    }
+    /*help end*/
 }
 
 @media (max-width: 992px) {
@@ -1999,6 +2101,19 @@ button:active {
     .contact-cont__button-wrapper a {
         margin: 15px;
     }
+    .help__breadcrumbs {
+        top: 0;
+    }
+    .help__main-wrapper{
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .help__category{
+        margin-bottom: 10px;
+    }
+    .help__aside {
+        margin-left: 0;
+    }
     /*help end*/
 
 }
@@ -2094,22 +2209,24 @@ button:active {
     /*about end*/
     /*help start*/
 
-.faq-card {
-    flex: 0 1 96%;
-}
+    .faq-card {
+        flex: 0 1 96%;
+    }
 
-.help__bottom-cont {
-    flex-wrap: wrap;
-}
+    .help__bottom-cont {
+        flex-wrap: wrap;
+    }
 
-.popular-cont,
-.help__contact {
-    flex: 0 1 96%;
-}
-.popular-cont{
-    margin-bottom: 15px;
-}
-/*help end*/
+    .popular-cont,
+    .help__contact {
+        flex: 0 1 96%;
+    }
+
+    .popular-cont {
+        margin-bottom: 15px;
+    }
+
+    /*help end*/
 }
 
 @media (max-width: 420px) {

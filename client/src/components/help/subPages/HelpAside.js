@@ -1,11 +1,14 @@
 ﻿import React from 'react';
+import Contacts from './Contacts';
+import Search from './Search';
+import Topics from './Topics';
 
 const HelpAside = () => {
     return (
         <aside className='help__aside help-aside'>
-            <div className='help-aside__topics'>topics</div>
-            <div className='help-aside__search'>search</div>
-            <div className='help-aside__contact'>contact</div>
+            <Topics/>
+            <Search/>
+            <Contacts/>
         </aside>
     );
 };
