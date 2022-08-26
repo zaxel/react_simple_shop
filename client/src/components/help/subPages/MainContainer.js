@@ -2,11 +2,11 @@
 import CategoryBanner from '../CategoryBanner';
 import CategoryListCont from './CategoryListCont';
 
-const MainContainer = () => {
+const MainContainer = ({...rest}) => {
     return (
         <div className='help__category'>
-            <CategoryBanner/>
-            <CategoryListCont/>
+            <CategoryBanner {...rest}/>
+            <CategoryListCont {...rest}/>
         </div>
     );
 };

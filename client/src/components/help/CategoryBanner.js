@@ -1,11 +1,11 @@
 ﻿import React from 'react';
-import delivery_banner from '../../assets/help/delivery_banner.avif'
 
-const CategoryBanner = () => {
+const CategoryBanner = ({title, banner}) => {
+   
     return (
         <div className='help__cat-banner'>
-            <img src={delivery_banner} alt='help category hero'/>
-            <h3>delivery</h3>
+            <img src={banner} alt='help category hero'/>
+            <h3>{title}</h3>
         </div>
     );
 };

@@ -6,7 +6,7 @@ import HelpMain from './subPages/HelpMain';
 const HelpRouter = () => {
     const helpComponents = helpRoutes.map(({ path, Component }) => {
         return <Route key={path} path={path} element={
-            <Component />
+            <Component path={path}/>
         } />
     })
     helpComponents.push(<Route key={Date.now()} index element={<HelpMain/>} />)

@@ -2,7 +2,9 @@
 import Card from './Card';
 
 const Cards = ({helpCategories}) => {
-    const cards = helpCategories.map(card => <Card key={card.id} {...card} /> )
+    const cards = helpCategories.map(card => {
+    return <Card key={card.id} {...card} />
+} )
     return (
         <div className='help__faq-cont faq-cont'>
             <h2 className='faq-cont__title'>FAQ TOPICS</h2>

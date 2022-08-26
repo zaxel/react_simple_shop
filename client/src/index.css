@@ -717,6 +717,7 @@ button:active {
 .contact-cont__banner {
     width: 100%;
     height: 25vh;
+    margin-bottom: 20px;
 }
 
 .contact-cont__banner img {

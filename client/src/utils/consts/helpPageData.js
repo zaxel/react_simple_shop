@@ -7,6 +7,13 @@ import stock_icon from '../../assets/icons/stock.svg';
 import payments_icon from '../../assets/icons/payments.svg';
 import tech_icon from '../../assets/icons/tech.svg';
 
+import delivery_banner from '../../assets/help/delivery_banner.avif'
+import returns_banner from '../../assets/help/return_banner.avif';
+import order_banner from '../../assets/help/order_banner.avif';
+import stock_banner from '../../assets/help/stock_banner.avif';
+import payment_banner from '../../assets/help/payment_banner.avif';
+import tech_banner from '../../assets/help/tech_banner.avif';
+
 
 export const popularFaqs = [
     { category: 2, faq_id: 1 },
@@ -207,10 +214,10 @@ export const TechHelp = [
 ]
 
 export const helpCategories = [
-    { id: 1, title: 'Delivery', icon: delivery_icon, link: HELP_DELIVERY_ROUTE, faqs: DeliveryHelp },
-    { id: 2, title: 'Returns & Refunds', icon: return_icon, link: HELP_RETURNS_ROUTE, faqs: DeliveryHelp },
-    { id: 3, title: 'Order issues', icon: order_icon, link: HELP_ORDER_ROUTE, faqs: DeliveryHelp },
-    { id: 4, title: 'Product & Stock', icon: stock_icon, link: HELP_STOCK_ROUTE, faqs: DeliveryHelp },
-    { id: 5, title: 'Payment, Promos & Gift Vouchers', icon: payments_icon, link: HELP_PAYMENT_ROUTE, faqs: DeliveryHelp },
-    { id: 6, title: 'Technical', icon: tech_icon, link: HELP_TECH_ROUTE, faqs: DeliveryHelp },
+    { id: 1, title: 'Delivery', banner: delivery_banner, icon: delivery_icon, link: HELP_DELIVERY_ROUTE, faqs: DeliveryHelp },
+    { id: 2, title: 'Returns & Refunds', banner: returns_banner, icon: return_icon, link: HELP_RETURNS_ROUTE, faqs: ReturnsHelp },
+    { id: 3, title: 'Order issues', banner: order_banner,  icon: order_icon, link: HELP_ORDER_ROUTE, faqs: OrderHelp },
+    { id: 4, title: 'Product & Stock', banner: stock_banner, icon: stock_icon, link: HELP_STOCK_ROUTE, faqs: StockHelp },
+    { id: 5, title: 'Payment, Promos & Gift Vouchers', banner: payment_banner, icon: payments_icon, link: HELP_PAYMENT_ROUTE, faqs: PaymentHelp },
+    { id: 6, title: 'Technical', banner: tech_banner, icon: tech_icon, link: HELP_TECH_ROUTE, faqs: TechHelp },
 ]

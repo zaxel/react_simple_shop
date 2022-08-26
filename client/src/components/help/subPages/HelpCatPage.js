@@ -3,13 +3,15 @@ import BreadCrumbs from './BreadCrumbs';
 import MainContainer from './MainContainer';
 import HelpAside from './HelpAside';
 
+import { helpCategories } from '../../../utils/consts/helpPageData';
 
-const HelpCatPage = () => {
+const HelpCatPage = ({path}) => {
+    const [ categoryData ] = helpCategories.filter(cat=>cat.link === path);
     return (
         <>
-            <BreadCrumbs/>
+            <BreadCrumbs {...categoryData}/>
             <div className='help__main-wrapper'>
-                <MainContainer/>
+                <MainContainer {...categoryData}/>
                 <HelpAside/>
             </div>
         </>
