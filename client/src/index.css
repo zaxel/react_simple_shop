@@ -730,12 +730,18 @@ button:active {
     text-align: center;
 }
 
-.contact-cont__button-wrapper a:hover {
+.contact-cont__button-wrapper a:hover,
+.contact-cont__button-wrapper button:hover {
     background-color: white;
     transition: all .3s ease-out;
 }
+.contact-cont__button-wrapper button:disabled{
+    background: white;
+    opacity: .3;
+}
 
-.contact-cont__button-wrapper a {
+.contact-cont__button-wrapper a,
+.contact-cont__button-wrapper button {
     display: inline-block;
     color: #2d2d2d;
     font-size: 27px;
@@ -748,7 +754,11 @@ button:active {
     margin: 20px;
     transition: all .3s ease-out;
 }
-
+.help__cat-list .spinner-border{
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
 /**help breadcrumbs**/
 .help__breadcrumbs {
     border-bottom: 1px solid #ddd;

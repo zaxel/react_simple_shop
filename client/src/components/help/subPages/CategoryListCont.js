@@ -3,6 +3,7 @@ import Progress from './Progress';
 import CategoryList from './CategoryList';
 import Button from './Button';
 import FooterCard from '../FooterCard';
+import { Spinner } from 'react-bootstrap';
 
 const CategoryListCont = ({ faqs, ...rest }) => {
     const itemsPerPage = 12;
@@ -12,7 +13,7 @@ const CategoryListCont = ({ faqs, ...rest }) => {
     const [paginationNumber, setPaginationNumber] = useState(1);
     const [items, setItems] = useState(faqs.filter(faq => faq.id <= paginationNumber * itemsPerPage).map(item => <FooterCard key={item.id} {...item} />));
     const [disabled, setDisabled] = useState(maxPage < paginationNumber + 2 ? true : false);
-    
+    const [loadingMore, setLoadingMore] = useState(false);
     const calcItemsCount = () => {
         return itemsPerPage * paginationNumber < faqs.length ? itemsPerPage * paginationNumber : faqs.length;
     }
@@ -29,21 +30,26 @@ const CategoryListCont = ({ faqs, ...rest }) => {
     }, [faqs])
 
     useEffect(() => {
-        console.log(paginationNumber, maxPage)
         if(paginationNumber >= maxPage){
             setDisabled(true);
         }
     }, [paginationNumber])
 
     const onLoadMoreClick = () => {
-        setPaginationNumber(paginationNumber => paginationNumber + 1);
+        setLoadingMore(true);
+        setTimeout(()=>{
+            setPaginationNumber(paginationNumber => paginationNumber + 1);
+            setLoadingMore(false);
+        }, 2000)
+        
     }
 
     return (
         <div className='popular-cont help__cat-list'>
             <CategoryList faqs={faqs} paginationNumber={paginationNumber} items={items} />
             <Progress count={count} total={totalFaqs} />
-            <Button onLoadMoreClick={onLoadMoreClick} disabled={disabled} />
+            
+            {loadingMore ? <Spinner animation="border" /> : <Button onLoadMoreClick={onLoadMoreClick} disabled={disabled} />}
         </div>
     );
 };
