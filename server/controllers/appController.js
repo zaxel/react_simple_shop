@@ -27,10 +27,22 @@ class AppController {
             const data = await pageService.update({ id, name, title, text });
             return res.json(data);
         } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
+    async getPage(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { id, name } = req.query;
+            const data = await pageService.getPage({ id, name }); 
+            return res.json(data);
+        } catch (e) {
             next(ApiError.forbidden(e.message));
         }
     }
-
 
 
 
@@ -45,16 +57,7 @@ class AppController {
             next(ApiError.forbidden(e.message));
         }
     }
-    async getCards(req, res, next) {
-        try {
-            let { sortBy, sortDirection } = req.query;
-            // const data = await appService.getAll();
-            // return res.json(data);
-        } catch (e) {
-            next(ApiError.forbidden(e.message));
-        }
-
-    }
+    
 
     // async delete(req, res, next){
     //     try{

@@ -1,5 +1,6 @@
 ﻿const { InfoAppCards, InfoPages } = require('../../models/models');
 const PageDto = require('../../dtos/static-page-dto.js');
+const { Op } = require("sequelize");
 
 class PageService {
     create = async ({ name, title, img, text, link, button_id }) => {
@@ -11,9 +12,16 @@ class PageService {
         let updatedData = await InfoPages.update({id, name, title, img, text, link, button_id }, {
             where: { id }
           });
-        return updatedData; 
+        return updatedData;
     }
-    
+    getPage = async ({ id, name }) => {
+        const searchParams = (id && {id}) ?? (name && {name});
+        let page = await InfoPages.findOne({
+            where:  {...searchParams}
+        });
+        page = new PageDto(page);
+        return page;
+    }
     
     
     
@@ -24,13 +32,7 @@ class PageService {
         // return {updatedData};
     // }
 
-    getAll = async (sortBy = 'id', sortDirection = 'ASC') => {
-        // let types = await Type.findAll({order: [
-        //     [sortBy, sortDirection],
-        // ]});
-        // types = types.map(el=>new TypeDto(el))
-        // return types;
-    }
+    
 
 
 

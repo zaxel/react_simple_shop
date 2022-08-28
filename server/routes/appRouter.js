@@ -1,6 +1,6 @@
 ﻿const Router = require('express');
 const router = new Router();
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 const checkRole = require('../middleware/checkRoleMiddleware');
 const appController = require('../controllers/appController');
 
@@ -25,17 +25,16 @@ router.put('/',
     body('button_id').optional().isArray(),
     appController.update);
 
+router.get('/',
+    param('id').optional().isNumeric(),
+    param('name').optional().isString().isLength({ min: 3 }),
+    appController.getPage); 
 
 
 
 router.post('/card/',
     // checkRole('ADMIN', 'MODERATOR'), 
     appController.createCard);
-
-
-
-// router.get('/', appController.getAll);
-
 
 
 // router.delete('/',
