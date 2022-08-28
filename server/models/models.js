@@ -60,9 +60,9 @@ const TypeBrand = sequelize.define('type_brand', {
 
 const InfoPages = sequelize.define('info_pages', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: false},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false},
     title: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
-    img: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
+    img: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
     text: {type: DataTypes.ARRAY(DataTypes.STRING(1024)), allowNull: true},
     link: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
     button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
