@@ -1,27 +1,28 @@
 ﻿const { InfoAppCards } = require('../../models/models');
-// const appDto = require('../../dtos/app-dto');
+const appDto = require('../../dtos/static-page-app-dto.js');
 
 class AppService {
-    create = async (name, title, text) => {
-        // const page = await InfoAppCards.create({ name, title, text });
-        // return page;
-        console.log(66, name, title, text)
-
-
-
-        // const data = await InfoAppCards.bulkCreate(types, {
-        //     ignoreDuplicates: true,
-        // });
-        //bulkCreate returns id===null if type already exist in db.
-        // return data.filter(type=> type.id);
+    create = async ({ title, hero, link, app_button_img, app_button_dark_img, infoPageId }) => {
+        let page = await InfoAppCards.create({ title, hero, link, app_button_img, app_button_dark_img, infoPageId });
+        page = new appDto(page);
+        return page;
     }
-    getAll = async (sortBy = 'id', sortDirection = 'ASC') => {
-        // let types = await Type.findAll({order: [
-        //     [sortBy, sortDirection],
-        // ]});
-        // types = types.map(el=>new TypeDto(el))
-        // return types;
-    }
+
+
+    // update = async ({id, name, title, img, text, link, button_id }) => {
+    //     let updatedData = await InfoPages.update({id, name, title, img, text, link, button_id }, {
+    //         where: { id }
+    //       });
+    //     return updatedData;
+    // }
+    // getPage = async ({ id, name }) => {
+    //     const searchParams = (id && {id}) ?? (name && {name});
+    //     let page = await InfoPages.findOne({
+    //         where:  {...searchParams}
+    //     });
+    //     page = new PageDto(page);
+    //     return page;
+    // }
 
 
 

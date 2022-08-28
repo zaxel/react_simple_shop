@@ -49,10 +49,9 @@ class AppController {
 
     async createCard(req, res, next) {
         try {
-            const { title, hero, link, app_button_img, app_button_dark_img } = req.body;
-            console.log(88, req.body)
-            // const data = await typeService.create(types);
-            return res.json(req.body);
+            const { title, hero, link, app_button_img, app_button_dark_img, infoPageId } = req.body;
+            const data = await appService.create({title, hero, link, app_button_img, app_button_dark_img, infoPageId});
+            return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));
         }

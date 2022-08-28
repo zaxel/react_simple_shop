@@ -31,9 +31,14 @@ router.get('/',
     appController.getPage); 
 
 
-
 router.post('/card/',
     // checkRole('ADMIN', 'MODERATOR'), 
+    body('title').isString().isLength({ min: 3 }),
+    body('hero').isString().isLength({ min: 5 }),
+    body('link').isString().isLength({ min: 5 }),
+    body('app_button_img').isString().isLength({ min: 5 }),
+    body('app_button_dark_img').isString().isLength({ min: 5 }),
+    body('InfoPageId').isNumeric(),
     appController.createCard);
 
 
