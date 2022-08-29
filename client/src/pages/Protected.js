@@ -1,20 +1,32 @@
-﻿import React from 'react';
+﻿import React, { useContext, useEffect } from 'react';
 import ProtectedCard from '../components/protected/ProtectedCard';
-import { protectedData, cards } from '../utils/consts/protectedPageData';
+import { Context } from '..';
+import { observer } from 'mobx-react-lite';
+import { Spinner } from 'react-bootstrap';
+import { fetchPage } from '../utils/staticPages/appPage';
 
-const Protected = () => {
-    const {title, descr} = protectedData;
-    const protectedCards = cards.map(card=><ProtectedCard {...card} key={card.title}/>);
+const Protected = observer(() => {
+    const { appPage } = useContext(Context);
+    const protectedCards = appPage.pageCards.map(card => <ProtectedCard {...card} key={card.title} />);
 
+    useEffect(()=>{
+        fetchPage(appPage);
+    }, [])
+
+    if (appPage.loading) {
+        return( <div className="spinner">
+            <Spinner animation="border" />
+        </div>)
+    }
     return (
         <div className='protected'>
             <div className='protected__container'>
-                <h2 className='protected__title'>{title}</h2>
-                <div className='protected__descr'>{descr}</div>
+                <h2 className='protected__title'>{appPage.pageTitle}</h2>
+                <div className='protected__descr'>{appPage.pageText}</div>
                 <div className='protected__cards'>{protectedCards}</div>
             </div>
         </div>
     );
-};
+});
 
 export default Protected;

@@ -1,15 +1,15 @@
 ﻿import React from 'react';
 
-const ProtectedCard = ({title, hero, pathname, app_button, app_button_dark }) => {
+const ProtectedCard = ({title, hero, link, app_button_img, app_button_dark_img }) => {
     return (
-        <a href={pathname} target="_blank" className='protected__cards prot-card'>
+        <a href={link} target="_blank" className='protected__cards prot-card'>
             <div className='prot-card__image-cont'>
-                <img src={hero} alt={'store application hero'} />
+                <img src = { process.env.REACT_APP_API_URL + hero } alt={'store application hero'} />
             </div>
             <h3 className='prot-card__title'>{title}</h3>
             <div className='prot-card__button-cont'>
-                <img className='prot-card__img' src={app_button} alt='app_button'/>
-                <img className='prot-card__img-dark' src={app_button_dark} alt='app_button'/>
+                <img className='prot-card__img' src={process.env.REACT_APP_API_URL + app_button_img} alt='app_button'/>
+                <img className='prot-card__img-dark' src={process.env.REACT_APP_API_URL + app_button_dark_img} alt='app_button'/>
             </div>
         </a>
     );

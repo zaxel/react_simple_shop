@@ -50,12 +50,8 @@ class AppController {
     }
     async getPage(req, res, next) {
         try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return next(ApiError.badRequest('validation error: ', errors.array()));
-            }
-            let { id } = req.params;
-            const data = await appService.getPage({id}); 
+            const name = process.env.APP_STATIC_PAGE;
+            const data = await appService.getPage({name}); 
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

@@ -28,12 +28,11 @@ class AppService {
         cards = cards.map(el=> new AppDto(el));
         return cards;
     }
-    getPage = async ({id}) => {
+    getPage = async ({name}) => {
         let page = await InfoPages.findOne({
-            where: { id },
+            where: { name },
             include: [{ model: InfoAppCards, as: 'info_app_cards' }]
         });
-        // cards = cards.map(el=> new AppDto(el));
         page = new PageDto(page);
         return page;
 

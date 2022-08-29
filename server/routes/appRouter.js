@@ -33,9 +33,7 @@ router.get('/card/:id',
 router.get('/cards/',
     appController.getAllCards); 
     
-router.get('/:id',
-    param('id').isNumeric(),
-    appController.getPage); 
+router.get('/', appController.getPage); 
 
 // router.delete('/',
 //     body('id').isNumeric(),

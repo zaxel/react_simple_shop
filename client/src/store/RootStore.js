@@ -13,6 +13,8 @@ import BrandsStore from "./adminPage/BrandsStore";
 import OrderDetailsStore from "./adminPage/OrderDetailsStore";
 import UserOrdersStore from "./adminPage/UserOrdersStore";
 
+import AppPageStore from "./staticPages/AppPageStore";
+
 export default class RootStore {
     constructor() {
       this.user = new UserStore(this);
@@ -28,5 +30,7 @@ export default class RootStore {
       this.brands = new BrandsStore(this);
       this.orderDetails = new OrderDetailsStore(this);
       this.userOrders = new UserOrdersStore(this);
+      this.appPage = new AppPageStore(this);
+
     }
 } 
