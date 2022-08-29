@@ -1,8 +1,8 @@
 ﻿const Router = require('express');
 const router = new Router();
-const { body, param } = require('express-validator');
+const { body, query } = require('express-validator');
 const checkRole = require('../middleware/checkRoleMiddleware');
-const appController = require('../controllers/appController');
+const StaticPageController = require('../controllers/StaticPageController');
 
 router.post('/',
     // checkRole('ADMIN', 'MODERATOR'), 
@@ -12,7 +12,7 @@ router.post('/',
     body('text').optional().isArray(),
     body('link').optional().isArray(),
     body('button_id').optional().isArray(),
-    appController.create);
+    StaticPageController.create);
 
 router.put('/',
     // checkRole('ADMIN', 'MODERATOR'), 
@@ -23,12 +23,12 @@ router.put('/',
     body('text').optional().isArray(),
     body('link').optional().isArray(),
     body('button_id').optional().isArray(),
-    appController.update);
+    StaticPageController.update);
 
 router.get('/',
-    param('id').optional().isNumeric(),
-    param('name').optional().isString().isLength({ min: 3 }),
-    appController.getPage); 
+    query('id').optional().isNumeric(),
+    query('name').optional().isString().isLength({ min: 3 }),
+    StaticPageController.getPage); 
 
 
 // router.delete('/',

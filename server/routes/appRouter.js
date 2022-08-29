@@ -5,7 +5,7 @@ const checkRole = require('../middleware/checkRoleMiddleware');
 const appController = require('../controllers/appController');
 
 
-router.post('/',
+router.post('/card/',
     // checkRole('ADMIN', 'MODERATOR'), 
     body('title').isString().isLength({ min: 3 }),
     body('hero').isString().isLength({ min: 5 }),
@@ -13,8 +13,29 @@ router.post('/',
     body('app_button_img').isString().isLength({ min: 5 }),
     body('app_button_dark_img').isString().isLength({ min: 5 }),
     body('InfoPageId').isNumeric(),
-    appController.createCard);
+    appController.create);
 
+router.put('/card/',
+    // checkRole('ADMIN', 'MODERATOR'), 
+    body('id').isNumeric(),
+    body('title').optional().isString().isLength({ min: 3 }),
+    body('hero').optional().isString().isLength({ min: 5 }),
+    body('link').optional().isString().isLength({ min: 5 }),
+    body('app_button_img').optional().isString().isLength({ min: 5 }),
+    body('app_button_dark_img').optional().isString().isLength({ min: 5 }),
+    body('InfoPageId').optional().isNumeric(),
+    appController.update);
+
+router.get('/card/:id',
+    param('id').isNumeric(),
+    appController.getSingleCard); 
+
+router.get('/cards/',
+    appController.getAllCards); 
+    
+router.get('/:id',
+    param('id').isNumeric(),
+    appController.getPage); 
 
 // router.delete('/',
 //     body('id').isNumeric(),
