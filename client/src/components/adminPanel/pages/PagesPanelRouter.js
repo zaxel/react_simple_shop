@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useEffect } from 'react';
 import { Route } from "react-router-dom";
 import { adminPagesRoutes } from '../../../routes';
 import AboutAdmin from './AboutAdmin';

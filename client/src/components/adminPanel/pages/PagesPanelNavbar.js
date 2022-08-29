@@ -7,13 +7,13 @@ const PagesPanelNavbar = () => {
         <nav className='pages__navbar'>
             <ul>
                 <li className="pages__nav-item">
-                    <Link className="pages__nav-link" to={ADMIN_ABOUT_ROUTE}>about</Link>
+                    <Link className="pages__nav-link" to={ADMIN_ABOUT_ROUTE}>about page</Link>
                 </li>
                 <li className="pages__nav-item">
-                    <Link className="pages__nav-link" to={ADMIN_APP_ROUTE}>our app</Link>
+                    <Link className="pages__nav-link" to={ADMIN_APP_ROUTE}>our app page</Link>
                 </li>
                 <li className="pages__nav-item">
-                    <Link className="pages__nav-link" to={ADMIN_HELP_ROUTE}>help</Link>
+                    <Link className="pages__nav-link" to={ADMIN_HELP_ROUTE}>help page</Link>
                 </li>
                 
                 

@@ -1171,20 +1171,38 @@ button:active {
 
 /*device end*/
 /*admin page start*/
-.admin {
-    flex: 1 1 auto;
+.admin-pages{
+    display: grid;
+    grid-template-columns: 150px auto;
 }
-
-.admin__container {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+.pages__navbar{
+   margin-bottom: 8px;
 }
-
-.admin__container .btn {
-    margin-bottom: 15px;
+.pages__navbar li {
+    border-bottom: 1px solid black;
+    
+}
+.pages__navbar a{
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
     text-transform: uppercase;
-    max-width: 300px;
+}
+.pages__navbar a:hover,
+.pages__navbar a:active{
+    text-decoration: underline;
+    background-color: white;
+}
+.pages__navbar a:focus{
+    background-color: white;
+}
+.admin-pages__page{
+    background-color: #fff;
+    height: 1000px;
+    padding: 8px;
+    margin-bottom: 8px;
 }
 
 /*admin page end*/

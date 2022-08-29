@@ -4,7 +4,7 @@ import PagesPanelNavbar from './PagesPanelNavbar';
 
 const PagesAdminPanel = () => {
     return (
-        <div className='account'>
+        <div className='account__pages admin-pages'>
             <PagesPanelNavbar />
             <Outlet />
         </div>

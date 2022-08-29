@@ -13,7 +13,7 @@ const HelpAdmin = observer(() => {
     //     )
     // }
     return (
-        <div className='user-admin__main'>
+        <div className='admin-pages__help admin-pages__page'>
             help pages
         </div>
     );
