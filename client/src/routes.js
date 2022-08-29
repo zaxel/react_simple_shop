@@ -29,16 +29,22 @@ import UsersAdminPanel from "./components/adminPanel/users/UsersAdminPanel";
 import DevicesAdminPanel from "./components/adminPanel/devices/DevicesAdminPanel";
 import TypesAdminPanel from "./components/adminPanel/types/TypesAdminPanel";
 import BrandsAdminPanel from "./components/adminPanel/brands/BrandsAdminPanel";
+import PagesAdminPanel from "./components/adminPanel/pages/PagesAdminPanel";
 import AdminPanelRouter from "./components/adminPanel/AdminPanelRouter";
+
+import PagesPanelRouter from "./components/adminPanel/pages/PagesPanelRouter";
+import AppAdmin from "./components/adminPanel/pages/AppAdmin";
+import HelpAdmin from "./components/adminPanel/pages/HelpAdmin";
+import AboutAdmin from "./components/adminPanel/pages/AboutAdmin";
 
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
         ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
         ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE,
-        ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE,
+        ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE, 
         ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE, HELP_DELIVERY_ROUTE, HELP_RETURNS_ROUTE,
         HELP_ORDER_ROUTE, HELP_STOCK_ROUTE, HELP_TECH_ROUTE, HELP_MAIN_ROUTE, HELP_TECH_ADMIN_ROUTE, 
-        HELP_PAYMENT_ROUTE} from "./utils/consts/routes";
+        HELP_PAYMENT_ROUTE, ADMIN_PAGES_ROUTE, ADMIN_APP_ROUTE, ADMIN_HELP_ROUTE, ADMIN_ABOUT_ROUTE} from "./utils/consts/routes";
 
 
 export const userNavRoutes = [
@@ -61,9 +67,6 @@ export const userNavRoutes = [
     
 ];
 
-
-
-
 export const adminNavRoutes = [
     {
         path: ADMIN_USER_ROUTE,
@@ -85,7 +88,26 @@ export const adminNavRoutes = [
         path: ADMIN_BRANDS_ROUTE,
         Component: BrandsAdminPanel
     },
+    {
+        path: ADMIN_PAGES_ROUTE,
+        Component: PagesAdminPanel,
+        NestedComponent: PagesPanelRouter
+    },
     
+];
+export const adminPagesRoutes = [
+    {
+        path: ADMIN_APP_ROUTE,
+        Component: AppAdmin
+    },
+    {
+        path: ADMIN_HELP_ROUTE,
+        Component: HelpAdmin
+    },
+    {
+        path: ADMIN_ABOUT_ROUTE,
+        Component: AboutAdmin
+    },
 ];
 export const adminRoutes = [
     {
@@ -113,7 +135,6 @@ export const authRoutes = [
         path: PROTECTED_ROUTE,
         Component: Protected
     },
-    
 ];
 export const helpRoutes = [
     
