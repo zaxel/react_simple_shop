@@ -1195,16 +1195,16 @@ button:active {
     text-decoration: underline;
     background-color: white;
 }
-.pages__navbar a:focus{
-    background-color: white;
-}
+
 .admin-pages__page{
     background-color: #fff;
     height: 1000px;
     padding: 8px;
     margin-bottom: 8px;
 }
-
+.pages__nav-item .pages__nav-link.active{
+    background-color: white;
+}
 /*admin page end*/
 
 
@@ -1671,9 +1671,8 @@ button:active {
     text-decoration: underline;
 }
 
-.account__navbar ul li a:focus {
+.account__nav-link.active{
     background-color: #F3F3F3;
-    outline: none;
 }
 
 /*account navbar end*/
