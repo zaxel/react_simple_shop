@@ -1,5 +1,4 @@
-﻿import { observer } from 'mobx-react-lite';
-import React, { useRef, useState, useEffect } from 'react';
+﻿import React, { useRef, useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 
 const AdminTextInput = ({ inputTitle, inputText, cb }) => {
@@ -10,7 +9,7 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         setInput(inputText);
         inputLast.current = inputText;
     }, [inputText])
@@ -30,54 +29,45 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
     const onButtonBlurHandler = () => {
         setEdit(false);
     }
-    const onButtonClickHandler = async() => {
+    const onButtonClickHandler = async () => {
         setEdit(false);
         if (isStateChanged()) {
-            try{
-                
+            try {
                 setLoading(true);
                 await cb(input);
                 inputLast.current = input;
-            }catch(e){
+            } catch (e) {
                 setInput(inputLast.current);
                 alert('oops, something went wrong!');
                 console.log(e?.response?.data?.message);
-            }finally{
+            } finally {
                 setLoading(false);
             }
         }
     }
     const onInputChange = (e) => {
-        setInput(()=> e.target.value)
+        setInput(() => e.target.value)
     }
 
-    // if (loading) {
-    //     return (
-    //         <td className="td-spinner">
-    //             <Spinner animation="border" />
-    //         </td>
-    //     )
-    // }
     return (
         <div className='admin__input-edit'>
             <div className='admin__input-container'>
-            {loading ? 
-                <div className="td-spinner">
-                    <Spinner animation="border" />
-                </div> :
-                <><h2>{inputTitle}: </h2>
-                <div>
-                    {!edit
-                        ? <div onClick={onDivClickHandler}>{input}</div>
-                        : <div className='display-flex'>
-                            <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
-                            <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
-                        </div>}
-                </div></>}
-                
+                {loading ?
+                    <div className="td-spinner">
+                        <Spinner animation="border" />
+                    </div> :
+                    <>
+                        <h2>{inputTitle}: </h2>
+                        <div>
+                            {!edit
+                                ? <div onClick={onDivClickHandler}>{input}</div>
+                                : <div className='display-flex'>
+                                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
+                                    <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
+                                </div>}
+                        </div>
+                    </>}
             </div>
-
-
         </div>
     );
 };

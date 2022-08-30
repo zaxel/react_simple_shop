@@ -1796,6 +1796,10 @@ button:active {
 /*admin device modal end*/
 
 /*admin static pages start*/
+.admin-pages .spinner{
+    width: 100%;
+    background-color: white;
+}
 .admin__input-edit {
     
     background-color: #F3F3F3;
