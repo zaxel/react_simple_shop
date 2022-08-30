@@ -22,8 +22,10 @@ class StaticPageController {
             if (!errors.isEmpty()) {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            const { id, name, title, text } = req.body;
-            const data = await pageService.update({ id, name, title, text });
+            const { id } = req.body;
+            const field = Object.keys(req.body)[1];
+            const newData = req.body[field]; 
+            const data = await pageService.update(id, field, newData);
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message)); 

@@ -8,12 +8,14 @@ class PageService {
         page = new PageDto(page);
         return page;
     }
-    update = async ({id, name, title, img, text, link, button_id }) => {
-        let updatedData = await InfoPages.update({id, name, title, img, text, link, button_id }, {
+    
+    update = async (id, field, newData) => {
+        const updatedData = await InfoPages.update({ [field]: newData }, {
             where: { id }
-          });
-        return updatedData;
+        });
+        return { updatedData };
     }
+
     getPage = async ({ id, name }) => {
         const searchParams = (id && {id}) ?? (name && {name});
         let page = await InfoPages.findOne({

@@ -20,8 +20,8 @@ export const fetchPage = async (currentStore) => {
     return setStore(currentStore, fetchedData);
   }
 
-  export const setData = async (currentStore, id, dbFieldName, data) => {
+  export const setData = async (id, dbFieldName, data) => {
+    !Array.isArray(data) && (data = [data]);
     const updatedData = await updateAppPage(id, dbFieldName, data);
-    fetchPage(currentStore);
     return updatedData;
   }

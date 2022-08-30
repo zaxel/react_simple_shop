@@ -4,8 +4,8 @@ export default class AppPageStore{
     constructor(){
         this._pageId = null;
         this._pageName = 'App';
-        this._pageTitle = '';
-        this._pageText = '';
+        this._pageTitle = [];
+        this._pageText = [];
         this._pageCards = [];
         this._loading = true;
         this._mainStoreFieldName = 'pageCards';
@@ -18,11 +18,11 @@ export default class AppPageStore{
     setPageName(name){
         this._pageName = name;
     }
-    setPageTitle(title){
-        this._pageTitle = title;
+    setPageTitle(titlesArr){
+        this._pageTitle = titlesArr;
     }
-    setPageText(text){
-        this._pageText = text;
+    setPageText(textsArr){
+        this._pageText = textsArr;
     }
     setLoading(bool){
         this._loading = bool;
@@ -31,6 +31,7 @@ export default class AppPageStore{
         this._pageCards = cards;
     }
     setPage(fetchedData){
+
         this.setPageId(fetchedData.id);
         this.setPageName(fetchedData.name);
         this.setPageTitle(fetchedData.title);

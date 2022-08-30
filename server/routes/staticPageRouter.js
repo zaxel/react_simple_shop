@@ -5,7 +5,7 @@ const checkRole = require('../middleware/checkRoleMiddleware');
 const StaticPageController = require('../controllers/StaticPageController');
 
 router.post('/',
-    // checkRole('ADMIN', 'MODERATOR'), 
+    checkRole('ADMIN', 'MODERATOR'), 
     body('name').isString().isLength({ min: 3 }),
     body('title').optional().isArray(),
     body('img').optional().isArray(),
@@ -15,7 +15,7 @@ router.post('/',
     StaticPageController.create);
 
 router.put('/',
-    // checkRole('ADMIN', 'MODERATOR'), 
+    checkRole('ADMIN', 'MODERATOR'), 
     body('id').isNumeric(),
     body('name').optional().isString().isLength({ min: 3 }),
     body('title').optional().isArray(),

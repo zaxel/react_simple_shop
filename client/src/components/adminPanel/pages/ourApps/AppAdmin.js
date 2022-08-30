@@ -12,6 +12,8 @@ const AppAdmin = observer(() => {
         return <Card {...card} key={card.id} />
     });
 
+    let setDataCarry = setData.bind(this, appPage.pageId, 'title')
+
     useEffect(()=>{
         fetchPage(appPage);
     }, [])
@@ -27,7 +29,7 @@ const AppAdmin = observer(() => {
         <div className='admin-pages__app admin-pages__page admin-app'>
             <div className='admin-app__container admin-pages__container'>
                 <h2>Edit content of "{appPage.pageName} Page".</h2>
-                <AdminTextInput title={'page title'} text={appPage.pageTitle} cb={setData} store={appPage}/>
+                <AdminTextInput inputTitle={'page title'} inputText={appPage.pageTitle.length ? appPage.pageTitle[0] : null} cb={setDataCarry}/>
                 <div className='admin-app__descr'>
                     <h2>edit description: </h2>
                     <p>description</p> 

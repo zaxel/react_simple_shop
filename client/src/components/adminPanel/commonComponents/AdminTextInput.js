@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 
-const AdminTextInput = ({ title, text, cb, store}) => {
+const AdminTextInput = ({ inputTitle, inputText, cb }) => {
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
     const inputLast = useRef(null);
@@ -11,10 +11,9 @@ const AdminTextInput = ({ title, text, cb, store}) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
-        setInput(text);
-        inputLast.current = text;
-    }, [text])
-
+        setInput(inputText);
+        inputLast.current = inputText;
+    }, [inputText])
 
     const isStateChanged = () => {
         return inputLast.current !== input;
@@ -35,19 +34,18 @@ const AdminTextInput = ({ title, text, cb, store}) => {
         setEdit(false);
         if (isStateChanged()) {
             try{
-                inputLast.current = input;
+                
                 setLoading(true);
-                await cb(store, null, 'title', input);
+                await cb(input);
+                inputLast.current = input;
             }catch(e){
-                console.log(e);
+                setInput(inputLast.current);
+                alert('oops, something went wrong!');
+                console.log(e?.response?.data?.message);
             }finally{
                 setLoading(false);
             }
         }
-
-        // const cb = inputCb.bind(this, id, dbFieldName, input, cart, user);
-        // onInputButtonClickHandler(toolTip, setEdit, setLoading, cb, store, id, dbFieldName, input);
-
     }
     const onInputChange = (e) => {
         setInput(()=> e.target.value)
@@ -67,7 +65,7 @@ const AdminTextInput = ({ title, text, cb, store}) => {
                 <div className="td-spinner">
                     <Spinner animation="border" />
                 </div> :
-                <><h2>{title}: </h2>
+                <><h2>{inputTitle}: </h2>
                 <div>
                     {!edit
                         ? <div onClick={onDivClickHandler}>{input}</div>

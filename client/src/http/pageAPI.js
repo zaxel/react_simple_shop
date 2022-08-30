@@ -7,8 +7,7 @@ export const fetchAppPage = async () => {
 
 
 export const updateAppPage = async (id, dbFieldName, data) => {
-    console.log(id, dbFieldName, data)
-    // const updatedData = await $authHost.put('api/user/' , {id, [dbFieldName]: data});
-    // return updatedData.data;
+    const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
+    return updatedData.data;
 }
 
