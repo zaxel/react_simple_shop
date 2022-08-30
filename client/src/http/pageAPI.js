@@ -5,3 +5,10 @@ export const fetchAppPage = async () => {
     return data;
 }
 
+
+export const updateAppPage = async (id, dbFieldName, data) => {
+    console.log(id, dbFieldName, data)
+    // const updatedData = await $authHost.put('api/user/' , {id, [dbFieldName]: data});
+    // return updatedData.data;
+}
+

@@ -33,7 +33,7 @@ import PagesAdminPanel from "./components/adminPanel/pages/PagesAdminPanel";
 import AdminPanelRouter from "./components/adminPanel/AdminPanelRouter";
 
 import PagesPanelRouter from "./components/adminPanel/pages/PagesPanelRouter";
-import AppAdmin from "./components/adminPanel/pages/AppAdmin";
+import AppAdmin from "./components/adminPanel/pages/ourApps/AppAdmin";
 import HelpAdmin from "./components/adminPanel/pages/HelpAdmin";
 import AboutAdmin from "./components/adminPanel/pages/AboutAdmin";
 

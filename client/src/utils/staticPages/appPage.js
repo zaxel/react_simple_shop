@@ -1,4 +1,4 @@
-﻿import { fetchAppPage } from "../../http/pageAPI";
+﻿import { fetchAppPage, updateAppPage } from "../../http/pageAPI";
 
 export const setStore = async (currentStore, fetchedData) => {
     try {
@@ -12,9 +12,16 @@ export const setStore = async (currentStore, fetchedData) => {
     } finally {
         currentStore.setLoading(false);
     }
-  }
+}
+
 
 export const fetchPage = async (currentStore) => {
     const fetchedData = await fetchAppPage();
     return setStore(currentStore, fetchedData);
+  }
+
+  export const setData = async (currentStore, id, dbFieldName, data) => {
+    const updatedData = await updateAppPage(id, dbFieldName, data);
+    fetchPage(currentStore);
+    return updatedData;
   }

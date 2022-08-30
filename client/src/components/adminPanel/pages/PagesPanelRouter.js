@@ -1,7 +1,7 @@
 ﻿import React, { useEffect } from 'react';
 import { Route } from "react-router-dom";
 import { adminPagesRoutes } from '../../../routes';
-import AboutAdmin from './AboutAdmin';
+import AppAdmin from './ourApps/AppAdmin';
 
 const PagesPanelRouter = () => {
     const pagesAdminRouts = adminPagesRoutes.map(({ path, Component }) => {
@@ -9,7 +9,7 @@ const PagesPanelRouter = () => {
             <Component />
         } />
     })
-    pagesAdminRouts.push(<Route key={Date.now()} index element={<AboutAdmin />} />)
+    pagesAdminRouts.push(<Route key={Date.now()} index element={<AppAdmin />} />)
     return pagesAdminRouts;
 };
 

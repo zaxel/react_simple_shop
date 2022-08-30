@@ -735,7 +735,8 @@ button:active {
     background-color: white;
     transition: all .3s ease-out;
 }
-.contact-cont__button-wrapper button:disabled{
+
+.contact-cont__button-wrapper button:disabled {
     background: white;
     opacity: .3;
 }
@@ -754,11 +755,13 @@ button:active {
     margin: 20px;
     transition: all .3s ease-out;
 }
-.help__cat-list .spinner-border{
+
+.help__cat-list .spinner-border {
     margin: 0 auto;
     display: block;
     margin-bottom: 20px;
 }
+
 /**help breadcrumbs**/
 .help__breadcrumbs {
     border-bottom: 1px solid #ddd;
@@ -1170,43 +1173,6 @@ button:active {
 }
 
 /*device end*/
-/*admin page start*/
-.admin-pages{
-    display: grid;
-    grid-template-columns: 150px auto;
-}
-.pages__navbar{
-   margin-bottom: 8px;
-}
-.pages__navbar li {
-    border-bottom: 1px solid black;
-    
-}
-.pages__navbar a{
-    display: block;
-    padding: 12px;
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-.pages__navbar a:hover,
-.pages__navbar a:active{
-    text-decoration: underline;
-    background-color: white;
-}
-
-.admin-pages__page{
-    background-color: #fff;
-    height: 1000px;
-    padding: 8px;
-    margin-bottom: 8px;
-}
-.pages__nav-item .pages__nav-link.active{
-    background-color: white;
-}
-/*admin page end*/
-
 
 /*device modal start*/
 .device-modal__select {
@@ -1671,7 +1637,7 @@ button:active {
     text-decoration: underline;
 }
 
-.account__nav-link.active{
+.account__nav-link.active {
     background-color: #F3F3F3;
 }
 
@@ -1828,6 +1794,103 @@ button:active {
 }
 
 /*admin device modal end*/
+
+/*admin static pages start*/
+.admin__input-edit {
+    
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 30px;
+}
+.admin__input-container {
+    display: flex;
+    align-items: flex-end;
+    
+}
+.admin__input-container .td-spinner{
+    margin: 0 auto;    
+}
+
+.admin__input-container h2 {
+    /* font-size: 15px; */
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.admin__input-container>div:first-of-type:not(.td-spinner) {
+    margin-left: 12px;
+    cursor: pointer;
+}
+.admin__input-container button{
+    border: 1px solid #333;
+    width: 40px;
+    height: auto;
+    margin-left: 1px;
+}
+.admin__input-container input{
+    border: 1px solid #333;
+    width: 240px;
+    height: auto;
+}
+.admin-pages {
+    display: grid;
+    grid-template-columns: 150px auto;
+}
+
+.pages__navbar {
+    margin-bottom: 8px;
+}
+
+.pages__navbar li {
+    border-bottom: 1px solid black;
+
+}
+
+.pages__navbar a {
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.pages__navbar a:hover,
+.pages__navbar a:active {
+    text-decoration: underline;
+    background-color: white;
+}
+
+.admin-pages__page {
+    background-color: #fff;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+.admin-pages__container > h2{
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 12px;
+}
+.pages__nav-item .pages__nav-link.active {
+    background-color: white;
+}
+
+
+
+/**admin app start**/
+.admin-app {
+    padding: 18px;
+}
+
+.admin-app__container .admin__input-edit {
+    max-width: 500px;
+    margin-bottom: 12px;
+}
+
+/**admin app end**/
+/*admin static pages end*/
+
 /*search start*/
 .search__container {
     padding: 2px 6px;
@@ -1901,6 +1964,7 @@ button:active {
     .help__breadcrumbs {
         top: -28px;
     }
+
     /*help end*/
 }
 
@@ -2129,19 +2193,24 @@ button:active {
     .contact-cont__button-wrapper a {
         margin: 15px;
     }
+
     .help__breadcrumbs {
         top: 0;
     }
-    .help__main-wrapper{
+
+    .help__main-wrapper {
         flex-direction: column;
         justify-content: space-evenly;
     }
-    .help__category{
+
+    .help__category {
         margin-bottom: 10px;
     }
+
     .help__aside {
         margin-left: 0;
     }
+
     /*help end*/
 
 }
