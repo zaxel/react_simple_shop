@@ -1,7 +1,7 @@
 ﻿import React, { useRef, useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 
-const AdminTextInput = ({ inputTitle, inputText, cb }) => {
+const AdminTextArea = ({ areaTitle, areaText, cb }) => {
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
     const inputLast = useRef(null);
@@ -10,9 +10,9 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setInput(inputText);
-        inputLast.current = inputText;
-    }, [inputText])
+        setInput(areaText);
+        inputLast.current = areaText;
+    }, [areaText])
 
     const isStateChanged = () => {
         return inputLast.current !== input;
@@ -50,19 +50,19 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
     }
 
     return (
-        <div className='admin__input-edit'>
-            <div className='admin__input-container'>
+        <div className='admin__area-edit'>
+            <div className='admin__area-container'>
                 {loading ?
                     <div className="td-spinner">
                         <Spinner animation="border" />
                     </div> :
                     <>
-                        <h2>edit {inputTitle}: </h2>
+                        <h2>edit {areaTitle}: </h2>
                         <div>
                             {!edit
                                 ? <div onClick={onDivClickHandler}>{input}</div>
                                 : <div className='display-flex'>
-                                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
+                                    <textarea ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
                                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                                 </div>}
                         </div>
@@ -73,4 +73,4 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
 };
 
 
-export default AdminTextInput;
+export default AdminTextArea;

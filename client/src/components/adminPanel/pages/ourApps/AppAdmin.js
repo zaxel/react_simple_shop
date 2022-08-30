@@ -2,6 +2,7 @@
 import { observer } from 'mobx-react-lite';
 import android from '../../../../assets/protected/android.jpg'
 import AdminTextInput from '../../commonComponents/AdminTextInput';
+import AdminTextArea from '../../commonComponents/AdminTextArea';
 import { Context } from '../../../..';
 import { fetchPage, setData } from '../../../../utils/staticPages/appPage';
 import Card from './Card';
@@ -13,7 +14,8 @@ const AppAdmin = observer(() => {
         return <Card {...card} key={card.id} />
     });
 
-    let setDataCarry = setData.bind(this, appPage.pageId, 'title')
+    const setInputDataCarry = setData.bind(this, appPage.pageId, 'title')
+    const setAreaDataCarry = setData.bind(this, appPage.pageId, 'text')
 
     useEffect(() => {
         fetchPage(appPage);
@@ -30,7 +32,8 @@ const AppAdmin = observer(() => {
         <div className='admin-pages__app admin-pages__page admin-app'>
             <div className='admin-app__container admin-pages__container'>
                 <h2>Edit content of "{appPage.pageName} Page".</h2>
-                <AdminTextInput inputTitle={'page title'} inputText={appPage.pageTitle.length ? appPage.pageTitle[0] : null} cb={setDataCarry} />
+                <AdminTextInput inputTitle={'page title'} inputText={appPage.pageTitle.length ? appPage.pageTitle[0] : null} cb={setInputDataCarry} />
+                <AdminTextArea areaTitle={'page description'} areaText={appPage.pageText.length ? appPage.pageText[0] : null} cb={setAreaDataCarry} />
                 <div className='admin-app__descr'>
                     <h2>edit description: </h2>
                     <p>description</p>

@@ -1800,41 +1800,57 @@ button:active {
     width: 100%;
     background-color: white;
 }
-.admin__input-edit {
+.admin__input-edit, 
+.admin__area-edit{
     
     background-color: #F3F3F3;
     border-radius: 8px;
     padding: 30px;
 }
-.admin__input-container {
+.admin__input-container,
+.admin__area-container{
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     
 }
-.admin__input-container .td-spinner{
+.admin__input-container .td-spinner,
+.admin__area-container .td-spinner{
     margin: 0 auto;    
 }
 
-.admin__input-container h2 {
+.admin__input-container h2,
+.admin__area-container h2 {
     /* font-size: 15px; */
     font-weight: 500;
     text-transform: uppercase;
 }
 
-.admin__input-container>div:first-of-type:not(.td-spinner) {
+.admin__input-container>div:first-of-type:not(.td-spinner),
+.admin__area-container>div:first-of-type:not(.td-spinner) {
+    line-height: 1.5;
     margin-left: 12px;
     cursor: pointer;
 }
-.admin__input-container button{
+.admin__input-container button,
+.admin__area-container button{
     border: 1px solid #333;
     width: 40px;
     height: auto;
     margin-left: 1px;
 }
+.admin__input-container button:hover,
+.admin__area-container button:hover{    
+    opacity: .6;
+}
 .admin__input-container input{
     border: 1px solid #333;
     width: 240px;
     height: auto;
+}
+.admin__area-container textarea{
+    border: 1px solid #333;
+    width: 740px;
+    min-height: 200px;
 }
 .admin-pages {
     display: grid;
@@ -1889,6 +1905,10 @@ button:active {
 
 .admin-app__container .admin__input-edit {
     max-width: 500px;
+    margin-bottom: 12px;
+}
+.admin-app__container .admin__area-edit {
+    max-width: 980px;
     margin-bottom: 12px;
 }
 
