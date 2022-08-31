@@ -53,7 +53,7 @@ const TdImgInputFile = ({ data, innerRef }) => {
         setShowModalImg(true);
     }
     const onInputChange = (e) => {
-        setInput(prev => e.target.files[0])
+        setInput(prev => e.target.files[0]);
     }
 
     useEffect(() => {

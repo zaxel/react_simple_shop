@@ -58,14 +58,12 @@ const AdminTextArea = ({ areaTitle, areaText, cb }) => {
                     </div> :
                     <>
                         <h2>edit {areaTitle}: </h2>
-                        <div>
                             {!edit
                                 ? <div onClick={onDivClickHandler}>{input}</div>
                                 : <div className='display-flex'>
                                     <textarea ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
                                     <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                                 </div>}
-                        </div>
                     </>}
             </div>
         </div>

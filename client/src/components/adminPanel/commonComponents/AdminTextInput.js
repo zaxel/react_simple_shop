@@ -57,15 +57,13 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
                         <Spinner animation="border" />
                     </div> :
                     <>
-                        <h2>edit {inputTitle}: </h2>
-                        <div>
-                            {!edit
-                                ? <div onClick={onDivClickHandler}>{input}</div>
-                                : <div className='display-flex'>
-                                    <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
-                                    <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
-                                </div>}
-                        </div>
+                        {inputTitle && <h2>edit {inputTitle}: </h2>}
+                        {!edit
+                            ? <div onClick={onDivClickHandler}>{input}</div>
+                            : <div className='display-flex'>
+                                <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
+                                <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
+                            </div>}
                     </>}
             </div>
         </div>

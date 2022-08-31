@@ -32,12 +32,9 @@ const AppAdmin = observer(() => {
         <div className='admin-pages__app admin-pages__page admin-app'>
             <div className='admin-app__container admin-pages__container'>
                 <h2>Edit content of "{appPage.pageName} Page".</h2>
+                <h2>(Click on content to edit.)</h2>
                 <AdminTextInput inputTitle={'page title'} inputText={appPage.pageTitle.length ? appPage.pageTitle[0] : null} cb={setInputDataCarry} />
                 <AdminTextArea areaTitle={'page description'} areaText={appPage.pageText.length ? appPage.pageText[0] : null} cb={setAreaDataCarry} />
-                <div className='admin-app__descr'>
-                    <h2>edit description: </h2>
-                    <p>description</p>
-                </div>
                 <div className='admin-app__cards-cont'>
                     <h2>edit cards: </h2>
                     <div className='admin-app__cards'>

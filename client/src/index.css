@@ -1643,9 +1643,11 @@ button:active {
     border-top-right-radius: 12px;
 
 }
+
 .account__nav-link {
-    position:relative; 
+    position: relative;
 }
+
 .account__nav-link.active::before {
     content: '';
     position: absolute;
@@ -1658,7 +1660,8 @@ button:active {
     border-bottom-right-radius: 8px;
     box-shadow: 0 5px 0 0 #F3F3F3;
 }
-.account__nav-link.active::after{
+
+.account__nav-link.active::after {
     content: '';
     position: absolute;
     display: block;
@@ -1670,13 +1673,15 @@ button:active {
     border-bottom-left-radius: 8px;
     box-shadow: 0 5px 0 0 #F3F3F3;
 }
+
 .account__nav-item:last-of-type>.account__nav-link.active::before,
-.account__nav-item:last-of-type>.account__nav-link.active::after{
+.account__nav-item:last-of-type>.account__nav-link.active::after {
     box-shadow: 0 5px 0 0 white;
 }
-.account__nav-item:last-of-type>.account__nav-link.active{
+
+.account__nav-item:last-of-type>.account__nav-link.active {
     background-color: white;
-} 
+}
 
 /*account navbar end*/
 /*account orders start*/
@@ -1833,31 +1838,34 @@ button:active {
 /*admin device modal end*/
 
 /*admin static pages start*/
-.admin-pages .spinner{
+.admin-pages .spinner {
     width: 100%;
     background-color: white;
 }
-.admin__input-edit, 
-.admin__area-edit{
-    
+
+.admin__input-edit,
+.admin__area-edit {
     background-color: #F3F3F3;
     border-radius: 8px;
     padding: 30px;
 }
+
 .admin__input-container,
-.admin__area-container{
+.admin__area-container,
+.admin__image-container {
     display: flex;
     align-items: center;
-    
+
 }
+
 .admin__input-container .td-spinner,
-.admin__area-container .td-spinner{
-    margin: 0 auto;    
+.admin__area-container .td-spinner,
+.admin__image-container .td-spinner {
+    margin: 0 auto;
 }
 
 .admin__input-container h2,
 .admin__area-container h2 {
-    /* font-size: 15px; */
     font-weight: 500;
     text-transform: uppercase;
 }
@@ -1867,28 +1875,41 @@ button:active {
     line-height: 1.5;
     margin-left: 12px;
     cursor: pointer;
+    position: relative;
 }
+
 .admin__input-container button,
-.admin__area-container button{
+.admin__area-container button {
     border: 1px solid #333;
     width: 40px;
     height: auto;
     margin-left: 1px;
 }
+
+.admin__image-container button {
+    border: 1px solid #333;
+    height: auto;
+    margin-left: 1px;
+}
+
 .admin__input-container button:hover,
-.admin__area-container button:hover{    
+.admin__area-container button:hover,
+.admin__image-container button:hover {
     opacity: .6;
 }
-.admin__input-container input{
+
+.admin__input-container input {
     border: 1px solid #333;
     width: 240px;
     height: auto;
 }
-.admin__area-container textarea{
+
+.admin__area-container textarea {
     border: 1px solid #333;
     width: 740px;
     min-height: 200px;
 }
+
 .admin-pages {
     display: grid;
     grid-template-columns: 150px auto;
@@ -1921,32 +1942,167 @@ button:active {
 .admin-pages__page {
     background-color: #fff;
     padding: 8px;
-    margin-bottom: 8px;
 }
-.admin-pages__container > h2{
+
+.admin-pages__container>h2 {
     font-size: 20px;
     font-weight: 500;
     text-align: center;
     margin: 18px 0 30px;
 }
+
+.admin-pages__container>h2:first-of-type {
+    margin: 18px 0;
+}
+
 .pages__nav-item .pages__nav-link.active {
     background-color: white;
 }
 
+/**input img common**/
+.image-admin,
+.admin__image-container,
+.image-admin__img {
+    width: 100%;
+    height: 100%;
+}
 
+.admin__image-edit {
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+}
+.image-admin__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+}
+.admin__input-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
+.admin__area-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
+.image-admin__img:hover::before {
+    content: 'EDIT';
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, .6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    letter-spacing: 2px;
+    z-index: 20;
+    border-radius: 5px;
+}
+.admin__input-container>div:first-of-type:not(.td-spinner):hover::after,
+.admin__area-container>div:first-of-type:not(.td-spinner):hover::after,
+.image-admin__img:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .1);
+    border-radius: 8px;
+}
+
+
+
+.image-admin__edit-cont {
+    width: 100%;
+}
+
+.image-admin__edit-cont input {
+    margin-bottom: 8px;
+    width: inherit;
+}
 
 /**admin app start**/
 .admin-app {
     padding: 18px;
+
 }
 
 .admin-app__container .admin__input-edit {
     max-width: 500px;
     margin-bottom: 12px;
 }
+
 .admin-app__container .admin__area-edit {
     max-width: 980px;
     margin-bottom: 12px;
+}
+
+.admin-app__cards-cont>h2 {
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-app__cards-cont {
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.admin-app__cards {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.app-card:nth-child(odd) {
+    flex: 0 0 23%;
+}
+
+.app-card:nth-child(even) {
+    flex: 0 0 42%;
+}
+
+.app-card {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.app-card h2 {
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.app-card__img {
+    height: 320px;
+    margin: 0 auto;
+    margin-bottom: 12px;
+}
+
+.app-card__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.app-card__title h3 {
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.app-card__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.app-card .admin__input-container input {
+    width: 100%;
 }
 
 /**admin app end**/
