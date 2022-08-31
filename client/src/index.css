@@ -1639,7 +1639,44 @@ button:active {
 
 .account__nav-link.active {
     background-color: #F3F3F3;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
 }
+.account__nav-link {
+    position:relative; 
+}
+.account__nav-link.active::before {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: -12px;
+    background-color: transparent;
+    width: 12px;
+    height: 10px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 5px 0 0 #F3F3F3;
+}
+.account__nav-link.active::after{
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    right: -12px;
+    background-color: transparent;
+    width: 12px;
+    height: 10px;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 5px 0 0 #F3F3F3;
+}
+.account__nav-item:last-of-type>.account__nav-link.active::before,
+.account__nav-item:last-of-type>.account__nav-link.active::after{
+    box-shadow: 0 5px 0 0 white;
+}
+.account__nav-item:last-of-type>.account__nav-link.active{
+    background-color: white;
+} 
 
 /*account navbar end*/
 /*account orders start*/
@@ -1890,7 +1927,7 @@ button:active {
     font-size: 20px;
     font-weight: 500;
     text-align: center;
-    margin-bottom: 12px;
+    margin: 18px 0 30px;
 }
 .pages__nav-item .pages__nav-link.active {
     background-color: white;
