@@ -2071,10 +2071,12 @@ button:active {
     text-align: center;
 }
 
-.app-card h2 {
+.app-card h2{
     font-weight: 500;
     text-transform: uppercase;
     text-align: center;
+}
+.app-card>h2:first-child{
     margin-bottom: 12px;
 }
 

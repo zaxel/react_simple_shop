@@ -74,7 +74,7 @@ const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName }) => {
                         <Spinner animation="border" />
                     </div> :
                     <>
-                        {inputTitle && <h2>edit {inputTitle}: </h2>}
+                        {inputTitle && <h2>{inputTitle}</h2>}
                         {!edit
                             ? <div onClick={onImgClickHandler} className='image-admin__img' >
                                 <img src={src} alt={alt}  />

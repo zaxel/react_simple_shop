@@ -57,7 +57,7 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
                         <Spinner animation="border" />
                     </div> :
                     <>
-                        {inputTitle && <h2>edit {inputTitle}: </h2>}
+                        {inputTitle && <h2>{inputTitle}:</h2>}
                         {!edit
                             ? <div onClick={onDivClickHandler}>{input}</div>
                             : <div className='display-flex'>

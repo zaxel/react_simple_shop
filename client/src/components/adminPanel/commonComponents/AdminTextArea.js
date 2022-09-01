@@ -57,7 +57,7 @@ const AdminTextArea = ({ areaTitle, areaText, cb }) => {
                         <Spinner animation="border" />
                     </div> :
                     <>
-                        <h2>edit {areaTitle}: </h2>
+                        <h2>{areaTitle}:</h2>
                             {!edit
                                 ? <div onClick={onDivClickHandler}>{input}</div>
                                 : <div className='display-flex'>

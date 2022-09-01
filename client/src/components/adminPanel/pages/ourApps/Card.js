@@ -7,6 +7,7 @@ import { setAppCardData, changeAppCardImg } from '../../../../utils/staticPages/
 const Card = ({id, link, title, hero, app_button_dark_img, app_button_img}) => {
 
     const setCardTitleCarried = setAppCardData.bind(this, id, 'title')
+    const setCardLinkCarried = setAppCardData.bind(this, id, 'link')
 
     return (
         <div className='admin-app__card app-card'>
@@ -16,7 +17,10 @@ const Card = ({id, link, title, hero, app_button_dark_img, app_button_img}) => {
                 {/* <img src={process.env.REACT_APP_API_URL + hero} alt='hero' /> */}
             </div>
             <div className='app-card__title'>
-                <AdminTextInput inputTitle={''} inputText={title} cb={setCardTitleCarried}/>
+                <AdminTextInput inputTitle={'title'} inputText={title} cb={setCardTitleCarried}/>
+            </div>
+            <div className='app-card__title'>
+                <AdminTextInput inputTitle={'link'} inputText={link} cb={setCardLinkCarried}/>
             </div>
             <div className='app-card__buttons'>
                 <div className='app-card__button-img'>
