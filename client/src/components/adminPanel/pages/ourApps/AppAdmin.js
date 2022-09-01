@@ -10,7 +10,7 @@ import { Spinner } from 'react-bootstrap';
 
 const AppAdmin = observer(() => {
     const { appPage } = useContext(Context);
-    const appCards = appPage.pageCards.map(card => {
+    const appCards = appPage.pageCards.slice().sort((a,b)=>a.id-b.id).map(card => {
         return <Card {...card} key={card.id} />
     });
 
