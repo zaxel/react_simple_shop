@@ -7,7 +7,7 @@ import { fetchPage } from '../utils/staticPages/appPage';
 
 const Protected = observer(() => {
     const { appPage } = useContext(Context);
-    const protectedCards = appPage.pageCards.map(card => <ProtectedCard {...card} key={card.title} />);
+    const protectedCards = appPage.pageCards.slice().sort((a,b)=>a.id-b.id).map(card => <ProtectedCard {...card} key={card.title} />);
 
     useEffect(()=>{
         fetchPage(appPage);
