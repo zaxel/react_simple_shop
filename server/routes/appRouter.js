@@ -35,6 +35,8 @@ router.get('/cards/',
     
 router.get('/', appController.getPage); 
 
+router.patch('/card/img-update', checkRole('ADMIN'), appController.updateCardImg);
+
 // router.delete('/',
 //     body('id').isNumeric(),
 //     checkRole('ADMIN'),

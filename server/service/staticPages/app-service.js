@@ -1,6 +1,7 @@
 ﻿const { InfoAppCards, InfoPages } = require('../../models/models');
 const AppDto = require('../../dtos/static-page-app-dto.js');
 const PageDto = require('../../dtos/static-page-dto.js');
+const fileService = require("../file/file-service");
 
 class AppService {
     create = async ({ title, hero, link, app_button_img, app_button_dark_img, infoPageId }) => {
@@ -27,6 +28,17 @@ class AppService {
         let cards = await InfoAppCards.findAll();
         cards = cards.map(el=> new AppDto(el));
         return cards;
+    }
+    updateCardImg = async (id, img, imgDbCollName) => {
+        if (!img) {
+            throw new Error('No image received!')
+        }
+        console.log(id, imgDbCollName); 
+        let fileName = await fileService.imageResolve(img);
+        const updatedData = await InfoAppCards.update({ [imgDbCollName]: fileName }, {
+            where: { id }
+        });
+        return { updatedData };
     }
     getPage = async ({name}) => {
         let page = await InfoPages.findOne({

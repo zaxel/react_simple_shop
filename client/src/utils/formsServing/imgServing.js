@@ -1,7 +1,8 @@
-﻿export const formDataImg = (id, input) => {
+﻿export const formDataImg = (id, input, imgDbCollName) => {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('img', input);
+    imgDbCollName && formData.append('imgDbCollName', imgDbCollName);
     return formData;
 }
 
