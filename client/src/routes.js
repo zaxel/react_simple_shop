@@ -35,7 +35,7 @@ import AdminPanelRouter from "./components/adminPanel/AdminPanelRouter";
 import PagesPanelRouter from "./components/adminPanel/pages/PagesPanelRouter";
 import AppAdmin from "./components/adminPanel/pages/ourApps/AppAdmin";
 import HelpAdmin from "./components/adminPanel/pages/HelpAdmin";
-import AboutAdmin from "./components/adminPanel/pages/AboutAdmin";
+import AboutAdmin from "./components/adminPanel/pages/about/AboutAdmin";
 
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 

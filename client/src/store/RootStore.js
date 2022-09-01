@@ -14,6 +14,7 @@ import OrderDetailsStore from "./adminPage/OrderDetailsStore";
 import UserOrdersStore from "./adminPage/UserOrdersStore";
 
 import AppPageStore from "./staticPages/AppPageStore";
+import AboutPageStore from "./staticPages/AboutPageStore";
 
 export default class RootStore {
     constructor() {
@@ -31,6 +32,7 @@ export default class RootStore {
       this.orderDetails = new OrderDetailsStore(this);
       this.userOrders = new UserOrdersStore(this);
       this.appPage = new AppPageStore(this);
+      this.aboutPage = new AboutPageStore(this);
 
     }
 } 
