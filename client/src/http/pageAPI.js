@@ -9,11 +9,17 @@ export const updateAppPage = async (id, dbFieldName, data) => {
     return updatedData.data;
 }
 
+
 export const updateAppCardImg = async (formData) => {
     const { data } = await $authHost.patch('api/app/card/img-update/' , formData);
     return data; 
 }
 
-
+export const updateAppCardData = async (id, dbFieldName, data) => {
+    console.log(id, dbFieldName, data)
+    
+    const updatedData = await $authHost.put('api/app/card' , {id, [dbFieldName]: data});
+    return updatedData.data;
+}
 
 

@@ -1,4 +1,4 @@
-﻿import { fetchAppPage, updateAppCardImg, updateAppPage } from "../../http/pageAPI";
+﻿import { fetchAppPage, updateAppCardImg, updateAppPage, updateAppCardData } from "../../http/pageAPI";
 
 export const setStore = async (currentStore, fetchedData) => {
     try {
@@ -28,5 +28,11 @@ export const fetchPage = async (currentStore) => {
   
   export const changeAppCardImg = async (formData) => {
     const updatedData = await updateAppCardImg(formData);
+    return updatedData;
+  }
+
+  export const setAppCardData = async (id, dbFieldName, data) => {
+    // !Array.isArray(data) && (data = [data]);
+    const updatedData = await updateAppCardData(id, dbFieldName, data);
     return updatedData;
   }

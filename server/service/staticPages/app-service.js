@@ -11,7 +11,7 @@ class AppService {
     }
 
     update = async ({id, title, hero, link, app_button_img, app_button_dark_img, infoPageId }) => {
-        let updatedData = await InfoAppCards.update({id, title, hero, link, app_button_img, app_button_dark_img, infoPageId }, {
+        let updatedData = await InfoAppCards.update({title, hero, link, app_button_img, app_button_dark_img, infoPageId }, {
             where: { id }
           });
         return updatedData;

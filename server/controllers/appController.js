@@ -1,6 +1,5 @@
 ﻿const ApiError = require('../error/ApiError');
 const appService = require('../service/staticPages/app-service');
-const pageService = require('../service/staticPages/page-service');
 const { validationResult } = require('express-validator');
 
 class AppController {
