@@ -1998,8 +1998,8 @@ button:active {
     z-index: 20;
     border-radius: 5px;
 }
-.admin__input-container>div:first-of-type:not(.td-spinner):hover::after,
-.admin__area-container>div:first-of-type:not(.td-spinner):hover::after,
+.admin__input-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
+.admin__area-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
 .image-admin__img:hover::after {
     content: '';
     position: absolute;

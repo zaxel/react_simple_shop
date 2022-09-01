@@ -16,3 +16,9 @@ export const correctImgTypeCheck = (input) => {
     }
     return true;
 }
+
+export const setImageFromBlob = (setSrc, input) => {
+    let image = new FileReader();
+    image.onloadend = ()=> setSrc(image.result);
+    image.readAsDataURL(input);
+}

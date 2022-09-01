@@ -1,6 +1,6 @@
 ﻿import React, { useRef, useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { correctImgTypeCheck } from '../../../utils/formsServing/imgServing';
+import { correctImgTypeCheck, setImageFromBlob } from '../../../utils/formsServing/imgServing';
 import { formDataImg } from '../../../utils/formsServing/imgServing';
 
 const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName }) => {
@@ -31,12 +31,6 @@ const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName }) => {
             setEdit(false)
         }
     }
-    
-    const setImageFromBlob = () => {
-        let image = new FileReader();
-        image.onloadend = ()=> setSrc(image.result);
-        image.readAsDataURL(input);
-    }
 
     const onConfirmClickHandler = async () => {
         setEdit(false);
@@ -47,7 +41,7 @@ const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName }) => {
                 setLoading(true);
                 const formData = formDataImg(id, input, imgDbCollName);
                 await cb(formData);
-                setImageFromBlob();
+                setImageFromBlob(setSrc, input);
                 inputLast.current = input;
             } catch (e) {
                 setInput(inputLast.current);
