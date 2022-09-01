@@ -50,7 +50,7 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
     }
 
     return (
-        <div className='admin__input-edit'>
+        <div className='admin__input-edit text-admin'>
             <div className='admin__input-container'>
                 {loading ?
                     <div className="td-spinner">
@@ -60,7 +60,7 @@ const AdminTextInput = ({ inputTitle, inputText, cb }) => {
                         {inputTitle && <h2>{inputTitle}:</h2>}
                         {!edit
                             ? <div onClick={onDivClickHandler}>{input}</div>
-                            : <div className='display-flex'>
+                            : <div className='display-flex text-admin__input-cont'>
                                 <input ref={inputRef} autoFocus type='text' value={input} onChange={onInputChange} onBlur={onInputBlur} />
                                 <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                             </div>}

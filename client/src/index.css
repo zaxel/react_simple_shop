@@ -1903,7 +1903,9 @@ button:active {
     width: 240px;
     height: auto;
 }
-
+.text-admin__input-cont{
+    width: max-content;
+}
 .admin__area-container textarea {
     border: 1px solid #333;
     width: 740px;
