@@ -1,6 +1,5 @@
 ﻿import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import android from '../../../../assets/protected/android.jpg'
 import AdminTextInput from '../../commonComponents/AdminTextInput';
 import AdminTextArea from '../../commonComponents/AdminTextArea';
 import { Context } from '../../../..';

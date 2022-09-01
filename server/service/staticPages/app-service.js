@@ -33,7 +33,6 @@ class AppService {
         if (!img) {
             throw new Error('No image received!')
         }
-        console.log(id, imgDbCollName); 
         let fileName = await fileService.imageResolve(img);
         const updatedData = await InfoAppCards.update({ [imgDbCollName]: fileName }, {
             where: { id }
@@ -51,20 +50,6 @@ class AppService {
         
     }
 
-
-
-    // update = async (id, name) => {
-    //     const updatedData = await Type.update({ name }, {
-    //         where: { id }
-    //       });
-    //     return {updatedData};
-    // }
-    // delete = async (id) => {
-    //     const updatedData = await Type.destroy({
-    //         where: { id }
-    //       });
-    //     return {updatedData};
-    // }
 }
 
 module.exports = new AppService();

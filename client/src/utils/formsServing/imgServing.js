@@ -10,11 +10,12 @@ export const correctImgTypeCheck = (input) => {
     if (!input) {
         alert('no file added')
         return false;
-    } else if (input.type !== "image/jpeg") {
-        alert('only jpg files accepted');
-        return false;
+    } else if (input.type === "image/jpeg" || input.type === "image/png" || input.type === "image/avif" || input.type === "image/webp") {
+        return true;    
     }
-    return true;
+    alert('only jpeg/png/avif/webp files accepted');
+    return false;
+    
 }
 
 export const setImageFromBlob = (setSrc, input) => {

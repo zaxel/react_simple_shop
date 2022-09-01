@@ -215,13 +215,15 @@ button:active {
 
 .about-card {
     padding: 8px;
-    width: 530px;
-    ;
+    width: 28vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .about-card__img-cont {
-    width: 510px;
-    height: 650px;
+    width: 26vw;
+    height: 35vw;
     margin-bottom: 30px;
 }
 
@@ -466,6 +468,7 @@ button:active {
     font-size: 21px;
     font-weight: 700;
     color: black;
+    text-align: center;
     text-decoration: none;
     margin-bottom: 15px;
 }
@@ -1702,7 +1705,6 @@ button:active {
     margin: 0 auto;
 }
 
-
 /*account orders end*/
 /*stripped table start*/
 .stripped-table {
@@ -2012,9 +2014,6 @@ button:active {
     background-color: rgba(0, 0, 0, .1);
     border-radius: 8px;
 }
-
-
-
 .image-admin__edit-cont {
     width: 100%;
 }
@@ -2104,7 +2103,14 @@ button:active {
     justify-content: space-evenly;
     margin-bottom: 20px;
 }
-
+.app-card__button-img{
+    flex: 0 1 45%;
+    max-height: 50%;
+}
+.app-card__button-img img{
+    max-height: 80px;
+    max-width: 120px;
+}
 .app-card .admin__input-container input {
     width: 100%;
 }
@@ -2263,6 +2269,17 @@ button:active {
 
     /*basket end*/
     /*about start*/
+    .about__cards {
+        margin-bottom: 10px;
+        flex-direction: column;
+    }
+    .about-card {
+        width: 100vw;
+    }
+    .about-card__img-cont {
+        width: 98vw;
+        height: 125vw;
+    }
     .sub-about {
         margin: 10px 0;
     }
@@ -2496,14 +2513,12 @@ button:active {
         margin-bottom: 10px;
     }
 
-    .about__cards {
-        margin-bottom: 10px;
-    }
+    
 
-    .about-card {
+    /* .about-card {
         max-width: 530px;
         ;
-    }
+    } */
 
     .about-card__img-cont {
         width: 95vw;

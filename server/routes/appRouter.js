@@ -6,7 +6,7 @@ const appController = require('../controllers/appController');
 
 
 router.post('/card/',
-    // checkRole('ADMIN', 'MODERATOR'), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('title').isString().isLength({ min: 3 }),
     body('hero').isString().isLength({ min: 5 }),
     body('link').isString().isLength({ min: 5 }),
@@ -16,7 +16,7 @@ router.post('/card/',
     appController.create);
 
 router.put('/card/',
-    // checkRole('ADMIN', 'MODERATOR'), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     body('title').optional().isString().isLength({ min: 3 }),
     body('hero').optional().isString().isLength({ min: 5 }),
@@ -35,7 +35,7 @@ router.get('/cards/',
     
 router.get('/', appController.getPage); 
 
-router.patch('/card/img-update', checkRole('ADMIN'), appController.updateCardImg);
+router.patch('/card/img-update', checkRole(['ADMIN', 'MODERATOR']), appController.updateCardImg);
 
 // router.delete('/',
 //     body('id').isNumeric(),
