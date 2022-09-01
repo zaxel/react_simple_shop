@@ -97,23 +97,18 @@ const InfoHelpRelatedQuestions = sequelize.define('info_help_related_questions',
 })
 
 
-const InfoAboutCardsPrev = sequelize.define('info_about_cards_prev', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
-  hero: {type: DataTypes.STRING, allowNull: false},
-  text: {type: DataTypes.STRING, allowNull: true},
-  button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
-})
 const InfoAboutCards = sequelize.define('info_about_cards', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
-  text: {type: DataTypes.STRING, allowNull: true},
+  title: {type: DataTypes.STRING, allowNull: false},
+  card_text: {type: DataTypes.STRING, allowNull: true},
+  card_prev_text: {type: DataTypes.STRING, allowNull: true},
+  hero: {type: DataTypes.STRING, allowNull: false},
   button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
 })
 const InfoAboutBlocks = sequelize.define('info_about_blocks', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   about_card_id: {type: DataTypes.INTEGER, allowNull: false},
-  title: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
+  title: {type: DataTypes.STRING, allowNull: false},
   text: {type: DataTypes.STRING, allowNull: true},
   hero: {type: DataTypes.STRING, allowNull: false},
   button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
@@ -199,13 +194,9 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   InfoHelpRelatedQuestions.hasMany(InfoHelpCategories)
   InfoHelpCategories.belongsTo(InfoHelpRelatedQuestions)
 
+  InfoPages.hasMany(InfoAboutCards)
+  InfoAboutCards.belongsTo(InfoPages)
 
-  InfoPages.hasMany(InfoAboutCardsPrev)
-  InfoAboutCardsPrev.belongsTo(InfoPages)
-  
-  InfoAboutCardsPrev.hasOne(InfoAboutCards)
-  InfoAboutCards.belongsTo(InfoAboutCardsPrev)
-  
   InfoAboutCards.hasMany(InfoAboutBlocks)
   InfoAboutBlocks.belongsTo(InfoAboutCards)
   
@@ -215,8 +206,6 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   InfoAboutCards.belongsToMany(ButtonLink, {through: ButtonMediator})
   ButtonLink.belongsToMany(InfoAboutCards, {through: ButtonMediator})
   
-  InfoAboutCardsPrev.belongsToMany(ButtonLink, {through: ButtonMediator})
-  ButtonLink.belongsToMany(InfoAboutCardsPrev, {through: ButtonMediator})
   
   InfoPages.belongsToMany(ButtonLink, {through: ButtonMediator})
   ButtonLink.belongsToMany(InfoPages, {through: ButtonMediator})
@@ -246,7 +235,6 @@ const InfoAppCards = sequelize.define('info_app_cards', {
       InfoHelpAnswers,
       InfoHelpRelatedQuestions,
       
-      InfoAboutCardsPrev,
       InfoAboutCards,
       InfoAboutBlocks,
       ButtonLink,
