@@ -99,10 +99,10 @@ const InfoHelpRelatedQuestions = sequelize.define('info_help_related_questions',
 
 const InfoAboutCards = sequelize.define('info_about_cards', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, allowNull: false},
-  card_text: {type: DataTypes.STRING, allowNull: true},
-  card_prev_text: {type: DataTypes.STRING, allowNull: true},
-  hero: {type: DataTypes.STRING, allowNull: false},
+  title: {type: DataTypes.STRING, allowNull: true},
+  card_text: {type: DataTypes.STRING(1024), allowNull: true},
+  card_prev_text: {type: DataTypes.STRING(1024), allowNull: true},
+  hero: {type: DataTypes.STRING, allowNull: true},
   button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
 })
 const InfoAboutBlocks = sequelize.define('info_about_blocks', {
