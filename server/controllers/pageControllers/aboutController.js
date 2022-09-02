@@ -26,6 +26,22 @@ class AboutController {
             next(ApiError.forbidden(e.message));
         }
     }
+    async update(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id, title, card_text, card_prev_text, button_id, infoPageId } = req.body;
+            let hero = req?.files?.hero || null;
+            const data = await aboutService.update({ id, title, card_text, hero, card_prev_text, button_id, infoPageId });
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
+
+
     async createBlock(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -41,19 +57,7 @@ class AboutController {
         }
     }
 
-    // async update(req, res, next) {
-    //     try {
-    //         const errors = validationResult(req);
-    //         if (!errors.isEmpty()) {
-    //             return next(ApiError.badRequest('validation error: ', errors.array()));
-    //         }
-    //         const { id, title, hero, link, app_button_img, app_button_dark_img, infoPageId } = req.body;
-    //         const data = await appService.update({ id, title, hero, link, app_button_img, app_button_dark_img, infoPageId });
-    //         return res.json(data);
-    //     } catch (e) {
-    //         next(ApiError.forbidden(e.message)); 
-    //     }
-    // }
+    
     // async getSingleCard(req, res, next) {
     //     try {
     //         const errors = validationResult(req);

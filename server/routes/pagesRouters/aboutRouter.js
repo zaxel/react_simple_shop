@@ -13,28 +13,22 @@ router.post('/card/',
     body('card_text').optional().isString().isLength({ min: 5 }),
     body('card_prev_text').optional().isString().isLength({ min: 5 }),
     body('button_id').optional().isArray(),
-    body('infoPageId').isNumeric(),
+    body('infoPageId').optional().isNumeric(),
+    // body('hero').optional().isString().isLength({ min: 5 }),
     aboutController.createCard);
 
-router.post('/block/',
-    // checkRole(['ADMIN', 'MODERATOR']), 
-    body('title').optional().isString().isLength({ min: 3 }),
-    body('text').optional().isString().isLength({ min: 5 }),
-    // body('hero').optional().isString().isLength({ min: 5 }),
-    body('button_id').optional().isArray(),
-    body('infoAboutCardId').isNumeric(),
-    aboutController.createBlock);
 
-// router.put('/card/',
-//     // checkRole(['ADMIN', 'MODERATOR']), 
-//     body('id').isNumeric(),
-//     body('title').optional().isString().isLength({ min: 3 }),
-//     body('hero').optional().isString().isLength({ min: 5 }),
-//     body('link').optional().isURL().isLength({ min: 5 }),
-//     body('app_button_img').optional().isString().isLength({ min: 5 }),
-//     body('app_button_dark_img').optional().isString().isLength({ min: 5 }),
-//     body('InfoPageId').optional().isNumeric(),
-//     appController.update);
+
+router.put('/card/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('id').isNumeric(),
+    body('title').optional().isString().isLength({ min: 3 }),
+    body('card_text').optional().isString().isLength({ min: 5 }),
+    body('card_prev_text').optional().isString().isLength({ min: 5 }),
+    body('button_id').optional().isArray(),
+    body('infoPageId').optional().isNumeric(),
+    // body('hero').optional().isString().isLength({ min: 5 }),
+    aboutController.update);
 
 // router.get('/card/:id',
 //     param('id').isNumeric(),
@@ -52,5 +46,15 @@ router.post('/block/',
 //     checkRole('ADMIN'),
 //     typeController.delete);
 
+
+
+router.post('/block/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('title').optional().isString().isLength({ min: 3 }),
+    body('text').optional().isString().isLength({ min: 5 }),
+    // body('hero').optional().isString().isLength({ min: 5 }),
+    body('button_id').optional().isArray(),
+    body('infoAboutCardId').isNumeric(),
+    aboutController.createBlock);
 
 module.exports = router;

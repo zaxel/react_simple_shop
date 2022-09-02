@@ -16,16 +16,7 @@ class AboutService {
         card = new AboutDto(card);
         return card;
     }
-    createBlock = async ({ title, text, hero, button_id, infoAboutCardId }) => {
-        let fileName = null;
-        if (hero) {
-            fileName = await fileService.imageResolve(hero);
-        }
-        
-        let block = await InfoAboutBlocks.create({ title, text, button_id, infoAboutCardId, hero: fileName });
-        block = new AboutBlockDto(block);
-        return block;
-    }
+   
 
     getPage = async ({name}) => {
         let page = await InfoPages.findOne({
@@ -43,12 +34,12 @@ class AboutService {
 
         
     }
-    // update = async ({id, title, hero, link, app_button_img, app_button_dark_img, infoPageId }) => {
-    //     let updatedData = await InfoAppCards.update({title, hero, link, app_button_img, app_button_dark_img, infoPageId }, {
-    //         where: { id }
-    //       });
-    //     return updatedData;
-    // }
+    update = async ({id, title, card_text, hero, card_prev_text, button_id, infoPageId }) => {
+        let updatedData = await InfoAboutCards.update({title, card_text, hero, card_prev_text, button_id, infoPageId }, {
+            where: { id }
+          });
+        return updatedData;
+    }
     
     // getSingleCard = async ({ id }) => {
     //     let card = await InfoAppCards.findOne({
@@ -72,7 +63,16 @@ class AboutService {
     //     });
     //     return { updatedData };
     // }
-   
+    createBlock = async ({ title, text, hero, button_id, infoAboutCardId }) => {
+        let fileName = null;
+        if (hero) {
+            fileName = await fileService.imageResolve(hero);
+        }
+        
+        let block = await InfoAboutBlocks.create({ title, text, button_id, infoAboutCardId, hero: fileName });
+        block = new AboutBlockDto(block);
+        return block;
+    }
 
 }
 
