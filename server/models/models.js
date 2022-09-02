@@ -107,10 +107,9 @@ const InfoAboutCards = sequelize.define('info_about_cards', {
 })
 const InfoAboutBlocks = sequelize.define('info_about_blocks', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  about_card_id: {type: DataTypes.INTEGER, allowNull: false},
-  title: {type: DataTypes.STRING, allowNull: false},
+  title: {type: DataTypes.STRING, allowNull: true},
   text: {type: DataTypes.STRING, allowNull: true},
-  hero: {type: DataTypes.STRING, allowNull: false},
+  hero: {type: DataTypes.STRING, allowNull: true},
   button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
 })
 const ButtonLink = sequelize.define('button_link', {

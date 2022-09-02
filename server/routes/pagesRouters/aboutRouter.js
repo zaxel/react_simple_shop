@@ -12,7 +12,16 @@ router.post('/card/',
     body('card_prev_text').optional().isString().isLength({ min: 5 }),
     body('button_id').optional().isArray(),
     body('infoPageId').isNumeric(),
-    aboutController.create);
+    aboutController.createCard);
+
+router.post('/block/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('title').optional().isString().isLength({ min: 3 }),
+    body('text').optional().isString().isLength({ min: 5 }),
+    // body('hero').optional().isString().isLength({ min: 5 }),
+    body('button_id').optional().isArray(),
+    body('infoAboutCardId').isNumeric(),
+    aboutController.createBlock);
 
 // router.put('/card/',
 //     // checkRole(['ADMIN', 'MODERATOR']), 

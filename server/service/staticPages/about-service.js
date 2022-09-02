@@ -1,10 +1,11 @@
-﻿const { InfoAboutCards, InfoPages } = require('../../models/models');
+﻿const { InfoAboutCards, InfoAboutBlocks, InfoPages } = require('../../models/models');
 const AboutDto = require('../../dtos/static-page-about-dto.js');
+const AboutBlockDto = require('../../dtos/static-page-about-block-dto.js');
 const PageDto = require('../../dtos/static-page-dto.js');
 const fileService = require("../file/file-service");
 
 class AboutService {
-    create = async ({ title, card_text, card_prev_text, hero, button_id, infoPageId }) => {
+    createCard = async ({ title, card_text, card_prev_text, hero, button_id, infoPageId }) => {
         let fileName = null;
         if (hero) {
             fileName = await fileService.imageResolve(hero);
@@ -13,6 +14,16 @@ class AboutService {
         let card = await InfoAboutCards.create({ title, card_text, card_prev_text, hero: fileName, button_id, infoPageId });
         card = new AboutDto(card);
         return card;
+    }
+    createBlock = async ({ title, text, hero, button_id, infoAboutCardId }) => {
+        let fileName = null;
+        if (hero) {
+            fileName = await fileService.imageResolve(hero);
+        }
+        
+        let block = await InfoAboutBlocks.create({ title, text, button_id, infoAboutCardId, hero: fileName });
+        block = new AboutBlockDto(block);
+        return block;
     }
 
     // update = async ({id, title, hero, link, app_button_img, app_button_dark_img, infoPageId }) => {

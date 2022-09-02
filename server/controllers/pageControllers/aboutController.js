@@ -3,7 +3,7 @@ const aboutService = require('../../service/staticPages/about-service');
 const { validationResult } = require('express-validator');
 
 class AboutController {
-    async create(req, res, next) {
+    async createCard(req, res, next) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
@@ -11,7 +11,21 @@ class AboutController {
             }
             const { title, card_text, card_prev_text, button_id, infoPageId } = req.body;
             let hero = req?.files?.hero || null;
-            const data = await aboutService.create({title, card_text, hero, card_prev_text, button_id, infoPageId});
+            const data = await aboutService.createCard({title, card_text, hero, card_prev_text, button_id, infoPageId});
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async createBlock(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { title, text, button_id, infoAboutCardId } = req.body;
+            let hero = req?.files?.hero || null;
+            const data = await aboutService.createBlock({title, text, hero, button_id, infoAboutCardId});
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));
