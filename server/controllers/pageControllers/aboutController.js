@@ -3,6 +3,15 @@ const aboutService = require('../../service/staticPages/about-service');
 const { validationResult } = require('express-validator');
 
 class AboutController {
+    async getPage(req, res, next) {
+        try {
+            const name = process.env.ABOUT_STATIC_PAGE;
+            const data = await aboutService.getPage({name}); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
     async createCard(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -80,15 +89,7 @@ class AboutController {
     //         next(ApiError.forbidden(e.message));
     //     }
     // }
-    // async getPage(req, res, next) {
-    //     try {
-    //         const name = process.env.APP_STATIC_PAGE;
-    //         const data = await appService.getPage({name}); 
-    //         return res.json(data);
-    //     } catch (e) {
-    //         next(ApiError.forbidden(e.message));
-    //     }
-    // }
+    
 
 
 

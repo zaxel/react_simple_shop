@@ -3,6 +3,7 @@ const AboutDto = require('../../dtos/static-page-about-dto.js');
 const AboutBlockDto = require('../../dtos/static-page-about-block-dto.js');
 const PageDto = require('../../dtos/static-page-dto.js');
 const fileService = require("../file/file-service");
+const aboutBtnsService = require("../staticPages/about-btns-service");
 
 class AboutService {
     createCard = async ({ title, card_text, card_prev_text, hero, button_id, infoPageId }) => {
@@ -26,6 +27,22 @@ class AboutService {
         return block;
     }
 
+    getPage = async ({name}) => {
+        let page = await InfoPages.findOne({
+            where: { name },
+            include: [{ 
+                model: InfoAboutCards, as: 'info_about_cards',
+                include: [{ 
+                    model: InfoAboutBlocks, as: 'info_about_blocks' 
+                }] 
+            }]
+        });
+        const buttons = aboutBtnsService.getAboutButtons(page);
+        page = new AboutDto(page);
+        return {page, buttons};
+
+        
+    }
     // update = async ({id, title, hero, link, app_button_img, app_button_dark_img, infoPageId }) => {
     //     let updatedData = await InfoAppCards.update({title, hero, link, app_button_img, app_button_dark_img, infoPageId }, {
     //         where: { id }
@@ -55,16 +72,7 @@ class AboutService {
     //     });
     //     return { updatedData };
     // }
-    // getPage = async ({name}) => {
-    //     let page = await InfoPages.findOne({
-    //         where: { name },
-    //         include: [{ model: InfoAppCards, as: 'info_app_cards' }]
-    //     });
-    //     page = new PageDto(page);
-    //     return page;
-
-        
-    // }
+   
 
 }
 

@@ -5,6 +5,8 @@ const checkRole = require('../../middleware/checkRoleMiddleware');
 const aboutController = require('../../controllers/pageControllers/aboutController');
 
 
+router.get('/', aboutController.getPage); 
+
 router.post('/card/',
     // checkRole(['ADMIN', 'MODERATOR']), 
     body('title').optional().isString().isLength({ min: 3 }),
@@ -41,7 +43,7 @@ router.post('/block/',
 // router.get('/cards/',
 //     appController.getAllCards); 
     
-// router.get('/', appController.getPage); 
+
 
 // router.patch('/card/img-update', checkRole(['ADMIN', 'MODERATOR']), appController.updateCardImg);
 
