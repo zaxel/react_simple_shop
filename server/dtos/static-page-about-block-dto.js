@@ -1,4 +1,4 @@
-﻿module.exports = class aboutBlockDto {
+﻿module.exports = class AboutBlockDto {
     constructor(model){
         const {id, title, text, button_id, infoAboutCardId, hero, updatedAt, createdAt} = model;
         if(id)this.id = model.id;
