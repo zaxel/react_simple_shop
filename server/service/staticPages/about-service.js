@@ -1,9 +1,10 @@
 ﻿const { InfoAboutCards, InfoAboutBlocks, InfoPages } = require('../../models/models');
 const AboutDto = require('../../dtos/static-page-about-dto.js');
 const AboutBlockDto = require('../../dtos/static-page-about-block-dto.js');
+const AboutCardDto = require('../../dtos/static-page-about-card-dto.js');
 const PageDto = require('../../dtos/static-page-dto.js');
 const fileService = require("../file/file-service");
-const aboutBtnsService = require("../staticPages/about-btns-service");
+const {PageBtnsService, CardBtnService, BlocBtnService} = require("../staticPages/about-btns-service");
 
 class AboutService {
     createCard = async ({ title, card_text, card_prev_text, hero, button_id, infoPageId }) => {
@@ -28,7 +29,7 @@ class AboutService {
                 }] 
             }]
         });
-        const buttons = aboutBtnsService.getAboutButtons(page);
+        const buttons = new PageBtnsService().getPageButtons(page);
         page = new AboutDto(page);
         return {page, buttons};
 
@@ -41,28 +42,49 @@ class AboutService {
         return updatedData;
     }
     
-    // getSingleCard = async ({ id }) => {
-    //     let card = await InfoAppCards.findOne({
-    //         where:  {id}
-    //     });
-    //     card = new AppDto(card);
-    //     return card;
-    // }
-    // getAllCards = async () => {
-    //     let cards = await InfoAppCards.findAll();
-    //     cards = cards.map(el=> new AppDto(el));
-    //     return cards;
-    // }
-    // updateCardImg = async (id, img, imgDbCollName) => {
-    //     if (!img) {
-    //         throw new Error('No image received!')
-    //     }
-    //     let fileName = await fileService.imageResolve(img);
-    //     const updatedData = await InfoAppCards.update({ [imgDbCollName]: fileName }, {
-    //         where: { id }
-    //     });
-    //     return { updatedData };
-    // }
+    getSingleCard = async ({ id }) => {
+        let card = await InfoAboutCards.findOne({
+            where:  {id},
+            include: [{ 
+                model: InfoAboutBlocks, as: 'info_about_blocks' 
+            }] 
+        });
+        card = new AboutCardDto(card);
+        const buttons = new CardBtnService().getCardButtons(card);
+        return {card, buttons};
+    }
+
+    getAllCards = async () => {
+        let cards = await InfoAboutCards.findAll({
+            include: [{ 
+                model: InfoAboutBlocks, as: 'info_about_blocks' 
+            }] 
+        });
+        cards = cards.map(el=> {
+            const card = new AboutCardDto(el);
+            const buttons = new CardBtnService().getCardButtons(card);
+            return {card, buttons};
+        });
+        return cards;
+    }
+    updateCardImg = async (id, img, imgDbCollName) => {
+        if (!img) {
+            throw new Error('No image received!')
+        }
+        let fileName = await fileService.imageResolve(img);
+        const updatedData = await InfoAboutCards.update({ [imgDbCollName]: fileName }, {
+            where: { id }
+        });
+        return { updatedData };
+    }
+    deleteCard = async (id) => {
+        const updatedData = await InfoAboutCards.destroy({
+            where: { id }
+        });
+        return { updatedData };
+    }
+
+
     createBlock = async ({ title, text, hero, button_id, infoAboutCardId }) => {
         let fileName = null;
         if (hero) {

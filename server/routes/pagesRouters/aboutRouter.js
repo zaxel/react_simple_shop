@@ -30,21 +30,19 @@ router.put('/card/',
     // body('hero').optional().isString().isLength({ min: 5 }),
     aboutController.update);
 
-// router.get('/card/:id',
-//     param('id').isNumeric(),
-//     appController.getSingleCard); 
+router.get('/card/:id',
+    param('id').isNumeric(),
+    aboutController.getSingleCard); 
 
-// router.get('/cards/',
-//     appController.getAllCards); 
-    
+router.get('/cards/',
+    aboutController.getAllCards); 
 
+router.patch('/card/img-update', checkRole(['ADMIN', 'MODERATOR']), aboutController.updateCardImg);
 
-// router.patch('/card/img-update', checkRole(['ADMIN', 'MODERATOR']), appController.updateCardImg);
-
-// router.delete('/',
-//     body('id').isNumeric(),
-//     checkRole('ADMIN'),
-//     typeController.delete);
+router.delete('/card/',
+    body('id').isNumeric(),
+    // checkRole('ADMIN'),
+    aboutController.deleteCard);
 
 
 
