@@ -17,8 +17,6 @@ router.post('/card/',
     // body('hero').optional().isString().isLength({ min: 5 }),
     aboutController.createCard);
 
-
-
 router.put('/card/',
     // checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
@@ -28,7 +26,7 @@ router.put('/card/',
     body('button_id').optional().isArray(),
     body('infoPageId').optional().isNumeric(),
     // body('hero').optional().isString().isLength({ min: 5 }),
-    aboutController.update);
+    aboutController.updateCard);
 
 router.get('/card/:id',
     param('id').isNumeric(),
@@ -52,7 +50,33 @@ router.post('/block/',
     body('text').optional().isString().isLength({ min: 5 }),
     // body('hero').optional().isString().isLength({ min: 5 }),
     body('button_id').optional().isArray(),
-    body('infoAboutCardId').isNumeric(),
+    body('infoAboutCardId').optional().isNumeric(),
     aboutController.createBlock);
+
+
+    router.put('/block/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('id').isNumeric(),
+    body('title').optional().isString().isLength({ min: 3 }),
+    body('text').optional().isString().isLength({ min: 5 }),
+    // body('hero').optional().isString().isLength({ min: 5 }),
+    body('button_id').optional().isArray(),
+    body('infoAboutCardId').optional().isNumeric(),
+    // body('hero').optional().isString().isLength({ min: 5 }),
+    aboutController.updateBlock);
+
+router.get('/block/:id',
+    param('id').isNumeric(),
+    aboutController.getSingleBlock); 
+
+router.get('/blocks/',
+    aboutController.getAllBlocks); 
+
+router.patch('/block/img-update', checkRole(['ADMIN', 'MODERATOR']), aboutController.updateBlockImg);
+
+router.delete('/block/',
+    body('id').isNumeric(),
+    // checkRole('ADMIN'),
+    aboutController.deleteBlock);
 
 module.exports = router;

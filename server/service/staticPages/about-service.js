@@ -4,7 +4,7 @@ const AboutBlockDto = require('../../dtos/static-page-about-block-dto.js');
 const AboutCardDto = require('../../dtos/static-page-about-card-dto.js');
 const PageDto = require('../../dtos/static-page-dto.js');
 const fileService = require("../file/file-service");
-const {PageBtnsService, CardBtnService, BlocBtnService} = require("../staticPages/about-btns-service");
+const {PageBtnsService, CardBtnService} = require("../staticPages/about-btns-service");
 
 class AboutService {
     createCard = async ({ title, card_text, card_prev_text, hero, button_id, infoPageId }) => {
@@ -35,7 +35,7 @@ class AboutService {
 
         
     }
-    update = async ({id, title, card_text, hero, card_prev_text, button_id, infoPageId }) => {
+    updateCard = async ({id, title, card_text, hero, card_prev_text, button_id, infoPageId }) => {
         let updatedData = await InfoAboutCards.update({title, card_text, hero, card_prev_text, button_id, infoPageId }, {
             where: { id }
           });
@@ -95,7 +95,44 @@ class AboutService {
         block = new AboutBlockDto(block);
         return block;
     }
+    updateBlock = async ({id, title, text, hero, button_id, infoAboutCardId }) => {
+        let updatedData = await InfoAboutBlocks.update({title, text, hero, button_id, infoAboutCardId }, {
+            where: { id }
+          });
+        return updatedData;
+    }
+    
+    getSingleBlock = async ({ id }) => {
+        let block = await InfoAboutBlocks.findOne({
+            where:  {id}
+        });
+        block = new AboutBlockDto(block);
+        return {block};
+    }
 
+    getAllBlocks = async () => {
+        let blocks = await InfoAboutBlocks.findAll();
+        blocks = blocks.map(el=> {
+            return new AboutBlockDto(el);
+        });
+        return blocks;
+    }
+    updateBlockImg = async (id, img, imgDbCollName) => {
+        if (!img) {
+            throw new Error('No image received!')
+        }
+        let fileName = await fileService.imageResolve(img);
+        const updatedData = await InfoAboutBlocks.update({ [imgDbCollName]: fileName }, {
+            where: { id }
+        });
+        return { updatedData };
+    }
+    deleteBlock = async (id) => {
+        const updatedData = await InfoAboutBlocks.destroy({
+            where: { id }
+        });
+        return { updatedData };
+    }
 }
 
 module.exports = new AboutService();
