@@ -1,7 +1,30 @@
 ﻿
+class BlocBtnService{
+    getBlockButtons = (data) => {
+        
+    }
+}
+class CardBtnService{
+    getCardButtons = (data) => {
+        const allButtons = [];
+        
+        const addButton = (buttons) => {
+            buttons.filter(btn => !allButtons.includes(btn)).forEach(el=>allButtons.push(el));
+        }
 
-class AboutBtnsService {
-    getAboutButtons = (data) => {
+        if(data.button_id && data.button_id.length){
+            addButton(data.button_id);
+        }
+        if(data.info_about_blocks && data.info_about_blocks.length){
+            data.info_about_blocks.filter(el=>el.button_id && el.button_id.length)
+                                .map(btn=>btn.button_id)
+                                .forEach(b=>addButton(b));
+        }
+        return allButtons;
+    }
+}
+class PageBtnsService {
+    getPageButtons = (data) => {
         const allButtons = [];
         const addButton = (buttons) => {
             buttons.filter(btn => !allButtons.includes(btn)).forEach(el=>allButtons.push(el));
@@ -24,4 +47,4 @@ class AboutBtnsService {
     }
 }
 
-module.exports = new AboutBtnsService();
+module.exports = { PageBtnsService, CardBtnService, BlocBtnService};
