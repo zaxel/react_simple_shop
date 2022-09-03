@@ -79,4 +79,31 @@ router.delete('/block/',
     // checkRole('ADMIN'),
     aboutController.deleteBlock);
 
+
+router.post('/btn/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('text').optional().isString().isLength({ min: 3 }),
+    body('link').optional().isString().isLength({ min: 5 }),
+    aboutController.createBtn);
+
+
+    router.put('/btn/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('id').isNumeric(),
+    body('text').optional().isString().isLength({ min: 3 }),
+    body('link').optional().isString().isLength({ min: 5 }),
+    aboutController.updateBtn);
+
+router.get('/btn/:id',
+    param('id').isNumeric(),
+    aboutController.getSingleBtn); 
+
+router.get('/btns/',
+    aboutController.getAllBtns); 
+
+router.delete('/btn/',
+    body('id').isNumeric(),
+    // checkRole('ADMIN'),
+    aboutController.deleteBtn);
+
 module.exports = router;

@@ -1,7 +1,8 @@
-﻿const { InfoAboutCards, InfoAboutBlocks, InfoPages } = require('../../models/models');
+﻿const { InfoAboutCards, InfoAboutBlocks, InfoPages, ButtonLink } = require('../../models/models');
 const AboutDto = require('../../dtos/static-page-about-dto.js');
 const AboutBlockDto = require('../../dtos/static-page-about-block-dto.js');
 const AboutCardDto = require('../../dtos/static-page-about-card-dto.js');
+const AboutBtnDto = require('../../dtos/static-page-about-btn-dto.js');
 const PageDto = require('../../dtos/static-page-dto.js');
 const fileService = require("../file/file-service");
 const {PageBtnsService, CardBtnService} = require("../staticPages/about-btns-service");
@@ -109,7 +110,6 @@ class AboutService {
           });
         return updatedData;
     }
-    
     getSingleBlock = async ({id}) => {
         let block = await InfoAboutBlocks.findOne({
             where:  {id}
@@ -117,7 +117,6 @@ class AboutService {
         block = new AboutBlockDto(block);
         return {block};
     }
-
     getAllBlocks = async () => {
         let blocks = await InfoAboutBlocks.findAll();
         blocks = blocks.map(el=> {
@@ -137,6 +136,39 @@ class AboutService {
     }
     deleteBlock = async (id) => {
         const updatedData = await InfoAboutBlocks.destroy({
+            where: { id }
+        });
+        return { updatedData };
+    }
+    
+    
+    createBtn = async ({ text, link }) => {
+        let btn = await ButtonLink.create({ text, link });
+        btn = new AboutBtnDto(btn);
+        return btn;
+    }
+    updateBtn = async ({id, text, link }) => {
+        let updatedData = await ButtonLink.update({text, link }, {
+            where: { id }
+          });
+        return updatedData;
+    }
+    getSingleBtn = async ({id}) => {
+        let btn = await ButtonLink.findOne({
+            where:  {id}
+        });
+        btn = new AboutBtnDto(btn);
+        return {btn};
+    }
+    getAllBtns = async () => {
+        let btns = await ButtonLink.findAll();
+        btns = btns.map(el=> {
+            return new AboutBtnDto(el);
+        });
+        return btns;
+    }
+    deleteBtn = async (id) => {
+        const updatedData = await ButtonLink.destroy({
             where: { id }
         });
         return { updatedData };

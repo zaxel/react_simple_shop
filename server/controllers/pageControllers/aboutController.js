@@ -40,11 +40,6 @@ class AboutController {
             next(ApiError.forbidden(e.message)); 
         }
     }
-
-
-    
-
-    
     async getSingleCard(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -91,7 +86,7 @@ class AboutController {
             const data = await aboutService.deleteCard(id);
             return res.json(data);
         }catch(e){
-            next(ApiError.badRequest(e.message + ': could not delete type.'));
+            next(ApiError.badRequest(e.message + ': could not delete about card.'));
         }
     }
 
@@ -111,9 +106,6 @@ class AboutController {
             next(ApiError.forbidden(e.message));
         }
     }
-
-
-
     async updateBlock(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -128,11 +120,6 @@ class AboutController {
             next(ApiError.forbidden(e.message)); 
         }
     }
-
-
-    
-
-    
     async getSingleBlock(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -168,7 +155,6 @@ class AboutController {
             next(ApiError.forbidden(e.message));
         }
     }
-
     async deleteBlock(req, res, next){
         try{
             const errors = validationResult(req);
@@ -180,6 +166,68 @@ class AboutController {
             return res.json(data);
         }catch(e){
             next(ApiError.badRequest(e.message + ': could not delete type.'));
+        }
+    }
+    
+    
+    async createBtn(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { text, link } = req.body;
+            const data = await aboutService.createBtn({text, link});
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async updateBtn(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id, text, link } = req.body;
+            const data = await aboutService.updateBtn({ id, text, link });
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
+    async getSingleBtn(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { id } = req.params;
+            const data = await aboutService.getSingleBtn({ id }); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async getAllBtns(req, res, next) {
+        try {
+            const data = await aboutService.getAllBtns(); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async deleteBtn(req, res, next){
+        try{
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id } = req.body;
+            const data = await aboutService.deleteBtn(id);
+            return res.json(data);
+        }catch(e){
+            next(ApiError.badRequest(e.message + ': could not delete button.'));
         }
     }
 }
