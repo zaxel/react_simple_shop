@@ -196,14 +196,14 @@ class AboutController {
             next(ApiError.forbidden(e.message)); 
         }
     }
-    async getSingleBtn(req, res, next) {
+    async getChoosedBtns(req, res, next) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id } = req.params;
-            const data = await aboutService.getSingleBtn({ id }); 
+            let id = req.query.id.split(',');
+            const data = await aboutService.getChoosedBtns({ id }); 
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

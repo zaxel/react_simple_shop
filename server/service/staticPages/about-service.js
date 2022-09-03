@@ -153,12 +153,12 @@ class AboutService {
           });
         return updatedData;
     }
-    getSingleBtn = async ({id}) => {
-        let btn = await ButtonLink.findOne({
+    getChoosedBtns = async ({id}) => {
+        let btns = await ButtonLink.findAll({
             where:  {id}
         });
-        btn = new AboutBtnDto(btn);
-        return {btn};
+        btns = btns.map(btn=>new AboutBtnDto(btn));
+        return {btns};
     }
     getAllBtns = async () => {
         let btns = await ButtonLink.findAll();

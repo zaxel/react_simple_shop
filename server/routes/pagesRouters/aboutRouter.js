@@ -87,16 +87,15 @@ router.post('/btn/',
     aboutController.createBtn);
 
 
-    router.put('/btn/',
+router.put('/btn/',
     // checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     body('text').optional().isString().isLength({ min: 3 }),
     body('link').optional().isString().isLength({ min: 5 }),
     aboutController.updateBtn);
 
-router.get('/btn/:id',
-    param('id').isNumeric(),
-    aboutController.getSingleBtn); 
+router.get('/btn',
+    aboutController.getChoosedBtns); 
 
 router.get('/btns/',
     aboutController.getAllBtns); 
