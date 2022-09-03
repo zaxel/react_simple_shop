@@ -12,9 +12,6 @@ module.exports = class AboutDto {
         if(button_id) this.button_id = model.button_id;
         if(updatedAt) this.updatedAt = Date.parse(model.updatedAt);
         if(createdAt) this.createdAt = Date.parse(model.createdAt);
-        // if(info_app_cards) this.info_app_cards = model.info_app_cards.map(el=> new AppDto(el));
-
-
         if(info_about_cards) this.info_about_cards = model.info_about_cards.map(el=> new AboutCardDto(el));
     }
     
