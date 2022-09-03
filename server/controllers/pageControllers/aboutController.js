@@ -74,7 +74,7 @@ class AboutController {
             }
             let { id, imgDbCollName } = req.body;
             let img = req?.files?.img || null;
-            const data = await aboutService.updateCardImg(id, img, imgDbCollName);
+            const data = await aboutService.updateCardImg(id, img);
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));
@@ -162,7 +162,7 @@ class AboutController {
             }
             let { id, imgDbCollName } = req.body;
             let img = req?.files?.img || null;
-            const data = await aboutService.updateBlockImg(id, img, imgDbCollName);
+            const data = await aboutService.updateBlockImg(id, img);
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

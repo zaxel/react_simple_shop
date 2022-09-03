@@ -36,7 +36,11 @@ class AboutService {
         
     }
     updateCard = async ({id, title, card_text, hero, card_prev_text, button_id, infoPageId }) => {
-        let updatedData = await InfoAboutCards.update({title, card_text, hero, card_prev_text, button_id, infoPageId }, {
+        let fileName = null;
+        if (hero) {
+            fileName = await fileService.imageResolve(hero);
+        }
+        let updatedData = await InfoAboutCards.update({title, card_text, hero: fileName, card_prev_text, button_id, infoPageId }, {
             where: { id }
           });
         return updatedData;
@@ -67,12 +71,12 @@ class AboutService {
         });
         return cards;
     }
-    updateCardImg = async (id, img, imgDbCollName) => {
-        if (!img) {
+    updateCardImg = async ({id, hero}) => {
+        if (!hero) {
             throw new Error('No image received!')
         }
-        let fileName = await fileService.imageResolve(img);
-        const updatedData = await InfoAboutCards.update({ [imgDbCollName]: fileName }, {
+        let fileName = await fileService.imageResolve(hero);
+        const updatedData = await InfoAboutCards.update({ hero: fileName }, {
             where: { id }
         });
         return { updatedData };
@@ -87,8 +91,8 @@ class AboutService {
 
     createBlock = async ({ title, text, hero, button_id, infoAboutCardId }) => {
         let fileName = null;
-        if (hero) {
-            fileName = await fileService.imageResolve(hero);
+        if (hero && hero.length) {
+            fileName = hero.map(img=>fileService.imageResolve(img));
         }
         
         let block = await InfoAboutBlocks.create({ title, text, button_id, infoAboutCardId, hero: fileName });
@@ -96,13 +100,17 @@ class AboutService {
         return block;
     }
     updateBlock = async ({id, title, text, hero, button_id, infoAboutCardId }) => {
-        let updatedData = await InfoAboutBlocks.update({title, text, hero, button_id, infoAboutCardId }, {
+        let fileName = null;
+        if (hero && hero.length) {
+            fileName = hero.map(img=>fileService.imageResolve(img));
+        }
+        let updatedData = await InfoAboutBlocks.update({title, text, hero: fileName, button_id, infoAboutCardId }, {
             where: { id }
           });
         return updatedData;
     }
     
-    getSingleBlock = async ({ id }) => {
+    getSingleBlock = async ({id}) => {
         let block = await InfoAboutBlocks.findOne({
             where:  {id}
         });
@@ -117,12 +125,12 @@ class AboutService {
         });
         return blocks;
     }
-    updateBlockImg = async (id, img, imgDbCollName) => {
-        if (!img) {
+    updateBlockImg = async ({id, hero}) => {
+        if (!hero) {
             throw new Error('No image received!')
         }
-        let fileName = await fileService.imageResolve(img);
-        const updatedData = await InfoAboutBlocks.update({ [imgDbCollName]: fileName }, {
+        let fileName = await fileService.imageResolve(hero);
+        const updatedData = await InfoAboutBlocks.update({ hero: fileName }, {
             where: { id }
         });
         return { updatedData };
