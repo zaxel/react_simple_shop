@@ -5,9 +5,16 @@ const AboutCardDto = require('../../dtos/static-page-about-card-dto.js');
 const AboutBtnDto = require('../../dtos/static-page-about-btn-dto.js');
 const PageDto = require('../../dtos/static-page-dto.js');
 const fileService = require("../file/file-service");
-const {PageBtnsService, CardBtnService} = require("../staticPages/about-btns-service");
+const {PageBtnsService, CardBtnService, BlockBtnService} = require("../staticPages/about-btns-service");
 
 class AboutService {
+    getChoosedBtns = async ({id}) => {
+        let btns = await ButtonLink.findAll({
+            where:  {id}
+        });
+        btns = btns.map(btn=>new AboutBtnDto(btn));
+        return btns;
+    }
     createCard = async ({ title, card_text, card_prev_text, hero, button_id, infoPageId }) => {
         let fileName = null;
         if (hero) {
@@ -18,7 +25,7 @@ class AboutService {
         card = new AboutDto(card);
         return card;
     }
-   
+
 
     getPage = async ({name}) => {
         let page = await InfoPages.findOne({
@@ -30,8 +37,10 @@ class AboutService {
                 }] 
             }]
         });
-        const buttons = new PageBtnsService().getPageButtons(page);
+        const btnsNumbers = new PageBtnsService().getPageButtons(page);
+        const buttons = await this.getChoosedBtns({id:btnsNumbers});
         page = new AboutDto(page);
+        
         return {page, buttons};
 
         
@@ -46,7 +55,6 @@ class AboutService {
           });
         return updatedData;
     }
-    
     getSingleCard = async ({ id }) => {
         let card = await InfoAboutCards.findOne({
             where:  {id},
@@ -55,22 +63,25 @@ class AboutService {
             }] 
         });
         card = new AboutCardDto(card);
-        const buttons = new CardBtnService().getCardButtons(card);
+        const btnsNumbers = new CardBtnService().getCardButtons(card);
+        const buttons = await this.getChoosedBtns({id:btnsNumbers});
         return {card, buttons};
     }
-
     getAllCards = async () => {
-        let cards = await InfoAboutCards.findAll({
+        let cardsArr = await InfoAboutCards.findAll({
             include: [{ 
                 model: InfoAboutBlocks, as: 'info_about_blocks' 
             }] 
         });
-        cards = cards.map(el=> {
-            const card = new AboutCardDto(el);
-            const buttons = new CardBtnService().getCardButtons(card);
-            return {card, buttons};
-        });
-        return cards;
+        const cards = await Promise.all(
+            cardsArr.map(async (el)=> {
+                const card = new AboutCardDto(el);
+                const btnsNumbers = new CardBtnService().getCardButtons(card);
+                const buttons = await this.getChoosedBtns({id:btnsNumbers});
+                return {card, buttons};
+            })
+        ) 
+        return {cards};
     }
     updateCardImg = async ({id, hero}) => {
         if (!hero) {
@@ -115,13 +126,18 @@ class AboutService {
             where:  {id}
         });
         block = new AboutBlockDto(block);
-        return {block};
+        const btnsNumbers = new BlockBtnService().getBlockButtons(block);
+        const buttons = await this.getChoosedBtns({id:btnsNumbers});
+        return {block, buttons};
     }
     getAllBlocks = async () => {
         let blocks = await InfoAboutBlocks.findAll();
-        blocks = blocks.map(el=> {
-            return new AboutBlockDto(el);
-        });
+        blocks = Promise.all(blocks.map(async el=> {
+            const block = new AboutBlockDto(el);
+            const btnsNumbers = new BlockBtnService().getBlockButtons(block);
+            const buttons = await this.getChoosedBtns({id:btnsNumbers});
+            return {block, buttons}
+        }));
         return blocks;
     }
     updateBlockImg = async ({id, hero}) => {
@@ -152,13 +168,6 @@ class AboutService {
             where: { id }
           });
         return updatedData;
-    }
-    getChoosedBtns = async ({id}) => {
-        let btns = await ButtonLink.findAll({
-            where:  {id}
-        });
-        btns = btns.map(btn=>new AboutBtnDto(btn));
-        return {btns};
     }
     getAllBtns = async () => {
         let btns = await ButtonLink.findAll();
