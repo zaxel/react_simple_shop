@@ -12,8 +12,10 @@ class AboutService {
         let btns = await ButtonLink.findAll({
             where:  {id}
         });
-        btns = btns.map(btn=>new AboutBtnDto(btn));
-        return btns;
+        let buttons = btns.reduce((obj, btn)=>{
+            return {...obj, [btn.id]: new AboutBtnDto(btn)}
+        }, {});
+        return buttons;
     }
     createCard = async ({ title, card_text, card_prev_text, hero, button_id, infoPageId }) => {
         let fileName = null;
@@ -171,10 +173,12 @@ class AboutService {
     }
     getAllBtns = async () => {
         let btns = await ButtonLink.findAll();
-        btns = btns.map(el=> {
-            return new AboutBtnDto(el);
-        });
-        return btns;
+
+        let buttons = btns.reduce((obj, btn)=>{
+            return {...obj, [btn.id]: new AboutBtnDto(btn)}
+        }, {});
+        return buttons;
+
     }
     deleteBtn = async (id) => {
         const updatedData = await ButtonLink.destroy({
