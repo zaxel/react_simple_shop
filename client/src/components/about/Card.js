@@ -1,15 +1,23 @@
-﻿import React from 'react';
+﻿import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
+import { Context } from '../..';
+import { ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE } from '../../utils/consts/routes';
 
-const  Card = ({hero, title, descr, buttonText, to}) => {
+const  Card = ({hero, title, card_prev_text, button_id, to, i}) => {
+    const { aboutPage } = useContext(Context);
+    const aboutCardsRoutes = {
+        0: ABOUT_CARD1_ROUTE,
+        1: ABOUT_CARD2_ROUTE,
+        2: ABOUT_CARD3_ROUTE,
+    }
     return (
         <li className='about__card about-card'>
             <div className='about-card__img-cont'>
                 <img src={hero} alt='about hero' />
             </div>
             <h3 className='about-card__title'>{title}</h3>
-            <h4 className='about-card__descr'>{descr}</h4>
-            <Link className="about-card__button" to={to}>{buttonText}</Link>
+            <h4 className='about-card__descr'>{card_prev_text}</h4>
+            <Link className="about-card__button" to={aboutCardsRoutes[i]}>{aboutPage.buttons[button_id[0]]?.text ?? 'button'}</Link>
         </li>
     );
 };
