@@ -9,13 +9,11 @@ import { observer } from 'mobx-react-lite';
 const About = observer(() => {
     const { aboutPage } = useContext(Context);
 
-    // const protectedCards = appPage.pageCards.slice().sort((a,b)=>a.id-b.id).map(card => <ProtectedCard {...card} key={card.title} />);
-
     useEffect(()=>{
         fetchPage(aboutPage);
     },[])
     
-    const cards = aboutPage.pageCards.map((card, i)=><Card key={card.id} i={i} {...card} />);
+    const cards = aboutPage.pageCards.slice().sort((a,b)=>a.id-b.id).map((card, i)=><Card key={card.id} {...card} />);
 
     if (aboutPage.loading) {
         return( <div className="spinner">
