@@ -1,6 +1,6 @@
 ﻿const Router = require('express');
 const router = new Router();
-const { body, param } = require('express-validator');
+const { body, param, query } = require('express-validator');
 const checkRole = require('../../middleware/checkRoleMiddleware');
 const aboutController = require('../../controllers/pageControllers/aboutController');
 
@@ -70,6 +70,7 @@ router.get('/block/:id',
     aboutController.getSingleBlock); 
 
 router.get('/blocks/',
+    query('infoAboutCardId').optional().isNumeric(),
     aboutController.getAllBlocks); 
 
 router.patch('/block/img-update', checkRole(['ADMIN', 'MODERATOR']), aboutController.updateBlockImg);
@@ -83,7 +84,7 @@ router.delete('/block/',
 router.post('/btn/',
     // checkRole(['ADMIN', 'MODERATOR']), 
     body('text').optional().isString().isLength({ min: 3 }),
-    body('link').optional().isString().isLength({ min: 5 }),
+    body('link').optional().isString().isLength({ min: 1 }),
     aboutController.createBtn);
 
 

@@ -4,7 +4,6 @@ import { Context } from '../..';
 import { ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE } from '../../utils/consts/routes';
 
 const  Card = ({hero, title, card_prev_text, button_id, to, id}) => {
-    console.log(id)
     const { aboutPage } = useContext(Context);
     const aboutCardsRoutes = {
         1: ABOUT_CARD1_ROUTE,

@@ -135,7 +135,12 @@ class AboutController {
     }
     async getAllBlocks(req, res, next) {
         try {
-            const data = await aboutService.getAllBlocks(); 
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { infoAboutCardId } = req.query;
+            const data = await aboutService.getAllBlocks(infoAboutCardId); 
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

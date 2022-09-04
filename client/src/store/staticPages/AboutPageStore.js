@@ -8,6 +8,7 @@ export default class AboutPageStore {
         this._pageText = [];
         this._pageCards = [];
         this._cardBlocks = [];
+        this._currentCard = {};
         this._buttons = [];
         this._loading = true;
         this._mainStoreFieldName = 'pageCards';
@@ -33,6 +34,7 @@ export default class AboutPageStore {
         this._pageCards = cards;
     }
     setCardBlocks(blocks) {
+        console.log(blocks)
         this._cardBlocks = blocks;
     }
     setButtons(buttons) {
@@ -43,29 +45,12 @@ export default class AboutPageStore {
         this.setPageName(page.name);
         this.setPageTitle(page.title);
         this.setPageText(page.text);
-
-        this.setPageCards(page.info_about_cards.map(card => {
-            const keysNoCards = Object.keys(card).filter(el => el !== 'info_about_blocks');
-            return keysNoCards.reduce((obj, key) => {
-                return { ...obj, [key]: card[key] }
-            }, {})
-        }));
-
-        this.setCardBlocks((() => {
-            const uniqId = new Set();
-            const uniqBlocks = [];
-            page.info_about_cards.map(card => {
-                return card.info_about_blocks
-            }).forEach(el => {
-                el.forEach(elem => {
-                    if (!uniqId.has(elem.id)) {
-                        uniqBlocks.push(elem);
-                    };
-                    uniqId.add(elem.id);
-                })
-            })
-            return uniqBlocks;
-        })());
+        this.setPageCards(page.info_about_cards);
+        this.setButtons(buttons);
+    }
+    setCurrentCard({card, buttons}) {
+        this._currentCard = card;
+        this.setCardBlocks(card.info_about_blocks)
         this.setButtons(buttons);
     }
 
@@ -89,6 +74,9 @@ export default class AboutPageStore {
     }
     get cardBlocks() {
         return this._cardBlocks;
+    }
+    get currentCard() {
+        return this._currentCard;
     }
     get buttons() {
         return this._buttons;

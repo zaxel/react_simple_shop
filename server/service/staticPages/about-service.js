@@ -33,10 +33,7 @@ class AboutService {
         let page = await InfoPages.findOne({
             where: { name },
             include: [{ 
-                model: InfoAboutCards, as: 'info_about_cards',
-                include: [{ 
-                    model: InfoAboutBlocks, as: 'info_about_blocks' 
-                }] 
+                model: InfoAboutCards, as: 'info_about_cards'
             }]
         });
         const btnsNumbers = new PageBtnsService().getPageButtons(page);
@@ -132,8 +129,11 @@ class AboutService {
         const buttons = await this.getChoosedBtns({id:btnsNumbers});
         return {block, buttons};
     }
-    getAllBlocks = async () => {
-        let blocks = await InfoAboutBlocks.findAll();
+    getAllBlocks = async (cardId) => {
+        const infoAboutCardId = cardId ?? [1,2,3];
+        let blocks = await InfoAboutBlocks.findAll({
+            where: {infoAboutCardId}
+        });
         blocks = Promise.all(blocks.map(async el=> {
             const block = new AboutBlockDto(el);
             const btnsNumbers = new BlockBtnService().getBlockButtons(block);

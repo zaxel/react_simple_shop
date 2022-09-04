@@ -25,6 +25,16 @@ export const fetchAboutPage = async () => {
     const {data} = await $host.get(`api/about`); 
     return data;
 }
+export const fetchAboutCard = async ({cardId}) => {
+    const {data} = await $host.get(`api/about/card/${cardId}`); 
+    return data;
+}
+export const fetchAboutBlocks = async ({infoAboutCardId}) => {
+    const {data} = await $host.get(`api/about/blocks`, {params:{
+        infoAboutCardId
+    }}); 
+    return data;
+}
 
 // export const updateAppPage = async (id, dbFieldName, data) => {
 //     const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
