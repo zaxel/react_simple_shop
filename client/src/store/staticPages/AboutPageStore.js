@@ -1,7 +1,7 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import { makeAutoObservable } from "mobx";
 
-export default class AboutPageStore{
-    constructor(){
+export default class AboutPageStore {
+    constructor() {
         this._pageId = null;
         this._pageName = 'About';
         this._pageTitle = [];
@@ -9,73 +9,91 @@ export default class AboutPageStore{
         this._pageCards = [];
         this._cardBlocks = [];
         this._buttons = [];
-
-
         this._loading = true;
         this._mainStoreFieldName = 'pageCards';
         makeAutoObservable(this);
     }
-    
-    setPageId(id){
+
+    setPageId(id) {
         this._pageId = id;
     }
-    setPageName(name){
+    setPageName(name) {
         this._pageName = name;
     }
-    setPageTitle(titlesArr){
+    setPageTitle(titlesArr) {
         this._pageTitle = titlesArr;
     }
-    setPageText(textsArr){
+    setPageText(textsArr) {
         this._pageText = textsArr;
     }
-    setLoading(bool){
+    setLoading(bool) {
         this._loading = bool;
     }
-    setPageCards(cards){
+    setPageCards(cards) {
         this._pageCards = cards;
     }
-    setCardBlocks(blocks){
+    setCardBlocks(blocks) {
         this._cardBlocks = blocks;
     }
-    setButtons(buttons){
+    setButtons(buttons) {
         this._buttons = buttons;
     }
-    setPage(fetchedData){
+    setPage({page, buttons}) {
+        this.setPageId(page.id);
+        this.setPageName(page.name);
+        this.setPageTitle(page.title);
+        this.setPageText(page.text);
 
-        this.setPageId(fetchedData.id);
-        this.setPageName(fetchedData.name);
-        this.setPageTitle(fetchedData.title);
-        this.setPageText(fetchedData.text);
+        this.setPageCards(page.info_about_cards.map(card => {
+            const keysNoCards = Object.keys(card).filter(el => el !== 'info_about_blocks');
+            return keysNoCards.reduce((obj, key) => {
+                return { ...obj, [key]: card[key] }
+            }, {})
+        }));
 
-        this.setPageCards(fetchedData.about_app_cards);
-        this.setCardBlocks(fetchedData.about_card_blocks);
+        this.setCardBlocks((() => {
+            const uniqId = new Set();
+            const uniqBlocks = [];
+            page.info_about_cards.map(card => {
+                return card.info_about_blocks
+            }).forEach(el => {
+                el.forEach(elem => {
+                    if (!uniqId.has(elem.id)) {
+                        uniqBlocks.push(elem);
+                    };
+                    uniqId.add(elem.id);
+                })
+            })
+            return uniqBlocks;
+        })());
+        this.setButtons(buttons);
     }
 
-    get pageId(){
+    get pageId() {
         return this._pageId;
     }
-    get pageName(){
+    get pageName() {
         return this._pageName;
     }
-    get pageTitle(){
+    get pageTitle() {
         return this._pageTitle;
     }
-    get pageText(){
+    get pageText() {
         return this._pageText;
     }
-    get loading(){
+    get loading() {
         return this._loading;
     }
-    get pageCards(){
+    get pageCards() {
         return this._pageCards;
     }
-    get cardBlocks(){
+    get cardBlocks() {
         return this._cardBlocks;
     }
-    get buttons(){
+    get buttons() {
         return this._buttons;
     }
-    get mainStoreFieldName(){
+    get mainStoreFieldName() {
         return this._mainStoreFieldName;
     }
 }
