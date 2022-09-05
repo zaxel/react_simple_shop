@@ -110,6 +110,7 @@ const InfoAboutBlocks = sequelize.define('info_about_blocks', {
   title: {type: DataTypes.STRING, allowNull: true},
   text: {type: DataTypes.STRING(1024), allowNull: true},
   hero: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
+  position: {type: DataTypes.INTEGER, allowNull: true},
   button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
 })
 const ButtonLink = sequelize.define('button_link', {
