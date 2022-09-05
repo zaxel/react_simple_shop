@@ -1,5 +1,5 @@
 ﻿import { fetchAboutPage, fetchAboutBlocks, fetchAboutCard, updateAboutPage, updateAboutCardData,
-        updateAboutBtnData  } from "../../http/pageAPI";
+        updateAboutBtnData, updateAboutCardImg  } from "../../http/pageAPI";
 
 export const setStore = async (currentStore, fetchedData) => {
   try {
@@ -62,10 +62,10 @@ export const changeData = async (id, dbFieldName, data) => {
   return updatedData;
 }
 
-// export const changeAppCardImg = async (formData) => {
-//   const updatedData = await updateAppCardImg(formData);
-//   return updatedData;
-// }
+export const changeAboutCardImg = async (formData) => {
+  const updatedData = await updateAboutCardImg(formData);
+  return updatedData;
+}
 
 export const changeAboutCardData = async (id, dbFieldName, data) => {
   const updatedData = await updateAboutCardData(id, dbFieldName, data);

@@ -40,10 +40,10 @@ export const updateAboutPage = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
-// export const updateAppCardImg = async (formData) => {
-//     const { data } = await $authHost.patch('api/app/card/img-update/' , formData);
-//     return data; 
-// }
+export const updateAboutCardImg = async (formData) => {
+    const { data } = await $authHost.patch('api/about/card/img-update/' , formData);
+    return data; 
+}
 export const updateAboutCardData = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/about/card' , {id, [dbFieldName]: data});
     return updatedData.data;

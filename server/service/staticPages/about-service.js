@@ -82,7 +82,7 @@ class AboutService {
         ) 
         return {cards};
     }
-    updateCardImg = async ({id, hero}) => {
+    updateCardImg = async (id, hero) => {
         if (!hero) {
             throw new Error('No image received!')
         }

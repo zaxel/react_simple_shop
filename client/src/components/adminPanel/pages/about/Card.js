@@ -9,7 +9,6 @@ const Card = ({ hero, title, card_prev_text, button_id, to, id }) => {
     const { aboutPage } = useContext(Context);
     const buttonText = aboutPage.buttons[button_id[0]].text;
     const buttonId = button_id[0];
-    console.log(hero, title, card_prev_text, button_id, to, id)
     const changeCardTitleCarried = changeAboutCardData.bind(this, id, 'title')
     const changeCardTextCarried = changeAboutCardData.bind(this, id, 'card_prev_text')
     const changeBtnTextCarried = changeAboutBtnData.bind(this, buttonId, 'text')
@@ -17,8 +16,8 @@ const Card = ({ hero, title, card_prev_text, button_id, to, id }) => {
     return (
         <div className='admin-app__card about-card'>
             <h2>edit card with id {id}: </h2>
-            <div className='app-card__img'>
-                <AdminImage id={id} inputTitle={''} imgDbCollName={'hero'} inputData={hero} alt={'card hero'} />
+            <div className='app-card__img app-about__img'>
+                <AdminImage id={id} inputTitle={''} imgDbCollName={'hero'} inputData={hero} alt={'card hero'} cb={changeAboutCardImg} />
                 {/* <AdminImage id={id} inputTitle={''} imgDbCollName={'hero'} inputData={hero} cb={changeAppCardImg} alt={'card hero'} /> */}
             </div>
             <div className='app-card__title'>
