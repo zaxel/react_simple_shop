@@ -1,10 +1,14 @@
 ﻿import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
+import { isContainBtns } from '../../utils/check/isContainBtns';
 
-const  AboutBlock = ({id, title, text, button_id, hero, heroLarge}) => {
-    const {aboutPage} = useContext(Context);
-    const btns = button_id?.map(btn=><Link className="about-card__button experience-block__button" key={aboutPage.buttons[btn].id} to={aboutPage.buttons[btn].link}>{aboutPage.buttons[btn].text}</Link>)
+const AboutBlock = observer(({ id, title, text, button_id, hero, heroLarge }) => {
+    const { aboutPage } = useContext(Context);
+
+    const btns = isContainBtns(aboutPage, button_id) && button_id.map(btn => <Link className="about-card__button experience-block__button" key={aboutPage.buttons[btn].id} to={aboutPage.buttons[btn].link}>{aboutPage.buttons[btn].text}</Link>)
+
     return (
         <div className='sub-about__block experience-block'>
             <div className='experience-block__img-cont'>
@@ -15,11 +19,13 @@ const  AboutBlock = ({id, title, text, button_id, hero, heroLarge}) => {
                 <h3 className='experience-block__title'>
                     {title}
                 </h3>
-                <div className='experience-block__descr'>{text}</div>
-                <div className='experience-block__buttons'>{btns}</div>
+                <div className='experience-block__descr' dangerouslySetInnerHTML={{ __html: text }}></div>
+                <div className='experience-block__buttons'>
+                    {btns}
+                </div>
             </div>
         </div>
     );
-};
+});
 
 export default AboutBlock;

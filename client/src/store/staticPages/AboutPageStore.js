@@ -34,24 +34,23 @@ export default class AboutPageStore {
         this._pageCards = cards;
     }
     setCardBlocks(blocks) {
-        console.log(blocks)
         this._cardBlocks = blocks;
     }
     setButtons(buttons) {
         this._buttons = buttons;
     }
     setPage({page, buttons}) {
+        this.setButtons(buttons);
         this.setPageId(page.id);
         this.setPageName(page.name);
         this.setPageTitle(page.title);
         this.setPageText(page.text);
         this.setPageCards(page.info_about_cards);
-        this.setButtons(buttons);
     }
     setCurrentCard({card, buttons}) {
-        this._currentCard = card;
-        this.setCardBlocks(card.info_about_blocks)
         this.setButtons(buttons);
+        this._currentCard = card;
+        this.setCardBlocks(card.info_about_blocks);
     }
 
     get pageId() {
