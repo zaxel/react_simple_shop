@@ -23,11 +23,13 @@ const AdminTextArea = ({ areaTitle, areaText, cb }) => {
     }
     const onInputBlur = (e) => {
         if (!(e.relatedTarget === buttonRef.current)) {
-            setEdit(false)
+            setEdit(false);
+            setInput(inputLast.current);
         }
     }
     const onButtonBlurHandler = () => {
         setEdit(false);
+        setInput(inputLast.current);
     }
     const onButtonClickHandler = async () => {
         setEdit(false);
