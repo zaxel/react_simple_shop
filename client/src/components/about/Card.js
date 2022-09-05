@@ -14,7 +14,7 @@ const  Card = observer(({hero, title, card_prev_text, button_id, to, id}) => {
     return (
         <li className='about__card about-card'>
             <div className='about-card__img-cont'>
-                <img src={hero} alt='about hero' />
+                <img src={process.env.REACT_APP_API_URL + hero} alt='about hero' />
             </div>
             <h3 className='about-card__title'>{title}</h3>
             <h4 className='about-card__descr'>{card_prev_text}</h4>
