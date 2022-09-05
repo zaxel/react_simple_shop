@@ -2116,6 +2116,15 @@ button:active {
 }
 
 /**admin app end**/
+/**admin about start**/
+.about-card {
+    flex: 0 0 31%;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+}
+/**admin about end**/
 /*admin static pages end*/
 
 /*search start*/
