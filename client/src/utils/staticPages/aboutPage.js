@@ -1,4 +1,4 @@
-﻿import { fetchAboutPage, fetchAboutBlocks, fetchAboutCard  } from "../../http/pageAPI";
+﻿import { fetchAboutPage, fetchAboutBlocks, fetchAboutCard, updateAboutPage  } from "../../http/pageAPI";
 
 export const setStore = async (currentStore, fetchedData) => {
   try {
@@ -55,11 +55,11 @@ export const fetchBlocks = async (currentStore, infoAboutCardId) => {
   return setAboutBlocks(currentStore, fetchedData);
 }
 
-// export const setData = async (id, dbFieldName, data) => {
-//   !Array.isArray(data) && (data = [data]);
-//   const updatedData = await updateAppPage(id, dbFieldName, data);
-//   return updatedData;
-// }
+export const setData = async (id, dbFieldName, data) => {
+  !Array.isArray(data) && (data = [data]);
+  const updatedData = await updateAboutPage(id, dbFieldName, data);
+  return updatedData;
+}
 
 // export const changeAppCardImg = async (formData) => {
 //   const updatedData = await updateAppCardImg(formData);
