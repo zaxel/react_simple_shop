@@ -1,13 +1,20 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ADMIN_APP_ROUTE, ADMIN_ABOUT_ROUTE, ADMIN_HELP_ROUTE } from '../../../utils/consts/routes';
+import { ADMIN_APP_ROUTE, ADMIN_ABOUT_ROUTE, ADMIN_HELP_ROUTE, ABOUT_BUTTONS_ROUTE, ABOUT_BLOCKS_ROUTE,
+        ABOUT_LEFT_CARD_ROUTE, ABOUT_MIDDLE_CARD_ROUTE, ABOUT_RIGHT_CARD_ROUTE } from '../../../utils/consts/routes';
 
 
 const PagesPanelNavbar = () => {
     const routes = [
         {to: ADMIN_APP_ROUTE, title: "app page"}, 
         {to: ADMIN_ABOUT_ROUTE, title: "about page"}, 
-        {to: ADMIN_HELP_ROUTE, title: "help page"}
+        {to: ABOUT_BUTTONS_ROUTE, title: "buttons"},
+        {to: ABOUT_BLOCKS_ROUTE, title: "blocks"},
+        {to: ABOUT_LEFT_CARD_ROUTE, title: "left card"},
+        {to: ABOUT_MIDDLE_CARD_ROUTE, title: "middle card"},
+        {to: ABOUT_RIGHT_CARD_ROUTE, title: "right card"},
+        {to: ADMIN_HELP_ROUTE, title: "help page"},
+
     ];
     const [active, setActive] = useState(false);
 

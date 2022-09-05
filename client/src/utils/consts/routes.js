@@ -38,7 +38,14 @@ export const ADMIN_BRANDS_ROUTE = BASE_ROUTE+'/admin/admin-brands';
 export const ADMIN_PAGES_ROUTE = BASE_ROUTE+'/admin/page';
 export const ADMIN_APP_ROUTE = BASE_ROUTE+'/admin/page/app';
 export const ADMIN_HELP_ROUTE = BASE_ROUTE+'/admin/page/help';
+
 export const ADMIN_ABOUT_ROUTE = BASE_ROUTE+'/admin/page/about';
+
+export const ABOUT_BUTTONS_ROUTE = BASE_ROUTE+'/admin/page/about/btns';
+export const ABOUT_BLOCKS_ROUTE = BASE_ROUTE+'/admin/page/about/blocks';
+export const ABOUT_LEFT_CARD_ROUTE = BASE_ROUTE+'/admin/page/about/l-card';
+export const ABOUT_MIDDLE_CARD_ROUTE = BASE_ROUTE+'/admin/page/about/m-card';
+export const ABOUT_RIGHT_CARD_ROUTE = BASE_ROUTE+'/admin/page/about/r-card';
 
 export const SAMPLE_ROUTE = BASE_ROUTE+'/sample';
 export const CHECKOUT_ROUTE = BASE_ROUTE+'/checkout';

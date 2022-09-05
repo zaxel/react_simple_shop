@@ -1927,6 +1927,28 @@ button:active {
     border-bottom: 1px solid black;
 
 }
+.pages__navbar li:nth-child(3) a,
+.pages__navbar li:nth-child(4) a,
+.pages__navbar li:nth-child(5) a,
+.pages__navbar li:nth-child(6) a,
+.pages__navbar li:nth-child(7) a{
+    font-size: 12px;
+    margin-left: 25px;
+    padding-left: 17px;
+    position: relative;
+}
+.pages__navbar li:nth-child(3) a::before,
+.pages__navbar li:nth-child(4) a::before,
+.pages__navbar li:nth-child(5) a::before,
+.pages__navbar li:nth-child(6) a::before,
+.pages__navbar li:nth-child(7) a::before{
+    position: absolute;
+    top: 30%;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    content: '--'
+}
 
 .pages__navbar a {
     display: block;

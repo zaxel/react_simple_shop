@@ -35,7 +35,13 @@ import AdminPanelRouter from "./components/adminPanel/AdminPanelRouter";
 import PagesPanelRouter from "./components/adminPanel/pages/PagesPanelRouter";
 import AppAdmin from "./components/adminPanel/pages/ourApps/AppAdmin";
 import HelpAdmin from "./components/adminPanel/pages/HelpAdmin";
+
 import AboutAdmin from "./components/adminPanel/pages/about/AboutAdmin";
+import Buttons from "./components/adminPanel/pages/about/Buttons";
+import Blocks from "./components/adminPanel/pages/about/Blocks";
+import LeftCard from "./components/adminPanel/pages/about/LeftCard";
+import MiddleCard from "./components/adminPanel/pages/about/MiddleCard";
+import RightCard from "./components/adminPanel/pages/about/RightCard";
 
 import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
@@ -44,8 +50,12 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE, 
         ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE, HELP_DELIVERY_ROUTE, HELP_RETURNS_ROUTE,
         HELP_ORDER_ROUTE, HELP_STOCK_ROUTE, HELP_TECH_ROUTE, HELP_MAIN_ROUTE, HELP_TECH_ADMIN_ROUTE, 
-        HELP_PAYMENT_ROUTE, ADMIN_PAGES_ROUTE, ADMIN_APP_ROUTE, ADMIN_HELP_ROUTE, ADMIN_ABOUT_ROUTE} from "./utils/consts/routes";
+        HELP_PAYMENT_ROUTE, ADMIN_PAGES_ROUTE, ADMIN_APP_ROUTE, ADMIN_HELP_ROUTE, ADMIN_ABOUT_ROUTE,
+        ABOUT_BUTTONS_ROUTE, ABOUT_BLOCKS_ROUTE, ABOUT_LEFT_CARD_ROUTE, ABOUT_MIDDLE_CARD_ROUTE, ABOUT_RIGHT_CARD_ROUTE} from "./utils/consts/routes";
 
+
+
+        
 
 export const userNavRoutes = [
     {
@@ -107,6 +117,26 @@ export const adminPagesRoutes = [
     {
         path: ADMIN_ABOUT_ROUTE,
         Component: AboutAdmin
+    },
+    {
+        path: ABOUT_BUTTONS_ROUTE,
+        Component: Buttons
+    },
+    {
+        path: ABOUT_BLOCKS_ROUTE,
+        Component: Blocks
+    },
+    {
+        path: ABOUT_LEFT_CARD_ROUTE,
+        Component: LeftCard
+    },
+    {
+        path: ABOUT_MIDDLE_CARD_ROUTE,
+        Component: MiddleCard
+    },
+    {
+        path: ABOUT_RIGHT_CARD_ROUTE,
+        Component: RightCard
     },
 ];
 export const adminRoutes = [
