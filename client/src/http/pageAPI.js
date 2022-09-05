@@ -44,9 +44,13 @@ export const updateAboutPage = async (id, dbFieldName, data) => {
 //     const { data } = await $authHost.patch('api/app/card/img-update/' , formData);
 //     return data; 
 // }
-// export const updateAppCardData = async (id, dbFieldName, data) => {
-//     const updatedData = await $authHost.put('api/app/card' , {id, [dbFieldName]: data});
-//     return updatedData.data;
-// }
+export const updateAboutCardData = async (id, dbFieldName, data) => {
+    const updatedData = await $authHost.put('api/about/card' , {id, [dbFieldName]: data});
+    return updatedData.data;
+}
+export const updateAboutBtnData = async (id, dbFieldName, data) => {
+    const updatedData = await $authHost.put('api/about/btn' , {id, [dbFieldName]: data});
+    return updatedData.data;
+}
 
 

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import AdminTextInput from '../../commonComponents/AdminTextInput';
 import AdminTextArea from '../../commonComponents/AdminTextArea';
 import { Context } from '../../../..';
-import { fetchPage, setData } from '../../../../utils/staticPages/aboutPage';
+import { fetchPage, changeData } from '../../../../utils/staticPages/aboutPage';
 import Card from './Card';
 import { isContainBtns } from '../../../../utils/check/isContainBtns';
 import { Spinner } from 'react-bootstrap';
@@ -13,8 +13,8 @@ const AboutAdmin = observer(() => {
     let title = aboutPage.pageTitle.length && aboutPage.pageTitle[0];
     const text = aboutPage.pageText.length && aboutPage.pageText[0];
 
-    const setInputDataCarry = setData.bind(this, aboutPage.pageId, 'title')
-    const setAreaDataCarry = setData.bind(this, aboutPage.pageId, 'text')
+    const changeInputDataCarry = changeData.bind(this, aboutPage.pageId, 'title')
+    const changeAreaDataCarry = changeData.bind(this, aboutPage.pageId, 'text')
 
     const cards = aboutPage.pageCards.slice().sort((a,b)=>a.id-b.id).map(card=>isContainBtns(aboutPage, card.button_id) && <Card key={card.id} {...card} />);
 
@@ -34,9 +34,9 @@ const AboutAdmin = observer(() => {
             <div className='admin-app__container admin-pages__container'>
                 <h2>Edit content of "{aboutPage.pageName} Page".</h2>
                 <h2>(Click on content to edit.)</h2>
-                <AdminTextInput inputTitle={'page title'} inputText={title} cb={setInputDataCarry}/>
+                <AdminTextInput inputTitle={'page title'} inputText={title} cb={changeInputDataCarry}/>
                 {/* <AdminTextInput inputTitle={'page title'} inputText={title} cb={setInputDataCarry} /> */}
-                <AdminTextArea areaTitle={'page description'} areaText={text} cb={setAreaDataCarry}/>
+                <AdminTextArea areaTitle={'page description'} areaText={text} cb={changeAreaDataCarry}/>
                 {/* <AdminTextArea areaTitle={'page description'} areaText={text} cb={setAreaDataCarry} /> */}
                 <div className='admin-app__cards-cont'>
                     <h2>edit cards: </h2>
