@@ -2124,6 +2124,9 @@ button:active {
     background-color: #fff;
     text-align: center;
 }
+.app-about__img{
+    height: 450px;
+}
 /**admin about end**/
 /*admin static pages end*/
 
