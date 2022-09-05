@@ -18,21 +18,17 @@ const Card = ({ hero, title, card_prev_text, button_id, to, id }) => {
             <h2>edit card with id {id}: </h2>
             <div className='app-card__img app-about__img'>
                 <AdminImage id={id} inputTitle={''} imgDbCollName={'hero'} inputData={hero} alt={'card hero'} cb={changeAboutCardImg} />
-                {/* <AdminImage id={id} inputTitle={''} imgDbCollName={'hero'} inputData={hero} cb={changeAppCardImg} alt={'card hero'} /> */}
             </div>
             <div className='app-card__title'>
-                {/* <AdminTextInput inputTitle={'title'} inputText={title} cb={setCardTitleCarried} /> */}
                 <AdminTextInput inputTitle={'title'} inputText={title} cb={changeCardTitleCarried}/>
             </div>
             <div className='app-card__title'>
-                {/* <AdminTextInput inputTitle={'text'} inputText={card_prev_text} cb={setCardLinkCarried} /> */}
                 <AdminTextInput inputTitle={'text'} inputText={card_prev_text} cb={changeCardTextCarried}/>
             </div>
             <div className='about-card__buttons'>
                 <div className='about-card__button-img'>
                     <AdminTextInput inputTitle={'button text'} inputText={buttonText} cb={changeBtnTextCarried}/>
                 </div>
-                
             </div>
         </div>
     )

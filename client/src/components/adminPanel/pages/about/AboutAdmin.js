@@ -35,9 +35,7 @@ const AboutAdmin = observer(() => {
                 <h2>Edit content of "{aboutPage.pageName} Page".</h2>
                 <h2>(Click on content to edit.)</h2>
                 <AdminTextInput inputTitle={'page title'} inputText={title} cb={changeInputDataCarry}/>
-                {/* <AdminTextInput inputTitle={'page title'} inputText={title} cb={setInputDataCarry} /> */}
                 <AdminTextArea areaTitle={'page description'} areaText={text} cb={changeAreaDataCarry}/>
-                {/* <AdminTextArea areaTitle={'page description'} areaText={text} cb={setAreaDataCarry} /> */}
                 <div className='admin-app__cards-cont'>
                     <h2>edit cards: </h2>
                     <div className='admin-app__cards'>

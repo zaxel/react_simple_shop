@@ -2127,6 +2127,9 @@ button:active {
 .app-about__img{
     height: 450px;
 }
+.about-card .admin__input-container input {
+    width: 15vw;
+}
 /**admin about end**/
 /*admin static pages end*/
 
