@@ -1,12 +1,21 @@
 ﻿import React, {useContext} from 'react';
 import { Context } from '../..';
 import { Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
+import { observer } from 'mobx-react-lite';
 
-const AboutSubPage = ({children, button_id, card_text, id, infoPageId, info_about_blocks, title}) => {
+const AboutSubPage = observer(({children, button_id, card_text, id, infoPageId, info_about_blocks, title}) => {
     const { aboutPage } = useContext(Context);
-    const btnText = aboutPage.buttons[button_id?.[1]]?.text ?? 'button';
-    const btnLink = aboutPage.buttons[button_id?.[1]]?.link ?? 'button';
+    const btnText = aboutPage.buttons[button_id?.[1]]?.text;
+    const btnLink = aboutPage.buttons[button_id?.[1]]?.link;
 
+    if (aboutPage.loading) {
+        return (
+            <div className="spinner">
+                <Spinner animation="border" />
+            </div>
+        )
+    }
     return (
         <>
             <h2 className='sub-about__title'>{title}</h2>
@@ -14,10 +23,10 @@ const AboutSubPage = ({children, button_id, card_text, id, infoPageId, info_abou
                 <p>{card_text}</p>
             </div>
             {children}
-            <Link className="about-card__button" to={btnLink}>{btnText}</Link>
+            {btnLink && <Link className="about-card__button" to={btnLink}>{btnText}</Link>}
         </>
 
     );
-};
+});
 
 export default AboutSubPage;
