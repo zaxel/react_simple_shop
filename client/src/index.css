@@ -2153,6 +2153,85 @@ button:active {
     width: 15vw;
 }
 /**admin about end**/
+/**admin about buttons start**/
+.about-buttons .admin-pages__container>h2:first-of-type{
+    margin: 18px 0 30px;
+}
+.about-buttons__btns-block{
+    max-width: 650px;
+    padding: 15px;
+    margin: 20px;
+    background-color: #F3F3F3;
+    border-radius: 8px;
+}
+.about-buttons__btns{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 0 10px;
+    margin-bottom: 6px;
+}
+.about-buttons__title{
+    flex: 0 1 250px;
+    /* max-width: 250px; */
+}
+.about-buttons__title .admin__input-edit{
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+}
+.about-buttons__link .admin__input-edit{
+    padding: 10px;
+}
+.about-buttons__title .admin__input-container{
+    display: block;
+    text-align: center;
+}
+.about-buttons__title .text-admin .admin__input-container>div{
+    margin-left: 0;
+    font-size: 21px;
+}
+.about-buttons__link{
+    flex: 0 1 100%;
+}
+.about-buttons__link>input{
+    margin-left: 12px;
+}
+.about-buttons__delete{
+    flex: 0 0 40px;
+    height: 40px;
+    font-weight: 700;
+    border-color: red;
+    color: red;
+    border-radius: 50%;
+    font-size: 22px;
+    transition: all .3s ease-in-out;
+}
+.about-buttons__delete:hover{
+    background-color: white;
+    transition: all .2s ease-in-out;
+}
+.about-buttons__new{
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    font-weight: 500;
+    transition: all .2s ease-in-out;
+}
+.about-buttons__new:hover{
+    background-color: #fff;
+    transition: all .2s ease-in-out;
+}
+.about-buttons__add-btns h4,
+.about-buttons__btns-block>h4{
+    display: block;
+    margin: 15px 15px 5px 15px;
+    font-weight: 500;
+}
+/**admin about buttons end**/
 /*admin static pages end*/
 
 /*search start*/
