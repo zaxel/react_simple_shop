@@ -102,7 +102,7 @@ router.get('/btns/',
     aboutController.getAllBtns); 
 
 router.delete('/btn/',
-    body('id').isNumeric(),
+    // body('id').isNumeric(),
     // checkRole('ADMIN'),
     aboutController.deleteBtn);
 

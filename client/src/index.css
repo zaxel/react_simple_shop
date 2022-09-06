@@ -2234,6 +2234,9 @@ button:active {
 .about-buttons__spinner{
     height: 70px;
 }
+.about-buttons__btns-block .spinner{
+    height: 55px;
+}
 /**admin about buttons end**/
 /*admin static pages end*/
 

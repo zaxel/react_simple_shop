@@ -10,7 +10,7 @@ export default class AboutPageStore {
         this._cardBlocks = [];
         this._currentCard = {};
         this._buttons = {};
-        this._loading = true;
+        this._loading = false;
         this._mainStoreFieldName = 'pageCards';
         makeAutoObservable(this);
     }
@@ -42,7 +42,17 @@ export default class AboutPageStore {
     addButton(button) {
         this._buttons = {...this._buttons, [button.id]: button};
     }
+    deleteButton(id) {
+        const btnsKeys = Object.keys(this._buttons);
+        const newBtns = {};
+        btnsKeys.filter(el=>el!==id).forEach(btnId=>{
+            newBtns[btnId] = {...this._buttons[btnId]}
+        }) 
+        this._buttons = newBtns;
+    }
     setPage({page, buttons}) {
+        console.log(page)
+        console.log(buttons)
         this.setButtons(buttons);
         this.setPageId(page.id);
         this.setPageName(page.name);

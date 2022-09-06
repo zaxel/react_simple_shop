@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useEffect, useState, useRef } from 'react';
 import AdminTextInput from '../../commonComponents/AdminTextInput';
-import { fetchBtns, createBtn } from '../../../../utils/staticPages/aboutPage';
+import { fetchBtns, createBtn, deleteBtn } from '../../../../utils/staticPages/aboutPage';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../../..';
 import { Spinner } from 'react-bootstrap';
@@ -8,21 +8,19 @@ import ButtonCard from './ButtonCard';
 
 const Buttons = observer(() => {
     const { aboutPage } = useContext(Context);
-    const [localLoading, setLocalLoading] = useState(false);
+    const [newBtnLoading, setNewBtnLoading] = useState(false);
+    const [btnCardLoading, setBtnCardLoading] = useState(null);
     const [newBtnText, setNewBtnText] = useState('');
     const [newBtnLink, setNewBtnLink] = useState('');
     const newBtnRef = useRef(null);
-
     const btns = aboutPage.buttons;
     const btnsId = Object.keys(btns);
-    const cards = btnsId.length && btnsId.map(id => <ButtonCard key={id} text={btns[id]['text']} link={btns[id]['link']} />);
-
 
     useEffect(() => fetchBtns(aboutPage), [])
 
     const addNewButton = async() => {
         try{
-            setLocalLoading(true);
+            setNewBtnLoading(true);
             await createBtn(aboutPage, newBtnText, newBtnLink);
             setNewBtnText('');
             setNewBtnLink('');
@@ -30,9 +28,21 @@ const Buttons = observer(() => {
             alert(e?.response?.data?.message);
             console.log(e);
         }finally{
-            setLocalLoading(false);
+            setNewBtnLoading(false);
         }
     }
+    const onDelClickHandler = async(id) => {
+        try{
+            setBtnCardLoading(id);
+            await deleteBtn(aboutPage, id);
+        }catch(e){
+            alert(e?.response?.data?.message);
+            console.log(e);
+        }finally{
+            setBtnCardLoading(null);
+        }
+    }
+    const cards = btnsId.length && btnsId.map(id => <ButtonCard key={id} text={btns[id]['text']} link={btns[id]['link']} id={id} onDelClickHandler={onDelClickHandler.bind(this, id)} loading={btnCardLoading}/>);
 
     if (aboutPage.loading) {
         return (
@@ -49,52 +59,7 @@ const Buttons = observer(() => {
                 <div className='about-buttons__btns-block'>
                     <h4>edit existing buttons:</h4>
                     {cards}
-                    {/* <div className='about-buttons__btns'>
-                        <div className='about-buttons__title'>
-                            <AdminTextInput inputTitle={''} inputText={'contact us'} />
-                        </div>
-                        <div className='about-buttons__link'>
-                            <AdminTextInput inputTitle={'link'} inputText={'/about'} />
-                        </div>
-                        <button className='about-buttons__delete'>X</button>
-                    </div>
-                    <div className='about-buttons__btns'>
-                        <div className='about-buttons__title'>
-                            <AdminTextInput inputTitle={''} inputText={'make your decision random text'} />
-                        </div>
-                        <div className='about-buttons__link'>
-                            <AdminTextInput inputTitle={'link'} inputText={'/home/page18'} />
-                        </div>
-                        <button className='about-buttons__delete'>X</button>
-                    </div>
-                    <div className='about-buttons__btns'>
-                        <div className='about-buttons__title'>
-                            <AdminTextInput inputTitle={''} inputText={'home'} />
-                        </div>
-                        <div className='about-buttons__link'>
-                            <AdminTextInput inputTitle={'link'} inputText={'/'} />
-                        </div>
-                        <button className='about-buttons__delete'>X</button>
-                    </div>
-                    <div className='about-buttons__btns'>
-                        <div className='about-buttons__title'>
-                            <AdminTextInput inputTitle={''} inputText={'visit our shop'} />
-                        </div>
-                        <div className='about-buttons__link'>
-                            <AdminTextInput inputTitle={'link'} inputText={'https://www.google.com'} />
-                        </div>
-                        <button className='about-buttons__delete'>X</button>
-                    </div>
-                    <div className='about-buttons__btns'>
-                        <div className='about-buttons__title'>
-                            <AdminTextInput inputTitle={''} inputText={'google'} />
-                        </div>
-                        <div className='about-buttons__link'>
-                            <AdminTextInput inputTitle={'link'} inputText={'google.com'} />
-                        </div>
-                        <button className='about-buttons__delete'>X</button>
-                    </div> */}
-                    {localLoading ?
+                    {newBtnLoading ?
                         <div className="spinner about-buttons__spinner">
                             <Spinner animation="border" />
                         </div> :

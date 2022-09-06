@@ -62,5 +62,11 @@ export const updateAboutBtnData = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/about/btn' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
+export const deleteBtnReq = async (id) => {
+    const updatedData = await $authHost.delete('api/about/btn' , {
+        data: {id}
+      });
+    return updatedData.data;
+}
 
 

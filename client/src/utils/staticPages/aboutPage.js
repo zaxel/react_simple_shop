@@ -5,15 +5,12 @@
 
 export const setStoreField = async (currentStore, setterName, newData) => {
   try {
-    currentStore.setLoading(true);
     const data = await currentStore[setterName](newData);
     return data;
   } catch (e) {
     console.log(e);
     alert(e?.response?.data?.message);
     throw e;
-  } finally {
-    currentStore.setLoading(false);
   }
 }
 
