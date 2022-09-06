@@ -83,7 +83,7 @@ router.delete('/block/',
 
 router.post('/btn/',
     // checkRole(['ADMIN', 'MODERATOR']), 
-    body('text').optional().isString().isLength({ min: 3 }),
+    body('text').isString().isLength({ min: 3 }),
     body('link').optional().isString().isLength({ min: 1 }),
     aboutController.createBtn);
 

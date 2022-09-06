@@ -9,7 +9,7 @@ export default class AboutPageStore {
         this._pageCards = [];
         this._cardBlocks = [];
         this._currentCard = {};
-        this._buttons = [];
+        this._buttons = {};
         this._loading = true;
         this._mainStoreFieldName = 'pageCards';
         makeAutoObservable(this);
@@ -38,6 +38,9 @@ export default class AboutPageStore {
     }
     setButtons(buttons) {
         this._buttons = buttons;
+    }
+    addButton(button) {
+        this._buttons = {...this._buttons, [button.id]: button};
     }
     setPage({page, buttons}) {
         this.setButtons(buttons);

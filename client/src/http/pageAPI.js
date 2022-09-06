@@ -48,6 +48,16 @@ export const updateAboutCardData = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/about/card' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
+
+
+export const createAboutBtn = async ({text, link}) => {
+    const updatedData = await $authHost.post('api/about/btn', {text, link});
+    return updatedData.data;
+}
+export const fetchAboutBtns = async () => {
+    const updatedData = await $authHost.get('api/about/btns');
+    return updatedData.data;
+}
 export const updateAboutBtnData = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/about/btn' , {id, [dbFieldName]: data});
     return updatedData.data;
