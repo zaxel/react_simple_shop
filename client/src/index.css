@@ -2168,7 +2168,7 @@ button:active {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid white;
+    border: 1px solid #C4C4C4;
     border-radius: 8px;
     padding: 0 10px;
     margin-bottom: 6px;
@@ -2230,6 +2230,9 @@ button:active {
     display: block;
     margin: 15px 15px 5px 15px;
     font-weight: 500;
+}
+.about-buttons__spinner{
+    height: 70px;
 }
 /**admin about buttons end**/
 /*admin static pages end*/
