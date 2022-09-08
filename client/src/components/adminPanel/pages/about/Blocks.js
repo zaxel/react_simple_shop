@@ -4,9 +4,11 @@ import { Spinner } from 'react-bootstrap';
 import AdminTextInput from '../../commonComponents/AdminTextInput';
 import hero from '../../../../assets/about/exp_hero_1.jpg';
 import heroSmall from '../../../../assets/about/exp_hero_3.jpg';
+import AddBtnsModal from './AddBtnsModal';
 
 
 const Blocks = () => {
+    const [addBtnsVisible, setAddBtnsVisible] = useState(true);
     const [newBlockLoading, setNewBlockLoading] = useState(false);
     const [arrowStyle, setArrowStyle] = useState('arrow');
     const [displayDescr, setDisplayDescr] = useState(false);
@@ -16,6 +18,9 @@ const Blocks = () => {
         arrowStyle === 'arrow' ? setArrowStyle('arrowDown') : setArrowStyle('arrow');
     }
 
+    const onAddBtnsClick = () => {
+        setAddBtnsVisible(true);
+    }
     // if (aboutPage.loading) {
     //     return (
     //         <div className="spinner">
@@ -66,32 +71,38 @@ const Blocks = () => {
                                 </div>
                                 <div className='about-blocks__body-battons'>
                                     <h3>Buttons:</h3>
-                                    <ul className='about-blocks__body-btns'>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>more about us</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>sh</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                    </ul>
+                                    <div className='about-blocks__battons-wrapper'>
+                                        <ul className='about-blocks__body-btns'>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>more about us</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>sh</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                        </ul>
+                                        <div className='about-blocks__btn-add'>
+                                            <button onClick={onAddBtnsClick}>add buttons</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>}
                         </li>
@@ -131,32 +142,38 @@ const Blocks = () => {
                                 </div>
                                 <div className='about-blocks__body-battons'>
                                     <h3>Buttons:</h3>
-                                    <ul className='about-blocks__body-btns'>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>more about us</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>sh</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                    </ul>
+                                    <div className='about-blocks__battons-wrapper'>
+                                        <ul className='about-blocks__body-btns'>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>more about us</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>sh</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                        </ul>
+                                        <div className='about-blocks__btn-add'>
+                                            <button>add buttons</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>}
                         </li>
@@ -196,32 +213,38 @@ const Blocks = () => {
                                 </div>
                                 <div className='about-blocks__body-battons'>
                                     <h3>Buttons:</h3>
-                                    <ul className='about-blocks__body-btns'>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>more about us</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>sh</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                    </ul>
+                                    <div className='about-blocks__battons-wrapper'>
+                                        <ul className='about-blocks__body-btns'>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>more about us</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>sh</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                        </ul>
+                                        <div className='about-blocks__btn-add'>
+                                            <button>add buttons</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>}
                         </li>
@@ -261,32 +284,38 @@ const Blocks = () => {
                                 </div>
                                 <div className='about-blocks__body-battons'>
                                     <h3>Buttons:</h3>
-                                    <ul className='about-blocks__body-btns'>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>more about us</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>sh</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                    </ul>
+                                    <div className='about-blocks__battons-wrapper'>
+                                        <ul className='about-blocks__body-btns'>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>more about us</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>sh</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                        </ul>
+                                        <div className='about-blocks__btn-add'>
+                                            <button>add buttons</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>}
                         </li>
@@ -326,32 +355,38 @@ const Blocks = () => {
                                 </div>
                                 <div className='about-blocks__body-battons'>
                                     <h3>Buttons:</h3>
-                                    <ul className='about-blocks__body-btns'>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>more about us</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>sh</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                    </ul>
+                                    <div className='about-blocks__battons-wrapper'>
+                                        <ul className='about-blocks__body-btns'>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>more about us</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>sh</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                        </ul>
+                                        <div className='about-blocks__btn-add'>
+                                            <button>add buttons</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>}
                         </li>
@@ -391,35 +426,113 @@ const Blocks = () => {
                                 </div>
                                 <div className='about-blocks__body-battons'>
                                     <h3>Buttons:</h3>
-                                    <ul className='about-blocks__body-btns'>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>more about us</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>sh</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                        <li className='about-blocks__body-btn'>
-                                            <button>shop women</button>
-                                        </li>
-                                    </ul>
+                                    <div className='about-blocks__battons-wrapper'>
+                                        <ul className='about-blocks__body-btns'>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>more about us</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>sh</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                        </ul>
+                                        <div className='about-blocks__btn-add'>
+                                            <button>add buttons</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>}
                         </li>
+                        <li className='about-blocks__card'>
+                            <div className='about-blocks__card-header'>
+                                <div className='about-blocks__card-title'>
+                                    <h3>Title:</h3>
+                                    <p>Brands you'll only find at ARAZONE</p>
+                                </div>
+                                <div className='about-blocks__card-text'>
+                                    <h3>Text (first two lines):</h3>
+                                    <p>Giving you the confidence to express your individuality, ARAZONE DESIGN interprets major trends, adding that next-level ARAZONE spin. Representing in our size ranges (ARAZONE Curve, Tall, Petite and Maternity), we've got all the stuff you need to invent a style that’s all yours… making every day, night and everything in-between as extraordinary as you are.</p>
+                                </div>
+                                <div className='about-blocks__card-button'>
+                                    <button onClick={changeStyle} className={arrowStyle}></button>
+                                </div>
+                            </div>
+                            {displayDescr && <div className='about-blocks__card-body'>
+                                <div className='about-blocks__body-title'>
+                                    <AdminTextInput inputTitle={'Title'} inputText={'Body positivity'} />
+                                </div>
+                                <div className='about-blocks__body-text'>
+                                    <AdminTextInput inputTitle={'Text'} inputText={'It’s important for us to promote a healthy body image – we’re not about conforming to any stereotypes'} />
+                                </div>
+                                <div className='about-blocks__body-imgs'>
+                                    <h3>Edit images:</h3>
+                                    <div className='about-blocks__body-images'>
+                                        <div className='about-blocks__body-image'>
+                                            {/* <AdminImage id={id} inputTitle={''} imgDbCollName={'app_button_img'} inputData={app_button_img} cb={changeAppCardImg} alt={'button'} /> */}
+                                            <AdminImage id={11} inputTitle={'main hero'} inputData={'855e8008-3a98-41fb-8e87-bef28caf10ab.jpg'} imgDbCollName={'app_button_img'} alt={'hero'} />
+                                        </div>
+                                        <div className='about-blocks__body-image'>
+                                            {/* <AdminImage id={id} inputTitle={''} imgDbCollName={'app_button_img'} inputData={app_button_img} cb={changeAppCardImg} alt={'button'} /> */}
+                                            <AdminImage id={12} inputTitle={'small screen hero'} inputData={'630dad37-d180-4369-a038-26bd0ed6c07d.jpg'} imgDbCollName={'app_button_img'} alt={'hero'} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='about-blocks__body-battons'>
+                                    <h3>Buttons:</h3>
+                                    <div className='about-blocks__battons-wrapper'>
+                                        <ul className='about-blocks__body-btns'>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>more about us</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>sh</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                            <li className='about-blocks__body-btn'>
+                                                <button>shop women</button>
+                                            </li>
+                                        </ul>
+                                        <div className='about-blocks__btn-add'>
+                                            <button>add buttons</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>}
+                        </li>
+
                     </ul>
                     {/* {cards} */}
                     <h4>create new block:</h4>
@@ -475,6 +588,7 @@ const Blocks = () => {
                         </div>}
                 </div>
             </div>
+            <AddBtnsModal show={addBtnsVisible} onHide={() => setAddBtnsVisible(false)}/>
         </div>
     );
 };

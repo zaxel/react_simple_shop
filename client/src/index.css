@@ -2388,7 +2388,7 @@ button:active {
 }
 .about-blocks__body-btns button{
     position: relative;
-    border: 1px solid black;
+    border: 1px solid #C4C4C4;
     border-radius: 8px;
     text-transform: uppercase;
     padding: 16px 8px;
@@ -2426,6 +2426,21 @@ button:active {
     border-radius: 8px;
     padding: 8px 16px;
     margin-bottom: 8px;
+}
+.about-blocks__battons-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.about-blocks__btn-add{
+    flex: 0 1 125px;
+    margin-right: 12px;
+}
+.about-blocks__btn-add button{
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    text-transform: uppercase;
+    padding: 8px;
 }
 .blocks-form__title,
 .blocks-form__text{
@@ -2503,6 +2518,95 @@ button:active {
     text-transform: uppercase;
     margin-bottom: 12px;
 }
+/***blocks modal start***/
+.blocks-modal .modal-dialog-centered{
+    max-width: 400px;
+    margin-left: 70%;
+    padding-top: 9vh;
+}
+.blocks-modal .modal-body{
+    max-height: 54vh;
+    overflow-x: auto;
+}
+.blocks-modal .modal-body ul li{
+    margin-bottom: 3px;
+    border: 1px solid #C4C4C4;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #F3F3F3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.blocks-modal .modal-body ul li h5{
+    font-weight: 500;
+}
+.blocks-modal .modal-body ul li button{
+    background-color: #C4C4C4;
+    flex: 0 0 42px;
+    border: none;
+    height: 50px;
+    position: relative;
+}
+.blocks-modal .modal-body ul li button::before{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg);
+    content: '';
+    border-left: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.blocks-modal .modal-body ul li button::after{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(-45deg);
+    content: '';
+    border-left: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.blocks-modal .modal-body ul li>div{
+    flex: 0 0 50%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    padding-left: 8px;
+}
+.blocks-modal .modal-body ul li>div:nth-of-type(1){
+    flex: 0 0 37%;
+}
+
+.about-blocks__card-button button{
+    
+}
+.arrow::before{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.arrow::after{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(-45deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+/***blocks modal end***/
 /**admin about blocks end**/
 /*admin static pages end*/
 
