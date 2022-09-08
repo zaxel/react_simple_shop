@@ -222,8 +222,6 @@ button:active {
 }
 
 .about-card__img-cont {
-    width: 26vw;
-    height: 35vw;
     margin-bottom: 30px;
 }
 
@@ -2238,6 +2236,274 @@ button:active {
     height: 55px;
 }
 /**admin about buttons end**/
+/**admin about blocks start**/
+.about-blocks .admin-pages__container>h2:first-of-type{
+    margin: 18px 0 30px;
+}
+.about-blocks__blocks{
+    max-width: 900px;
+    padding: 15px;
+    margin: 20px;
+    background-color: #F3F3F3;
+    border-radius: 8px;
+}
+.about-blocks__blocks>h4{
+    display: block;
+    margin: 15px 15px 5px 15px;
+    font-weight: 500;
+}
+.about-blocks__card{
+    border-radius: 8px;
+    border: 1px solid #C4C4C4;
+    margin-bottom: 1px;
+}
+.about-blocks__cards-cont{
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    background-color: white;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.about-blocks__card-header{
+    display: flex;
+    padding: 8px;
+    max-height: 70px;
+}
+.about-blocks__card-header div{
+    max-height: 100%;
+}
+.about-blocks__card-header div:not(:first-child){
+    margin-left: 12px;
+}
+.about-blocks__card-title{
+    width: 14vw;
+}
+.about-blocks__card-text{
+    width: 64vw;
+}
+.about-blocks__card-title h3,
+.about-blocks__card-text h3{
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.about-blocks__card-text p{
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 100%; 
+    height: 32px; 
+}
+.about-blocks__body-image h2{
+    font-weight: 500;
+}
+.about-blocks__card-button button{
+    border: none;
+    width: 60px;
+    height: 50px;
+    position: relative;
+}
+.arrow::before{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.arrow::after{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(-45deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.arrowDown::before{
+    position: absolute;
+    top: 19px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(135deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.arrowDown::after{
+    position: absolute;
+    top: 19px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(-135deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.about-blocks__card-body{
+    padding: 8px;
+}
+.about-blocks__card-body>div{
+    margin-bottom: 12px;
+}
+.about-blocks__body-imgs,
+.about-blocks__body-battons{
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    padding: 8px;
+
+}
+.about-blocks__body-imgs>h3,
+.about-blocks__body-battons>h3{
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.about-blocks__body-images{
+    display: flex;
+    align-items: flex-start;
+    
+}
+.about-blocks__body-image:first-child{
+    flex: 1 0 66%;
+}
+.about-blocks__body-image:nth-child(2){
+    flex: 1 0 33%;
+    margin-left: 8px;
+}
+.about-blocks__body-btns{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.about-blocks__body-btns .about-blocks__body-btn:not(:first-child) button{
+    margin-left: 5px;
+}
+.about-blocks__body-btns button{
+    position: relative;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-transform: uppercase;
+    padding: 16px 8px;
+    margin-bottom: 6px;
+}
+.about-blocks__body-btns button:hover::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 10;
+}
+.about-blocks__body-btns button:hover::after{
+    content: 'REMOVE';
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, .6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    letter-spacing: 2px;
+    z-index: 20;
+    border-radius: 5px;
+}
+.about-blocks__add-btns{
+    background-color: white;
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 8px;
+}
+.blocks-form__title,
+.blocks-form__text{
+    display: flex;
+    align-items: center;
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 12px;
+}
+.blocks-form__title h5,
+.blocks-form__text h5{
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.blocks-form__title input{
+    margin-left: 12px;
+}
+.blocks-form__text textarea{
+    margin-left: 12px;
+    width: 70vw;
+    min-height: 50px;
+}
+.blocks-form__imgs-cont{
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 12px;
+}
+.blocks-form__imgs-cont>h3{
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.block-form__img-cards{
+    display: flex;
+    align-items: flex-start;
+}
+.block-form__img-card{
+    display: flex;
+    align-items: center;
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 20px;
+}
+.block-form__img-card:first-child{
+    flex: 0 1 60%;
+}
+.block-form__img-card:nth-child(2){
+    flex: 0 1 38%;
+    margin-left: 8px;
+}
+.block-form__img-card>h4{
+    display: block;
+    flex: 0 1 15%;
+    font-weight: 500;
+}
+.block-form__img-wrapper{
+    flex: 0 1 85%;
+    margin-left: 8px;
+}
+.block-form__img-card:nth-child(2) .block-form__img-edit input{
+    max-width: 190px;
+}
+.block-form__img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+.block-form__new-block{
+    border: 1px solid #C4C4C4;
+    padding: 18px 12px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+/**admin about blocks end**/
 /*admin static pages end*/
 
 /*search start*/
@@ -2245,6 +2511,7 @@ button:active {
     padding: 2px 6px;
     background-color: #fff;
     width: fit-content;
+    text-transform: uppercase;
 }
 
 .search input {
@@ -2398,10 +2665,7 @@ button:active {
     .about-card {
         width: 100vw;
     }
-    .about-card__img-cont {
-        width: 98vw;
-        height: 125vw;
-    }
+   
     .sub-about {
         margin: 10px 0;
     }
