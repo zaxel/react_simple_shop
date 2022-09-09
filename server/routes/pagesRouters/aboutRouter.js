@@ -73,7 +73,9 @@ router.get('/blocks/',
     query('infoAboutCardId').optional().isNumeric(),
     aboutController.getAllBlocks); 
 
-router.patch('/block/img-update', checkRole(['ADMIN', 'MODERATOR']), aboutController.updateBlockImg);
+router.patch('/block/img-update', 
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    aboutController.updateBlockImg);
 
 router.delete('/block/',
     body('id').isNumeric(),

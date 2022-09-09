@@ -1,6 +1,6 @@
 ﻿import {
   fetchAboutPage, fetchAboutBlocks, fetchAboutCard, updateAboutPage, updateAboutCardData,
-  updateAboutBtnData, updateAboutCardImg, fetchAboutBtns, createAboutBtn, deleteBtnReq
+  updateAboutBtnData, updateAboutCardImg, fetchAboutBtns, createAboutBtn, deleteBtnReq, updateAboutBlockImg
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -48,7 +48,10 @@ export const fetchBlocks = async (currentStore, infoAboutCardId) => {
   return setStoreField(currentStore, setterName, fetchedData);
   
 }
-
+export const changeAboutBlockImg = async (formData) => {
+  const updatedData = await updateAboutBlockImg(formData);
+  return updatedData;
+}
 
 export const createBtn = async (currentStore, text, link) => {
   const fetchedData = await createAboutBtn({ text, link });

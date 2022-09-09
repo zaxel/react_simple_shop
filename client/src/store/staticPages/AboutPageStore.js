@@ -11,6 +11,7 @@ export default class AboutPageStore {
         this._currentCard = {};
         this._buttons = {};
         this._loading = false;
+        this._activeBlockEdit = null;
         this._mainStoreFieldName = 'pageCards';
         makeAutoObservable(this);
     }
@@ -39,6 +40,9 @@ export default class AboutPageStore {
     setButtons(buttons) {
         this._buttons = buttons;
     }
+    setActiveBlockEdit(blockId) {
+        this._activeBlockEdit = blockId;
+    }
     addButton(button) {
         this._buttons = {...this._buttons, [button.id]: button};
     }
@@ -51,8 +55,6 @@ export default class AboutPageStore {
         this._buttons = newBtns;
     }
     setPage({page, buttons}) {
-        console.log(page)
-        console.log(buttons)
         this.setButtons(buttons);
         this.setPageId(page.id);
         this.setPageName(page.name);
@@ -89,6 +91,9 @@ export default class AboutPageStore {
     }
     get currentCard() {
         return this._currentCard;
+    }
+    get activeBlockEdit() {
+        return this._activeBlockEdit;
     }
     get buttons() {
         return this._buttons;

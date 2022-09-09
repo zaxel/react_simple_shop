@@ -3,7 +3,7 @@ import { Spinner } from 'react-bootstrap';
 import { correctImgTypeCheck, setImageFromBlob } from '../../../utils/formsServing/imgServing';
 import { formDataImg } from '../../../utils/formsServing/imgServing';
 
-const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName }) => {
+const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName, index }) => {
     const fileRef = useRef(null);
     const inputLast = useRef(null);
     const confirmRef = useRef(null);
@@ -39,7 +39,7 @@ const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName }) => {
             try {
                 if (!correctImgTypeCheck(input)) return;
                 setLoading(true);
-                const formData = formDataImg(id, input, imgDbCollName);
+                const formData = formDataImg({id, input, imgDbCollName, index});
                 await cb(formData);
                 setImageFromBlob(setSrc, input);
                 inputLast.current = input;

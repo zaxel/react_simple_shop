@@ -152,9 +152,9 @@ class AboutController {
             if(!errors.isEmpty()){
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id, imgDbCollName } = req.body;
+            let { id, index } = req.body;
             let img = req?.files?.img || null;
-            const data = await aboutService.updateBlockImg(id, img);
+            const data = await aboutService.updateBlockImg({id, index, img});
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

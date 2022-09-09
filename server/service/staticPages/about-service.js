@@ -142,15 +142,24 @@ class AboutService {
         }));
         return blocks;
     }
-    updateBlockImg = async ({id, hero}) => {
-        if (!hero) {
+    updateBlockImg = async ({id, index, img}) => {
+        if (!img) {
             throw new Error('No image received!')
         }
-        let fileName = await fileService.imageResolve(hero);
-        const updatedData = await InfoAboutBlocks.update({ hero: fileName }, {
+        let fileName = await fileService.imageResolve(img);
+        let arr = [];
+        const dbImgs = await InfoAboutBlocks.findOne({
+            where: {id},
+            attributes: ['hero']
+        })
+        if(Array.isArray(dbImgs.hero)){
+            arr = dbImgs.hero; 
+        }
+        arr[index] = fileName;
+        const updatedData = await InfoAboutBlocks.update({ hero: arr }, {
             where: { id }
-        });
-        return { updatedData };
+        })
+        return updatedData;
     }
     deleteBlock = async (id) => {
         const updatedData = await InfoAboutBlocks.destroy({

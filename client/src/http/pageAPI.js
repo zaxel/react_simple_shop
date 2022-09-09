@@ -25,20 +25,15 @@ export const fetchAboutPage = async () => {
     const {data} = await $host.get(`api/about`); 
     return data;
 }
-export const fetchAboutCard = async ({cardId}) => {
-    const {data} = await $host.get(`api/about/card/${cardId}`); 
-    return data;
-}
-export const fetchAboutBlocks = async ({infoAboutCardId}) => {
-    const {data} = await $host.get(`api/about/blocks`, {params:{
-        infoAboutCardId
-    }}); 
-    return data;
-}
-
 export const updateAboutPage = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
     return updatedData.data;
+}
+
+
+export const fetchAboutCard = async ({cardId}) => {
+    const {data} = await $host.get(`api/about/card/${cardId}`); 
+    return data;
 }
 export const updateAboutCardImg = async (formData) => {
     const { data } = await $authHost.patch('api/about/card/img-update/' , formData);
@@ -49,6 +44,19 @@ export const updateAboutCardData = async (id, dbFieldName, data) => {
     return updatedData.data;
 }
 
+
+
+export const fetchAboutBlocks = async ({infoAboutCardId}) => {
+    const {data} = await $host.get(`api/about/blocks`, {params:{
+        infoAboutCardId
+    }}); 
+    return data;
+}
+
+export const updateAboutBlockImg = async (formData) => {
+    const { data } = await $authHost.patch('api/about/block/img-update/' , formData);
+    return data; 
+}
 
 export const createAboutBtn = async ({text, link}) => {
     const updatedData = await $authHost.post('api/about/btn', {text, link});

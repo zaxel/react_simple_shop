@@ -2279,6 +2279,7 @@ button:active {
 }
 .about-blocks__card-title{
     width: 14vw;
+    overflow: hidden;
 }
 .about-blocks__card-text{
     width: 64vw;
