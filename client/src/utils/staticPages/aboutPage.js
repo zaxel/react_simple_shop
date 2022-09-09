@@ -44,7 +44,7 @@ export const changeAboutCardData = async (id, dbFieldName, data) => {
 
 export const fetchBlocks = async (currentStore, infoAboutCardId) => {
   const fetchedData = await fetchAboutBlocks({ infoAboutCardId });
-  const setterName = 'setCardBlocks';
+  const setterName = 'setEditBlocks';
   return setStoreField(currentStore, setterName, fetchedData);
   
 }

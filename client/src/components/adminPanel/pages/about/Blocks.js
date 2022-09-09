@@ -22,15 +22,17 @@ const Blocks = observer(() => {
     useEffect(()=>{
         fetchBlocks(aboutPage);
     }, [])
-    const blockCards = aboutPage.cardBlocks.slice().sort((a,b)=>a.block.id-b.block.id).map(card=><BlockCard key={card.block.id} onAddBtnsClick={onAddBtnsClick} {...card}/>);
+    const blockCards = aboutPage.editBlocks.slice()
+        .sort((a,b)=>a.block.id-b.block.id)
+        .map(card=><BlockCard key={card.block.id} onAddBtnsClick={onAddBtnsClick} {...card}/>);
 
-    // if (aboutPage.loading) {
-    //     return (
-    //         <div className="spinner">
-    //             <Spinner animation="border" />
-    //         </div>
-    //     )
-    // }
+    if (aboutPage.loading) {
+        return (
+            <div className="spinner">
+                <Spinner animation="border" />
+            </div>
+        )
+    }
     return (
         <div className='admin-pages__page about-blocks'>
             <div className='admin-pages__container about-blocks__container'>

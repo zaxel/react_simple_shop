@@ -4,14 +4,13 @@ import AdminImage from '../../commonComponents/AdminImage';
 import { Context } from '../../../..';
 import { observer } from 'mobx-react-lite';
 import { changeAboutBlockImg } from '../../../../utils/staticPages/aboutPage';
+import { blockImgsLinks } from '../../../../utils/dataFormat/blockImgsLinks';
 
 const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
 
     const {aboutPage} = useContext(Context);
     const [arrowStyle, setArrowStyle] = useState('arrow');
     const [displayDescr, setDisplayDescr] = useState(false);
-
-    const setHeroCarried = changeAboutBlockImg.bind(this, block.id, 0)
 
     const changeStyle = () => {
         aboutPage.activeBlockEdit === block.id ? aboutPage.setActiveBlockEdit(null) : aboutPage.setActiveBlockEdit(block.id);
@@ -25,11 +24,6 @@ const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
             setDisplayDescr(false);
         }
     }, [aboutPage.activeBlockEdit])
-
-    const hero = block?.hero?.[0] ?? '';
-    let smallHero = '';
-    if(block.hero && Array.isArray(block.hero) && block.hero.length > 1)
-    smallHero = block.hero[1];
 
     return (
         <li className='about-blocks__card'>
@@ -57,10 +51,10 @@ const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
                                     <h3>Edit images:</h3>
                                     <div className='about-blocks__body-images'>
                                         <div className='about-blocks__body-image'>
-                                            <AdminImage id={block.id} index={0} inputTitle={'main hero'} inputData={hero} cb={changeAboutBlockImg} alt={'hero'} />
+                                            <AdminImage id={block.id} index={0} inputTitle={'main hero'} inputData={blockImgsLinks(block.hero).hero} cb={changeAboutBlockImg} alt={'hero'} />
                                         </div>
                                         <div className='about-blocks__body-image'>
-                                            <AdminImage id={block.id} index={1} inputTitle={'small screen hero'} inputData={smallHero} cb={changeAboutBlockImg} alt={'hero'} />
+                                            <AdminImage id={block.id} index={1} inputTitle={'small screen hero'} inputData={blockImgsLinks(block.hero).smallHero} cb={changeAboutBlockImg} alt={'hero'} />
                                         </div>
                                     </div>
                                 </div>

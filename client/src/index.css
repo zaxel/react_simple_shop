@@ -372,12 +372,14 @@ button:active {
     text-align: center;
 }
 
-.whoWe .experience-block__img {
+.experience-block__img-small {
     display: none;
 }
 
 .whoWe .experience-block__img-cont {
     flex: 0 1 100%;
+    max-width: 65vw;
+    margin: 0 auto;
 }
 
 .whoWe .experience-block__descr-cont {
@@ -2818,11 +2820,15 @@ button:active {
 
     /**who we are**/
     .whoWe .experience-block__img {
-        display: block;
+        display: none;
     }
 
-    .whoWe .experience-block__img-large {
-        display: none;
+    .whoWe .experience-block__img-cont {
+        max-width: 98vw;
+    }
+    .whoWe .experience-block__img-small {
+        display: block;
+        max-width: 98vw;
     }
 
     .whoWe .experience-block__descr-cont {

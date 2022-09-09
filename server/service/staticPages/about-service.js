@@ -61,6 +61,7 @@ class AboutService {
                 model: InfoAboutBlocks, as: 'info_about_blocks' 
             }] 
         });
+
         card = new AboutCardDto(card);
         const btnsNumbers = new CardBtnService().getCardButtons(card);
         const buttons = await this.getChoosedBtns({id:btnsNumbers});

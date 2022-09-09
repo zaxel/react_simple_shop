@@ -8,6 +8,7 @@ export default class AboutPageStore {
         this._pageText = [];
         this._pageCards = [];
         this._cardBlocks = [];
+        this._editBlocks = [];
         this._currentCard = {};
         this._buttons = {};
         this._loading = false;
@@ -35,6 +36,7 @@ export default class AboutPageStore {
         this._pageCards = cards;
     }
     setCardBlocks(blocks) {
+        console.log(33, blocks)
         this._cardBlocks = blocks;
     }
     setButtons(buttons) {
@@ -63,9 +65,17 @@ export default class AboutPageStore {
         this.setPageCards(page.info_about_cards);
     }
     setCurrentCard({card, buttons}) {
+        console.log(55, card.info_about_blocks)
         this.setButtons(buttons);
         this._currentCard = card;
         this.setCardBlocks(card.info_about_blocks);
+    }
+    setEditBlocks(blocks) {
+        this._editBlocks = blocks;
+        console.log(66, blocks)
+        // this.setButtons(buttons);
+        // this._currentCard = card;
+        // this.setCardBlocks(card.info_about_blocks);
     }
 
     get pageId() {
@@ -88,6 +98,9 @@ export default class AboutPageStore {
     }
     get cardBlocks() {
         return this._cardBlocks;
+    }
+    get editBlocks() {
+        return this._editBlocks;
     }
     get currentCard() {
         return this._currentCard;
