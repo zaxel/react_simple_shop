@@ -4,6 +4,7 @@ import AboutBlocks from '../../components/about/AboutBlocks';
 import { Context } from '../..';
 import { fetchCard } from '../../utils/staticPages/aboutPage';
 import { observer } from 'mobx-react-lite';
+import { Spinner } from 'react-bootstrap';
 
 const WhoWe = observer(() => {
     const { aboutPage } = useContext(Context);
@@ -13,7 +14,12 @@ const WhoWe = observer(() => {
     useEffect(()=>{
         fetchCard(aboutPage, cardId);
     }, [])
-    
+
+    if (aboutPage.loading) {
+        return( <div className="spinner">
+            <Spinner animation="border" />
+        </div>)
+    }
     return (
         <div className='sub-about whoWe'>
             <div className='sub-about__container'>

@@ -1,10 +1,19 @@
-﻿import React from 'react';
+﻿import React, {useContext} from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, Modal, Form} from 'react-bootstrap';
-
+import { Button, Modal, Form, Spinner} from 'react-bootstrap';
+import { Context } from '../../../..';
+// import Spinner from 'react-bootstrap';
 
 const AddBtnsModal = observer(({show, onHide}) => {
-    
+  const { aboutPage } = useContext(Context);
+
+  if (aboutPage.loading) {
+    return (
+        <div className="spinner">
+            <Spinner animation="border" />
+        </div>
+    )
+}
     return (
       <Modal className="device-modal blocks-modal" centered show={show} onHide={onHide}>
         <Modal.Header closeButton>

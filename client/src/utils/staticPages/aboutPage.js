@@ -15,9 +15,16 @@ export const setStoreField = async (currentStore, setterName, newData) => {
 }
 
 
+export const setComponentLoading = (store, status) => {
+  store.setLoading(status);
+}
+
+
 export const fetchPage = async (currentStore) => {
+  setComponentLoading(currentStore, true);
   const fetchedData = await fetchAboutPage();
   const setterName = 'setPage';
+  setComponentLoading(currentStore, false);
   return setStoreField(currentStore, setterName, fetchedData);
 }
 export const changeData = async (id, dbFieldName, data) => {
@@ -28,8 +35,10 @@ export const changeData = async (id, dbFieldName, data) => {
 
 
 export const fetchCard = async (currentStore, cardId) => {
+  setComponentLoading(currentStore, true);
   const fetchedData = await fetchAboutCard({ cardId });
   const setterName = 'setCurrentCard';
+  setComponentLoading(currentStore, false);
   return setStoreField(currentStore, setterName, fetchedData);
 }
 export const changeAboutCardImg = async (formData) => {
@@ -43,8 +52,10 @@ export const changeAboutCardData = async (id, dbFieldName, data) => {
 
 
 export const fetchBlocks = async (currentStore, infoAboutCardId) => {
+  setComponentLoading(currentStore, true);
   const fetchedData = await fetchAboutBlocks({ infoAboutCardId });
   const setterName = 'setEditBlocks';
+  setComponentLoading(currentStore, false);
   return setStoreField(currentStore, setterName, fetchedData);
   
 }
@@ -59,8 +70,10 @@ export const createBtn = async (currentStore, text, link) => {
   return setStoreField(currentStore, setterName, fetchedData);
 }
 export const fetchBtns = async (currentStore) => {
+  setComponentLoading(currentStore, true);
   const fetchedData = await fetchAboutBtns();
   const setterName = 'setButtons';
+  setComponentLoading(currentStore, false);
   return setStoreField(currentStore, setterName, fetchedData);
 }
 export const changeAboutBtnData = async (id, dbFieldName, data) => {
