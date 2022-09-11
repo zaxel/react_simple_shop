@@ -8,20 +8,25 @@ import heroSmall from '../../../../assets/about/exp_hero_3.jpg';
 import AddBtnsModal from './AddBtnsModal';
 import BlockCard from './BlockCard';
 import { observer } from 'mobx-react-lite';
-import { fetchBlocks } from '../../../../utils/staticPages/aboutPage';
+import { fetchBlocks, fetchBtnsModal } from '../../../../utils/staticPages/aboutPage';
 
 
 const Blocks = observer(() => {
     const {aboutPage} = useContext(Context);
     const [addBtnsVisible, setAddBtnsVisible] = useState(false);
     const [newBlockLoading, setNewBlockLoading] = useState(false);
-    const onAddBtnsClick = () => {
+    
+    const onAddBtnsClick = async() => {
         setAddBtnsVisible(true);
+        aboutPage.setModalBtnsLoading(true);
+        await fetchBtnsModal(aboutPage);
+        aboutPage.setModalBtnsLoading(false);
     }
 
     useEffect(()=>{
         fetchBlocks(aboutPage);
     }, [])
+
     const blockCards = aboutPage.editBlocks.slice()
         .sort((a,b)=>a.block.id-b.block.id)
         .map(card=><BlockCard key={card.block.id} onAddBtnsClick={onAddBtnsClick} {...card}/>);
@@ -41,10 +46,7 @@ const Blocks = observer(() => {
                     <h4>edit existing blocks:</h4>
                     <ul className='about-blocks__cards-cont'>
                         {blockCards}
-                        
-
                     </ul>
-                    {/* {cards} */}
                     <h4>create new block:</h4>
                     {newBlockLoading ?
                         <div className="spinner about-blocks__spinner">
@@ -75,7 +77,6 @@ const Blocks = observer(() => {
                                                     <input type='file' accept="image/*" onChange={() => console.log(99)} onClick={() => console.log('click')} />
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div className='block-form__img-card'>
                                             <h4>small screen hero:</h4>
@@ -87,14 +88,11 @@ const Blocks = observer(() => {
                                                     <input type='file' accept="image/*" onChange={() => console.log(99)} onClick={() => console.log('click')} />
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                                 <button className='block-form__new-block'>add new block</button>
                             </form>
-
                         </div>}
                 </div>
             </div>

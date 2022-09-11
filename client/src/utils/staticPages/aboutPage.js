@@ -86,3 +86,10 @@ export const deleteBtn = async (currentStore, id) => {
   setStoreField(currentStore, setterName, id);
   return updatedData;
 }
+
+
+export const fetchBtnsModal = async (currentStore) => {
+  const fetchedData = await fetchAboutBtns();
+  const setterName = 'setButtonsModal';
+  return setStoreField(currentStore, setterName, fetchedData);
+}

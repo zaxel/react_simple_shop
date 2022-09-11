@@ -11,7 +11,9 @@ export default class AboutPageStore {
         this._editBlocks = [];
         this._currentCard = {};
         this._buttons = {};
+        this._buttonsModal = {};
         this._loading = false;
+        this._modalBtnsLoading = false;
         this._activeBlockEdit = null;
         this._mainStoreFieldName = 'pageCards';
         makeAutoObservable(this);
@@ -32,6 +34,9 @@ export default class AboutPageStore {
     setLoading(bool) {
         this._loading = bool;
     }
+    setModalBtnsLoading(bool) {
+        this._modalBtnsLoading = bool;
+    }
     setPageCards(cards) {
         this._pageCards = cards;
     }
@@ -41,6 +46,9 @@ export default class AboutPageStore {
     }
     setButtons(buttons) {
         this._buttons = buttons;
+    }
+    setButtonsModal(buttons) {
+        this._buttonsModal = buttons;
     }
     setActiveBlockEdit(blockId) {
         this._activeBlockEdit = blockId;
@@ -65,17 +73,12 @@ export default class AboutPageStore {
         this.setPageCards(page.info_about_cards);
     }
     setCurrentCard({card, buttons}) {
-        console.log(55, card.info_about_blocks)
         this.setButtons(buttons);
         this._currentCard = card;
         this.setCardBlocks(card.info_about_blocks);
     }
     setEditBlocks(blocks) {
         this._editBlocks = blocks;
-        console.log(66, blocks)
-        // this.setButtons(buttons);
-        // this._currentCard = card;
-        // this.setCardBlocks(card.info_about_blocks);
     }
 
     get pageId() {
@@ -92,6 +95,9 @@ export default class AboutPageStore {
     }
     get loading() {
         return this._loading;
+    }
+    get modalBtnsLoading() {
+        return this._modalBtnsLoading;
     }
     get pageCards() {
         return this._pageCards;
@@ -110,6 +116,9 @@ export default class AboutPageStore {
     }
     get buttons() {
         return this._buttons;
+    }
+    get buttonsModal() {
+        return this._buttonsModal;
     }
     get mainStoreFieldName() {
         return this._mainStoreFieldName;
