@@ -25,6 +25,7 @@ const Blocks = observer(() => {
 
     useEffect(()=>{
         fetchBlocks(aboutPage);
+        fetchBtnsModal(aboutPage);
     }, [])
 
     const blockCards = aboutPage.editBlocks.slice()

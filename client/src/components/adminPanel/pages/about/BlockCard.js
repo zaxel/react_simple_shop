@@ -5,9 +5,9 @@ import { Context } from '../../../..';
 import { observer } from 'mobx-react-lite';
 import { changeAboutBlockImg } from '../../../../utils/staticPages/aboutPage';
 import { blockImgsLinks } from '../../../../utils/dataFormat/blockImgsLinks';
+import BlockCardButton from './BlockCardButton';
 
 const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
-
     const {aboutPage} = useContext(Context);
     const [arrowStyle, setArrowStyle] = useState('arrow');
     const [displayDescr, setDisplayDescr] = useState(false);
@@ -15,6 +15,10 @@ const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
     const changeStyle = () => {
         aboutPage.activeBlockEdit === block.id ? aboutPage.setActiveBlockEdit(null) : aboutPage.setActiveBlockEdit(block.id);
     }
+
+    const btnsId = Object.keys(buttons);
+    const blockCardButtons =  btnsId.length && btnsId.map(buttonId => <BlockCardButton key={buttonId} text={buttons[buttonId]['text']} link={buttons[buttonId]['link']} id={buttonId} blockId={block.id}/>);
+
     useEffect(()=>{
         if(aboutPage.activeBlockEdit === block.id){ 
             setArrowStyle('arrowDown'); 
@@ -62,30 +66,7 @@ const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
                                     <h3>Buttons:</h3>
                                     <div className='about-blocks__battons-wrapper'>
                                         <ul className='about-blocks__body-btns'>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>more about us</button>
-                                            </li>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>shop women</button>
-                                            </li>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>shop women</button>
-                                            </li>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>sh</button>
-                                            </li>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>shop</button>
-                                            </li>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>shop women</button>
-                                            </li>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>shop women</button>
-                                            </li>
-                                            <li className='about-blocks__body-btn'>
-                                                <button>shop women</button>
-                                            </li>
+                                            {blockCardButtons || <li>No buttons added</li>}
                                         </ul>
                                         <div className='about-blocks__btn-add'>
                                             <button onClick={onAddBtnsClick}>add buttons</button>

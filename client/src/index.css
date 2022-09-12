@@ -62,6 +62,7 @@ button:active {
 
 /*Spinner Start*/
 .spinner {
+    flex: 1 1 auto;
     width: 100vw;
     height: 77vh;
     display: flex;
@@ -2385,6 +2386,7 @@ button:active {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    flex: 0 1 100%;
 }
 .about-blocks__body-btns .about-blocks__body-btn:not(:first-child) button{
     margin-left: 5px;
@@ -2437,7 +2439,7 @@ button:active {
 }
 .about-blocks__btn-add{
     flex: 0 1 125px;
-    margin-right: 12px;
+    margin: 0 12px;
 }
 .about-blocks__btn-add button{
     border: 1px solid #C4C4C4;

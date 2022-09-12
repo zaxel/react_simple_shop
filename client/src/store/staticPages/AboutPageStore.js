@@ -41,7 +41,6 @@ export default class AboutPageStore {
         this._pageCards = cards;
     }
     setCardBlocks(blocks) {
-        console.log(33, blocks)
         this._cardBlocks = blocks;
     }
     setButtons(buttons) {
@@ -79,6 +78,9 @@ export default class AboutPageStore {
     }
     setEditBlocks(blocks) {
         this._editBlocks = blocks;
+    }
+    editEditBlocksBtns(btns) {
+        this._editBlocks.find(el=>el.block.id === this._activeBlockEdit).buttons = btns;
     }
 
     get pageId() {
