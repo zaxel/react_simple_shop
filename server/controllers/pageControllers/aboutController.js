@@ -113,7 +113,7 @@ class AboutController {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
             const { id, title, text, button_id, infoAboutCardId } = req.body;
-            let hero = req?.files?.hero || null;
+            let hero = req?.files?.hero || undefined;
             const data = await aboutService.updateBlock({ id, title, text, hero, button_id, infoAboutCardId });
             return res.json(data);
         } catch (e) {

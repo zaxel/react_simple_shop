@@ -112,11 +112,10 @@ class AboutService {
         return block;
     }
     updateBlock = async ({id, title, text, hero, button_id, infoAboutCardId }) => {
-        let fileName = null;
         if (hero && hero.length) {
-            fileName = hero.map(img=>fileService.imageResolve(img));
+            hero = hero.map(img=>fileService.imageResolve(img));
         }
-        let updatedData = await InfoAboutBlocks.update({title, text, hero: fileName, button_id, infoAboutCardId }, {
+        let updatedData = await InfoAboutBlocks.update({title, text, hero, button_id, infoAboutCardId }, {
             where: { id }
           });
         return updatedData;
