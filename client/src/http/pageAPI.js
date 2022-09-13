@@ -65,6 +65,12 @@ export const updateAboutBlockImg = async (formData) => {
     const { data } = await $authHost.patch('api/about/block/img-update/' , formData);
     return data; 
 }
+export const deleteBlockReq = async (id) => {
+    const updatedData = await $authHost.delete('api/about/block' , {
+        data: {id}
+      });
+    return updatedData.data;
+}
 
 export const createAboutBtn = async ({text, link}) => {
     const updatedData = await $authHost.post('api/about/btn', {text, link});

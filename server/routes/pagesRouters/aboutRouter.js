@@ -53,8 +53,7 @@ router.post('/block/',
     body('infoAboutCardId').optional().isNumeric(),
     aboutController.createBlock);
 
-
-    router.put('/block/',
+router.put('/block/',
     // checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     body('title').optional().isString().isLength({ min: 3 }),

@@ -3,7 +3,7 @@ import AdminTextInput from '../../commonComponents/AdminTextInput';
 import AdminImage from '../../commonComponents/AdminImage';
 import { Context } from '../../../..';
 import { observer } from 'mobx-react-lite';
-import { changeAboutBlockImg } from '../../../../utils/staticPages/aboutPage';
+import { changeAboutBlockImg, deleteBlock } from '../../../../utils/staticPages/aboutPage';
 import { blockImgsLinks } from '../../../../utils/dataFormat/blockImgsLinks';
 import BlockCardButton from './BlockCardButton';
 
@@ -41,7 +41,7 @@ const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
                                     <p>{block.text}</p>
                                 </div>
                                 <div className='about-blocks__card-del'>
-                                    <button onClick={()=>console.log(99)}>X</button>
+                                    <button onClick={()=>deleteBlock(aboutPage, block.id)}>X</button>
                                 </div>
                                 <div className='about-blocks__card-button'>
                                     <button onClick={changeStyle} className={arrowStyle}></button>

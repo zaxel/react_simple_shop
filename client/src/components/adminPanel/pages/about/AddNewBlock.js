@@ -63,7 +63,7 @@ const AddNewBlock = () => {
                                     {imgSrc && <img src={imgSrc} alt={'hero'} />}
                                 </div>
                                 <div className='block-form__img-edit'>
-                                    <input type='file' accept="image/*" onChange={onInputImageChange} onClick={() => console.log('click')} />
+                                    <input type='file' accept="image/*" onChange={onInputImageChange} />
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ const AddNewBlock = () => {
                                     {smallImgSrc && <img src={smallImgSrc} alt={'small hero'} />}
                                 </div>
                                 <div className='block-form__img-edit'>
-                                    <input type='file' accept="image/*" onChange={onInputSmallImageChange} onClick={() => console.log('click')} />
+                                    <input type='file' accept="image/*" onChange={onInputSmallImageChange}/>
                                 </div>
                             </div>
                         </div>
