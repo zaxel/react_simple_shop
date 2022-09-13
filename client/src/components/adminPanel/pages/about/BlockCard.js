@@ -40,6 +40,9 @@ const BlockCard = observer(({block, buttons, onAddBtnsClick}) => {
                                     <h3>Text (first two lines):</h3>
                                     <p>{block.text}</p>
                                 </div>
+                                <div className='about-blocks__card-del'>
+                                    <button onClick={()=>console.log(99)}>X</button>
+                                </div>
                                 <div className='about-blocks__card-button'>
                                     <button onClick={changeStyle} className={arrowStyle}></button>
                                 </div>
