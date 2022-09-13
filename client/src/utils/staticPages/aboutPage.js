@@ -63,6 +63,8 @@ export const fetchBlocks = async (currentStore, infoAboutCardId) => {
 export const createBlock = async (currentStore, formData) => {
   setComponentLoading(currentStore, true);
   const fetchedData = await createAboutBlock(formData);
+  const setterName = 'addEditBlocks';
+  setStoreField(currentStore, setterName, fetchedData);
   setComponentLoading(currentStore, false);
   return fetchedData;
 }
@@ -70,10 +72,10 @@ export const createBlock = async (currentStore, formData) => {
 
 export const updateBlockBtns = async (btnsCopy, store) => {
   const newBtnsIds = Object.keys(btnsCopy);
-  store.setModalBtnsLoading(true);
+  setStoreField(store, 'setModalBtnsLoading', true);
   await changeAboutBlockData(store.activeBlockEdit, 'button_id', newBtnsIds);
-  store.editEditBlocksBtns(btnsCopy);
-  store.setModalBtnsLoading(false);
+  setStoreField(store, 'editEditBlocksBtns', btnsCopy);
+  setStoreField(store, 'setModalBtnsLoading', false);
 }
 export const changeAboutBlockData = async (id, dbFieldName, data) => {
   const updatedData = await updateAboutBlockData(id, dbFieldName, data);

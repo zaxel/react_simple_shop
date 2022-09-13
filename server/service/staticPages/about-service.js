@@ -100,21 +100,18 @@ class AboutService {
         return { updatedData };
     }
 
-
     createBlock = async ({ title, text, hero, heroAlt }) => {
         let heroArr = [];
         hero &&  heroArr.push(hero);
         heroAlt && heroArr.push(heroAlt);
-        // let fileName = '';
         if (heroArr.length) {
-            // fileName = heroArr.map(img=>fileService.imageResolve(img));
             hero = await Promise.all(heroArr.map(async (img)=>  await fileService.imageResolve(img)));
         }
-        console.log(88, hero)
-        
         let block = await InfoAboutBlocks.create({ title, text, hero });
         block = new AboutBlockDto(block);
-        return block;
+        const btnsNumbers = new BlockBtnService().getBlockButtons(block);
+        const buttons = await this.getChoosedBtns({id:btnsNumbers});
+        return {block, buttons};
     }
     updateBlock = async ({id, title, text, hero, button_id, infoAboutCardId }) => {
         if (hero && hero.length) {

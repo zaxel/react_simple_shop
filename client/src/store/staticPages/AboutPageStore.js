@@ -79,6 +79,9 @@ export default class AboutPageStore {
     setEditBlocks(blocks) {
         this._editBlocks = blocks;
     }
+    addEditBlocks(blocks) {
+        this._editBlocks.push(blocks);
+    }
     editEditBlocksBtns(btns) {
         this._editBlocks.find(el=>el.block.id === this._activeBlockEdit).buttons = btns;
     }
