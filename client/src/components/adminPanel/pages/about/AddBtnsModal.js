@@ -9,6 +9,8 @@ const AddBtnsModal = observer(({show, onHide}) => {
   const { aboutPage } = useContext(Context);
   const btns = aboutPage.buttonsModal;
   const btnsId = Object.keys(btns);
+
+  console.log(aboutPage.editBlocks)
   
   const cards = btnsId.length && btnsId.map(id => <ButtonModalCard key={id} text={btns[id]['text']} link={btns[id]['link']} id={id}/>);
   

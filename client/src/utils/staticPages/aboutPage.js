@@ -1,7 +1,7 @@
 ﻿import {
   fetchAboutPage, fetchAboutBlocks, fetchAboutCard, updateAboutPage, updateAboutCardData,
   updateAboutBtnData, updateAboutCardImg, fetchAboutBtns, createAboutBtn, deleteBtnReq, updateAboutBlockImg,
-  updateAboutBlockData
+  updateAboutBlockData, createAboutBlock
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -59,6 +59,12 @@ export const fetchBlocks = async (currentStore, infoAboutCardId) => {
   setComponentLoading(currentStore, false);
   return setStoreField(currentStore, setterName, fetchedData);
 
+}
+export const createBlock = async (currentStore, formData) => {
+  setComponentLoading(currentStore, true);
+  const fetchedData = await createAboutBlock(formData);
+  setComponentLoading(currentStore, false);
+  return fetchedData;
 }
 
 

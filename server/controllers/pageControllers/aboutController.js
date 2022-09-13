@@ -99,8 +99,9 @@ class AboutController {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
             const { title, text, button_id, infoAboutCardId } = req.body;
-            let hero = req?.files?.hero || null;
-            const data = await aboutService.createBlock({title, text, hero, button_id, infoAboutCardId});
+            let hero = req?.files?.img || null;
+            let heroAlt = req?.files?.imgAlt || null;
+            const data = await aboutService.createBlock({title, text, hero, heroAlt});
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

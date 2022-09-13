@@ -101,13 +101,18 @@ class AboutService {
     }
 
 
-    createBlock = async ({ title, text, hero, button_id, infoAboutCardId }) => {
-        let fileName = null;
-        if (hero && hero.length) {
-            fileName = hero.map(img=>fileService.imageResolve(img));
+    createBlock = async ({ title, text, hero, heroAlt }) => {
+        let heroArr = [];
+        hero &&  heroArr.push(hero);
+        heroAlt && heroArr.push(heroAlt);
+        // let fileName = '';
+        if (heroArr.length) {
+            // fileName = heroArr.map(img=>fileService.imageResolve(img));
+            hero = await Promise.all(heroArr.map(async (img)=>  await fileService.imageResolve(img)));
         }
+        console.log(88, hero)
         
-        let block = await InfoAboutBlocks.create({ title, text, button_id, infoAboutCardId, hero: fileName });
+        let block = await InfoAboutBlocks.create({ title, text, hero });
         block = new AboutBlockDto(block);
         return block;
     }
@@ -129,11 +134,8 @@ class AboutService {
         const buttons = await this.getChoosedBtns({id:btnsNumbers});
         return {block, buttons};
     }
-    getAllBlocks = async (cardId) => {
-        const infoAboutCardId = cardId ?? [1,2,3];
-        let blocks = await InfoAboutBlocks.findAll({
-            where: {infoAboutCardId}
-        });
+    getAllBlocks = async () => {
+        let blocks = await InfoAboutBlocks.findAll();
         blocks = Promise.all(blocks.map(async el=> {
             const block = new AboutBlockDto(el);
             const btnsNumbers = new BlockBtnService().getBlockButtons(block);

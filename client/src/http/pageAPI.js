@@ -53,6 +53,14 @@ export const fetchAboutBlocks = async ({infoAboutCardId}) => {
     }}); 
     return data;
 }
+export const createAboutBlock = async (formData) => {
+    const updatedData = await $authHost.post('api/about/block', formData);
+    return updatedData.data;
+}
+
+
+
+
 export const updateAboutBlockData = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/about/block' , {id, [dbFieldName]: data});
     return updatedData.data;
