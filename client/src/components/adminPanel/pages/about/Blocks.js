@@ -9,6 +9,7 @@ import AddBtnsModal from './AddBtnsModal';
 import BlockCard from './BlockCard';
 import { observer } from 'mobx-react-lite';
 import { fetchBlocks, fetchBtnsModal } from '../../../../utils/staticPages/aboutPage';
+import AddNewBlock from './AddNewBlock';
 
 
 const Blocks = observer(() => {
@@ -53,48 +54,7 @@ const Blocks = observer(() => {
                         <div className="spinner about-blocks__spinner">
                             <Spinner animation="border" />
                         </div> :
-                        <div className='about-blocks__add-btns'>
-                            <form className='about-blocks__form blocks-form'>
-                                <div className='blocks-form__title'>
-                                    {/* <input type={'text'} placeholder='button text' value={newBtnText} onChange={(e)=>setNewBtnText(e.currentTarget.value)}/> */}
-                                    <h5>new title:</h5>
-                                    <input type={'text'} placeholder='block title' />
-                                </div>
-                                <div className='blocks-form__text'>
-                                    {/* <input type={'text'} placeholder='button link' value={newBtnLink} onChange={(e)=>setNewBtnLink(e.target.value)}/> */}
-                                    <h5>new description:</h5>
-                                    <textarea placeholder='block description' />
-                                </div>
-                                <div className='blocks-form__imgs-cont'>
-                                    <h3>Edit images</h3>
-                                    <div className='block-form__img-cards'>
-                                        <div className='block-form__img-card'>
-                                            <h4>main hero:</h4>
-                                            <div className='block-form__img-wrapper'>
-                                                <div className='block-form__img' >
-                                                    <img src={hero} alt={'hero'} />
-                                                </div>
-                                                <div className='block-form__img-edit'>
-                                                    <input type='file' accept="image/*" onChange={() => console.log(99)} onClick={() => console.log('click')} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='block-form__img-card'>
-                                            <h4>small screen hero:</h4>
-                                            <div className='block-form__img-wrapper'>
-                                                <div className='block-form__img' >
-                                                    <img src={heroSmall} alt={'small hero'} />
-                                                </div>
-                                                <div className='block-form__img-edit'>
-                                                    <input type='file' accept="image/*" onChange={() => console.log(99)} onClick={() => console.log('click')} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button className='block-form__new-block'>add new block</button>
-                            </form>
-                        </div>}
+                        <AddNewBlock/>}
                 </div>
             </div>
             <AddBtnsModal show={addBtnsVisible} onHide={() => setAddBtnsVisible(false)}/>
