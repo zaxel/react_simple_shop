@@ -2366,29 +2366,6 @@ button:active {
     color: white;
     transition: all .2s ease-in-out;
 }
-/* .about-blocks__card-del button::before{
-    position: absolute;
-    top: 0;
-    left: 15px;
-    width: 30px;
-    height: 30px;
-    transform: rotate(45deg);
-    content: '';
-    border-bottom: 1px solid black;
-    transition: all .3s ease-in-out;
-}
-.about-blocks__card-del button::after{
-    position: absolute;
-    top: 0;
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    transform: rotate(-45deg);
-    content: '';
-    border-bottom: 1px solid black;
-    transition: all .3s ease-in-out;
-} */
-
 .about-blocks__card-body{
     padding: 8px;
 }
@@ -2652,6 +2629,201 @@ button:active {
 }
 /***blocks modal end***/
 /**admin about blocks end**/
+/**admin about card start**/
+.admin-about__container>h2{
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    margin: 18px 0 30px;
+}
+.admin-about__title{
+    max-width: 500px;
+    margin: 12px 20px 20px;
+}
+.admin-about__area{
+    max-width: 900px;
+    margin: 12px 20px 0;
+}
+.admin-about__blocks{
+    max-width: 900px;
+    padding: 15px;
+    margin: 20px;
+    background-color: #F3F3F3;
+    border-radius: 8px;
+}
+.admin-about__blocks>h4{
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.admin-about__cards-cont{
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    background-color: white;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.admin-about__card{
+    cursor: grab;
+    /* cursor: move; */
+    border-radius: 8px;
+    border: 1px solid #C4C4C4;
+    margin-bottom: 1px;
+}
+.admin-about__card:hover{
+    background-color: rgba(0, 0, 0, .1);
+}
+.admin-about__card-header{
+    display: flex;
+    padding: 8px;
+    max-height: 70px;
+}
+
+.admin-about__card-header{
+    display: flex;
+    padding: 8px;
+    max-height: 70px;
+}
+.admin-about__card-header div{
+    max-height: 100%;
+}
+.admin-about__card-header div:not(:first-child){
+    margin-left: 12px;
+}
+.admin-about__card-title{
+    width: 14vw;
+    overflow: hidden;
+}
+.admin-about__card-text{
+    width: 64vw;
+}
+.admin-about__card-title h3,
+.admin-about__card-text h3{
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.admin-about__card-text p{
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 100%; 
+    height: 32px; 
+}
+
+.admin-about__card-button button{
+    border: none;
+    width: 60px;
+    height: 50px;
+    position: relative;
+}
+.admin-about__card-del button{
+    border: none;
+    width: 60px;
+    height: 50px;
+    position: relative;
+    font-size: 25px;
+    transition: all .2s ease-in-out;
+}
+.admin-about__card-del button:hover{
+    background-color: red;
+    color: white;
+    transition: all .2s ease-in-out;
+}
+.admin-about__card-button button{
+    border: none;
+    width: 60px;
+    height: 50px;
+    position: relative;
+}
+.about-arrow::before{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.about-arrow::after{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(-45deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.about-arrowDown::before{
+    position: absolute;
+    top: 19px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(135deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.about-arrowDown::after{
+    position: absolute;
+    top: 19px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(-135deg);
+    content: '';
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+}
+.admin-about__card-body{
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 30px;
+}
+.admin-about__body-title{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+.admin-about__body-text{
+    margin-bottom: 12px;
+    text-indent: 20px;
+}
+.admin-about__body-img{
+    width: 50vw;
+    height: 30vw;
+    margin-bottom: 20px;
+}
+.admin-about__body-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.admin-about__body-btns{
+    display: flex;
+    justify-content: flex-end;
+}
+.admin-about__body-btn{
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    text-transform: uppercase;
+    padding: 18px 25px;
+    margin-bottom: 8px;
+    font-size: 21px;
+    font-weight: 500;
+}
+.admin-about__body-btn:not(:first-child){
+    margin-left: 8px;
+}
+/**admin about card end**/
 /*admin static pages end*/
 
 /*search start*/

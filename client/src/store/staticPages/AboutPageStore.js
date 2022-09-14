@@ -72,6 +72,7 @@ export default class AboutPageStore {
         this.setPageCards(page.info_about_cards);
     }
     setCurrentCard({card, buttons}) {
+        console.log(card)
         this.setButtons(buttons);
         this._currentCard = card;
         this.setCardBlocks(card.info_about_blocks);

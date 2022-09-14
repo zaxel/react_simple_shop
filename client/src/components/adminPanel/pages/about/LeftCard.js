@@ -1,6 +1,7 @@
 ﻿import React, { useContext, useEffect } from 'react';
 
 import { Spinner } from 'react-bootstrap';
+import CommonCard from './CommonCard';
 
 const LeftCard = () => {
     
@@ -13,9 +14,7 @@ const LeftCard = () => {
     //     )
     // }
     return (
-        <div className="admin-pages__page">
-            LeftCard component content
-        </div>
+        <CommonCard/>
     );
 };
 
