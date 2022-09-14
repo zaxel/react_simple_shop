@@ -21,6 +21,7 @@ const BlockCard = observer(({ block, buttons, onAddBtnsClick }) => {
     const btnsId = Object.keys(buttons);
     const blockCardButtons = btnsId.length && btnsId.map(buttonId => <BlockCardButton key={buttonId} text={buttons[buttonId]['text']} link={buttons[buttonId]['link']} id={buttonId} blockId={block.id} />);
 
+
     useEffect(() => {
         if (aboutPage.activeBlockEdit === block.id) {
             setArrowStyle('arrowDown');

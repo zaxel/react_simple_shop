@@ -1,9 +1,10 @@
-﻿import React, { useContext, useEffect } from 'react';
+﻿import { observer } from 'mobx-react-lite';
+import React, { useContext, useEffect } from 'react';
 
 import { Spinner } from 'react-bootstrap';
 import CommonCard from './CommonCard';
 
-const LeftCard = () => {
+const LeftCard = observer(() => {
     
 
     // if (aboutPage.loading) {
@@ -14,8 +15,8 @@ const LeftCard = () => {
     //     )
     // }
     return (
-        <CommonCard/>
+        <CommonCard cardId={1}/>
     );
-};
+});
 
 export default LeftCard;
