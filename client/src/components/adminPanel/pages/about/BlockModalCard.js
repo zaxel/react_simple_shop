@@ -1,19 +1,20 @@
-﻿import React, {useContext} from 'react';
+﻿import { observer } from 'mobx-react-lite';
+import React, {useContext} from 'react';
 import { Button } from 'react-bootstrap';
 import { Context } from '../../../..';
-import { updateBlockBtns } from '../../../../utils/staticPages/aboutPage';
+import { changeAboutBlockData } from '../../../../utils/staticPages/aboutPage';
 
 
 const BlockModalCard = ({text, title, id}) => {
     const { aboutPage } = useContext(Context);
-    const allButtons = aboutPage.buttonsModal;
-    const currentBlock = aboutPage.editBlocks.find(el=>el.block.id === aboutPage.activeBlockEdit);
-    
+    const blocks = aboutPage.editBlocks;
+    const currentCard = aboutPage.activeCardEdit;
+
     const addBlock = async(id) => {
-      console.log('add block', id)
-        // const btnsCopy = {...currentBlock.buttons};
-        // btnsCopy[id] = allButtons[id];
-        // updateBlockBtns(btnsCopy, aboutPage);
+      aboutPage.setLoading(true);
+      await changeAboutBlockData(id, 'infoAboutCardId', currentCard)
+      aboutPage.setEditBlockCardId(id);
+      aboutPage.setLoading(false);
     }
 
     return (

@@ -11,11 +11,11 @@ const AddBlocksModal = observer(({show, onHide}) => {
   const { aboutPage } = useContext(Context);
   const blocks = aboutPage.editBlocks;
 
-  console.log(aboutPage.editBlocks)
-  const cards = blocks.length && blocks.map(el => <BlockModalCard key={el.block.id} text={el.block.text} title={el.block.title} id={el.block.id}/>);
   useEffect(()=>{
     fetchBlocks(aboutPage);
   },[])
+
+  const cards = blocks.length && blocks.filter(card=>!card.block.infoAboutCardId).map(el => <BlockModalCard key={el.block.id} text={el.block.text} title={el.block.title} id={el.block.id}/>);
   
     return (
       <Modal className="device-modal blocks-modal" centered show={show} onHide={onHide}>
@@ -29,7 +29,7 @@ const AddBlocksModal = observer(({show, onHide}) => {
           <div className="spinner">
             <Spinner animation="border" />
           </div> :
-          <ul>{cards}</ul>}  
+          <ul>{cards.length ? cards : 'no blocks available'}</ul>}  
         </Form.Group>
           
         </Modal.Body>

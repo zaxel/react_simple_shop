@@ -4,6 +4,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../../..';
 import { isContainBtns } from '../../../../utils/check/isContainBtns';
 import { blockImgsLinks } from '../../../../utils/dataFormat/blockImgsLinks';
+import { changeAboutBlockData } from '../../../../utils/staticPages/aboutPage';
 
 
 const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
@@ -31,6 +32,18 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
 
     const btns = isContainBtns(aboutPage, button_id) && button_id.map(btn => <li key={aboutPage.buttons[btn].id} className='admin-about__body-btn'><span>{aboutPage.buttons[btn].text}</span></li>)
 
+    const deleteBlock = async() => {
+        try{
+            aboutPage.setLoading(true);
+            await changeAboutBlockData(id, 'infoAboutCardId', null)
+            aboutPage.removeEditBlockCardId(id); 
+        }catch(e){
+            console.log(e)
+        }finally{
+            aboutPage.setLoading(false);
+        }
+        
+    }
 
     return (
         <li className='admin-about__card'>
@@ -44,8 +57,8 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
                     <p>{text}</p>
                 </div>
                 <div className='admin-about__card-del'>
-                    {/* <button onClick={() => deleteBlock(aboutPage, block.id)}>X</button> */}
-                    <button onClick={() => console.log(99)}>X</button>
+                    <button onClick={deleteBlock}>X</button>
+                    {/* <button onClick={() => console.log(99)}>X</button> */}
                 </div>
                 <div className='admin-about__card-button'>
                     <button onClick={changeStyle} className={arrowStyle}></button>

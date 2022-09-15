@@ -15,6 +15,7 @@ export default class AboutPageStore {
         this._loading = false;
         this._modalBtnsLoading = false;
         this._activeBlockEdit = null;
+        this._activeCardEdit = null;
         this._mainStoreFieldName = 'pageCards';
         makeAutoObservable(this);
     }
@@ -52,6 +53,9 @@ export default class AboutPageStore {
     setActiveBlockEdit(blockId) {
         this._activeBlockEdit = blockId;
     }
+    setActiveCardEdit(cardId) {
+        this._activeCardEdit = cardId;
+    }
     addButton(button) {
         this._buttons = {...this._buttons, [button.id]: button};
     }
@@ -80,6 +84,16 @@ export default class AboutPageStore {
     setEditBlocks(blocks) {
         this._editBlocks = blocks;
     }
+    setEditBlockCardId(id) {
+        let elem = this._editBlocks.find(el=>el.block.id === id).block;
+        elem.infoAboutCardId = this._activeCardEdit;
+        this._cardBlocks.push(elem);
+    }
+    removeEditBlockCardId(id) {
+        let elem = this._editBlocks.find(el=>el.block.id === id).block;
+        elem.infoAboutCardId = null;
+        this._cardBlocks = this._cardBlocks.filter(el=>el.id !== id);
+    }
     addEditBlocks(blocks) {
         this._editBlocks.push(blocks);
     }
@@ -89,6 +103,7 @@ export default class AboutPageStore {
     editEditBlocksBtns(btns) {
         this._editBlocks.find(el=>el.block.id === this._activeBlockEdit).buttons = btns;
     }
+    
 
     get pageId() {
         return this._pageId;
@@ -122,6 +137,9 @@ export default class AboutPageStore {
     }
     get activeBlockEdit() {
         return this._activeBlockEdit;
+    }
+    get activeCardEdit() {
+        return this._activeCardEdit;
     }
     get buttons() {
         return this._buttons;

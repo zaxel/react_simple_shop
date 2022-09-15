@@ -60,7 +60,7 @@ router.put('/block/',
     body('text').optional().isString().isLength({ min: 5 }),
     // body('hero').optional().isString().isLength({ min: 5 }),
     body('button_id').optional().isArray(),
-    body('infoAboutCardId').optional().isNumeric(),
+    // body('infoAboutCardId').optional().isNumeric(),
     // body('hero').optional().isString().isLength({ min: 5 }),
     aboutController.updateBlock);
 

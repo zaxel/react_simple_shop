@@ -20,6 +20,7 @@ const CommonCard = observer(({ cardId }) => {
 
     useEffect(() => {
         aboutPage.setActiveBlockEdit(null);
+        aboutPage.setActiveCardEdit(cardId);
         fetchCard(aboutPage, cardId);
     }, [])
 
@@ -29,9 +30,6 @@ const CommonCard = observer(({ cardId }) => {
     const onAddBlocksClick = async() => {
         setAddBlocksVisible(true);
         setButtonStyle('hide');
-        // aboutPage.setModalBtnsLoading(true);
-        // await fetchBtnsModal(aboutPage);
-        // aboutPage.setModalBtnsLoading(false);
     }
     const onBlockModalHide = async() => {
         setAddBlocksVisible(false);
@@ -62,8 +60,7 @@ const CommonCard = observer(({ cardId }) => {
                 <div className='admin-about__blocks'>
                     <h4>edit card content:</h4>
                     <ul className='admin-about__cards-cont'>
-
-                        {draggableBlocks}
+                        {draggableBlocks.length ? draggableBlocks : 'this card has no blocks added yet!'}
                     </ul>
                 </div>
             </div>
