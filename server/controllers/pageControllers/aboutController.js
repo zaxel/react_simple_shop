@@ -140,8 +140,7 @@ class AboutController {
             if (!errors.isEmpty()) {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { infoAboutCardId } = req.query;
-            const data = await aboutService.getAllBlocks(infoAboutCardId); 
+            const data = await aboutService.getAllBlocks(); 
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

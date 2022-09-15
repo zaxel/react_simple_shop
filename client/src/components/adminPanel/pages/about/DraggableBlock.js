@@ -31,11 +31,6 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
 
     const btns = isContainBtns(aboutPage, button_id) && button_id.map(btn => <li key={aboutPage.buttons[btn].id} className='admin-about__body-btn'><span>{aboutPage.buttons[btn].text}</span></li>)
 
-    // const changeStyle = () => {
-    //     arrowStyle === 'about-arrow' ? setArrowStyle('about-arrowDown') : setArrowStyle('about-arrow')
-    //     arrowStyle === 'about-arrow' ? setDisplayDescr(true) : setDisplayDescr(false);
-    //     // aboutPage.activeBlockEdit === block.id ? aboutPage.setActiveBlockEdit(null) : aboutPage.setActiveBlockEdit(block.id);
-    // }
 
     return (
         <li className='admin-about__card'>

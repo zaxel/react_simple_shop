@@ -52,9 +52,9 @@ export const changeAboutCardData = async (id, dbFieldName, data) => {
 }
 
 
-export const fetchBlocks = async (currentStore, infoAboutCardId) => {
+export const fetchBlocks = async (currentStore) => {
   setComponentLoading(currentStore, true);
-  const fetchedData = await fetchAboutBlocks({ infoAboutCardId });
+  const fetchedData = await fetchAboutBlocks();
   const setterName = 'setEditBlocks';
   setComponentLoading(currentStore, false);
   return setStoreField(currentStore, setterName, fetchedData);

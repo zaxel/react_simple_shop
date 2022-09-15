@@ -69,7 +69,6 @@ router.get('/block/:id',
     aboutController.getSingleBlock); 
 
 router.get('/blocks/',
-    query('infoAboutCardId').optional().isNumeric(),
     aboutController.getAllBlocks); 
 
 router.patch('/block/img-update', 

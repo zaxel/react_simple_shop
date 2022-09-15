@@ -39,6 +39,12 @@ button:hover {
 button:active {
     transform: translate(1px, 1px);
 }
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
 
 .modal-dialog-centered {
     max-width: 550px;
@@ -2823,6 +2829,21 @@ button:active {
 .admin-about__body-btn:not(:first-child){
     margin-left: 8px;
 }
+.admin-about{
+    position: relative;
+}
+.admin-about>button{
+    position: fixed;
+    top: 20%;
+    right: 8vw;
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    text-transform: uppercase;
+    padding: 16px 8px;
+    max-width: 150px;
+}
+
+
 /**admin about card end**/
 /*admin static pages end*/
 

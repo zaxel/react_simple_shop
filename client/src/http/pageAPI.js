@@ -47,10 +47,8 @@ export const updateAboutCardData = async (id, dbFieldName, data) => {
 
 
 
-export const fetchAboutBlocks = async ({infoAboutCardId}) => {
-    const {data} = await $host.get(`api/about/blocks`, {params:{
-        infoAboutCardId
-    }}); 
+export const fetchAboutBlocks = async () => {
+    const {data} = await $host.get(`api/about/blocks`); 
     return data;
 }
 export const createAboutBlock = async (formData) => {
