@@ -33,7 +33,6 @@ export const updateAboutPage = async (id, dbFieldName, data) => {
 
 export const fetchAboutCard = async ({cardId}) => {
     const {data} = await $host.get(`api/about/card/${cardId}`); 
-    console.log(data)
     return data;
 }
 export const updateAboutCardImg = async (formData) => {

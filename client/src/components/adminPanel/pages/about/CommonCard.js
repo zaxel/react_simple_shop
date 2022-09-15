@@ -1,10 +1,8 @@
 ﻿import React, { useState, useContext, useEffect } from 'react';
 import AdminTextInput from '../../commonComponents/AdminTextInput';
-import { Spinner } from 'react-bootstrap';
 import AdminTextArea from '../../commonComponents/AdminTextArea';
 import { Context } from '../../../..';
-import hero from '../../../../assets/about/brand_hero_7.gif'
-import { fetchCard } from '../../../../utils/staticPages/aboutPage';
+import { changeAboutCardData, fetchCard } from '../../../../utils/staticPages/aboutPage';
 import DraggableBlock from './DraggableBlock';
 import { observer } from 'mobx-react-lite';
 import AddBlocksModal from './AddBlocksModal';
@@ -27,6 +25,9 @@ const CommonCard = observer(({ cardId }) => {
 
     const draggableBlocks = blocks.slice().sort((a, b) => a.id - b.id).map(block => <DraggableBlock key={block.id} {...block} />)
 
+    const setInputDataCarry = changeAboutCardData.bind(this, cardId, 'title')
+    const setAreaDataCarry = changeAboutCardData.bind(this, cardId, 'card_text')
+
     const onAddBlocksClick = async() => {
         setAddBlocksVisible(true);
         setButtonStyle('hide');
@@ -37,25 +38,16 @@ const CommonCard = observer(({ cardId }) => {
     }
 
 
-    // if (aboutPage.loading) {
-    //     return (
-    //         <div className="spinner">
-    //             <Spinner animation="border" />
-    //         </div>
-    //     )
-    // }
     return (
         <div className='admin-pages__page admin-about'>
             <div className='admin-about__container'>
                 <h2>Edit {cardPosition[cardId]} about page card: </h2>
 
                 <div className='admin-about__title'>
-                    <AdminTextInput inputTitle={'title'} inputText={card.title} />
-                    {/* <AdminTextInput inputTitle={'title'} inputText={'title'} cb={changeCardTitleCarried}/> */}
+                    <AdminTextInput inputTitle={'title'} inputText={card.title} cb={setInputDataCarry}/>
                 </div>
                 <div className='admin-about__area'>
-                    <AdminTextArea areaTitle={'card description'} areaText={card.card_text} />
-                    {/* <AdminTextArea inputTitle={'text'} inputText={'card_prev_text'} cb={changeCardTextCarried}/> */}
+                    <AdminTextArea areaTitle={'card description'} areaText={card.card_text} cb={setAreaDataCarry}/>
                 </div>
                 <div className='admin-about__blocks'>
                     <h4>edit card content:</h4>
