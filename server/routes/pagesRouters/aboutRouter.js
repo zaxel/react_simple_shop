@@ -64,6 +64,11 @@ router.put('/block/',
     // body('hero').optional().isString().isLength({ min: 5 }),
     aboutController.updateBlock);
 
+router.put('/block-position/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('positions').isArray(),
+    aboutController.updateBlocksPositions);
+
 router.get('/block/:id',
     param('id').isNumeric(),
     aboutController.getSingleBlock); 

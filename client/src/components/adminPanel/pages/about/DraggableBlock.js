@@ -9,12 +9,9 @@ import { changeAboutBlockData } from '../../../../utils/staticPages/aboutPage';
 
 const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
     const { aboutPage } = useContext(Context);
-
     const [arrowStyle, setArrowStyle] = useState('about-arrow');
     const [displayDescr, setDisplayDescr] = useState(false);
 
-    
-    
     useEffect(() => {
         if (aboutPage.activeBlockEdit === id) {
             setArrowStyle('about-arrowDown');
@@ -31,22 +28,21 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
 
     const btns = isContainBtns(aboutPage, button_id) && button_id.map(btn => <li key={aboutPage.buttons[btn].id} className='admin-about__body-btn'><span>{aboutPage.buttons[btn].text}</span></li>)
 
-    const deleteBlock = async() => {
-        try{
+    const deleteBlock = async () => {
+        try {
             aboutPage.setLoading(true);
             await changeAboutBlockData(id, 'infoAboutCardId', null);
             await changeAboutBlockData(id, 'position', null);
-            aboutPage.removeEditBlockCardIdAndPos(id); 
-        }catch(e){
+            aboutPage.removeEditBlockCardIdAndPos(id);
+        } catch (e) {
             console.log(e)
-        }finally{
+        } finally {
             aboutPage.setLoading(false);
         }
-        
     }
 
     return (
-        <  >
+        <>
             <div className='admin-about__card-header'>
                 <div className='admin-about__card-title'>
                     <h3>Title:</h3>
@@ -82,7 +78,6 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
                 </div>
             </div>}
         </>
-
     )
 });
 

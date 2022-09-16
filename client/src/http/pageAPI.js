@@ -58,6 +58,10 @@ export const updateAboutBlockData = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/about/block' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
+export const updateAboutBlocksPosition = async ( positions) => {
+    const updatedData = await $authHost.put('api/about/block-position' , {positions});
+    return updatedData.data; 
+}
 export const updateAboutBlockImg = async (formData) => {
     const { data } = await $authHost.patch('api/about/block/img-update/' , formData);
     return data; 

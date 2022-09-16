@@ -121,6 +121,19 @@ class AboutController {
             next(ApiError.forbidden(e.message)); 
         }
     }
+    async updateBlocksPositions(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { positions } = req.body;
+            const data = await aboutService.updateBlockPositions({ positions });
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
     async getSingleBlock(req, res, next) {
         try {
             const errors = validationResult(req);

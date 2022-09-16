@@ -1,4 +1,5 @@
 ﻿import { makeAutoObservable } from "mobx";
+import { changeAboutBlocksPosition } from "../../utils/staticPages/aboutPage";
 
 export default class AboutPageStore {
     constructor() {
@@ -45,26 +46,34 @@ export default class AboutPageStore {
         this._cardBlocks = blocks;
     }
     setCardBlockPosition(startPosition, endPosition) {
-        this._cardBlocks.map(el => console.log(el.position))
-        console.log('startPosition: ' + startPosition + ', endPosition: ' + endPosition)
+        const positions = [];
         this._cardBlocks = this._cardBlocks.map(block => {
+            const currentBlockPos = {id: block.id, position: block.position};
             if (startPosition < endPosition) {
                 if (block.position === startPosition) {
+                    currentBlockPos.position = endPosition;
+                    positions.push(currentBlockPos);
                     return { ...block, position: endPosition };
                 } else if (block.position > startPosition && block.position <= endPosition) {
+                    currentBlockPos.position = block.position - 1;
+                    positions.push(currentBlockPos);
                     return { ...block, position: block.position - 1 };
                 }
             } else {
                 if (block.position === startPosition) {
+                    currentBlockPos.position = endPosition;
+                    positions.push(currentBlockPos);
                     return { ...block, position: endPosition };
                 } else if (block.position < startPosition && block.position >= endPosition) {
+                    currentBlockPos.position = block.position + 1;
+                    positions.push(currentBlockPos);
                     return { ...block, position: block.position + 1 };
                 }
             }
+            positions.push(currentBlockPos);
             return block;
         });
-        // this._cardBlocks = this._cardBlocks.map(block=>block.position === endPosition ? {...block, position: startPosition} : block);
-        this._cardBlocks.map(el => console.log(el.id, el.position))
+        changeAboutBlocksPosition(positions)
     }
     setButtons(buttons) {
         this._buttons = buttons;
@@ -110,11 +119,12 @@ export default class AboutPageStore {
         elem.infoAboutCardId = this._activeCardEdit;
         elem.position = position;
         this._cardBlocks.push(elem);
+
     }
     removeEditBlockCardIdAndPos(id) {
         let elem = this._editBlocks.find(el => el.block.id === id).block;
         elem.infoAboutCardId = null;
-        elem.position = null; 
+        elem.position = null;
         this._cardBlocks = this._cardBlocks.filter(el => el.id !== id);
     }
     addEditBlocks(blocks) {
