@@ -65,7 +65,8 @@ const CommonCard = observer(({ cardId }) => {
                         <AdminTextArea areaTitle={'card description'} areaText={card.card_text} cb={setAreaDataCarry} />
                     </div>
                     <div className='admin-about__blocks'>
-                        <h4>edit card content:</h4>
+                        <h4>add/remove/sort blocks:</h4>
+                        <h4>(drag and drop blocks to change position)</h4>
                         <Droppable droppableId="droppable-1">
                             {(provided, snapshot) => (
                                 <ul className='admin-about__cards-cont' ref={provided.innerRef} {...provided.droppableProps}>
