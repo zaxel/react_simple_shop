@@ -26,13 +26,12 @@ const CommonCard = observer(({ cardId }) => {
     const draggableBlocks = blocks.slice()
         .sort((a, b) => a.position - b.position)
         .map(block => {
-            return <Draggable key={block.id}  draggableId={'draggable-'+block.position} index={block.position}>
-                {(provided ) => {
-                    return(
-                        <li className='admin-about__card' key={block.id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                            <DraggableBlock  {...block}/>
-                        </li>
-                )}}
+            return <Draggable key={block.id} draggableId={'draggable-'+block.id} index={block.position}>
+                {(provided, snapshot) => (
+                    <li className='admin-about__card' key={block.id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                        <DraggableBlock {...block} />
+                    </li>
+                )}
             </Draggable>
         })
 
@@ -47,14 +46,13 @@ const CommonCard = observer(({ cardId }) => {
         setAddBlocksVisible(false);
         setButtonStyle('show');
     }
+    const setBlockPosition = ({destination, source}) => {
+        aboutPage.setCardBlockPosition( source.index, destination.index);
+    }
 
     return (
         <DragDropContext
-            onBeforeCapture={() => console.log('before capture')}
-            onBeforeDragStart={() => console.log('before drag start')}
-            onDragStart={() => console.log('on drag start')}
-            onDragUpdate={() => console.log('on drag update')}
-            onDragEnd={() => console.log('on drag end')}
+            onDragEnd={setBlockPosition}
         >
             <div className='admin-pages__page admin-about'>
                 <div className='admin-about__container'>

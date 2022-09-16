@@ -2673,12 +2673,11 @@ button:active {
     margin-bottom: 30px;
 }
 .admin-about__card{
-    cursor: grab;
-    /* cursor: move; */
     border-radius: 8px;
     border: 1px solid #C4C4C4;
     margin-bottom: 1px;
 }
+
 .admin-about__card:hover{
     background-color: rgba(0, 0, 0, .1);
 }

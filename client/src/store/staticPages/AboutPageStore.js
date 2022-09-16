@@ -44,6 +44,31 @@ export default class AboutPageStore {
     setCardBlocks(blocks) {
         this._cardBlocks = blocks;
     }
+    setCardBlockPosition(startPosition, endPosition) {
+        this._cardBlocks.map(el => console.log(el.position))
+        console.log('startPosition: ' + startPosition + ', endPosition: ' + endPosition)
+        this._cardBlocks = this._cardBlocks.map(block => {
+            if (startPosition < endPosition) {
+                if (block.position === startPosition) {
+                    return { ...block, position: endPosition };
+                } else if (block.position > startPosition && block.position <= endPosition) {
+                    return { ...block, position: block.position - 1 };
+                } else {
+                    return block;
+                }
+            } else {
+                if (block.position === startPosition) {
+                    return { ...block, position: endPosition };
+                } else if (block.position < startPosition && block.position >= endPosition) {
+                    return { ...block, position: block.position + 1 };
+                } else {
+                    return block;
+                }
+            }
+        });
+        // this._cardBlocks = this._cardBlocks.map(block=>block.position === endPosition ? {...block, position: startPosition} : block);
+        this._cardBlocks.map(el => console.log(el.position))
+    }
     setButtons(buttons) {
         this._buttons = buttons;
     }
@@ -57,17 +82,17 @@ export default class AboutPageStore {
         this._activeCardEdit = cardId;
     }
     addButton(button) {
-        this._buttons = {...this._buttons, [button.id]: button};
+        this._buttons = { ...this._buttons, [button.id]: button };
     }
     deleteButton(id) {
         const btnsKeys = Object.keys(this._buttons);
         const newBtns = {};
-        btnsKeys.filter(el=>el!==id).forEach(btnId=>{
-            newBtns[btnId] = {...this._buttons[btnId]}
-        }) 
+        btnsKeys.filter(el => el !== id).forEach(btnId => {
+            newBtns[btnId] = { ...this._buttons[btnId] }
+        })
         this._buttons = newBtns;
     }
-    setPage({page, buttons}) {
+    setPage({ page, buttons }) {
         this.setButtons(buttons);
         this.setPageId(page.id);
         this.setPageName(page.name);
@@ -75,7 +100,7 @@ export default class AboutPageStore {
         this.setPageText(page.text);
         this.setPageCards(page.info_about_cards);
     }
-    setCurrentCard({card, buttons}) {
+    setCurrentCard({ card, buttons }) {
         this.setButtons(buttons);
         this._currentCard = card;
         this.setCardBlocks(card.info_about_blocks);
@@ -84,25 +109,25 @@ export default class AboutPageStore {
         this._editBlocks = blocks;
     }
     setEditBlockCardId(id) {
-        let elem = this._editBlocks.find(el=>el.block.id === id).block;
+        let elem = this._editBlocks.find(el => el.block.id === id).block;
         elem.infoAboutCardId = this._activeCardEdit;
         this._cardBlocks.push(elem);
     }
     removeEditBlockCardId(id) {
-        let elem = this._editBlocks.find(el=>el.block.id === id).block;
+        let elem = this._editBlocks.find(el => el.block.id === id).block;
         elem.infoAboutCardId = null;
-        this._cardBlocks = this._cardBlocks.filter(el=>el.id !== id);
+        this._cardBlocks = this._cardBlocks.filter(el => el.id !== id);
     }
     addEditBlocks(blocks) {
         this._editBlocks.push(blocks);
     }
     deleteBlock(id) {
-        this._editBlocks = this._editBlocks.filter(block=>block.block.id !== id);
+        this._editBlocks = this._editBlocks.filter(block => block.block.id !== id);
     }
     editEditBlocksBtns(btns) {
-        this._editBlocks.find(el=>el.block.id === this._activeBlockEdit).buttons = btns;
+        this._editBlocks.find(el => el.block.id === this._activeBlockEdit).buttons = btns;
     }
-    
+
 
     get pageId() {
         return this._pageId;
