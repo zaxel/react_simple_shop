@@ -53,21 +53,18 @@ export default class AboutPageStore {
                     return { ...block, position: endPosition };
                 } else if (block.position > startPosition && block.position <= endPosition) {
                     return { ...block, position: block.position - 1 };
-                } else {
-                    return block;
                 }
             } else {
                 if (block.position === startPosition) {
                     return { ...block, position: endPosition };
                 } else if (block.position < startPosition && block.position >= endPosition) {
                     return { ...block, position: block.position + 1 };
-                } else {
-                    return block;
                 }
             }
+            return block;
         });
         // this._cardBlocks = this._cardBlocks.map(block=>block.position === endPosition ? {...block, position: startPosition} : block);
-        this._cardBlocks.map(el => console.log(el.position))
+        this._cardBlocks.map(el => console.log(el.id, el.position))
     }
     setButtons(buttons) {
         this._buttons = buttons;
@@ -108,14 +105,16 @@ export default class AboutPageStore {
     setEditBlocks(blocks) {
         this._editBlocks = blocks;
     }
-    setEditBlockCardId(id) {
+    setEditBlockCardIdAndPos(id, position) {
         let elem = this._editBlocks.find(el => el.block.id === id).block;
         elem.infoAboutCardId = this._activeCardEdit;
+        elem.position = position;
         this._cardBlocks.push(elem);
     }
-    removeEditBlockCardId(id) {
+    removeEditBlockCardIdAndPos(id) {
         let elem = this._editBlocks.find(el => el.block.id === id).block;
         elem.infoAboutCardId = null;
+        elem.position = null; 
         this._cardBlocks = this._cardBlocks.filter(el => el.id !== id);
     }
     addEditBlocks(blocks) {

@@ -11,9 +11,13 @@ const BlockModalCard = ({text, title, id}) => {
     const currentCard = aboutPage.activeCardEdit;
 
     const addBlock = async(id) => {
+      const nextPosition = aboutPage.cardBlocks.length + 1;
+      console.log(nextPosition)
       aboutPage.setLoading(true);
       await changeAboutBlockData(id, 'infoAboutCardId', currentCard)
-      aboutPage.setEditBlockCardId(id);
+      await changeAboutBlockData(id, 'position', nextPosition) 
+      // aboutPage.setEditBlockCardId(id);  
+      aboutPage.setEditBlockCardIdAndPos(id, nextPosition);
       aboutPage.setLoading(false);
     }
 

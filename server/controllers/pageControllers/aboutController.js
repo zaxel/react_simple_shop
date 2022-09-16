@@ -113,9 +113,9 @@ class AboutController {
             if (!errors.isEmpty()) {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            const { id, title, text, button_id, infoAboutCardId } = req.body;
+            const { id, title, text, button_id, infoAboutCardId, position } = req.body;
             let hero = req?.files?.hero || undefined;
-            const data = await aboutService.updateBlock({ id, title, text, hero, button_id, infoAboutCardId });
+            const data = await aboutService.updateBlock({ id, title, text, hero, button_id, infoAboutCardId, position });
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message)); 

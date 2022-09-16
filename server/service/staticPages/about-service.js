@@ -113,11 +113,11 @@ class AboutService {
         const buttons = await this.getChoosedBtns({id:btnsNumbers});
         return {block, buttons};
     }
-    updateBlock = async ({id, title, text, hero, button_id, infoAboutCardId }) => {
+    updateBlock = async ({id, title, text, hero, button_id, infoAboutCardId, position }) => {
         if (hero && hero.length) {
             hero = hero.map(img=>fileService.imageResolve(img));
         }
-        let updatedData = await InfoAboutBlocks.update({title, text, hero, button_id, infoAboutCardId }, {
+        let updatedData = await InfoAboutBlocks.update({title, text, hero, button_id, infoAboutCardId, position }, {
             where: { id }
           });
         return updatedData;

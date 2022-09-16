@@ -34,8 +34,9 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
     const deleteBlock = async() => {
         try{
             aboutPage.setLoading(true);
-            await changeAboutBlockData(id, 'infoAboutCardId', null)
-            aboutPage.removeEditBlockCardId(id); 
+            await changeAboutBlockData(id, 'infoAboutCardId', null);
+            await changeAboutBlockData(id, 'position', null);
+            aboutPage.removeEditBlockCardIdAndPos(id); 
         }catch(e){
             console.log(e)
         }finally{
