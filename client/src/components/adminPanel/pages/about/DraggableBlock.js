@@ -8,7 +8,6 @@ import { changeAboutBlockData } from '../../../../utils/staticPages/aboutPage';
 
 
 const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
-
     const { aboutPage } = useContext(Context);
 
     const [arrowStyle, setArrowStyle] = useState('about-arrow');
@@ -46,7 +45,7 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
     }
 
     return (
-        <li className='admin-about__card'>
+        <  >
             <div className='admin-about__card-header'>
                 <div className='admin-about__card-title'>
                     <h3>Title:</h3>
@@ -81,7 +80,7 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
                     </ul>
                 </div>
             </div>}
-        </li>
+        </>
 
     )
 });
