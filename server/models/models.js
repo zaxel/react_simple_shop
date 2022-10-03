@@ -69,8 +69,6 @@ const InfoPages = sequelize.define('info_pages', {
 })
 const InfoHelpPopular = sequelize.define('info_help_popular', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    category: {type: DataTypes.STRING, allowNull: false},
-    faq_id: {type: DataTypes.INTEGER, allowNull: false},
 })
 const InfoHelpCategories = sequelize.define('info_help_categories', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -78,22 +76,19 @@ const InfoHelpCategories = sequelize.define('info_help_categories', {
     banner: {type: DataTypes.STRING, allowNull: false},
     icon: {type: DataTypes.STRING, allowNull: false},
     link: {type: DataTypes.STRING, allowNull: false},
-    faqs: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false},
 })
 const InfoHelpQuestions = sequelize.define('info_help_questions', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     question: {type: DataTypes.STRING, allowNull: false},
-    answer_id: {type: DataTypes.INTEGER, allowNull: false},
 })
 const InfoHelpAnswers = sequelize.define('info_help_answers', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
     text: {type: DataTypes.STRING, allowNull: false},
-    related_questions: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false},
 })
 const InfoHelpRelatedQuestions = sequelize.define('info_help_related_questions', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    answer_id: {type: DataTypes.INTEGER, allowNull: false},
+    faq_id: {type: DataTypes.INTEGER, allowNull: false},
 })
 
 
@@ -173,26 +168,21 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   Brand.belongsToMany(Type, {through: TypeBrand})
 
 
-  InfoPages.hasMany(InfoHelpPopular)
-  InfoHelpPopular.belongsTo(InfoPages)
-
   InfoPages.hasMany(InfoHelpCategories)
   InfoHelpCategories.belongsTo(InfoPages)
   
   InfoHelpCategories.hasMany(InfoHelpQuestions)
   InfoHelpQuestions.belongsTo(InfoHelpCategories)
   
-  InfoHelpPopular.hasOne(InfoHelpQuestions)
-  InfoHelpQuestions.belongsTo(InfoHelpPopular)
+  InfoHelpQuestions.hasOne(InfoHelpPopular)
+  InfoHelpPopular.belongsTo(InfoHelpQuestions)
   
   InfoHelpAnswers.hasOne(InfoHelpQuestions)
   InfoHelpQuestions.belongsTo(InfoHelpAnswers)
   
   InfoHelpAnswers.hasMany(InfoHelpRelatedQuestions)
   InfoHelpRelatedQuestions.belongsTo(InfoHelpAnswers)
-  
-  InfoHelpRelatedQuestions.hasMany(InfoHelpCategories)
-  InfoHelpCategories.belongsTo(InfoHelpRelatedQuestions)
+
 
   InfoPages.hasMany(InfoAboutCards)
   InfoAboutCards.belongsTo(InfoPages)
@@ -206,7 +196,7 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   InfoAboutCards.belongsToMany(ButtonLink, {through: ButtonMediator})
   ButtonLink.belongsToMany(InfoAboutCards, {through: ButtonMediator})
   
-  
+
   InfoPages.belongsToMany(ButtonLink, {through: ButtonMediator})
   ButtonLink.belongsToMany(InfoPages, {through: ButtonMediator})
 
