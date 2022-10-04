@@ -39,33 +39,29 @@ router.patch('/card/img-update', checkRole(['ADMIN', 'MODERATOR']), aboutControl
 
 router.delete('/card/',
     body('id').isNumeric(),
-    // checkRole('ADMIN'),
+    checkRole('ADMIN'),
     aboutController.deleteCard);
 
 
 
 router.post('/block/',
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('title').optional().isString().isLength({ min: 3 }),
     body('text').optional().isString().isLength({ min: 5 }),
-    // body('hero').optional().isString().isLength({ min: 5 }),
     body('button_id').optional().isArray(),
     body('infoAboutCardId').optional().isNumeric(),
     aboutController.createBlock);
 
 router.put('/block/',
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     body('title').optional().isString().isLength({ min: 3 }),
     body('text').optional().isString().isLength({ min: 5 }),
-    // body('hero').optional().isString().isLength({ min: 5 }),
     body('button_id').optional().isArray(),
-    // body('infoAboutCardId').optional().isNumeric(),
-    // body('hero').optional().isString().isLength({ min: 5 }),
     aboutController.updateBlock);
 
 router.put('/block-position/',
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('positions').isArray(),
     aboutController.updateBlocksPositions);
 
@@ -77,24 +73,24 @@ router.get('/blocks/',
     aboutController.getAllBlocks); 
 
 router.patch('/block/img-update', 
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     aboutController.updateBlockImg);
 
 router.delete('/block/',
     body('id').isNumeric(),
-    // checkRole('ADMIN'),
+    checkRole('ADMIN'),
     aboutController.deleteBlock);
 
 
 router.post('/btn/',
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('text').isString().isLength({ min: 3 }),
     body('link').optional().isString().isLength({ min: 1 }),
     aboutController.createBtn);
 
 
 router.put('/btn/',
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     body('text').optional().isString().isLength({ min: 3 }),
     body('link').optional().isString().isLength({ min: 5 }),
@@ -107,8 +103,7 @@ router.get('/btns/',
     aboutController.getAllBtns); 
 
 router.delete('/btn/',
-    // body('id').isNumeric(),
-    // checkRole('ADMIN'),
+    checkRole('ADMIN'),
     aboutController.deleteBtn);
 
 module.exports = router;
