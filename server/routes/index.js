@@ -10,8 +10,10 @@ const cartRouter = require('./cartRouter');
 const orderRouter = require('./orderRouter');
 const orderDetailRouter = require('./orderDetailRouter');
 
+const staticPageRouter = require('./pagesRouters/staticPageRouter');
 const appRouter = require('./pagesRouters/appRouter');
 const aboutRouter = require('./pagesRouters/aboutRouter');
+const helpRouter = require('./pagesRouters/helpRouter');
 
 router.use('/user', userRouter);
 router.use('/device', deviceRouter);
@@ -22,7 +24,9 @@ router.use('/cart', cartRouter);
 router.use('/order', orderRouter);
 router.use('/order/details', orderDetailRouter);
 
+router.use('/page', staticPageRouter);
 router.use('/app', appRouter);
 router.use('/about', aboutRouter);
+router.use('/help', helpRouter);
 
 module.exports = router;
