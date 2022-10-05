@@ -15,6 +15,8 @@ import UserOrdersStore from "./adminPage/UserOrdersStore";
 
 import AppPageStore from "./staticPages/AppPageStore";
 import AboutPageStore from "./staticPages/AboutPageStore";
+import HelpPageStore from "./staticPages/HelpPageStore";
+import HelpAdminStore from "./staticPages/HelpAdminStore";
 
 export default class RootStore {
     constructor() {
@@ -33,6 +35,8 @@ export default class RootStore {
       this.userOrders = new UserOrdersStore(this);
       this.appPage = new AppPageStore(this);
       this.aboutPage = new AboutPageStore(this);
+      this.helpPage = new HelpPageStore(this);
+      this.helpAdmin = new HelpAdminStore(this);
 
     }
 } 
