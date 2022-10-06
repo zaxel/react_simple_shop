@@ -34,7 +34,11 @@ import AdminPanelRouter from "./components/adminPanel/AdminPanelRouter";
 
 import PagesPanelRouter from "./components/adminPanel/pages/PagesPanelRouter";
 import AppAdmin from "./components/adminPanel/pages/ourApps/AppAdmin";
-import HelpAdmin from "./components/adminPanel/pages/HelpAdmin";
+import HelpAdmin from "./components/adminPanel/pages/help/HelpAdmin"; 
+
+import HelpAdminFaq from "./components/adminPanel/pages/help/HelpAdminFaq"; 
+import HelpAdminCat from "./components/adminPanel/pages/help/HelpAdminCat"; 
+import HelpAdminCatManger from "./components/adminPanel/pages/help/HelpAdminCatManger"; 
 
 import AboutAdmin from "./components/adminPanel/pages/about/AboutAdmin";
 import Buttons from "./components/adminPanel/pages/about/Buttons";
@@ -51,7 +55,8 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE, HELP_DELIVERY_ROUTE, HELP_RETURNS_ROUTE,
         HELP_ORDER_ROUTE, HELP_STOCK_ROUTE, HELP_TECH_ROUTE, HELP_MAIN_ROUTE, HELP_TECH_ADMIN_ROUTE, 
         HELP_PAYMENT_ROUTE, ADMIN_PAGES_ROUTE, ADMIN_APP_ROUTE, ADMIN_HELP_ROUTE, ADMIN_ABOUT_ROUTE,
-        ABOUT_BUTTONS_ROUTE, ABOUT_BLOCKS_ROUTE, ABOUT_LEFT_CARD_ROUTE, ABOUT_MIDDLE_CARD_ROUTE, ABOUT_RIGHT_CARD_ROUTE} from "./utils/consts/routes";
+        ABOUT_BUTTONS_ROUTE, ABOUT_BLOCKS_ROUTE, ABOUT_LEFT_CARD_ROUTE, ABOUT_MIDDLE_CARD_ROUTE, ABOUT_RIGHT_CARD_ROUTE,
+        ADMIN_HELP_FAQ_ROUTE, ADMIN_HELP_CAT_ROUTE, ADMIN_HELP_MANAGER_ROUTE} from "./utils/consts/routes";
 
 
 
@@ -114,6 +119,23 @@ export const adminPagesRoutes = [
         path: ADMIN_HELP_ROUTE,
         Component: HelpAdmin
     },
+
+
+    {
+        path: ADMIN_HELP_FAQ_ROUTE,
+        Component: HelpAdminFaq
+    },
+    {
+        path: ADMIN_HELP_CAT_ROUTE,
+        Component: HelpAdminCat
+    },
+    {
+        path: ADMIN_HELP_MANAGER_ROUTE,
+        Component: HelpAdminCatManger
+    },
+
+
+
     {
         path: ADMIN_ABOUT_ROUTE,
         Component: AboutAdmin

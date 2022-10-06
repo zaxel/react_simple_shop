@@ -1938,7 +1938,10 @@ button:active {
 .pages__navbar li:nth-child(4) a,
 .pages__navbar li:nth-child(5) a,
 .pages__navbar li:nth-child(6) a,
-.pages__navbar li:nth-child(7) a{
+.pages__navbar li:nth-child(7) a,
+.pages__navbar li:nth-child(9) a,
+.pages__navbar li:nth-child(10) a,
+.pages__navbar li:nth-child(11) a{
     font-size: 12px;
     margin-left: 25px;
     padding-left: 17px;
@@ -1948,7 +1951,10 @@ button:active {
 .pages__navbar li:nth-child(4) a::before,
 .pages__navbar li:nth-child(5) a::before,
 .pages__navbar li:nth-child(6) a::before,
-.pages__navbar li:nth-child(7) a::before{
+.pages__navbar li:nth-child(7) a::before,
+.pages__navbar li:nth-child(9) a::before,
+.pages__navbar li:nth-child(10) a::before,
+.pages__navbar li:nth-child(11) a::before{
     position: absolute;
     top: 30%;
     left: 5px;
