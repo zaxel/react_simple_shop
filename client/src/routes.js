@@ -119,8 +119,6 @@ export const adminPagesRoutes = [
         path: ADMIN_HELP_ROUTE,
         Component: HelpAdmin
     },
-
-
     {
         path: ADMIN_HELP_FAQ_ROUTE,
         Component: HelpAdminFaq
@@ -133,9 +131,6 @@ export const adminPagesRoutes = [
         path: ADMIN_HELP_MANAGER_ROUTE,
         Component: HelpAdminCatManger
     },
-
-
-
     {
         path: ADMIN_ABOUT_ROUTE,
         Component: AboutAdmin

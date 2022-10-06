@@ -29,4 +29,7 @@ export default class HelpPageStore{
     get pageImg(){
         return this._pageImg[0];
     }
+    get pageName(){
+        return this._pageName;
+    }
 }

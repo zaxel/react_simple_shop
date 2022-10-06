@@ -2850,6 +2850,52 @@ button:active {
 
 
 /**admin about card end**/
+/**admin help page start**/
+.admin-pages__help{
+    padding: 18px;
+}
+.admin-pages__help .image-admin{
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+.admin-pages__help .image-admin h2{
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.help-admin__contact{
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 30px 0;
+    max-width: 970px;
+}
+.help-admin__contact>h3{
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.help-admin__contact-cont{
+    margin: 8px;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+.help-admin__contact .admin__image-container h2{
+    text-transform: lowercase;
+}
+.help-admin__contact-bg{
+    max-width: 920px;
+    display: flex;
+    justify-content: flex-start;
+}
+.help-admin__bg-large{
+    flex: 1 0 66%;
+}
+.help-admin__bg-small{
+    flex: 1 0 33%;
+    margin-left: 8px;
+}
+/**admin help page end**/
 /*admin static pages end*/
 
 /*search start*/
