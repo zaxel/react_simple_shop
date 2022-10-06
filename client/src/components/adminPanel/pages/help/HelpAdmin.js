@@ -1,12 +1,17 @@
-﻿import React, { useContext } from 'react';
+﻿import React, { useContext, useEffect } from 'react';
 import { Context } from '../../../..';
 import { observer } from 'mobx-react-lite';
 import AdminTextInput from '../../commonComponents/AdminTextInput';
 import AdminImage from '../../commonComponents/AdminImage';
+import { fetchPage } from '../../../../utils/staticPages/helpPage';
 
 
 const HelpAdmin = observer(() => {
     const { helpAdmin } = useContext(Context);
+
+    useEffect(() => {
+        fetchPage(helpAdmin);
+    }, [])
 
     // if (types.loading) {
     //     return (

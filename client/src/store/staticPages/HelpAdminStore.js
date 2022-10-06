@@ -4,6 +4,7 @@ export default class HelpPageStore{
     constructor(){
         this._pageId = null;
         this._pageName = 'Help';
+        this._loading = true;
         this._pageTitles = '';
         this._pageImg = '';
         this._contactTitle = '';
@@ -18,6 +19,9 @@ export default class HelpPageStore{
     setPageTitle(title){
         this._pageTitle = title;
     }
+    setLoading(bool){
+        this._loading = bool;
+    }
     setPageImg(img){
         this._pageImg = img;
     }
@@ -30,12 +34,23 @@ export default class HelpPageStore{
     setContactSmallImg(img){
         this._contactBgImages[1] = img;
     }
+    setPage(fetchedData){
+
+        this.setPageId(fetchedData.id);
+        // this.setPageName(fetchedData.name);
+        // this.setPageTitle(fetchedData.title);
+        // this.setPageText(fetchedData.text);
+        // this.setPageCards(fetchedData.info_app_cards);
+    }
 
     get pageId(){
         return this._pageId;
     }
     get pageTitle(){
         return this._pageTitle;
+    }
+    get loading(){
+        return this._loading;
     }
     get pageImg(){
         return this._pageImg;
