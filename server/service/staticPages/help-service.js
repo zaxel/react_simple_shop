@@ -29,20 +29,24 @@ class HelpService {
     // }
 
 
+    // getPage = async ({ name }) => {
+    //     let page = await InfoPages.findOne({
+    //         where: { name },
+    //         include: [{
+    //             model: InfoAboutCards, as: 'info_about_cards'
+    //         }]
+    //     });
+    //     const btnsNumbers = new PageBtnsService().getPageButtons(page);
+    //     const buttons = await this.getChoosedBtns({ id: btnsNumbers });
+    //     page = new AboutDto(page);
+    //     return { page, buttons };
+    // }
     getPage = async ({ name }) => {
-        // let page = await InfoPages.findOne({
-        //     where: { name },
-        //     include: [{
-        //         model: InfoAboutCards, as: 'info_about_cards'
-        //     }]
-        // });
-        // const btnsNumbers = new PageBtnsService().getPageButtons(page);
-        // const buttons = await this.getChoosedBtns({ id: btnsNumbers });
-        // page = new AboutDto(page);
-
-        // return { page, buttons };
-
-
+        let page = await InfoPages.findOne({
+            where: { name }
+        });
+        page = new PageDto(page);
+        return page;
     }
     
 }

@@ -94,11 +94,10 @@ export const deleteBtnReq = async (id) => {
 
 
 export const fetchHelpPage = async () => {
-    console.log(999)
-    // const {data} = await $host.get(`api/help`); 
-    // return data;
+    const {data} = await $host.get(`api/help`); 
+    return data;
 }
 export const updateHelpPage = async (id, dbFieldName, data) => {
-    const updatedData = await $authHost.put('api/help' , {id, [dbFieldName]: data});
+    const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
     return updatedData.data;
 }

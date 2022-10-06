@@ -31,6 +31,18 @@ export const changeData = async (id, dbFieldName, data) => {
   const updatedData = await updateHelpPage(id, dbFieldName, data);
   return updatedData;
 }
+export const changeTitle = async (id, dbFieldName, currentStore, data) => {
+  data = [data, currentStore.contactTitle || ''];
+  const updatedData = await updateHelpPage(id, dbFieldName, data);
+  setStoreField(currentStore, 'setPageTitle', data[0])
+  return updatedData;
+}
+export const changeContactTitle = async (id, dbFieldName, currentStore, data ) => {
+  data = [currentStore.pageTitle || '', data];
+  const updatedData = await updateHelpPage(id, dbFieldName, data);
+  setStoreField(currentStore, 'setContactTitle', data[1])
+  return updatedData;
+}
 
 
 // export const fetchCard = async (currentStore, cardId) => {

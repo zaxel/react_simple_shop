@@ -5,7 +5,7 @@ export default class HelpPageStore{
         this._pageId = null;
         this._pageName = 'Help';
         this._loading = true;
-        this._pageTitles = '';
+        this._pageTitle = '';
         this._pageImg = '';
         this._contactTitle = '';
         this._contactBgImages = [];
@@ -16,8 +16,14 @@ export default class HelpPageStore{
     setPageId(id){
         this._pageId = id;
     }
+    setPageName(name){
+        this._pageName = name;
+    }
     setPageTitle(title){
         this._pageTitle = title;
+    }
+    setContactTitle(title){
+        this._contactTitle = title;
     }
     setLoading(bool){
         this._loading = bool;
@@ -25,9 +31,7 @@ export default class HelpPageStore{
     setPageImg(img){
         this._pageImg = img;
     }
-    setContactBgImages(imgArr){
-        this._contactBgImages = imgArr;
-    }
+    
     setContactLargeImg(img){
         this._contactBgImages[0] = img;
     }
@@ -35,12 +39,15 @@ export default class HelpPageStore{
         this._contactBgImages[1] = img;
     }
     setPage(fetchedData){
-
-        this.setPageId(fetchedData.id);
-        // this.setPageName(fetchedData.name);
-        // this.setPageTitle(fetchedData.title);
-        // this.setPageText(fetchedData.text);
-        // this.setPageCards(fetchedData.info_app_cards);
+        console.log(fetchedData)
+        fetchedData.id && this.setPageId(fetchedData.id);
+        fetchedData.name && this.setPageName(fetchedData.name);
+        fetchedData?.title?.[0] && this.setPageTitle(fetchedData.title[0]);
+        fetchedData?.title?.[1] && this.setContactTitle(fetchedData.title[1]);
+        fetchedData?.img?.[0] && this.setPageImg(fetchedData.img[0]);
+        fetchedData?.img?.[1] && this.setContactLargeImg(fetchedData.img[1]);
+        fetchedData?.img?.[2] && this.setContactSmallImg(fetchedData.img[0]);
+        console.log(this._pageTitle, this._contactTitle)
     }
 
     get pageId(){
