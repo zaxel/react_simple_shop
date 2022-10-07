@@ -8,7 +8,7 @@ export default class HelpPageStore{
         this._pageTitle = '';
         this._pageImg = '';
         this._contactTitle = '';
-        this._contactBgImages = [];
+        this._contactBgImages = ['', ''];
         
         makeAutoObservable(this);
     }
@@ -46,7 +46,7 @@ export default class HelpPageStore{
         fetchedData?.title?.[1] && this.setContactTitle(fetchedData.title[1]);
         fetchedData?.img?.[0] && this.setPageImg(fetchedData.img[0]);
         fetchedData?.img?.[1] && this.setContactLargeImg(fetchedData.img[1]);
-        fetchedData?.img?.[2] && this.setContactSmallImg(fetchedData.img[0]);
+        fetchedData?.img?.[2] && this.setContactSmallImg(fetchedData.img[2]);
         console.log(this._pageTitle, this._contactTitle)
     }
 
@@ -67,5 +67,8 @@ export default class HelpPageStore{
     }
     get contactTitle(){
         return this._contactTitle;
+    }
+    get contactBgImages(){
+        return this._contactBgImages;
     }
 }

@@ -1,5 +1,5 @@
 ﻿import {
-  fetchHelpPage, updateHelpPage
+  fetchHelpPage, updateHelpPage, updatePageImg
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -43,6 +43,11 @@ export const changeContactTitle = async (id, dbFieldName, currentStore, data ) =
   setStoreField(currentStore, 'setContactTitle', data[1])
   return updatedData;
 }
+export const changePageHero = async (formData) => {
+  const updatedData = await updatePageImg(formData);
+  return updatedData;
+}
+
 
 
 // export const fetchCard = async (currentStore, cardId) => {

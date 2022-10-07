@@ -1,5 +1,10 @@
 ﻿import {$host, $authHost} from ".";
 
+export const updatePageImg = async (formData) => {
+    const updatedData = await $authHost.put('api/page/image' , formData);
+    return updatedData.data;
+}
+
 export const fetchAppPage = async () => {
     const {data} = await $host.get(`api/app`); 
     return data;

@@ -31,6 +31,22 @@ class StaticPageController {
             next(ApiError.forbidden(e.message)); 
         }
     }
+
+    async imageUpdate(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { id, type } = req.body;
+            let img = req?.files?.img || null;
+            const requestedData = await pageService.updateImg(id, type, img);
+            return res.json(requestedData);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+
     async getPage(req, res, next) {
         try {
             const errors = validationResult(req);

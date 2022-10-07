@@ -1,7 +1,8 @@
-﻿export const formDataImg = ({id, input, inputAlt, imgDbCollName, index, title, text}) => {
+﻿export const formDataImg = ({id, input, inputAlt, imgDbCollName, index, title, text, type}) => {
     const formData = new FormData();
     id && formData.append('id', id);
     input && formData.append('img', input);
+    type && formData.append('type', type);
     inputAlt && formData.append('imgAlt', inputAlt);
     imgDbCollName && formData.append('imgDbCollName', imgDbCollName);
     (index || index === 0) && formData.append('index', index);
