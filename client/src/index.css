@@ -3015,6 +3015,20 @@ button:active {
     z-index: 20;
     border-radius: 5px;
 }
+.adminFaq__modal-related.blocks-modal .modal-dialog-centered{
+    max-width: 500px;
+    margin-left: 64%;
+}
+.adminFaq__modal-related.blocks-modal .modal-body ul li>div{
+    white-space: unset;
+    max-height: 50px;
+}
+.adminFaq__modal-related.blocks-modal .modal-body ul li>div:nth-of-type(1){
+    flex: 0 0 30%;
+}
+.adminFaq__modal-related.blocks-modal .modal-body ul li>div{
+    flex: 0 0 60%;
+}
 /**admin help faq end**/
 /*admin static pages end*/
 

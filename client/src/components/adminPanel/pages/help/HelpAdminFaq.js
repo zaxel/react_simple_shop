@@ -4,6 +4,7 @@ import { Context } from '../../../..';
 import Faq from './components/Faq';
 import { Spinner } from 'react-bootstrap';
 import AddNewFaq from './components/AddNewFaq';
+import AddFaqModal from './components/AddFaqModal';
 
 
 const HelpAdminFaq = observer(() => {
@@ -11,12 +12,12 @@ const HelpAdminFaq = observer(() => {
     const [addFaqVisible, setAddFaqVisible] = useState(false);
     const [newFaqLoading, setNewFaqLoading] = useState(false);
 
-    // const onAddBtnsClick = async () => {
-    //     // setAddBtnsVisible(true);
-    //     // aboutPage.setModalBtnsLoading(true);
-    //     // await fetchBtnsModal(aboutPage);
-    //     // aboutPage.setModalBtnsLoading(false);
-    // }
+    const onAddFaqClick = async () => {
+        setAddFaqVisible(true);
+        helpAdmin.setModalFaqLoading(true);
+        // await fetchBtnsModal(aboutPage);
+        helpAdmin.setModalFaqLoading(false);
+    }
 
     useEffect(() => {
         // fetchBlocks(aboutPage);
@@ -26,7 +27,7 @@ const HelpAdminFaq = observer(() => {
 
     const faqs = helpAdmin.questions.slice()
         .sort((a,b)=>a.order_id-b.order_id)
-        .map(faq=><Faq key={faq.id} question={faq} answer={helpAdmin.answers.find(answer=>answer.id === faq.infoHelpAnswerId)}/>);
+        .map(faq=><Faq key={faq.id} question={faq} answer={helpAdmin.answers.find(answer=>answer.id === faq.infoHelpAnswerId)} onAddFaqClick={onAddFaqClick}/>);
         
 
     // if (helpAdmin.loading) {
@@ -51,6 +52,7 @@ const HelpAdminFaq = observer(() => {
                     </div> :
                     <AddNewFaq />}
             </div>
+            <AddFaqModal show={addFaqVisible} onHide={() => setAddFaqVisible(false)}/>
         </div>
     );
 });

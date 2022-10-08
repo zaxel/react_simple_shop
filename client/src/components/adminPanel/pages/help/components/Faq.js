@@ -6,12 +6,12 @@ import AdminTextInput from '../../../commonComponents/AdminTextInput';
 import Related from './Related';
 
 
-const Faq = observer(({question, answer}) => {
+const Faq = observer(({question, answer, onAddFaqClick}) => {
     const { helpAdmin } = useContext(Context);
     const [arrowStyle, setArrowStyle] = useState('arrow');
     const [displayDescr, setDisplayDescr] = useState(false);
 
-    const relatedFaqs = helpAdmin.questions.map(el=><Related question={el.question} />);
+    const relatedFaqs = helpAdmin.questions.map(el=><Related key={el.id} question={el.question} />);
     // const relatedFaqs = null;
 
     const changeStyle = () => {
@@ -64,7 +64,7 @@ const Faq = observer(({question, answer}) => {
                             {relatedFaqs || <li className='adminFaq__norelated'>No related FAQ's added</li>}
                         </ul>
                         <div className='about-blocks__btn-add'>
-                            <button onClick={(onAddBtnsClick)=>console.log(78)}>add related FAQ</button>
+                            <button onClick={()=>onAddFaqClick()}>add related FAQ</button>
                             {/* <button >add buttons</button> */}
                         </div>
                     </div>

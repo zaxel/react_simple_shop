@@ -23,7 +23,7 @@ const AddBtnsModal = observer(({show, onHide}) => {
           <div className="spinner">
             <Spinner animation="border" />
           </div> :
-          <ul>{cards}</ul>}  
+          <ul>{cards}</ul>}   
         </Form.Group>
           
         </Modal.Body>
