@@ -1,13 +1,15 @@
-﻿import React, { useContext, useEffect } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../../..';
 import Faq from './components/Faq';
+import { Spinner } from 'react-bootstrap';
+import AddNewFaq from './components/AddNewFaq';
 
 
 const HelpAdminFaq = observer(() => {
     const { helpAdmin } = useContext(Context);
-    // const [addBtnsVisible, setAddBtnsVisible] = useState(false);
-    // const [newBlockLoading, setNewBlockLoading] = useState(false);
+    const [addFaqVisible, setAddFaqVisible] = useState(false);
+    const [newFaqLoading, setNewFaqLoading] = useState(false);
 
     // const onAddBtnsClick = async () => {
     //     // setAddBtnsVisible(true);
@@ -43,11 +45,11 @@ const HelpAdminFaq = observer(() => {
                     {faqs}
                 </ul>
                 <h4>create new FAQ's:</h4>
-                {/* {newBlockLoading ?
+                {newFaqLoading ?
                     <div className="spinner about-blocks__spinner">
                         <Spinner animation="border" />
                     </div> :
-                    <AddNewBlock />} */}
+                    <AddNewFaq />}
             </div>
         </div>
     );
