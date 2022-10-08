@@ -2896,6 +2896,126 @@ button:active {
     margin-left: 8px;
 }
 /**admin help page end**/
+/**admin help faq start**/
+
+.adminFaq>h2{
+    margin: 18px 0 30px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+.adminFaq__container{
+    max-width: 66vw;
+    padding: 15px;
+    margin: 20px;
+    background-color: #F3F3F3;
+    border-radius: 8px;
+}
+.adminFaq__container>h4 {
+    display: block;
+    margin: 15px 15px 5px 15px;
+    font-weight: 500;
+}
+.adminFaq__container>ul{
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    background-color: white;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.adminFaq__container>ul>li{
+    border-radius: 8px;
+    border: 1px solid #C4C4C4;
+    margin-bottom: 1px;
+}
+.adminFaq__header{
+    display: flex;
+    padding: 8px;
+    max-height: 70px;
+}
+.adminFaq__question-cont{
+    flex: 0 0 28%;
+}
+.adminFaq__answer-cont{
+    flex: 0 0 56%;
+    margin-left: 4px;
+}
+.adminFaq__delete-cont{
+    flex: 0 0 7%;
+    margin-left: 4px;
+}
+.adminFaq__question-button{
+    flex: 0 0 7%;
+    margin-left: 4px;
+}
+.adminFaq__header h3{
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.adminFaq__question-cont p,
+.adminFaq__answer-cont p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 32px;
+}
+.adminFaq__related-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    padding: 8px;
+}
+.adminFaq__norelated{
+    width: 44vw;
+    height: 44px;
+    line-height: 2.7;
+    margin: 0 20px;
+}
+.adminFaq__related button{
+    position: relative;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #C4C4C4;
+    margin-bottom: 1px;
+    width: 100%;
+    height: 48px;
+    padding: 4px 10px;
+    text-align: left;
+    overflow: hidden;
+}
+.adminFaq__related button:hover::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 10;
+}
+.adminFaq__related button:hover::after{
+    content: 'REMOVE';
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, .6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    letter-spacing: 2px;
+    z-index: 20;
+    border-radius: 5px;
+}
+/**admin help faq end**/
 /*admin static pages end*/
 
 /*search start*/

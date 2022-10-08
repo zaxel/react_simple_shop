@@ -28,6 +28,7 @@ const Blocks = observer(() => {
         fetchBlocks(aboutPage);
         fetchBtnsModal(aboutPage);
         aboutPage.setActiveBlockEdit(null);
+        console.log(aboutPage)
     }, [])
 
     const blockCards = aboutPage.editBlocks.slice()
