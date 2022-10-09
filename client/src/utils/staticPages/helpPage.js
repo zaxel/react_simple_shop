@@ -1,5 +1,6 @@
 ﻿import {
   createFaqs,
+  deleteFaqReq,
   fetchFaqs,
   fetchHelpPage, updateFaqAnswer, updateFaqQuestion, updateHelpPage, updatePageImg
 } from "../../http/pageAPI";
@@ -70,7 +71,6 @@ export const fetchAllFaqs = async (currentStore) => {
 }
 export const createNewFaq = async (currentStore, question, answerTitle, answerText) => {
   try {
-    setComponentLoading(currentStore, true);
     const fetchedData = await createFaqs(question, answerTitle, answerText);
     const setterName = 'addNewFaq';
     setStoreField(currentStore, setterName, fetchedData);
@@ -97,6 +97,18 @@ export const changeFaqAnswer = async (id, dbFieldName, currentStore, data) => {
   try {
       const updatedData = await updateFaqAnswer(id, dbFieldName, data);
       setStoreField(currentStore, 'updateAnswer', {id, [dbFieldName]: data}); 
+      return updatedData;
+  } catch (e) {
+    console.log(e)
+  } finally {
+    setComponentLoading(currentStore, false);
+  }
+}
+export const deleteFaq = async (id, currentStore) => {
+  try {
+    setComponentLoading(currentStore, true); 
+      const updatedData = await deleteFaqReq(id);
+      setStoreField(currentStore, 'deleteFaq', id); 
       return updatedData;
   } catch (e) {
     console.log(e)

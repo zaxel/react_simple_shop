@@ -1,7 +1,7 @@
 ﻿import { observer } from 'mobx-react-lite';
 import React, {useContext, useState, useEffect} from 'react';
 import { Context } from '../../../../..';
-import { changeFaqAnswer, changeFaqQuestion } from '../../../../../utils/staticPages/helpPage';
+import { changeFaqAnswer, changeFaqQuestion, deleteFaq } from '../../../../../utils/staticPages/helpPage';
 import AdminTextArea from '../../../commonComponents/AdminTextArea';
 import AdminTextInput from '../../../commonComponents/AdminTextInput';
 import Related from './Related';
@@ -45,7 +45,7 @@ const Faq = observer(({question, answer, onAddRelatedFaqClick}) => {
                     <p>{answer?.text || 'no answer added yet'}</p>
                 </div>
                 <div className='adminFaq__delete-cont about-blocks__card-del'>
-                    <button onClick={() => console.log(99)}>X</button>
+                    <button onClick={deleteFaq.bind(this, answer.answerId, helpAdmin)}>X</button> 
                 </div>
                 <div className='adminFaq__question-button about-blocks__card-button'>
                     <button onClick={changeStyle} className={arrowStyle}></button>

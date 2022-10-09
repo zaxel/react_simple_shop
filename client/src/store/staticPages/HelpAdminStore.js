@@ -106,6 +106,10 @@ export default class HelpPageStore{
         const data = text ?? title;
         this._answers.find(answer=>answer.answerId === id)[field] = data;
     }
+    deleteFaq(id){
+        this._questions = this._questions.filter(question=>question.infoHelpAnswerId !== id);
+        this._answers = this._answers.filter(answer=>answer.answerId !== id);
+    }
     
     
     get pageId(){

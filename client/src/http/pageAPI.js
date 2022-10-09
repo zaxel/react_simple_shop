@@ -125,3 +125,9 @@ export const updateFaqQuestion = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/help/question' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
+export const deleteFaqReq = async (id) => {
+    const updatedData = await $authHost.delete('api/help/faq' , {
+        data: {id}
+      });
+    return updatedData.data;
+}

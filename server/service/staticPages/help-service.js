@@ -42,6 +42,16 @@ class HelpService {
         });
         return updatedData;
     }
+    deleteFaq = async ({ id }) => {
+        const deletedQuestion = await InfoHelpQuestions.destroy({
+            where: { infoHelpAnswerId: id }
+        });
+        const deletedAnswer = await InfoHelpAnswers.destroy({
+            where: { id }
+        });
+        
+        return {deletedAnswer, deletedQuestion};
+    }
     
 }
 

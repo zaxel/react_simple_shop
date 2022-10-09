@@ -27,6 +27,9 @@ router.put('/question/',
     body('id').isNumeric(),
     body('question').optional().isString().isLength({ min: 3 }),
     helpController.updateFaqQuestion);
-    
+router.delete('/faq/',
+    checkRole('ADMIN'),
+    body('id').isNumeric(),
+    helpController.deleteFaq);
 
 module.exports = router;
