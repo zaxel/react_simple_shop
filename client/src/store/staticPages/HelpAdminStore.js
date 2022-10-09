@@ -90,9 +90,10 @@ export default class HelpPageStore{
 
 
 
-    addNewFaq({answerId, text, title, answerUpdatedAt, questionAnswerId, question, questionCreatedAt, id, questionUpdatedAt, questionOrderId, questionCategoryId}){
-        this._questions.push({id, order_id: questionOrderId, question, infoHelpCategoryId: questionCategoryId, infoHelpAnswerId: questionAnswerId})
-        this._answers.push({id: answerId, title, text})
+    addNewFaq({answerId, text, title, answerUpdatedAt, infoHelpAnswerId, question, questionCreatedAt, id, questionUpdatedAt, order_id, infoHelpCategoryId}){
+        console.log()
+        this._questions.push({id, order_id, question, infoHelpCategoryId, infoHelpAnswerId})
+        this._answers.push({answerId, title, text})
     }
     setAllFaqs({answers, questions}){
         this._answers = answers;
