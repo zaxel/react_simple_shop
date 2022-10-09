@@ -110,11 +110,10 @@ export const updateHelpPage = async (id, dbFieldName, data) => {
 
 
 export const fetchFaqs = async () => {
-    const {data} = await $host.get(`api/help/faqs`); 
+    const {data} = await $host.get(`api/help/faqs`);
     return data;
 }
 export const createFaqs = async (question, answerTitle, answerText) => {
     const updatedData = await $authHost.post('api/help/faq', {question, answerTitle, answerText}); 
-    console.log(updatedData.data);
     return updatedData.data;  
 }

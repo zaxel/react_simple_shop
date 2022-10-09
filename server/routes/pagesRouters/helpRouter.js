@@ -5,7 +5,9 @@ const checkRole = require('../../middleware/checkRoleMiddleware');
 const helpController = require('../../controllers/pageControllers/helpController');
 
 
-router.get('/', helpController.getPage); 
+router.get('/', helpController.getPage);
+
+router.get('/faqs/', helpController.getFaqs); 
 
 router.post('/faq/',
     checkRole(['ADMIN', 'MODERATOR']), 

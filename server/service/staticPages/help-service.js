@@ -17,30 +17,10 @@ class HelpService {
     //     }, {});
     //     return buttons;
     // }
-    createFaq = async ({ question, answerTitle, answerText }) => {
-
-        const newAnswer = await InfoHelpAnswers.create({ title: answerTitle, text: answerText });
-        const newQuestion = await InfoHelpQuestions.create({ question, infoHelpAnswerId: newAnswer.dataValues.id });
-        const answer = newAnswer.dataValues;
-
-        question = newQuestion.dataValues;
-        const faq = new HelpFaqDto({answer, question});
-        return faq; 
-    }
+    
 
 
-    // getPage = async ({ name }) => {
-    //     let page = await InfoPages.findOne({
-    //         where: { name },
-    //         include: [{
-    //             model: InfoAboutCards, as: 'info_about_cards'
-    //         }]
-    //     });
-    //     const btnsNumbers = new PageBtnsService().getPageButtons(page);
-    //     const buttons = await this.getChoosedBtns({ id: btnsNumbers });
-    //     page = new AboutDto(page);
-    //     return { page, buttons };
-    // }
+    
     getPage = async ({ name }) => {
         let page = await InfoPages.findOne({
             where: { name }
@@ -48,7 +28,19 @@ class HelpService {
         page = new PageDto(page);
         return page;
     }
-    
+    getFaqs = async () => {
+        let questionsData = await InfoHelpQuestions.findAll();
+        let answersData = await InfoHelpAnswers.findAll();
+        const questions = questionsData.map(el=>new HelpFaqDto({question: el}));
+        const answers = answersData.map(el=>new HelpFaqDto({answer: el}));
+        return { questions, answers };  
+    }
+    createFaq = async ({ question, answerTitle, answerText }) => {
+        const answer = await InfoHelpAnswers.create({ title: answerTitle, text: answerText });
+        question = await InfoHelpQuestions.create({ question, infoHelpAnswerId: answer.id });
+        const faq = new HelpFaqDto({answer, question});
+        return faq; 
+    }
 }
 
 module.exports = new HelpService();

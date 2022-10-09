@@ -12,6 +12,14 @@ class HelpController {
             next(ApiError.forbidden(e.message));
         }
     }
+    async getFaqs(req, res, next) {
+        try {
+            const data = await helpService.getFaqs(); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
     async createFaq(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -22,7 +30,7 @@ class HelpController {
             const data = await helpService.createFaq({question, answerTitle, answerText});
             return res.json(data);
         } catch (e) {
-            next(ApiError.forbidden(e.message));
+            next(ApiError.forbidden(e.message)); 
         }
     }
     

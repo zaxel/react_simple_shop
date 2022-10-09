@@ -6,7 +6,7 @@ import AdminTextInput from '../../../commonComponents/AdminTextInput';
 import Related from './Related';
 
 
-const Faq = observer(({question, answer, onAddFaqClick}) => {
+const Faq = observer(({question, answer, onAddRelatedFaqClick}) => {
     const { helpAdmin } = useContext(Context);
     const [arrowStyle, setArrowStyle] = useState('arrow');
     const [displayDescr, setDisplayDescr] = useState(false);
@@ -15,7 +15,6 @@ const Faq = observer(({question, answer, onAddFaqClick}) => {
     // const relatedFaqs = null;
 
     const changeStyle = () => {
-        console.log(question.id, helpAdmin.activeFaqEdit)
         helpAdmin.activeFaqEdit === question.id ? helpAdmin.setActiveFaqEdit(null) : helpAdmin.setActiveFaqEdit(question.id);
     }
 
@@ -34,11 +33,11 @@ const Faq = observer(({question, answer, onAddFaqClick}) => {
             <div className='adminFaq__header'>
                 <div className='adminFaq__question-cont'>
                     <h3>Question(first two lines):</h3>
-                    <p>{question.question}</p>
+                    <p>{question?.question || 'no question added yet'}</p>
                 </div>
                 <div className='adminFaq__answer-cont'>
                     <h3>Answer(first two lines):</h3>
-                    <p>{answer.text}</p>
+                    <p>{answer?.text || 'no answer added yet'}</p>
                 </div>
                 <div className='adminFaq__delete-cont about-blocks__card-del'>
                     <button onClick={() => console.log(99)}>X</button>
@@ -49,13 +48,13 @@ const Faq = observer(({question, answer, onAddFaqClick}) => {
             </div>
             {displayDescr && <div className='about-blocks__card-body'>
                 <div className='about-blocks__body-title'>
-                    <AdminTextInput inputTitle={'Question'} inputText={question.question} cb={()=>console.log(99)}/>
+                    <AdminTextInput inputTitle={'Question'} inputText={question?.question || 'no question added yet'} cb={()=>console.log(99)}/>
                 </div>
                 <div className='about-blocks__body-text'>
-                    <AdminTextInput inputTitle={'Answer Title'} inputText={answer.title} cb={()=>console.log(99)}/>
+                    <AdminTextInput inputTitle={'Answer Title'} inputText={answer?.title || 'no answer title added yet'} cb={()=>console.log(99)}/>
                 </div>
                 <div className='about-blocks__body-text'>
-                    <AdminTextArea areaTitle={'Answer Text'} areaText={answer.text} cb={()=>console.log(99)}/>
+                    <AdminTextArea areaTitle={'Answer Text'} areaText={answer?.text || 'no answer body added yet'} cb={()=>console.log(99)}/>
                 </div>
                 <div className='about-blocks__body-battons'> 
                     <h3>Related FAQ's:</h3>
@@ -64,7 +63,7 @@ const Faq = observer(({question, answer, onAddFaqClick}) => {
                             {relatedFaqs || <li className='adminFaq__norelated'>No related FAQ's added</li>}
                         </ul>
                         <div className='about-blocks__btn-add'>
-                            <button onClick={()=>onAddFaqClick()}>add related FAQ</button>
+                            <button onClick={()=>onAddRelatedFaqClick()}>add related FAQ</button>
                         </div>
                     </div>
 

@@ -1,5 +1,6 @@
 ﻿import {
   createFaqs,
+  fetchFaqs,
   fetchHelpPage, updateHelpPage, updatePageImg
 } from "../../http/pageAPI";
 
@@ -38,7 +39,7 @@ export const changeTitle = async (id, dbFieldName, currentStore, data) => {
   setStoreField(currentStore, 'setPageTitle', data[0])
   return updatedData;
 }
-export const changeContactTitle = async (id, dbFieldName, currentStore, data ) => {
+export const changeContactTitle = async (id, dbFieldName, currentStore, data) => {
   data = [currentStore.pageTitle || '', data];
   const updatedData = await updateHelpPage(id, dbFieldName, data);
   setStoreField(currentStore, 'setContactTitle', data[1])
@@ -51,21 +52,35 @@ export const changePageHero = async (formData) => {
 
 
 
-export const createNewFaq = async (currentStore, question, answerTitle, answerText) => {
-  try{
+export const fetchAllFaqs = async (currentStore) => {
+
+  try {
     setComponentLoading(currentStore, true);
-    const fetchedData = await createFaqs(question, answerTitle, answerText); 
+    const fetchedData = await fetchFaqs();
+     
+    const setterName = 'setAllFaqs';
+    setComponentLoading(currentStore, false);
+    
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+  } finally {
+    setComponentLoading(currentStore, false);
+  }
+}
+export const createNewFaq = async (currentStore, question, answerTitle, answerText) => {
+  try {
+    setComponentLoading(currentStore, true);
+    const fetchedData = await createFaqs(question, answerTitle, answerText);
     const setterName = 'addNewFaq';
     setStoreField(currentStore, setterName, fetchedData);
     return fetchedData;
-  }catch(e){
+  } catch (e) {
     console.log(e)
-  }finally{
+  } finally {
     setComponentLoading(currentStore, false);
   }
-  
-  
-} 
+}
 
 
 // export const fetchCard = async (currentStore, cardId) => {
@@ -125,7 +140,7 @@ export const createNewFaq = async (currentStore, question, answerTitle, answerTe
 // }
 // export const changeAboutBlocksPosition = async (positions) => {
 //   const updatedData = await updateAboutBlocksPosition(positions);
-//   return updatedData; 
+//   return updatedData;
 // }
 // export const changeAboutBlockImg = async (formData) => {
 //   const updatedData = await updateAboutBlockImg(formData);

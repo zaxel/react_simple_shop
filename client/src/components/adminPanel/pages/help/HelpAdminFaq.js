@@ -5,6 +5,7 @@ import Faq from './components/Faq';
 import { Spinner } from 'react-bootstrap';
 import AddNewFaq from './components/AddNewFaq';
 import AddFaqModal from './components/AddFaqModal';
+import { fetchAllFaqs } from '../../../../utils/staticPages/helpPage';
 
 
 const HelpAdminFaq = observer(() => {
@@ -12,31 +13,31 @@ const HelpAdminFaq = observer(() => {
     const [addFaqVisible, setAddFaqVisible] = useState(false);
     const [newFaqLoading, setNewFaqLoading] = useState(false);
 
-    const onAddFaqClick = async () => {
+    const onAddRelatedFaqClick = async () => {
         setAddFaqVisible(true);
         helpAdmin.setModalFaqLoading(true);
-        // await fetchBtnsModal(aboutPage);
+        // await fetchAllFaqs(aboutPage);
         helpAdmin.setModalFaqLoading(false);
     }
 
     useEffect(() => {
-        // fetchBlocks(aboutPage);
+        fetchAllFaqs(helpAdmin);
         // fetchBtnsModal(aboutPage);
         helpAdmin.setActiveFaqEdit(null);
     }, [])
 
     const faqs = helpAdmin.questions.slice()
         .sort((a,b)=>a.order_id-b.order_id)
-        .map(faq=><Faq key={faq.id} question={faq} answer={helpAdmin.answers.find(answer=>answer.id === faq.infoHelpAnswerId)} onAddFaqClick={onAddFaqClick}/>);
+        .map(faq=><Faq key={faq.id} question={faq} answer={helpAdmin.answers.find(answer=>answer.answerId === faq.infoHelpAnswerId)} onAddRelatedFaqClick={onAddRelatedFaqClick}/>);
         
 
-    // if (helpAdmin.loading) {
-    //     return (
-    //         <div className="spinner">
-    //             <Spinner animation="border" />
-    //         </div>
-    //     )
-    // }
+    if (helpAdmin.loading) {
+        return (
+            <div className="spinner">
+                <Spinner animation="border" />
+            </div>
+        )
+    }
     return (
         <div className='admin-pages__page adminFaq'>
             <h2>Edit FAQS of Help Page".</h2>
