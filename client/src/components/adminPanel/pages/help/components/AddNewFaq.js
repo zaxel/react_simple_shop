@@ -1,27 +1,38 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../../../../..';
+import { createNewFaq } from '../../../../../utils/staticPages/helpPage';
 
 const AddNewFaq = () => {
     const {helpAdmin} = useContext(Context);
 
 
-    const [input, setInput] = useState('');
-    const [text, setText] = useState('');
+    const [question, setQuestion] = useState('');
+    const [answerTitle, setAnswerTitle] = useState('');
+    const [answerText, setAnswerText] = useState('');
     
+    const resetNewFaqForm = () => {
+        setQuestion('');
+        setAnswerTitle('');
+        setAnswerText('');
+    }
 
-    const onFormConfirm = (e) => {
+    const onFormConfirm = async(e) => {
         e.preventDefault();
         
-        if(!input){
-            alert('title could not be empty');
+        if(!question){
+            alert('you have to add your question');
             return;
         }
-        if(!text){
-            alert('description could not be empty');
+        if(!answerTitle){
+            alert('you have to add answer title');
             return;
         }
-        // const formData = formDataImg({input: imgInput, inputAlt: smallImgInput, title: input, text});
-        // createBlock(aboutPage, formData);
+        if(!answerText){
+            alert('you have to add answer text');
+            return;
+        }
+        await createNewFaq(helpAdmin, question, answerTitle, answerText);
+        resetNewFaqForm();
     }
 
     return (
@@ -29,17 +40,16 @@ const AddNewFaq = () => {
             <form className='about-blocks__form blocks-form'>
                 <div className='blocks-form__title'>
                     <h5>question:</h5>
-                    <input type={'text'} placeholder='FAQ question' value={input} onChange={(e)=>setInput(e.currentTarget.value)}/>
+                    <input type={'text'} placeholder='FAQ question' value={question} onChange={(e)=>setQuestion(e.currentTarget.value)}/>
                 </div>
                 <div className='blocks-form__title'>
                     <h5>answer title:</h5>
-                    <input type={'text'} placeholder='FAQ answer title' value={input} onChange={(e)=>setInput(e.currentTarget.value)}/>
+                    <input type={'text'} placeholder='FAQ answer title' value={answerTitle} onChange={(e)=>setAnswerTitle(e.currentTarget.value)}/>
                 </div>
                 <div className='blocks-form__text'>
                     <h5>answer description:</h5>
-                    <textarea placeholder='FAQ answer body' value={text} onChange={(e)=>setText(e.currentTarget.value)}/>
+                    <textarea placeholder='FAQ answer body' value={answerText} onChange={(e)=>setAnswerText(e.currentTarget.value)}/>
                 </div>
-                
                 <button className='block-form__new-block' onClick={onFormConfirm}>add new FAQ</button>
             </form>
         </div>

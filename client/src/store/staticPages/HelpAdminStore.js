@@ -104,6 +104,12 @@ export default class HelpPageStore{
     }
 
 
+
+    addNewFaq({answerId, answerText, answerTitle, answerUpdatedAt, questionAnswerId, question, questionCreatedAt, questionId, questionUpdatedAt, questionOrderId, questionCategoryId}){
+        this._questions.push({id: questionId, order_id: questionOrderId, question, infoHelpCategoryId: questionCategoryId, infoHelpAnswerId: questionAnswerId})
+        this._answers.push({id: answerId, title: answerTitle, text: answerText})
+    }
+
     get pageId(){
         return this._pageId;
     }

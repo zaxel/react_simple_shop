@@ -1,4 +1,5 @@
 ﻿import {
+  createFaqs,
   fetchHelpPage, updateHelpPage, updatePageImg
 } from "../../http/pageAPI";
 
@@ -48,6 +49,23 @@ export const changePageHero = async (formData) => {
   return updatedData;
 }
 
+
+
+export const createNewFaq = async (currentStore, question, answerTitle, answerText) => {
+  try{
+    setComponentLoading(currentStore, true);
+    const fetchedData = await createFaqs(question, answerTitle, answerText); 
+    const setterName = 'addNewFaq';
+    setStoreField(currentStore, setterName, fetchedData);
+    return fetchedData;
+  }catch(e){
+    console.log(e)
+  }finally{
+    setComponentLoading(currentStore, false);
+  }
+  
+  
+} 
 
 
 // export const fetchCard = async (currentStore, cardId) => {

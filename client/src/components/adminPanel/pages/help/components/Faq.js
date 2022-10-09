@@ -65,7 +65,6 @@ const Faq = observer(({question, answer, onAddFaqClick}) => {
                         </ul>
                         <div className='about-blocks__btn-add'>
                             <button onClick={()=>onAddFaqClick()}>add related FAQ</button>
-                            {/* <button >add buttons</button> */}
                         </div>
                     </div>
 

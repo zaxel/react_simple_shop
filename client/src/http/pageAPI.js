@@ -106,3 +106,15 @@ export const updateHelpPage = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
+
+
+
+export const fetchFaqs = async () => {
+    const {data} = await $host.get(`api/help/faqs`); 
+    return data;
+}
+export const createFaqs = async (question, answerTitle, answerText) => {
+    const updatedData = await $authHost.post('api/help/faq', {question, answerTitle, answerText}); 
+    console.log(updatedData.data);
+    return updatedData.data;  
+}
