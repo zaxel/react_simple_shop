@@ -33,6 +33,33 @@ class HelpController {
             next(ApiError.forbidden(e.message)); 
         }
     }
+
+    async updateFaqQuestion(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id, question } = req.body;
+            const data = await helpService.updateQuestion({ id, question });
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
+    async updateFaqAnswer(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id, text, title } = req.body;
+            const data = await helpService.updateAnswer({ id, text, title });
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
     
 }
 

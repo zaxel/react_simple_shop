@@ -16,4 +16,17 @@ router.post('/faq/',
     body('answerText').isString().isLength({ min: 3 }),
     helpController.createFaq);
 
+router.put('/answer/',
+    checkRole(['ADMIN', 'MODERATOR']), 
+    body('id').isNumeric(),
+    body('text').optional().isString().isLength({ min: 3 }),
+    body('title').optional().isString().isLength({ min: 3 }),
+    helpController.updateFaqAnswer);
+router.put('/question/',
+    checkRole(['ADMIN', 'MODERATOR']), 
+    body('id').isNumeric(),
+    body('question').optional().isString().isLength({ min: 3 }),
+    helpController.updateFaqQuestion);
+    
+
 module.exports = router;

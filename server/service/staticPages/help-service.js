@@ -8,19 +8,6 @@ const HelpFaqDto = require('../../dtos/static-page-help-faq-dto');
 const fileService = require("../file/file-service");
 
 class HelpService {
-    // getChoosedBtns = async ({ id }) => {
-    //     let btns = await ButtonLink.findAll({
-    //         where: { id }
-    //     });
-    //     let buttons = btns.reduce((obj, btn) => {
-    //         return { ...obj, [btn.id]: new AboutBtnDto(btn) }
-    //     }, {});
-    //     return buttons;
-    // }
-    
-
-
-    
     getPage = async ({ name }) => {
         let page = await InfoPages.findOne({
             where: { name }
@@ -41,6 +28,21 @@ class HelpService {
         const faq = new HelpFaqDto({answer, question});
         return faq; 
     }
+    updateQuestion = async ({ id, question }) => {
+        const updatedData = await InfoHelpQuestions.update({ question }, {
+            where: { id }
+        });
+        return updatedData;
+    }
+    updateAnswer = async ({ id, text, title }) => {
+        const field = text ? {text} : {title}
+
+        const updatedData = await InfoHelpAnswers.update(field, {
+            where: { id }
+        });
+        return updatedData;
+    }
+    
 }
 
 module.exports = new HelpService();

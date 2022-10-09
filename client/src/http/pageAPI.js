@@ -117,3 +117,11 @@ export const createFaqs = async (question, answerTitle, answerText) => {
     const updatedData = await $authHost.post('api/help/faq', {question, answerTitle, answerText}); 
     return updatedData.data;  
 }
+export const updateFaqAnswer = async (id, dbFieldName, data) => {
+    const updatedData = await $authHost.put('api/help/answer' , {id, [dbFieldName]: data});
+    return updatedData.data;
+}
+export const updateFaqQuestion = async (id, dbFieldName, data) => {
+    const updatedData = await $authHost.put('api/help/question' , {id, [dbFieldName]: data});
+    return updatedData.data;
+}

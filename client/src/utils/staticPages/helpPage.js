@@ -1,7 +1,7 @@
 ﻿import {
   createFaqs,
   fetchFaqs,
-  fetchHelpPage, updateHelpPage, updatePageImg
+  fetchHelpPage, updateFaqAnswer, updateFaqQuestion, updateHelpPage, updatePageImg
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -60,7 +60,7 @@ export const fetchAllFaqs = async (currentStore) => {
      
     const setterName = 'setAllFaqs';
     setComponentLoading(currentStore, false);
-    
+     
     return setStoreField(currentStore, setterName, fetchedData);
   } catch (e) {
     console.log(e)
@@ -75,6 +75,29 @@ export const createNewFaq = async (currentStore, question, answerTitle, answerTe
     const setterName = 'addNewFaq';
     setStoreField(currentStore, setterName, fetchedData);
     return fetchedData;
+  } catch (e) {
+    console.log(e)
+  } finally {
+    setComponentLoading(currentStore, false);
+  }
+}
+
+export const changeFaqQuestion = async (id, dbFieldName, currentStore, data) => {
+  try {
+      const updatedData = await updateFaqQuestion(id, dbFieldName, data);
+      setStoreField(currentStore, 'updateQuestion', {id, data})
+      return updatedData;
+  } catch (e) {
+    console.log(e)
+  } finally {
+    setComponentLoading(currentStore, false);
+  }
+}
+export const changeFaqAnswer = async (id, dbFieldName, currentStore, data) => {
+  try {
+      const updatedData = await updateFaqAnswer(id, dbFieldName, data);
+      setStoreField(currentStore, 'updateAnswer', {id, [dbFieldName]: data}); 
+      return updatedData;
   } catch (e) {
     console.log(e)
   } finally {

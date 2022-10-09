@@ -98,6 +98,15 @@ export default class HelpPageStore{
         this._answers = answers;
         this._questions = questions;
     }
+    updateQuestion({id, data}){
+        this._questions.find(quest=>quest.id === id).question = data; 
+    }
+    updateAnswer({id, text, title}){
+        const field = text ? 'text' : 'title';
+        const data = text ?? title;
+        this._answers.find(answer=>answer.answerId === id)[field] = data;
+    }
+    
     
     get pageId(){
         return this._pageId;
