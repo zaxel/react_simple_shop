@@ -182,8 +182,8 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   InfoHelpAnswers.hasOne(InfoHelpQuestions)
   InfoHelpQuestions.belongsTo(InfoHelpAnswers)
   
-  InfoHelpAnswers.hasMany(InfoHelpRelatedQuestions)
-  InfoHelpRelatedQuestions.belongsTo(InfoHelpAnswers)
+  InfoHelpQuestions.hasMany(InfoHelpRelatedQuestions)
+  InfoHelpRelatedQuestions.belongsTo(InfoHelpQuestions)
 
 
   InfoPages.hasMany(InfoAboutCards)

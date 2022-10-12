@@ -33,7 +33,14 @@ class HelpController {
             next(ApiError.forbidden(e.message)); 
         }
     }
-
+    async getQuestion(req, res, next) {
+        try {
+            const data = await helpService.getQuestion(); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
     async updateFaqQuestion(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -73,7 +80,74 @@ class HelpController {
             next(ApiError.forbidden(e.message)); 
         }
     }
+
     
+    async getCategory(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { id } = req.query;
+            const data = await helpService.getCategory({id}); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async createCategory(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { title, banner, icon, link } = req.body;
+            const data = await helpService.createCategory({title, banner, icon, link});
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
+    
+    async getRelated(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { id } = req.query;
+            const data = await helpService.getRelatedFaq({id}); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async addRelated(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { faq_id, infoHelpQuestionId } = req.body;
+            const data = await helpService.addRelatedFaq({faq_id, infoHelpQuestionId}); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async deleteRelated(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { faq_id, infoHelpQuestionId } = req.body;
+            const data = await helpService.delRelatedFaq({faq_id, infoHelpQuestionId}); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
 }
 
 module.exports = new HelpController();

@@ -117,6 +117,11 @@ export const createFaqs = async (question, answerTitle, answerText) => {
     const updatedData = await $authHost.post('api/help/faq', {question, answerTitle, answerText}); 
     return updatedData.data;  
 }
+export const fetchQuestions = async () => {
+    const fetchedData = await $host.get('api/help/question');  
+    return fetchedData.data;
+}
+
 export const updateFaqAnswer = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/help/answer' , {id, [dbFieldName]: data});
     return updatedData.data;
@@ -130,4 +135,27 @@ export const deleteFaqReq = async (id) => {
         data: {id}
       });
     return updatedData.data;
+}
+
+export const fetchCategory = async (id) => {
+    const fetchedData = await $host.get('api/help/category' , {params:{
+        id
+    }});
+    return fetchedData.data;
+}
+export const fetchRelated = async (id) => {
+    const fetchedData = await $host.get('api/help/related' , {params:{
+        id
+    }});
+    return fetchedData.data;
+}
+export const addRelatedReq = async (faq_id, infoHelpQuestionId) => {
+    const fetchedData = await $authHost.post('api/help/related' , {faq_id, infoHelpQuestionId});
+    return fetchedData.data;
+}
+export const removedRelatedReq = async (faq_id, infoHelpQuestionId) => {
+    const fetchedData = await $authHost.delete('api/help/related' , {
+        data: {faq_id, infoHelpQuestionId}
+    });
+    return fetchedData.data;
 }

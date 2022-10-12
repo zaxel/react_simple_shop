@@ -27,9 +27,37 @@ router.put('/question/',
     body('id').isNumeric(),
     body('question').optional().isString().isLength({ min: 3 }),
     helpController.updateFaqQuestion);
+router.get('/question/',
+    helpController.getQuestion);
 router.delete('/faq/',
     checkRole('ADMIN'),
     body('id').isNumeric(),
     helpController.deleteFaq);
+
+router.get('/category/',
+    query('id').optional().isNumeric(),
+    helpController.getCategory);
+router.post('/category/',
+    // checkRole(['ADMIN', 'MODERATOR']), 
+    body('title').isString().isLength({ min: 3 }),
+    body('banner').optional().isString().isLength({ min:  5}),
+    body('icon').optional().isString().isLength({ min: 5 }),
+    body('link').optional().isString().isLength({ min: 5 }),
+    helpController.createCategory); 
+
+    
+router.get('/related/',
+    query('id').isNumeric(),
+    helpController.getRelated);
+router.post('/related/',
+    checkRole(['ADMIN', 'MODERATOR']),
+    body('faq_id').isNumeric(),
+    body('infoHelpQuestionId').isNumeric(),
+    helpController.addRelated);
+router.delete('/related/',
+    checkRole(['ADMIN']),
+    body('faq_id').isNumeric(),
+    body('infoHelpQuestionId').isNumeric(),
+    helpController.deleteRelated);
 
 module.exports = router;

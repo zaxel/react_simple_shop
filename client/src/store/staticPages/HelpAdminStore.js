@@ -12,23 +12,9 @@ export default class HelpPageStore{
         this._activeFaqEdit = null;
         this._questions = [];
         this._answers = [];
-        this._allQuestions = [
-            {id: 1, infoHelpCategoryId: 2, question: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of', updatedAt: 44577845477},
-            {id: 2, infoHelpCategoryId: 1, question: 'who are you1?', updatedAt: 44577845477},
-            {id: 3, infoHelpCategoryId: 1, question: 'who are you2?', updatedAt: 44577845477},
-        ]
-        this._faqRelated = [
-            {id: 1, faq_id: 1, related_id: 2},
-            {id: 2, faq_id: 1, related_id: 3},
-            {id: 3, faq_id: 1, related_id: 4},
-            {id: 4, faq_id: 3, related_id: 1},
-            {id: 5, faq_id: 3, related_id: 2},
-        ]
-        this._categories = [
-            {id:1, order_id: 1, title: 'delivery', banner: 'dkka.jpg', icon: 'someicon.png', link: 'http://www.google.com'},
-            {id:2, order_id: 2, title: 'payments', banner: 'dkka.jpg', icon: 'someicon.png', link: 'http://www.google.com'},
-            {id:3, order_id: 3, title: 'order issues', banner: 'dkka.jpg', icon: 'someicon.png', link: 'http://www.google.com'},
-        ]
+        this._allQuestions = [];
+        this._faqRelated = [];
+        this._categories = [];
         this._modalFaqLoading = false;
 
         makeAutoObservable(this);
@@ -81,17 +67,23 @@ export default class HelpPageStore{
         this._modalFaqLoading = bool;
     }
 
+    setAllQuestions(data){
+        this._allQuestions = data.questions;
+    }
     setFaqRelated(relations){
         this._faqRelated = relations;
     }
+    addRelated(relation){
+        this._faqRelated.push(relation);
+    }
+    removeRelated(infoHelpQuestionId){
+        this._faqRelated = this._faqRelated.filter(faq=> faq.infoHelpQuestionId!==infoHelpQuestionId);
+    }
     setCategories(categories){
+
         this._categories = categories;
     }
-
-
-
     addNewFaq({answerId, text, title, answerUpdatedAt, infoHelpAnswerId, question, questionCreatedAt, id, questionUpdatedAt, order_id, infoHelpCategoryId}){
-        console.log()
         this._questions.push({id, order_id, question, infoHelpCategoryId, infoHelpAnswerId})
         this._answers.push({answerId, title, text})
     }
@@ -114,7 +106,7 @@ export default class HelpPageStore{
     
     
     get pageId(){
-        return this._pageId;
+        return this._pageId; 
     }
     get pageTitle(){
         return this._pageTitle;
@@ -152,7 +144,7 @@ export default class HelpPageStore{
         return this._allQuestions;
     }
     get faqRelated(){
-        return this._faqRelated;
+        return this._faqRelated; 
     }
     get categories(){
         return this._categories;

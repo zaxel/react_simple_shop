@@ -15,9 +15,7 @@ const HelpAdminFaq = observer(() => {
 
     const onAddRelatedFaqClick = async () => {
         setAddFaqVisible(true);
-        helpAdmin.setModalFaqLoading(true);
-        // await fetchAllFaqs(aboutPage);
-        helpAdmin.setModalFaqLoading(false);
+        
     }
 
     useEffect(() => {

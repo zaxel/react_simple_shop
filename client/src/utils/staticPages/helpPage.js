@@ -1,8 +1,6 @@
 ﻿import {
-  createFaqs,
-  deleteFaqReq,
-  fetchFaqs,
-  fetchHelpPage, updateFaqAnswer, updateFaqQuestion, updateHelpPage, updatePageImg
+  createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion, 
+  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -51,23 +49,27 @@ export const changePageHero = async (formData) => {
   return updatedData;
 }
 
-
-
 export const fetchAllFaqs = async (currentStore) => {
 
   try {
     setComponentLoading(currentStore, true);
     const fetchedData = await fetchFaqs();
-     
     const setterName = 'setAllFaqs';
-    setComponentLoading(currentStore, false);
-     
     return setStoreField(currentStore, setterName, fetchedData);
   } catch (e) {
     console.log(e)
   } finally {
     setComponentLoading(currentStore, false);
   }
+}
+export const fetchFaqQuestions = async (currentStore) => {
+  try {
+    const fetchedData = await fetchQuestions(); 
+    const setterName = 'setAllQuestions';
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+  } 
 }
 export const createNewFaq = async (currentStore, question, answerTitle, answerText) => {
   try {
@@ -81,7 +83,6 @@ export const createNewFaq = async (currentStore, question, answerTitle, answerTe
     setComponentLoading(currentStore, false);
   }
 }
-
 export const changeFaqQuestion = async (id, dbFieldName, currentStore, data) => {
   try {
       const updatedData = await updateFaqQuestion(id, dbFieldName, data);
@@ -117,97 +118,40 @@ export const deleteFaq = async (id, currentStore) => {
   }
 }
 
+export const fetchFaqCategory = async (currentStore) => {
+  try {
+    const fetchedData = await fetchCategory(); 
+    const setterName = 'setCategories'; 
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+  } 
+}
+export const fetchRelatedRelations = async (currentStore, id) => {
+  try {
+    const fetchedData = await fetchRelated(id); 
+    const setterName = 'setFaqRelated';
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+  } 
+}
+export const addRelatedFaq = async (currentStore, faq_id, infoHelpQuestionId) => {
+  try {
+    const fetchedData = await addRelatedReq(faq_id, infoHelpQuestionId); 
+    const setterName = 'addRelated';
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+  }
+}
+export const removeRelatedFaq = async (currentStore, faq_id, infoHelpQuestionId) => {
+  try {
+    const fetchedData = await removedRelatedReq(faq_id, infoHelpQuestionId); 
+    const setterName = 'removeRelated';
+    return setStoreField(currentStore, setterName, infoHelpQuestionId);
+  } catch (e) {
+    console.log(e)
+  }
+}
 
-// export const fetchCard = async (currentStore, cardId) => {
-//   setComponentLoading(currentStore, true);
-//   const fetchedData = await fetchAboutCard({ cardId });
-//   const setterName = 'setCurrentCard';
-//   setComponentLoading(currentStore, false);
-//   return setStoreField(currentStore, setterName, fetchedData);
-// }
-// export const changeAboutCardImg = async (formData) => {
-//   const updatedData = await updateAboutCardImg(formData);
-//   return updatedData;
-// }
-// export const changeAboutCardData = async (id, dbFieldName, data) => {
-//   const updatedData = await updateAboutCardData(id, dbFieldName, data);
-//   return updatedData;
-// }
-
-
-// export const fetchBlocks = async (currentStore) => {
-//   setComponentLoading(currentStore, true);
-//   const fetchedData = await fetchAboutBlocks();
-//   const setterName = 'setEditBlocks';
-//   setComponentLoading(currentStore, false);
-//   return setStoreField(currentStore, setterName, fetchedData);
-
-// }
-// export const createBlock = async (currentStore, formData) => {
-//   setComponentLoading(currentStore, true);
-//   const fetchedData = await createAboutBlock(formData);
-//   const setterName = 'addEditBlocks';
-//   setStoreField(currentStore, setterName, fetchedData);
-//   setComponentLoading(currentStore, false);
-//   return fetchedData;
-// }
-// export const deleteBlock = async (currentStore, id) => {
-//   try{
-//     const updatedData = await deleteBlockReq(id);
-//     const setterName = 'deleteBlock';
-//     setStoreField(currentStore, setterName, id);
-//     return updatedData;
-//   }catch(e){
-//     console.log(e)
-//   }
-// }
-
-// export const updateBlockBtns = async (btnsCopy, store) => {
-//   const newBtnsIds = Object.keys(btnsCopy);
-//   setStoreField(store, 'setModalBtnsLoading', true);
-//   await changeAboutBlockData(store.activeBlockEdit, 'button_id', newBtnsIds);
-//   setStoreField(store, 'editEditBlocksBtns', btnsCopy);
-//   setStoreField(store, 'setModalBtnsLoading', false);
-// }
-// export const changeAboutBlockData = async (id, dbFieldName, data) => {
-//   const updatedData = await updateAboutBlockData(id, dbFieldName, data);
-//   return updatedData;
-// }
-// export const changeAboutBlocksPosition = async (positions) => {
-//   const updatedData = await updateAboutBlocksPosition(positions);
-//   return updatedData;
-// }
-// export const changeAboutBlockImg = async (formData) => {
-//   const updatedData = await updateAboutBlockImg(formData);
-//   return updatedData;
-// }
-
-// export const createBtn = async (currentStore, text, link) => {
-//   const fetchedData = await createAboutBtn({ text, link });
-//   const setterName = 'addButton';
-//   return setStoreField(currentStore, setterName, fetchedData);
-// }
-// export const fetchBtns = async (currentStore) => {
-//   setComponentLoading(currentStore, true);
-//   const fetchedData = await fetchAboutBtns();
-//   const setterName = 'setButtons';
-//   setComponentLoading(currentStore, false);
-//   return setStoreField(currentStore, setterName, fetchedData);
-// }
-// export const changeAboutBtnData = async (id, dbFieldName, data) => {
-//   const updatedData = await updateAboutBtnData(id, dbFieldName, data);
-//   return updatedData;
-// }
-// export const deleteBtn = async (currentStore, id) => {
-//   const updatedData = await deleteBtnReq(id);
-//   const setterName = 'deleteButton';
-//   setStoreField(currentStore, setterName, id);
-//   return updatedData;
-// }
-
-
-// export const fetchBtnsModal = async (currentStore) => {
-//   const fetchedData = await fetchAboutBtns();
-//   const setterName = 'setButtonsModal';
-//   return setStoreField(currentStore, setterName, fetchedData);
-// }

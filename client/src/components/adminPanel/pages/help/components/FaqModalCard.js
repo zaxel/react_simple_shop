@@ -1,23 +1,22 @@
-﻿import React, { useContext } from 'react';
+﻿import { observer } from 'mobx-react-lite';
+import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { Context } from '../../../../..';
+import { addRelatedFaq } from '../../../../../utils/staticPages/helpPage';
 
-const FaqModalCard = ({ category, text, id }) => {
-    console.log(category)
+const FaqModalCard = observer(({ category, text, id }) => {
     const { helpAdmin } = useContext(Context);
-    //   const currentCard = helpAdmin.activeCardEdit;
-    const addBlock = async (id) => {
-        // const nextPosition = aboutPage.cardBlocks.length + 1;
-        helpAdmin.setLoading(true);
-        // await changeAboutBlockData(id, 'infoAboutCardId', currentCard)
-        // await changeAboutBlockData(id, 'position', nextPosition)
-        // helpAdmin.setEditBlockCardIdAndPos(id, nextPosition);
-        helpAdmin.setLoading(false);
+
+    const addRelated = async (newRelId) => {
+        helpAdmin.setModalFaqLoading(true);
+        const currentFaq = helpAdmin.activeFaqEdit;
+        await addRelatedFaq(helpAdmin, currentFaq, newRelId);
+        helpAdmin.setModalFaqLoading(false);
     }
 
     return (
         <li>
-            <Button variant="secondary" onClick={() => addBlock(id)}></Button>
+            <Button variant="secondary" onClick={() => addRelated(id)}></Button>
             <div className='block-modal__link-cont'>
                 <h5>category:</h5>
                 <p>{category}</p>
@@ -29,6 +28,6 @@ const FaqModalCard = ({ category, text, id }) => {
             
         </li>
     );
-};
+});
 
 export default FaqModalCard;

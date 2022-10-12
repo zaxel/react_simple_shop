@@ -1,19 +1,20 @@
 ﻿import React, { useContext } from 'react';
 import { Context } from '../../../../..';
+import { removeRelatedFaq } from '../../../../../utils/staticPages/helpPage';
 
-const Related = ({question}) => {
+const Related = ({faq, setBodyLoading}) => {
     const {helpAdmin} = useContext(Context);
 
     const addBtn = async () => {
-        // const currentBlock = aboutPage.editBlocks.find(el=>el.block.id === blockId);
-        // const btnsCopy = { ...currentBlock.buttons };
-        // delete btnsCopy[id];
-        // updateBlockBtns(btnsCopy, aboutPage);
+        setBodyLoading(true);
+        const currentFaq = helpAdmin.activeFaqEdit;
+        await removeRelatedFaq(helpAdmin, currentFaq, faq.id)
+        setBodyLoading(false);
     }
 
     return (
         <li className='adminFaq__related'>
-            <button onClick={addBtn}>{question}</button>
+            <button onClick={addBtn}>{faq.question}</button>
         </li>
     )
 };
