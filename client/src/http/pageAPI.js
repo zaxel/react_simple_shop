@@ -23,9 +23,6 @@ export const updateAppCardData = async (id, dbFieldName, data) => {
     return updatedData.data;
 }
 
-
-
-
 export const fetchAboutPage = async () => {
     const {data} = await $host.get(`api/about`); 
     return data;
@@ -34,7 +31,6 @@ export const updateAboutPage = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
-
 
 export const fetchAboutCard = async ({cardId}) => {
     const {data} = await $host.get(`api/about/card/${cardId}`); 
@@ -48,8 +44,6 @@ export const updateAboutCardData = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/about/card' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
-
-
 
 export const fetchAboutBlocks = async () => {
     const {data} = await $host.get(`api/about/blocks`); 
@@ -97,7 +91,6 @@ export const deleteBtnReq = async (id) => {
     return updatedData.data;
 }
 
-
 export const fetchHelpPage = async () => {
     const {data} = await $host.get(`api/help`); 
     return data;
@@ -106,8 +99,6 @@ export const updateHelpPage = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/page' , {id, [dbFieldName]: data});
     return updatedData.data;
 }
-
-
 
 export const fetchFaqs = async () => {
     const {data} = await $host.get(`api/help/faqs`);
@@ -136,13 +127,6 @@ export const deleteFaqReq = async (id) => {
       });
     return updatedData.data;
 }
-
-export const fetchCategory = async (id) => {
-    const fetchedData = await $host.get('api/help/category' , {params:{
-        id
-    }});
-    return fetchedData.data;
-}
 export const fetchRelated = async (id) => {
     const fetchedData = await $host.get('api/help/related' , {params:{
         id
@@ -155,7 +139,15 @@ export const addRelatedReq = async (faq_id, infoHelpQuestionId) => {
 }
 export const removedRelatedReq = async (faq_id, infoHelpQuestionId) => {
     const fetchedData = await $authHost.delete('api/help/related' , {
-        data: {faq_id, infoHelpQuestionId}
+        data: {faq_id, infoHelpQuestionId} 
     });
+    return fetchedData.data;
+}
+
+
+export const fetchCategory = async (id) => {
+    const fetchedData = await $host.get('api/help/category' , {params:{
+        id
+    }});
     return fetchedData.data;
 }

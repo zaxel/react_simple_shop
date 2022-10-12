@@ -8,7 +8,7 @@ const Related = ({faq, setBodyLoading}) => {
     const addBtn = async () => {
         setBodyLoading(true);
         const currentFaq = helpAdmin.activeFaqEdit;
-        await removeRelatedFaq(helpAdmin, currentFaq, faq.id)
+        await removeRelatedFaq(helpAdmin, currentFaq, faq.id);
         setBodyLoading(false);
     }
 

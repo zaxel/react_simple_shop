@@ -58,6 +58,6 @@ router.delete('/related/',
     checkRole(['ADMIN']),
     body('faq_id').isNumeric(),
     body('infoHelpQuestionId').isNumeric(),
-    helpController.deleteRelated);
+    helpController.deleteRelated); 
 
 module.exports = router;
