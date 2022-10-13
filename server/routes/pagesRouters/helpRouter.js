@@ -38,11 +38,10 @@ router.get('/category/',
     query('id').optional().isNumeric(),
     helpController.getCategory);
 router.post('/category/',
-    // checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN', 'MODERATOR']), 
     body('title').isString().isLength({ min: 3 }),
-    body('banner').optional().isString().isLength({ min:  5}),
-    body('icon').optional().isString().isLength({ min: 5 }),
     body('link').optional().isString().isLength({ min: 5 }),
+    body('order_id').isNumeric(),
     helpController.createCategory); 
 
     

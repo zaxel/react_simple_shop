@@ -101,12 +101,18 @@ class HelpController {
             if (!errors.isEmpty()) {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            const { title, banner, icon, link } = req.body;
-            const data = await helpService.createCategory({title, banner, icon, link});
+            const { title, banner, icon, link, order_id } = req.body;
+            const bannerData = req?.files?.banner || null;
+            const iconData = req?.files?.icon || null;
+            const data = await helpService.createCategory({title, bannerData, iconData, link, order_id});
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message)); 
         }
+
+
+
+
     }
     
     async getRelated(req, res, next) {

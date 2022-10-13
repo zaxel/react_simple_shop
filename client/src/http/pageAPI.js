@@ -151,3 +151,7 @@ export const fetchCategory = async (id) => {
     }});
     return fetchedData.data;
 }
+export const createCategoryReq = async (formData) => {
+    const updatedData = await $authHost.post('api/help/category', formData);
+    return updatedData.data;
+}

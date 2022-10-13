@@ -1,10 +1,10 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../../../../..';
 import { correctImgTypeCheck, formDataCatImg, setImageFromBlob } from '../../../../../utils/formsServing/imgServing';
-import { createNewFaq } from '../../../../../utils/staticPages/helpPage';
+import { createCategory } from '../../../../../utils/staticPages/helpPage';
 
-const AddNewCat = () => {
-    const {helpAdmin} = useContext(Context);
+const AddNewCat = ({ setNewCatLoading }) => {
+    const { helpAdmin } = useContext(Context);
 
 
     const [title, setTitle] = useState('');
@@ -13,18 +13,18 @@ const AddNewCat = () => {
     const [bannerSrc, setBannerSrc] = useState('')
     const [iconInput, setIconInput] = useState('');
     const [iconSrc, setIconSrc] = useState('')
-    
-    const onBannerChange = async(e) => {
+
+    const onBannerChange = async (e) => {
         setBannerInput(() => e.target.files[0])
     }
-    const onIconChange = async(e) => {
+    const onIconChange = async (e) => {
         setIconInput(() => e.target.files[0])
     }
-    useEffect(()=>{
+    useEffect(() => {
         bannerInput && setImageFromBlob(setBannerSrc, bannerInput);
     }, [bannerInput])
 
-    useEffect(()=>{
+    useEffect(() => {
         iconInput && setImageFromBlob(setIconSrc, iconInput);
     }, [iconInput])
 
@@ -37,22 +37,26 @@ const AddNewCat = () => {
         setIconSrc('');
     }
 
-    const onFormConfirm = async(e) => {
-        e.preventDefault();
-        if (bannerInput && !correctImgTypeCheck(bannerInput)) return;
-        if (iconInput && !correctImgTypeCheck(iconInput)) return;
-        if(!title){
-            alert('you have to add category name!');
-            return;
-        }
-        if(!link){
-            alert('you have to add category link!');
-            return;
-        }
-        
-        const formData = formDataCatImg({title, link, banner: bannerInput, icon: iconInput});
-        // await createCategory(helpAdmin, formData);
-        resetNewCatForm();
+    const onFormConfirm = async (e) => {
+        try {
+            e.preventDefault();
+            if (bannerInput && !correctImgTypeCheck(bannerInput)) return;
+            if (iconInput && !correctImgTypeCheck(iconInput)) return;
+            if (!title) {
+                alert('you have to add category name!');
+                return;
+            }
+            if (!link) {
+                alert('you have to add category link!');
+                return;
+            }
+            const order_id = helpAdmin.categories.length + 1;
+            const formData = formDataCatImg({ title, link, banner: bannerInput, icon: iconInput, order_id });
+            await createCategory(helpAdmin, formData);
+            resetNewCatForm();
+        } catch (e) {
+            console.log(e);
+        } 
     }
 
     return (
@@ -60,11 +64,11 @@ const AddNewCat = () => {
             <form className='about-blocks__form blocks-form'>
                 <div className='blocks-form__title'>
                     <h5>new title:</h5>
-                    <input type={'text'} placeholder='category title' value={title} onChange={(e)=>setTitle(e.currentTarget.value)}/>
+                    <input type={'text'} placeholder='category title' value={title} onChange={(e) => setTitle(e.currentTarget.value)} />
                 </div>
                 <div className='blocks-form__title'>
                     <h5>new link:</h5>
-                    <input type={'text'} placeholder='/help/...your_link.../' value={link} onChange={(e)=>setLink(e.currentTarget.value)}/>
+                    <input type={'text'} placeholder='/help/...your_link.../' value={link} onChange={(e) => setLink(e.currentTarget.value)} />
                 </div>
                 <div className='blocks-form__imgs-cont'>
                     <h3>Add images</h3>
@@ -87,7 +91,7 @@ const AddNewCat = () => {
                                     {iconSrc && <img src={iconSrc} alt={'icon'} />}
                                 </div>
                                 <div className='block-form__img-edit'>
-                                    <input type='file' accept="image/*" onChange={onIconChange}/>
+                                    <input type='file' accept="image/*" onChange={onIconChange} />
                                 </div>
                             </div>
                         </div>

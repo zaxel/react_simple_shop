@@ -43,7 +43,7 @@ const HelpAdminCat = observer(() => {
                     <div className="spinner about-blocks__spinner">
                         <Spinner animation="border" />
                     </div> :
-                    <AddNewCat />}
+                    <AddNewCat setNewCatLoading={setNewCatLoading}/>}
             </div>
         </div>
     );

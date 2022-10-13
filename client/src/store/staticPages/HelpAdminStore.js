@@ -59,7 +59,7 @@ export default class HelpPageStore{
         this._activeFaqEdit = faqId;
     }
     setActiveCatEdit(catId){
-        this._activeCatEdit = catId;
+        this._activeCatEdit = catId; 
     }
     setQuestions(questions){
         this._questions = questions;
@@ -87,6 +87,11 @@ export default class HelpPageStore{
 
         this._categories = categories;
     }
+    addCategory(category){
+        this._categories.push(category);
+    }
+
+
     addNewFaq({answerId, text, title, answerUpdatedAt, infoHelpAnswerId, question, questionCreatedAt, id, questionUpdatedAt, order_id, infoHelpCategoryId}){
         this._questions.push({id, order_id, question, infoHelpCategoryId, infoHelpAnswerId})
         this._answers.push({answerId, title, text})

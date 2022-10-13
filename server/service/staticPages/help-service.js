@@ -66,8 +66,10 @@ class HelpService {
         const data = cat.map(el=>new HelpCatDto(el));
         return data;
     }
-    createCategory = async ({ title, banner, icon, link }) => {
-        const cat = await InfoHelpCategories.create({ title, banner, icon, link });
+    createCategory = async ({ title, bannerData, iconData, link, order_id }) => {
+        const banner = await fileService.imageResolve(bannerData);
+        const icon = await fileService.imageResolve(iconData);
+        const cat = await InfoHelpCategories.create({ title, banner, icon, link, order_id });
         const data = new HelpCatDto(cat);
         return data; 
     }

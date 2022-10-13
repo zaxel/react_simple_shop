@@ -1,6 +1,6 @@
 ﻿import {
   createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion, 
-  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq
+  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -118,15 +118,6 @@ export const deleteFaq = async (id, currentStore) => {
   }
 }
 
-export const fetchFaqCategory = async (currentStore) => {
-  try {
-    const fetchedData = await fetchCategory(); 
-    const setterName = 'setCategories'; 
-    return setStoreField(currentStore, setterName, fetchedData);
-  } catch (e) {
-    console.log(e)
-  } 
-}
 export const fetchRelatedRelations = async (currentStore, id) => {
   try {
     const fetchedData = await fetchRelated(id); 
@@ -153,5 +144,25 @@ export const removeRelatedFaq = async (currentStore, faq_id, infoHelpQuestionId)
   } catch (e) {
     console.log(e)
   }
+}
+
+export const fetchFaqCategory = async (currentStore) => {
+  try {
+    const fetchedData = await fetchCategory(); 
+    const setterName = 'setCategories'; 
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+  } 
+}
+export const createCategory = async (currentStore, formData) => {
+  try {
+    const fetchedData = await createCategoryReq(formData);
+    const setterName = 'addCategory';
+    setStoreField(currentStore, setterName, fetchedData);
+    return fetchedData;
+  } catch (e) {
+    console.log(e)
+  } 
 }
 

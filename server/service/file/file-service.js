@@ -3,7 +3,8 @@ const path = require('path');
 
 class FileService{
     imageResolve = async(img) => {
-        let fileName = uuid.v4() + ".jpg";
+        const extension = img.name.split('.').pop();
+        let fileName = uuid.v4() + "." + extension;
         img.mv(path.resolve(__dirname, '..', '..', 'static', fileName));
         return fileName;
     }
