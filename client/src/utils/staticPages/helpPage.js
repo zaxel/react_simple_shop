@@ -1,6 +1,6 @@
 ﻿import {
   createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion,
-  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, deleteCategoryReq, updateCategory
+  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, deleteCategoryReq, updateCategory, changeCatImgReq
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -171,7 +171,7 @@ export const changeCatData = async (id, dbFieldName, currentStore, data) => {
   try {
     setComponentLoading(currentStore, false)
     const updatedData = await updateCategory(id, dbFieldName, data);
-    setStoreField(currentStore, 'updateCategory', { id, [dbFieldName]: data });
+    setStoreField(currentStore, 'updateCategory', { id, [dbFieldName]: data }); 
     return updatedData;
   } catch (e) {
     console.log(e)
@@ -179,7 +179,15 @@ export const changeCatData = async (id, dbFieldName, currentStore, data) => {
     setComponentLoading(currentStore, false);
   }
 }
-
+export const changeCatImg = async (formData, currentStore) => {
+  try {
+    const updatedData = await changeCatImgReq(formData);
+    setStoreField(currentStore, 'updateCategoryImg', updatedData);
+  return updatedData;
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 
 

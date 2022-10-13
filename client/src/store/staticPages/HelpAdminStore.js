@@ -104,7 +104,10 @@ export default class HelpPageStore{
         const fieldName = link ? 'link' : 'title'
         const data = link ? link : title;
         this._categories.find(cat=>cat.id===id)[fieldName] = data; 
-    }
+    } 
+    updateCategoryImg({id, imgDbCollName, fileName}){
+        this._categories.find(cat=>cat.id===+id)[imgDbCollName] = fileName; 
+    } 
 
 
     addNewFaq({answerId, text, title, answerUpdatedAt, infoHelpAnswerId, question, questionCreatedAt, id, questionUpdatedAt, order_id, infoHelpCategoryId}){

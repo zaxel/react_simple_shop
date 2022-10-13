@@ -88,6 +88,16 @@ class HelpService {
         });
         return updatedData;
     }
+    updateCatImg = async ({ id, imgDbCollName, img }) => {
+        if (!img) {
+            throw new Error('No image received!')
+        }
+        let fileName = await fileService.imageResolve(img);
+        const updatedData = await InfoHelpCategories.update({[imgDbCollName]: fileName}, {
+            where: { id }
+        });
+        return {id, imgDbCollName, fileName};
+    }
     deleteCategory = async ({id}) => {
         const deletedCat = await InfoHelpCategories.destroy({
             where: { id }

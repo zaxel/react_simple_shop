@@ -51,6 +51,10 @@ router.put('/category/',
     body('title').optional().isString().isLength({ min: 3 }),
     body('link').optional().isString().isLength({ min: 3 }),
     helpController.updateCategory); 
+router.patch('/category/img-update/',
+    checkRole(['ADMIN', 'MODERATOR']), 
+    body('id').isNumeric(),
+    helpController.changeCategoryImg); 
 
 router.delete('/category/',
     checkRole(['ADMIN']), 
