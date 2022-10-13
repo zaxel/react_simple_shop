@@ -81,6 +81,13 @@ class HelpService {
         );
         return categories; 
     }
+    updateCategory = async ({ id, link, title }) => {
+        const field = link ? {link} : {title}
+        const updatedData = await InfoHelpCategories.update(field, {
+            where: { id }
+        });
+        return updatedData;
+    }
     deleteCategory = async ({id}) => {
         const deletedCat = await InfoHelpCategories.destroy({
             where: { id }

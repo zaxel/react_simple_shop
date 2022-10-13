@@ -155,6 +155,11 @@ export const createCategoryReq = async (formData) => {
     const updatedData = await $authHost.post('api/help/category', formData);
     return updatedData.data; 
 }
+export const updateCategory = async (id, dbFieldName, data) => {
+    console.log(id, dbFieldName, data)
+    const updatedData = await $authHost.put('api/help/category', {id, [dbFieldName]: data});
+    return updatedData.data; 
+}
 
 export const deleteCategoryReq = async ({id, catPositions}) => {
     const updatedData = await $authHost.delete('api/help/category', {data: {id, catPositions}});

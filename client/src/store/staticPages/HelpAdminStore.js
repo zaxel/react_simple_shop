@@ -100,6 +100,11 @@ export default class HelpPageStore{
         this._categories.forEach(el=>catPositions.push({id: el.id, order_id: el.order_id}))
         deleteFaqCategory({id, catPositions});
     }
+    updateCategory({id, link, title}){
+        const fieldName = link ? 'link' : 'title'
+        const data = link ? link : title;
+        this._categories.find(cat=>cat.id===id)[fieldName] = data; 
+    }
 
 
     addNewFaq({answerId, text, title, answerUpdatedAt, infoHelpAnswerId, question, questionCreatedAt, id, questionUpdatedAt, order_id, infoHelpCategoryId}){

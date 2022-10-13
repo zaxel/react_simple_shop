@@ -43,6 +43,15 @@ router.post('/category/',
     body('link').optional().isString().isLength({ min: 5 }),
     body('order_id').isNumeric(),
     helpController.createCategory); 
+
+
+router.put('/category/',
+    checkRole(['ADMIN', 'MODERATOR']), 
+    body('id').isNumeric(),
+    body('title').optional().isString().isLength({ min: 3 }),
+    body('link').optional().isString().isLength({ min: 3 }),
+    helpController.updateCategory); 
+
 router.delete('/category/',
     checkRole(['ADMIN']), 
     body('catPositions').isArray(),

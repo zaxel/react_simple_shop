@@ -1,6 +1,6 @@
 ﻿import {
-  createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion, 
-  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, deleteCategoryReq 
+  createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion,
+  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, deleteCategoryReq, updateCategory
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -64,12 +64,12 @@ export const fetchAllFaqs = async (currentStore) => {
 }
 export const fetchFaqQuestions = async (currentStore) => {
   try {
-    const fetchedData = await fetchQuestions(); 
+    const fetchedData = await fetchQuestions();
     const setterName = 'setAllQuestions';
     return setStoreField(currentStore, setterName, fetchedData);
   } catch (e) {
     console.log(e)
-  } 
+  }
 }
 export const createNewFaq = async (currentStore, question, answerTitle, answerText) => {
   try {
@@ -85,9 +85,9 @@ export const createNewFaq = async (currentStore, question, answerTitle, answerTe
 }
 export const changeFaqQuestion = async (id, dbFieldName, currentStore, data) => {
   try {
-      const updatedData = await updateFaqQuestion(id, dbFieldName, data);
-      setStoreField(currentStore, 'updateQuestion', {id, data})
-      return updatedData;
+    const updatedData = await updateFaqQuestion(id, dbFieldName, data);
+    setStoreField(currentStore, 'updateQuestion', { id, data })
+    return updatedData;
   } catch (e) {
     console.log(e)
   } finally {
@@ -96,9 +96,9 @@ export const changeFaqQuestion = async (id, dbFieldName, currentStore, data) => 
 }
 export const changeFaqAnswer = async (id, dbFieldName, currentStore, data) => {
   try {
-      const updatedData = await updateFaqAnswer(id, dbFieldName, data);
-      setStoreField(currentStore, 'updateAnswer', {id, [dbFieldName]: data}); 
-      return updatedData;
+    const updatedData = await updateFaqAnswer(id, dbFieldName, data);
+    setStoreField(currentStore, 'updateAnswer', { id, [dbFieldName]: data });
+    return updatedData;
   } catch (e) {
     console.log(e)
   } finally {
@@ -107,10 +107,10 @@ export const changeFaqAnswer = async (id, dbFieldName, currentStore, data) => {
 }
 export const deleteFaq = async (id, currentStore) => {
   try {
-    setComponentLoading(currentStore, true); 
-      const updatedData = await deleteFaqReq(id);
-      setStoreField(currentStore, 'deleteFaq', id); 
-      return updatedData;
+    setComponentLoading(currentStore, true);
+    const updatedData = await deleteFaqReq(id);
+    setStoreField(currentStore, 'deleteFaq', id);
+    return updatedData;
   } catch (e) {
     console.log(e)
   } finally {
@@ -120,16 +120,16 @@ export const deleteFaq = async (id, currentStore) => {
 
 export const fetchRelatedRelations = async (currentStore, id) => {
   try {
-    const fetchedData = await fetchRelated(id); 
+    const fetchedData = await fetchRelated(id);
     const setterName = 'setFaqRelated';
     return setStoreField(currentStore, setterName, fetchedData);
   } catch (e) {
     console.log(e)
-  } 
+  }
 }
 export const addRelatedFaq = async (currentStore, faq_id, infoHelpQuestionId) => {
   try {
-    const fetchedData = await addRelatedReq(faq_id, infoHelpQuestionId); 
+    const fetchedData = await addRelatedReq(faq_id, infoHelpQuestionId);
     const setterName = 'addRelated';
     return setStoreField(currentStore, setterName, fetchedData);
   } catch (e) {
@@ -138,7 +138,7 @@ export const addRelatedFaq = async (currentStore, faq_id, infoHelpQuestionId) =>
 }
 export const removeRelatedFaq = async (currentStore, faq_id, infoHelpQuestionId) => {
   try {
-    const fetchedData = await removedRelatedReq(faq_id, infoHelpQuestionId); 
+    const fetchedData = await removedRelatedReq(faq_id, infoHelpQuestionId);
     const setterName = 'removeRelated';
     return setStoreField(currentStore, setterName, infoHelpQuestionId);
   } catch (e) {
@@ -148,12 +148,12 @@ export const removeRelatedFaq = async (currentStore, faq_id, infoHelpQuestionId)
 
 export const fetchFaqCategory = async (currentStore) => {
   try {
-    const fetchedData = await fetchCategory(); 
-    const setterName = 'setCategories'; 
+    const fetchedData = await fetchCategory();
+    const setterName = 'setCategories';
     return setStoreField(currentStore, setterName, fetchedData);
   } catch (e) {
     console.log(e)
-  } 
+  }
 }
 export const createCategory = async (currentStore, formData) => {
   try {
@@ -163,14 +163,32 @@ export const createCategory = async (currentStore, formData) => {
     return fetchedData;
   } catch (e) {
     console.log(e)
-  } 
+  }
 }
-export const deleteFaqCategory = async ({id, catPositions}) => {
+
+
+export const changeCatData = async (id, dbFieldName, currentStore, data) => {
   try {
-    const fetchedData = await deleteCategoryReq({id, catPositions});
+    setComponentLoading(currentStore, false)
+    const updatedData = await updateCategory(id, dbFieldName, data);
+    setStoreField(currentStore, 'updateCategory', { id, [dbFieldName]: data });
+    return updatedData;
+  } catch (e) {
+    console.log(e)
+  } finally {
+    setComponentLoading(currentStore, false);
+  }
+}
+
+
+
+
+export const deleteFaqCategory = async ({ id, catPositions }) => {
+  try {
+    const fetchedData = await deleteCategoryReq({ id, catPositions });
     return fetchedData;
   } catch (e) {
     console.log(e)
-  } 
-} 
+  }
+}
 

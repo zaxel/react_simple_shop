@@ -32,8 +32,7 @@ const CategoryCard = observer(({category}) => {
                 <div className='adminFaq__question-cont admin-cat__icon-cont'>
                     <h3>Icon:</h3>
                     <div className='admin-cat__icon'>
-                        <img alt='hero' src={process.env.REACT_APP_API_URL + 'delivery.svg'} />
-                        {/* <img alt='hero' src={process.env.REACT_APP_API_URL + '0bde358d-809f-4307-847b-1bc9fa9fd960.jpg'} /> */}
+                        <img alt='hero' src={process.env.REACT_APP_API_URL + category.icon} />
                     </div>
                 </div>
                 <div className='adminFaq__answer-cont admin-cat__answer-cont'>
