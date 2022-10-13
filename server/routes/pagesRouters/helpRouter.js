@@ -43,6 +43,11 @@ router.post('/category/',
     body('link').optional().isString().isLength({ min: 5 }),
     body('order_id').isNumeric(),
     helpController.createCategory); 
+router.delete('/category/',
+    checkRole(['ADMIN']), 
+    body('catPositions').isArray(),
+    body('id').isNumeric(),
+    helpController.deleteCategory); 
 
     
 router.get('/related/',

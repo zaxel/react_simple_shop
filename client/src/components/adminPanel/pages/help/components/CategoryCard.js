@@ -22,6 +22,10 @@ const CategoryCard = observer(({category}) => {
         }
     }, [helpAdmin.activeCatEdit])
 
+    const onDeleteCategoryClick = () => {
+        helpAdmin.deleteCategory(category.id);
+    }
+
     return (
         <li>
             <div className='adminFaq__header'>
@@ -37,7 +41,7 @@ const CategoryCard = observer(({category}) => {
                     <p>{category?.title || 'no title added yet'}</p>
                 </div>
                 <div className='adminFaq__delete-cont about-blocks__card-del'>
-                    <button onClick={()=>console.log(99)}>X</button> 
+                    <button onClick={onDeleteCategoryClick}>X</button> 
                 </div>
                 <div className='adminFaq__question-button about-blocks__card-button'>
                     <button onClick={changeStyle} className={arrowStyle}></button>

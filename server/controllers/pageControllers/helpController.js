@@ -109,10 +109,20 @@ class HelpController {
         } catch (e) {
             next(ApiError.forbidden(e.message)); 
         }
-
-
-
-
+    }
+    async deleteCategory(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id, catPositions } = req.body;
+            const dataPosition = await helpService.setCategoryPosition({catPositions});
+            const dataDeleted = await helpService.deleteCategory({id});  
+            return res.json(dataDeleted);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
     }
     
     async getRelated(req, res, next) {

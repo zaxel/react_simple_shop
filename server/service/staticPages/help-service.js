@@ -73,6 +73,26 @@ class HelpService {
         const data = new HelpCatDto(cat);
         return data; 
     }
+    setCategoryPosition = async ({catPositions}) => {
+        const categories = await InfoHelpCategories.bulkCreate(catPositions,
+            {
+                updateOnDuplicate: ["order_id"],
+            }
+        );
+        return categories; 
+    }
+    deleteCategory = async ({id}) => {
+        const deletedCat = await InfoHelpCategories.destroy({
+            where: { id }
+        })
+        return deletedCat; 
+    } 
+
+
+
+
+
+
     
     getRelatedFaq = async ({id}) => {
         const related = await InfoHelpRelatedQuestions.findAll({

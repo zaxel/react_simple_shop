@@ -1,4 +1,5 @@
 ﻿import {makeAutoObservable} from "mobx";
+import { deleteFaqCategory } from "../../utils/staticPages/helpPage";
 
 export default class HelpPageStore{
     constructor(){
@@ -89,6 +90,15 @@ export default class HelpPageStore{
     }
     addCategory(category){
         this._categories.push(category);
+    }
+    deleteCategory(id){
+        const catPositions = [];
+        this._categories.forEach(category=>{ 
+            if(category.id > id) category.order_id = category.order_id - 1; 
+        })
+        this._categories = this._categories.filter(category=>category.id!==id);
+        this._categories.forEach(el=>catPositions.push({id: el.id, order_id: el.order_id}))
+        deleteFaqCategory({id, catPositions});
     }
 
 

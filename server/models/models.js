@@ -73,10 +73,10 @@ const InfoHelpPopular = sequelize.define('info_help_popular', {
 const InfoHelpCategories = sequelize.define('info_help_categories', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     order_id: {type: DataTypes.INTEGER, allowNull: true},
-    title: {type: DataTypes.STRING, allowNull: false},
-    banner: {type: DataTypes.STRING, allowNull: false},
-    icon: {type: DataTypes.STRING, allowNull: false},
-    link: {type: DataTypes.STRING, allowNull: false},
+    title: {type: DataTypes.STRING, allowNull: true},
+    banner: {type: DataTypes.STRING, allowNull: true},
+    icon: {type: DataTypes.STRING, allowNull: true},
+    link: {type: DataTypes.STRING, allowNull: true},
 })
 const InfoHelpQuestions = sequelize.define('info_help_questions', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},

@@ -74,7 +74,7 @@ class AboutController {
         } catch (e) {
             next(ApiError.forbidden(e.message));
         }
-    }
+    } 
 
     async deleteCard(req, res, next){
         try{
@@ -106,7 +106,7 @@ class AboutController {
         } catch (e) {
             next(ApiError.forbidden(e.message));
         }
-    }
+    } 
     async updateBlock(req, res, next) {
         try {
             const errors = validationResult(req);
