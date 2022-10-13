@@ -3031,6 +3031,23 @@ button:active {
     flex: 0 0 60%;
 }
 /**admin help faq end**/
+/**admin help categories start**/
+.admin-cat__icon-cont{
+    flex: 0 0 10%;
+}
+.admin-cat__answer-cont{
+    flex: 0 0 73%;
+}
+.admin-cat__icon{
+    width: 50px;
+    height: 40px;
+}
+.admin-cat__icon img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/**admin help categories end**/
 /*admin static pages end*/
 
 /*search start*/

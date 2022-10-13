@@ -10,6 +10,7 @@ export default class HelpPageStore{
         this._contactTitle = '';
         this._contactBgImages = ['', ''];
         this._activeFaqEdit = null;
+        this._activeCatEdit = null;
         this._questions = [];
         this._answers = [];
         this._allQuestions = [];
@@ -56,6 +57,9 @@ export default class HelpPageStore{
     }
     setActiveFaqEdit(faqId){
         this._activeFaqEdit = faqId;
+    }
+    setActiveCatEdit(catId){
+        this._activeCatEdit = catId;
     }
     setQuestions(questions){
         this._questions = questions;
@@ -129,6 +133,9 @@ export default class HelpPageStore{
     get activeFaqEdit(){
         return this._activeFaqEdit;
     }
+    get activeCatEdit(){
+        return this._activeCatEdit; 
+    }
     get questions(){
         return this._questions;
     }
@@ -148,5 +155,5 @@ export default class HelpPageStore{
     }
     get categories(){
         return this._categories;
-    }
+    } 
 }

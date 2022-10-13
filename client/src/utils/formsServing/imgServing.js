@@ -10,6 +10,14 @@
     text && formData.append('text', text);
     return formData;
 }
+export const formDataCatImg = ({title, link, banner, icon}) => {
+    const formData = new FormData();
+    title && formData.append('title', title);
+    link && formData.append('link', link);
+    banner && formData.append('banner', banner);
+    icon && formData.append('icon', icon);
+    return formData;
+}
 
 export const correctImgTypeCheck = (input) => {
     if (!input) {
