@@ -156,7 +156,6 @@ export const createCategoryReq = async (formData) => {
     return updatedData.data; 
 }
 export const updateCategory = async (id, dbFieldName, data) => {
-    console.log(id, dbFieldName, data)
     const updatedData = await $authHost.put('api/help/category', {id, [dbFieldName]: data});
     return updatedData.data; 
 }

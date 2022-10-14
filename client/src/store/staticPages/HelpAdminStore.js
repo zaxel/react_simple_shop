@@ -113,7 +113,7 @@ export default class HelpPageStore{
         this._categories.find(cat=>cat.id===id)[fieldName] = data; 
     } 
     updateCategoryImg({id, imgDbCollName, fileName}){
-        this._categories.find(cat=>cat.id===+id)[imgDbCollName] = fileName; 
+        this._categories.find(cat=>cat.id===+id)[imgDbCollName] = fileName;
     } 
     setCatPosition(startPosition, endPosition){
         this._positions = [];

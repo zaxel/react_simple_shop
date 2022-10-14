@@ -28,7 +28,7 @@ const HelpAdminCat = observer(() => {
             return <Draggable key={category.id} draggableId={'draggable-'+category.id} index={category.order_id}>
                 {(provided, snapshot) => (
                     <li className='admin-about__card' key={category.id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <CategoryCard {...category} />
+                        <CategoryCard category={category} />
                     </li>
                 )}
             </Draggable>

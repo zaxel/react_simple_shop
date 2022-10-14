@@ -3,7 +3,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import { Context } from '../../../../..';
 import CategoryCardBody from './CategoryCardBody';
 
-const CategoryCard = observer(({id, icon, title, banner, link}) => {
+const CategoryCard = observer(({category}) => {
     const { helpAdmin } = useContext(Context);
     const [arrowStyle, setArrowStyle] = useState('arrow');
     const [faqArrowStyle, setFaqArrowStyle] = useState('arrow');
@@ -11,29 +11,29 @@ const CategoryCard = observer(({id, icon, title, banner, link}) => {
     const [displayFaqs, setDisplayFaqs] = useState(false);
 
     const changeStyle = () => {
-        if(helpAdmin.activeCatEdit === id){
+        if(helpAdmin.activeCatEdit === category.id){
             helpAdmin.setActiveCatEdit(null);
         }else{
-            helpAdmin.setActiveCatEdit(id);
+            helpAdmin.setActiveCatEdit(category.id);
             helpAdmin.setActiveCatBody(null);
         }
     }
     const changeFaqStyle = () => {
-        if(helpAdmin.activeCatBody === id){
+        if(helpAdmin.activeCatBody === category.id){
             helpAdmin.setActiveCatBody(null)
         }else{
-            helpAdmin.setActiveCatBody(id)
+            helpAdmin.setActiveCatBody(category.id)
             helpAdmin.setActiveCatEdit(null);
         }
     }
 
     useEffect(() => {
-        if (helpAdmin.activeCatEdit === id) {
+        if (helpAdmin.activeCatEdit === category.id) {
             setArrowStyle('arrowDown');
             setDisplayDescr(true);
             setFaqArrowStyle('arrow');
             setDisplayFaqs(false);
-        }else if(helpAdmin.activeCatBody === id){
+        }else if(helpAdmin.activeCatBody === category.id){
             setArrowStyle('arrow');
             setDisplayDescr(false);
             setFaqArrowStyle('arrowDown');
@@ -48,7 +48,7 @@ const CategoryCard = observer(({id, icon, title, banner, link}) => {
     }, [helpAdmin.activeCatEdit, helpAdmin.activeCatBody])
 
     const onDeleteCategoryClick = () => {
-        helpAdmin.deleteCategory(id); 
+        helpAdmin.deleteCategory(category.id); 
     }
 
     return (
@@ -57,12 +57,12 @@ const CategoryCard = observer(({id, icon, title, banner, link}) => {
                 <div className='adminFaq__question-cont admin-cat__icon-cont'>
                     <h3>Icon:</h3>
                     <div className='admin-cat__icon'>
-                        <img alt='hero' src={process.env.REACT_APP_API_URL + icon} />
+                        <img alt='hero' src={process.env.REACT_APP_API_URL + category.icon} />
                     </div>
                 </div>
                 <div className='adminFaq__answer-cont admin-cat__answer-cont'>
                     <h3>Category Title:</h3>
-                    <p>{title || 'no title added yet'}</p>
+                    <p>{category.title || 'no title added yet'}</p>
                 </div>
                 <div className='adminFaq__delete-cont about-blocks__card-del'>
                     <button title="delete category" onClick={onDeleteCategoryClick}>X</button> 
@@ -74,8 +74,8 @@ const CategoryCard = observer(({id, icon, title, banner, link}) => {
                     <button title="add/remove FAQ's" onClick={changeFaqStyle} className={faqArrowStyle}></button>
                 </div>
             </div> 
-            {displayDescr && <CategoryCardBody id={id} title={title} banner={banner} icon={icon} link={link}/>}
-            {displayFaqs && <div><strong>faq's will be there {id}</strong></div>}
+            {displayDescr && <CategoryCardBody id={category.id} title={category.title} banner={category.banner} icon={category.icon} link={category.link}/>}
+            {displayFaqs && <div><strong>faq's will be there {category.id}</strong></div>}
         </>
     );
 });

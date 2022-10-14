@@ -1,7 +1,7 @@
 ﻿import {
   createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion,
   updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, 
-  deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition
+  deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition 
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
