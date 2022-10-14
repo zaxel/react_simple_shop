@@ -55,6 +55,10 @@ router.patch('/category/img-update/',
     checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     helpController.changeCategoryImg); 
+router.put('/category/position/',
+    checkRole(['ADMIN', 'MODERATOR']), 
+    body('positions').isArray(),
+    helpController.changeCatPosition); 
 
 router.delete('/category/',
     checkRole(['ADMIN']), 

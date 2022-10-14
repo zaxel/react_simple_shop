@@ -1,6 +1,7 @@
 ﻿import {
   createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion,
-  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, deleteCategoryReq, updateCategory, changeCatImgReq
+  updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, 
+  deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -188,8 +189,10 @@ export const changeCatImg = async (formData, currentStore) => {
     console.log(e)
   }
 }
-
-
+export const changeHelpCatPosition = async (positions) => {
+  const updatedData = await updateHelpCatPosition(positions);
+  return updatedData; 
+}
 
 export const deleteFaqCategory = async ({ id, catPositions }) => {
   try {

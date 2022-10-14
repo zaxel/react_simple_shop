@@ -1,5 +1,5 @@
 ﻿import {makeAutoObservable} from "mobx";
-import { deleteFaqCategory } from "../../utils/staticPages/helpPage";
+import { changeHelpCatPosition, deleteFaqCategory } from "../../utils/staticPages/helpPage";
 
 export default class HelpPageStore{
     constructor(){
@@ -107,6 +107,36 @@ export default class HelpPageStore{
     } 
     updateCategoryImg({id, imgDbCollName, fileName}){
         this._categories.find(cat=>cat.id===+id)[imgDbCollName] = fileName; 
+    } 
+    setCatPosition(startPosition, endPosition){
+        const positions = [];
+        this._categories = this._categories.map(cat => {
+            const currentCatPos = {id: cat.id, order_id: cat.order_id};
+            if (startPosition < endPosition) {
+                if (cat.order_id === startPosition) {
+                    currentCatPos.order_id = endPosition;
+                    positions.push(currentCatPos);
+                    return { ...cat, order_id: endPosition };
+                } else if (cat.order_id > startPosition && cat.order_id <= endPosition) {
+                    currentCatPos.order_id = cat.order_id - 1;
+                    positions.push(currentCatPos);
+                    return { ...cat, order_id: cat.order_id - 1 };
+                }
+            } else {
+                if (cat.order_id === startPosition) {
+                    currentCatPos.order_id = endPosition;
+                    positions.push(currentCatPos);
+                    return { ...cat, order_id: endPosition };
+                } else if (cat.order_id < startPosition && cat.order_id >= endPosition) {
+                    currentCatPos.order_id = cat.order_id + 1;
+                    positions.push(currentCatPos);
+                    return { ...cat, order_id: cat.order_id + 1 };
+                }
+            }
+            positions.push(currentCatPos); 
+            return cat;
+        });
+        changeHelpCatPosition(positions);
     } 
 
 

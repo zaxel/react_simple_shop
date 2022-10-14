@@ -164,6 +164,10 @@ export const changeCatImgReq = async (formData) => {
     const { data } = await $authHost.patch('api/help/category/img-update/', formData);
     return data;
 }
+export const updateHelpCatPosition = async (positions) => {
+    const updatedData = await $authHost.put('api/help/category/position' , {positions});
+    return updatedData.data; 
+}
 
 export const deleteCategoryReq = async ({id, catPositions}) => {
     const updatedData = await $authHost.delete('api/help/category', {data: {id, catPositions}});
