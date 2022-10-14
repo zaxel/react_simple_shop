@@ -18,6 +18,7 @@ export default class HelpPageStore{
         this._allQuestions = [];
         this._faqRelated = [];
         this._categories = [];
+        this._positions = [];
         this._modalFaqLoading = false;
 
         makeAutoObservable(this);
@@ -96,13 +97,15 @@ export default class HelpPageStore{
         this._categories.push(category);
     }
     deleteCategory(id){
-        const catPositions = [];
+        this._positions = [];
+        const deletedCatPosition = this._categories.find(cat=>cat.id===id).order_id;
+        console.log(deletedCatPosition)
         this._categories.forEach(category=>{ 
-            if(category.id > id) category.order_id = category.order_id - 1; 
+            if(category.order_id > deletedCatPosition) category.order_id = category.order_id - 1; 
         })
         this._categories = this._categories.filter(category=>category.id!==id);
-        this._categories.forEach(el=>catPositions.push({id: el.id, order_id: el.order_id}))
-        deleteFaqCategory({id, catPositions});
+        this._categories.forEach(el=>this._positions.push({id: el.id, order_id: el.order_id}))
+        deleteFaqCategory({id, catPositions: this._positions});
     }
     updateCategory({id, link, title}){
         const fieldName = link ? 'link' : 'title'
@@ -113,34 +116,34 @@ export default class HelpPageStore{
         this._categories.find(cat=>cat.id===+id)[imgDbCollName] = fileName; 
     } 
     setCatPosition(startPosition, endPosition){
-        const positions = [];
+        this._positions = [];
         this._categories = this._categories.map(cat => {
             const currentCatPos = {id: cat.id, order_id: cat.order_id};
             if (startPosition < endPosition) {
                 if (cat.order_id === startPosition) {
                     currentCatPos.order_id = endPosition;
-                    positions.push(currentCatPos);
+                    this._positions.push(currentCatPos);
                     return { ...cat, order_id: endPosition };
                 } else if (cat.order_id > startPosition && cat.order_id <= endPosition) {
                     currentCatPos.order_id = cat.order_id - 1;
-                    positions.push(currentCatPos);
+                    this._positions.push(currentCatPos);
                     return { ...cat, order_id: cat.order_id - 1 };
                 }
             } else {
                 if (cat.order_id === startPosition) {
                     currentCatPos.order_id = endPosition;
-                    positions.push(currentCatPos);
+                    this._positions.push(currentCatPos);
                     return { ...cat, order_id: endPosition };
                 } else if (cat.order_id < startPosition && cat.order_id >= endPosition) {
                     currentCatPos.order_id = cat.order_id + 1;
-                    positions.push(currentCatPos);
+                    this._positions.push(currentCatPos);
                     return { ...cat, order_id: cat.order_id + 1 };
                 }
             }
-            positions.push(currentCatPos); 
+            this._positions.push(currentCatPos); 
             return cat;
         });
-        changeHelpCatPosition(positions);
+        changeHelpCatPosition(this._positions);
     } 
 
 
@@ -194,7 +197,7 @@ export default class HelpPageStore{
         return this._activeCatEdit; 
     }
     get activeCatBody(){
-        return this._activeCatBody; 
+        return this._activeCatBody;  
     }
     get questions(){
         return this._questions;

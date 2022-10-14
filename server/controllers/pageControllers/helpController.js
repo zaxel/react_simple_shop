@@ -99,7 +99,8 @@ class HelpController {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return next(ApiError.badRequest('validation error: ', errors.array()));
+                console.log(996, errors.array())
+        return next(ApiError.badRequest('validation error: ', errors.array()));
             }
             const { title, banner, icon, link, order_id } = req.body;
             const bannerData = req?.files?.banner || null;

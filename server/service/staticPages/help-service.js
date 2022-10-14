@@ -67,8 +67,13 @@ class HelpService {
         return data;
     }
     createCategory = async ({ title, bannerData, iconData, link, order_id }) => {
-        const banner = await fileService.imageResolve(bannerData);
-        const icon = await fileService.imageResolve(iconData);
+        let banner = bannerData;
+        let icon = iconData;
+        if(banner)
+            banner = await fileService.imageResolve(bannerData);
+        if(icon)
+            icon = await fileService.imageResolve(iconData);
+
         const cat = await InfoHelpCategories.create({ title, banner, icon, link, order_id });
         const data = new HelpCatDto(cat);
         return data; 
