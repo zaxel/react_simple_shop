@@ -6,21 +6,46 @@ import CategoryCardBody from './CategoryCardBody';
 const CategoryCard = observer(({id, icon, title, banner, link}) => {
     const { helpAdmin } = useContext(Context);
     const [arrowStyle, setArrowStyle] = useState('arrow');
+    const [faqArrowStyle, setFaqArrowStyle] = useState('arrow');
     const [displayDescr, setDisplayDescr] = useState(false);
+    const [displayFaqs, setDisplayFaqs] = useState(false);
 
     const changeStyle = () => {
-        helpAdmin.activeCatEdit === id ? helpAdmin.setActiveCatEdit(null) : helpAdmin.setActiveCatEdit(id);
+        if(helpAdmin.activeCatEdit === id){
+            helpAdmin.setActiveCatEdit(null);
+        }else{
+            helpAdmin.setActiveCatEdit(id);
+            helpAdmin.setActiveCatBody(null);
+        }
+    }
+    const changeFaqStyle = () => {
+        if(helpAdmin.activeCatBody === id){
+            helpAdmin.setActiveCatBody(null)
+        }else{
+            helpAdmin.setActiveCatBody(id)
+            helpAdmin.setActiveCatEdit(null);
+        }
     }
 
     useEffect(() => {
         if (helpAdmin.activeCatEdit === id) {
             setArrowStyle('arrowDown');
             setDisplayDescr(true);
-        } else {
+            setFaqArrowStyle('arrow');
+            setDisplayFaqs(false);
+        }else if(helpAdmin.activeCatBody === id){
             setArrowStyle('arrow');
             setDisplayDescr(false);
+            setFaqArrowStyle('arrowDown');
+            setDisplayFaqs(true);
         }
-    }, [helpAdmin.activeCatEdit])
+         else {
+            setArrowStyle('arrow');
+            setFaqArrowStyle('arrow');
+            setDisplayDescr(false);
+            setDisplayFaqs(false);
+        }
+    }, [helpAdmin.activeCatEdit, helpAdmin.activeCatBody])
 
     const onDeleteCategoryClick = () => {
         helpAdmin.deleteCategory(id); 
@@ -40,13 +65,17 @@ const CategoryCard = observer(({id, icon, title, banner, link}) => {
                     <p>{title || 'no title added yet'}</p>
                 </div>
                 <div className='adminFaq__delete-cont about-blocks__card-del'>
-                    <button onClick={onDeleteCategoryClick}>X</button> 
+                    <button title="delete category" onClick={onDeleteCategoryClick}>X</button> 
                 </div>
                 <div className='adminFaq__question-button about-blocks__card-button'>
-                    <button onClick={changeStyle} className={arrowStyle}></button>
+                    <button title="edit category data" onClick={changeStyle} className={arrowStyle}></button>
                 </div>
-            </div>
+                <div className='adminFaq__question-button about-blocks__card-button'>
+                    <button title="add/remove FAQ's" onClick={changeFaqStyle} className={faqArrowStyle}></button>
+                </div>
+            </div> 
             {displayDescr && <CategoryCardBody id={id} title={title} banner={banner} icon={icon} link={link}/>}
+            {displayFaqs && <div><strong>faq's will be there {id}</strong></div>}
         </>
     );
 });

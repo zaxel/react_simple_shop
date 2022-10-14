@@ -12,6 +12,7 @@ export default class HelpPageStore{
         this._contactBgImages = ['', ''];
         this._activeFaqEdit = null;
         this._activeCatEdit = null;
+        this._activeCatBody = null;
         this._questions = [];
         this._answers = [];
         this._allQuestions = [];
@@ -61,6 +62,9 @@ export default class HelpPageStore{
     }
     setActiveCatEdit(catId){
         this._activeCatEdit = catId; 
+    }
+    setActiveCatBody(bodyName){
+        this._activeCatBody = bodyName;
     }
     setQuestions(questions){
         this._questions = questions;
@@ -188,6 +192,9 @@ export default class HelpPageStore{
     }
     get activeCatEdit(){
         return this._activeCatEdit; 
+    }
+    get activeCatBody(){
+        return this._activeCatBody; 
     }
     get questions(){
         return this._questions;
