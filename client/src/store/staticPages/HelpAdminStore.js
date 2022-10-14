@@ -99,7 +99,6 @@ export default class HelpPageStore{
     deleteCategory(id){
         this._positions = [];
         const deletedCatPosition = this._categories.find(cat=>cat.id===id).order_id;
-        console.log(deletedCatPosition)
         this._categories.forEach(category=>{ 
             if(category.order_id > deletedCatPosition) category.order_id = category.order_id - 1; 
         })

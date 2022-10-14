@@ -52,7 +52,8 @@ const HelpAdminCat = observer(() => {
         <div className='admin-pages__page adminFaq'>
             <h2>Edit Categories of Help Page".</h2>
             <div className='adminFaq__container'>
-                <h4>edit existing FAQ's:</h4>
+                <h4>add/remove/sort FAQ's</h4>
+                <h4>(drag and drop FAQ's to change order):</h4>
                 <Droppable droppableId="droppable-1">
                             {(provided, snapshot) => (
                                 <ul className='admin-about__cards-cont' ref={provided.innerRef} {...provided.droppableProps}>
