@@ -53,7 +53,10 @@ class HelpService {
         const deletedAnswer = await InfoHelpAnswers.destroy({
             where: { id }
         });
-        
+        const deletedRelation = await InfoHelpRelatedQuestions.destroy({
+            where: { faq_id: id }
+        });
+
         return {deletedAnswer, deletedQuestion};
     }
     

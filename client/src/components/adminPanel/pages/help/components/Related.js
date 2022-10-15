@@ -14,7 +14,7 @@ const Related = ({faq, setBodyLoading}) => {
 
     return (
         <li className='adminFaq__related'>
-            <button onClick={addBtn}>{faq.question}</button>
+            <button onClick={addBtn}>{faq?.question}</button>
         </li>
     )
 };
