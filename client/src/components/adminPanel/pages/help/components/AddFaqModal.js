@@ -1,43 +1,35 @@
-﻿import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect } from 'react';
-import { Button, Form, Modal, Spinner } from 'react-bootstrap';
+﻿import React, {useContext, useEffect} from 'react';
+import { observer } from 'mobx-react-lite';
+import { Button, Modal, Form, Spinner} from 'react-bootstrap';
+// import { Context } from '../../../..';
 import { Context } from '../../../../..';
-import { fetchFaqCategory, fetchFaqQuestions } from '../../../../../utils/staticPages/helpPage';
-import FaqModalCard from './FaqModalCard';
+
 
 const AddFaqModal = observer(({show, onHide}) => {
-    const { helpAdmin } = useContext(Context);
   
-  const categories = helpAdmin.categories;
-  const questions = helpAdmin.allQuestions;
+  const { helpAdmin } = useContext(Context);
+  // const blocks = aboutPage.editBlocks;
 
   useEffect(()=>{
-    (async()=>{
-      helpAdmin.setModalFaqLoading(true);
-      await fetchFaqQuestions(helpAdmin);
-      await fetchFaqCategory(helpAdmin); 
-      helpAdmin.setModalFaqLoading(false);
-    })()
-  }, [])
+    // fetchBlocks(helpAdmin);
+  },[])
 
-  const questionsCards = questions.length && questions.filter(item => {
-    const isRelatedAlreadyAdded = helpAdmin.faqRelated.some(el=>el.infoHelpQuestionId===item.id);
-    return item.infoHelpCategoryId && categories.length && !isRelatedAlreadyAdded
-    }).map(card=><FaqModalCard key={card.id} text={card.question} id={card.id} category={categories.find(cat=>cat.id===card.infoHelpCategoryId).title}/>);
-
+  // const cards = blocks.length && blocks.filter(card=>!card.block.infoAboutCardId).map(el => <BlockModalCard key={el.block.id} text={el.block.text} title={el.block.title} id={el.block.id}/>);
+  
     return (
-      <Modal className="device-modal blocks-modal adminFaq__modal-related" centered show={show} onHide={onHide}>
+      <Modal className="device-modal blocks-modal" centered show={show} onHide={onHide}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Related Question:</Modal.Title>
+          <Modal.Title>Add Blocks To Card</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         
         <Form.Group className="mb-3">
-        {helpAdmin.modalFaqLoading ?
+        {helpAdmin.loading ?
           <div className="spinner">
             <Spinner animation="border" />
-          </div> :
-          <ul>{questionsCards.length ? questionsCards : <li>no relations available</li>}</ul>}   
+          </div> : 
+          <div>content</div>}
+          {/* <ul>{cards.length ? cards : 'no blocks available'}</ul>}   */}
         </Form.Group>
           
         </Modal.Body>
@@ -48,6 +40,6 @@ const AddFaqModal = observer(({show, onHide}) => {
         </Modal.Footer>
       </Modal>
     );
-})
+});
 
 export default AddFaqModal;

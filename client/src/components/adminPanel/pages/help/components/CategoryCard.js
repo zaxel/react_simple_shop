@@ -2,8 +2,9 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { Context } from '../../../../..';
 import CategoryCardBody from './CategoryCardBody';
+import CategoryCardFaqs from './CategoryCardFaqs';
 
-const CategoryCard = observer(({category}) => {
+const CategoryCard = observer(({category, setButtonStyle}) => {
     const { helpAdmin } = useContext(Context);
     const [arrowStyle, setArrowStyle] = useState('arrow');
     const [faqArrowStyle, setFaqArrowStyle] = useState('arrow');
@@ -16,13 +17,16 @@ const CategoryCard = observer(({category}) => {
         }else{
             helpAdmin.setActiveCatEdit(category.id);
             helpAdmin.setActiveCatBody(null);
+            setButtonStyle('hide');
         }
     }
     const changeFaqStyle = () => {
         if(helpAdmin.activeCatBody === category.id){
             helpAdmin.setActiveCatBody(null)
+            setButtonStyle('hide');
         }else{
             helpAdmin.setActiveCatBody(category.id)
+            setButtonStyle('show');
             helpAdmin.setActiveCatEdit(null);
         }
     }
@@ -75,7 +79,7 @@ const CategoryCard = observer(({category}) => {
                 </div>
             </div> 
             {displayDescr && <CategoryCardBody id={category.id} title={category.title} banner={category.banner} icon={category.icon} link={category.link}/>}
-            {displayFaqs && <div><strong>faq's will be there {category.id}</strong></div>}
+            {displayFaqs && <CategoryCardFaqs id={category.id} title={category.title} banner={category.banner} icon={category.icon} link={category.link}/>}
         </>
     );
 });

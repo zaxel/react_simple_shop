@@ -4,8 +4,8 @@ import { Context } from '../../../..';
 import Faq from './components/Faq';
 import { Spinner } from 'react-bootstrap';
 import AddNewFaq from './components/AddNewFaq';
-import AddFaqModal from './components/AddFaqModal';
 import { fetchAllFaqs } from '../../../../utils/staticPages/helpPage';
+import AddRelatedFaqModal from './components/AddRelatedFaqModal';
 
 
 const HelpAdminFaq = observer(() => {
@@ -51,7 +51,7 @@ const HelpAdminFaq = observer(() => {
                     </div> :
                     <AddNewFaq />}
             </div>
-            <AddFaqModal show={addFaqVisible} onHide={() => setAddFaqVisible(false)}/>
+            <AddRelatedFaqModal show={addFaqVisible} onHide={() => setAddFaqVisible(false)}/>
         </div>
     );
 });
