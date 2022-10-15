@@ -72,6 +72,15 @@ export const fetchFaqQuestions = async (currentStore) => {
     console.log(e)
   }
 }
+export const fetchCategoryFaqQuestions = async (currentStore, categoryId) => {
+  try {
+    const fetchedData = await fetchQuestions(categoryId);
+    const setterName = 'setQuestions';
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+  }
+}
 export const createNewFaq = async (currentStore, question, answerTitle, answerText) => {
   try {
     const fetchedData = await createFaqs(question, answerTitle, answerText);
@@ -166,8 +175,6 @@ export const createCategory = async (currentStore, formData) => {
     console.log(e)
   }
 }
-
-
 export const changeCatData = async (id, dbFieldName, currentStore, data) => {
   try {
     setComponentLoading(currentStore, false)
@@ -193,7 +200,6 @@ export const changeHelpCatPosition = async (positions) => {
   const updatedData = await updateHelpCatPosition(positions);
   return updatedData; 
 }
-
 export const deleteFaqCategory = async ({ id, catPositions }) => {
   try {
     const fetchedData = await deleteCategoryReq({ id, catPositions });

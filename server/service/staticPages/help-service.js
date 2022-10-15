@@ -21,8 +21,12 @@ class HelpService {
         const answers = answersData.map(el=>new HelpFaqDto({answer: el}));
         return { questions, answers };  
     }
-    getQuestion = async () => {
-        let questionsData = await InfoHelpQuestions.findAll();
+    getQuestion = async ({categoryId}) => {
+        let param = null;
+        if(categoryId) param = {infoHelpCategoryId: categoryId}; 
+        let questionsData = await InfoHelpQuestions.findAll({
+            where: param
+        });
         const questions = questionsData.map(el=>new HelpFaqDto({question: el}));
         return { questions };  
     }
@@ -112,12 +116,6 @@ class HelpService {
         })
         return deletedCat; 
     } 
-
-
-
-
-
-
     
     getRelatedFaq = async ({id}) => {
         const related = await InfoHelpRelatedQuestions.findAll({

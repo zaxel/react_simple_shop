@@ -67,7 +67,7 @@ export default class HelpPageStore{
     setActiveCatBody(bodyName){
         this._activeCatBody = bodyName;
     }
-    setQuestions(questions){
+    setQuestions({questions}){
         this._questions = questions;
     }
     setAnswers(answers){

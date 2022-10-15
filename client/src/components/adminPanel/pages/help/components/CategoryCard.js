@@ -79,7 +79,7 @@ const CategoryCard = observer(({category, setButtonStyle}) => {
                 </div>
             </div> 
             {displayDescr && <CategoryCardBody id={category.id} title={category.title} banner={category.banner} icon={category.icon} link={category.link}/>}
-            {displayFaqs && <CategoryCardFaqs id={category.id} title={category.title} banner={category.banner} icon={category.icon} link={category.link}/>}
+            {displayFaqs && <CategoryCardFaqs categoryId={category.id}/>}
         </>
     );
 });

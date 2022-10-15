@@ -5,7 +5,7 @@ import { removeRelatedFaq } from '../../../../../utils/staticPages/helpPage';
 const CategoryFaqCard = ({faq, setBodyLoading}) => {
     const {helpAdmin} = useContext(Context);
 
-    const addBtn = async () => {
+    const removeBtn = async () => {
         console.log(faq.id)
         // setBodyLoading(true);
         // const currentFaq = helpAdmin.activeFaqEdit;
@@ -16,7 +16,7 @@ const CategoryFaqCard = ({faq, setBodyLoading}) => {
     return (
         <li className='adminFaq__related adminFaq__category-faqs'>
             <div>drag here</div>
-            <button onClick={addBtn}>{'faq?.question that is it'}</button>
+            <button onClick={removeBtn}>{faq.question}</button>
 
         </li>
     )

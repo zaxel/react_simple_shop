@@ -28,6 +28,7 @@ router.put('/question/',
     body('question').optional().isString().isLength({ min: 3 }),
     helpController.updateFaqQuestion);
 router.get('/question/',
+    query('categoryId').optional().isNumeric(),
     helpController.getQuestion);
 router.delete('/faq/',
     checkRole('ADMIN'),

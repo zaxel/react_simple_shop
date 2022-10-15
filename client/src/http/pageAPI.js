@@ -108,8 +108,10 @@ export const createFaqs = async (question, answerTitle, answerText) => {
     const updatedData = await $authHost.post('api/help/faq', {question, answerTitle, answerText}); 
     return updatedData.data;  
 }
-export const fetchQuestions = async () => {
-    const fetchedData = await $host.get('api/help/question');  
+export const fetchQuestions = async (categoryId) => {
+    const fetchedData = await $host.get('api/help/question', {params:{
+        categoryId
+    }});  
     return fetchedData.data;
 }
 

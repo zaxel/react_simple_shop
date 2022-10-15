@@ -35,7 +35,12 @@ class HelpController {
     }
     async getQuestion(req, res, next) {
         try {
-            const data = await helpService.getQuestion(); 
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { categoryId } = req.query;
+            const data = await helpService.getQuestion({categoryId}); 
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));
