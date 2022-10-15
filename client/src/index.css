@@ -3086,6 +3086,9 @@ button:active {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }
+.blocks-modal .modal-body .mb-3 ul li .adminFaq-modal__title-cont{
+    flex: 0 0 87%;
+}
 /**admin help categories end**/
 /*admin static pages end*/
 

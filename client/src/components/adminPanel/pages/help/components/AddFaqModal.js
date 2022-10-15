@@ -1,35 +1,40 @@
-﻿import React, {useContext, useEffect} from 'react';
+﻿import React, {useContext, useEffect, useState} from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, Modal, Form, Spinner} from 'react-bootstrap';
 // import { Context } from '../../../..';
 import { Context } from '../../../../..';
+import AddFaqModalCard from './AddFaqModalCard';
+import { fetchFaqQuestions } from '../../../../../utils/staticPages/helpPage';
 
 
 const AddFaqModal = observer(({show, onHide}) => {
-  
+  const [loading, setLoading] = useState(false);
   const { helpAdmin } = useContext(Context);
-  // const blocks = aboutPage.editBlocks;
+  const categoryId = helpAdmin.activeCatBody;
 
   useEffect(()=>{
-    // fetchBlocks(helpAdmin);
+    (async()=>{
+      setLoading(true);
+      await fetchFaqQuestions(helpAdmin);
+      setLoading(false);
+    })()
   },[])
 
-  // const cards = blocks.length && blocks.filter(card=>!card.block.infoAboutCardId).map(el => <BlockModalCard key={el.block.id} text={el.block.text} title={el.block.title} id={el.block.id}/>);
+  const cards = helpAdmin.allQuestions.length && helpAdmin.allQuestions.filter(faq=>faq.infoHelpCategoryId!==categoryId).map(el => <AddFaqModalCard title='add to category' key={el.id} question={el.question} id={el.id}/>);
   
     return (
       <Modal className="device-modal blocks-modal" centered show={show} onHide={onHide}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Blocks To Card</Modal.Title>
+          <Modal.Title>Add FAQ's To Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         
         <Form.Group className="mb-3">
-        {helpAdmin.loading ?
+        {loading ?
           <div className="spinner">
             <Spinner animation="border" />
           </div> : 
-          <div>content</div>}
-          {/* <ul>{cards.length ? cards : 'no blocks available'}</ul>}   */}
+          <ul>{cards.length ? cards : 'no FAQ\'s available'}</ul>}  
         </Form.Group>
           
         </Modal.Body>
