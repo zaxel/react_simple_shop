@@ -43,8 +43,8 @@ class HelpService {
         });
         return updatedData;
     }
-    resetQuestionCatByCatId = async ({ categoryId }) => {
-        const updatedData = await InfoHelpQuestions.update({infoHelpCategoryId: null}, {
+    resetQuestionOrderByCatId = async ({ categoryId }) => {
+        const updatedData = await InfoHelpQuestions.update({order_id: null}, {
             where: { infoHelpCategoryId: categoryId }
         });
         return updatedData;

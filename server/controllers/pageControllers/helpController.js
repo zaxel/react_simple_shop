@@ -177,8 +177,8 @@ class HelpController {
             }
             const { id, catPositions } = req.body;
             const dataPosition = await helpService.setCategoryPosition({catPositions});
+            const resetedFaqCat = await helpService.resetQuestionOrderByCatId({categoryId: id});  
             const dataDeleted = await helpService.deleteCategory({id});  
-            const resetedFaqCat = await helpService.resetQuestionCatByCatId({categoryId: id});  
             return res.json(dataDeleted);
         } catch (e) {
             next(ApiError.forbidden(e.message)); 

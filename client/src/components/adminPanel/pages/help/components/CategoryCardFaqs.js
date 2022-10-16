@@ -12,16 +12,16 @@ const CategoryCardFaqs = observer(({ categoryId }) => {
 
 
     const faqs = helpAdmin.questions.slice()
-    .sort((a, b) => a.order_id - b.order_id)
-    .map(faq => {
-        return <Draggable key={faq.id} draggableId={'draggable-' + faq.id} index={faq.order_id}>
-            {(provided, snapshot) => (
-                <li className='adminFaq__related adminFaq__category-faqs' key={faq.id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                    <CategoryFaqCard key={faq.id} setBodyLoading={setLoading} faq={faq} />
-                </li>
-            )}
-        </Draggable>
-    })
+        .sort((a, b) => a.order_id - b.order_id)
+        .map(faq => {
+            return <Draggable key={faq.id} draggableId={'draggable-' + faq.id} index={faq.order_id}>
+                {(provided, snapshot) => (
+                    <li className='adminFaq__related adminFaq__category-faqs' key={faq.id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                        <CategoryFaqCard key={faq.id} setBodyLoading={setLoading} faq={faq} />
+                    </li>
+                )}
+            </Draggable>
+        })
 
 
     useEffect(() => {
@@ -30,11 +30,10 @@ const CategoryCardFaqs = observer(({ categoryId }) => {
             await fetchCategoryFaqQuestions(helpAdmin, categoryId);
             setLoading(false);
         })()
-
     }, [])
-    
+
     const setCategoryPosition = ({ destination, source }) => {
-        helpAdmin.setFaqPosition(source.index, destination.index); 
+        helpAdmin.setFaqPosition(source.index, destination.index);
     }
 
     if (loading) {
@@ -54,22 +53,15 @@ const CategoryCardFaqs = observer(({ categoryId }) => {
                     <h3>(darg and drop FAQ to change orders):</h3>
                     <div className='about-blocks__battons-wrapper'>
 
-                    <Droppable droppableId="droppable-2">
-                        {(provided, snapshot) => (
-                            <ul className='adminFaq__related-cont' ref={provided.innerRef} {...provided.droppableProps}>
-                                {faqs.length ? faqs : <li className='adminFaq__norelated'>No FAQ's added yet</li>}
-                                {/* {categories.length ? categories : 'no categories added yet!'} */}
-                                {provided.placeholder}
-                            </ul>
-                        )}
-                    </Droppable>
-
-                        {/* <ul className='adminFaq__related-cont'>
-                            {faqs.length ? faqs : <li className='adminFaq__norelated'>No FAQ's added yet</li>}
-                        </ul> */}
-
+                        <Droppable droppableId="droppable-2">
+                            {(provided, snapshot) => (
+                                <ul className='adminFaq__related-cont' ref={provided.innerRef} {...provided.droppableProps}>
+                                    {faqs.length ? faqs : <li className='adminFaq__norelated'>No FAQ's added yet</li>}
+                                    {provided.placeholder}
+                                </ul>
+                            )}
+                        </Droppable>
                     </div>
-
                 </div>
             </div>
         </DragDropContext>
