@@ -27,13 +27,13 @@ const HelpAdminCat = observer(() => {
     const categories = helpAdmin.categories.slice()
         .sort((a, b) => a.order_id - b.order_id)
         .map(category => {
-            return <Draggable key={category.id} draggableId={'draggable-' + category.id} index={category.order_id}>
-                {(provided, snapshot) => (
+            return <Draggable isDragDisabled={helpAdmin.activeCatBody === category.id ? true : false} key={category.id} draggableId={'draggable-' + category.id} index={category.order_id}>
+                {(provided, snapshot) => ( 
                     <li className='admin-about__card' key={category.id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                         <CategoryCard setButtonStyle={setButtonStyle} category={category} />
                     </li>
                 )}
-            </Draggable>
+            </Draggable> 
         })
     const onAddFaqClick = async () => {
         setAddFaqVisible(true);
@@ -57,7 +57,7 @@ const HelpAdminCat = observer(() => {
     return (
         <DragDropContext
             onDragEnd={setCategoryPosition}
-        >
+        > 
             <div className='admin-pages__page adminFaq'>
                 <h2>Edit Categories of Help Page".</h2>
                 <div className='adminFaq__container'>

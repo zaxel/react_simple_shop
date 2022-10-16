@@ -70,6 +70,15 @@ class HelpService {
 
         return {deletedAnswer, deletedQuestion};
     }
+    setFaqPosition = async ({ positions, categoryId }) => {
+        const categories = await InfoHelpQuestions.bulkCreate(positions,
+            {
+                updateOnDuplicate: ["order_id"],
+                where: { infoHelpCategoryId: categoryId }
+            }
+        );
+        return categories; 
+    }
     
     getCategory = async ({id}) => {
         let param = null;

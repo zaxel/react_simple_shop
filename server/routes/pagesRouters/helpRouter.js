@@ -35,6 +35,11 @@ router.delete('/faq/',
     checkRole('ADMIN'),
     body('id').isNumeric(),
     helpController.deleteFaq);
+router.put('/faq/position/',
+    checkRole(['ADMIN', 'MODERATOR']), 
+    body('positions').isArray(),
+    body('categoryId').isNumeric(),
+    helpController.changeFaqPosition); 
 
 router.get('/category/',
     query('id').optional().isNumeric(),
@@ -61,6 +66,7 @@ router.put('/category/position/',
     checkRole(['ADMIN', 'MODERATOR']), 
     body('positions').isArray(),
     helpController.changeCatPosition); 
+
 
 router.delete('/category/',
     checkRole(['ADMIN']), 

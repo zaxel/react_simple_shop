@@ -1,5 +1,5 @@
 ﻿import {makeAutoObservable} from "mobx";
-import { changeHelpCatPosition, deleteFaqCategory } from "../../utils/staticPages/helpPage";
+import { changeHelpCatPosition, deleteFaqCategory, changeHelpFaqPosition } from "../../utils/staticPages/helpPage";
 
 export default class HelpPageStore{
     constructor(){
@@ -19,6 +19,7 @@ export default class HelpPageStore{
         this._faqRelated = [];
         this._categories = [];
         this._positions = [];
+        this._faqPositions = [];
         this._modalFaqLoading = false;
 
         makeAutoObservable(this);
@@ -144,6 +145,42 @@ export default class HelpPageStore{
         });
         changeHelpCatPosition(this._positions);
     } 
+    setFaqPosition(startPosition, endPosition){
+        this._faqPositions = []; 
+        console.log(this._questions);
+        this._questions = this._questions.map(faq => {
+            const currentFaqPos = {id: faq.id, order_id: faq.order_id};
+            if (startPosition < endPosition) {
+                if (faq.order_id === startPosition) {
+                    currentFaqPos.order_id = endPosition;
+                    this._faqPositions.push(currentFaqPos);
+                    return { ...faq, order_id: endPosition };
+                } else if (faq.order_id > startPosition && faq.order_id <= endPosition) {
+                    currentFaqPos.order_id = faq.order_id - 1;
+                    this._faqPositions.push(currentFaqPos);
+                    return { ...faq, order_id: faq.order_id - 1 };
+                }
+            } else {
+                if (faq.order_id === startPosition) {
+                    currentFaqPos.order_id = endPosition;
+                    this._faqPositions.push(currentFaqPos);
+                    return { ...faq, order_id: endPosition };
+                } else if (faq.order_id < startPosition && faq.order_id >= endPosition) {
+                    currentFaqPos.order_id = faq.order_id + 1;
+                    this._faqPositions.push(currentFaqPos);
+                    return { ...faq, order_id: faq.order_id + 1 };
+                }
+            }
+            this._faqPositions.push(currentFaqPos); 
+            return faq;
+        });
+        changeHelpFaqPosition({categoryId: this._activeCatBody, positions: this._faqPositions});
+    } 
+
+
+
+
+
     setFaqCategory({id, categoryId}){
         const addingFaq = this._allQuestions.find(quest=>quest.id === id);
         categoryId 

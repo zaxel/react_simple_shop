@@ -1,7 +1,7 @@
 ﻿import {
   createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion,
   updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, 
-  deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition
+  deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition, updateHelpFaqPosition
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -139,6 +139,10 @@ export const deleteFaq = async (id, currentStore) => {
   } finally {
     setComponentLoading(currentStore, false);
   }
+}
+export const changeHelpFaqPosition = async ({categoryId, positions}) => {
+  const updatedData = await updateHelpFaqPosition({categoryId, positions});
+  return updatedData; 
 }
 
 export const fetchRelatedRelations = async (currentStore, id) => {

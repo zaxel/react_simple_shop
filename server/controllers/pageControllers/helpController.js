@@ -85,6 +85,19 @@ class HelpController {
             next(ApiError.forbidden(e.message)); 
         }
     }
+    async changeFaqPosition(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { positions, categoryId } = req.body;
+            const data = await helpService.setFaqPosition({ positions, categoryId });
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
 
     
     async getCategory(req, res, next) {

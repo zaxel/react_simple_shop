@@ -114,6 +114,10 @@ export const fetchQuestions = async (categoryId) => {
     }});  
     return fetchedData.data;
 }
+export const updateHelpFaqPosition = async ({categoryId, positions}) => {
+    const updatedData = await $authHost.put('api/help/faq/position' , {categoryId, positions});
+    return updatedData.data; 
+}
 
 export const updateFaqAnswer = async (id, dbFieldName, data) => {
     const updatedData = await $authHost.put('api/help/answer' , {id, [dbFieldName]: data});
