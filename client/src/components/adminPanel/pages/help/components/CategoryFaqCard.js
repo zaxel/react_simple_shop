@@ -7,6 +7,7 @@ const CategoryFaqCard = ({faq, setBodyLoading}) => {
 
     const removeBtn = async () => {
         setBodyLoading(true);
+        await helpAdmin.setFaqCategory({id:faq.id, categoryId: null});  
         await setFaqCategory(helpAdmin, faq.id, null);
         setBodyLoading(false);
     }

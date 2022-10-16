@@ -26,8 +26,14 @@ router.put('/question/',
     checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     body('question').optional().isString().isLength({ min: 3 }),
-    body('infoHelpQuestionId').optional().isString().isLength({ min: 3 }),
+    body('catNewFaqData.infoHelpCategoryId').optional({ nullable: true }).isNumeric(),
+    body('catNewFaqData.fromCategoryId').optional().isNumeric(),
+    body('catNewFaqData.order_id').optional({ nullable: true }).isNumeric(),
+    body('catNewFaqData.positions').optional(),
     helpController.updateFaqQuestion);
+
+
+
 router.get('/question/',
     query('categoryId').optional().isNumeric(),
     helpController.getQuestion);

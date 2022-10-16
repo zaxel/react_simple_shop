@@ -50,10 +50,15 @@ class HelpController {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
+                console.log(77, errors.array())
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            const { id, question, infoHelpCategoryId } = req.body;
-            const data = await helpService.updateQuestion({ id, question, infoHelpCategoryId });
+            const { id, question, catNewFaqData } = req.body;
+            if(catNewFaqData?.positions?.length){
+                const data = await helpService.setFaqPosition({ positions: catNewFaqData.positions, categoryId: catNewFaqData.fromCategoryId });
+            }
+            const data = await helpService.updateQuestion({ id, question, catNewFaqData }); 
+            
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message)); 

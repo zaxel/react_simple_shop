@@ -1,6 +1,6 @@
 ﻿import {makeAutoObservable} from "mobx";
 import { changeHelpCatPosition, deleteFaqCategory, changeHelpFaqPosition } from "../../utils/staticPages/helpPage";
-
+ 
 export default class HelpPageStore{
     constructor(){
         this._pageId = null;
@@ -147,7 +147,6 @@ export default class HelpPageStore{
     } 
     setFaqPosition(startPosition, endPosition){
         this._faqPositions = []; 
-        console.log(this._questions);
         this._questions = this._questions.map(faq => {
             const currentFaqPos = {id: faq.id, order_id: faq.order_id};
             if (startPosition < endPosition) {
@@ -174,19 +173,26 @@ export default class HelpPageStore{
             this._faqPositions.push(currentFaqPos); 
             return faq;
         });
-        changeHelpFaqPosition({categoryId: this._activeCatBody, positions: this._faqPositions});
+        changeHelpFaqPosition({categoryId: this._activeCatBody, positions: this._faqPositions}); 
     } 
-
-
-
-
-
     setFaqCategory({id, categoryId}){
-        const addingFaq = this._allQuestions.find(quest=>quest.id === id);
-        categoryId 
-            ? this._questions.push(addingFaq)
-            : this._questions = this._questions.filter(quest=>quest.id!==id);
-        addingFaq.infoHelpCategoryId = categoryId;
+        const currentFaq = this._allQuestions.find(quest=>quest.id === id);
+        if(categoryId){
+            this._questions.push({...currentFaq, order_id: this._questions.length + 1})
+        }else{
+            this._faqPositions = [];
+            this._questions = this._questions
+                .filter(quest=>quest.id!==id)
+                .map(el=>{
+                    if(el.order_id > currentFaq.order_id){
+                        return {...el, order_id: el.order_id - 1};
+                    }else{
+                        return el;
+                    }
+                })
+                this._questions.forEach(item=>this._faqPositions.push({id: item.id, order_id: item.order_id})) 
+        }
+        currentFaq.infoHelpCategoryId = categoryId;
     }
     
     addNewFaq({answerId, text, title, answerUpdatedAt, infoHelpAnswerId, question, questionCreatedAt, id, questionUpdatedAt, order_id, infoHelpCategoryId}){
@@ -258,5 +264,8 @@ export default class HelpPageStore{
     }
     get categories(){
         return this._categories;
+    } 
+    get faqPositions(){
+        return this._faqPositions;
     } 
 }
