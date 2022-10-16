@@ -144,8 +144,14 @@ export default class HelpPageStore{
         });
         changeHelpCatPosition(this._positions);
     } 
-
-
+    setFaqCategory({id, categoryId}){
+        const addingFaq = this._allQuestions.find(quest=>quest.id === id);
+        categoryId 
+            ? this._questions.push(addingFaq)
+            : this._questions = this._questions.filter(quest=>quest.id!==id);
+        addingFaq.infoHelpCategoryId = categoryId;
+    }
+    
     addNewFaq({answerId, text, title, answerUpdatedAt, infoHelpAnswerId, question, questionCreatedAt, id, questionUpdatedAt, order_id, infoHelpCategoryId}){
         this._questions.push({id, order_id, question, infoHelpCategoryId, infoHelpAnswerId})
         this._answers.push({answerId, title, text})
@@ -207,8 +213,6 @@ export default class HelpPageStore{
     get modalFaqLoading(){
         return this._modalFaqLoading;
     }
-
-
     get allQuestions(){
         return this._allQuestions;
     }

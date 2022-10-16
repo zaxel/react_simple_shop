@@ -20,7 +20,7 @@ const AddFaqModal = observer(({show, onHide}) => {
     })()
   },[])
 
-  const cards = helpAdmin.allQuestions.length && helpAdmin.allQuestions.filter(faq=>faq.infoHelpCategoryId!==categoryId).map(el => <AddFaqModalCard title='add to category' key={el.id} question={el.question} id={el.id}/>);
+  const cards = helpAdmin.allQuestions.length && helpAdmin.allQuestions.filter(faq=>!faq.infoHelpCategoryId).map(el => <AddFaqModalCard title='add to category' setLoading={setLoading} key={el.id} question={el.question} id={el.id}/>);
   
     return (
       <Modal className="device-modal blocks-modal" centered show={show} onHide={onHide}>

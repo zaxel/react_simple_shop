@@ -13,9 +13,9 @@ const CategoryCardFaqs = observer(({ categoryId }) => {
      
     useEffect(() => {
         (async () => {
-            setLoading(true)
+            setLoading(true);
             await fetchCategoryFaqQuestions(helpAdmin, categoryId);
-            setLoading(false)
+            setLoading(false);
         })()
 
     }, [])
@@ -34,7 +34,6 @@ const CategoryCardFaqs = observer(({ categoryId }) => {
                 <div className='about-blocks__battons-wrapper'>
                     <ul className='adminFaq__related-cont'>
                         {faqs.length ? faqs : <li className='adminFaq__norelated'>No FAQ's added yet</li>}
-                        {/* <li>li text</li> */}
                     </ul>
                 </div>
 

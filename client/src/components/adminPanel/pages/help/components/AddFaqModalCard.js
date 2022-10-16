@@ -1,25 +1,21 @@
 ﻿import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { Context } from '../../../../..';
+import { setFaqCategory } from '../../../../../utils/staticPages/helpPage';
 
 
-const AddFaqModalCard = ({ question, id }) => {
+const AddFaqModalCard = ({ question, id, setLoading }) => {
   const { helpAdmin } = useContext(Context);
-  // const currentCard = aboutPage.activeCardEdit; 
-  const addBlock = async (id) => { 
-    console.log({id})
-    console.log(helpAdmin.activeCatBody)
-    // const nextPosition = aboutPage.cardBlocks.length + 1;
-    // aboutPage.setLoading(true);
-    // await changeAboutBlockData(id, 'infoAboutCardId', currentCard)
-    // await changeAboutBlockData(id, 'position', nextPosition)
-    // aboutPage.setEditBlockCardIdAndPos(id, nextPosition);
-    // aboutPage.setLoading(false);
+
+  const addFaq = async (id) => { 
+    setLoading(true);
+    await setFaqCategory(helpAdmin, id, helpAdmin.activeCatBody);
+    setLoading(false);
   }
 
   return (
     <li>
-      <Button variant="secondary" onClick={() => addBlock(id)}></Button>
+      <Button variant="secondary" onClick={() => addFaq(id)}></Button>
       <div className='block-modal__title-cont adminFaq-modal__title-cont'> 
         <h5>{question}</h5>
       </div>

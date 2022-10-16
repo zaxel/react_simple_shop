@@ -52,8 +52,8 @@ class HelpController {
             if (!errors.isEmpty()) {
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            const { id, question } = req.body;
-            const data = await helpService.updateQuestion({ id, question });
+            const { id, question, infoHelpCategoryId } = req.body;
+            const data = await helpService.updateQuestion({ id, question, infoHelpCategoryId });
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message)); 
@@ -165,6 +165,7 @@ class HelpController {
             const { id, catPositions } = req.body;
             const dataPosition = await helpService.setCategoryPosition({catPositions});
             const dataDeleted = await helpService.deleteCategory({id});  
+            const resetedFaqCat = await helpService.resetQuestionCatByCatId({categoryId: id});  
             return res.json(dataDeleted);
         } catch (e) {
             next(ApiError.forbidden(e.message)); 

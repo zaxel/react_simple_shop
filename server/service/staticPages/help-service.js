@@ -36,9 +36,16 @@ class HelpService {
         const faq = new HelpFaqDto({answer, question});
         return faq; 
     }
-    updateQuestion = async ({ id, question }) => {
-        const updatedData = await InfoHelpQuestions.update({ question }, {
+    updateQuestion = async ({ id, question, infoHelpCategoryId }) => {
+        const field = question ? {question} : {infoHelpCategoryId}
+        const updatedData = await InfoHelpQuestions.update(field, {
             where: { id }
+        });
+        return updatedData;
+    }
+    resetQuestionCatByCatId = async ({ categoryId }) => {
+        const updatedData = await InfoHelpQuestions.update({infoHelpCategoryId: null}, {
+            where: { infoHelpCategoryId: categoryId }
         });
         return updatedData;
     }

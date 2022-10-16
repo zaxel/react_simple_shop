@@ -26,6 +26,7 @@ router.put('/question/',
     checkRole(['ADMIN', 'MODERATOR']), 
     body('id').isNumeric(),
     body('question').optional().isString().isLength({ min: 3 }),
+    body('infoHelpQuestionId').optional().isString().isLength({ min: 3 }),
     helpController.updateFaqQuestion);
 router.get('/question/',
     query('categoryId').optional().isNumeric(),
