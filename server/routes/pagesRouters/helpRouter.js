@@ -32,8 +32,6 @@ router.put('/question/',
     body('catNewFaqData.positions').optional(),
     helpController.updateFaqQuestion);
 
-
-
 router.get('/question/',
     query('categoryId').optional().isNumeric(),
     helpController.getQuestion);

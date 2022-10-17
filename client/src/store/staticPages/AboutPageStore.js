@@ -119,7 +119,6 @@ export default class AboutPageStore {
         elem.infoAboutCardId = this._activeCardEdit;
         elem.position = position;
         this._cardBlocks.push(elem);
-
     }
     removeEditBlockCardIdAndPos(id) {
         let elem = this._editBlocks.find(el => el.block.id === id).block;

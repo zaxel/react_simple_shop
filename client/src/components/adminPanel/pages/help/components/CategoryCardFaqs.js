@@ -8,7 +8,7 @@ import CategoryFaqCard from './CategoryFaqCard';
 
 const CategoryCardFaqs = observer(({ categoryId }) => {
     const { helpAdmin } = useContext(Context);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false); 
 
 
     const faqs = helpAdmin.questions.slice()

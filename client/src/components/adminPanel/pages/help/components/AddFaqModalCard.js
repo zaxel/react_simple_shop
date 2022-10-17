@@ -9,7 +9,7 @@ const AddFaqModalCard = ({ question, id, setLoading }) => {
 
   const addFaq = async (id) => { 
     setLoading(true);
-    await helpAdmin.setFaqCategory({id, categoryId: helpAdmin.activeCatBody}); 
+    await helpAdmin.setFaqCategory({id, categoryId: helpAdmin.activeCatBody});  
     await setFaqCategory(helpAdmin, id, helpAdmin.activeCatBody); 
     setLoading(false);
   }

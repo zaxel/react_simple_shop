@@ -23,7 +23,7 @@ const AddRelatedFaqModal = observer(({show, onHide}) => {
   const questionsCards = questions.length && questions.filter(item => {
     const isRelatedAlreadyAdded = helpAdmin.faqRelated.some(el=>el.infoHelpQuestionId===item.id);
     return item.infoHelpCategoryId && categories.length && !isRelatedAlreadyAdded
-    }).map(card=><FaqModalCard key={card.id} text={card.question} id={card.id} category={categories.find(cat=>cat.id===card.infoHelpCategoryId).title}/>);
+    }).map(card=><FaqModalCard key={card.id} text={card.question} id={card.id} category={categories.find(cat=>cat.id===card.infoHelpCategoryId)?.title || ''}/>);
 
     return (
       <Modal className="device-modal blocks-modal adminFaq__modal-related" centered show={show} onHide={onHide}>

@@ -10,7 +10,6 @@ import { fetchFaqQuestions } from '../../../../../utils/staticPages/helpPage';
 const AddFaqModal = observer(({show, onHide}) => {
   const [loading, setLoading] = useState(false);
   const { helpAdmin } = useContext(Context);
-  const categoryId = helpAdmin.activeCatBody;
 
   useEffect(()=>{
     (async()=>{
