@@ -86,7 +86,7 @@ const InfoHelpQuestions = sequelize.define('info_help_questions', {
 const InfoHelpAnswers = sequelize.define('info_help_answers', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
-    text: {type: DataTypes.STRING, allowNull: false},
+    text: {type: DataTypes.STRING(20000), allowNull: false},
 })
 const InfoHelpRelatedQuestions = sequelize.define('info_help_related_questions', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},

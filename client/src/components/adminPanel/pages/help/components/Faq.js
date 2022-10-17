@@ -12,6 +12,7 @@ const Faq = observer(({question, answer, onAddRelatedFaqClick}) => {
     const changeStyle = () => {
         helpAdmin.activeFaqEdit === question.id ? helpAdmin.setActiveFaqEdit(null) : helpAdmin.setActiveFaqEdit(question.id);
     }
+    const pText = answer?.text ?? 'no answer added yet'; 
 
     useEffect(() => {
         if (helpAdmin.activeFaqEdit === question.id) {
@@ -32,7 +33,7 @@ const Faq = observer(({question, answer, onAddRelatedFaqClick}) => {
                 </div>
                 <div className='adminFaq__answer-cont'>
                     <h3>Answer(first two lines):</h3>
-                    <p>{answer?.text || 'no answer added yet'}</p>
+                    <p dangerouslySetInnerHTML={{ __html: pText}}></p>
                 </div>
                 <div className='adminFaq__delete-cont about-blocks__card-del'>
                     <button onClick={deleteFaq.bind(this, answer.answerId, helpAdmin)}>X</button> 

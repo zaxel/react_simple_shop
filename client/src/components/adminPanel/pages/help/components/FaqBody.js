@@ -5,6 +5,7 @@ import { Context } from '../../../../..';
 import { changeFaqAnswer, changeFaqQuestion, fetchRelatedRelations } from '../../../../../utils/staticPages/helpPage';
 import AdminTextArea from '../../../commonComponents/AdminTextArea';
 import AdminTextInput from '../../../commonComponents/AdminTextInput';
+import AdminWysiwyg from '../../../commonComponents/AdminWysiwyg';
 import Related from './Related'; 
 
 const FaqBody = observer(({ question, answer, onAddRelatedFaqClick }) => {
@@ -41,7 +42,7 @@ const FaqBody = observer(({ question, answer, onAddRelatedFaqClick }) => {
                 <AdminTextInput inputTitle={'Answer Title'} inputText={answer?.title || 'no answer title added yet'} cb={changeAnswerTitleCarried} />
             </div>
             <div className='about-blocks__body-text'>
-                <AdminTextArea areaTitle={'Answer Text'} areaText={answer?.text || 'no answer body added yet'} cb={changeAnswerTextCarried} />
+                <AdminWysiwyg areaTitle={'Answer Text'} areaText={answer?.text || 'no answer body added yet'} cb={changeAnswerTextCarried} />
             </div>
             <div className='about-blocks__body-battons'>
                 <h3>Related FAQ's:</h3>

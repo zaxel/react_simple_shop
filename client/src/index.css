@@ -1853,7 +1853,8 @@ button:active {
 }
 
 .admin__input-edit,
-.admin__area-edit {
+.admin__area-edit,
+.admin__wysiwyg-edit{
     background-color: #F3F3F3;
     border-radius: 8px;
     padding: 30px;
@@ -1861,6 +1862,7 @@ button:active {
 
 .admin__input-container,
 .admin__area-container,
+.admin__wysiwyg-container,
 .admin__image-container {
     display: flex;
     align-items: center;
@@ -1869,17 +1871,20 @@ button:active {
 
 .admin__input-container .td-spinner,
 .admin__area-container .td-spinner,
+.admin__wysiwyg-container .td-spinner,
 .admin__image-container .td-spinner {
     margin: 0 auto;
 }
 
 .admin__input-container h2,
+.admin__wysiwyg-container h2,
 .admin__area-container h2 {
     font-weight: 500;
     text-transform: uppercase;
 }
 
 .admin__input-container>div:first-of-type:not(.td-spinner),
+.admin__wysiwyg-container>div:first-of-type:not(.td-spinner),
 .admin__area-container>div:first-of-type:not(.td-spinner) {
     line-height: 1.5;
     margin-left: 12px;
@@ -1888,6 +1893,7 @@ button:active {
 }
 
 .admin__input-container button,
+.admin__wysiwyg-container button,
 .admin__area-container button {
     border: 1px solid #333;
     width: 40px;
@@ -1903,6 +1909,7 @@ button:active {
 
 .admin__input-container button:hover,
 .admin__area-container button:hover,
+.admin__wysiwyg-container button:hover,
 .admin__image-container button:hover {
     opacity: .6;
 }
@@ -2020,6 +2027,7 @@ button:active {
     position: relative;
 }
 .admin__input-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
+.admin__wysiwyg-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
 .admin__area-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
 .image-admin__img:hover::before {
     content: 'EDIT';
@@ -2038,6 +2046,7 @@ button:active {
     border-radius: 5px;
 }
 .admin__input-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
+.admin__wysiwyg-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
 .admin__area-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
 .image-admin__img:hover::after {
     content: '';
@@ -3029,6 +3038,30 @@ button:active {
 }
 .adminFaq__modal-related.blocks-modal .modal-body ul li>div{
     flex: 0 0 60%;
+}
+.admin__wysiwyg-edit{
+    min-height: 30vw;
+}
+.admin__wysiwyg-container{
+    height: 100%;
+}
+.admin__wysiwyg-container>div{
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+}
+.admin__wysiwyg-container .quill{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+.admin__wysiwyg-container .ql-container{
+    height: 87%;
+}
+.admin__wysiwyg-container .td-spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /**admin help faq end**/
 /**admin help categories start**/

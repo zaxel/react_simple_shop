@@ -182,6 +182,12 @@ video {
     *zoom: 1;
     max-width: 100%;
 }
+strong{
+    font-weight: 500;
+}
+em{
+    font-style: italic;
+}
 
 
 /**
