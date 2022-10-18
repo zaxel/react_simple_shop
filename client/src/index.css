@@ -3040,23 +3040,23 @@ button:active {
     flex: 0 0 60%;
 }
 .admin__wysiwyg-edit{
-    min-height: 30vw;
+    min-height: 16vw;
 }
 .admin__wysiwyg-container{
-    min-height: 25vw;
+    min-height: 14vw;
 }
 .admin__wysiwyg-container>div{
-    min-height: 25vw;
+    min-height: 13vw;
     width: 100%;
     padding: 8px;
 }
 .admin__wysiwyg-container .quill{
-    /* height: 100%; */
     width: 100%;
     background-color: white;
 }
 .admin__wysiwyg-container .ql-container{
-    height: 87%;
+    /* height: 73%; */
+    height: auto;
 }
 .admin__wysiwyg-container .td-spinner{
     display: flex;

@@ -24,7 +24,8 @@ const AdminWysiwyg = ({ areaTitle, areaText, cb }) => {
         setEdit(true);
     }
     const onInputBlur = (e, source) => {
-        if (source === 'silent') return;
+        // if (source === 'silent') return;
+        
         if (!(e.relatedTarget === buttonRef.current)) {
             setEdit(false);
             setInput(inputLast.current);
@@ -65,7 +66,7 @@ const AdminWysiwyg = ({ areaTitle, areaText, cb }) => {
                         {!edit
                             ? <div dangerouslySetInnerHTML={{ __html: input }} onClick={onDivClickHandler}></div>
                             : <div className='display-flex'>
-                                <ReactQuill theme="snow" ref={inputRef} autoFocus value={input} onChange={setInput} onBlur={onInputBlur} />
+                                <ReactQuill theme="snow" ref={inputRef} value={input} onChange={setInput} />
                                 <button ref={buttonRef} onClick={onButtonClickHandler} onBlur={onButtonBlurHandler}>V</button>
                             </div>}
                     </>}
