@@ -1,10 +1,11 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
+﻿import React, { useContext, useRef, useState } from 'react';
+import ReactQuill from 'react-quill';
 import { Context } from '../../../../..';
 import { createNewFaq } from '../../../../../utils/staticPages/helpPage';
 
 const AddNewFaq = () => {
     const {helpAdmin} = useContext(Context);
-
+    const wysiwygRef = useRef(null);
 
     const [question, setQuestion] = useState('');
     const [answerTitle, setAnswerTitle] = useState('');
@@ -48,7 +49,9 @@ const AddNewFaq = () => {
                 </div>
                 <div className='blocks-form__text'>
                     <h5>answer description:</h5>
-                    <textarea placeholder='FAQ answer body' value={answerText} onChange={(e)=>setAnswerText(e.currentTarget.value)}/>
+                    <ReactQuill theme="snow" ref={wysiwygRef} autoFocus value={answerText} onChange={setAnswerText}/>
+                    {/* <AdminWysiwyg areaTitle={'Answer Text'} areaText={answer?.text || 'no answer body added yet'} cb={changeAnswerTextCarried} /> */}
+                    {/* <textarea placeholder='FAQ answer body' value={answerText} onChange={(e)=>setAnswerText(e.currentTarget.value)}/> */}
                 </div>
                 <button className='block-form__new-block' onClick={onFormConfirm}>add new FAQ</button>
             </form>

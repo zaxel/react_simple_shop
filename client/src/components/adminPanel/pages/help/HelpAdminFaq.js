@@ -15,19 +15,21 @@ const HelpAdminFaq = observer(() => {
 
     const onAddRelatedFaqClick = async () => {
         setAddFaqVisible(true);
-        
+
     }
 
     useEffect(() => {
         fetchAllFaqs(helpAdmin);
-        // fetchBtnsModal(aboutPage);
         helpAdmin.setActiveFaqEdit(null);
     }, [])
 
-    const faqs = helpAdmin.questions.slice()
-        .sort((a,b)=>a.order_id-b.order_id)
-        .map(faq=><Faq key={faq.id} question={faq} answer={helpAdmin.answers.find(answer=>answer.answerId === faq.infoHelpAnswerId)} onAddRelatedFaqClick={onAddRelatedFaqClick}/>);
-        
+    let faqs = <div>No available faq's</div>;
+
+    if (helpAdmin.questions.length) {
+        faqs = helpAdmin.questions.slice()
+            .sort((a, b) => a.order_id - b.order_id)
+            .map(faq => <Faq key={faq.id} question={faq} answer={helpAdmin.answers.find(answer => answer.answerId === faq.infoHelpAnswerId)} onAddRelatedFaqClick={onAddRelatedFaqClick} />)
+    }
 
     if (helpAdmin.loading) {
         return (
@@ -51,7 +53,7 @@ const HelpAdminFaq = observer(() => {
                     </div> :
                     <AddNewFaq />}
             </div>
-            <AddRelatedFaqModal show={addFaqVisible} onHide={() => setAddFaqVisible(false)}/>
+            <AddRelatedFaqModal show={addFaqVisible} onHide={() => setAddFaqVisible(false)} />
         </div>
     );
 });
