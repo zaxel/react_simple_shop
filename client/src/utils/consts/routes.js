@@ -41,7 +41,6 @@ export const ADMIN_HELP_ROUTE = BASE_ROUTE+'/admin/page/help';
 
 export const ADMIN_HELP_FAQ_ROUTE = BASE_ROUTE+'/admin/page/help-faq';
 export const ADMIN_HELP_CAT_ROUTE = BASE_ROUTE+'/admin/page/help-cat';
-export const ADMIN_HELP_MANAGER_ROUTE = BASE_ROUTE+'/admin/page/help-manager';
 
 export const ADMIN_ABOUT_ROUTE = BASE_ROUTE+'/admin/page/about';
 

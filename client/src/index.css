@@ -2970,6 +2970,9 @@ button:active {
     width: 100%;
     height: 32px;
 }
+.adminFaq__answer-cont img{
+    max-width: 50%;
+}
 .adminFaq__related-cont{
     width: 100%;
     display: flex;
