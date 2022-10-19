@@ -1,9 +1,19 @@
-﻿import React from 'react';
+﻿import { observer } from 'mobx-react-lite';
+import React, { useContext } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Context } from '../..';
+import { HELP_FAQ_ROUTE } from '../../utils/consts/routes';
 
-const Card = ({ icon, link, title, id, faqs, banner }) => {
-    const questInCategory = 4;
-    // const faqsList = faqs.filter(el => el.id < questInCategory).map(faq => <li key={faq.id}><Link to={faq.link}>{faq.question}</Link></li>);
+const Card = observer(({ id, link, title, icon, banner }) => {
+    const { helpPage } = useContext(Context);
+
+    const faqsList = helpPage.starterQuestions
+        .slice()
+        .filter(el => el.infoHelpCategoryId === id)
+        .sort((a, b) => a.order_id - b.order_id)
+        .map(faq => <li key={faq.id}><Link to={HELP_FAQ_ROUTE}>{faq.question}</Link></li>);
+
     return (
         <div className='faq-cont__card faq-card'>
             <div className='faq-card__title'>
@@ -13,13 +23,18 @@ const Card = ({ icon, link, title, id, faqs, banner }) => {
                 <Link to={link}>{title}</Link>
             </div>
             <ul className='faq-card__links'>
-                {'faqsList'}
+                {!faqsList.length 
+                    ? (<div className="spinner">
+                            <Spinner animation="border" />
+                        </div>)
+                    : faqsList  
+                }
             </ul>
             <div className='faq-card__all'>
                 <Link to={link}>View All</Link>
             </div>
         </div>
     );
-};
+});
 
 export default Card;

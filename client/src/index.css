@@ -643,6 +643,10 @@ button:active {
 .faq-card__links {
     padding: 10px;
 }
+.faq-card__links>.spinner {
+    width: auto;
+    height: auto;
+}
 
 .faq-card__links li {
     padding: 12px;

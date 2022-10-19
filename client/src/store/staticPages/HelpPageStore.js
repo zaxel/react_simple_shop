@@ -11,6 +11,7 @@ export default class HelpPageStore{
         this._contactHero = null;
 
         this._categories = [];
+        this._starterQuestions = [];
         
         makeAutoObservable(this);
     }
@@ -48,7 +49,9 @@ export default class HelpPageStore{
     
     setCategories(cat){
         this._categories = cat;
-        console.log(this._categories)
+    }
+    setStarterQuestions({questions}){
+        this._starterQuestions = questions;
     }
 
 
@@ -80,4 +83,8 @@ export default class HelpPageStore{
     get categories(){
         return this._categories;
     }
+    get starterQuestions(){
+        return this._starterQuestions;
+    }
+   
 }

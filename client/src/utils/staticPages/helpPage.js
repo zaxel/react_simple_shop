@@ -72,9 +72,22 @@ export const fetchFaqQuestions = async (currentStore) => {
     console.log(e)
   }
 }
-export const fetchCategoryFaqQuestions = async (currentStore, categoryId) => {
+export const fetchStarterQuestions = async (currentStore, categories) => {
   try {
-    const fetchedData = await fetchQuestions(categoryId);
+    const categoryId = null; 
+    const page = 1; 
+    const limit = 3;
+    const fetchedData = await fetchQuestions(categoryId, page, limit, categories);
+    const setterName = 'setStarterQuestions';
+    return setStoreField(currentStore, setterName, fetchedData);
+    
+  } catch (e) {
+    console.log(e)
+  }
+}
+export const fetchCategoryFaqQuestions = async (currentStore, categoryId, page, limit, categories) => {
+  try {
+    const fetchedData = await fetchQuestions(categoryId, page, limit, categories);
     const setterName = 'setQuestions';
     return setStoreField(currentStore, setterName, fetchedData);
   } catch (e) {

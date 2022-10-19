@@ -6,14 +6,23 @@ import { helpCategories } from '../../../utils/consts/helpPageData';
 import { popularFaqs } from '../../../utils/consts/helpPageData';
 import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
-import { fetchPage, fetchFaqCategory } from '../../../utils/staticPages/helpPage';
+import { fetchPage, fetchFaqCategory, fetchStarterQuestions } from '../../../utils/staticPages/helpPage';
 
 const HelpMain = () => {
     const {helpPage} = useContext(Context);
 
+    const getStarterQuestions = () => {
+        const categoriesIds = helpPage.categories.map(cat=>cat.id);
+        fetchStarterQuestions(helpPage, JSON.stringify(categoriesIds));
+    }
+
     useEffect(()=>{
-        fetchPage(helpPage);
-        fetchFaqCategory(helpPage);
+        (async()=>{
+            fetchPage(helpPage);
+            await fetchFaqCategory(helpPage);
+            getStarterQuestions();
+        })()
+        
     }, [])
 
     if (helpPage.loading) {
