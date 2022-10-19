@@ -17,40 +17,80 @@ class HelpService {
     getFaqs = async () => {
         let questionsData = await InfoHelpQuestions.findAll();
         let answersData = await InfoHelpAnswers.findAll();
-        const questions = questionsData.map(el=>new HelpFaqDto({question: el}));
-        const answers = answersData.map(el=>new HelpFaqDto({answer: el}));
-        return { questions, answers };  
+        const questions = questionsData.map(el => new HelpFaqDto({ question: el }));
+        const answers = answersData.map(el => new HelpFaqDto({ answer: el }));
+        return { questions, answers };
     }
-    getQuestion = async ({categoryId}) => {
+    getQuestion = async ({ categoryId, page, limit, categories }) => {
+        const startPage = process.env.START_FAQS_PAGE;
+        const defaultLimit = null;
+        const sortBy = 'order_id';
+        const sortDirection = 'ASC';
+        let cat = null;
         let param = null;
-        if(categoryId) param = {infoHelpCategoryId: categoryId}; 
-        let questionsData = await InfoHelpQuestions.findAll({
-            where: param
-        });
-        const questions = questionsData.map(el=>new HelpFaqDto({question: el}));
-        return { questions };  
+
+        if (categoryId)
+            param = { infoHelpCategoryId: categoryId };
+
+        page = page || startPage;
+        limit = limit || defaultLimit;
+        let offset = page * limit - limit;
+
+        if (categories) {
+            cat = JSON.parse(categories);
+            let questions = [];
+
+            let faqs = await Promise.all(cat.map(async (faqId) => await InfoHelpQuestions.findAll({
+                where: { infoHelpCategoryId: faqId },
+                limit,
+                offset,
+                order: [
+                    [sortBy, sortDirection],
+                ]
+            })
+            ));
+
+            faqs.forEach(categoryFaqs => {
+                const currentFaqs = categoryFaqs.map(faq => {
+                    return new HelpFaqDto({ question: faq })
+                })
+                questions = [...questions, ...currentFaqs]
+            });
+            return { questions };
+        } else {
+            let questionsData = await InfoHelpQuestions.findAll({
+                where: param,
+                limit,
+                offset,
+                order: [
+                    [sortBy, sortDirection],
+                ]
+            });
+            const questions = questionsData.map(el => new HelpFaqDto({ question: el }));
+            return { questions };
+        }
     }
     createFaq = async ({ question, answerTitle, answerText }) => {
         const answer = await InfoHelpAnswers.create({ title: answerTitle, text: answerText });
         question = await InfoHelpQuestions.create({ question, infoHelpAnswerId: answer.id });
-        const faq = new HelpFaqDto({answer, question});
-        return faq; 
+        const faq = new HelpFaqDto({ answer, question });
+        return faq;
     }
     updateQuestion = async ({ id, question, catNewFaqData }) => {
-        const field = question ? {question} : {infoHelpCategoryId: catNewFaqData.infoHelpCategoryId, order_id: catNewFaqData.order_id}
+        const field = question ? { question } : { infoHelpCategoryId: catNewFaqData.infoHelpCategoryId, order_id: catNewFaqData.order_id }
         const updatedData = await InfoHelpQuestions.update(field, {
             where: { id }
         });
         return updatedData;
     }
     resetQuestionOrderByCatId = async ({ categoryId }) => {
-        const updatedData = await InfoHelpQuestions.update({order_id: null}, {
+        const updatedData = await InfoHelpQuestions.update({ order_id: null }, {
             where: { infoHelpCategoryId: categoryId }
         });
         return updatedData;
     }
     updateAnswer = async ({ id, text, title }) => {
-        const field = text ? {text} : {title}
+        const field = text ? { text } : { title }
 
         const updatedData = await InfoHelpAnswers.update(field, {
             where: { id }
@@ -68,7 +108,7 @@ class HelpService {
             where: { faq_id: id }
         });
 
-        return {deletedAnswer, deletedQuestion};
+        return { deletedAnswer, deletedQuestion };
     }
     setFaqPosition = async ({ positions, categoryId }) => {
         const categories = await InfoHelpQuestions.bulkCreate(positions,
@@ -77,40 +117,40 @@ class HelpService {
                 where: { infoHelpCategoryId: categoryId }
             }
         );
-        return categories; 
+        return categories;
     }
-    
-    getCategory = async ({id}) => {
+
+    getCategory = async ({ id }) => {
         let param = null;
-        if(id) param = {id}; 
+        if (id) param = { id };
         let cat = await InfoHelpCategories.findAll({
             where: param
         })
-        const data = cat.map(el=>new HelpCatDto(el));
+        const data = cat.map(el => new HelpCatDto(el));
         return data;
     }
     createCategory = async ({ title, bannerData, iconData, link, order_id }) => {
         let banner = bannerData;
         let icon = iconData;
-        if(banner)
+        if (banner)
             banner = await fileService.imageResolve(bannerData);
-        if(icon)
+        if (icon)
             icon = await fileService.imageResolve(iconData);
 
         const cat = await InfoHelpCategories.create({ title, banner, icon, link, order_id });
         const data = new HelpCatDto(cat);
-        return data; 
+        return data;
     }
-    setCategoryPosition = async ({catPositions}) => {
+    setCategoryPosition = async ({ catPositions }) => {
         const categories = await InfoHelpCategories.bulkCreate(catPositions,
             {
                 updateOnDuplicate: ["order_id"],
             }
         );
-        return categories; 
+        return categories;
     }
     updateCategory = async ({ id, link, title }) => {
-        const field = link ? {link} : {title}
+        const field = link ? { link } : { title }
         const updatedData = await InfoHelpCategories.update(field, {
             where: { id }
         });
@@ -121,33 +161,33 @@ class HelpService {
             throw new Error('No image received!')
         }
         let fileName = await fileService.imageResolve(img);
-        const updatedData = await InfoHelpCategories.update({[imgDbCollName]: fileName}, {
+        const updatedData = await InfoHelpCategories.update({ [imgDbCollName]: fileName }, {
             where: { id }
         });
-        return {id, imgDbCollName, fileName};
+        return { id, imgDbCollName, fileName };
     }
-    deleteCategory = async ({id}) => {
+    deleteCategory = async ({ id }) => {
         const deletedCat = await InfoHelpCategories.destroy({
             where: { id }
         })
-        return deletedCat; 
-    } 
-    
-    getRelatedFaq = async ({id}) => {
+        return deletedCat;
+    }
+
+    getRelatedFaq = async ({ id }) => {
         const related = await InfoHelpRelatedQuestions.findAll({
-            where: {faq_id: id}
+            where: { faq_id: id }
         })
-        const data = related.map(el=>new HelpRelatedDto(el));
+        const data = related.map(el => new HelpRelatedDto(el));
         return data;
     }
-    addRelatedFaq = async ({faq_id, infoHelpQuestionId}) => {
-        const createdRelation = await InfoHelpRelatedQuestions.create({faq_id, infoHelpQuestionId});
+    addRelatedFaq = async ({ faq_id, infoHelpQuestionId }) => {
+        const createdRelation = await InfoHelpRelatedQuestions.create({ faq_id, infoHelpQuestionId });
         const data = new HelpRelatedDto(createdRelation);
         return data;
     }
-    delRelatedFaq = async ({faq_id, infoHelpQuestionId}) => {
+    delRelatedFaq = async ({ faq_id, infoHelpQuestionId }) => {
         const deletedRelation = await InfoHelpRelatedQuestions.destroy({
-            where: {[Op.and]: [{ faq_id }, { infoHelpQuestionId }]}
+            where: { [Op.and]: [{ faq_id }, { infoHelpQuestionId }] }
         });
         return deletedRelation;
     }

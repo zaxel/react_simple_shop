@@ -9,6 +9,8 @@ export default class HelpPageStore{
         this._pageHero = null;
         this._contactTitle = '';
         this._contactHero = null;
+
+        this._categories = [];
         
         makeAutoObservable(this);
     }
@@ -41,9 +43,15 @@ export default class HelpPageStore{
         this.setPageHero(img[0]);
         this.setContactTitle(title[1]);
         this.setContactHero(img[1]);
-
-        console.log(this._contactHero)
     }
+
+    
+    setCategories(cat){
+        this._categories = cat;
+        console.log(this._categories)
+    }
+
+
 
     get loading(){
         return this._loading;
@@ -65,5 +73,11 @@ export default class HelpPageStore{
     }
     get contactHero(){
         return this._contactHero;
+    }
+    
+    
+    
+    get categories(){
+        return this._categories;
     }
 }

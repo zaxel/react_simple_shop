@@ -34,6 +34,8 @@ router.put('/question/',
 
 router.get('/question/',
     query('categoryId').optional().isNumeric(),
+    query('page').optional().isNumeric(),
+    query('limit').optional().isNumeric(),
     helpController.getQuestion);
 router.delete('/faq/',
     checkRole('ADMIN'),
