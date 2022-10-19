@@ -530,6 +530,9 @@ button:active {
     padding: 4vw;
 }
 
+.help__container>.spinner {
+    height: 65vh;
+}
 .help__banner {
     margin-bottom: 30px;
     position: relative;
@@ -548,7 +551,7 @@ button:active {
 .help-banner {
     width: 100%;
     height: 30vh;
-    background: url('./assets/help/help_banner_lrg.avif') center/cover no-repeat;
+    background: center/cover no-repeat;
 }
 
 .help-banner h3 {
@@ -2197,7 +2200,6 @@ button:active {
 }
 .about-buttons__title{
     flex: 0 1 250px;
-    /* max-width: 250px; */
 }
 .about-buttons__title .admin__input-edit{
     background-color: white;
