@@ -1,9 +1,11 @@
-﻿import React from 'react';
-import { helpCategories } from '../../../utils/consts/helpPageData';
+﻿import React, { useContext } from 'react';
+import { Context } from '../../..';
 import Topic from './Topic';
 
 const Topics = () => {
-    const topics = helpCategories.map(card => <Topic key={card.id} {...card} />)
+    const {helpPage} = useContext(Context);
+    
+    const topics = helpPage.categories.map(card => <Topic key={card.id} {...card} />)
     return (
         <>
             

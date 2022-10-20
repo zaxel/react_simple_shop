@@ -36,7 +36,7 @@ const Faq = observer(({question, answer, onAddRelatedFaqClick}) => {
                     <p dangerouslySetInnerHTML={{ __html: pText}}></p>
                 </div>
                 <div className='adminFaq__delete-cont about-blocks__card-del'>
-                    <button onClick={deleteFaq.bind(this, answer.answerId, helpAdmin)}>X</button> 
+                    <button onClick={deleteFaq.bind(this, answer?.answerId, helpAdmin)}>X</button> 
                 </div>
                 <div className='adminFaq__question-button about-blocks__card-button'>
                     <button onClick={changeStyle} className={arrowStyle}></button>

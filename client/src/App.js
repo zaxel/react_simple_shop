@@ -11,10 +11,11 @@ import { setCartFromLocalStore } from "./utils/cart/setLocalStoreCart";
 import Footer from "./components/Footer";
 import ShopToolTip from "./components/ShopToolTip";
 import { isActivated } from "./utils/check/isActivated";
+import { fetchFaqCategory } from "./utils/staticPages/helpPage";
 
 
 const App = observer(() => {
-  const { user, cart } = useContext(Context);
+  const { user, cart, helpPage } = useContext(Context);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const App = observer(() => {
         await setUserIfAuth(user);
         await setCartId(cart, user);
         await fetchSetCart(user, cart);
+        // await fetchFaqCategory(helpPage); 
         cart.setCartTotal();
         isActivated(user);
       } catch (e) {
@@ -32,7 +34,7 @@ const App = observer(() => {
         setLoading(false)
       }
     })()
-  }, [])
+  }, []) 
 
   if (loading) {
     return (

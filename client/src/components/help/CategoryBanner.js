@@ -3,8 +3,8 @@
 const CategoryBanner = ({title, banner}) => {
    
     return (
-        <div className='help__cat-banner'>
-            <img src={banner} alt='help category hero'/>
+        <div className='help__cat-banner'> 
+            <img src={process.env.REACT_APP_API_URL + banner} alt='help category hero'/> 
             <h3>{title}</h3>
         </div>
     );

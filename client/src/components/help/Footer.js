@@ -4,14 +4,15 @@ import { ABOUT_ROUTE } from '../../utils/consts/routes';
 import contact_banner from "../../assets/help/contact_us.avif"
 import FooterCard from './FooterCard';
 
-const Footer = ({popularFaqs, helpCategories}) => {
-    const cards = popularFaqs.map(el=><FooterCard key={helpCategories[el.category].faqs[el.faq_id].question} {...helpCategories[el.category].faqs[el.faq_id]}/>)
+const Footer = () => {
+// const Footer = ({popularFaqs, helpCategories}) => {
+    // const cards = popularFaqs.map(el=><FooterCard key={helpCategories[el.category].faqs[el.faq_id].question} {...helpCategories[el.category].faqs[el.faq_id]}/>)
     return (
         <div className='help__bottom-cont'>
                     <div className='popular-cont'>
                         <h3>popular faqs</h3>
                         <ul className='popular-cont__cards'>
-                            {cards}
+                            {'cards'}
                         </ul>
                     </div>
                     <div className='help__contact'>

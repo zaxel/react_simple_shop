@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Context } from '../..';
-import { HELP_FAQ_ROUTE } from '../../utils/consts/routes';
+import { HELP_FAQ_ROUTE, HELP_CAT_ROUTE, BASE_ROUTE } from '../../utils/consts/routes';
 
 const Card = observer(({ id, link, title, icon, banner }) => {
-    const { helpPage } = useContext(Context);
+    const { helpPage } = useContext(Context); 
 
     const faqsList = helpPage.starterQuestions
         .slice()
@@ -20,7 +20,7 @@ const Card = observer(({ id, link, title, icon, banner }) => {
                 <div className='faq-card__icon'>
                     <img src={process.env.REACT_APP_API_URL + icon} alt="faq icon" />
                 </div>
-                <Link to={link}>{title}</Link>
+                <Link to={HELP_CAT_ROUTE + link}>{title}</Link> 
             </div>
             <ul className='faq-card__links'>
                 {!faqsList.length 
@@ -31,7 +31,7 @@ const Card = observer(({ id, link, title, icon, banner }) => {
                 }
             </ul>
             <div className='faq-card__all'>
-                <Link to={link}>View All</Link>
+                <Link to={HELP_CAT_ROUTE + link}>View All</Link> 
             </div>
         </div>
     );

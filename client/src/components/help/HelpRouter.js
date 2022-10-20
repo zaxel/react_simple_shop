@@ -4,6 +4,7 @@ import { helpRoutes } from '../../routes';
 import HelpMain from './subPages/HelpMain';
 
 const HelpRouter = () => {
+
     const helpComponents = helpRoutes.map(({ path, Component }) => {
         return <Route key={path} path={path} element={
             <Component path={path}/>

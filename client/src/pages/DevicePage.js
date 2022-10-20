@@ -16,7 +16,6 @@ const DevicePage = () => {
   let {id} = useParams();
     useEffect(()=>{
         fetchSingleDevice(id).then(data=>{
-            console.log(data)
             setDevice(data); 
         }).catch(err => {
             console.log(err.message)

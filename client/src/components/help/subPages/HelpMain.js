@@ -25,6 +25,8 @@ const HelpMain = () => {
         
     }, [])
 
+    console.log('help main') 
+
     if (helpPage.loading) {
         return( <div className="spinner">
             <Spinner animation="border" />
@@ -34,7 +36,7 @@ const HelpMain = () => {
         <>
             <Banner />
             <Cards />
-            <Footer popularFaqs={popularFaqs} helpCategories={helpCategories}/>
+            <Footer popularFaqs={'popularFaqs'} helpCategories={'helpCategories'}/>
         </>
     );
 };
