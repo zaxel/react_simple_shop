@@ -6,6 +6,7 @@ import { fetchSingleDevice } from '../http/deviceAPI';
 import { Spinner } from 'react-bootstrap';
 import { addToCart } from '../utils/cart/addToCart';
 import { Context } from '..';
+import ErrorPage from './ErrorPage';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({});
@@ -15,9 +16,16 @@ const DevicePage = () => {
   let {id} = useParams();
     useEffect(()=>{
         fetchSingleDevice(id).then(data=>{
+            console.log(data)
             setDevice(data); 
+        }).catch(err => {
+            console.log(err.message)
+            setDevice('error')
         })
     }, [])
+
+    if(device === null || device === 'error') 
+        return <ErrorPage/>
 
     return (
         <div className='device'>
