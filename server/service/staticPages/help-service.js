@@ -1,10 +1,12 @@
-﻿const { InfoPages, InfoHelpQuestions, InfoHelpAnswers, InfoHelpCategories, InfoHelpRelatedQuestions } = require('../../models/models');
+﻿const { InfoPages, InfoHelpQuestions, InfoHelpAnswers, InfoHelpCategories, InfoHelpRelatedQuestions,
+    InfoHelpPopular } = require('../../models/models');
 const { Op } = require("sequelize");
 const fileService = require("../file/file-service");
 const PageDto = require('../../dtos/static-page-dto.js');
 const HelpFaqDto = require('../../dtos/static-page-help-faq-dto');
 const HelpCatDto = require('../../dtos/static-page-help-cat-dto');
 const HelpRelatedDto = require('../../dtos/static-page-help-related-dto');
+const HelpPopularDto = require('../../dtos/static-page-help-popular-dto');
 
 class HelpService {
     getPage = async ({ name }) => {
@@ -98,6 +100,8 @@ class HelpService {
         return updatedData;
     }
     deleteFaq = async ({ id }) => {
+        const question = await InfoHelpQuestions.findOne({where: {infoHelpAnswerId: id}});
+
         const deletedQuestion = await InfoHelpQuestions.destroy({
             where: { infoHelpAnswerId: id }
         });
@@ -107,6 +111,10 @@ class HelpService {
         const deletedRelation = await InfoHelpRelatedQuestions.destroy({
             where: { faq_id: id }
         });
+
+        const deletedPopular = await InfoHelpPopular.destroy({
+            where: { infoHelpQuestionId: question.id }
+        })
 
         return { deletedAnswer, deletedQuestion };
     }
@@ -190,6 +198,25 @@ class HelpService {
             where: { [Op.and]: [{ faq_id }, { infoHelpQuestionId }] }
         });
         return deletedRelation;
+    }
+
+    getPopular = async () => {
+        let popularIdsData = await InfoHelpPopular.findAll();
+        const id = popularIdsData.map(el => el.infoHelpQuestionId);
+        const popularData = await InfoHelpQuestions.findAll({where: {id}})
+        const popular = popularData.map(el => new HelpFaqDto({ question: el }));
+        return { popular };
+    }
+    createPopular = async ({ infoHelpQuestionId }) => {
+        const data = await InfoHelpPopular.create({ infoHelpQuestionId });
+        const newPopular = new HelpPopularDto(data);
+        return { newPopular };
+    }
+    deletePopular = async ({ id }) => {
+        const deletedPopular = await InfoHelpPopular.destroy({
+            where: { id }
+        })
+        return deletedPopular;
     }
 }
 

@@ -228,6 +228,28 @@ class HelpController {
             next(ApiError.forbidden(e.message));
         }
     }
+
+    async getPopular(req, res, next) {
+        try {
+            const data = await helpService.getPopular(); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async createPopular(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id } = req.body;
+            const data = await helpService.createPopular({infoHelpQuestionId: id});
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message)); 
+        }
+    }
 }
 
 module.exports = new HelpController();

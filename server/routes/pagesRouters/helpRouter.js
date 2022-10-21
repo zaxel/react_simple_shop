@@ -96,4 +96,11 @@ router.delete('/related/',
     body('infoHelpQuestionId').isNumeric(),
     helpController.deleteRelated); 
 
+
+router.get('/popular/', helpController.getPopular); 
+router.post('/popular/',
+    // checkRole(['ADMIN', 'MODERATOR']),
+    body('id').isNumeric(),
+    helpController.createPopular);
+
 module.exports = router;
