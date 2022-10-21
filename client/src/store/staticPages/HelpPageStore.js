@@ -12,6 +12,10 @@ export default class HelpPageStore{
 
         this._categories = [];
         this._starterQuestions = [];
+        this._questions = [];
+
+        this._faqsPage = 1;
+        this._totalFaqs = 0;
         
         makeAutoObservable(this);
     }
@@ -53,6 +57,21 @@ export default class HelpPageStore{
     setStarterQuestions({questions}){
         this._starterQuestions = questions;
     }
+    setQuestions({questions, count}){
+        this._totalFaqs = count;
+        this._questions = [...this._questions, ...questions]; 
+    }
+    resetQuestions(){
+        this._totalFaqs = 0;
+        this._faqsPage = 1; 
+        this._questions = []; 
+    }
+    setFaqsPage(pageNumber){
+        this._faqsPage = pageNumber;
+    }
+    setTotalFaqs(totalNumber){
+        this._totalFaqs = totalNumber;
+    }
 
 
 
@@ -86,5 +105,14 @@ export default class HelpPageStore{
     get starterQuestions(){
         return this._starterQuestions;
     }
+    get questions(){
+        return this._questions;
+    }
+    get faqsPage(){
+        return this._faqsPage; 
+    }
+    get totalFaqs(){
+        return this._totalFaqs; 
+    } 
    
 }

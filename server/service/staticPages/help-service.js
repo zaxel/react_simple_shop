@@ -58,7 +58,7 @@ class HelpService {
             });
             return { questions };
         } else {
-            let questionsData = await InfoHelpQuestions.findAll({
+            let questionsData = await InfoHelpQuestions.findAndCountAll({
                 where: param,
                 limit,
                 offset,
@@ -66,8 +66,8 @@ class HelpService {
                     [sortBy, sortDirection],
                 ]
             });
-            const questions = questionsData.map(el => new HelpFaqDto({ question: el }));
-            return { questions };
+            const questions = questionsData.rows.map(el => new HelpFaqDto({ question: el }));
+            return { questions, count: questionsData.count };
         }
     }
     createFaq = async ({ question, answerTitle, answerText }) => {
