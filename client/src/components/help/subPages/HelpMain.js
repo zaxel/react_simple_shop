@@ -6,9 +6,9 @@ import { helpCategories } from '../../../utils/consts/helpPageData';
 import { popularFaqs } from '../../../utils/consts/helpPageData';
 import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
-import { fetchPage, fetchFaqCategory, fetchStarterQuestions } from '../../../utils/staticPages/helpPage';
+import { fetchPage, fetchFaqCategory, fetchStarterQuestions, fetchPopularFaqs } from '../../../utils/staticPages/helpPage';
 
-const HelpMain = () => {
+const HelpMain = () => { 
     const {helpPage} = useContext(Context);
 
     const getStarterQuestions = () => {
@@ -19,6 +19,7 @@ const HelpMain = () => {
     useEffect(()=>{
         (async()=>{
             fetchPage(helpPage);
+            fetchPopularFaqs(helpPage);
             await fetchFaqCategory(helpPage);
             getStarterQuestions();
         })()
@@ -34,7 +35,7 @@ const HelpMain = () => {
         <>
             <Banner />
             <Cards />
-            <Footer popularFaqs={'popularFaqs'} helpCategories={'helpCategories'}/>
+            <Footer />
         </>
     );
 };

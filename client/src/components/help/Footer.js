@@ -9,19 +9,21 @@ import { observer } from 'mobx-react-lite';
 const Footer = observer(() => {
     const { helpPage } = useContext(Context);
     const [contactUsHeroSrc, setContactUsHeroSrc] = useState(null);
-
+    let cards = [];
     useEffect(()=>{
         if(helpPage.contactHero)
             setContactUsHeroSrc(process.env.REACT_APP_API_URL + helpPage.contactHero)
     }, [helpPage.contactHero])
 // const Footer = ({popularFaqs, helpCategories}) => {
     // const cards = popularFaqs.map(el=><FooterCard key={helpCategories[el.category].faqs[el.faq_id].question} {...helpCategories[el.category].faqs[el.faq_id]}/>)
+    if(helpPage.faqPopular.length)
+        cards = helpPage.faqPopular.map(faq=><FooterCard key={faq.id} {...faq}/>)
     return (
         <div className='help__bottom-cont'>
                     <div className='popular-cont'>
                         <h3>popular faqs</h3>
                         <ul className='popular-cont__cards'>
-                            {'cards'}
+                            {cards}
                         </ul>
                     </div>
                     <div className='help__contact'>

@@ -16,6 +16,8 @@ export default class HelpPageStore{
 
         this._faqsPage = 1;
         this._totalFaqs = 0;
+
+        this._faqPopular = [];
         
         makeAutoObservable(this);
     }
@@ -51,7 +53,7 @@ export default class HelpPageStore{
     }
 
     
-    setCategories(cat){
+    setCategories(cat){ 
         this._categories = cat;
     }
     setStarterQuestions({questions}){
@@ -71,6 +73,10 @@ export default class HelpPageStore{
     }
     setTotalFaqs(totalNumber){
         this._totalFaqs = totalNumber;
+    }
+    setFaqPopular({popular}){
+        this._faqPopular = popular;
+        console.log(this._faqPopular);
     }
 
 
@@ -113,6 +119,9 @@ export default class HelpPageStore{
     }
     get totalFaqs(){
         return this._totalFaqs; 
+    } 
+    get faqPopular(){
+        return this._faqPopular; 
     } 
    
 }

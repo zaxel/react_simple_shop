@@ -178,3 +178,8 @@ export const deleteCategoryReq = async ({id, catPositions}) => {
     const updatedData = await $authHost.delete('api/help/category', {data: {id, catPositions}});
     return updatedData.data;  
 }
+
+export const fetchPopular = async () => {
+    const fetchedData = await $host.get('api/help/popular');
+    return fetchedData.data;  
+}
