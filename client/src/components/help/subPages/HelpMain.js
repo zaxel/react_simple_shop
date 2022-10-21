@@ -25,8 +25,6 @@ const HelpMain = () => {
         
     }, [])
 
-    console.log('help main') 
-
     if (helpPage.loading) {
         return( <div className="spinner">
             <Spinner animation="border" />

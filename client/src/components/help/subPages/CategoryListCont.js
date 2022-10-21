@@ -34,7 +34,7 @@ const CategoryListCont = observer(({ id }) => {
                 setCount(calcItemsCount());
                 maxPage = Math.ceil(helpPage.totalFaqs / itemsPerPage);
                 setDisabled(maxPage < helpPage.faqsPage + 2 ? true : false)
-                setLoading(false);
+                setLoading(false);   
             }
         })()
     }, [id])
@@ -53,11 +53,11 @@ const CategoryListCont = observer(({ id }) => {
         setLoadingMore(false); 
     }
 
-    if (loading) {
+    if (!count || loading) {
         return (<div className="spinner">
             <Spinner animation="border" /> 
         </div>)
-    }
+    } 
     return (
         <div className='popular-cont help__cat-list'>
             <CategoryList faqs={helpPage.questions} items={items}/>

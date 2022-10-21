@@ -819,7 +819,9 @@ button:active {
     flex: 0 1 70%;
     background-color: #f3f3f3;
 }
-
+.help__category>.spinner{
+    width: auto;
+}
 .help__aside {
     flex: 0 1 30%;
     margin-left: 20px;
@@ -876,7 +878,6 @@ button:active {
     font-weight: 700;
     text-align: center;
 }
-
 /**help categories list**/
 .cat-list li:first-child {
     color: #2d2d2d;
