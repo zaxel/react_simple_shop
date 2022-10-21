@@ -99,7 +99,7 @@ router.delete('/related/',
 
 router.get('/popular/', helpController.getPopular); 
 router.post('/popular/',
-    // checkRole(['ADMIN', 'MODERATOR']),
+    checkRole(['ADMIN', 'MODERATOR']),
     body('id').isNumeric(),
     helpController.createPopular);
 

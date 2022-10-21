@@ -1,5 +1,5 @@
 ﻿import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { Context } from '../..';
 import Card from './Card';
@@ -13,8 +13,6 @@ const Cards = observer(() => {
             return <Card key={card.id} {...card} />
         })
     } 
-
-
 
     if (!cards) {
         return (<div className="spinner">

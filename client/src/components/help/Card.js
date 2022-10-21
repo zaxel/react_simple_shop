@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Context } from '../..';
-import { HELP_FAQ_ROUTE, HELP_CAT_ROUTE, BASE_ROUTE } from '../../utils/consts/routes';
+import { HELP_FAQ_ROUTE, HELP_CAT_ROUTE } from '../../utils/consts/routes';
 
 const Card = observer(({ id, link, title, icon, banner }) => {
     const { helpPage } = useContext(Context); 

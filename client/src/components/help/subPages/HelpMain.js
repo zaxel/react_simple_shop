@@ -2,8 +2,6 @@
 import Banner from './../Banner'
 import Cards from './../Cards';
 import Footer from './../Footer';
-import { helpCategories } from '../../../utils/consts/helpPageData';
-import { popularFaqs } from '../../../utils/consts/helpPageData';
 import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { fetchPage, fetchFaqCategory, fetchStarterQuestions, fetchPopularFaqs } from '../../../utils/staticPages/helpPage';

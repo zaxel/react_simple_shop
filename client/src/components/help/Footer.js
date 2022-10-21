@@ -1,7 +1,6 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ABOUT_ROUTE } from '../../utils/consts/routes';
-import contact_banner from "../../assets/help/contact_us.avif"
 import FooterCard from './FooterCard';
 import { Context } from '../..';
 import { observer } from 'mobx-react-lite';
@@ -14,11 +13,11 @@ const Footer = observer(() => {
         if(helpPage.contactHero)
             setContactUsHeroSrc(process.env.REACT_APP_API_URL + helpPage.contactHero)
     }, [helpPage.contactHero])
-// const Footer = ({popularFaqs, helpCategories}) => {
-    // const cards = popularFaqs.map(el=><FooterCard key={helpCategories[el.category].faqs[el.faq_id].question} {...helpCategories[el.category].faqs[el.faq_id]}/>)
+
     if(helpPage.faqPopular.length)
         cards = helpPage.faqPopular.map(faq=><FooterCard key={faq.id} {...faq}/>)
-    return (
+    
+        return (
         <div className='help__bottom-cont'>
                     <div className='popular-cont'>
                         <h3>popular faqs</h3>

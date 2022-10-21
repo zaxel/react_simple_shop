@@ -7,7 +7,6 @@ import { fetchFaqCategory, fetchPage } from '../../../utils/staticPages/helpPage
 import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import ErrorPage from '../../../pages/ErrorPage';
-
 // import { helpCategories } from '../../../utils/consts/helpPageData';
 
 

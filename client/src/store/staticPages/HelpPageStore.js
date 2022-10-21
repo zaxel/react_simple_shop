@@ -76,7 +76,6 @@ export default class HelpPageStore{
     }
     setFaqPopular({popular}){
         this._faqPopular = popular;
-        console.log(this._faqPopular);
     }
 
 
@@ -102,7 +101,6 @@ export default class HelpPageStore{
     get contactHero(){
         return this._contactHero;
     }
-    
     
     
     get categories(){

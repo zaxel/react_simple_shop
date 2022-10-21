@@ -20,6 +20,6 @@ const Banner = observer(() => {
             </div>
         </div>
     );
-});
+}); 
 
 export default Banner;
