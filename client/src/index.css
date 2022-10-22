@@ -778,7 +778,44 @@ button:active {
     display: block;
     margin-bottom: 20px;
 }
-
+.help-faq__main-cont{
+    padding: 8px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font: 16px / 26px system-ui, Roboto, Arial, sans-serif;
+}
+.help-faq__main-body p{
+    text-indent: 20px;
+    margin-bottom: 8px;
+    
+}
+.related-cont h3,
+.help-faq__main-cont h3{
+    font-size: 19px;
+}
+.related-cont h3{
+    margin: 0 30px 20px 30px;
+    padding-top: 20px;
+}
+.help-faq__main-cont h3{
+    text-align: center;
+    color: #2d2d2d;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+.help-faq__main-cont h4{
+    font-size: 16px;
+    text-align: center;
+    color: #767676;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+.related-cont{
+    background-color: #fff;
+}
 /**help breadcrumbs**/
 .help__breadcrumbs {
     border-bottom: 1px solid #ddd;

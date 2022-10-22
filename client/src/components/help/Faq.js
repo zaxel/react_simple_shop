@@ -56,15 +56,15 @@ const Faq = observer(() => {
     <div className='help__category help__faq'>
       <div className='help-faq__wrapper'>
         <div className='help-faq__main-cont'>
-          <h3>helpPage category</h3>
-          <h2>{helpPage.faqQuestion}</h2>
+          <h4>helpPage category</h4>
+          <h3>{helpPage.faqQuestion}</h3>
           <div className='help-faq__main-body' dangerouslySetInnerHTML={{ __html: helpPage.faqAnswer }}></div>
         </div>
         <div className='help-faq__related-cont'>
-          <div className='popular-cont'>
+          <div className='popular-cont related-cont'>
             <h3>related faq's</h3>
             <ul className='popular-cont__cards'>
-              {relatedFaqs}
+              {relatedFaqs || <li>'No related FAQ's'</li>}
             </ul>
           </div>
         </div>
