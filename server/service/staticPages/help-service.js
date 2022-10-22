@@ -2,6 +2,7 @@
     InfoHelpPopular } = require('../../models/models');
 const { Op } = require("sequelize");
 const fileService = require("../file/file-service");
+const queryToString = require('../../utils/queryToString');
 const PageDto = require('../../dtos/static-page-dto.js');
 const HelpFaqDto = require('../../dtos/static-page-help-faq-dto');
 const HelpCatDto = require('../../dtos/static-page-help-cat-dto');
@@ -22,6 +23,26 @@ class HelpService {
         const questions = questionsData.map(el => new HelpFaqDto({ question: el }));
         const answers = answersData.map(el => new HelpFaqDto({ answer: el }));
         return { questions, answers };
+    }
+    getFaq = async ({id, faqName}) => {
+        let question = null;
+        if(id){
+            const questionData = await InfoHelpQuestions.findOne({where: {id}});
+            question = new HelpFaqDto({ question: questionData });
+        }else{
+            const query = (queryToString(faqName));
+            const questionData = await InfoHelpQuestions.findOne({where: {
+                question: {
+                    [Op.iLike]: `${query}%`
+                }
+            }});
+            question = new HelpFaqDto({ question: questionData });
+        }
+        let answersData = await InfoHelpAnswers.findOne({
+            where: {id: question.infoHelpAnswerId}
+        });
+            const answer = new HelpFaqDto({ answer: answersData });
+        return { question, answer };
     }
     getQuestion = async ({ categoryId, page, limit, categories }) => {
         const startPage = process.env.START_FAQS_PAGE;

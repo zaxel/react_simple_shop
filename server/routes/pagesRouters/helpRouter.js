@@ -7,7 +7,13 @@ const helpController = require('../../controllers/pageControllers/helpController
 
 router.get('/', helpController.getPage);
 
-router.get('/faqs/', helpController.getFaqs); 
+router.get('/faqs/', helpController.getFaqs);
+
+router.get('/singlefaq/:faqName',
+    helpController.getSingleFaq); 
+router.get('/faq/',
+    query('id').optional().isNumeric(),
+    helpController.getFaq); 
 
 router.post('/faq/',
     checkRole(['ADMIN', 'MODERATOR']), 

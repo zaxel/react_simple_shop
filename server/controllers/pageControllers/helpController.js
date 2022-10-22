@@ -20,6 +20,33 @@ class HelpController {
             next(ApiError.forbidden(e.message));
         }
     }
+    async getFaq(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { id } = req.query;
+            const data = await helpService.getFaq({ id }); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async getSingleFaq(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                console.log(errors.array())
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            const { faqName } = req.params;
+            const data = await helpService.getFaq({ faqName }); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
     async createFaq(req, res, next) {
         try {
             const errors = validationResult(req);
