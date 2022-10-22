@@ -1,7 +1,8 @@
 ﻿import {
   createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion,
   updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, 
-  deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition, updateHelpFaqPosition, fetchPopular  
+  deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition, updateHelpFaqPosition, fetchPopular,
+  fetchFaqById, fetchFaqByTitle   
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -61,6 +62,22 @@ export const fetchAllFaqs = async (currentStore) => {
     console.log(e)
   } finally {
     setComponentLoading(currentStore, false);
+  }
+}
+export const fetchFaq = async (currentStore, id, title) => {
+
+  try {
+    let fetchedData = null;
+    if(id)
+      fetchedData = await fetchFaqById({id});
+    if(title)
+      fetchedData = await fetchFaqByTitle({title}); 
+
+    const setterName = 'setFaq';
+    return setStoreField(currentStore, setterName, fetchedData);
+  } catch (e) {
+    console.log(e)
+    throw new Error(e);
   }
 }
 export const fetchFaqQuestions = async (currentStore) => {

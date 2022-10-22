@@ -100,6 +100,16 @@ export const updateHelpPage = async (id, dbFieldName, data) => {
     return updatedData.data;
 }
 
+export const fetchFaqById = async ({id}) => {
+    const {data} = await $host.get(`api/help/faq/`, {params:{
+        id 
+    }});
+    return data;
+}
+export const fetchFaqByTitle = async ({title}) => {
+    const {data} = await $host.get(`api/help/singlefaq/${title}`); 
+    return data;
+}
 export const fetchFaqs = async () => {
     const {data} = await $host.get(`api/help/faqs`);
     return data;

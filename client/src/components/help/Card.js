@@ -4,6 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Context } from '../..';
 import { HELP_FAQ_ROUTE, HELP_CAT_ROUTE } from '../../utils/consts/routes';
+import { stringToQuery } from '../../utils/dataFormat/stringToQuery';
 
 const Card = observer(({ id, link, title, icon, banner }) => {
     const { helpPage } = useContext(Context); 
@@ -12,7 +13,7 @@ const Card = observer(({ id, link, title, icon, banner }) => {
         .slice()
         .filter(el => el.infoHelpCategoryId === id)
         .sort((a, b) => a.order_id - b.order_id)
-        .map(faq => <li key={faq.id}><Link to={HELP_FAQ_ROUTE}>{faq.question}</Link></li>);
+        .map(faq => <li key={faq.id}><Link to={HELP_FAQ_ROUTE + '/' + stringToQuery(faq.question)}>{faq.question}</Link></li>);
 
     return (
         <div className='faq-cont__card faq-card'>

@@ -18,6 +18,10 @@ export default class HelpPageStore{
         this._totalFaqs = 0;
 
         this._faqPopular = [];
+
+        this._faqQuestion = '';
+        this._faqAnswer = '';
+        this._faqRelated = [];
         
         makeAutoObservable(this);
     }
@@ -77,6 +81,13 @@ export default class HelpPageStore{
     setFaqPopular({popular}){
         this._faqPopular = popular;
     }
+    setFaq(faq){
+        this._faqQuestion = faq.question.question;
+        this._faqAnswer = faq.answer.text;
+        this._faqRelated = faq.relatedFaqs;
+
+        console.log(faq) 
+    }
 
 
 
@@ -120,6 +131,15 @@ export default class HelpPageStore{
     } 
     get faqPopular(){
         return this._faqPopular; 
+    } 
+    get faqQuestion(){
+        return this._faqQuestion; 
+    } 
+    get faqAnswer(){
+        return this._faqAnswer; 
+    } 
+    get faqRelated(){
+        return this._faqRelated; 
     } 
    
 }

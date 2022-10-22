@@ -13,7 +13,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import Help from "./pages/help/Help";
 import HelpCatPage from "./components/help/subPages/HelpCatPage";
 import HelpRouter from "./components/help/HelpRouter";
-import HelpFaq from "./components/help/Faq";
+import HelpFaq from "./components/help/FaqContainer";
 
 import WhoWe from "./pages/about/WhoWe";
 import Experience from "./pages/about/Experience";
@@ -181,7 +181,7 @@ export let helpRoutes = [
         Component: HelpCatPage, 
     }, 
     {
-        path: HELP_FAQ_ROUTE,
+        path: HELP_FAQ_ROUTE + '/:faq',
         Component: HelpFaq,
     },
 ]

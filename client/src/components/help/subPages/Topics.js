@@ -1,8 +1,9 @@
-﻿import React, { useContext } from 'react';
+﻿import { observer } from 'mobx-react-lite';
+import React, { useContext } from 'react';
 import { Context } from '../../..';
 import Topic from './Topic';
 
-const Topics = () => {
+const Topics = observer(() => {
     const {helpPage} = useContext(Context);
     
     const topics = helpPage.categories.map(card => <Topic key={card.id} {...card} />)
@@ -14,6 +15,6 @@ const Topics = () => {
             </ul>
         </>
     );
-};
+});
 
 export default Topics;
