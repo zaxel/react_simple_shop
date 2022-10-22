@@ -37,12 +37,26 @@ class HelpService {
                 }
             }});
             question = new HelpFaqDto({ question: questionData });
+            id=question.id;
         }
         let answersData = await InfoHelpAnswers.findOne({
             where: {id: question.infoHelpAnswerId}
         });
             const answer = new HelpFaqDto({ answer: answersData });
-        return { question, answer };
+
+            const relatedData = await this.getRelatedFaq({id});
+            const relatedIds = relatedData.map(el=>el.infoHelpQuestionId);
+            const relatedQuestionsData = await InfoHelpQuestions.findAll({where: {id: relatedIds}});
+            const relatedQuestions = relatedQuestionsData.map(faq => {
+                return new HelpFaqDto({ question: faq })
+            })
+            const relatedAnswersIds = relatedQuestions.map(el=>el.infoHelpAnswerId)
+            const relatedAnswersData = await InfoHelpAnswers.findAll({where: {id: relatedAnswersIds}});
+            const relatedFaqs = relatedQuestions.map(faq=>{
+                const answerData = relatedAnswersData.find(el=>el.id===faq.infoHelpAnswerId);
+                return {...faq, answerTitle: answerData.title, answerText: answer.text}
+            })
+        return { question, answer, relatedFaqs };
     }
     getQuestion = async ({ categoryId, page, limit, categories }) => {
         const startPage = process.env.START_FAQS_PAGE;
@@ -239,6 +253,8 @@ class HelpService {
         })
         return deletedPopular;
     }
+
+    
 }
 
 module.exports = new HelpService();
