@@ -4,17 +4,13 @@
 
 
 *************************************************
-### *** check things ***
+### *** this is not commercial and not complite project ***
+### *** coded just for fun to test different features and libraries ***
 
 **`DEMO front`** ------ [https://saelex.com/shop](https://saelex.com/shop)
-* login - test@gmail.com
+* login - modereator@gmail.com
 * pass - 1111
 
-**`Backend`** ----- [https://apple-sundae-74995.herokuapp.com/](https://apple-sundae-74995.herokuapp.com/)
-
-few endpoints for test:
-* /api/devices - get all devices
-* /api/device/:id - get single device
 *************************************************
 
 
@@ -27,4 +23,5 @@ few endpoints for test:
 - [x] heroku, postgre SQL, sequelize
 - [x] node.js, express
 - [x] bootstrap
-- [x] and others...
+- [x] react beautiful drag-and-drop
+- [x] and other...
