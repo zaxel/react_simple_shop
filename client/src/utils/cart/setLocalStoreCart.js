@@ -1,5 +1,4 @@
-﻿import { fetchSingleDevice } from "../../http/deviceAPI";
-import { fetchCartDevices } from "./fetchSetCart";
+﻿import { fetchCartDevices } from "./fetchSetCart";
 
 export const setLocalStoreCart = (cart) => {
     localStorage.setItem('cart', JSON.stringify(cart.cart));

@@ -1,4 +1,4 @@
-﻿import {action, makeObservable, observable, override} from "mobx";
+﻿import {action, makeObservable, observable} from "mobx";
 import BaseWithSearchStore from "./BaseWithSearchStore";
 
 export default class DevicesStore extends BaseWithSearchStore{

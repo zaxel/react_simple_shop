@@ -2,7 +2,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
 import { registration, login } from '../http/userAPI';
-import { REGISTRATION_ROUTE, LOGIN_ROUTE, NAVBAR_HEIGHT, SHOP_ROUTE } from '../utils/consts/routes';
+import { REGISTRATION_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts/routes';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { setUserIfAuth } from '../utils/setUserIfAuth';
@@ -24,7 +24,6 @@ const Auth = observer(() => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // authForm.current.style.height = height - NAVBAR_HEIGHT + 'px';
         return () => {
             history.setAuthFrom(SHOP_ROUTE);
         }
@@ -49,7 +48,7 @@ const Auth = observer(() => {
             isActivated(user);
             navigate(from);
         } catch (e) {
-            // console.log(e)
+            console.log(e)
             alert(e.message);
         }
     }

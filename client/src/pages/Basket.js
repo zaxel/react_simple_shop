@@ -13,8 +13,6 @@ const Basket = observer(() => {
       history.setAuthFrom(pathname);
     },[])
     
-    
-    
     return (
         <div className='basket'>
             <div className='basket__container'>

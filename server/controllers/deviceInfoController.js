@@ -15,7 +15,6 @@ class DeviceInfoController {
     }
     async createBulk(req, res, next) {
         try {
-            // deviceId: 18, title: 'tester', description: 'some description'
             let newInfoLines = req.body;
             console.log(55, newInfoLines)
             const info = await infoService.createBulk(newInfoLines);

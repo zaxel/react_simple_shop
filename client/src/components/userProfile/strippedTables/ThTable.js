@@ -1,5 +1,4 @@
 ﻿import React, { useEffect, useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import withTooltip from '../../../hocs/withTooltip/withTooltip';
 import { Context } from '../../..';
 

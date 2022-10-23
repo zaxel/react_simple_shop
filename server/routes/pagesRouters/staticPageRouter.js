@@ -34,10 +34,4 @@ router.get('/',
     StaticPageController.getPage); 
 
 
-// router.delete('/',
-//     body('id').isNumeric(),
-//     checkRole('ADMIN'),
-//     typeController.delete);
-
-
 module.exports = router;

@@ -7,7 +7,7 @@ import PrivateRouteWrapper from '../utils/PrivateRouteWrapper';
 
 
 const AppRouter = observer(() => {
-    const { user, device } = useContext(Context);
+    const { user } = useContext(Context);
     
     return (
         <Routes>

@@ -15,17 +15,11 @@ const requestInterceptor = config => {
 }
 const authRequestInterceptor = config => {
     config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
-    
     removeEmptyParams(config);
-    
-    
-    
     return config;
 }
 
-
 const authResponseInterceptor = config => {
-    
     return config;
 }
 

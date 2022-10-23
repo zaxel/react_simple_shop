@@ -4,7 +4,7 @@ import { Context } from "..";
 import { LOGIN_ROUTE } from "./consts/routes";
 
 /**
- * A wrapper around the element which checks if the user is authenticated
+ * An element wrapper which checks if the user is authenticated
  * If authenticated, renders the passed element
  * If not authenticated, redirects the user to Login page.
  */

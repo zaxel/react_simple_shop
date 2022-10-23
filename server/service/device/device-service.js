@@ -3,7 +3,6 @@ const { Device, DeviceInfo } = require('../../models/models');
 const { Op, Sequelize } = require("sequelize");
 const acceptedFileType = 'text/plain';
 const { searchDevicesOptions, orderDevicesOptions } = require('../../utils/searchOptions');
-// const orderDevicesOptions = require('../../utils/searchOptions');
 
 class DeviceService {
     create = async (name, price, brandId, typeId, info, img) => {

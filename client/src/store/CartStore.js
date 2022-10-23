@@ -47,12 +47,6 @@ export default class CartStore{
         this._cartDevices = devices;
     }
     setDeviceAmount(amount, deviceId){
-        // this._cart.map(el=>{
-        //     console.log('basketId: '+el.basketId)
-        //     console.log('deviceId: '+el.deviceId)
-        //     console.log('device_amount: '+ el.device_amount)
-        //     console.log('------------------')
-        // })
         this._cart = this._cart.map(el=>{
             return el.deviceId===deviceId 
             ? {basketId: el.basketId, deviceId: el.deviceId, device_amount: amount}

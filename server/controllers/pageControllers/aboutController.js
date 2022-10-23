@@ -90,8 +90,6 @@ class AboutController {
         }
     }
 
-
-
     async createBlock(req, res, next) {
         try {
             const errors = validationResult(req);
@@ -186,7 +184,6 @@ class AboutController {
             next(ApiError.badRequest(e.message + ': could not delete type.'));
         }
     }
-    
     
     async createBtn(req, res, next) {
         try {

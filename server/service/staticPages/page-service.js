@@ -59,20 +59,6 @@ class PageService {
         return page;
     }
     
-    
-    
-    // delete = async (id) => {
-        // const updatedData = await Type.destroy({
-            // where: { id }
-        //   });
-        // return {updatedData};
-    // }
-
-    
-
-
-
-    
 }
 
 module.exports = new PageService();

@@ -12,7 +12,6 @@ const TrTable =  ({data, onRowClickHandler, innerRef}) => {
     }, [])
 
     return (
-        // <tr ref={innerRef} >
         <tr className='td-active' ref={innerRef} onClick={onRowClickHandler}> 
             {data.map(tds=>{
                 const key = uuidv4();
@@ -23,4 +22,3 @@ const TrTable =  ({data, onRowClickHandler, innerRef}) => {
 };
 
 export default withTooltip(TrTable);
-// export default TrTable;

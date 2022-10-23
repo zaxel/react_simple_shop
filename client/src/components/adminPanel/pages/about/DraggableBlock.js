@@ -1,6 +1,5 @@
 ﻿import { observer } from 'mobx-react-lite';
 import React, { useContext, useState, useEffect } from 'react';
-
 import { Context } from '../../../..';
 import { isContainBtns } from '../../../../utils/check/isContainBtns';
 import { blockImgsLinks } from '../../../../utils/dataFormat/blockImgsLinks';
@@ -54,11 +53,9 @@ const DraggableBlock = observer(({ id, title, text, button_id, hero }) => {
                 </div>
                 <div className='admin-about__card-del'>
                     <button onClick={deleteBlock}>X</button>
-                    {/* <button onClick={() => console.log(99)}>X</button> */}
                 </div>
                 <div className='admin-about__card-button'>
                     <button onClick={changeStyle} className={arrowStyle}></button>
-                    {/* <button onClick={changeStyle} className={arrowStyle}></button> */}
                 </div>
             </div>
             {displayDescr && <div className='admin-about__card-body'>

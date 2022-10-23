@@ -1,4 +1,4 @@
-﻿import React, {useContext, useEffect, useRef} from 'react';
+﻿import React, {useContext, useRef} from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Context } from '../..';
 import { v4 as uuidv4 } from 'uuid';
@@ -39,8 +39,6 @@ const OrderModal = ({ show, onHide }) => {
         ['Nokia 45885', '1', '4.7', '$5.00'],
     ]
 
-    
-
     const onRowClickHandler = () => {
         toolTip.setIsAvailable(false);
         toolTip.setIsToolTipShown(false);
@@ -54,9 +52,6 @@ const OrderModal = ({ show, onHide }) => {
         alert('sort');
         toolTip.setIsAvailable(true);
     }
-
-    
-
     const thsWithTooltip = ths.map((el, i) => {
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);

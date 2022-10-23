@@ -23,14 +23,6 @@ const AdminWysiwyg = ({ areaTitle, areaText, cb }) => {
     const onDivClickHandler = () => {
         setEdit(true);
     }
-    const onInputBlur = (e, source) => {
-        // if (source === 'silent') return;
-        
-        if (!(e.relatedTarget === buttonRef.current)) {
-            setEdit(false);
-            setInput(inputLast.current);
-        }
-    }
     
     const onButtonBlurHandler = () => {
         setEdit(false);

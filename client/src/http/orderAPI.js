@@ -5,7 +5,6 @@ export const createOrder = async (order, basketId) => {
     return data;
 }
 
-// export const getOrders = async (sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
 export const getOrders = async (id, sortBy, sortDirection, limit, page, searchBy, searchPrase) => {
     const {data} = await $authHost.get('api/order/' , {params:{
         sortBy, sortDirection, limit, page, searchBy, searchPrase

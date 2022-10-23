@@ -1,4 +1,4 @@
-﻿import {makeObservable, observable, action, override} from "mobx";
+﻿import {makeObservable, observable, action} from "mobx";
 import BaseStore from "./BaseStore";
 
 export default class DevicesInfoStore extends BaseStore{

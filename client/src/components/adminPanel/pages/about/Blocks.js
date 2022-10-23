@@ -1,10 +1,6 @@
 ﻿import React, { useState, useContext, useEffect } from 'react';
 import { Context } from '../../../..';
-import AdminImage from '../../commonComponents/AdminImage';
 import { Spinner } from 'react-bootstrap';
-import AdminTextInput from '../../commonComponents/AdminTextInput';
-import hero from '../../../../assets/about/exp_hero_1.jpg';
-import heroSmall from '../../../../assets/about/exp_hero_3.jpg';
 import AddBtnsModal from './AddBtnsModal';
 import BlockCard from './BlockCard';
 import { observer } from 'mobx-react-lite';

@@ -10,7 +10,7 @@ import { Context } from '../..';
 const Orders = () => {
     let thRefs = useRef([]);
     let tdRefs = useRef([]);
-    const {toolTip} = useContext(Context);
+    const { toolTip } = useContext(Context);
     const [orderModalVisible, setOrderModalVisible] = useState(false);
 
     const ths = ['order id', 'ordered at', 'amount ordered', 'total'];
@@ -43,7 +43,7 @@ const Orders = () => {
         setOrderModalVisible(false);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         toolTip.setIsAvailable(true);
     }, [])
 
@@ -51,33 +51,40 @@ const Orders = () => {
 
         const myKey = uuidv4();
         let ref = (el) => (thRefs.current[i] = el);
-        let toolTipInfo = {i, myRefs: thRefs, text: 'sort'};
+        let toolTipInfo = { i, myRefs: thRefs, text: 'sort' };
         return <ThTable toolTipInfo={toolTipInfo} innerRef={ref} key={myKey} onThClickHandler={onThClickHandler} data={el} />
     })
     const tdsWithTooltip = tds.map((el, i) => {
 
         const myKey = uuidv4();
         let ref = (el) => (tdRefs.current[i] = el);
-        let toolTipInfo = {i, myRefs: tdRefs, text: 'click for detailed info'};
+        let toolTipInfo = { i, myRefs: tdRefs, text: 'click for detailed info' };
         return <TrTable toolTipInfo={toolTipInfo} currentRef={tdRefs.current[i]} innerRef={ref} key={myKey} onRowClickHandler={onRowClickHandler} data={el} />
     })
 
     return (
-        <div className='account__orders acc-orders'>
+        <>
+            <div className='account__payment'>
+                <div>User order page!</div>
+                <div>under development!</div>
+            </div>
+            <div className='account__orders acc-orders'>
 
-            <table className='stripped-table'>
-                <thead>
-                    <tr>
-                        {thsWithTooltip}
-                    </tr>
-                </thead>
-                <tbody>
-                    {tdsWithTooltip}
-                </tbody>
-            </table>
-            {/* <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} /> */}
-            {/* <PaginationCont /> */}
-        </div>
+                <table className='stripped-table'>
+                    <thead>
+                        <tr>
+                            {thsWithTooltip}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tdsWithTooltip}
+                    </tbody>
+                </table>
+                {/* <UserOrderModal show={orderModalVisible} onHide={onModalHideHandler} /> */}
+                {/* <PaginationCont /> */}
+            </div>
+        </>
+
     );
 };
 

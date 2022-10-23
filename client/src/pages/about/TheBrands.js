@@ -1,7 +1,6 @@
 ﻿import React, {useEffect ,useContext} from 'react';
 import AboutSubPage from '../../components/about/AboutSubPage';
 import AboutBlocks from '../../components/about/AboutBlocks';
-import { brandData } from '../../utils/consts/aboutPageData';
 import { fetchCard } from '../../utils/staticPages/aboutPage';
 import { Context } from '../..';
 import { observer } from 'mobx-react-lite';

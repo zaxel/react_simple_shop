@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext, useEffect } from 'react';
+﻿import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import useWindowSize from '../hooks/useWindowSize';
 import { observer } from 'mobx-react-lite';

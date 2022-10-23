@@ -3,7 +3,8 @@
 const Delivery = () => {
     return (
         <div className='account__delivery'>
-            UserDelivery page!
+            <div>UserDelivery page!</div>
+            <div>under development</div>
         </div>
     );
 };

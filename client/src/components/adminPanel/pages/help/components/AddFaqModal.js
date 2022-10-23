@@ -1,7 +1,6 @@
 ﻿import React, {useContext, useEffect, useState} from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, Modal, Form, Spinner} from 'react-bootstrap';
-// import { Context } from '../../../..';
 import { Context } from '../../../../..';
 import AddFaqModalCard from './AddFaqModalCard';
 import { fetchFaqQuestions } from '../../../../../utils/staticPages/helpPage';

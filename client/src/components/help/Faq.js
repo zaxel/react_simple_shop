@@ -17,7 +17,6 @@ const Faq = observer(() => {
   const setCurrentCategory = () => {
     const [category] = helpPage.categories.filter(cat=>cat.id === helpPage.faqCategoryId);
     helpPage.setFaqCategory(category);
-
   }
 
   const fetchSetFaqComponent = async () => {
@@ -65,10 +64,8 @@ const Faq = observer(() => {
     return <ErrorPage />
 
   return (
-    
       <div className='help__category help__faq'>
       <BreadCrumbs active={3} category={helpPage.faqCategory} faq={helpPage.faqQuestion}/>
-
         <div className='help-faq__wrapper'>
           <div className='help-faq__main-cont'>
             <h4>{helpPage.faqCategory.title}</h4>
@@ -85,8 +82,6 @@ const Faq = observer(() => {
           </div>
         </div>
       </div>
-    
-
   );
 });
 

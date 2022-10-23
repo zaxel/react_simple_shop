@@ -50,8 +50,6 @@ const AddNewFaq = () => {
                 <div className='blocks-form__text'>
                     <h5>answer description:</h5>
                     <ReactQuill theme="snow" ref={wysiwygRef} autoFocus value={answerText} onChange={setAnswerText}/>
-                    {/* <AdminWysiwyg areaTitle={'Answer Text'} areaText={answer?.text || 'no answer body added yet'} cb={changeAnswerTextCarried} /> */}
-                    {/* <textarea placeholder='FAQ answer body' value={answerText} onChange={(e)=>setAnswerText(e.currentTarget.value)}/> */}
                 </div>
                 <button className='block-form__new-block' onClick={onFormConfirm}>add new FAQ</button>
             </form>

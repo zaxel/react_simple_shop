@@ -1,6 +1,5 @@
 ﻿import React, {useEffect, useContext} from 'react';
 import AboutSubPage from '../../components/about/AboutSubPage';
-import { experienceData } from '../../utils/consts/aboutPageData';
 import { Context } from '../..';
 import AboutBlocks from '../../components/about/AboutBlocks';
 import { fetchCard } from '../../utils/staticPages/aboutPage';
@@ -23,7 +22,6 @@ const Experience = observer(() => {
     return (
         <div className='sub-about'>
             <div className='sub-about__container'>
-                {/* <AboutSubPage {...experienceData}/> */}
                 <AboutSubPage {...card}>
                     <AboutBlocks blocksData={aboutPage.cardBlocks}/>
                 </AboutSubPage>

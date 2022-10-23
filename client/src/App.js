@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
 import { observer } from "mobx-react-lite";
@@ -11,11 +11,10 @@ import { setCartFromLocalStore } from "./utils/cart/setLocalStoreCart";
 import Footer from "./components/Footer";
 import ShopToolTip from "./components/ShopToolTip";
 import { isActivated } from "./utils/check/isActivated";
-import { fetchFaqCategory } from "./utils/staticPages/helpPage";
 
 
 const App = observer(() => {
-  const { user, cart, helpPage } = useContext(Context);
+  const { user, cart } = useContext(Context);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +24,6 @@ const App = observer(() => {
         await setUserIfAuth(user);
         await setCartId(cart, user);
         await fetchSetCart(user, cart);
-        // await fetchFaqCategory(helpPage); 
         cart.setCartTotal();
         isActivated(user);
       } catch (e) {

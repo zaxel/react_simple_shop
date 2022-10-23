@@ -76,7 +76,6 @@ const BlockCard = observer(({ block, buttons, onAddBtnsClick }) => {
                         </ul>
                         <div className='about-blocks__btn-add'>
                             <button onClick={onAddBtnsClick}>add buttons</button>
-                            {/* <button >add buttons</button> */}
                         </div>
                     </div>
 

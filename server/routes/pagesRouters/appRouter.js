@@ -37,10 +37,5 @@ router.get('/', appController.getPage);
 
 router.patch('/card/img-update', checkRole(['ADMIN', 'MODERATOR']), appController.updateCardImg);
 
-// router.delete('/',
-//     body('id').isNumeric(),
-//     checkRole('ADMIN'),
-//     typeController.delete);
-
 
 module.exports = router;
