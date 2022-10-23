@@ -6,7 +6,7 @@ import HelpAside from './subPages/HelpAside';
 const FaqContainer = observer(() => {
   
     return (
-        <div className='help__main-wrapper'>
+        <div className='help__main-wrapper'> 
           <Faq/>  
           <HelpAside/>  
         </div>

@@ -596,7 +596,6 @@ button:active {
 .help__faq-cont {
     margin-bottom: 30px;
 }
-
 .faq-cont__title {
     color: #2d2d2d;
     font-size: 31px;
@@ -779,6 +778,7 @@ button:active {
     margin-bottom: 20px;
 }
 .help-faq__main-cont{
+    background-color: #F3F3F3;
     padding: 8px;
     line-height: 1.5;
     margin-bottom: 10px;
@@ -822,6 +822,7 @@ button:active {
     position: relative;
     top: -40px;
     padding-bottom: 20px;
+    text-transform: lowercase;
 }
 
 .help__breadcrumbs a {
@@ -837,6 +838,15 @@ button:active {
 
 .help__breadcrumbs .active {
     color: #2d2d2d;
+}
+.breadcrumbs-arrow,
+.breadcrumbs-active{
+    font-size: 13px;
+    color: black;
+    color: #2d2d2d;
+}
+.breadcrumbs-active{
+    text-decoration: underline;
 }
 
 /**help subpage**/
@@ -881,6 +891,9 @@ button:active {
     margin-bottom: 10px;
 }
 
+.help__faq{
+    background-color: white;
+}
 /**help subpage banner**/
 .help__cat-banner {
     width: 100%;

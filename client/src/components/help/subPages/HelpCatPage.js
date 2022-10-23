@@ -7,10 +7,9 @@ import { fetchFaqCategory, fetchPage } from '../../../utils/staticPages/helpPage
 import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import ErrorPage from '../../../pages/ErrorPage';
-// import { helpCategories } from '../../../utils/consts/helpPageData';
 
 
-const HelpCatPage = observer(({path}) => {
+const HelpCatPage = observer(() => {
     let { catname } = useParams();
     const { helpPage } = useContext(Context);
     const [wrongPage, setWrongPage] = useState(false);
@@ -41,7 +40,7 @@ const HelpCatPage = observer(({path}) => {
 
     return ( 
         <>
-            {/* <BreadCrumbs {...categoryData}/> */}
+            <BreadCrumbs active={2} category={categoryData}/> 
             <div className='help__main-wrapper'>
                 <MainContainer {...categoryData}/>
                 <HelpAside/> 

@@ -12,7 +12,7 @@ const Card = observer(({ id, link, title, icon, banner }) => {
     const faqsList = helpPage.starterQuestions
         .slice()
         .filter(el => el.infoHelpCategoryId === id)
-        .sort((a, b) => a.order_id - b.order_id)
+        .sort((a, b) => a.order_id - b.order_id) 
         .map(faq => <li key={faq.id}><Link to={HELP_FAQ_ROUTE + '/' + stringToQuery(faq.question)}>{faq.question}</Link></li>);
 
     return (

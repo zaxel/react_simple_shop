@@ -22,6 +22,8 @@ export default class HelpPageStore{
         this._faqQuestion = '';
         this._faqAnswer = '';
         this._faqRelated = [];
+        this._faqCategory = {};
+        this._infoHelpCategoryId = null;
         
         makeAutoObservable(this);
     }
@@ -55,8 +57,6 @@ export default class HelpPageStore{
         this.setContactTitle(title[1]);
         this.setContactHero(img[1]);
     }
-
-    
     setCategories(cat){ 
         this._categories = cat;
     }
@@ -81,15 +81,15 @@ export default class HelpPageStore{
     setFaqPopular({popular}){
         this._faqPopular = popular;
     }
+    setFaqCategory(category){
+        this._faqCategory = category;
+    }
     setFaq(faq){
         this._faqQuestion = faq.question.question;
         this._faqAnswer = faq.answer.text;
         this._faqRelated = faq.relatedFaqs;
-
-        console.log(faq) 
+        this._infoHelpCategoryId = faq.question.infoHelpCategoryId;
     }
-
-
 
     get loading(){
         return this._loading;
@@ -112,8 +112,6 @@ export default class HelpPageStore{
     get contactHero(){
         return this._contactHero;
     }
-    
-    
     get categories(){
         return this._categories;
     }
@@ -140,6 +138,12 @@ export default class HelpPageStore{
     } 
     get faqRelated(){
         return this._faqRelated; 
+    } 
+    get faqCategoryId(){
+        return this._infoHelpCategoryId; 
+    } 
+    get faqCategory(){
+        return this._faqCategory; 
     } 
    
 }

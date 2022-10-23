@@ -5,6 +5,7 @@ import Footer from './../Footer';
 import { Context } from '../../..';
 import { Spinner } from 'react-bootstrap';
 import { fetchPage, fetchFaqCategory, fetchStarterQuestions, fetchPopularFaqs } from '../../../utils/staticPages/helpPage';
+import BreadCrumbs from './BreadCrumbs';
 
 const HelpMain = () => { 
     const {helpPage} = useContext(Context);
@@ -31,6 +32,7 @@ const HelpMain = () => {
     }
     return (
         <>
+            <BreadCrumbs active={1}/>
             <Banner />
             <Cards />
             <Footer />
