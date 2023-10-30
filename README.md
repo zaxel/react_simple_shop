@@ -8,7 +8,7 @@
 ### *** coded just for fun to test different features and libraries ***
 
 **`DEMO front`** ------ [https://saelex.com/shop](https://saelex.com/shop)
-* login - modereator@gmail.com
+* login - moderator@gmail.com
 * pass - 1111
 
 *************************************************
