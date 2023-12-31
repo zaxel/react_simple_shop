@@ -4,13 +4,9 @@
 
 
 *************************************************
-### *** this is not commercial and not complite project ***
+### *** this is not commercial but a fully functional project. ***
+Since Heroku discontinued free plans at the beginning of 2023, and the backend for this project was hosted on Heroku, I had to remove the backend to avoid unnecessary payments. 
 ### *** coded just for fun to test different features and libraries ***
-
-**`DEMO front`** ------ [https://saelex.com/shop](https://saelex.com/shop)
-* login - moderator@gmail.com
-* pass - 1111
-
 *************************************************
 
 
