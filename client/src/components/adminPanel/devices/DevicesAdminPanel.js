@@ -17,6 +17,7 @@ import { setDataToStore } from '../../../utils/administration/common';
 import { DevicesThs as ths } from '../../../utils/consts/thTitles';
 import { useSearchParams } from 'react-router-dom';
 import { getQueryParamsString, setQueryParamsString } from '../../../utils/http/queryParams';
+import ChangeSellerDescrModal from './modals/ChangeSellerDescrModal';
 
 const DevicesAdminPanel = observer(() => {
   let thRefs = useRef([]);
@@ -24,6 +25,7 @@ const DevicesAdminPanel = observer(() => {
   const [deviceInfoModalVisible, setDeviceInfoModalVisible] = useState(false);
   const [addDeviceVisible, setAddDeviceVisible] = useState(false);
   const [addDeviceBulkVisible, setAddDeviceBulkVisible] = useState(false);
+  const [changeSellerDscrVisible, setChangeSellerDscrVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
     
 
@@ -59,6 +61,9 @@ const DevicesAdminPanel = observer(() => {
     if (fetchedInfo.loggedOut) return;
     await setDataToStore(adminDevicesInfo, 'setInfo', fetchedInfo);
   }
+  const onSellerDscrClickHandler = () => {
+    setChangeSellerDscrVisible(true);
+  }
 
   const onSubmitSearch = async () => {
     fetchPage(adminDevices);
@@ -73,7 +78,11 @@ const DevicesAdminPanel = observer(() => {
 
   const trs = adminDevices.devices.count ?
     adminDevices.devices?.rows?.map((el, i) => {
-      const row = { ...el, onDescriptionClickHandler: onDescriptionClickHandler.bind(this, el.id) };
+      const row = { 
+        ...el, 
+        onDescriptionClickHandler: onDescriptionClickHandler.bind(this, el.id), 
+        onSellerDscrClickHandler, 
+      };
       return <TrDevices key={el.id} data={row} />
     }) :
     <tr className='td-active text-danger'><td>Nothing found!</td></tr>
@@ -105,6 +114,7 @@ const DevicesAdminPanel = observer(() => {
         <AdminDeviceInfoModal show={deviceInfoModalVisible} onHide={onModalHideHandler} />
         <AddDeviceModal show={addDeviceVisible} onHide={() => setAddDeviceVisible(false)} />
         <AddDeviceBulkModal show={addDeviceBulkVisible} onHide={() => setAddDeviceBulkVisible(false)} />
+        <ChangeSellerDescrModal show={changeSellerDscrVisible} onHide={() => setChangeSellerDscrVisible(false)} />
       </div>
 
       <PaginationCont currentStore={adminDevices} />
