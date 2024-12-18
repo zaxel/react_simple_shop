@@ -15,7 +15,7 @@ export const fetchAll = async (cb, ...rest) => {
 export const fetchDataSetStore = async (cb, currentStore, cartStore, userStore, flags) => {
     const { loadingOn, loadingOff, setToStore, setPageTotal, checkIfAuth } = flags;
 
-    try {
+    try { 
         const setterName = getMainSetterName(currentStore);
         loadingOn && currentStore.setLoading(true);
         const data = await cb();

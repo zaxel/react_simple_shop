@@ -16,10 +16,11 @@ export const createBulkDevices = async (formData, cartStore, userStore) => {
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 
 }
-export const changeDeviceData = async (id, dbFieldName, data, cartStore, userStore) => {
-  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
-  const cb = updateDevice.bind(this, id, dbFieldName, data);
-  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
+export const changeDeviceData = async (id, dbFieldName, data, cartStore, userStore, curStore=null,
+  flags={ loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true }) => {
+  // const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+  const cb = updateDevice.bind(this, id, dbFieldName, data); 
+  return fetchDataSetStore(cb, curStore, cartStore, userStore, flags);
 }
 
 export const deleteDevice = async (id, cartStore, userStore) => {

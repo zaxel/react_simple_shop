@@ -28,6 +28,7 @@ export const onFileButtonBlurHandler = (toolTip, setEdit, e, fileRef) => {
 // withCheckAndReload
 export const onInputButtonClickHandler = async (toolTip, setEdit, setLoading, cb, componentStore, infoId, dbFieldName, value) => {
     if (isStateChangedTableFieldCommon(componentStore, componentStore.mainStoreFieldName, infoId, dbFieldName, value)) {
+        console.log(componentStore.mainStoreFieldName)
         await loadingAndFetch(setLoading, cb);
         componentStore.setUpdateDataTrigger(prev => !componentStore.updateDataTrigger);
     }else{
