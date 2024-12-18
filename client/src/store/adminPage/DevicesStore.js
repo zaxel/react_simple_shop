@@ -14,6 +14,8 @@ export default class DevicesStore extends BaseWithSearchStore{
     _brands = [];
     _typeActive = null;
     _brandActive = null;
+    _deviceActive = null;
+    _deviceSellerDescription = "";
 
     constructor(){
         super();
@@ -27,6 +29,8 @@ export default class DevicesStore extends BaseWithSearchStore{
             _brands: observable,
             _typeActive: observable,
             _brandActive: observable,
+            _deviceActive: observable,
+            _deviceSellerDescription: observable,
 
             setDevices: action,
             setActivePage: action,
@@ -36,6 +40,10 @@ export default class DevicesStore extends BaseWithSearchStore{
             setBrands: action,
             setTypeActive: action,
             setBrandActive: action,
+            setDeviceActive: action,
+            setDeviceSellerDescription: action,
+            setClearDeviceSellerDescription: action,
+            
         })
     }
 
@@ -63,9 +71,21 @@ export default class DevicesStore extends BaseWithSearchStore{
     setBrandActive(typeId){
         this._brandActive = typeId;
     }
+    setDeviceActive(deviceId){
+        this._deviceActive = deviceId;
+    }
+    setDeviceSellerDescription(){
+        this._deviceSellerDescription = this._devices.rows.find(el=>el.id===this._deviceActive)?.seller_dscr;
+    }
+    setClearDeviceSellerDescription(){
+        this._deviceSellerDescription = "";
+    }
     
     get devices(){
         return this._devices;
+    }
+    get deviceSellerDescription(){
+        return this._deviceSellerDescription;
     }
     get activePage(){
         return this._activePage;
@@ -90,5 +110,8 @@ export default class DevicesStore extends BaseWithSearchStore{
     }
     get brandActive(){
         return this._brandActive;
+    }
+    get deviceActive(){
+        return this._deviceActive;
     }
 }
