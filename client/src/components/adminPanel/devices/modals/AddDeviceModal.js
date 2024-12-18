@@ -10,6 +10,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
     const [selectedBrand, setSelectedBrand] = useState('');
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
+    const [sellerDescr, setSellerDescr] = useState('');
     const [specs, setSpecs] = useState([]);
     const [img, setImg] = useState('');
 
@@ -39,7 +40,8 @@ const AddDeviceModal = observer(({show, onHide}) => {
       setSelectedType('');
       setSelectedBrand('');
       setTitle('');
-      setPrice('');
+      setPrice('');  
+      setSellerDescr('');  
       setSpecs([]);
       adminDevices.setTypeActive(null);
       adminDevices.setBrandActive(null);
@@ -47,7 +49,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
     const setNewDevice = async() => {
       try{
         onHide();
-        const formData = formDataNewDevice(title, price, adminDevices.brandActive, adminDevices.typeActive, specs, img);
+        const formData = formDataNewDevice(title, price, adminDevices.brandActive, adminDevices.typeActive, specs, img, sellerDescr);
         
         const { loggedOut, name } = await createDevice(formData, cart, user);
             if(loggedOut)return;
@@ -82,6 +84,7 @@ const AddDeviceModal = observer(({show, onHide}) => {
             </Form.Select>
           <Form.Control value={title} onChange={(e)=>setTitle(e.currentTarget.value)} placeholder="Add Device Title"/>
           <Form.Control type="number" step="0.01" value={price} onChange={(e)=>setPrice(e.currentTarget.value)} placeholder="Add Price"/>
+          <textarea className="form-control mb-2" value={sellerDescr} onChange={(e) => setSellerDescr(e.currentTarget.value)} id="FormControlTextareaSellerItemDescrModal" rows="4" placeholder="Seller description"></textarea>
           <Form.Control type="file" onChange={e=>setImg(e.target.files[0])} className="device-modal__file"/>
           <hr/>
           <ul className='device-modal__spec-container'>
