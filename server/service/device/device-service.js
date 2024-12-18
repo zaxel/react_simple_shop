@@ -5,12 +5,12 @@ const acceptedFileType = 'text/plain';
 const { searchDevicesOptions, orderDevicesOptions } = require('../../utils/searchOptions');
 
 class DeviceService {
-    create = async (name, price, brandId, typeId, info, img) => {
+    create = async (name, price, brandId, typeId, info, img, seller_dscr) => {
         let fileName = 'no-image.jpg'
         if (img) {
             fileName = await fileService.imageResolve(img);
         }
-        const device = await Device.create({ name, price, brandId, typeId, img: fileName });
+        const device = await Device.create({ name, price, brandId, typeId, img: fileName, seller_dscr });
         if (info) {
             info = JSON.parse(info);
             this.createInfo(info, device.id);
