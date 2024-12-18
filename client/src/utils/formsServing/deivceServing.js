@@ -1,7 +1,7 @@
 ﻿export const formDataInfoNoEmptyFields = (infosArray) => {
     return infosArray.filter(info=> info.title && info.description);
 }
-export const formDataNewDevice = (title, price, brandActive, typeActive, specs, img) => {
+export const formDataNewDevice = (title, price, brandActive, typeActive, specs, img, seller_dscr) => {
     const formData = new FormData();
         formData.append('name', title);
         formData.append('price', price);
@@ -9,5 +9,6 @@ export const formDataNewDevice = (title, price, brandActive, typeActive, specs, 
         formData.append('typeId', typeActive);
         formData.append('info', JSON.stringify(formDataInfoNoEmptyFields(specs)));
         formData.append('img', img);
+        formData.append('seller_dscr', seller_dscr);
     return formData;
 }
