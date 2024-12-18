@@ -9,6 +9,7 @@ import TdDescriptionLink from './TdDescriptionLink';
 import TdDelete from './TdDelete';
 import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
 import { makeInnerRefs } from '../../../../utils/toolTipServing/makeInnerRefs';
+import TdSellerDscrLink from './TdSellerDscrLink';
 
 const TrDevices = ({ data }) => {
     let tdRefs = useRef([]);
@@ -19,7 +20,8 @@ const TrDevices = ({ data }) => {
         'image administration',
         'edit device type',
         'edit device brand',
-        'edit device descriptions',
+        'edit device seller description',
+        'edit device specifications',
         'delete device',
     ];
     const tipsRefs = makeInnerRefs(tipsTitles, tdRefs);
@@ -34,8 +36,11 @@ const TrDevices = ({ data }) => {
             <td>{adminPageFormatDate(Date.parse(data.createdAt))}</td>
             <TdTypeSelect {...tipsRefs[4]} data={{inputData: data.typeId, id: data.id, dbFieldName: 'typeId'}}/>
             <TdBrandSelect {...tipsRefs[5]} data={{inputData: data.brandId, id: data.id, dbFieldName: 'brandId'}}/>
-            <TdDescriptionLink {...tipsRefs[6]} data={{onDescriptionClickHandler:data.onDescriptionClickHandler, name: data.name}}/>
-            <TdDelete {...tipsRefs[7]} data={{id: data.id}}/>
+            
+            <TdSellerDscrLink {...tipsRefs[6]} data={{inputData: data.seller_dscr, id: data.id, onSellerDscrClickHandler:data.onSellerDscrClickHandler, dbFieldName: 'seller_dscr'}}/>
+
+            <TdDescriptionLink {...tipsRefs[7]} data={{onDescriptionClickHandler:data.onDescriptionClickHandler, name: data.name}}/>
+            <TdDelete {...tipsRefs[8]} data={{id: data.id}}/>
         </tr>
     );
 };

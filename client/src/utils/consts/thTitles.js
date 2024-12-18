@@ -15,7 +15,8 @@ export const DevicesThs = [
     { title: 'created', sortBy: 'createdAt' },
     { title: 'type', sortBy: 'typeId' },
     { title: 'brand', sortBy: 'brandId' },
-    { title: 'descriptions', sortBy: null },
+    { title: 'seller description', sortBy: null },
+    { title: 'specifications', sortBy: null },
     { title: 'destroy', sortBy: null },
 ]
 
