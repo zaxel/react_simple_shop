@@ -5,12 +5,20 @@ const acceptedFileType = 'text/plain';
 const { searchDevicesOptions, orderDevicesOptions } = require('../../utils/searchOptions');
 
 class DeviceService {
-    create = async (name, price, brandId, typeId, info, img, seller_dscr) => {
-        let fileName = 'no-image.jpg'
-        if (img) {
-            fileName = await fileService.imageResolve(img);
+    create = async (name, price, brandId, typeId, info, images, seller_dscr) => {
+        let imgesOutStoreData = [];
+        if (images) {
+           let imgStoreResp = await fileService.imagesOuterStoreDataResolve(images);
+           imgStoreResp.forEach((result, index) => {
+               if (result.status === "fulfilled") {
+                //    console.log(`Image ${index}: Upload succeeded`, result.value);
+                   imgesOutStoreData.push(result.value.data);
+                } else if (result.status === "rejected") {
+                    console.log(`Image ${index}: Upload failed`, result.reason);
+                }
+            }); 
         }
-        const device = await Device.create({ name, price, brandId, typeId, img: fileName, seller_dscr });
+        const device = await Device.create({ name, price, brandId, typeId, img: imgesOutStoreData, seller_dscr });
         if (info) {
             info = JSON.parse(info);
             this.createInfo(info, device.id);

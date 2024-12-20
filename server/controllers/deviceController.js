@@ -5,9 +5,9 @@ const { validationResult } = require('express-validator');
 class DeviceController {
     async create(req, res, next) {
         try {
-            let { name, price, brandId, typeId, info, seller_dscr="some seller description" } = req.body;
-            let img = req?.files?.img || null;
-            const device = await deviceService.create(name, price, brandId, typeId, info, img, seller_dscr);
+            let { name, price, brandId, typeId, info, seller_dscr } = req.body;
+            let images = req?.files || null;
+            const device = await deviceService.create(name, price, brandId, typeId, info, images, seller_dscr);
             return res.json(device);
         } catch (e) {
             next(ApiError.forbidden(e.message));
