@@ -4,11 +4,10 @@
 import { fetchAll, fetchDataSetStore } from "./common";
 
 
-export const createDevice = async (formData, cartStore, userStore) => {
-  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
+export const createDevice = async (formData, cartStore, userStore, flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true }) => {
   const cb = createDeviceReq.bind(this, formData);
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);
-}
+} 
 
 export const createBulkDevices = async (formData, cartStore, userStore) => {
   const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
