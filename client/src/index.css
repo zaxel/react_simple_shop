@@ -1860,6 +1860,8 @@ button:active {
 .stripped-table__device-img {
     width: 16px;
     height: 16px;
+    margin-left: 2px;
+    border-radius: 2px;
 }
 
 .stripped-table__input-file {
@@ -1872,6 +1874,10 @@ button:active {
 
 .device-img__modal-body {
     text-align: center;
+}
+
+.device-img__modal-images{
+    min-height: 220px;
 }
 
 .device-img__modal {
