@@ -3,7 +3,7 @@ import { Spinner } from 'react-bootstrap';
 import { correctImgTypeCheck, setImageFromBlob } from '../../../utils/formsServing/imgServing';
 import { formDataImg } from '../../../utils/formsServing/imgServing';
 
-const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName, index, type }) => {
+const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName, index, type, isExternal = false}) => {
     const fileRef = useRef(null);
     const inputLast = useRef(null);
     const confirmRef = useRef(null);
@@ -16,8 +16,10 @@ const AdminImage = ({id, inputTitle, inputData, cb, alt, imgDbCollName, index, t
     useEffect(() => {
         setInput(inputData);
         inputLast.current = inputData;
-        setSrc(process.env.REACT_APP_API_URL + inputData);
-    }, [inputData])
+        isExternal  
+            ? setSrc(inputData)
+            : setSrc(process.env.REACT_APP_API_URL + inputData);
+    }, [inputData, isExternal])
 
     const isStateChanged = () => {
         return inputLast.current !== input;
