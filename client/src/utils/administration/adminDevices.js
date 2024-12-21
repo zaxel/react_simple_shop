@@ -1,6 +1,9 @@
 ﻿import { fetchAllDevices, updateDevice, updateImg,
         deleteDeviceReq, createBulkDevices as createBulkDevicesReq,
-        createDevice as createDeviceReq, fetchAllTypes, fetchAllBrands } from "../../http/deviceAPI";
+        createDevice as createDeviceReq, fetchAllTypes, fetchAllBrands, 
+        deleteDeviceImgReq,
+        addDeviceImgReq,
+        updateDeviceImgReq} from "../../http/deviceAPI";
 import { fetchAll, fetchDataSetStore } from "./common";
 
 
@@ -28,9 +31,16 @@ export const deleteDevice = async (id, cartStore, userStore) => {
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 }
 
-export const updateDeviceImg = async (data, cartStore, userStore) => {
-  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
-  const cb = updateImg.bind(this, data);
+export const addDeviceImg = async (data, cartStore, userStore, flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true }) => {
+  const cb = addDeviceImgReq.bind(this, data); 
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);  
+}
+export const updateDeviceImg = async (data, cartStore, userStore, flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true }) => {
+  const cb = updateDeviceImgReq.bind(this, data); 
+  return fetchDataSetStore(cb, null, cartStore, userStore, flags);  
+}
+export const deleteDeviceImg = async (data, cartStore, userStore, flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true }) => {
+  const cb = deleteDeviceImgReq.bind(this, data);
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);  
 }
 

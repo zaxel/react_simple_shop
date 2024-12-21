@@ -73,8 +73,21 @@ export const updateDevice = async (id, dbFieldName, newData) => {
     const { data } = await $authHost.put('api/device/' , {id, [dbFieldName]: newData});
     return data; 
 }
-export const updateImg = async (formData) => {
-    const { data } = await $authHost.patch('api/device/img-update/' , formData);
+
+
+
+export const addDeviceImgReq = async (formData) => {
+    const { data } = await $authHost.patch('api/device/img-create/' , formData);  
+    return data; 
+}
+export const updateDeviceImgReq = async (formData) => { 
+    const { data } = await $authHost.put('api/device/img-update/' , formData); 
+    return data; 
+}
+export const deleteDeviceImgReq = async (imageData) => { 
+    const { data } = await $authHost.delete('api/device/img-delete/' , {
+        data: imageData
+      });
     return data; 
 }
 export const deleteDeviceReq = async (id) => {
