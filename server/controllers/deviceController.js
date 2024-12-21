@@ -65,15 +65,43 @@ class DeviceController {
             next(ApiError.forbidden(e.message));
         }
     }
-    async updateImg(req, res, next){
+    async updateDeviceImg(req, res, next){
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()){
                 return next(ApiError.badRequest('validation error: ', errors.array()));
             }
-            let { id } = req.body;
             let img = req?.files?.img || null;
-            const data = await deviceService.updateImg(id, img);
+            let { id, index } = req.body;
+            const data = await deviceService.updateImg(id, index, img, next);  
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async createDeviceImg(req, res, next){
+        try {
+            const errors = validationResult(req);
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { itemId } = req.body;
+            let images = req?.files || null;
+            const data = await deviceService.createImg(itemId, images); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
+    async deleteDeviceImg(req, res, next){
+        
+        try {
+            const errors = validationResult(req); 
+            if(!errors.isEmpty()){
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { deviceId, imgId } = req.body; 
+            const data = await deviceService.deleteDevImg(deviceId, imgId, next);
             return res.json(data);
         } catch (e) {
             next(ApiError.forbidden(e.message));

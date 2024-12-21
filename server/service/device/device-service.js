@@ -3,20 +3,21 @@ const { Device, DeviceInfo } = require('../../models/models');
 const { Op, Sequelize } = require("sequelize");
 const acceptedFileType = 'text/plain';
 const { searchDevicesOptions, orderDevicesOptions } = require('../../utils/searchOptions');
+const ApiError = require("../../error/ApiError");
 
 class DeviceService {
     create = async (name, price, brandId, typeId, info, images, seller_dscr) => {
         let imgesOutStoreData = [];
         if (images) {
-           let imgStoreResp = await fileService.imagesOuterStoreDataResolve(images);
-           imgStoreResp.forEach((result, index) => {
-               if (result.status === "fulfilled") {
-                //    console.log(`Image ${index}: Upload succeeded`, result.value);
-                   imgesOutStoreData.push(result.value.data);
+            let imgStoreResp = await fileService.imagesOuterStoreDataResolve(images);
+            imgStoreResp.forEach((result, index) => {
+                if (result.status === "fulfilled") {
+                    //    console.log(`Image ${index}: Upload succeeded`, result.value);
+                    imgesOutStoreData.push(result.value.data);
                 } else if (result.status === "rejected") {
                     console.log(`Image ${index}: Upload failed`, result.reason);
                 }
-            }); 
+            });
         }
         const device = await Device.create({ name, price, brandId, typeId, img: imgesOutStoreData, seller_dscr });
         if (info) {
@@ -45,8 +46,8 @@ class DeviceService {
         const bulkPromises = data.map(el => {
             (async function () {
                 let { name, price, brandId, typeId, rate, img, info } = el;
-                let device = []; 
-                try{
+                let device = [];
+                try {
                     device = await Device.bulkCreate([{ name, price, brandId, typeId, rate, img }],
                         {
                             ignoreDuplicates: true,
@@ -61,7 +62,7 @@ class DeviceService {
             })()
 
         })
-            let bulkItems = await Promise.allSettled(bulkPromises);
+        let bulkItems = await Promise.allSettled(bulkPromises);
         return bulkItems;
     }
     getAll = async (id, brandId, typeId, limit, page, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
@@ -92,15 +93,84 @@ class DeviceService {
         });
         return { updatedData };
     }
-    updateImg = async (id, img) => {
-        if (!img) {
+    createImg = async (itemId, imagesData) => {
+        if (!imagesData) {
             throw new Error('No image received!')
         }
-        let fileName = await fileService.imageResolve(img);
-        const updatedData = await Device.update({ 'img': fileName }, {
-            where: { id }
+        const status = { rejected: 0, fulfilled: 0 };
+        const imagesOutStoreData = [];
+        const oldItemImagesData = await Device.findOne({
+            where: { id: itemId },
+            attributes: ['img']
         });
-        return { updatedData };
+        imagesOutStoreData.push(...oldItemImagesData.img);
+
+        let imgStoreResp = await fileService.imagesOuterStoreDataResolve(imagesData);
+
+        imgStoreResp.forEach((result, index) => {
+            if (result.status === "fulfilled") {
+                status.fulfilled++;
+                imagesOutStoreData.push(result.value.data);
+            } else if (result.status === "rejected") {
+                status.rejected++;
+                console.log(`Image ${index}: Upload failed`, result.reason);
+            }
+        });
+        const updatedDevices = await Device.update({ 'img': imagesOutStoreData }, {
+            where: { id: itemId }
+        });
+        return { updatedDevices, ...status };
+    }
+    updateImg = async (itemId, curImgId, imgData, next) => {
+        if (!itemId || !curImgId || !imgData) {
+            throw new Error('Not all required image data received!')
+        }
+        const deviceImages = await Device.findOne({
+            where: { id: itemId },
+            attributes: ['img'] 
+        });
+
+        const removeLink = deviceImages.img.find(img => img.id === curImgId).delete_url;
+        const restImages = deviceImages.img.filter(img => img.id !== curImgId);
+        try {
+            // const res = await fileService.imagesOuterStoreDataDelete(removeLink);
+            let imgStoreResp = await fileService.imagesOuterStoreDataResolve({1: imgData});
+
+            imgStoreResp.forEach((result, index) => {
+                if (result.status === "fulfilled") {
+                    restImages.push(result.value.data);
+                } else if (result.status === "rejected") {
+                    console.log(`Image ${index}: Upload failed`, result.reason);
+                }
+            });
+            const updatedDevices = await Device.update({ 'img': restImages }, {
+                where: { id: itemId }
+            });
+            return { updatedDevices };
+
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+    deleteDevImg = async (itemId, imgId, next) => {
+        if (!itemId || !imgId) {
+            throw new Error('No required image data received!')
+        }
+        const device = await Device.findOne({
+            where: { id: itemId }
+        });
+        const removeLink = device.img.find(img => img.id === imgId).delete_url;
+        const restImages = device.img.filter(img => img.id !== imgId);
+        try {
+            // const res = await fileService.imagesOuterStoreDataDelete(removeLink);
+            const updatedData = await Device.update({ 'img': restImages }, {
+                where: { id: itemId }
+            });
+            return { updatedData };
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+
     }
     delete = async (id) => {
         const updatedData = await Device.destroy({
