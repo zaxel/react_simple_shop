@@ -1,6 +1,6 @@
 ﻿const uuid = require('uuid');
 const path = require('path');
-const uploadImgExtrStoreService = require('../http/uploadImgExtrStore-service');
+const serveImgExtrStoreService = require('../http/imgExtrStore-service');
 
 
 class FileService {
@@ -11,8 +11,12 @@ class FileService {
         return fileName;
     }
     imagesOuterStoreDataResolve = async (images) => {
-        return await uploadImgExtrStoreService.post(images);
+        return await serveImgExtrStoreService.post(images);
     }
+    imagesOuterStoreDataDelete = async (url) => {
+        return await serveImgExtrStoreService.delete(url);
+    }
+
 }
 
 module.exports = new FileService();

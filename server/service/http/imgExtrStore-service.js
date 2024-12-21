@@ -1,7 +1,7 @@
 ﻿const axios = require('axios');
 const FormData = require('form-data');
 
-class UploadImgExtrStoreService {
+class ServeImgExtrStoreService {
     post = async (imagesData) => {
         try {
             const promises = Object.entries(imagesData).map(async ([id, image]) => {
@@ -30,7 +30,21 @@ class UploadImgExtrStoreService {
             throw error;
         }
     }
-
+    delete = async url => {
+        try {
+            const response = await axios.post(url,
+                {
+                    params: {
+                        key: process.env.IMG_STORAGE_KEY,
+                    }
+                }
+            );
+            return response;
+        } catch (error) {
+            console.error("Error removing image:", error);
+            throw error;
+        }
+    }
 }
 
-module.exports = new UploadImgExtrStoreService();
+module.exports = new ServeImgExtrStoreService();
