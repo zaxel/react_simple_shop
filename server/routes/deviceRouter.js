@@ -16,6 +16,8 @@ router.put('/',
     body('price').optional().isNumeric(),
     checkRole('ADMIN'), 
     deviceController.update);
-router.patch('/img-update', checkRole('ADMIN'), deviceController.updateImg);
+router.patch('/img-create', checkRole('ADMIN'), deviceController.createDeviceImg); 
+router.put('/img-update', checkRole('ADMIN'), deviceController.updateDeviceImg);
 router.delete('/', checkRole('ADMIN'), deviceController.delete);
+router.delete('/img-delete', checkRole('ADMIN'), deviceController.deleteDeviceImg);
 module.exports = router;
