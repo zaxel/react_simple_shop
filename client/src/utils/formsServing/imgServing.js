@@ -37,3 +37,16 @@ export const setImageFromBlob = (setSrc, input) => {
     image.onloadend = ()=> setSrc(image.result);
     image.readAsDataURL(input);
 }
+
+export const fetchImageAsBlob = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl);
+      if (!response.ok) {
+        throw new Error('Failed to fetch image');
+      }
+      const blob = await response.blob();
+      return blob;
+    } catch (error) {
+      console.error('Error fetching image:', error);
+    }
+  };
