@@ -1,9 +1,10 @@
 ﻿const fileService = require("../file/file-service");
 const { Device, DeviceInfo } = require('../../models/models');
 const { Op, Sequelize } = require("sequelize");
-const acceptedFileType = 'text/plain';
+const acceptedFileType = 'string';
 const { searchDevicesOptions, orderDevicesOptions } = require('../../utils/searchOptions');
 const ApiError = require("../../error/ApiError");
+const { random } = require("../../db");
 
 class DeviceService {
     create = async (name, price, brandId, typeId, info, images, seller_dscr) => {
@@ -38,32 +39,51 @@ class DeviceService {
         });
     }
     createBulk = async (req, next) => {
-        let { file } = req.files;
-        if (file.mimetype !== acceptedFileType)
-            throw new Error('unaccepted file type. must be .txt');
-        const data = JSON.parse(file.data);
-        let self = this;
-        const bulkPromises = data.map(el => {
-            (async function () {
-                let { name, price, brandId, typeId, rate, img, info } = el;
+        let images = req.files;
+        let item = req.body;
+        const savedDBstatus = { saved: 0, failed: 0 };
+        try {
+            let imgStoreResp = await fileService.imagesOuterStoreDataResolve(images);
+            const imagesOutStoreData = imgStoreResp.map((result, index) => {
+                if (result.status === "fulfilled") {
+                    savedDBstatus.saved++;
+                    return result.value.data;
+                } else if (result.status === "rejected") {
+                    savedDBstatus.failed++;
+                    console.log(`Image ${index}: Upload failed`, result.reason);
+                }
+            });
+
+            let self = this;
+            const bulkItems = await Promise.allSettled([{ img: imagesOutStoreData, ...item }].map(async el => {
+                let { name, price, brandId, typeId, rate, img, info, seller_dscr } = el;
                 let device = [];
                 try {
-                    device = await Device.bulkCreate([{ name, price, brandId, typeId, rate, img }],
+                    device = await Device.bulkCreate([{ name, price, brandId, typeId, rate, img, seller_dscr }],
                         {
                             ignoreDuplicates: true,
                         });
                 } catch (err) {
-                    console.log(66, err.message)
+                    savedDBstatus.saved -= img.length;
+                    savedDBstatus.failed += img.length;
+                    // await Promise.allSettled(img.map(async im=>{
+                    //     await fileService.imagesOuterStoreDataDelete(im.delete_url); 
+                    // }))
+                    console.error(err);
+                    throw err;
                 }
                 if (info) {
+                    info = JSON.parse(info);
                     if (!device.length || !device[0].id) return;
                     self.createInfo(info, device[0].id);
                 }
-            })()
 
-        })
-        let bulkItems = await Promise.allSettled(bulkPromises);
-        return bulkItems;
+            }))
+            return { status: bulkItems[0].status, value: savedDBstatus };
+        } catch (error) {
+            console.error("Error in bulk processing:", error);
+            return { status: "error", value: savedDBstatus };
+        }
     }
     getAll = async (id, brandId, typeId, limit, page, sortBy, sortDirection = 'ASC', searchBy, searchPrase) => {
         const startPage = process.env.START_PAGE;
@@ -127,14 +147,14 @@ class DeviceService {
         }
         const deviceImages = await Device.findOne({
             where: { id: itemId },
-            attributes: ['img'] 
+            attributes: ['img']
         });
 
         const removeLink = deviceImages.img.find(img => img.id === curImgId).delete_url;
         const restImages = deviceImages.img.filter(img => img.id !== curImgId);
         try {
             // const res = await fileService.imagesOuterStoreDataDelete(removeLink);
-            let imgStoreResp = await fileService.imagesOuterStoreDataResolve({1: imgData});
+            let imgStoreResp = await fileService.imagesOuterStoreDataResolve({ 1: imgData });
 
             imgStoreResp.forEach((result, index) => {
                 if (result.status === "fulfilled") {
