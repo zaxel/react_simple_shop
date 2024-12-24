@@ -16,7 +16,7 @@ class DeviceController {
     async createBulk(req, res, next) {
         try {
             const data = await deviceService.createBulk(req, next);
-            return res.json({ created_updated: data.length + ' devices' });
+            return res.json(data); 
         } catch (e) {
             next(ApiError.forbidden(e.message));
         }
