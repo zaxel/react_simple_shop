@@ -28,7 +28,6 @@ export const fetchDataSetStore = async (cb, currentStore, cartStore, userStore, 
             return logoutOnClient(cartStore, userStore);
         }
         console.log(e);
-        alert(e?.response?.data?.message);
         throw e;
     } finally {
         loadingOff && currentStore.setLoading(false);

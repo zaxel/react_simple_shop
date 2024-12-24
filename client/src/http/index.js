@@ -39,7 +39,7 @@ const authResponseErrorCb = async (error) => {
         }
     }
     if(error.response.status === 403){
-        alert(error.response.data.message);
+        console.log(error?.response?.data?.message || 'unknown error');
         return 'error';
     }
    throw error;
