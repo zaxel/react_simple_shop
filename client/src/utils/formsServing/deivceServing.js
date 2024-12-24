@@ -20,7 +20,7 @@ export const formDataNewDevice = (title, price, brandActive, typeActive, specs, 
         formData.append('seller_dscr', seller_dscr);
     return formData;
 }
-export const formDataNewDeviceOuterImgStore = (title, price, brandActive, typeActive, specs, images, seller_dscr) => {
+export const formDataNewDeviceOuterImgStore = (title, price, brandActive, typeActive, specs, images, seller_dscr, rate=0) => {
     const formData = new FormData();
         formData.append('name', title);
         formData.append('price', price);
@@ -28,8 +28,9 @@ export const formDataNewDeviceOuterImgStore = (title, price, brandActive, typeAc
         formData.append('typeId', typeActive);
         formData.append('info', JSON.stringify(formDataInfoNoEmptyFields(specs)));
         formData.append('seller_dscr', seller_dscr);
-        images.forEach(image => {
-            formData.append(image.id, image.img);
+        formData.append('rate', rate);
+        images.forEach(image => { 
+            formData.append(image.id, image.img); 
         });
     return formData;
 }
