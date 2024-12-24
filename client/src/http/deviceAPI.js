@@ -1,4 +1,6 @@
 ﻿import {$host, $authHost} from ".";
+import { formDataNewDeviceOuterImgStore } from "../utils/formsServing/deivceServing";
+import { fetchImageAsBlob } from "../utils/formsServing/imgServing";
 
 export const createTypes = async (types) => {
     const {data} = await $authHost.post('api/type', {types});
@@ -49,9 +51,22 @@ export const createDevice = async (formData) => {
     const {data} = await $authHost.post('api/device', formData);
     return data;
 }
-export const createBulkDevices = async (formData) => {
-    const {data} = await $authHost.post('api/device/bulk', formData);
-    return data;
+export const createBulkDevices = async (requests, signal) => {
+    const imagesFolder =  process.env.REACT_APP_IMAGES_FOLDER || "http://localhost:3000/bulkUploadImgs/";
+    const itemsBatch = await Promise.all(requests.map(async({images, ...rest})=>{
+        const imagesBlobs = await Promise.all(images.map(async img=>{
+            return {id: img, img: await fetchImageAsBlob(imagesFolder+img)};  
+        })); 
+        const itemFormData = formDataNewDeviceOuterImgStore(rest.name, rest.price, rest.brandId, rest.typeId, rest.info, imagesBlobs, rest.seller_dscr);   
+        return itemFormData;
+    }))
+    const sendBatch = async (batch, signal) => {
+        const requests = batch.map(async (item) => {
+            return await $authHost.post('api/device/bulk', item, {signal}); 
+          });
+          return await Promise.allSettled(requests);   
+      };
+      return await sendBatch(itemsBatch, signal);
 }
 
 export const fetchAllDevices = async (id, sortBy, sortDirection = 'ASC', limit, page, searchBy = null, searchPrase = null, brandId, typeId) => {

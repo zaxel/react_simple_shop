@@ -12,10 +12,9 @@ export const createDevice = async (formData, cartStore, userStore, flags = { loa
   return fetchDataSetStore(cb, null, cartStore, userStore, flags);
 } 
 
-export const createBulkDevices = async (formData, cartStore, userStore) => {
-  const flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true };
-  const cb = createBulkDevicesReq.bind(this, formData);
-  return fetchDataSetStore(cb, null, cartStore, userStore, flags);
+export const createBulkDevices = async (formData, cartStore, userStore, signal, flags = { loadingOn: false, loadingOff: false, setToStore: false, setPageTotal: false, checkIfAuth: true }) => {
+  const cb = createBulkDevicesReq.bind(this, formData, signal);  
+  return await fetchDataSetStore(cb, null, cartStore, userStore, flags); 
 
 }
 export const changeDeviceData = async (id, dbFieldName, data, cartStore, userStore, curStore=null,
