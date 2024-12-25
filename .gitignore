@@ -28,3 +28,4 @@ yarn-error.log*
 
 # ebay parser
 /ebayParser/node_modules
+/ebayParser/generatedData
