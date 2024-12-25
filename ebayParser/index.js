@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const path = require('path');
 const readline = require('readline');
 
 
@@ -136,12 +137,42 @@ const parseItemsCatalog = async (items, baseURL, brands, types, { brandNew, delP
 
             } catch (e) {
                 console.error(`Failed to parse HTML from ${url}:`, e.message);
-                fs.appendFileSync(`./generatedData/${errorFileName}`, new Date().toLocaleString() + ' => '  + e.message + '\n');
+                fs.appendFileSync(`./generatedData/${errorFileName}`, new Date().toLocaleString() + ' => ' + e.message + '\n');
                 continue;
             }
         }
     }
     return itemsList;
+}
+const readItemsFromFile = async () => {
+    try {
+        const filePath = path.join('./generatedData/', itemsListFileName);
+        const data = await fs.promises.readFile(filePath, 'utf8');
+        
+        const fileData = JSON.parse(data || "[]");
+
+        if (!Array.isArray(fileData) || fileData.length === 0) {
+            throw new Error("No valid item format detected in the file.");
+        }
+        return fileData;
+    } catch (e) {
+        console.error(`Error reading items from file: ${e.message}`);
+        fs.appendFileSync(`./generatedData/${errorFileName}`, `${new Date().toLocaleString()} => ${e.message}\n`);
+        
+        if (e.code === "ENOENT") {
+            console.error(
+                "File not found. \nThe 'itemsList.txt' file must exist in the '/generatedData/' directory, " +
+                "generated during the first step of the parsing process (parsing the list of item URLs), " +
+                "to proceed with the individual item parsing process."
+            );
+        }
+        return null;
+    }
+};
+const parseItems = async () => {
+    const items = await readItemsFromFile(); 
+    if(!items) return;
+    console.log(items)
 }
 (async () => {
     const itemsOfOneInstance = 15;
@@ -241,15 +272,14 @@ const parseItemsCatalog = async (items, baseURL, brands, types, { brandNew, delP
     ]
 
     //step 1. run items list parsing
-    const res = await clearOldParsedData();
-    const itemsList = await parseItemsCatalog(itemsOfOneInstance, baseURL, brands, types, params, minDelay, maxDelay);
-    fs.appendFileSync(`./generatedData/${itemsListFileName}`, `${JSON.stringify(itemsList)} \n`);
-    console.log(itemsList);
-    console.log(`created ${itemsList.length} items skeletons.`);
+    // const res = await clearOldParsedData();
+    // const itemsList = await parseItemsCatalog(itemsOfOneInstance, baseURL, brands, types, params, minDelay, maxDelay);
+    // fs.appendFileSync(`./generatedData/${itemsListFileName}`, `${JSON.stringify(itemsList)} \n`);
+    // console.log(itemsList);
+    // console.log(`created ${itemsList.length} items skeletons.`);
 
     //step 2. run full items data parsing (must have items list parsed on this step)
-    // to be implemented..
-    // const items = await parseItems(...); 
+    const items = await parseItems();
     // fs.appendFileSync('./generatedData/items.txt', `${items}`);
     // console.log(items);
     // console.log(items.length);
