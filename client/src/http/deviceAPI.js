@@ -57,7 +57,7 @@ export const createBulkDevices = async (requests, signal) => {
         const imagesBlobs = await Promise.all(images.map(async img=>{
             return {id: img, img: await fetchImageAsBlob(imagesFolder+img)};  
         })); 
-        const itemFormData = formDataNewDeviceOuterImgStore(rest.name, rest.price, rest.brandId, rest.typeId, rest.info, imagesBlobs, rest.seller_dscr);   
+        const itemFormData = formDataNewDeviceOuterImgStore(rest.name, rest.price, rest.brandId, rest.typeId, rest.info, imagesBlobs, rest.seller_description, rest.rate);   
         return itemFormData;
     }))
     const sendBatch = async (batch, signal) => {
