@@ -26,7 +26,6 @@ const AddDeviceBulkModal = observer(({ show, onHide }) => {
 
   useEffect(() => {
     return () => {
-      console.log('unmount')
       signalsRef.current.forEach(controller => controller.abort());
       signalsRef.current = [];
       breakRef.current = true;
