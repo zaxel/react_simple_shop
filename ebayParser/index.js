@@ -120,7 +120,7 @@ const downloadImg = async (urls) => {
             const timestamp = Date.now();
             const filePath = path.join('./generatedData/images', `image_${timestamp}_${i}.webp`);
             fs.writeFileSync(filePath, response.data);
-            newImagesNames.push(filePath);
+            newImagesNames.push(`image_${timestamp}_${i}.webp`);
             console.log(`Image ${i} downloaded successfully to ${filePath}`);
         }));
 
@@ -414,7 +414,7 @@ const parseItems = async (batchSize, minDelay, maxDelay) => {
     const textFilesToDel = [itemsListFileName, parsedItemsFileName, errorFileName];
     const itemsOfOneInstance = 15;
     const baseEbayURL = "https://www.ebay.co.uk/b/";
-    const itemsBatchSize = 4;
+    const itemsBatchSize = 5;
     const params =
     {
         brandNew: "LH_ItemCondition=1000",
@@ -429,11 +429,11 @@ const parseItems = async (batchSize, minDelay, maxDelay) => {
             title: "TV's",
             url: "bn_1839641"
         },
-        {
-            id: 2,
-            title: "lap-tops",
-            url: "bn_450756"
-        },
+        // {
+        //     id: 2,
+        //     title: "lap-tops",
+        //     url: "bn_450756"
+        // },
         // {
         //     id: 3,
         //     title: "fridges",
@@ -499,10 +499,10 @@ const parseItems = async (batchSize, minDelay, maxDelay) => {
         //     id: 7,
         //     title: "Siemens"
         // },
-        {
-            id: 8,
-            title: "Sony"
-        },
+        // {
+        //     id: 8,
+        //     title: "Sony"
+        // },
         // {
         //     id: 9,
         //     title: "Toshiba"
