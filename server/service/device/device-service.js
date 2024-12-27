@@ -47,7 +47,7 @@ class DeviceService {
             const imagesOutStoreData = imgStoreResp.map((result, index) => {
                 if (result.status === "fulfilled") {
                     savedDBstatus.saved++;
-                    return result.value.data;
+                    return result.value.data || "";
                 } else if (result.status === "rejected") {
                     savedDBstatus.failed++;
                     console.log(`Image ${index}: Upload failed`, result.reason);
