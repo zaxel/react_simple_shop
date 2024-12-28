@@ -1,6 +1,8 @@
 ﻿const uuid = require('uuid');
 const path = require('path');
-const serveImgExtrStoreService = require('../http/imgExtrStore-service');
+// const serveImgExtrStoreService_imgBB = require('../http/imgExtrStore_imgBB-service');
+const serveImgExtrStoreService_imagekit = require('../http/imgExtrStore_imagekit-service');
+const ImageKitDto = require('../../dtos/out-stor-resp-imagekit-dto');
 
 
 class FileService {
@@ -11,10 +13,19 @@ class FileService {
         return fileName;
     }
     imagesOuterStoreDataResolve = async (images) => {
-        return await serveImgExtrStoreService.post(images);
+        // return await serveImgExtrStoreService_imgBB.post(images);
+        const response = await serveImgExtrStoreService_imagekit.post(images);
+        return response.map(res=>{
+            const val = res.value;
+            const newValue = {};
+            newValue.data = new ImageKitDto(val);
+            return {...res, value: newValue};
+        });
     }
     imagesOuterStoreDataDelete = async (url) => {
-        return await serveImgExtrStoreService.delete(url);
+        // return await serveImgExtrStoreService_imgBB.delete(url);
+        return await serveImgExtrStoreService_imagekit.delete(url);
+        
     }
 
 }

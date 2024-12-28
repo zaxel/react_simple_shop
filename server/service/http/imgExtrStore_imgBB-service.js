@@ -1,7 +1,7 @@
 ﻿const axios = require('axios');
 const FormData = require('form-data');
 
-class ServeImgExtrStoreService {
+class ServeImgExtrStoreService_imgBB {
     post = async (imagesData) => {
         try {
             const promises = Object.entries(imagesData).map(async ([id, image]) => {
@@ -11,9 +11,9 @@ class ServeImgExtrStoreService {
                     contentType: image.mimetype,
                 });
 
-                const response = await axios.post(process.env.IMG_STORAGE_API_URL, formData, {
+                const response = await axios.post(process.env.IMG_STORAGE_API_URL_IMGDB, formData, {
                     params: {
-                        key: process.env.IMG_STORAGE_KEY,
+                        key: process.env.IMG_STORAGE_KEY_IMGDB,
                     },
                     headers: {
                         "Content-Type": "multipart/form-data",
@@ -35,7 +35,7 @@ class ServeImgExtrStoreService {
             const response = await axios.post(url,
                 {
                     params: {
-                        key: process.env.IMG_STORAGE_KEY,
+                        key: process.env.IMG_STORAGE_KEY_IMGDB,
                     }
                 }
             );
@@ -47,4 +47,4 @@ class ServeImgExtrStoreService {
     }
 }
 
-module.exports = new ServeImgExtrStoreService();
+module.exports = new ServeImgExtrStoreService_imgBB();
