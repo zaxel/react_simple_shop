@@ -1,2 +1,3 @@
 ﻿export const BATCH_SIZE = 3;
-export const DELAY_BETWEEN_BATCH_REQ = 3000;
+export const MIN_DELAY_BETWEEN_BATCH_REQ = 5;
+export const MAX_DELAY_BETWEEN_BATCH_REQ = 15;

@@ -5,9 +5,10 @@ import { Context } from '../../../..';
 import { observer } from 'mobx-react-lite';
 import { SAMPLE_ROUTE } from '../../../../utils/consts/routes';
 import { fileToArray } from '../../../../utils/dataFormat/convertTypes';
-import { BATCH_SIZE, DELAY_BETWEEN_BATCH_REQ } from '../../../../utils/consts/bulkUpload';
+import { BATCH_SIZE, MIN_DELAY_BETWEEN_BATCH_REQ, MAX_DELAY_BETWEEN_BATCH_REQ } from '../../../../utils/consts/bulkUpload';
 import BulkItemsUploadStatusAlert from '../../alerts/BulkItemsUploadStatusAlert';
 import { addBulkItemsInBatches} from '../../../../utils/administration/adminAddItemsBulk';
+import { getRandomInRange } from '../../../../utils/getRandomInRange';
 
 const AddDeviceBulkModal = observer(({ show, onHide }) => {
   const [arrayFile, setArrayFile] = useState('');
@@ -49,7 +50,7 @@ const AddDeviceBulkModal = observer(({ show, onHide }) => {
         alert('no file selected.'); 
         return;
       }
-      const { failures, imageFails, successes, imageSuccesses } = await addBulkItemsInBatches(breakRef, arrayFile, BATCH_SIZE, DELAY_BETWEEN_BATCH_REQ, addController, removeController, cart, user, setStatus);
+      const { failures, imageFails, successes, imageSuccesses } = await addBulkItemsInBatches(breakRef, arrayFile, BATCH_SIZE, getRandomInRange(MIN_DELAY_BETWEEN_BATCH_REQ, MAX_DELAY_BETWEEN_BATCH_REQ)*1000, addController, removeController, cart, user, setStatus);
       failedAddRef.current += failures;
       successAddRef.current += successes;
       imagesSavedFails.current += imageFails;
