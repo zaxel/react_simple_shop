@@ -153,7 +153,8 @@ class DeviceService {
         const removeLink = deviceImages.img.find(img => img.id === curImgId).delete_url;
         const restImages = deviceImages.img.filter(img => img.id !== curImgId);
         try {
-            // const res = await fileService.imagesOuterStoreDataDelete(removeLink);
+            // const res = await fileService.imagesOuterStoreDataDelete(removeLink); //imgBB
+            fileService.imagesOuterStoreDataDelete(curImgId); //imageKit
             let imgStoreResp = await fileService.imagesOuterStoreDataResolve({ 1: imgData });
 
             imgStoreResp.forEach((result, index) => {
@@ -182,7 +183,8 @@ class DeviceService {
         const removeLink = device.img.find(img => img.id === imgId).delete_url;
         const restImages = device.img.filter(img => img.id !== imgId);
         try {
-            // const res = await fileService.imagesOuterStoreDataDelete(removeLink);
+            // const res = await fileService.imagesOuterStoreDataDelete(removeLink); //imgBB
+            await fileService.imagesOuterStoreDataDelete(imgId); //imagekit
             const updatedData = await Device.update({ 'img': restImages }, {
                 where: { id: itemId }
             });
@@ -192,7 +194,13 @@ class DeviceService {
         }
 
     }
-    delete = async (id) => {
+    delete = async (id) => { 
+        const imagesToDelete = await Device.findOne({
+            where: { id }
+        });
+        Promise.all(imagesToDelete.img.map(async image=>{
+            return await fileService.imagesOuterStoreDataDelete(image.id); //imagekit
+        }))
         const updatedData = await Device.destroy({
             where: { id }
         });

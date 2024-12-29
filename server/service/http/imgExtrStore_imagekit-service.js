@@ -5,7 +5,7 @@ class ServeImgExtrStoreService_imagekit {
         try {
             const promises = Object.entries(imagesData).map(async ([id, image]) => {
                 const key = "Basic "+ Buffer.from(process.env.IMG_STORAGE_KEY_IMAGEKIT+":").toString('base64');
-                const response = await axios.post(process.env.IMG_STORAGE_API_URL_IMAGEKIT, {
+                const response = await axios.post(process.env.IMG_STORAGE_API_UPLOAD_URL_IMAGEKIT, {
                     file: image.data.toString('base64'), 
                     fileName: image.name, 
                 }, {
@@ -25,16 +25,16 @@ class ServeImgExtrStoreService_imagekit {
             throw error;
         }
     }
-    delete = async url => {
+    delete = async imageId => {
+        const key = "Basic "+ Buffer.from(process.env.IMG_STORAGE_KEY_IMAGEKIT+":").toString('base64');
+        const options = {
+            method: 'DELETE',
+            url: process.env.IMG_STORAGE_API_DELETE_URL_IMAGEKIT+imageId,
+            headers: {Accept: 'application/json', Authorization: key}
+          };
         try {
-            // const response = await axios.post(url,
-            //     {
-            //         params: {
-            //             key: process.env.IMG_STORAGE_KEY,
-            //         }
-            //     }
-            // );
-            // return response;
+            const response = await axios.request(options);;
+            return response;
         } catch (error) {
             console.error("Error removing image:", error);
             throw error;

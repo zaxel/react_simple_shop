@@ -22,9 +22,9 @@ class FileService {
             return {...res, value: newValue};
         });
     }
-    imagesOuterStoreDataDelete = async (url) => {
+    imagesOuterStoreDataDelete = async (imageId) => {
         // return await serveImgExtrStoreService_imgBB.delete(url);
-        return await serveImgExtrStoreService_imagekit.delete(url);
+        return await serveImgExtrStoreService_imagekit.delete(imageId);
         
     }
 
