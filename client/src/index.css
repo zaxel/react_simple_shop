@@ -13,7 +13,7 @@ body {
 
 body {
     margin: 0;
-    background-color: #f3f3f3;
+    background-color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1172,52 +1172,41 @@ button:active {
 }
 
 .device__img-cont,
-.device__title-cont,
-.device__price-cont {
-    flex: 0 1 30vw;
-    height: 30vw;
+.device__info-cont{
+    flex: 0 0 50%;
+    height: 70dvh;
 }
 
-.device__star-cont {
-    height: 25vw;
-    text-align: center;
-    line-height: 27vw;
-    font-size: 32px;
-    font-weight: 500;
-}
 
-.device__star-cont img {
-    display: none;
-}
 
-.device__img-cont img {
+.image-gallery {
     width: 100%;
-    height: 100%;
+    height: 70dvh;
+}
+
+.image-gallery-slide img {
+    width: 100%;
+    height: 70dvh;
+    max-height: 70dvh;
     object-fit: cover;
+    overflow: hidden;
+    object-position: center center;
 }
 
-.device__price-cont {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
-    text-align: center;
-    padding: 35px;
+.fullscreen .image-gallery-slide img {
+    height: 100dvh;
+    max-height: 100vh;
+}
+.image-gallery .image-gallery-content.fullscreen{
+    background-color: #fff;
 }
 
-.device__button {
-    font-family: roboto, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
+.image-gallery-thumbnails-container .image-gallery-thumbnail.active,
+.image-gallery-thumbnails-container .image-gallery-thumbnail:focus,
+.image-gallery-thumbnails-container .image-gallery-thumbnail:hover {
+    border: 2px solid #337ab7;
 }
 
-.device h2 {
-    font-family: roboto, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-}
 
 .device__specification h2 {
     margin-bottom: 18px;

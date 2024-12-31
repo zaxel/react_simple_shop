@@ -7,6 +7,7 @@ import { Spinner } from 'react-bootstrap';
 import { addToCart } from '../utils/cart/addToCart';
 import { Context } from '..';
 import ErrorPage from './ErrorPage';
+import DeviceGallery from '../components/DeviceGallery';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({});
@@ -37,18 +38,21 @@ const DevicePage = () => {
                             </div>
                         </div> :
                         <div className='device__img-cont'>
-                            <img src={process.env.REACT_APP_API_URL + device.img} alt='item photo'/>
+                            {/* <img src={process.env.REACT_APP_API_URL + device.img} alt='item photo'/> */}
+                            <DeviceGallery device={device}/>
                         </div>}
-                    <div className='device__title-cont'>
-                        <h2>{device.name}</h2>
-                        <div className='device__star-cont' style={{background: `url(${bigStar}) no-repeat center center / contain`}}>
-                            <img src={star} alt='rating star'/>{device.rate} 
+                    <div className='device__info-cont'>
+                        <div className='device__title-cont'>
+                            <h2>{device.name}</h2>
+                            <div className='device__star-cont' style={{background: `url(${bigStar}) no-repeat center center / contain`}}>
+                                <img src={star} alt='rating star'/>{device.rate} 
+                            </div>
+                            
                         </div>
-                        
-                    </div>
-                    <div className='device__price-cont'>
-                        <h2>${device.price}</h2>
-                        <button onClick={()=>addToCart(cart, user, user.isAuth, cart.cartId, device.id, device_amount, user.user.id)} className='btn btn-outline-light auth__button device__button'>add to basket</button>
+                        <div className='device__price-cont'>
+                            <h2>${device.price}</h2>
+                            <button onClick={()=>addToCart(cart, user, user.isAuth, cart.cartId, device.id, device_amount, user.user.id)} className='btn btn-outline-light auth__button device__button'>add to basket</button>
+                        </div>
                     </div>
                 </div>
                 <div className='device__specification'>
