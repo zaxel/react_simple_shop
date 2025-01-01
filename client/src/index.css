@@ -1173,7 +1173,7 @@ button:active {
 
 .device__main-cont {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 .device__img-cont {
     flex: 0 0 50%;
@@ -1192,18 +1192,18 @@ button:active {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70vh;
+    height: 80vh;
 }
 
 .image-gallery {
     width: 100%;
-    height: 70dvh;
+    height: 80dvh;
 }
 
 .image-gallery-slide img {
     width: 100%;
-    height: 70dvh;
-    max-height: 70dvh;
+    height: 80dvh;
+    max-height: 80dvh;
     object-fit: cover;
     overflow: hidden;
     object-position: center center;
@@ -1223,26 +1223,60 @@ button:active {
     border: 2px solid #337ab7;
 }
 
-
-.device__specification h2 {
-    margin-bottom: 18px;
-}
-
-.device__specification li {
-    font-family: roboto, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    padding: 10px 20px;
-}
-
-.device__specification li:nth-child(odd) {
-    background-color: white;
-}
-
 .device__img-cont .spinner {
     width: 100%;
     height: 100%;
+}
+
+.device__title-cont{
+    border-bottom: 1px solid #d5d9d9;
+    margin-bottom: 20px;
+}
+.device__title{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.device__shop-link{
+    font-size: 14px;
+    font-weight: 600;
+}
+.device__star-cont{
+    margin-bottom: 8px;
+}
+.device__amount-bought{
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+.device__amount-bought span{
+    font-weight: 600;
+}
+
+.device__price{
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.device__price-lower{
+    font-size: 14;
+    margin-bottom: 14px;
+}
+.device__items-left{
+    font-size: 14px;
+    font-weight: 600;
+    color: #b12704;
+    margin-bottom: 14px;
+}
+
+.dev-spec tr{
+    line-height: 2.0;
+    font-size: 14px;
+}
+.dev-spec__title{
+    font-weight: 700;
+}
+.dev-spec__descr{
+    font-weight: 500;
 }
 
 /*device end*/
