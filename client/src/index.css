@@ -1167,17 +1167,33 @@ button:active {
 .device__main-cont {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 18px;
 }
 
-.device__img-cont,
-.device__info-cont{
+.device__main-cont {
+    display: flex;
+    gap: 10px;
+}
+.device__img-cont {
     flex: 0 0 50%;
-    height: 70dvh;
+    position: relative;
+    align-self: stretch;
+}
+.device__info-cont{
+    flex: 0 0 30%;
+}
+.device__buy-cont{
+    flex: 0 0 20%;
 }
 
-
+.device__imgcont-wrapper{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+}
 
 .image-gallery {
     width: 100%;

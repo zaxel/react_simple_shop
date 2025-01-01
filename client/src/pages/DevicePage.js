@@ -43,7 +43,9 @@ const DevicePage = () => {
 						</div>
 					) : (
 						<div className="device__img-cont">
-							<DeviceGallery device={device} />
+                            <div className='device__imgcont-wrapper'>
+    							<DeviceGallery device={device} />
+                            </div>
 						</div>
 					)}
 					<div className="device__info-cont">
