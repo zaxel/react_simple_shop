@@ -1176,15 +1176,15 @@ button:active {
     gap: 12px;
 }
 .device__img-cont {
-    flex: 0 0 50%;
+    flex: 0 1 50%;
     position: relative;
     align-self: stretch;
 }
 .device__info-cont{
-    flex: 0 0 30%;
+    flex: 0 1 30%;
 }
 .device__buy-cont{
-    flex: 0 0 20%;
+    flex: 0 1 20%;
 }
 
 .device__imgcont-wrapper{
@@ -1278,6 +1278,87 @@ button:active {
 .dev-spec__descr{
     font-weight: 500;
 }
+
+
+.device__buy{
+    border: 1px solid #d5d9d9;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+.dev-buy__price{
+    font-weight: 600;
+    margin: 20px 0 20px 0;
+}
+.dev-buy__price span{
+    color: #b12704;
+    font-weight: 300;
+}
+.dev-buy__del-date{
+    font-weight: 600;
+}
+.dev-buy__delivery{
+    margin-bottom: 15px;
+}
+.dev-buy__del-address{
+    font-size: 11px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+}
+.dev-buy__del-address img{
+    width: 15px;
+    height: 15px;
+    
+}
+.dev-buy__condition{
+    font-weight: 600;
+}
+.dev-buy__fulfilledBy{
+    margin-bottom: 15px;
+}
+.dev-buy__buy-button{
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+.dev-buy__add-list{
+    border: 1px solid #d5d9d9;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.dev-other{
+    border: 1px solid #d5d9d9;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+.dev-other h3{
+    font-size: 19px;
+    font-weight: 600;
+    border-bottom: 1px solid #d5d9d9;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+.dev-other a{
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+}
+.dev-other span{
+    font-size: 16px;
+}
+
 
 /*device end*/
 /*device rating start*/
