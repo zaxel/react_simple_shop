@@ -1,21 +1,17 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
-import bigStar from '../assets/rating_star_b.png';
-import star from '../assets/rating_star.png';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+﻿import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { fetchSingleDevice } from '../http/deviceAPI';
 import { Spinner } from 'react-bootstrap';
-import { addToCart } from '../utils/cart/addToCart';
-import { Context } from '..';
 import { Link } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
-import DeviceGallery from '../components/DeviceGallery';
-import RateItem from '../components/RateItem';
+import DeviceGallery from '../components/device/DeviceGallery';
+import RateItem from '../components/device/RateItem';
 import { SHOP_ROUTE } from '../utils/consts/routes';
+import DeviceBuyCont from '../components/device/DeviceBuyCont';
+import { formatGbCurrency } from '../utils/dataFormat/currencies';
 
 const DevicePage = () => {
 	const [device, setDevice] = useState({});
-	const { user, cart } = useContext(Context);
-	const device_amount = 1;
 
 	let { id } = useParams();
 	useEffect(() => {
@@ -62,7 +58,7 @@ const DevicePage = () => {
 							</div>
 						</div>
 						<div className="device__price-cont">
-							<h2 className='device__price'>${device.price}</h2>
+							<h2 className='device__price'>{formatGbCurrency(device.price)}</h2>
 							<p className="device__price-lower">
 								Available at a lower price from <Link to={SHOP_ROUTE}>other sellers</Link> that may not offer free Prime delivery.
 							</p>
@@ -81,22 +77,12 @@ const DevicePage = () => {
 							</table>
 						</div>
 					</div>
-					<aside className="device__buy-cont">
-						<h2>Buy and rest</h2>
-						<button
-							onClick={() =>
-								addToCart(cart, user, user.isAuth, cart.cartId, device.id, device_amount, user.user.id)
-							}
-							className="btn btn-outline-light auth__button device__button"
-						>
-							add to basket
-						</button>
-					</aside>
+					<DeviceBuyCont device={device}/>
 				</div>
-				<div className="device__seller-deskr">
-					<h2>About this item:</h2>
-                    {device.seller_dscr && <iframe src={device.seller_dscr} width="100%" height="1440px" title="seller description"/>}
-                </div>
+				{device.seller_dscr && <div className="device__seller-deskr">
+                 <h2>About this item:</h2>
+                    <iframe src={device.seller_dscr} width="100%" height="1440px" title="seller description"/>
+                </div>}
 			</div>
 		</div>
 	);
