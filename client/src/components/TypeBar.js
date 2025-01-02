@@ -6,6 +6,7 @@ const TypeBar = observer(() => {
     const {device} = useContext(Context);
     return (
         <div className='typebar'>
+            <h3 className='typebar__department-title'>Department</h3>
             <ul className="list-group">
                 {device.types.map(li_item => {
                    return <li

@@ -1014,39 +1014,41 @@ button:active {
 .typebar {
     flex: 0 1 16%;
     margin-top: 90px;
-    background: #C4C4C4;
     height: fit-content;
 }
-
-.typebar .list-group-item+.list-group-item.active {
-    margin-top: 0;
-    border-top-width: 0;
+.typebar__department-title{
+    font-size: 16px;
+    font-weight: 800;
 }
 
+/* .typebar .list-group-item+.list-group-item.active {
+    margin-top: 0;
+    border-top-width: 0;
+} */
+
 .list-group {
-    padding: 20px 0;
+    padding: 15px 0;
 }
 
 .list-group-item {
-    background-color: transparent;
     border: none;
     cursor: pointer;
-    font-family: roboto, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0.3rem 1rem;
 }
 
 .list-group-item:hover {
-    background-color: darkgrey;
+    color: #de7921;
 }
 
 .list-group-item.active {
     color: black;
-    background-color: darkgrey;
-    ;
-    border-color: darkgrey;
-    ;
+    background-color: transparent;
+    font-weight: 800;
+    font-size: 16px;
+    /* border-color: darkgrey; */
+    
 }
 
 /*typebar end*/
