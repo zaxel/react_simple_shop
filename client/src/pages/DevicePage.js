@@ -9,6 +9,7 @@ import RateItem from '../components/device/RateItem';
 import { SHOP_ROUTE } from '../utils/consts/routes';
 import DeviceBuyCont from '../components/device/DeviceBuyCont';
 import { formatGbCurrency } from '../utils/dataFormat/currencies';
+import SellerDescription from '../components/device/SellerDescription';
 
 const DevicePage = () => {
 	const [device, setDevice] = useState({});
@@ -79,10 +80,7 @@ const DevicePage = () => {
 					</div>
 					<DeviceBuyCont device={device}/>
 				</div>
-				{device.seller_dscr && <div className="device__seller-deskr">
-                 <h2>About this item:</h2>
-                    <iframe src={device.seller_dscr} width="100%" height="1440px" title="seller description"/>
-                </div>}
+				<SellerDescription device={device} />
 			</div>
 		</div>
 	);

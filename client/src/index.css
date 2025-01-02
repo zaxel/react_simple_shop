@@ -1359,6 +1359,11 @@ button:active {
     font-size: 16px;
 }
 
+.device__seller-descr iframe{
+    display: block;
+    width: 100%;
+    min-height: 100dvh;
+}
 
 /*device end*/
 /*device rating start*/
