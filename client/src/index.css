@@ -1015,16 +1015,12 @@ button:active {
     flex: 0 1 16%;
     margin-top: 90px;
     height: fit-content;
+    border-right: 2px solid #d5d9d9;
 }
 .typebar__department-title{
     font-size: 16px;
     font-weight: 800;
 }
-
-/* .typebar .list-group-item+.list-group-item.active {
-    margin-top: 0;
-    border-top-width: 0;
-} */
 
 .list-group {
     padding: 15px 0;
@@ -1047,7 +1043,6 @@ button:active {
     background-color: transparent;
     font-weight: 800;
     font-size: 16px;
-    /* border-color: darkgrey; */
     
 }
 
@@ -1057,25 +1052,27 @@ button:active {
 .brandBar .list-group {
     flex-direction: row;
     flex-wrap: wrap;
+    border-bottom: 1px solid #d5d9d9;
+    border-radius: 0;
+    padding: 0;
 }
 
 .brandBar__li {
     list-style: none;
-    background-color: #C4C4C4;
-    margin: 0 0 8px 8px;
-    padding: 8px 16px;
+    padding: 8px;
+    margin-left: 8px;
     cursor: pointer;
-    font-family: roboto, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
+    font-weight: 500;
+    font-size: 13px;
 }
 
-.brandBar__li:hover,
+.brandBar__li:hover{
+    color: #de7921;
+    text-decoration: underline;
+}
 .brandBar__li.active {
-    background-color: darkgray;
+    font-weight: 600;
 }
-
 /* brandbar end */
 
 /* device item start*/
