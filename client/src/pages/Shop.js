@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useEffect } from 'react';
 import TypeBar from '../components/TypeBar';
 import BrandBar from '../components/BrandBar';
-import DeviceItems from '../components/DeviceItems';
+import DeviceItems from '../components/device/DeviceItems';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { fetchPage } from '../utils/administration/adminDevices';
