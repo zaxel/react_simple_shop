@@ -1685,31 +1685,37 @@ button:active {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 3px;
+    gap: 3px;
     height: 96px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: flex-start;
 }
-
-.basket-sponsored__price-cont {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 500;
+.basket-sponsored__descr-cont h4{
+    cursor: pointer;
 }
-
+.basket-sponsored__descr-cont h4:hover{
+    color: #de7921;
+}
+.basket-sponsored__descr-cont h5{
+    font-size: 14px;
+    font-weight: 900;
+}
 .basket-sponsored__descr-cont button {
     font-size: 12px;
     padding: 2px 6px;
+}
+.basket-sponsored__star .rating{
+    font-size: 24px;
+    font-weight: 500;
 }
 
 .basket-item__descr-subcont h2 {
     margin-bottom: 6px;
     cursor: pointer;
+}
+.basket-item__descr-subcont h2:hover {
+    color: #de7921;
 }
 
 /*basket end*/
