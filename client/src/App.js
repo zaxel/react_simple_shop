@@ -27,7 +27,7 @@ const App = observer(() => {
         cart.setCartTotal();
         isActivated(user);
       } catch (e) {
-        console.log(e)
+        console.log(e.message)
       } finally {
         setLoading(false)
       }

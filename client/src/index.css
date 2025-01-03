@@ -1078,29 +1078,23 @@ button:active {
 /* device item start*/
 .devices {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: column;
 }
 
 .deviceItem {
+    display: flex;
     padding: 8px;
-    margin: 20px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    transition: all 0.25s;
-
+    margin-bottom: 8px;
+    gap: 15px;
 }
-
-.deviceItem:hover {
-    border-color: black;
-
-}
-
 .deviceItem__image-cont {
+    flex: 0 1 25%;
     width: 180px;
     height: 180px;
-    margin-bottom: 8px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .deviceItem__image-cont img {
@@ -1108,46 +1102,30 @@ button:active {
     height: 100%;
     object-fit: cover;
 }
-
-.deviceItem__title-cont {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+.deviceItem__info-cont{
+    flex: 0 1 75%;
 }
-
 .deviceItem__title {
     color: #817D7D;
     font-family: roboto, sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 8px;
     max-width: fit-content;
-
+    cursor: pointer;
 }
-
+.deviceItem__title:hover{
+    color: #de7921;
+} 
 .deviceItem__rating-cont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 8px;
 }
-
-.deviceItem__img {
-    width: 13px;
-    height: 13px;
-}
-
-.deviceItem__img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .deviceItem__price {
     font-family: roboto, sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 900;
+    font-size: 18px;
 }
 
 /* device item end*/
@@ -3687,16 +3665,16 @@ button:active {
     .shop__container {
         flex-direction: column;
     }
-
-
     .shop__devices-cont {
         margin-left: 0;
     }
-
+    .deviceItem__image-cont {
+        width: 60px;
+        height: 60px;
+    }
     .typebar {
         margin-top: 0;
     }
-
     /*shop end*/
     /*device item start*/
     .device__imgcont-wrapper{
