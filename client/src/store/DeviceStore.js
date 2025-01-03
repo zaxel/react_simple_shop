@@ -9,7 +9,7 @@ export default class DeviceStore{
     _brandActive = null;
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 30;
+    _itemsPerPage = 15;
     _loading = true;
     constructor(){
         
