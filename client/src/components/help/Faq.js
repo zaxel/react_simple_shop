@@ -54,7 +54,6 @@ const Faq = observer(() => {
   if (helpPage.faqRelated.length) {
     relatedFaqs = helpPage.faqRelated.map(faq => <FooterCard key={faq.id} {...faq} />)
   }
-
   if (loading) {
     return (<div className="spinner">
       <Spinner animation="border" />
@@ -68,7 +67,7 @@ const Faq = observer(() => {
       <BreadCrumbs active={3} category={helpPage.faqCategory} faq={helpPage.faqQuestion}/>
         <div className='help-faq__wrapper'>
           <div className='help-faq__main-cont'>
-            <h4>{helpPage.faqCategory.title}</h4>
+            <h4>{helpPage.faqCategory?.title}</h4>
             <h3>{helpPage.faqQuestion}</h3>
             <div className='help-faq__main-body' dangerouslySetInnerHTML={{ __html: helpPage.faqAnswer }}></div>
           </div>
