@@ -6,6 +6,8 @@ import { deleteDevice, updateDeviceAmount } from '../../utils/cart/fetchSetCart'
 import { setLocalStoreCart } from '../../utils/cart/setLocalStoreCart';
 import { useNavigate } from 'react-router-dom';
 import { DEVICE_ROUTE } from '../../utils/consts/routes';
+import { formatGbCurrency } from '../../utils/dataFormat/currencies';
+import no_image from '../../assets/no-image.jpg';
 
 
 const BasketItem = observer(({device, basketDevice}) => {
@@ -43,7 +45,7 @@ const BasketItem = observer(({device, basketDevice}) => {
     return (
         <div className='basket-item'>
             <div onClick={navigateToItem} className='basket-item__img'>
-                <img src={process.env.REACT_APP_API_URL + device.img} alt='basket item' />
+                <img src = { device.img?.[0]?.url || no_image }  alt = {`basket item ${device.name}`} />
             </div>
             <div className='basket-item__descr-cont'>
                 <div className='basket-item__descr-subcont'>
@@ -63,7 +65,7 @@ const BasketItem = observer(({device, basketDevice}) => {
 
                 </div>
                 <div className='basket-item__price-cont'>
-                    <h3>${device.price}</h3>
+                    <h3>{formatGbCurrency(device.price)}</h3>
                 </div>
 
             </div>
