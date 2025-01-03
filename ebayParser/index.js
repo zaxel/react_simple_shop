@@ -241,7 +241,7 @@ const getCommonFields = (() => {
     }
     const getPrice = ($, container) => {
         const price = $(container).find('.x-bin-price__content .x-price-primary .ux-textspans').text().slice(1);
-        return price;
+        return price.replaceAll(/[^0-9.,]+/g, '').replaceAll(/\,/g, "");
     }
     const getRate = () => {
         //simulate rating. as very few items on eBay have a rating. 
