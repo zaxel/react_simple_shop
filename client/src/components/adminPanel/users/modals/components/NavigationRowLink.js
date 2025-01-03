@@ -4,7 +4,7 @@ import withTooltip from '../../../../../hocs/withTooltip/withTooltip';
 import { useNavigate } from "react-router-dom";
 import { ADMIN_ORDERS_ROUTE } from '../../../../../utils/consts/routes';
 import { adminPageFormatDate } from '../../../../../utils/dataFormat/formatDate';
-import { formatUsCurrency } from '../../../../../utils/dataFormat/currencies';
+import { formatGbCurrency } from '../../../../../utils/dataFormat/currencies';
 
 const NavigationRowLink = ({ data, innerRef}) => {
     const { toolTip, orders } = useContext(Context);
@@ -28,7 +28,7 @@ const NavigationRowLink = ({ data, innerRef}) => {
             <td >{data.id}</td>
             <td>{adminPageFormatDate(data.createdAt)}</td>
             <td >{data.amountOrdered}</td>
-            <td>{formatUsCurrency(data.total)}</td>
+            <td>{formatGbCurrency(data.total)}</td>
         </tr>
 
     );
