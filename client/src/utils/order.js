@@ -1,4 +1,5 @@
 ﻿import { createOrder } from "../http/orderAPI";
+import { formatGbCurrency } from "./dataFormat/currencies";
 import { logoutOnClient } from "./logout";
 
 export const makeOrder = async (setPayed, cartStore, userStore) => {
@@ -24,7 +25,7 @@ export const makeItems = (cartStore) => {
         return <div key={device.id} className='checkout__item-row'>
             <div className='checkout__item-title'>{device.name}</div>
             <div className='checkout__count'>x {count}</div>
-            <div className='checkout__price'>${device.price}</div>
+            <div className='checkout__price'>{formatGbCurrency(device.price)}</div>
         </div>
     })
     return items;
