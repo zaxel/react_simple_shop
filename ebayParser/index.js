@@ -9,7 +9,7 @@ const itemsListFileName = 'itemsList.txt';
 const parsedItemsFileName = 'items.txt';
 const errorFileName = 'error.txt';
 const minDelay = 5;
-const maxDelay = 10;
+const maxDelay = 20;
 
 const clearOldParsedData = async (textFilesToDel, isImgDel) => {
     const deleteTextFiles = files => {
@@ -301,8 +301,14 @@ const parseItemPage = async ($, body, readyFileObj) => {
         const getNewImageUrl = oldImageUrl => {
             const serializedAddress = oldImageUrl.split('/');
             const [nameOld, extension] = serializedAddress.at(-1).split('.');
-            const imageAddress = serializedAddress.toSpliced(serializedAddress.length - 1, 1, "s-l960." + extension).join('/');
+            let imageAddress = serializedAddress.slice();
+            imageAddress.splice(imageAddress.length - 1, 1, "s-l960." + extension);
+            imageAddress = imageAddress.join('/');
             return imageAddress;
+
+            // const [nameOld, extension] = serializedAddress.at(-1).split('.');
+            // const imageAddress = serializedAddress.toSpliced(serializedAddress.length - 1, 1, "s-l960." + extension).join('/');
+            // return imageAddress;
         }
         const images = $(container).find('.picture-panel-container .ux-image-grid-container .ux-image-grid.no-scrollbar').children();
         $(images).each((i, image) => {
@@ -429,11 +435,11 @@ const parseItems = async (batchSize, minDelay, maxDelay) => {
             title: "TV's",
             url: "bn_1839641"
         },
-        // {
-        //     id: 2,
-        //     title: "lap-tops",
-        //     url: "bn_450756"
-        // },
+        {
+            id: 2,
+            title: "lap-tops",
+            url: "bn_450756"
+        },
         // {
         //     id: 3,
         //     title: "fridges",
@@ -471,42 +477,42 @@ const parseItems = async (batchSize, minDelay, maxDelay) => {
         // },
     ]
     const brands = [
-        // {
-        //     id: 1,
-        //     title: "Beko"
-        // },
-        // {
-        //     id: 2,
-        //     title: "JVC"
-        // },
-        // {
-        //     id: 3,
-        //     title: "LG"
-        // },
-        // {
-        //     id: 4,
-        //     title: "Miele"
-        // },
+        {
+            id: 1,
+            title: "Beko"
+        },
+        {
+            id: 2,
+            title: "JVC"
+        },
+        {
+            id: 3,
+            title: "LG"
+        },
+        {
+            id: 4,
+            title: "Miele"
+        },
         {
             id: 5,
             title: "Samsung"
         },
-        // {
-        //     id: 6,
-        //     title: "Sharp"
-        // },
-        // {
-        //     id: 7,
-        //     title: "Siemens"
-        // },
-        // {
-        //     id: 8,
-        //     title: "Sony"
-        // },
-        // {
-        //     id: 9,
-        //     title: "Toshiba"
-        // },
+        {
+            id: 6,
+            title: "Sharp"
+        },
+        {
+            id: 7,
+            title: "Siemens"
+        },
+        {
+            id: 8,
+            title: "Sony"
+        },
+        {
+            id: 9,
+            title: "Toshiba"
+        },
     ]
 
     const confirmParsingStep = async () => {
