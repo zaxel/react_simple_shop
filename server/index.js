@@ -1,7 +1,9 @@
 ﻿require('dotenv').config();
+const searchable = require('./migrations/search/searchable');
 const express = require('express');
 const sequelize = require('./db');
-const models = require('./models/models');
+const params = require('./migrations/search/params');
+// const models = require('./models/models');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/ErrorHandlingMiddleware');
 const path = require('path');
@@ -27,11 +29,11 @@ app.use('/api', router);
 app.use(errorHandler);
 
 
-
 const start = async()=>{
     try{
         await sequelize.authenticate();
-        await sequelize.sync();
+        await sequelize.sync({ alter: true });
+        // await searchable.up(params); //migration (up || down)
         app.listen(PORT, ()=>console.log(`server started on port ${PORT}`));
     }catch(e){
         console.log(e)
