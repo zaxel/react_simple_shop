@@ -18,7 +18,7 @@ class TSVectorSearchDisable {
       
             console.log(`Dropped column, function, trigger and indices for table ${table}.`);
           } catch (e) {
-            console.error("failed to drop column, function, trigger and indices for table ${table}. ", e.message);
+            console.error(`failed to drop column, function, trigger and indices for table ${table}. `, e.message);
             throw e;
           }
     };
