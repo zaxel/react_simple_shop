@@ -54,6 +54,13 @@ router.put('/faq/position/',
     body('categoryId').isNumeric(),
     helpController.changeFaqPosition); 
 
+router.get('/search/',
+    query('searchPhrase').optional().isString(),
+    query('page').optional().isNumeric(),
+    query('limit').optional().isNumeric(),
+    query('categories').optional().isString(),
+    helpController.getFaqSearch);
+
 router.get('/category/',
     query('id').optional().isNumeric(),
     helpController.getCategory);
