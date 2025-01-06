@@ -112,9 +112,9 @@ export const fetchCategoryFaqQuestions = async (currentStore, categoryId, page, 
     console.log(e)
   }
 }
-export const fetchSearchFaqQuestions = async (currentStore, categoryId, page, limit, categories) => {
+export const fetchSearchFaqQuestions = async (currentStore, searchPhrase, page, limit, categories) => {
   try {
-    const fetchedData = await fetchSearchFaq(categoryId, page, limit, categories);
+    const fetchedData = await fetchSearchFaq(searchPhrase, page, limit, categories);
     const setterName = 'setQuestions';
     return setStoreField(currentStore, setterName, fetchedData); 
   } catch (e) {

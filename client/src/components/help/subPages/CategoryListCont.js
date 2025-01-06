@@ -27,11 +27,11 @@ const CategoryListCont = observer(({ id , title}) => {
 
     useEffect(()=>{
         (async()=>{
-            if(id){
+            // if(id){
                 setLoading(true);
                 await helpPage.resetQuestions();
                 if(title==="Search Result"){
-                    await fetchSearchFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
+                    await fetchSearchFaqQuestions(helpPage, 'where is my order', helpPage.faqsPage, itemsPerPage);
                 }else{
                     await fetchCategoryFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
                 }
@@ -39,9 +39,9 @@ const CategoryListCont = observer(({ id , title}) => {
                 maxPage = Math.ceil(helpPage.totalFaqs / itemsPerPage);
                 setDisabled(maxPage < helpPage.faqsPage + 2 ? true : false)
                 setLoading(false);   
-            }
+            // }
         })()
-    }, [id])
+    }, [id, title])
     
     useEffect(() => {
         if(helpPage.faqsPage >= maxPage){

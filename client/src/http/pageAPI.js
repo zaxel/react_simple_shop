@@ -126,10 +126,10 @@ export const fetchQuestions = async (categoryId, page, limit, categories) => {
     console.log(fetchedData.data);
     return fetchedData.data;
 }
-export const fetchSearchFaq = async (categoryId, page, limit, categories) => {
-    console.log(categoryId, page, limit, categories);
+export const fetchSearchFaq = async (searchPhrase, page, limit, categories) => {
+    console.log(searchPhrase, page, limit, categories);
     const fetchedData = await $host.get('api/help/search', {params:{
-        categoryId, page, limit, categories
+        searchPhrase, page, limit, categories
     }});  
     console.log(fetchedData.data);
     return fetchedData.data;
