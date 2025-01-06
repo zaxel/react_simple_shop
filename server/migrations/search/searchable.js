@@ -1,10 +1,12 @@
 const { removeIndicesAndTriggers } = require("./tsVector/searchReadyDisable");
+const { addTrgmExtension } = require("./trigram/fuzzySearchEnable");
 const {
   addTSVectorColumn,
   createTriggerAndFunction,
   updateExistingData,
   createIndex,
 } = require("./tsVector/searchReadyEnable");
+const { removeTrgmExtension } = require("./trigram/fuzzySearchDisable");
 
 module.exports = {
   up: async function ({ queryInterface, Sequelize, searchable, trigrams }) {
@@ -23,11 +25,21 @@ module.exports = {
       }
 
       if (trigrams.length > 0) {
-        console.log("Enabling fuzzy search functionality...");
-        console.warn("Trigram functionality not implemented yet.");
+        const results = await Promise.allSettled(
+          trigrams.map(({ name }) =>{
+            addTrgmExtension(name, queryInterface);
+          })
+        );
+        results.forEach((result, index) => {
+          if (result.status === "rejected") {
+            console.error(`Failed to enable searchReady for table "${searchable[index].table}", column "${searchable[index].column}":`,
+            result.reason);
+          }
+        });
+        console.log("fuzzy search functionality successfully enabled.");
       }
     } catch (e) {
-      console.error("Migration failed:", e.message);
+      console.error("search enabling failed:", e.message);
       throw e;
     }
   },
@@ -46,11 +58,20 @@ module.exports = {
       });
 
       if (trigrams.length > 0) {
-        console.log("Disabling fuzzy search functionality...");
-        console.warn("Trigram functionality not implemented yet.");
+        const results = await Promise.allSettled(
+          trigrams.map(({ name }) =>{
+            removeTrgmExtension(name, queryInterface);
+          })
+        );
+        results.forEach((result, index) => {
+          if (result.status === "rejected") {
+            console.error(`Failed to disable ${trigrams[index].name} extension:`, result.reason);
+          }
+        });
+        console.log("fuzzy search functionality successfully disabled.");
       }
     } catch (e) {
-      console.error("Rollback failed:", e.message);
+      console.error("search disabling failed:", e.message);
       throw e;
     }
   },

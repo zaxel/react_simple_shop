@@ -12,5 +12,5 @@ module.exports = {
         createParams: "setweight(to_tsvector('english', NEW.title), 'A') || setweight(to_tsvector(COALESCE(NEW.text, '')), 'B')",
         updateParams: "setweight(to_tsvector('english', title), 'A') || setweight(to_tsvector(COALESCE(text, '')), 'B')",
     }],
-    trigrams: []
+    trigrams: [{name: 'pg_trgm'}]
 }
