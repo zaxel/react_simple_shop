@@ -6,7 +6,9 @@ import Topic from './Topic';
 const Topics = observer(() => {
     const {helpPage} = useContext(Context);
     
-    const topics = helpPage.categories.map(card => <Topic key={card.id} {...card} />)
+    const topics = helpPage.categories
+        .filter(card=>card.title!=="Search Result")
+        .map(card => <Topic key={card.id} {...card} />)
     return (
         <>
             <ul className='help-aside__topics topic-aside'>
