@@ -1,6 +1,8 @@
 ﻿import { observer } from 'mobx-react-lite';
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../..';
+import { Link } from 'react-router-dom';
+import { HELP_CAT_ROUTE } from '../../utils/consts/routes';
 
 const Banner = observer(() => {
     const {helpPage} = useContext(Context);
@@ -16,7 +18,9 @@ const Banner = observer(() => {
             <h3>{helpPage.pageTitle}</h3>
             <div className='help-banner__container'>
                 <input type="text" placeholder="Search for help" />
-                <button onClick={() => console.log('search')} />
+                <Link to={HELP_CAT_ROUTE + "/search"}> 
+                    <button onClick={()=>helpPage.setSearchPhrase("where is my order?")} />
+                </Link> 
             </div>
         </div>
     );

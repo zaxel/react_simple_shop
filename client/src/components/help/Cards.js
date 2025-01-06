@@ -9,7 +9,9 @@ const Cards = observer(() => {
     let cards = null;
 
     if(helpPage.categories.length){
-        cards = helpPage.categories.map(card => {
+        cards = helpPage.categories
+                .filter(card=>card.title!=="Search Result")
+                .map(card => {
             return <Card key={card.id} {...card} />
         })
     } 
