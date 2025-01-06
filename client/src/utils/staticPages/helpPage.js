@@ -2,7 +2,8 @@
   createFaqs, deleteFaqReq, fetchFaqs, fetchHelpPage, fetchQuestions, updateFaqAnswer, updateFaqQuestion,
   updateHelpPage, updatePageImg, fetchCategory, fetchRelated, addRelatedReq, removedRelatedReq, createCategoryReq, 
   deleteCategoryReq, updateCategory, changeCatImgReq, updateHelpCatPosition, updateHelpFaqPosition, fetchPopular,
-  fetchFaqById, fetchFaqByTitle   
+  fetchFaqById, fetchFaqByTitle,   
+  fetchSearchFaq
 } from "../../http/pageAPI";
 
 export const setStoreField = async (currentStore, setterName, newData) => {
@@ -105,6 +106,15 @@ export const fetchStarterQuestions = async (currentStore, categories) => {
 export const fetchCategoryFaqQuestions = async (currentStore, categoryId, page, limit, categories) => {
   try {
     const fetchedData = await fetchQuestions(categoryId, page, limit, categories);
+    const setterName = 'setQuestions';
+    return setStoreField(currentStore, setterName, fetchedData); 
+  } catch (e) {
+    console.log(e)
+  }
+}
+export const fetchSearchFaqQuestions = async (currentStore, categoryId, page, limit, categories) => {
+  try {
+    const fetchedData = await fetchSearchFaq(categoryId, page, limit, categories);
     const setterName = 'setQuestions';
     return setStoreField(currentStore, setterName, fetchedData); 
   } catch (e) {

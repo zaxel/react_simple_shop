@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useContext, useEffect, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import Progress from './Progress';
 import CategoryList from './CategoryList';
 import Button from './Button';
@@ -6,17 +6,17 @@ import FooterCard from '../FooterCard';
 import { Spinner } from 'react-bootstrap';
 import { Context } from '../../..';
 import { observer } from 'mobx-react-lite';
-import { fetchCategoryFaqQuestions } from '../../../utils/staticPages/helpPage';
+import { fetchCategoryFaqQuestions, fetchSearchFaqQuestions } from '../../../utils/staticPages/helpPage';
 
-const CategoryListCont = observer(({ id }) => {
+const CategoryListCont = observer(({ id , title}) => {
     const { helpPage } = useContext(Context);
     const itemsPerPage = 12;
     let maxPage = Math.ceil(helpPage.totalFaqs / itemsPerPage); 
-
+    
     let items = [] 
     if(helpPage.questions.length)
         items = helpPage.questions.map(item => <FooterCard key={item.id} {...item}/>);
-
+    
     const [loading, setLoading] = useState(false);
     const [disabled, setDisabled] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
@@ -30,7 +30,11 @@ const CategoryListCont = observer(({ id }) => {
             if(id){
                 setLoading(true);
                 await helpPage.resetQuestions();
-                await fetchCategoryFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
+                if(title==="Search Result"){
+                    await fetchSearchFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
+                }else{
+                    await fetchCategoryFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
+                }
                 setCount(calcItemsCount());
                 maxPage = Math.ceil(helpPage.totalFaqs / itemsPerPage);
                 setDisabled(maxPage < helpPage.faqsPage + 2 ? true : false)
@@ -48,7 +52,11 @@ const CategoryListCont = observer(({ id }) => {
     const onLoadMoreClick = async() => {
         setLoadingMore(true);
         helpPage.setFaqsPage(helpPage.faqsPage + 1);
-        await fetchCategoryFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
+        if(title==="Search Result"){
+            await fetchSearchFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
+        }else{
+            await fetchCategoryFaqQuestions(helpPage, id, helpPage.faqsPage, itemsPerPage);
+        }
         setCount(calcItemsCount());
         setLoadingMore(false); 
     }
