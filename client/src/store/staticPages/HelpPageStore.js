@@ -24,6 +24,8 @@ export default class HelpPageStore{
         this._faqRelated = [];
         this._faqCategory = {};
         this._infoHelpCategoryId = null;
+
+        this._searchPhrase = '';
         
         makeAutoObservable(this);
     }
@@ -90,6 +92,9 @@ export default class HelpPageStore{
         this._faqRelated = faq.relatedFaqs;
         this._infoHelpCategoryId = faq.question.infoHelpCategoryId;
     }
+    setSearchPhrase(text){
+        this._searchPhrase = text;
+    }
 
     get loading(){
         return this._loading;
@@ -144,6 +149,9 @@ export default class HelpPageStore{
     } 
     get faqCategory(){
         return this._faqCategory; 
+    } 
+    get searchPhrase(){
+        return this._searchPhrase; 
     } 
    
 }
