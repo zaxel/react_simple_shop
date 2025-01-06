@@ -26,8 +26,6 @@ class HelpService {
         return { questions, answers };
     }
     getFaq = async ({id, faqName}) => {
-        console.log(88, 'getFaq')
-        console.log(id)
         let question = null;
         if(id){
             const questionData = await InfoHelpQuestions.findOne({where: {id}});
