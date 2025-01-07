@@ -869,6 +869,11 @@ button:active {
 .help__category>.spinner{
     width: auto;
 }
+
+.help__error .error__page{
+    margin-top: 10dvh;
+}
+
 .help__aside {
     flex: 0 1 30%;
     margin-left: 20px;
