@@ -6,6 +6,7 @@ const fileService = require("../file/file-service");
 const queryToString = require('../../utils/queryToString');
 const PageDto = require('../../dtos/static-page-dto.js');
 const HelpFaqDto = require('../../dtos/static-page-help-faq-dto');
+const HelpFaqAnsToQuestDto = require('../../dtos/static-page-help-faq-ans-dto'); 
 const HelpCatDto = require('../../dtos/static-page-help-cat-dto');
 const HelpRelatedDto = require('../../dtos/static-page-help-related-dto');
 const HelpPopularDto = require('../../dtos/static-page-help-popular-dto');
@@ -162,12 +163,12 @@ class HelpService {
             },
             limit,
             offset,
-            order: [['rank', 'DESC']],
+            order: [['rank', 'DESC'], ['id', 'ASC']],
             replacements: { searchPhrase },
           });
       
-          const answers = searchResultData.rows.map(el => new HelpFaqDto({ answer: el }));
-          return { answers, count: searchResultData.count };
+          const faqs = searchResultData.rows.map(el => new HelpFaqAnsToQuestDto({ faq: el }));
+          return { questions: faqs, count: searchResultData.count };
         } catch (error) {
           console.error('Error in getFaqSearch:', error);
           throw error;
