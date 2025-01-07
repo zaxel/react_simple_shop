@@ -119,19 +119,15 @@ export const createFaqs = async (question, answerTitle, answerText) => {
     return updatedData.data;  
 }
 export const fetchQuestions = async (categoryId, page, limit, categories) => {
-    console.log(categoryId, page, limit, categories);
     const fetchedData = await $host.get('api/help/question', {params:{
         categoryId, page, limit, categories
     }});  
-    console.log(fetchedData.data);
     return fetchedData.data;
 }
 export const fetchSearchFaq = async (searchPhrase, page, limit, categories) => {
-    console.log(searchPhrase, page, limit, categories);
     const fetchedData = await $host.get('api/help/search', {params:{
         searchPhrase, page, limit, categories
     }});  
-    console.log(fetchedData.data);
     return fetchedData.data;
 }
 export const updateHelpFaqPosition = async ({categoryId, positions}) => {
