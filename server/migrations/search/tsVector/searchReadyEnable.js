@@ -87,7 +87,7 @@ class TSVectorSearchReady {
           FROM pg_indexes
           WHERE tablename = $1 AND indexname = $2;
         `;
-        const indexName = `${column}_idx`;
+        const indexName = `${table}_${column}_idx`;
         const indexExists = await queryInterface.sequelize.query(indexQuery, {
           bind: [table, indexName],
           type: queryInterface.sequelize.QueryTypes.SELECT,
