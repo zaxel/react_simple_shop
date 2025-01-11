@@ -121,46 +121,68 @@ class DeviceService {
     try {
       const searchResultData = await sequelize.query(
         `
-                SELECT *,
-                COUNT(*) OVER() AS total_count
-                FROM (
-                  SELECT 
-                    "device".*,
-                    ts_rank(setweight("device"."searchable", 'A'), websearch_to_tsquery('english', :searchPhrase)) AS "device_rank",
-                    ts_headline(
-                      'english',
-                      "device"."name",
-                      websearch_to_tsquery('english', :searchPhrase),
-                      'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
-                    ) AS "highlighted_name",
-                    "info"."id" AS "info_id",
-                    "info"."title" AS "info_title",
-                    "info"."description" AS "info_description",
-                    ts_headline(
-                      'english',
-                      "info"."title",
-                      websearch_to_tsquery('english', :searchPhrase),
-                      'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
-                    ) AS "info_highlighted_title",
-                    ts_headline(
-                      'english',
-                      "info"."description",
-                      websearch_to_tsquery('english', :searchPhrase),
-                      'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
-                    ) AS "info_highlighted_description",
-                    ts_rank(setweight("info"."searchable", 'B'), websearch_to_tsquery('english', :searchPhrase)) AS "info_rank"
-                  FROM "devices" AS "device"
-                  LEFT OUTER JOIN "device_infos" AS "info"
-                    ON "device"."id" = "info"."deviceId" 
-                    AND "info"."searchable" @@ websearch_to_tsquery('english', :searchPhrase)
-                  WHERE 
-                    "device"."searchable" @@ websearch_to_tsquery('english', :searchPhrase)
-                    AND (:brandId IS NULL OR "device"."brandId" = :brandId)
-                    AND (:typeId IS NULL OR "device"."typeId" = :typeId)
-                ) AS subquery
-                ORDER BY "device_rank" + COALESCE("info_rank", 0) DESC, "id" ASC 
-                LIMIT :limit OFFSET :offset;
-                `,
+        WITH ranked_devices AS (
+        SELECT 
+          "device".*,
+          ts_rank(setweight("device"."searchable", 'A'), websearch_to_tsquery('english', :searchPhrase)) AS "device_rank",
+          ts_headline(
+            'english',
+            "device"."name",
+            websearch_to_tsquery('english', :searchPhrase),
+            'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
+          ) AS "highlighted_name",
+          ts_headline(
+            'english',
+            "info"."title",
+            websearch_to_tsquery('english', :searchPhrase),
+            'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
+          ) AS "info_highlighted_title",
+          ts_headline(
+            'english',
+            "info"."description",
+            websearch_to_tsquery('english', :searchPhrase),
+            'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
+          ) AS "info_highlighted_description",
+          ts_rank(setweight("info"."searchable", 'B'), websearch_to_tsquery('english', :searchPhrase)) AS "info_rank",
+          similarity("device"."searchable"::text, :searchPhrase) AS "device_similarity",
+          similarity("info"."searchable"::text, :searchPhrase) AS "info_similarity",
+          ROW_NUMBER() OVER (
+            PARTITION BY "device"."id" 
+            ORDER BY 
+              ts_rank(setweight("device"."searchable", 'A'), websearch_to_tsquery('english', :searchPhrase)) + 
+              COALESCE(ts_rank(setweight("info"."searchable", 'B'), websearch_to_tsquery('english', :searchPhrase)), 0) DESC, 
+              GREATEST(similarity("device"."searchable"::text, :searchPhrase), similarity("info"."searchable"::text, :searchPhrase)) DESC
+          ) AS row_number
+        FROM "devices" AS "device"
+        LEFT OUTER JOIN "device_infos" AS "info"
+          ON "device"."id" = "info"."deviceId"
+        WHERE 
+          (
+            "device"."searchable" @@ websearch_to_tsquery('english', :searchPhrase) OR
+            similarity("device"."searchable"::text, :searchPhrase) > 0.2 OR
+            similarity("info"."searchable"::text, :searchPhrase) > 0.2
+          )
+          AND (:brandId IS NULL OR "device"."brandId" = :brandId)
+          AND (:typeId IS NULL OR "device"."typeId" = :typeId)
+      ),
+      total_count AS (
+        SELECT COUNT(*) AS count
+        FROM ranked_devices
+        WHERE row_number = 1
+      )
+      SELECT 
+        ranked_devices.*, 
+        "highlighted_name", 
+        "info_highlighted_title", 
+        "info_highlighted_description",
+        total_count.count AS total_count
+      FROM ranked_devices, total_count
+      WHERE row_number = 1
+      ORDER BY 
+        "device_rank" + COALESCE("info_rank", 0) DESC, 
+        GREATEST("device_similarity", "info_similarity") DESC
+      LIMIT :limit OFFSET :offset;
+      `,
         {
           replacements: {
             searchPhrase,
