@@ -10,6 +10,7 @@ import PaginationCont from '../components/PaginationCont';
 import { Spinner } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 import { getQueryParamsString, setQueryParamsString } from '../utils/http/queryParams';
+import SearchBar from '../components/SearchBar';
 
 const Shop = observer(() => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +31,7 @@ const Shop = observer(() => {
     useEffect(() => {
         setQueryParamsString(setSearchParams, device);
         fetchPage(device);
-    }, [device.activePage, device.brandActive, device.typeActive])
+    }, [device.activePage, device.brandActive, device.typeActive, device.searchKey])
 
     if (device.loading) {
         return (
@@ -45,6 +46,7 @@ const Shop = observer(() => {
                 <TypeBar />
                 <div className='shop__devices-cont'>
                     <BrandBar />
+                    <SearchBar setSearchParams={setSearchParams}/>
                     <DeviceItems />
                     <PaginationCont currentStore={device} />
                 </div>
