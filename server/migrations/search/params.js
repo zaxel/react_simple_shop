@@ -16,14 +16,14 @@ module.exports = {
         {
             table: "devices", 
             column: "searchable",
-            createParams: "to_tsvector('simple', COALESCE(name, ''))",
-            updateParams: "to_tsvector('simple', COALESCE(name, ''))",
+            createParams: "to_tsvector('english', COALESCE(name, ''))",
+            updateParams: "to_tsvector('english', COALESCE(name, ''))",
         }
         ,{
             table: "device_infos", 
             column: "searchable",
-            createParams: "setweight(to_tsvector('english', NEW.title), 'A') || setweight(to_tsvector('simple', COALESCE(NEW.description, '')), 'B')",
-            updateParams: "setweight(to_tsvector('english', title), 'A') || setweight(to_tsvector('simple', COALESCE(description, '')), 'B')",
+            createParams: "setweight(to_tsvector('english', NEW.title), 'A') || setweight(to_tsvector('english', COALESCE(NEW.description, '')), 'B')",
+            updateParams: "setweight(to_tsvector('english', title), 'A') || setweight(to_tsvector('english', COALESCE(description, '')), 'B')",
         }
     ],
     trigrams: [{name: 'pg_trgm'}]
