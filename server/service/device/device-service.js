@@ -354,18 +354,22 @@ class DeviceService {
     }
   };
   delete = async (id) => {
-    const imagesToDelete = await Device.findOne({
-      where: { id },
-    });
-    Promise.all(
-      imagesToDelete.img.map(async (image) => {
-        return await fileService.imagesOuterStoreDataDelete(image.id); //imagekit
-      })
-    );
-    const updatedData = await Device.destroy({
-      where: { id },
-    });
-    return { updatedData };
+    try{
+      const imagesToDelete = await Device.findOne({
+        where: { id },
+      });
+      Promise.all(
+        imagesToDelete.img.map(async (image) => {
+          return await fileService.imagesOuterStoreDataDelete(image.id); //imagekit
+        })
+      );
+      const updatedData = await Device.destroy({
+        where: { id },
+      });
+      return { updatedData };
+    }catch(e){
+      console.log("error on item deleting: ", e)
+    }
   };
 }
 module.exports = new DeviceService();

@@ -24,7 +24,11 @@ class FileService {
     }
     imagesOuterStoreDataDelete = async (imageId) => {
         // return await serveImgExtrStoreService_imgBB.delete(url);
-        return await serveImgExtrStoreService_imagekit.delete(imageId);
+        try{
+            return await serveImgExtrStoreService_imagekit.delete(imageId);
+        }catch(e){
+            console.log("error on image deleting: ", e);
+        }
         
     }
 
