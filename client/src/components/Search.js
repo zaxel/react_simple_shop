@@ -10,12 +10,12 @@ const Search = observer(({store, options, onSubmitSearch}) => {
         store.setSearchBy(e.target.value)
     }
     const onSubmit = (e) => {
-        if(!store.searchBy) {
-            return alert('Please choose search by filter option!' )
-        }
-        if(store.searchByPrase === store.searchByLastPrase && store.searchBy === store.searchByLast){
+        if(!store.searchByPrase || !store.searchBy)
+            store.setSearchBy("");
+        
+        if(store.searchByPrase === store.searchByLastPrase && store.searchBy === store.searchByLast)
             return;
-        }
+        
         store.setSearchByLastPrase(store.searchByPrase);
         store.setSearchByLast(store.searchBy);
         setQueryParamsString(setSearchParams, store);
