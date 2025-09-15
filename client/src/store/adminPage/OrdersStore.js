@@ -8,7 +8,7 @@ export default class OrdersStore extends BaseWithSearchStore{
 
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 4;
+    _itemsPerPage = 8;
 
     constructor(){
         super();
