@@ -2,7 +2,7 @@
   "name": "client_store_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
+  "homepage": "https://zaxel.github.io/react_simple_shop/",
   "dependencies": {
     "@popperjs/core": "^2.11.4",
     "@testing-library/jest-dom": "^5.14.1",
@@ -25,6 +25,8 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
