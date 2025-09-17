@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script type="text/javascript">
+      console.log(sessionStorage.redirect);
+      console.log(location.href);
+      
       sessionStorage.redirect = location.href;
     </script>
     <meta http-equiv="refresh" content="0;URL='/'">
