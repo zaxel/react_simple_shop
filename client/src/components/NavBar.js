@@ -29,7 +29,7 @@ const NavBar = observer(() => {
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
             <div className="container-fluid">
-                <Link onClick={resetPageOptions} className="navbar-brand" to="/">Arazone</Link>
+                <Link onClick={resetPageOptions} className="navbar-brand" to={SHOP_ROUTE}>Arazone</Link>
                 <ul className="flex-row navbar-nav me-auto mb-lg-0">
                     <li className="nav-item">
                         <Link className="nav-link" to={SHOP_ROUTE}>Home</Link>
