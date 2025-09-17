@@ -4,10 +4,11 @@ import { Context } from '../..';
 import { observer } from 'mobx-react-lite';
 import { isContainBtns } from '../../utils/check/isContainBtns';
 import { blockImgsLinks } from '../../utils/dataFormat/blockImgsLinks';
+import { BASE_ROUTE } from '../../utils/consts/routes';
 
 const AboutBlock = observer(({ id, title, text, button_id, hero}) => {
     const { aboutPage } = useContext(Context);
-    const btns = isContainBtns(aboutPage, button_id) && button_id.map(btn => <Link className="about-card__button experience-block__button" key={aboutPage.buttons[btn].id} to={aboutPage.buttons[btn].link}>{aboutPage.buttons[btn].text}</Link>)
+    const btns = isContainBtns(aboutPage, button_id) && button_id.map(btn => <Link className="about-card__button experience-block__button" key={aboutPage.buttons[btn].id} to={BASE_ROUTE+aboutPage.buttons[btn].link}>{aboutPage.buttons[btn].text}</Link>)
 
     return (
         <div className='sub-about__block experience-block'>
