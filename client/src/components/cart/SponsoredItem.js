@@ -24,7 +24,6 @@ const SponsoredItem = ({ el }) => {
       user.user.id
     );
   };
-  console.log(el);
   return (
     <div className="basket-sponsored">
       <div className="basket-sponsored__img">
