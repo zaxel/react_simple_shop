@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react_simple_shop/static/css/main.b86fa739.css",
-    "main.js": "/react_simple_shop/static/js/main.9829cb82.js",
+    "main.js": "/react_simple_shop/static/js/main.76e14fed.js",
     "static/media/card_example1.png": "/react_simple_shop/static/media/card_example1.2f760370ba94dff31765.png",
     "static/media/card_example3.jpg": "/react_simple_shop/static/media/card_example3.8c3b46488630c51f83e3.jpg",
     "static/media/card_example2.jpg": "/react_simple_shop/static/media/card_example2.d54728d2bd102e001c87.jpg",
@@ -15,10 +15,10 @@
     "static/media/search.svg": "/react_simple_shop/static/media/search.e5eb24b0703bcef3c116.svg",
     "static/media/arrow-right.svg": "/react_simple_shop/static/media/arrow-right.b7104ff3b1c44dba050e802ca0703dbf.svg",
     "main.b86fa739.css.map": "/react_simple_shop/static/css/main.b86fa739.css.map",
-    "main.9829cb82.js.map": "/react_simple_shop/static/js/main.9829cb82.js.map"
+    "main.76e14fed.js.map": "/react_simple_shop/static/js/main.76e14fed.js.map"
   },
   "entrypoints": [
     "static/css/main.b86fa739.css",
-    "static/js/main.9829cb82.js"
+    "static/js/main.76e14fed.js"
   ]
 }
