@@ -5,6 +5,8 @@
     <title>Redirecting...</title>
     <script type="text/javascript">
       sessionStorage.redirect = location.href;
+      console.log("%PUBLIC_URL%");
+      console.log(process.env.PUBLIC_URL);
       window.location.href = "%PUBLIC_URL%";
     </script>
     <meta http-equiv="refresh" content="0;URL='%PUBLIC_URL%'" />
