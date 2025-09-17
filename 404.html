@@ -4,10 +4,12 @@
     <meta charset="utf-8" />
     <title>Redirecting...</title>
     <script type="text/javascript">
+      // Save the path so index.html can pick it up
       sessionStorage.redirect = location.href;
-      window.location.href = "%PUBLIC_URL%/";
+      // Redirect to index.html
+      window.location.href = "/react_simple_shop/";
     </script>
-    <meta http-equiv="refresh" content="0;URL='%PUBLIC_URL%/'" />
+    <meta http-equiv="refresh" content="0;URL='%PUBLIC_URL%'" />
   </head>
   <body></body>
 </html>
