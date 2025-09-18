@@ -1,23 +1,44 @@
-# Device Shop
+# React and Express.js Device Shop
+
+#### **This is not a commercial project, but a fully functional one.**
+A simple e-commerce shop built with **React** (frontend) and **Node.js + Express.js** (backend). Data is stored in a **PostgreSQL database**.
+
+While not all features are fully polished, the project provides the core functionality needed for online selling: 
+- product listings,
+- administration panel with full control over users, goods, orders, and static content, etc.
+
+The project is deployed on **GitHub Pages** (frontend) and **Heroku** (backend). Images are stored externally (ImageDB / ImageKit).
+
+It also includes **powerful fuzzy search** (handles misspelled queries). Item search and FAQ search are implemented with slightly different approaches.
+
+Additionally, a **configurable eBay item parser** has been implemented. It is designed to be clever enough to bypass eBay’s anti-scraping mechanisms and avoid blocking during item parsing.
+#### **Coded just for fun to experiment with different features and libraries.**
+*************************************************
 
 
+### Libraries, hooks, and other features used in this project
+
+- [x] **React** (class + functional components)
+- [x] **MobX**, JWT authorization, custom hooks
+- [x] **React Router** (BrowserRouter, Route, Switch)
+- [x] **REST** API, Axios, localStorage, cookies
+- [x] **Node.js**, Express.js
+- [x] **PostgreSQL** + Sequelize
+- [x] **eBay items parser**
+- [x] **Admin panel** (users, goods, orders, etc.)
+- [x] **Product listing, fuzzy search**, filtering, cart, CRUD operations
+- [x] **Static content pages** with admin constructor (includes drag-and-drop support)
+- [x] **Bootstrap**
+- [x] **React Beautiful DnD** (drag-and-drop)
+- [x] and more...
 
 
 *************************************************
-### *** this is not commercial but a fully functional project. ***
-Since Heroku discontinued free plans at the beginning of 2023, and the backend for this project was hosted on Heroku, I had to remove the backend to avoid unnecessary payments. 
-### *** coded just for fun to test different features and libraries ***
-*************************************************
+### *** DEMO ***
+[GitHub Pages Sandbox](https://zaxel.github.io/react_simple_shop/)
 
+**🔑 Sandbox account:**
 
-### libraries, hooks and other features in this project:
+Email: ViewOnlyAdmin@gmail.com
 
-- [x] react, class components, functional components
-- [x] mobx, jwt authorization, hooks
-- [x] react-router-dom, route, browserrouter, switch
-- [x] rest API, axios, localStorage
-- [x] heroku, postgre SQL, sequelize
-- [x] node.js, express
-- [x] bootstrap
-- [x] react beautiful drag-and-drop
-- [x] and other...
+Password: 1111 
