@@ -36,6 +36,7 @@ const Device = sequelize.define('device', {
   price: {type: DataTypes.FLOAT, allowNull: false},
   rate: {type: DataTypes.FLOAT, defaultValue: 0.0},
   img: {type: DataTypes.JSON, allowNull: false},
+  searchable: { type: DataTypes.TSVECTOR },
 })
 const Type = sequelize.define('type', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -49,6 +50,7 @@ const DeviceInfo = sequelize.define('device_info', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   title: {type: DataTypes.STRING, allowNull: false},
   description: {type: DataTypes.STRING(10000), allowNull: false},
+  searchable: { type: DataTypes.TSVECTOR },
 })
 const Rate = sequelize.define('rate', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -83,11 +85,12 @@ const InfoHelpQuestions = sequelize.define('info_help_questions', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     order_id: {type: DataTypes.INTEGER, allowNull: true},
     question: {type: DataTypes.STRING, allowNull: true},
-})
-const InfoHelpAnswers = sequelize.define('info_help_answers', {
+  })
+  const InfoHelpAnswers = sequelize.define('info_help_answers', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
     text: {type: DataTypes.STRING(20000), allowNull: false},
+    searchable: { type: DataTypes.TSVECTOR },
 })
 const InfoHelpRelatedQuestions = sequelize.define('info_help_related_questions', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},

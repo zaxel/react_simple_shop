@@ -9,7 +9,8 @@ export default class DeviceStore{
     _brandActive = null;
     _activePage = 1;
     _pagesTotal = 1;
-    _itemsPerPage = 30;
+    _itemsPerPage = 15;
+    _searchKey = "";
     _loading = true;
     constructor(){
         
@@ -30,7 +31,7 @@ export default class DeviceStore{
     setBrandActive(typeId){
         this._brandActive = typeId;
     }
-    setActivePage(page){
+    setActivePage(page){ 
         this._activePage = page;
     }
     setPagesTotal(number){
@@ -38,6 +39,9 @@ export default class DeviceStore{
     }
     setItemsPerPage(number){
         this._itemsPerPage = number;
+    }
+    setSearchKey(phrase){
+        this._searchKey = phrase;
     }
     setLoading(bool){
         this._loading = bool;
@@ -69,6 +73,9 @@ export default class DeviceStore{
     }
     get loading(){
         return this._loading;
+    }
+    get searchKey(){
+        return this._searchKey;
     }
     get mainStoreFieldName(){
         return this._mainStoreFieldName;

@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import SponsoredItem from './SponsoredItem';
 import { CHECKOUT_ROUTE, RANDOM_DEVICES_COUNT } from '../../utils/consts/routes';
 import { fetchRandomDevices } from '../../http/deviceAPI';
+import { formatGbCurrency } from '../../utils/dataFormat/currencies';
 
 const CartAside = () => {
     const { cart } = useContext(Context);
@@ -26,7 +27,7 @@ const CartAside = () => {
         <aside className='basket__aside basket-aside'>
             {!!cart.itemsCount &&
                 <div className='basket-aside__checkout-cont'>
-                    <h3 className='basket-aside__subtotal'>Subtotal ({cart.itemsCount} items): <span>${cart.cartTotal}</span></h3>
+                    <h3 className='basket-aside__subtotal'>Subtotal ({cart.itemsCount} items): <span>{formatGbCurrency(cart.cartTotal)}</span></h3>
                     <Button onClick={checkout} variant="warning" className='basket-aside__button'>Proceed to checkout</Button>
                 </div>}
             <div className='basket-aside__related-cont'>

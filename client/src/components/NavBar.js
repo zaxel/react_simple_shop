@@ -10,7 +10,7 @@ import {
 import { logoutOnClient, logoutOnServer } from "../utils/logout";
 
 const NavBar = observer(() => {
-    const { cart, user } = useContext(Context);
+    const { cart, user, device } = useContext(Context);
     const navigate = useNavigate();
 
     const onLogoutPressed = () => {
@@ -19,10 +19,17 @@ const NavBar = observer(() => {
         navigate(LOGIN_ROUTE);
     }
 
+    const resetPageOptions = () => {
+        device.setSearchKey("");
+        device.setActivePage(1);
+        device.setBrandActive(null);
+        device.setTypeActive(null);
+    }
+
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">Arazone</Link>
+                <Link onClick={resetPageOptions} className="navbar-brand" to={SHOP_ROUTE}>Arazone</Link>
                 <ul className="flex-row navbar-nav me-auto mb-lg-0">
                     <li className="nav-item">
                         <Link className="nav-link" to={SHOP_ROUTE}>Home</Link>
@@ -30,7 +37,7 @@ const NavBar = observer(() => {
                     <li className="nav-item">
                         <Link className="nav-link" to={ABOUT_ROUTE}>About</Link>
                     </li>
-                    <li className="nav-item">
+                    <li onClick={resetPageOptions} className="nav-item">
                         <Link className="nav-link" to={SHOP_ROUTE}>Shop</Link>
                     </li>
                     <li className="nav-item">

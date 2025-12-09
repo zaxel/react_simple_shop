@@ -9,3 +9,12 @@
       });
     return formatter.format(timeStamp)
 }
+export const deviceBuyContainerFormatDate = timeStamp => {
+  let formatter = new Intl.DateTimeFormat("en-GB", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+  return formatter.format(timeStamp)
+}

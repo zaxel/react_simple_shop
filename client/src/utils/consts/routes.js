@@ -1,4 +1,4 @@
-﻿export const BASE_ROUTE = '';
+﻿export const BASE_ROUTE = '/react_simple_shop';
 export const ADMIN_ROUTE = BASE_ROUTE+'/admin';
 export const LOGIN_ROUTE = BASE_ROUTE+'/login';
 export const PROTECTED_ROUTE = BASE_ROUTE+'/protect';

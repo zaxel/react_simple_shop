@@ -45,7 +45,7 @@ export const deleteDeviceImg = async (data, cartStore, userStore, flags = { load
 
 export const fetchPage = async (currentStore) => {
   const flags = { loadingOn: true, loadingOff: true, setToStore: true, setPageTotal: true, checkIfAuth: false };
-  const cb = fetchAll.bind(this, fetchAllDevices, null, currentStore.sortBy, currentStore.sortDirection, currentStore.itemsPerPage, currentStore.activePage, currentStore.searchBy, currentStore.searchByPrase, currentStore.brandActive, currentStore.typeActive);
+  const cb = fetchAll.bind(this, fetchAllDevices, null, currentStore.sortBy, currentStore.sortDirection, currentStore.itemsPerPage, currentStore.activePage, currentStore.searchBy, currentStore.searchByPrase, currentStore.brandActive, currentStore.typeActive, currentStore.searchKey);
   return fetchDataSetStore(cb, currentStore, null, null, flags); 
 }
 

@@ -1,9 +1,10 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
+﻿import React, { useContext, useEffect } from 'react';
 import { Context } from '..';
 import {  useLocation } from "react-router-dom"
 import BasketItem from '../components/cart/BasketItem';
 import { observer } from 'mobx-react-lite';
 import CartAside from '../components/cart/CartAside';
+import { formatGbCurrency } from '../utils/dataFormat/currencies';
 
 const Basket = observer(() => {
     let {pathname} = useLocation();
@@ -26,7 +27,7 @@ const Basket = observer(() => {
                             const basketDevice = cart.cart.find(el=>el.deviceId === device.id);
                             return <BasketItem key={device.id} device={device} basketDevice={basketDevice}/>
                         })}
-                        <h3 className='basket__main-subtotal'>Subtotal ({cart.itemsCount} items): <span>${cart.cartTotal}</span></h3>
+                        <h3 className='basket__main-subtotal'>Subtotal ({cart.itemsCount} items): <span>{formatGbCurrency(cart.cartTotal)}</span></h3>
                     </div> :
                     <div className='basket__main'>
                         <div className='basket__title-cont'>

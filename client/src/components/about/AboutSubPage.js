@@ -3,6 +3,7 @@ import { Context } from '../..';
 import { Link } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
+import { BASE_ROUTE } from '../../utils/consts/routes';
 
 const AboutSubPage = observer(({children, button_id, card_text, id, infoPageId, info_about_blocks, title}) => {
     const { aboutPage } = useContext(Context);
@@ -23,7 +24,7 @@ const AboutSubPage = observer(({children, button_id, card_text, id, infoPageId, 
                 <p>{card_text}</p>
             </div>
             {children}
-            {btnLink && <Link className="about-card__button" to={btnLink}>{btnText}</Link>}
+            {btnLink && <Link className="about-card__button" to={BASE_ROUTE+btnLink}>{btnText}</Link>}
         </>
 
     );

@@ -124,6 +124,12 @@ export const fetchQuestions = async (categoryId, page, limit, categories) => {
     }});  
     return fetchedData.data;
 }
+export const fetchSearchFaq = async (searchPhrase, page, limit, categories) => {
+    const fetchedData = await $host.get('api/help/search', {params:{
+        searchPhrase, page, limit, categories
+    }});  
+    return fetchedData.data;
+}
 export const updateHelpFaqPosition = async ({categoryId, positions}) => {
     const updatedData = await $authHost.put('api/help/faq/position' , {categoryId, positions});
     return updatedData.data; 

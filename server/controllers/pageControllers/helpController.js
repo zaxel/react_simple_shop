@@ -130,6 +130,19 @@ class HelpController {
         }
     }
 
+    async getFaqSearch(req, res, next) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.badRequest('validation error: ', errors.array()));
+            }
+            let { searchPhrase, page, limit, categories } = req.query;
+            const data = await helpService.getFaqSearch({searchPhrase, page, limit, categories}); 
+            return res.json(data);
+        } catch (e) {
+            next(ApiError.forbidden(e.message));
+        }
+    }
     
     async getCategory(req, res, next) {
         try {

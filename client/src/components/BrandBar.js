@@ -7,7 +7,6 @@ const BrandBar = observer(() => {
     return (
         <div className='brandBar'>
             <ul className="list-group">
-            
             {device.brands.map(brand => {
                return <li
                 key={brand.id} 
@@ -17,6 +16,12 @@ const BrandBar = observer(() => {
                 }}
                 className={"brandBar__li" + (device.brandActive === brand.id ? ' active' : '')}>{brand.name}</li>
             })}
+            <li key={Date.now()} 
+                onClick={()=>{
+                    device.setBrandActive(null);
+                    device.setActivePage(1);
+                    }}
+                className={"brandBar__li" + (device.brandActive === null ? ' active' : '')}>All brands</li>
         </ul>
         </div>
     );

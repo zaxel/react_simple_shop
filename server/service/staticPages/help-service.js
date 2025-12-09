@@ -1,10 +1,12 @@
 ﻿const { InfoPages, InfoHelpQuestions, InfoHelpAnswers, InfoHelpCategories, InfoHelpRelatedQuestions,
     InfoHelpPopular } = require('../../models/models');
 const { Op } = require("sequelize");
+const sequelize = require('../../db');
 const fileService = require("../file/file-service");
 const queryToString = require('../../utils/queryToString');
 const PageDto = require('../../dtos/static-page-dto.js');
 const HelpFaqDto = require('../../dtos/static-page-help-faq-dto');
+const HelpFaqAnsToQuestDto = require('../../dtos/static-page-help-faq-ans-dto'); 
 const HelpCatDto = require('../../dtos/static-page-help-cat-dto');
 const HelpRelatedDto = require('../../dtos/static-page-help-related-dto');
 const HelpPopularDto = require('../../dtos/static-page-help-popular-dto');
@@ -107,6 +109,72 @@ class HelpService {
             return { questions, count: questionsData.count };
         }
     }
+    
+    getFaqSearch = async ({ searchPhrase, page = process.env.START_FAQS_PAGE || 1, limit = 10, categories }) => {
+        if (!searchPhrase || typeof searchPhrase !== 'string') {
+          throw new Error('searchPhrase is required and must be a string.');
+        }
+        if (page <= 0 || limit <= 0) {
+          throw new Error('page and limit must be positive integers.');
+        }
+      
+        const offset = (page - 1) * limit;
+      
+        try {
+          const searchResultData = await InfoHelpAnswers.findAndCountAll({
+            where: {
+              [Op.or]: [
+                sequelize.literal(`searchable @@ websearch_to_tsquery('english', :searchPhrase)`),
+                sequelize.where(sequelize.fn('similarity', sequelize.col('title'), sequelize.literal(':searchPhrase')), {
+                  [Op.gt]: 0.3,
+                }),
+                sequelize.where(sequelize.fn('similarity', sequelize.col('text'), sequelize.literal(':searchPhrase')), {
+                  [Op.gt]: 0.3,
+                }),
+              ],
+            },
+            attributes: {
+              include: [
+                [
+                  sequelize.fn('ts_rank', sequelize.col('searchable'), sequelize.fn('websearch_to_tsquery', searchPhrase)),
+                  'rank',
+                ],
+                [
+                  sequelize.fn(
+                    'ts_headline',
+                    'english',
+                    sequelize.col('title'),
+                    sequelize.fn('websearch_to_tsquery', searchPhrase),
+                    'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
+                  ),
+                  'highlighted_title',
+                ],
+                [
+                  sequelize.fn(
+                    'ts_headline',
+                    'english',
+                    sequelize.col('text'),
+                    sequelize.fn('websearch_to_tsquery', searchPhrase),
+                    'StartSel=<b>, StopSel=</b>, MaxFragments=2, MinWords=3, MaxWords=10'
+                  ),
+                  'highlighted_text',
+                ],
+              ],
+            },
+            limit,
+            offset,
+            order: [['rank', 'DESC'], ['id', 'ASC']],
+            replacements: { searchPhrase },
+          });
+      
+          const faqs = searchResultData.rows.map(el => new HelpFaqAnsToQuestDto({ faq: el }));
+          return { questions: faqs, count: searchResultData.count };
+        } catch (error) {
+          console.error('Error in getFaqSearch:', error);
+          throw error;
+        }
+      };
+      
     createFaq = async ({ question, answerTitle, answerText }) => {
         const answer = await InfoHelpAnswers.create({ title: answerTitle, text: answerText });
         question = await InfoHelpQuestions.create({ question, infoHelpAnswerId: answer.id });

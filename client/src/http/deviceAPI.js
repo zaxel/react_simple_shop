@@ -69,9 +69,9 @@ export const createBulkDevices = async (requests, signal) => {
       return await sendBatch(itemsBatch, signal);
 }
 
-export const fetchAllDevices = async (id, sortBy, sortDirection = 'ASC', limit, page, searchBy = null, searchPrase = null, brandId, typeId) => {
+export const fetchAllDevices = async (id, sortBy, sortDirection = 'ASC', limit, page, searchBy = null, searchPrase = null, brandId, typeId, searchKey) => {
     const {data} = await $host.get('api/device', {params:{
-        brandId, typeId, limit, page, id, sortBy, sortDirection, searchBy, searchPrase
+        brandId, typeId, limit, page, id, sortBy, sortDirection, searchBy, searchPrase, searchKey
     }}); 
     return data;
 }

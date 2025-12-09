@@ -24,8 +24,8 @@ class DeviceController {
     }
     async getAll(req, res, next) {
         try {
-            let { id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase } = req.query;
-            const devices = await deviceService.getAll(id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase);
+            let { id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase, searchKey } = req.query;
+            const devices = await deviceService.getAll(id, brandId, typeId, limit, page, sortBy, sortDirection, searchBy, searchPrase, searchKey);
             return res.json(devices);
         } catch (e) {
             next(ApiError.forbidden(e.message));
