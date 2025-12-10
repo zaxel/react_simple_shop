@@ -2028,7 +2028,7 @@ button:active {
 }
 
 .account__nav-link.active {
-    background-color: #F3F3F3;
+    background-color: white;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 
@@ -2048,7 +2048,7 @@ button:active {
     width: 12px;
     height: 10px;
     border-bottom-right-radius: 8px;
-    box-shadow: 0 5px 0 0 #F3F3F3;
+    box-shadow: 0 5px 0 0 white;
 }
 
 .account__nav-link.active::after {
@@ -2061,7 +2061,7 @@ button:active {
     width: 12px;
     height: 10px;
     border-bottom-left-radius: 8px;
-    box-shadow: 0 5px 0 0 #F3F3F3;
+    box-shadow: 0 5px 0 0 white;
 }
 
 .account__nav-item:last-of-type>.account__nav-link.active::before,
