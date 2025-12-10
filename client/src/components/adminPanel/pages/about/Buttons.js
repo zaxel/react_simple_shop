@@ -16,7 +16,9 @@ const Buttons = observer(() => {
     const btns = aboutPage.buttons;
     const btnsId = Object.keys(btns);
 
-    useEffect(() => fetchBtns(aboutPage), [])
+    useEffect(() => {
+        fetchBtns(aboutPage);
+    }, [])
 
     const addNewButton = async() => {
         try{

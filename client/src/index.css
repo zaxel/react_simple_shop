@@ -2608,25 +2608,29 @@ button:active {
     margin-left: 12px;
 }
 .about-buttons__delete{
-    flex: 0 0 40px;
-    height: 40px;
-    font-weight: 700;
-    border-color: red;
-    color: red;
-    border-radius: 50%;
-    font-size: 22px;
-    transition: all .3s ease-in-out;
+    border: none;
+    width: 60px;
+    height: 50px;
+    margin: 8px;
+    position: relative;
+    font-size: 25px;
+    transition: all .2s ease-in-out;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
 }
 .about-buttons__delete:hover{
-    background-color: white;
+    background-color: red;
+    color: white;
     transition: all .2s ease-in-out;
 }
 .about-buttons__new{
-    border: 1px solid black;
-    border-radius: 3px;
-    margin: 5px;
-    font-weight: 500;
-    transition: all .2s ease-in-out;
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    text-transform: uppercase;
+    padding: 8px;
+    margin: 8px 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .about-buttons__new:hover{
     background-color: #fff;
@@ -2711,6 +2715,7 @@ button:active {
     border: none;
     width: 60px;
     height: 50px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     position: relative;
 }
 .arrow::before{
@@ -2766,6 +2771,7 @@ button:active {
     position: relative;
     font-size: 25px;
     transition: all .2s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .about-blocks__card-del button:hover{
     background-color: red;
