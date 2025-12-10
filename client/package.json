@@ -2,7 +2,7 @@
   "name": "client_store_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zaxel.github.io/react_simple_shop/",
+  "homepage": "https://localhost:3000/",
   "dependencies": {
     "@popperjs/core": "^2.11.4",
     "@testing-library/jest-dom": "^5.14.1",
