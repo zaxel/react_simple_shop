@@ -23,13 +23,13 @@ router.post('/faq/',
     helpController.createFaq);
 
 router.put('/answer/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     body('text').optional().isString().isLength({ min: 3 }),
     body('title').optional().isString().isLength({ min: 3 }),
     helpController.updateFaqAnswer);
 router.put('/question/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     body('question').optional().isString().isLength({ min: 3 }),
     body('catNewFaqData.infoHelpCategoryId').optional({ nullable: true }).isNumeric(),
@@ -49,7 +49,7 @@ router.delete('/faq/',
     body('id').isNumeric(),
     helpController.deleteFaq);
 router.put('/faq/position/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('positions').isArray(),
     body('categoryId').isNumeric(),
     helpController.changeFaqPosition); 
@@ -73,17 +73,17 @@ router.post('/category/',
 
 
 router.put('/category/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     body('title').optional().isString().isLength({ min: 3 }),
     body('link').optional().isString().isLength({ min: 3 }),
     helpController.updateCategory); 
 router.patch('/category/img-update/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     helpController.changeCategoryImg); 
 router.put('/category/position/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('positions').isArray(),
     helpController.changeCatPosition); 
 

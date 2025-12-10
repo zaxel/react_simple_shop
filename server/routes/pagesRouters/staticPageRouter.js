@@ -15,7 +15,7 @@ router.post('/',
     StaticPageController.create);
 
 router.put('/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     body('name').optional().isString().isLength({ min: 3 }),
     body('title').optional().isArray(),
@@ -25,7 +25,7 @@ router.put('/',
     body('button_id').optional().isArray(),
     StaticPageController.update);
 router.put('/image/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     StaticPageController.imageUpdate); 
 
 router.get('/',

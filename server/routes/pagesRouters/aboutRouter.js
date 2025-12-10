@@ -17,7 +17,7 @@ router.post('/card/',
     aboutController.createCard);
 
 router.put('/card/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     body('title').optional().isString().isLength({ min: 3 }),
     body('card_text').optional().isString().isLength({ min: 5 }),
@@ -33,7 +33,7 @@ router.get('/card/:id',
 router.get('/cards/',
     aboutController.getAllCards); 
 
-router.patch('/card/img-update', checkRole(['ADMIN', 'MODERATOR']), aboutController.updateCardImg);
+router.patch('/card/img-update', checkRole(['ADMIN']), aboutController.updateCardImg);
 
 router.delete('/card/',
     body('id').isNumeric(),
@@ -49,7 +49,7 @@ router.post('/block/',
     aboutController.createBlock);
 
 router.put('/block/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     body('title').optional().isString().isLength({ min: 3 }),
     body('text').optional().isString().isLength({ min: 5 }),
@@ -57,7 +57,7 @@ router.put('/block/',
     aboutController.updateBlock);
 
 router.put('/block-position/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('positions').isArray(),
     aboutController.updateBlocksPositions);
 
@@ -69,7 +69,7 @@ router.get('/blocks/',
     aboutController.getAllBlocks); 
 
 router.patch('/block/img-update', 
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     aboutController.updateBlockImg);
 
 router.delete('/block/',
@@ -86,7 +86,7 @@ router.post('/btn/',
 
 
 router.put('/btn/',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    checkRole(['ADMIN']), 
     body('id').isNumeric(),
     body('text').optional().isString().isLength({ min: 3 }),
     body('link').optional().isString().isLength({ min: 5 }),
