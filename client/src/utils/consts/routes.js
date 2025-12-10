@@ -25,6 +25,12 @@ export const ACCOUNT_DELIVERY_ROUTE = BASE_ROUTE+'/account/delivery';
 export const ACCOUNT_PAYMENT_ROUTE = BASE_ROUTE+'/account/payment';
 export const ACCOUNT_ORDERS_ROUTE = BASE_ROUTE+'/account/orders';
 
+export const PROFILE_ROUTE = BASE_ROUTE+'/profile';
+
+export const PROFILE_INFO_ROUTE = BASE_ROUTE+'/profile/info';
+export const PROFILE_ORDERS_ROUTE = BASE_ROUTE+'/profile/orders';
+export const PROFILE_ADDRESS_ROUTE = BASE_ROUTE+'/profile/address';
+
 export const ADMIN_USER_ROUTE = BASE_ROUTE+'/admin/admin-users';
 export const ADMIN_ORDERS_ROUTE = BASE_ROUTE+'/admin/admin-orders';
 export const ADMIN_DEVICES_ROUTE = BASE_ROUTE+'/admin/admin-devices';

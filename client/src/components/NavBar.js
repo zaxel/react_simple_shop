@@ -5,7 +5,8 @@ import { Context } from '..';
 import {
     SHOP_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE,
     ADMIN_ROUTE, ABOUT_ROUTE, HELP_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
-    PROTECTED_ROUTE
+    PROTECTED_ROUTE,
+    PROFILE_ROUTE
 } from '../utils/consts/routes';
 import { logoutOnClient, logoutOnServer } from "../utils/logout";
 
@@ -56,6 +57,9 @@ const NavBar = observer(() => {
                         </li>
                         <li className="nav-item">
                             <button onClick={() => navigate(user.isAuth ? ACCOUNT_ROUTE : LOGIN_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? `User ${user.user.id}` : 'Login'}</button>
+                        </li>
+                        <li className="nav-item">
+                            <button onClick={() => navigate(user.isAuth ? PROFILE_ROUTE : LOGIN_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? `User ${"Z"}` : 'Login'}</button>
                         </li>
                         <li className="nav-item">
                             <button onClick={user.isAuth ? onLogoutPressed : () => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? 'Logout' :  'Sigh up'}</button>

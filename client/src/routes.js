@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import About from "./pages/about/About";
 import Protected from "./pages/Protected";
 import AccountPage from "./pages/AccountPage";
+import Profile from "./pages/Profile";
 import Sample from "./pages/Sample";
 import CheckoutPage from "./pages/CheckoutPage";
 
@@ -55,7 +56,8 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE, HELP_FAQ_ROUTE, ADMIN_PAGES_ROUTE, 
         ADMIN_APP_ROUTE, ADMIN_HELP_ROUTE, ADMIN_ABOUT_ROUTE, ABOUT_BUTTONS_ROUTE, ABOUT_BLOCKS_ROUTE, 
         ABOUT_LEFT_CARD_ROUTE, ABOUT_MIDDLE_CARD_ROUTE, ABOUT_RIGHT_CARD_ROUTE, ADMIN_HELP_FAQ_ROUTE, 
-        ADMIN_HELP_CAT_ROUTE, HELP_CAT_ROUTE } from "./utils/consts/routes";
+        ADMIN_HELP_CAT_ROUTE, HELP_CAT_ROUTE, 
+        PROFILE_ROUTE} from "./utils/consts/routes";
         
 
 export const userNavRoutes = [
@@ -169,6 +171,10 @@ export const authRoutes = [
         path: ACCOUNT_ROUTE,
         Component: AccountPage,
         NestedComponent: AccountRouter
+    },
+    {
+        path: PROFILE_ROUTE,
+        Component: Profile,
     },
     {
         path: PROTECTED_ROUTE,
