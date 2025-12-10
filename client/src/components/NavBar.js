@@ -41,7 +41,7 @@ const NavBar = observer(() => {
                         <Link className="nav-link" to={SHOP_ROUTE}>Shop</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to={PROTECTED_ROUTE}>Protected</Link>
+                        <Link className="nav-link" to={PROTECTED_ROUTE}>Our Apps</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to={HELP_ROUTE}>Help</Link>
