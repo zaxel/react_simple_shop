@@ -2873,6 +2873,7 @@ button:active {
     border-radius: 8px;
     text-transform: uppercase;
     padding: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .blocks-form__title,
 .blocks-form__text{
@@ -2949,6 +2950,7 @@ button:active {
     border-radius: 8px;
     text-transform: uppercase;
     margin-bottom: 12px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 /***blocks modal start***/
 .blocks-modal .modal-dialog-centered{
@@ -3123,12 +3125,6 @@ button:active {
     height: 32px; 
 }
 
-.admin-about__card-button button{
-    border: none;
-    width: 60px;
-    height: 50px;
-    position: relative;
-}
 .admin-about__card-del button{
     border: none;
     width: 60px;
@@ -3136,6 +3132,7 @@ button:active {
     position: relative;
     font-size: 25px;
     transition: all .2s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .admin-about__card-del button:hover{
     background-color: red;
@@ -3147,6 +3144,7 @@ button:active {
     width: 60px;
     height: 50px;
     position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .about-arrow::before{
     position: absolute;
@@ -3246,6 +3244,7 @@ button:active {
     text-transform: uppercase;
     padding: 16px 8px;
     max-width: 150px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -3490,6 +3489,7 @@ button:active {
     text-transform: uppercase;
     padding: 16px 8px;
     max-width: 150px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .adminFaq__category-faqs{
     display: flex;
