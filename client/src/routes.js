@@ -56,8 +56,15 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE, HELP_FAQ_ROUTE, ADMIN_PAGES_ROUTE, 
         ADMIN_APP_ROUTE, ADMIN_HELP_ROUTE, ADMIN_ABOUT_ROUTE, ABOUT_BUTTONS_ROUTE, ABOUT_BLOCKS_ROUTE, 
         ABOUT_LEFT_CARD_ROUTE, ABOUT_MIDDLE_CARD_ROUTE, ABOUT_RIGHT_CARD_ROUTE, ADMIN_HELP_FAQ_ROUTE, 
-        ADMIN_HELP_CAT_ROUTE, HELP_CAT_ROUTE, 
-        PROFILE_ROUTE} from "./utils/consts/routes";
+        ADMIN_HELP_CAT_ROUTE, HELP_CAT_ROUTE, PROFILE_ROUTE, PROFILE_INFO_ROUTE, PROFILE_ORDERS_ROUTE,
+        PROFILE_ADDRESS_ROUTE,
+        PROFILE_WISHLIST_ROUTE} from "./utils/consts/routes";
+
+import ProfileAddress from "./components/profile/Address";
+import ProfileInfo from "./components/profile/Info";
+import ProfileOrders from "./components/profile/Orders";
+import ProfileRouter from "./components/profile/ProfileRouter";
+import WishList from "./components/profile/WishList";
         
 
 export const userNavRoutes = [
@@ -77,6 +84,26 @@ export const userNavRoutes = [
         path: ACCOUNT_ORDERS_ROUTE,
         Component: Orders
     },
+    
+];
+export const profileRoutes = [
+    {
+        path: PROFILE_INFO_ROUTE,
+        Component: ProfileInfo
+    },
+    {
+        path: PROFILE_ORDERS_ROUTE,
+        Component: ProfileOrders
+    },
+    {
+        path: PROFILE_ADDRESS_ROUTE,
+        Component: ProfileAddress
+    },
+    {
+        path: PROFILE_WISHLIST_ROUTE,
+        Component: WishList
+    },
+    
     
 ];
 
@@ -175,6 +202,7 @@ export const authRoutes = [
     {
         path: PROFILE_ROUTE,
         Component: Profile,
+        NestedComponent: ProfileRouter
     },
     {
         path: PROTECTED_ROUTE,

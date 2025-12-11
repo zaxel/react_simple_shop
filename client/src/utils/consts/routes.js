@@ -30,6 +30,7 @@ export const PROFILE_ROUTE = BASE_ROUTE+'/profile';
 export const PROFILE_INFO_ROUTE = BASE_ROUTE+'/profile/info';
 export const PROFILE_ORDERS_ROUTE = BASE_ROUTE+'/profile/orders';
 export const PROFILE_ADDRESS_ROUTE = BASE_ROUTE+'/profile/address';
+export const PROFILE_WISHLIST_ROUTE = BASE_ROUTE+'/profile/wishlist';
 
 export const ADMIN_USER_ROUTE = BASE_ROUTE+'/admin/admin-users';
 export const ADMIN_ORDERS_ROUTE = BASE_ROUTE+'/admin/admin-orders';
