@@ -6,21 +6,41 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#3b82f6",
-        "primary-foreground": "#ffffff",
-        destructive: "#ef4444",
-        "destructive-foreground": "#ffffff",
-        secondary: "#8b5cf6", 
-        "secondary-foreground": "#ffffff",
-        accent: "#f3f4f6",
-        "accent-foreground": "#111827",
-        success: "#10b981", 
-        warning: "#f59e0b", 
-        input: "#f9fafb",
-        border: "#e5e7eb", 
-        ring: "#2563eb",
-        muted: "#e5e7eb", 
-        "muted-foreground": "#6b7280",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
       },
     }
   },

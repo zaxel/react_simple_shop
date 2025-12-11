@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    :root {
+        --sidebar: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+    }
+
+    .dark {
+        --sidebar: oklch(0.205 0 0);
+        --sidebar-foreground: oklch(0.985 0 0);
+        --sidebar-primary: oklch(0.488 0.243 264.376);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.269 0 0);
+        --sidebar-accent-foreground: oklch(0.985 0 0);
+        --sidebar-border: oklch(1 0 0 / 10%);
+        --sidebar-ring: oklch(0.439 0 0);
+    }
+}
+
 /*general styles start*/
 
 HTML,
@@ -43,10 +69,12 @@ button:hover {
 button:active {
     transform: translate(1px, 1px);
 }
-.hide{
+
+.hide {
     display: none;
 }
-.show{
+
+.show {
     display: block;
 }
 
@@ -537,6 +565,7 @@ button:active {
 .help__container>.spinner {
     height: 65vh;
 }
+
 .help__banner {
     margin-bottom: 30px;
     position: relative;
@@ -600,6 +629,7 @@ button:active {
 .help__faq-cont {
     margin-bottom: 30px;
 }
+
 .faq-cont__title {
     color: #2d2d2d;
     font-size: 31px;
@@ -646,6 +676,7 @@ button:active {
 .faq-card__links {
     padding: 10px;
 }
+
 .faq-card__links>.spinner {
     width: auto;
     height: auto;
@@ -781,34 +812,40 @@ button:active {
     display: block;
     margin-bottom: 20px;
 }
-.help-faq__main-cont{
+
+.help-faq__main-cont {
     background-color: #F3F3F3;
     padding: 8px;
     line-height: 1.5;
     margin-bottom: 10px;
     font: 16px / 26px system-ui, Roboto, Arial, sans-serif;
 }
-.help-faq__main-body p{
+
+.help-faq__main-body p {
     text-indent: 20px;
     margin-bottom: 8px;
-    
+
 }
+
 .related-cont h3,
-.help-faq__main-cont h3{
+.help-faq__main-cont h3 {
     font-size: 19px;
 }
-.related-cont h3{
+
+.related-cont h3 {
     margin: 0 30px 20px 30px;
     padding-top: 20px;
 }
-.help-faq__main-cont h3{
+
+.help-faq__main-cont h3 {
     text-align: center;
     color: #2d2d2d;
     font-weight: 500;
     letter-spacing: 1.5px;
     margin-bottom: 10px;
 }
-.help-faq__main-cont h4{
+
+.help-faq__main-cont h4 {
     font-size: 16px;
     text-align: center;
     color: #767676;
@@ -817,9 +854,11 @@ button:active {
     margin: 10px 0;
     text-transform: uppercase;
 }
-.related-cont{
+
+.related-cont {
     background-color: #fff;
 }
+
 /**help breadcrumbs**/
 .help__breadcrumbs {
     border-bottom: 1px solid #ddd;
@@ -843,13 +882,15 @@ button:active {
 .help__breadcrumbs .active {
     color: #2d2d2d;
 }
+
 .breadcrumbs-arrow,
-.breadcrumbs-active{
+.breadcrumbs-active {
     font-size: 13px;
     color: black;
     color: #2d2d2d;
 }
-.breadcrumbs-active{
+
+.breadcrumbs-active {
     text-decoration: underline;
 }
 
@@ -870,11 +911,12 @@ button:active {
     flex: 0 1 70%;
     background-color: #f3f3f3;
 }
-.help__category>.spinner{
+
+.help__category>.spinner {
     width: auto;
 }
 
-.help__error .error__page{
+.help__error .error__page {
     margin-top: 10dvh;
 }
 
@@ -900,9 +942,10 @@ button:active {
     margin-bottom: 10px;
 }
 
-.help__faq{
+.help__faq {
     background-color: white;
 }
+
 /**help subpage banner**/
 .help__cat-banner {
     width: 100%;
@@ -937,6 +980,7 @@ button:active {
     font-weight: 700;
     text-align: center;
 }
+
 /**help categories list**/
 .cat-list li:first-child {
     color: #2d2d2d;
@@ -1026,7 +1070,8 @@ button:active {
     height: fit-content;
     border-right: 2px solid #d5d9d9;
 }
-.typebar__department-title{
+
+.typebar__department-title {
     font-size: 16px;
     font-weight: 800;
 }
@@ -1052,7 +1097,7 @@ button:active {
     background-color: transparent;
     font-weight: 800;
     font-size: 16px;
-    
+
 }
 
 /*typebar end*/
@@ -1075,13 +1120,15 @@ button:active {
     font-size: 13px;
 }
 
-.brandBar__li:hover{
+.brandBar__li:hover {
     color: #de7921;
     text-decoration: underline;
 }
+
 .brandBar__li.active {
     font-weight: 600;
 }
+
 /* brandbar end */
 
 /* device item start*/
@@ -1098,6 +1145,7 @@ button:active {
     border: 1px solid #f5f5f5;
     border-radius: 6px;
 }
+
 .deviceItem__image-cont {
     flex: 0 1 25%;
     width: 180px;
@@ -1113,9 +1161,11 @@ button:active {
     height: 100%;
     object-fit: cover;
 }
-.deviceItem__info-cont{
+
+.deviceItem__info-cont {
     flex: 0 1 75%;
 }
+
 .deviceItem__title {
     color: #817D7D;
     font-family: roboto, sans-serif;
@@ -1126,18 +1176,22 @@ button:active {
     max-width: fit-content;
     cursor: pointer;
 }
-.deviceItem__title:hover{
+
+.deviceItem__title:hover {
     color: #de7921;
-} 
+}
+
 .deviceItem__rating-cont {
     margin-bottom: 8px;
 }
+
 .deviceItem__price {
     font-family: roboto, sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
 }
+
 /* device item end*/
 
 /*shop search start*/
@@ -1188,13 +1242,16 @@ button:active {
     border-bottom-right-radius: 50%;
     background-color: transparent;
 }
+
 .shop-search__search-button:hover {
     background-color: #f8f9fa;
     border: 1px solid #de7921;
 }
-.shop-search__search-button:active{
+
+.shop-search__search-button:active {
     top: 0;
 }
+
 .shop-search__search-icon {
     position: absolute;
     top: 50%;
@@ -1212,7 +1269,7 @@ button:active {
     top: 100%;
     left: 0;
     right: 0;
-    
+
     background: white;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
@@ -1236,7 +1293,8 @@ button:active {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-.suggestions__history .suggestion__item{
+
+.suggestions__history .suggestion__item {
     padding: 10px 20px;
 }
 
@@ -1244,12 +1302,13 @@ button:active {
 .suggestion__item.active {
     background: #d5d9d9;
 }
+
 .suggestion__item:last-of-type:hover,
 .suggestion__item:last-of-type.active {
     border-radius: 0 0 15px 15px;
 }
 
-.suggestion__item-container{
+.suggestion__item-container {
     display: flex;
     margin-bottom: 5px;
 }
@@ -1260,7 +1319,8 @@ button:active {
     margin-right: 10px;
     color: #666;
 }
-.suggestion__search-icon img{
+
+.suggestion__search-icon img {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1276,22 +1336,27 @@ button:active {
     background: #f8f9fa;
     border-radius: 15px 15px 0 0;
 }
-.shop-search__container.py-5{
+
+.shop-search__container.py-5 {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
 }
-.suggestion__device-info{
+
+.suggestion__device-info {
     display: flex;
     gap: 10px;
 }
-.suggestion__device-info{
+
+.suggestion__device-info {
     color: #666;
     font-size: 0.8rem;
     margin-left: 25px;
 }
-.suggestion__item b{
+
+.suggestion__item b {
     font-weight: 700;
 }
+
 /*shop search end*/
 
 /*device start*/
@@ -1317,19 +1382,22 @@ button:active {
     display: flex;
     gap: 12px;
 }
+
 .device__img-cont {
     flex: 0 1 50%;
     position: relative;
     align-self: stretch;
 }
-.device__info-cont{
+
+.device__info-cont {
     flex: 0 1 30%;
 }
-.device__buy-cont{
+
+.device__buy-cont {
     flex: 0 1 20%;
 }
 
-.device__imgcont-wrapper{
+.device__imgcont-wrapper {
     position: sticky;
     top: 0;
     left: 0;
@@ -1355,7 +1423,8 @@ button:active {
     height: 100dvh;
     max-height: 100vh;
 }
-.image-gallery .image-gallery-content.fullscreen{
+
+.image-gallery .image-gallery-content.fullscreen {
     background-color: #fff;
 }
 
@@ -1370,59 +1439,68 @@ button:active {
     height: 100%;
 }
 
-.device__title-cont{
+.device__title-cont {
     border-bottom: 1px solid #d5d9d9;
     margin-bottom: 20px;
 }
-.device__title{
+
+.device__title {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 8px;
 }
-.device__shop-link{
+
+.device__shop-link {
     font-size: 14px;
-    font-weight: 600;
-}
-.device__star-cont{
-    margin-bottom: 8px;
-}
-.device__amount-bought{
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-.device__amount-bought span{
     font-weight: 600;
 }
 
-.device__price{
+.device__star-cont {
+    margin-bottom: 8px;
+}
+
+.device__amount-bought {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.device__amount-bought span {
+    font-weight: 600;
+}
+
+.device__price {
     font-size: 24px;
     font-weight: 500;
     margin-bottom: 20px;
 }
-.device__price-lower{
+
+.device__price-lower {
     font-size: 14;
     margin-bottom: 14px;
 }
-.device__items-left{
+
+.device__items-left {
     font-size: 14px;
     font-weight: 600;
     color: #b12704;
     margin-bottom: 14px;
 }
 
-.dev-spec tr{
+.dev-spec tr {
     line-height: 2.0;
     font-size: 14px;
 }
-.dev-spec__title{
+
+.dev-spec__title {
     font-weight: 700;
 }
-.dev-spec__descr{
+
+.dev-spec__descr {
     font-weight: 500;
 }
 
 
-.device__buy{
+.device__buy {
     border: 1px solid #d5d9d9;
     border-radius: 15px;
     padding: 10px;
@@ -1430,43 +1508,52 @@ button:active {
     line-height: 1.5;
     margin-bottom: 20px;
 }
-.dev-buy__price{
+
+.dev-buy__price {
     font-weight: 600;
     margin: 20px 0 20px 0;
 }
-.dev-buy__price span{
+
+.dev-buy__price span {
     color: #b12704;
     font-weight: 300;
 }
-.dev-buy__del-date{
+
+.dev-buy__del-date {
     font-weight: 600;
 }
-.dev-buy__delivery{
+
+.dev-buy__delivery {
     margin-bottom: 15px;
 }
-.dev-buy__del-address{
+
+.dev-buy__del-address {
     font-size: 11px;
     margin: 0 0 15px 0;
     font-weight: 600;
 }
-.dev-buy__del-address img{
+
+.dev-buy__del-address img {
     width: 15px;
     height: 15px;
-    
+
 }
-.dev-buy__condition{
+
+.dev-buy__condition {
     font-weight: 600;
 }
-.dev-buy__fulfilledBy{
+
+.dev-buy__fulfilledBy {
     margin-bottom: 15px;
 }
-.dev-buy__buy-button{
+
+.dev-buy__buy-button {
     margin-bottom: 15px;
     text-align: center;
 }
 
 
-.dev-buy__add-list{
+.dev-buy__add-list {
     border: 1px solid #d5d9d9;
     border-radius: 15px;
     padding: 10px;
@@ -1475,12 +1562,13 @@ button:active {
     margin-bottom: 20px;
     text-align: center;
 }
-.dev-buy__add-list button{
+
+.dev-buy__add-list button {
     min-width: 130px;
 }
 
 
-.dev-other{
+.dev-other {
     border: 1px solid #d5d9d9;
     border-radius: 15px;
     padding: 10px;
@@ -1488,23 +1576,26 @@ button:active {
     line-height: 1.5;
     margin-bottom: 20px;
 }
-.dev-other h3{
+
+.dev-other h3 {
     font-size: 19px;
     font-weight: 600;
     border-bottom: 1px solid #d5d9d9;
     padding-bottom: 8px;
     margin-bottom: 8px;
 }
-.dev-other a{
+
+.dev-other a {
     color: #000;
     text-decoration: none;
     font-weight: 500;
 }
-.dev-other span{
+
+.dev-other span {
     font-size: 16px;
 }
 
-.device__seller-descr iframe{
+.device__seller-descr iframe {
     display: block;
     width: 100%;
     min-height: 100dvh;
@@ -1512,21 +1603,24 @@ button:active {
 
 /*device end*/
 /*device rating start*/
-.rating{
+.rating {
     display: flex;
     align-items: flex-end;
     font-size: 40px;
     line-height: 0.75;
 }
-.rating__body{
+
+.rating__body {
     position: relative;
     z-index: -1;
 }
-.rating__body::before{
+
+.rating__body::before {
     content: url("./assets/star-line-yellow-icon.svg") url("./assets/star-line-yellow-icon.svg") url("./assets/star-line-yellow-icon.svg") url("./assets/star-line-yellow-icon.svg") url("./assets/star-line-yellow-icon.svg");
     display: block;
 }
-.rating__active{
+
+.rating__active {
     position: absolute;
     /* width: 85%; */
     height: 100%;
@@ -1534,7 +1628,8 @@ button:active {
     left: 0;
     overflow: hidden;
 }
-.rating__active::before{
+
+.rating__active::before {
     content: url("./assets/star-fill-yellow-icon.svg") url("./assets/star-fill-yellow-icon.svg") url("./assets/star-fill-yellow-icon.svg") url("./assets/star-fill-yellow-icon.svg") url("./assets/star-fill-yellow-icon.svg");
     position: absolute;
     width: 100px;
@@ -1542,7 +1637,8 @@ button:active {
     top: 0;
     left: 0;
 }
-.rating__items{
+
+.rating__items {
     display: flex;
     position: absolute;
     width: 100%;
@@ -1550,16 +1646,19 @@ button:active {
     top: 0;
     left: 0;
 }
-.rating__item{
+
+.rating__item {
     flex: 0 0 20%;
     height: 100%;
     opacity: 0;
 }
-.rating__value{
+
+.rating__value {
     font-size: 50%;
     line-height: 1;
     padding: 0 0 0 10px;
 }
+
 /*device rating end*/
 
 /*device modal start*/
@@ -1857,21 +1956,26 @@ button:active {
     flex-direction: column;
     align-items: flex-start;
 }
-.basket-sponsored__descr-cont h4{
+
+.basket-sponsored__descr-cont h4 {
     cursor: pointer;
 }
-.basket-sponsored__descr-cont h4:hover{
+
+.basket-sponsored__descr-cont h4:hover {
     color: #de7921;
 }
-.basket-sponsored__descr-cont h5{
+
+.basket-sponsored__descr-cont h5 {
     font-size: 14px;
     font-weight: 900;
 }
+
 .basket-sponsored__descr-cont button {
     font-size: 12px;
     padding: 2px 6px;
 }
-.basket-sponsored__star .rating{
+
+.basket-sponsored__star .rating {
     font-size: 24px;
     font-weight: 500;
 }
@@ -1880,6 +1984,7 @@ button:active {
     margin-bottom: 6px;
     cursor: pointer;
 }
+
 .basket-item__descr-subcont h2:hover {
     color: #de7921;
 }
@@ -2202,7 +2307,7 @@ button:active {
     text-align: center;
 }
 
-.device-img__modal-images{
+.device-img__modal-images {
     min-height: 220px;
 }
 
@@ -2244,7 +2349,7 @@ button:active {
 
 .admin__input-edit,
 .admin__area-edit,
-.admin__wysiwyg-edit{
+.admin__wysiwyg-edit {
     background-color: #F3F3F3;
     border-radius: 8px;
     padding: 30px;
@@ -2309,9 +2414,11 @@ button:active {
     width: 240px;
     height: auto;
 }
-.text-admin__input-cont{
+
+.text-admin__input-cont {
     width: max-content;
 }
+
 .admin__area-container textarea {
     border: 1px solid #333;
     width: 740px;
@@ -2331,6 +2438,7 @@ button:active {
     border-bottom: 1px solid black;
 
 }
+
 .pages__navbar li:nth-child(3) a,
 .pages__navbar li:nth-child(4) a,
 .pages__navbar li:nth-child(5) a,
@@ -2338,12 +2446,13 @@ button:active {
 .pages__navbar li:nth-child(7) a,
 .pages__navbar li:nth-child(9) a,
 .pages__navbar li:nth-child(10) a,
-.pages__navbar li:nth-child(11) a{
+.pages__navbar li:nth-child(11) a {
     font-size: 12px;
     margin-left: 25px;
     padding-left: 17px;
     position: relative;
 }
+
 .pages__navbar li:nth-child(3) a::before,
 .pages__navbar li:nth-child(4) a::before,
 .pages__navbar li:nth-child(5) a::before,
@@ -2351,7 +2460,7 @@ button:active {
 .pages__navbar li:nth-child(7) a::before,
 .pages__navbar li:nth-child(9) a::before,
 .pages__navbar li:nth-child(10) a::before,
-.pages__navbar li:nth-child(11) a::before{
+.pages__navbar li:nth-child(11) a::before {
     position: absolute;
     top: 30%;
     left: 5px;
@@ -2410,12 +2519,14 @@ button:active {
     cursor: pointer;
     position: relative;
 }
+
 .image-admin__img img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     position: relative;
 }
+
 .admin__input-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
 .admin__wysiwyg-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
 .admin__area-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::before,
@@ -2435,6 +2546,7 @@ button:active {
     z-index: 20;
     border-radius: 5px;
 }
+
 .admin__input-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
 .admin__wysiwyg-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
 .admin__area-container>div:first-of-type:not(.td-spinner):not(.display-flex):hover::after,
@@ -2448,6 +2560,7 @@ button:active {
     background-color: rgba(0, 0, 0, .1);
     border-radius: 8px;
 }
+
 .image-admin__edit-cont {
     width: 100%;
 }
@@ -2506,12 +2619,13 @@ button:active {
     text-align: center;
 }
 
-.app-card h2{
+.app-card h2 {
     font-weight: 500;
     text-transform: uppercase;
     text-align: center;
 }
-.app-card>h2:first-child{
+
+.app-card>h2:first-child {
     margin-bottom: 12px;
 }
 
@@ -2537,14 +2651,17 @@ button:active {
     justify-content: space-evenly;
     margin-bottom: 20px;
 }
-.app-card__button-img{
+
+.app-card__button-img {
     flex: 0 1 45%;
     max-height: 50%;
 }
-.app-card__button-img img{
+
+.app-card__button-img img {
     max-height: 80px;
     max-width: 120px;
 }
+
 .app-card .admin__input-container input {
     width: 100%;
 }
@@ -2558,25 +2675,30 @@ button:active {
     background-color: #fff;
     text-align: center;
 }
-.app-about__img{
+
+.app-about__img {
     height: 450px;
 }
+
 .about-card .admin__input-container input {
     width: 15vw;
 }
+
 /**admin about end**/
 /**admin about buttons start**/
-.about-buttons .admin-pages__container>h2:first-of-type{
+.about-buttons .admin-pages__container>h2:first-of-type {
     margin: 18px 0 30px;
 }
-.about-buttons__btns-block{
+
+.about-buttons__btns-block {
     max-width: 650px;
     padding: 15px;
     margin: 20px;
     background-color: #F3F3F3;
     border-radius: 8px;
 }
-.about-buttons__btns{
+
+.about-buttons__btns {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -2585,33 +2707,41 @@ button:active {
     padding: 0 10px;
     margin-bottom: 6px;
 }
-.about-buttons__title{
+
+.about-buttons__title {
     flex: 0 1 250px;
 }
-.about-buttons__title .admin__input-edit{
+
+.about-buttons__title .admin__input-edit {
     background-color: white;
     border: 1px solid black;
     padding: 5px;
     margin: 5px;
 }
-.about-buttons__link .admin__input-edit{
+
+.about-buttons__link .admin__input-edit {
     padding: 10px;
 }
-.about-buttons__title .admin__input-container{
+
+.about-buttons__title .admin__input-container {
     display: block;
     text-align: center;
 }
-.about-buttons__title .text-admin .admin__input-container>div{
+
+.about-buttons__title .text-admin .admin__input-container>div {
     margin-left: 0;
     font-size: 21px;
 }
-.about-buttons__link{
+
+.about-buttons__link {
     flex: 0 1 100%;
 }
-.about-buttons__link>input{
+
+.about-buttons__link>input {
     margin-left: 12px;
 }
-.about-buttons__delete{
+
+.about-buttons__delete {
     border: none;
     width: 60px;
     height: 50px;
@@ -2623,12 +2753,14 @@ button:active {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 3px;
 }
-.about-buttons__delete:hover{
+
+.about-buttons__delete:hover {
     background-color: red;
     color: white;
     transition: all .2s ease-in-out;
 }
-.about-buttons__new{
+
+.about-buttons__new {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     text-transform: uppercase;
@@ -2636,45 +2768,54 @@ button:active {
     margin: 8px 0;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-.about-buttons__new:hover{
+
+.about-buttons__new:hover {
     background-color: #fff;
     transition: all .2s ease-in-out;
 }
+
 .about-buttons__add-btns h4,
-.about-buttons__btns-block>h4{
+.about-buttons__btns-block>h4 {
     display: block;
     margin: 15px 15px 5px 15px;
     font-weight: 500;
 }
-.about-buttons__spinner{
+
+.about-buttons__spinner {
     height: 70px;
 }
-.about-buttons__btns-block .spinner{
+
+.about-buttons__btns-block .spinner {
     height: 55px;
 }
+
 /**admin about buttons end**/
 /**admin about blocks start**/
-.about-blocks .admin-pages__container>h2:first-of-type{
+.about-blocks .admin-pages__container>h2:first-of-type {
     margin: 18px 0 30px;
 }
-.about-blocks__blocks{
+
+.about-blocks__blocks {
     max-width: 900px;
     padding: 15px;
     margin: 20px;
     background-color: #F3F3F3;
     border-radius: 8px;
 }
-.about-blocks__blocks>h4{
+
+.about-blocks__blocks>h4 {
     display: block;
     margin: 15px 15px 5px 15px;
     font-weight: 500;
 }
-.about-blocks__card{
+
+.about-blocks__card {
     border-radius: 8px;
     border: 1px solid #C4C4C4;
     margin-bottom: 1px;
 }
-.about-blocks__cards-cont{
+
+.about-blocks__cards-cont {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     background-color: white;
@@ -2683,46 +2824,56 @@ button:active {
     flex-direction: column;
     margin-bottom: 30px;
 }
-.about-blocks__card-header{
+
+.about-blocks__card-header {
     display: flex;
     padding: 8px;
     max-height: 70px;
 }
-.about-blocks__card-header div{
+
+.about-blocks__card-header div {
     max-height: 100%;
 }
-.about-blocks__card-header div:not(:first-child){
+
+.about-blocks__card-header div:not(:first-child) {
     margin-left: 12px;
 }
-.about-blocks__card-title{
+
+.about-blocks__card-title {
     width: 14vw;
     overflow: hidden;
 }
-.about-blocks__card-text{
+
+.about-blocks__card-text {
     width: 64vw;
 }
+
 .about-blocks__card-title h3,
-.about-blocks__card-text h3{
+.about-blocks__card-text h3 {
     font-weight: 500;
     margin-bottom: 4px;
 }
-.about-blocks__card-text p{
+
+.about-blocks__card-text p {
     text-overflow: ellipsis;
-    overflow: hidden; 
-    width: 100%; 
-    height: 32px; 
+    overflow: hidden;
+    width: 100%;
+    height: 32px;
 }
-.about-blocks__body-image h2{
+
+.about-blocks__body-image h2 {
     font-weight: 500;
 }
-.about-blocks__card-button button{
+
+.about-blocks__card-button button {
     border: none;
     width: 60px;
     height: 50px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     position: relative;
 }
-.arrow::before{
+
+.arrow::before {
     position: absolute;
     top: 0;
     left: 15px;
@@ -2733,7 +2884,8 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.arrow::after{
+
+.arrow::after {
     position: absolute;
     top: 0;
     right: 15px;
@@ -2744,7 +2896,8 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.arrowDown::before{
+
+.arrowDown::before {
     position: absolute;
     top: 19px;
     left: 15px;
@@ -2755,7 +2908,8 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.arrowDown::after{
+
+.arrowDown::after {
     position: absolute;
     top: 19px;
     right: 15px;
@@ -2768,7 +2922,7 @@ button:active {
 }
 
 
-.about-blocks__card-del button{
+.about-blocks__card-del button {
     border: none;
     width: 60px;
     height: 50px;
@@ -2777,52 +2931,63 @@ button:active {
     transition: all .2s ease-in-out;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-.about-blocks__card-del button:hover{
+
+.about-blocks__card-del button:hover {
     background-color: red;
     color: white;
     transition: all .2s ease-in-out;
 }
-.about-blocks__card-body{
+
+.about-blocks__card-body {
     padding: 8px;
 }
-.about-blocks__card-body>div{
+
+.about-blocks__card-body>div {
     margin-bottom: 12px;
 }
+
 .about-blocks__body-imgs,
-.about-blocks__body-battons{
+.about-blocks__body-battons {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     padding: 8px;
 
 }
+
 .about-blocks__body-imgs>h3,
-.about-blocks__body-battons>h3{
+.about-blocks__body-battons>h3 {
     font-weight: 500;
     margin-bottom: 8px;
     text-align: center;
 }
-.about-blocks__body-images{
+
+.about-blocks__body-images {
     display: flex;
     align-items: flex-start;
-    
+
 }
-.about-blocks__body-image:first-child{
+
+.about-blocks__body-image:first-child {
     flex: 1 0 66%;
 }
-.about-blocks__body-image:nth-child(2){
+
+.about-blocks__body-image:nth-child(2) {
     flex: 1 0 33%;
     margin-left: 8px;
 }
-.about-blocks__body-btns{
+
+.about-blocks__body-btns {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     flex: 0 1 100%;
 }
-.about-blocks__body-btns .about-blocks__body-btn:not(:first-child) button{
+
+.about-blocks__body-btns .about-blocks__body-btn:not(:first-child) button {
     margin-left: 5px;
 }
-.about-blocks__body-btns button{
+
+.about-blocks__body-btns button {
     position: relative;
     border: 1px solid #C4C4C4;
     border-radius: 8px;
@@ -2830,7 +2995,8 @@ button:active {
     padding: 16px 8px;
     margin-bottom: 6px;
 }
-.about-blocks__body-btns button:hover::before{
+
+.about-blocks__body-btns button:hover::before {
     position: absolute;
     content: '';
     top: 0;
@@ -2840,7 +3006,8 @@ button:active {
     background-color: rgba(0, 0, 0, .3);
     z-index: 10;
 }
-.about-blocks__body-btns button:hover::after{
+
+.about-blocks__body-btns button:hover::after {
     content: 'REMOVE';
     font-size: 13px;
     font-weight: 700;
@@ -2856,31 +3023,36 @@ button:active {
     z-index: 20;
     border-radius: 5px;
 }
-.about-blocks__add-btns{
+
+.about-blocks__add-btns {
     background-color: white;
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     padding: 8px 16px;
     margin-bottom: 8px;
 }
-.about-blocks__battons-wrapper{
+
+.about-blocks__battons-wrapper {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
-.about-blocks__btn-add{
+
+.about-blocks__btn-add {
     flex: 0 1 125px;
     margin: 0 12px;
 }
-.about-blocks__btn-add button{
+
+.about-blocks__btn-add button {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     text-transform: uppercase;
     padding: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
 .blocks-form__title,
-.blocks-form__text{
+.blocks-form__text {
     display: flex;
     align-items: center;
     background-color: #F3F3F3;
@@ -2888,67 +3060,81 @@ button:active {
     padding: 30px;
     margin-bottom: 12px;
 }
+
 .blocks-form__title h5,
-.blocks-form__text h5{
+.blocks-form__text h5 {
     font-weight: 500;
     text-transform: uppercase;
 }
-.blocks-form__title input{
+
+.blocks-form__title input {
     margin-left: 12px;
 }
-.blocks-form__text textarea{
+
+.blocks-form__text textarea {
     margin-left: 12px;
     width: 70vw;
     min-height: 50px;
 }
-.blocks-form__imgs-cont{
+
+.blocks-form__imgs-cont {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     padding: 8px;
     margin-bottom: 12px;
 }
-.blocks-form__imgs-cont>h3{
+
+.blocks-form__imgs-cont>h3 {
     font-weight: 500;
     margin-bottom: 8px;
     text-align: center;
 }
-.block-form__img-cards{
+
+.block-form__img-cards {
     display: flex;
     align-items: flex-start;
 }
-.block-form__img-card{
+
+.block-form__img-card {
     display: flex;
     align-items: center;
     background-color: #F3F3F3;
     border-radius: 8px;
     padding: 20px;
 }
-.block-form__img-card:first-child{
+
+.block-form__img-card:first-child {
     flex: 0 1 60%;
 }
-.block-form__img-card:nth-child(2){
+
+.block-form__img-card:nth-child(2) {
     flex: 0 1 38%;
     margin-left: 8px;
 }
-.block-form__img-card>h4{
+
+.block-form__img-card>h4 {
     display: block;
     flex: 0 1 15%;
     font-weight: 500;
 }
-.block-form__img-wrapper{
+
+.block-form__img-wrapper {
     flex: 0 1 85%;
     margin-left: 8px;
 }
-.block-form__img-card:nth-child(2) .block-form__img-edit input{
+
+.block-form__img-card:nth-child(2) .block-form__img-edit input {
     max-width: 190px;
 }
-.block-form__img img{
+
+.block-form__img img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     margin-bottom: 12px;
 }
-.block-form__new-block{
+
+.block-form__new-block {
     border: 1px solid #C4C4C4;
     padding: 18px 12px;
     border-radius: 8px;
@@ -2956,17 +3142,20 @@ button:active {
     margin-bottom: 12px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
 /***blocks modal start***/
-.blocks-modal .modal-dialog-centered{
+.blocks-modal .modal-dialog-centered {
     max-width: 400px;
     margin-left: 70%;
     padding-top: 9vh;
 }
-.blocks-modal .modal-body{
+
+.blocks-modal .modal-body {
     max-height: 54vh;
     overflow-x: auto;
 }
-.blocks-modal .modal-body ul li{
+
+.blocks-modal .modal-body ul li {
     margin-bottom: 3px;
     border: 1px solid #C4C4C4;
     padding: 8px;
@@ -2976,17 +3165,20 @@ button:active {
     align-items: center;
     justify-content: flex-start;
 }
-.blocks-modal .modal-body ul li h5{
+
+.blocks-modal .modal-body ul li h5 {
     font-weight: 500;
 }
-.blocks-modal .modal-body ul li button{
+
+.blocks-modal .modal-body ul li button {
     background-color: #C4C4C4;
     flex: 0 0 42px;
     border: none;
     height: 50px;
     position: relative;
 }
-.blocks-modal .modal-body ul li button::before{
+
+.blocks-modal .modal-body ul li button::before {
     position: absolute;
     top: 10px;
     left: 15px;
@@ -2997,7 +3189,8 @@ button:active {
     border-left: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.blocks-modal .modal-body ul li button::after{
+
+.blocks-modal .modal-body ul li button::after {
     position: absolute;
     top: 10px;
     left: 15px;
@@ -3008,18 +3201,20 @@ button:active {
     border-left: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.blocks-modal .modal-body ul li>div{
+
+.blocks-modal .modal-body ul li>div {
     flex: 0 0 50%;
     text-overflow: ellipsis;
-    overflow: hidden; 
+    overflow: hidden;
     white-space: nowrap;
     padding-left: 8px;
 }
-.blocks-modal .modal-body ul li>div:nth-of-type(1){
+
+.blocks-modal .modal-body ul li>div:nth-of-type(1) {
     flex: 0 0 37%;
 }
 
-.arrow::before{
+.arrow::before {
     position: absolute;
     top: 0;
     left: 15px;
@@ -3030,7 +3225,8 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.arrow::after{
+
+.arrow::after {
     position: absolute;
     top: 0;
     right: 15px;
@@ -3041,41 +3237,48 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.blocks-modal .spinner{
+
+.blocks-modal .spinner {
     width: 100%;
     height: 300px;
 }
+
 /***blocks modal end***/
 /**admin about blocks end**/
 /**admin about card start**/
-.admin-about__container>h2{
+.admin-about__container>h2 {
     font-weight: 500;
     font-size: 20px;
     text-align: center;
     margin: 18px 0 30px;
 }
-.admin-about__title{
+
+.admin-about__title {
     max-width: 500px;
     margin: 12px 20px 20px;
 }
-.admin-about__area{
+
+.admin-about__area {
     max-width: 900px;
     margin: 12px 20px 0;
 }
-.admin-about__blocks{
+
+.admin-about__blocks {
     max-width: 900px;
     padding: 15px;
     margin: 20px;
     background-color: #F3F3F3;
     border-radius: 8px;
 }
-.admin-about__blocks>h4{
+
+.admin-about__blocks>h4 {
     font-weight: 500;
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 20px;
 }
-.admin-about__cards-cont{
+
+.admin-about__cards-cont {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     background-color: white;
@@ -3084,52 +3287,60 @@ button:active {
     flex-direction: column;
     margin-bottom: 30px;
 }
-.admin-about__card{
+
+.admin-about__card {
     border-radius: 8px;
     border: 1px solid #C4C4C4;
     margin-bottom: 1px;
 }
 
-.admin-about__card:hover{
+.admin-about__card:hover {
     background-color: rgba(0, 0, 0, .1);
 }
-.admin-about__card-header{
+
+.admin-about__card-header {
     display: flex;
     padding: 8px;
     max-height: 70px;
 }
 
-.admin-about__card-header{
+.admin-about__card-header {
     display: flex;
     padding: 8px;
     max-height: 70px;
 }
-.admin-about__card-header div{
+
+.admin-about__card-header div {
     max-height: 100%;
 }
-.admin-about__card-header div:not(:first-child){
+
+.admin-about__card-header div:not(:first-child) {
     margin-left: 12px;
 }
-.admin-about__card-title{
+
+.admin-about__card-title {
     width: 14vw;
     overflow: hidden;
 }
-.admin-about__card-text{
+
+.admin-about__card-text {
     width: 64vw;
 }
+
 .admin-about__card-title h3,
-.admin-about__card-text h3{
+.admin-about__card-text h3 {
     font-weight: 500;
     margin-bottom: 4px;
 }
-.admin-about__card-text p{
+
+.admin-about__card-text p {
     text-overflow: ellipsis;
-    overflow: hidden; 
-    width: 100%; 
-    height: 32px; 
+    overflow: hidden;
+    width: 100%;
+    height: 32px;
 }
 
-.admin-about__card-del button{
+.admin-about__card-del button {
     border: none;
     width: 60px;
     height: 50px;
@@ -3138,19 +3349,22 @@ button:active {
     transition: all .2s ease-in-out;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-.admin-about__card-del button:hover{
+
+.admin-about__card-del button:hover {
     background-color: red;
     color: white;
     transition: all .2s ease-in-out;
 }
-.admin-about__card-button button{
+
+.admin-about__card-button button {
     border: none;
     width: 60px;
     height: 50px;
     position: relative;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-.about-arrow::before{
+
+.about-arrow::before {
     position: absolute;
     top: 0;
     left: 15px;
@@ -3161,7 +3375,8 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.about-arrow::after{
+
+.about-arrow::after {
     position: absolute;
     top: 0;
     right: 15px;
@@ -3172,7 +3387,8 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.about-arrowDown::before{
+
+.about-arrowDown::before {
     position: absolute;
     top: 19px;
     left: 15px;
@@ -3183,7 +3399,8 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.about-arrowDown::after{
+
+.about-arrowDown::after {
     position: absolute;
     top: 19px;
     right: 15px;
@@ -3194,37 +3411,44 @@ button:active {
     border-bottom: 1px solid black;
     transition: all .3s ease-in-out;
 }
-.admin-about__card-body{
+
+.admin-about__card-body {
     background-color: #F3F3F3;
     border-radius: 8px;
     padding: 30px;
 }
-.admin-about__body-title{
+
+.admin-about__body-title {
     text-align: center;
     font-size: 25px;
     font-weight: 500;
     margin-bottom: 12px;
     text-transform: uppercase;
 }
-.admin-about__body-text{
+
+.admin-about__body-text {
     margin-bottom: 12px;
     text-indent: 20px;
 }
-.admin-about__body-img{
+
+.admin-about__body-img {
     width: 50vw;
     height: 30vw;
     margin-bottom: 20px;
 }
-.admin-about__body-img img{
+
+.admin-about__body-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.admin-about__body-btns{
+
+.admin-about__body-btns {
     display: flex;
     justify-content: flex-end;
 }
-.admin-about__body-btn{
+
+.admin-about__body-btn {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     text-transform: uppercase;
@@ -3233,13 +3457,16 @@ button:active {
     font-size: 21px;
     font-weight: 500;
 }
-.admin-about__body-btn:not(:first-child){
+
+.admin-about__body-btn:not(:first-child) {
     margin-left: 8px;
 }
-.admin-about{
+
+.admin-about {
     position: relative;
 }
-.admin-about>button{
+
+.admin-about>button {
     position: fixed;
     top: 20%;
     right: 8vw;
@@ -3254,72 +3481,85 @@ button:active {
 
 /**admin about card end**/
 /**admin help page start**/
-.admin-pages__help{
+.admin-pages__help {
     padding: 18px;
 }
-.admin-pages__help .image-admin{
+
+.admin-pages__help .image-admin {
     max-width: 600px;
     margin-bottom: 20px;
 }
-.admin-pages__help .image-admin h2{
+
+.admin-pages__help .image-admin h2 {
     font-weight: 500;
     text-transform: uppercase;
 }
-.help-admin__contact{
+
+.help-admin__contact {
     background-color: #F3F3F3;
     border-radius: 8px;
     padding: 30px 0;
     max-width: 970px;
 }
-.help-admin__contact>h3{
+
+.help-admin__contact>h3 {
     font-weight: 500;
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 20px;
 }
-.help-admin__contact-cont{
+
+.help-admin__contact-cont {
     margin: 8px;
     padding: 8px;
     background-color: #fff;
     border-radius: 8px;
 }
-.help-admin__contact .admin__image-container h2{
+
+.help-admin__contact .admin__image-container h2 {
     text-transform: lowercase;
 }
-.help-admin__contact-bg{
+
+.help-admin__contact-bg {
     max-width: 920px;
     display: flex;
     justify-content: flex-start;
 }
-.help-admin__bg-large{
+
+.help-admin__bg-large {
     flex: 1 0 66%;
 }
-.help-admin__bg-small{
+
+.help-admin__bg-small {
     flex: 1 0 33%;
     margin-left: 8px;
 }
+
 /**admin help page end**/
 /**admin help faq start**/
 
-.adminFaq>h2{
+.adminFaq>h2 {
     margin: 18px 0 30px;
     font-size: 20px;
     font-weight: 500;
     text-align: center;
 }
-.adminFaq__container{
+
+.adminFaq__container {
     max-width: 66vw;
     padding: 15px;
     margin: 20px;
     background-color: #F3F3F3;
     border-radius: 8px;
 }
+
 .adminFaq__container>h4 {
     display: block;
     margin: 15px 15px 5px 15px;
     font-weight: 500;
 }
-.adminFaq__container>ul{
+
+.adminFaq__container>ul {
     border: 1px solid #C4C4C4;
     border-radius: 8px;
     background-color: white;
@@ -3328,35 +3568,43 @@ button:active {
     flex-direction: column;
     margin-bottom: 30px;
 }
-.adminFaq__container>ul>li{
+
+.adminFaq__container>ul>li {
     border-radius: 8px;
     border: 1px solid #C4C4C4;
     margin-bottom: 1px;
 }
-.adminFaq__header{
+
+.adminFaq__header {
     display: flex;
     padding: 8px;
     max-height: 70px;
 }
-.adminFaq__question-cont{
+
+.adminFaq__question-cont {
     flex: 0 0 28%;
 }
-.adminFaq__answer-cont{
+
+.adminFaq__answer-cont {
     flex: 0 0 56%;
     margin-left: 4px;
 }
-.adminFaq__delete-cont{
+
+.adminFaq__delete-cont {
     flex: 0 0 7%;
     margin-left: 4px;
 }
-.adminFaq__question-button{
+
+.adminFaq__question-button {
     flex: 0 0 7%;
     margin-left: 4px;
 }
-.adminFaq__header h3{
+
+.adminFaq__header h3 {
     font-weight: 500;
     margin-bottom: 4px;
 }
+
 .adminFaq__question-cont p,
 .adminFaq__answer-cont p {
     text-overflow: ellipsis;
@@ -3364,10 +3612,12 @@ button:active {
     width: 100%;
     height: 32px;
 }
-.adminFaq__answer-cont img{
+
+.adminFaq__answer-cont img {
     max-width: 50%;
 }
-.adminFaq__related-cont{
+
+.adminFaq__related-cont {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -3376,13 +3626,15 @@ button:active {
     border-radius: 8px;
     padding: 8px;
 }
-.adminFaq__norelated{
+
+.adminFaq__norelated {
     width: 44vw;
     height: 44px;
     line-height: 2.7;
     margin: 0 20px;
 }
-.adminFaq__related button{
+
+.adminFaq__related button {
     position: relative;
     background-color: #fff;
     font-weight: 500;
@@ -3396,7 +3648,8 @@ button:active {
     text-align: left;
     overflow: hidden;
 }
-.adminFaq__related button:hover::before{
+
+.adminFaq__related button:hover::before {
     position: absolute;
     content: '';
     top: 0;
@@ -3406,7 +3659,8 @@ button:active {
     background-color: rgba(0, 0, 0, .3);
     z-index: 10;
 }
-.adminFaq__related button:hover::after{
+
+.adminFaq__related button:hover::after {
     content: 'REMOVE';
     font-size: 13px;
     font-weight: 700;
@@ -3422,69 +3676,86 @@ button:active {
     z-index: 20;
     border-radius: 5px;
 }
-.adminFaq__modal-related.blocks-modal .modal-dialog-centered{
+
+.adminFaq__modal-related.blocks-modal .modal-dialog-centered {
     max-width: 500px;
     margin-left: 64%;
 }
-.adminFaq__modal-related.blocks-modal .modal-body ul li>div{
+
+.adminFaq__modal-related.blocks-modal .modal-body ul li>div {
     white-space: unset;
     max-height: 50px;
 }
-.adminFaq__modal-related.blocks-modal .modal-body ul li>div:nth-of-type(1){
+
+.adminFaq__modal-related.blocks-modal .modal-body ul li>div:nth-of-type(1) {
     flex: 0 0 30%;
 }
-.adminFaq__modal-related.blocks-modal .modal-body ul li>div{
+
+.adminFaq__modal-related.blocks-modal .modal-body ul li>div {
     flex: 0 0 60%;
 }
-.admin__wysiwyg-edit{
+
+.admin__wysiwyg-edit {
     min-height: 16vw;
 }
-.admin__wysiwyg-container{
+
+.admin__wysiwyg-container {
     min-height: 14vw;
 }
-.admin__wysiwyg-container>div{
+
+.admin__wysiwyg-container>div {
     min-height: 13vw;
     width: 100%;
     padding: 8px;
 }
-.admin__wysiwyg-container .quill{
+
+.admin__wysiwyg-container .quill {
     width: 100%;
     background-color: white;
 }
-.admin__wysiwyg-container .ql-container{
+
+.admin__wysiwyg-container .ql-container {
     /* height: 73%; */
     height: auto;
 }
-.admin__wysiwyg-container .td-spinner{
+
+.admin__wysiwyg-container .td-spinner {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.blocks-form__text>.quill{
+
+.blocks-form__text>.quill {
     width: 100%;
     background-color: white;
 }
+
 /**admin help faq end**/
 /**admin help categories start**/
-.adminFaq{
+.adminFaq {
     position: relative;
 }
-.admin-cat__icon-cont{
+
+.admin-cat__icon-cont {
     flex: 0 0 10%;
 }
-.admin-cat__answer-cont{
+
+.admin-cat__answer-cont {
     flex: 0 0 65%;
 }
-.admin-cat__icon{
+
+.admin-cat__icon {
     width: 50px;
     height: 40px;
 }
-.admin-cat__icon img{
+
+.admin-cat__icon img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.adminFaq>button{
+
+.adminFaq>button {
     position: fixed;
     top: 20%;
     right: 8vw;
@@ -3495,12 +3766,14 @@ button:active {
     max-width: 150px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-.adminFaq__category-faqs{
+
+.adminFaq__category-faqs {
     display: flex;
     align-items: center;
     margin-bottom: 1px;
 }
-.adminFaq__category-faqs div{
+
+.adminFaq__category-faqs div {
     flex: 0 1 5%;
     height: 48px;
     background-color: #E5E5E5;
@@ -3514,16 +3787,19 @@ button:active {
     line-height: 1.3;
     text-align: center;
 }
-.adminFaq__category-faqs button{
+
+.adminFaq__category-faqs button {
     flex: 0 1 95%;
     margin-bottom: 0;
     border-left: none;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }
-.blocks-modal .modal-body .mb-3 ul li .adminFaq-modal__title-cont{
+
+.blocks-modal .modal-body .mb-3 ul li .adminFaq-modal__title-cont {
     flex: 0 0 87%;
 }
+
 /**admin help categories end**/
 /*admin static pages end*/
 
@@ -3613,14 +3889,17 @@ button:active {
         flex-direction: column;
 
     }
+
     .device__img-cont,
     .device__info-cont,
-    .device__buy-cont{
+    .device__buy-cont {
         flex: 0 1 100%;
     }
-    .device__buy-cont{
+
+    .device__buy-cont {
         width: 100%;
     }
+
     /*device end*/
 }
 
@@ -3646,10 +3925,11 @@ button:active {
         margin-bottom: 10px;
         flex-direction: column;
     }
+
     .about-card {
         width: 100vw;
     }
-   
+
     .sub-about {
         margin: 10px 0;
     }
@@ -3703,6 +3983,7 @@ button:active {
     .whoWe .experience-block__img-cont {
         max-width: 98vw;
     }
+
     .whoWe .experience-block__img-small {
         display: block;
         max-width: 98vw;
@@ -3843,36 +4124,43 @@ button:active {
     .shop__container {
         flex-direction: column;
     }
+
     .shop__devices-cont {
         margin-left: 0;
     }
+
     .deviceItem__image-cont {
         width: 60px;
         height: 60px;
     }
+
     .typebar {
         margin-top: 0;
     }
+
     /*shop end*/
     /*device item start*/
-    .device__imgcont-wrapper{
+    .device__imgcont-wrapper {
         height: 50vh;
     }
-    
+
     .image-gallery {
         height: 50dvh;
     }
-    
+
     .image-gallery-slide img {
         height: 50dvh;
         max-height: 50dvh;
     }
-    .image-gallery .image-gallery-content .image-gallery-thumbnails-wrapper{
+
+    .image-gallery .image-gallery-content .image-gallery-thumbnails-wrapper {
         display: none;
     }
-    .image-gallery .image-gallery-content .image-gallery-slide-wrapper{
+
+    .image-gallery .image-gallery-content .image-gallery-slide-wrapper {
         width: 100%;
     }
+
     /*device item end*/
     /*basket star*/
     .basket-item {
@@ -3900,7 +4188,7 @@ button:active {
         margin-bottom: 10px;
     }
 
-    
+
 
     /* .about-card {
         max-width: 530px;
