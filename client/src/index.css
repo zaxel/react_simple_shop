@@ -14,6 +14,8 @@
         --sidebar-ring: 217.2 91.2% 59.8%;
         --background: 0 0% 100%;
         --foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
     }
 
     .dark {
