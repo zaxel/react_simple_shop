@@ -1198,6 +1198,13 @@
   "resolved" "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.10.tgz"
   "version" "0.2.10"
 
+"@hookform/resolvers@^5.2.2":
+  "integrity" "sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA=="
+  "resolved" "https://registry.npmjs.org/@hookform/resolvers/-/resolvers-5.2.2.tgz"
+  "version" "5.2.2"
+  dependencies:
+    "@standard-schema/utils" "^0.3.0"
+
 "@humanwhocodes/config-array@^0.9.2":
   "integrity" "sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw=="
   "resolved" "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.9.5.tgz"
@@ -1706,6 +1713,13 @@
   dependencies:
     "@radix-ui/react-use-layout-effect" "1.1.1"
 
+"@radix-ui/react-label@^2.1.8":
+  "integrity" "sha512-FmXs37I6hSBVDlO4y764TNz1rLgKwjJMQ0EGte6F3Cb3f4bIuHB/iLa/8I9VKkmOy+gNHq8rql3j686ACVV21A=="
+  "resolved" "https://registry.npmjs.org/@radix-ui/react-label/-/react-label-2.1.8.tgz"
+  "version" "2.1.8"
+  dependencies:
+    "@radix-ui/react-primitive" "2.1.4"
+
 "@radix-ui/react-menu@2.1.16":
   "integrity" "sha512-72F2T+PLlphrqLcAotYPp0uJMr5SjP5SL01wfEspJbru5Zs5vQaSHb4VB3ZMJPimgHHCHG7gMOeOB9H3Hdmtxg=="
   "resolved" "https://registry.npmjs.org/@radix-ui/react-menu/-/react-menu-2.1.16.tgz"
@@ -1996,6 +2010,11 @@
   "version" "8.1.0"
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@standard-schema/utils@^0.3.0":
+  "integrity" "sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g=="
+  "resolved" "https://registry.npmjs.org/@standard-schema/utils/-/utils-0.3.0.tgz"
+  "version" "0.3.0"
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   "integrity" "sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ=="
@@ -8784,6 +8803,11 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   "version" "6.0.11"
 
+"react-hook-form@^7.55.0", "react-hook-form@^7.68.0":
+  "integrity" "sha512-oNN3fjrZ/Xo40SWlHf1yCjlMK417JxoSJVUXQjGdvdRCU07NTFei1i1f8ApUAts+IVh14e4EdakeLEA+BEAs/Q=="
+  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.68.0.tgz"
+  "version" "7.68.0"
+
 "react-image-gallery@^1.3.0":
   "integrity" "sha512-lKnPaOzxqSdujPFyl+CkVw0j1aYoNCHk61cvr1h7aahf5aWqmPcR9YhUB4cYrt5Tn5KHDaPUzYm5/+cX9WxzaA=="
   "resolved" "https://registry.npmjs.org/react-image-gallery/-/react-image-gallery-1.3.0.tgz"
@@ -11132,7 +11156,12 @@
   "resolved" "https://registry.npmjs.org/zod-to-json-schema/-/zod-to-json-schema-3.25.0.tgz"
   "version" "3.25.0"
 
-"zod@^3.24.1", "zod@^3.25 || ^4", "zod@^3.25 || ^4.0":
+"zod@^3.24.1":
   "integrity" "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
   "resolved" "https://registry.npmjs.org/zod/-/zod-3.25.76.tgz"
   "version" "3.25.76"
+
+"zod@^3.25 || ^4", "zod@^3.25 || ^4.0", "zod@^4.1.13":
+  "integrity" "sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig=="
+  "resolved" "https://registry.npmjs.org/zod/-/zod-4.1.13.tgz"
+  "version" "4.1.13"
