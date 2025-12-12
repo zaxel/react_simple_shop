@@ -61,7 +61,7 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         PROFILE_WISHLIST_ROUTE} from "./utils/consts/routes";
 
 import ProfileAddress from "./components/profile/Address";
-import ProfileInfo from "./components/profile/Info";
+import ProfileInfo from "./components/profile/info/Info";
 import ProfileOrders from "./components/profile/Orders";
 import ProfileRouter from "./components/profile/ProfileRouter";
 import WishList from "./components/profile/WishList";

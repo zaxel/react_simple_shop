@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Route } from "react-router-dom";
 import { profileRoutes } from '../../routes';
-import ProfileInfo from './Info';
+import ProfileInfo from './info/Info';
 
 const ProfileRouter = () => {
     const routs = profileRoutes.map(({ path, Component }) => {
