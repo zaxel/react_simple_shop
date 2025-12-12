@@ -43,7 +43,7 @@ const DropDownMenu = () => {
             }
         >
             {dropMenuItems.map((item) => {
-                return <SimpleDropdownItem className='size-6'>
+                return <SimpleDropdownItem key={item.title} className='size-6'>
                     <Link to={item.route} className='hover:text-gray-700'>
                         <div className='flex items-center gap-2'>
                             <item.icon className='w-5 h-5' /> <span>{item.title}</span>
