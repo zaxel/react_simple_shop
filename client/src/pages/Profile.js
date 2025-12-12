@@ -1,8 +1,7 @@
 ﻿import React from 'react';
 import { Outlet } from 'react-router-dom';
-import AccountNavbar from '../components/userProfile/AccountNavbar';
-import { Sidebar, SidebarInset, SidebarProvider, SidebarTrigger } from '../shadcn/sidebar';
-import ProfileSidebar from '../components/profile/ProfileSidebar';
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '../shadcn/sidebar';
+import ProfileSidebar from '../components/profile/ProfileSidebar/ProfileSidebar';
 
 const Profile = () => {
     return (

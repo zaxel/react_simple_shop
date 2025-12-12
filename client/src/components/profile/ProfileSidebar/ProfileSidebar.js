@@ -1,42 +1,51 @@
-﻿import React from 'react';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '../../shadcn/sidebar';
-import { Clipboard, Handbag, Heart, Home} from 'lucide-react';
+﻿import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarSeparator } from '../../../shadcn/sidebar';
+import { Avatar, AvatarFallback, AvatarImage } from '../../../shadcn/avatar';
+import { Clipboard, Handbag, Heart, Home, } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { PROFILE_ADDRESS_ROUTE, PROFILE_INFO_ROUTE, PROFILE_ORDERS_ROUTE, PROFILE_WISHLIST_ROUTE } from '../../utils/consts/routes';
+import { PROFILE_ADDRESS_ROUTE, PROFILE_INFO_ROUTE, PROFILE_ORDERS_ROUTE, PROFILE_WISHLIST_ROUTE } from '../../../utils/consts/routes';
+import DropDownMenu from './DropDownMenu';
 
 const items = [
     {
         title: "Info",
-        url: "#",
         icon: Clipboard,
         route: PROFILE_INFO_ROUTE
     },
     {
         title: "Address",
-        url: "#",
         icon: Home,
         route: PROFILE_ADDRESS_ROUTE,
     },
     {
         title: "Orders",
-        url: "#",
         icon: Handbag,
         route: PROFILE_ORDERS_ROUTE,
     },
     {
         title: "Wish List",
-        url: "#",
         icon: Heart,
         route: PROFILE_WISHLIST_ROUTE,
     }
 ]
 
 const ProfileSidebar = () => {
+   
     return (
         <Sidebar collapsible="icon" side="left" variant="sidebar">
-            <SidebarHeader >
-                <div>header</div>
+            <SidebarHeader className='px-0'>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton inactive>
+                            <Avatar className='size-6'>
+                                <AvatarImage src="https://github.com/shadcn.png" />
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
+                            <span>Michael Brown</span>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
             </SidebarHeader>
+            <SidebarSeparator />
             <SidebarContent>
                 <SidebarGroup >
                     <SidebarGroupLabel>Profile</SidebarGroupLabel>
@@ -55,12 +64,16 @@ const ProfileSidebar = () => {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-
             </SidebarContent>
+            <SidebarSeparator />
             <SidebarFooter>
-                <div>footer</div>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <DropDownMenu />
+                    </SidebarMenuItem>
+                </SidebarMenu>
             </SidebarFooter>
-        </Sidebar>
+        </Sidebar >
     );
 };
 
