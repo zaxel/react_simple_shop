@@ -35,7 +35,7 @@ const ProfileSidebar = () => {
             <SidebarHeader className='px-0'>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton inactive>
+                        <SidebarMenuButton inactive="true">
                             <Avatar className='size-6'>
                                 <AvatarImage src="https://github.com/shadcn.png" />
                                 <AvatarFallback>CN</AvatarFallback>
