@@ -2,10 +2,10 @@
 
 const Orders = () => {
     return (
-        <div>
-            orders content.
-        </div>
-    );
+            <div>
+                orders content.
+            </div>
+        );
 };
 
 export default Orders;
