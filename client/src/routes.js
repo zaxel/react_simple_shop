@@ -64,7 +64,7 @@ import ProfileAddress from "./components/profile/address/Address";
 import ProfileInfo from "./components/profile/info/Info";
 import ProfileOrders from "./components/profile/orders/Orders";
 import ProfileRouter from "./components/profile/ProfileRouter";
-import WishList from "./components/profile/WishList";
+import WishList from "./components/profile/wishlist/WishList";
         
 
 export const userNavRoutes = [
