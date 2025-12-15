@@ -4,11 +4,30 @@ const DataTypes = require('sequelize');
 const User = sequelize.define('user', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   email: {type: DataTypes.STRING, unique: true},
+  name: {type: DataTypes.STRING(100)},
+  surname: {type: DataTypes.STRING(150)},
+  phone: {type: DataTypes.STRING(20)},
   password: {type: DataTypes.STRING},
   role: {type: DataTypes.STRING, defaultValue: "USER"},
   is_activated: {type: DataTypes.BOOLEAN, defaultValue: false},
   activation_link: {type: DataTypes.STRING},
 })
+
+
+const Address = sequelize.define('address', {
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  street: {type: DataTypes.STRING(150)},
+  house: {type: DataTypes.STRING(50)},
+  apartment: {type: DataTypes.STRING(50)},
+  city: {type: DataTypes.STRING(200)},
+  postal_code: {type: DataTypes.STRING(50)},
+  country: {type: DataTypes.STRING(100)},
+  county: {type: DataTypes.STRING(100)},
+  is_default: {type: DataTypes.BOOLEAN, defaultValue: false},
+})
+
+
+
 const Token = sequelize.define('token', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   refresh_token: {type: DataTypes.STRING(1024), allowNull: true},
@@ -137,6 +156,9 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   User.hasOne(Token)
   Token.belongsTo(User)
   
+  User.hasMany(Address, { foreignKey: 'user_id' })
+  Address.belongsTo(User, { foreignKey: 'user_id' })
+  
   User.hasOne(Basket)
   Basket.belongsTo(User)
   
@@ -213,6 +235,7 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   module.exports = {
       Token,
       User,
+      Address,
       Basket,
       BasketDevice,
       Order,
