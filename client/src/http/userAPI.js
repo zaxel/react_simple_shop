@@ -38,3 +38,45 @@ export const deleteUserReq = async (id) => {
       });
     return deletedUser.data;
 }
+
+
+export const addAddress = async (userId, newAddress) => {
+    try{
+        const resp = await $authHost.post(`api/user/${userId}/addresses`, newAddress);
+        return resp.data;
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}
+export const updateAddress = async (userId, addressId, addressInfo) => {
+    try{
+        const resp = await $authHost.patch(`api/user/${userId}/addresses/${addressId}`, addressInfo);
+        return resp.data;
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}
+export const deleteAddress = async (userId, addressId) => {
+    try{
+        const resp = await $authHost.delete(`api/user/${userId}/addresses/${addressId}`);
+        return resp.data;
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}
+export const setDefaultAddress = async (userId, addressId) => {
+    try{
+        const resp = await $authHost.patch(`api/user/${userId}/addresses/${addressId}/default`);
+        return resp.data;
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}

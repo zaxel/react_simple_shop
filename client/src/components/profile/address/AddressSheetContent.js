@@ -9,7 +9,7 @@ import { Button } from '../../../shadcn/button';
 
 const formFieldNames = [
     "country",
-    "zip",
+    "postal_code",
     "city",
     "county",
     "street",

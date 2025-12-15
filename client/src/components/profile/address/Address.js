@@ -4,86 +4,68 @@ import { Button } from '../../../shadcn/button';
 import { ClipboardPaste } from 'lucide-react';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../../../shadcn/select';
 import AddressSheetContent from './AddressSheetContent';
+import { useContext } from 'react';
+import { Context } from '../../..';
+import useFetch from '../../../utils/http/useFetch';
+import { useEffect } from 'react';
+import { addAddress, deleteAddress, setDefaultAddress } from '../../../http/userAPI';
+import ErrorBox from '../../ErrorBox';
+import { Spinner } from '../../../shadcn/spinner';
 
-const addressesList = [
-    {
-        id: 1,
-        country: "US",
-        zip: "NY 10003",
-        city: "New York",
-        county: "New York",
-        street: "Cooper Square",
-        house: "20",
-        default: false
-    },
-    {
-        id: 2,
-        country: "US",
-        zip: "NY 11205",
-        city: "New York",
-        county: "Brooklyn",
-        street: "Bedford Ave",
-        house: "1100",
-        default: false
-    },
-    {
-        id: 3,
-        country: "US",
-        zip: "NY 11373",
-        city: "New York",
-        county: "Elmhurst",
-        street: "73rd St",
-        house: "41-01",
-        default: false
-    },
-    {
-        id: 4,
-        country: "US",
-        zip: "NY 10314",
-        city: "New York",
-        county: "Staten Island",
-        street: "Richmond Ave",
-        house: "1500",
-        default: true
-    },
-    {
-        id: 5,
-        country: "UK",
-        zip: "SL3 8AP",
-        city: "London",
-        county: "Slough",
-        street: "Torent rd",
-        house: "34",
-        default: false
-    },
-]
 const Address = () => {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
-    const [addresses, setAddresses] = useState(addressesList);
-    const defAddress = addresses.find(el => el.default === true) ?? addresses[0];
-    const [defaultId, setDefaultId] = useState(defAddress.id.toString());
+    const [addresses, setAddresses] = useState([]);
+    const [defaultId, setDefaultId] = useState(null);
 
-    const onRemoveAddressHandler = removeId => {
-        if (addresses.length < 2) return;
-        if (removeId.toString() === defaultId) {
-            const remaining = addresses.filter(el => el.id !== removeId);
-            const newDefaultId = remaining[0].id.toString();
-            setDefaultId(newDefaultId);
-            setAddresses(prev =>
-                prev.map(el =>
-                    el.id === newDefaultId
-                        ? { ...el, default: true }
-                        : { ...el, default: false }
-                )
-            );
-        }
+    const { user } = useContext(Context);
+    const userId = user.user?.id;
+    const url = `api/user/${userId}/addresses`;
+
+    const { data, error, isLoading } = useFetch(url, null, true);
+
+    useEffect(() => {
+        if (!data || !data.count || !Array.isArray(data.rows))
+            return;
+        setAddresses(data.rows);
+
+    }, [data]);
+
+    useEffect(() => {
+        const defAddress = addresses.find(el => el.is_default) ?? addresses[0];
+        setDefaultId(defAddress?.id?.toString() ?? null);
+    }, [addresses]);
+
+    if(error)
+        return <ErrorBox error={error}/>
+    
+    if(isLoading)
+        return <div className="flex justify-center items-center h-[75vh]"> <Spinner /></div>
+
+    const handleDelete = async (addressId) => {
+        const result = await deleteAddress(userId, addressId);
+        if (!result) return;
         setAddresses(prev =>
-            prev.filter(el => el.id !== removeId)
+            prev.filter(addr => addr.id !== addressId)
         );
+    };
+
+    const handleAdd = async (address) => {
+        const created = await addAddress(userId, address);
+        console.log(created);
+        if (!created) return;
+        setAddresses(prev => [...prev, created]);
     }
-    const addNewAddress = address => {
-        setAddresses(prev=> [...prev, {...address, default: false, id: Date.now()}]);
-    }
+
+    const handleSetDefault = async (value) => {
+        setDefaultId(value);
+        setAddresses(prev =>
+            prev.map(addr => ({
+                ...addr,
+                is_default: addr.id.toString() === value,
+            }))
+        );
+        await setDefaultAddress(userId, value);
+    };
 
     return (
         <div className='sm:min-w-[30rem] p-4 flex flex-col gap-4'>
@@ -96,29 +78,21 @@ const Address = () => {
                             Add Address
                         </Button>
                     </SheetTrigger>
-                    <AddressSheetContent  addNewAddress={addNewAddress} onClose={() => setIsSheetOpen(false)}/>
+                    <AddressSheetContent addNewAddress={(address) => handleAdd(address)} onClose={() => setIsSheetOpen(false)} />
                 </Sheet>
             </div>
             <div className='flex flex-wrap items-center justify-between  bg-primary-foreground p-6 rounded-lg gap-4'>
                 <p className='font-medium'>Set default address</p>
                 <Select
                     value={defaultId}
-                    onValueChange={(value) => {
-                        setDefaultId(value);
-                        setAddresses(prev =>
-                            prev.map(addr => ({
-                                ...addr,
-                                default: addr.id.toString() === value,
-                            }))
-                        );
-                    }}
+                    onValueChange={handleSetDefault}
                 >
                     <SelectTrigger className="w-[220px]">
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            {addresses.map(({ zip, city, street, id }) => {
+                            {addresses.map(({ city, street, id }) => {
                                 return <SelectItem key={id} value={id.toString()}>
                                     {`${city} ${street}`}
                                 </SelectItem>
@@ -128,21 +102,19 @@ const Address = () => {
                 </Select>
             </div>
             <div className='flex gap-4 flex-wrap'>
-                {addresses.map(({ id, country, zip, city, county, street, house }) => {
+                {addresses.map(({ id, country, postal_code, city, county, street, house }) => {
                     return <div key={id} className='min-w-[18rem] bg-primary-foreground p-4 rounded-lg flex items-center justify-between gap-6'>
                         <div>
-                            <p className='font-bold'>{country}, {zip}</p>
+                            <p className='font-bold'>{country}, {postal_code}</p>
                             <p className='font-medium'>{city}, {county}</p>
                             <p>{street} {house}</p>
                         </div>
-                        <Button disabled={addresses.length < 2} onClick={() => onRemoveAddressHandler(id)} className='!rounded-full !w-10 !h-10' variant="destructive"><ClipboardPaste /> </Button>
+                        <Button disabled={addresses.length < 2} onClick={() => handleDelete(id)} className='!rounded-full !w-10 !h-10' variant="destructive"><ClipboardPaste /> </Button>
                     </div>
                 })}
 
             </div>
         </div>
-
-
     );
 
 };
