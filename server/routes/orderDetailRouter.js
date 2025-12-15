@@ -1,11 +1,10 @@
 ﻿const Router = require('express');
-const { body } = require('express-validator');
 const router = new Router();
 const ordersDetailsController = require('../controllers/ordersDetailsController');
-const checkRole = require('../middleware/checkRoleMiddleware');
+const authMiddleware = require('../middleware/authMiddleware');
 
 router.get('/:orderId',
-    checkRole(['ADMIN', 'MODERATOR']), 
+    authMiddleware, 
     ordersDetailsController.getOrderDescriptions);
 
 module.exports = router;
