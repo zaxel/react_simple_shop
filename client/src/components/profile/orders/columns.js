@@ -1,6 +1,7 @@
 ﻿import { ArrowUpDown } from "lucide-react";
 import { Button } from "../../../shadcn/button";
 import { cn } from "../../../utils/cn"
+import RateItem from "../../device/RateItem";
 
 const statusColors = {
     "in progress": "bg-yellow-400",
@@ -8,17 +9,123 @@ const statusColors = {
     failed: "bg-red-400",
 };
 
-export const columns = [
+export const columnsOrders = [
     {
         accessorKey: "id",
-        header: "Order Id",
+        header: () => {
+            return (
+                <div className="text-left">
+                    Order Id
+                </div>
+            )
+        },
         meta: { className: "hidden xl:table-cell" },
         cell: ({ row }) => {
             return <div className="font-medium ml-4">{parseInt(row.getValue("id"))}</div>
         },
     },
     {
-        accessorKey: "title",
+        accessorKey: "createdAt",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="w-full justify-center"
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Order Date
+                    <ArrowUpDown className="h-2 w-2" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => {
+            const dateObj = new Date(row.getValue("createdAt"));
+            const date = dateObj.toLocaleDateString("en-GB");
+            const time = dateObj.toLocaleTimeString("en-GB");
+            return <div className="text-center">{date} {time}</div>
+        },
+    },
+    {
+        accessorKey: "amountOrdered",
+        meta: { className: "hidden lg:table-cell" },
+        header: () => {
+            return (
+                <div className="text-center">
+                    Amount
+                </div>
+            )
+        },
+        cell: ({ row }) => {
+            const amount = row.getValue("amountOrdered");
+            return <div className="text-center">{amount}</div>
+        },
+    },
+    {
+        accessorKey: "status",
+        meta: { className: "hidden md:table-cell" },
+        header: () => {
+            return (
+                <div className="text-center">
+                    Status
+                </div>
+            )
+        },
+        cell: ({ row }) => {
+            const status = row.getValue("status");
+            return <span className={cn(
+                `p-1 rounded-md text-xs text-foreground`,
+                statusColors[status]
+            )}>{status}</span>
+        },
+    },
+    {
+        id: "details",
+        header: () => {
+            return (
+                <div className="text-center">
+                    Order Details
+                </div>
+            )
+        },
+        cell: ({ table, row }) => {
+            const { setOrderDetailsId } = table.options?.meta;
+            const orderId = row.original.id;
+            return <div className="text-center">
+                <Button onClick={() => setOrderDetailsId(orderId)} variant="link">details</Button>
+            </div>
+        },
+    },
+    {
+        accessorKey: "total",
+        header: () => {
+            return (
+                <div className="text-center">
+                    Paid
+                </div>
+            )
+        },
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("total"))
+            const formatted = new Intl.NumberFormat("en-GB", {
+                style: "currency",
+                currency: "GBP",
+            }).format(amount)
+
+            return <div className="text-right font-medium mr-4">{formatted}</div>
+        },
+    },
+]
+export const columnsDetails = [
+    {
+        accessorKey: "deviceId",
+        header: "Item Id",
+        meta: { className: "hidden xl:table-cell" },
+        cell: ({ row }) => {
+            return <div className="font-medium ml-4">{parseInt(row.getValue("deviceId"))}</div>
+        },
+    },
+    {
+        accessorKey: "name",
         header: ({ column }) => {
             return (
                 <Button
@@ -32,9 +139,9 @@ export const columns = [
             )
         },
         cell: ({ row }) => {
-            const item = row.getValue("title");
-            const img = row.original.img;  
-            const brand = row.original.brand;  
+            const item = row.getValue("name");
+            const img = row.original.img;
+            const brand = row.original.brand;
 
             return (
                 <div className="flex items-center gap-3">
@@ -52,8 +159,8 @@ export const columns = [
         },
     },
     {
-        accessorKey: "amountOrdered",
-         meta: { className: "hidden xl:table-cell" },
+        accessorKey: "device_amount",
+        meta: { className: "hidden xl:table-cell" },
         header: ({ column }) => {
             return (
                 <Button
@@ -67,25 +174,31 @@ export const columns = [
             )
         },
         cell: ({ row }) => {
-            const amount = row.getValue("amountOrdered");
+            const amount = row.getValue("device_amount");
             return <div className="text-center">{amount}</div>
         },
     },
     {
-        accessorKey: "status",
-         meta: { className: "hidden md:table-cell" },
-        header: "Status",
+        accessorKey: "rate",
+        meta: { className: "hidden md:table-cell" },
+        header: () => {
+            return (
+                <div className="text-center">
+                    Rate
+                </div>
+            )
+        },
         cell: ({ row }) => {
-            const status = row.getValue("status");
-            return <span className={cn(
-                `p-1 rounded-md text-xs text-foreground`,
-                statusColors[status]
-            )}>{status}</span>
+            const rate = parseFloat(row.getValue("rate"));
+            return <div className="scale-75" >
+                <RateItem rate={rate} />
+
+            </div>
         },
     },
     {
         accessorKey: "createdAt",
-         meta: { className: "hidden lg:table-cell" },
+        meta: { className: "hidden lg:table-cell" },
         header: ({ column }) => {
             return (
                 <Button
@@ -107,7 +220,7 @@ export const columns = [
         },
     },
     {
-        accessorKey: "total",
+        accessorKey: "price",
         header: ({ column }) => {
             return (
                 <Button
@@ -115,13 +228,13 @@ export const columns = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Paid
+                    Price
                     <ArrowUpDown className="h-2 w-2" />
                 </Button>
             )
         },
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("total"))
+            const amount = parseFloat(row.getValue("price"))
             const formatted = new Intl.NumberFormat("en-GB", {
                 style: "currency",
                 currency: "GBP",

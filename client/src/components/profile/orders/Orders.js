@@ -1,214 +1,86 @@
-﻿import React from 'react';
-import { ColumnDef } from "@tanstack/react-table";
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { DataTable } from './Data-Table';
-import { columns } from './columns';
+import { columnsOrders, columnsDetails } from './columns';
+import { Button } from '../../../shadcn/button';
+import useFetch from '../../../utils/http/useFetch';
+import { Context } from '../../..';
 
-const resp = {
-    "count": 38,
-    "rows": [
-        {
-            "id": 47,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757929742000,
-            "amountOrdered": 1,
-            "userId": 93,
-            "email": "admin@gmail.com",
-            status: "completed",
-            "total": 142.49,
-        },
-        {
-            "id": 48,
-            "title": "Adjustable Air Conditioner Deflector Telescopic Windshield Baffle Cover",
-            "brand": "Beco",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHnc94LVn1b8JGkgEIykqVd485j1JFvr30w&s",
-            "createdAt": 1757929792000,
-            "amountOrdered": 2,
-            "userId": 93,
-            "email": "admin@gmail.com",
-            status: "failed",
-            "total": 968
-        },
-        {
-            "id": 49,
-            "title": "Adjustable Air Conditioner Deflector Telescopic Windshield Baffle Cover",
-            "brand": "Beco",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHnc94LVn1b8JGkgEIykqVd485j1JFvr30w&s",
-            "createdAt": 1757929925000,
-            "amountOrdered": 4,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "completed",
-            "total": 92.92,
-        },
-        {
-            "id": 50,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757929983000,
-            "amountOrdered": 3,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "failed",
-            "total": 2080.99
-        },
-        {
-            "id": 51,
-            "title": "Adjustable Air Conditioner Deflector Telescopic Windshield Baffle Cover",
-            "brand": "Beco",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHnc94LVn1b8JGkgEIykqVd485j1JFvr30w&s",
-            "createdAt": 1757930094000,
-            "amountOrdered": 6,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "in progress",
-            "total": 5087.06
-        },
-        {
-            "id": 52,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757930130000,
-            "amountOrdered": 1,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "completed",
-            "total": 273
-        },
-        {
-            "id": 53,
-            "title": "Adjustable Air Conditioner Deflector Telescopic Windshield Baffle Cover",
-            "brand": "Beco",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHnc94LVn1b8JGkgEIykqVd485j1JFvr30w&s",
-            "createdAt": 1757930161000,
-            "amountOrdered": 1,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "completed",
-            "total": 2550
-        },
-        {
-            "id": 54,
-            "title": "Adjustable Air Conditioner Deflector Telescopic Windshield Baffle Cover",
-            "brand": "Beco",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHnc94LVn1b8JGkgEIykqVd485j1JFvr30w&s",
-            "createdAt": 1757930183000,
-            "amountOrdered": 4,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "in progress",
-            "total": 380.62
-        },
-        {
-            "id": 67,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757929742000,
-            "amountOrdered": 1,
-            "userId": 93,
-            "email": "admin@gmail.com",
-            status: "completed",
-            "total": 142.49,
-        },
-        {
-            "id": 68,
-            "title": "Adjustable Air Conditioner Deflector Telescopic Windshield Baffle Cover",
-            "brand": "Beco",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHnc94LVn1b8JGkgEIykqVd485j1JFvr30w&s",
-            "createdAt": 1757929792000,
-            "amountOrdered": 2,
-            "userId": 93,
-            "email": "admin@gmail.com",
-            status: "failed",
-            "total": 968
-        },
-        {
-            "id": 69,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757929925000,
-            "amountOrdered": 4,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "completed",
-            "total": 92.92,
-        },
-        {
-            "id": 70,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757929983000,
-            "amountOrdered": 3,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "failed",
-            "total": 2080.99
-        },
-        {
-            "id": 71,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757930094000,
-            "amountOrdered": 6,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "in progress",
-            "total": 5087.06
-        },
-        {
-            "id": 72,
-            "title": "Adjustable Air Conditioner Deflector Telescopic Windshield Baffle Cover",
-            "brand": "Beco",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHnc94LVn1b8JGkgEIykqVd485j1JFvr30w&s",
-            "createdAt": 1757930130000,
-            "amountOrdered": 1,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "completed",
-            "total": 273
-        },
-        {
-            "id": 73,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757930161000,
-            "amountOrdered": 1,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "completed",
-            "total": 2550
-        },
-        {
-            "id": 74,
-            "title": "Beko Robot Cleaner VRR60314VW | White/Chrome Design | 150 Minute Run Time | 2000",
-            "brand": "Samsung",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRArjig5RaSN94i9mKCI4ay63ea4X1ZJsQEyQ&s",
-            "createdAt": 1757930183000,
-            "amountOrdered": 4,
-            "userId": 90,
-            "email": "ViewOnlyAdmin@gmail.com",
-            status: "in progress",
-            "total": 380.62
-        },
-    ]
-}
 
+const ordersUrl = "api/order/";
+const orderDetailsUrl = "api/order/details/";
 
 const Orders = () => {
+    const [orderDetailsId, setOrderDetailsId] = useState(null);
+    const { user } = useContext(Context);
+    const userId = user.user?.id;
+
+    const [orders, setOrders] = useState({
+        "count": 0,
+        "rows": []
+    });
+
+    const [pagination, setPagination] = useState({
+        pageIndex: 0,
+        pageSize: 10,
+    });
+
+    const [sorting, setSorting] = useState([
+        { id: 'createdAt', desc: true } // Default sort
+    ]);
+
+    const params = useMemo(() => ({
+        sortBy: sorting[0]?.id ?? "createdAt",
+        sortDirection: sorting[0]?.desc ? "DESC" : "ASC",
+        limit: pagination.pageSize,
+        page: pagination.pageIndex + 1,
+        searchBy: !orderDetailsId ? "userId" : undefined,
+        searchPhrase: !orderDetailsId && userId,
+    }), [sorting, pagination.pageSize, pagination.pageIndex, orderDetailsId, userId]);
+
+    const url = useMemo(() => {
+        return orderDetailsId ? `${orderDetailsUrl}${orderDetailsId}` : ordersUrl;
+    }, [orderDetailsId]);
+
+    const columns = useMemo(() => {
+        return orderDetailsId ? columnsDetails : columnsOrders;
+    }, [orderDetailsId]);
+
+
+    const { data, error, isLoading } = useFetch(url, { params }, true);
+
+    const setOrderDetailsHandler = (orderId) => {
+        setOrders({
+            "count": 0,
+            "rows": []
+        });
+        setOrderDetailsId(orderId);
+        setPagination({ pageIndex: 0, pageSize: 10 });
+        setSorting([{ id: 'createdAt', desc: true }]);
+    }
+
+    useEffect(() => {
+        if (!data) return;
+        setOrders(data);
+    }, [data]);
+
+    if (!userId) return null;
+    if (error)
+        return <div className='flex items-center justify-center text-lg text-red-500'>Unexpected error.</div>
+
     return (
         <div className=''>
-            <div className='mb-8 px-4 py-2 bg-primary-foreground rounded-lg'>
-                <h1 className='font-semibold '>Your Orders</h1>
+            <div className='px-4 py-2 mb-8 bg-primary-foreground rounded-lg flex justify-between items-center flex-wrap'>
+                <h1 className='font-semibold mb-4 '>{!orderDetailsId
+                    ? "Your Orders"
+                    : `Order № ${orderDetailsId} details`}</h1>
+                {orderDetailsId && <Button variant="default" onClick={() => setOrderDetailsHandler(null)}>Back to orders</Button>}
             </div>
-            <DataTable data={resp.rows} columns={columns}/>
+            <DataTable
+                data={orders.rows} columns={columns} orderDetailsId={orderDetailsId}
+                setOrderDetailsId={setOrderDetailsHandler} totalCount={orders.count}
+                limit={pagination.pageSize} pagination={pagination} setPagination={setPagination}
+                sorting={sorting} setSorting={setSorting} isLoading={isLoading}
+            />
         </div>
     );
 };
