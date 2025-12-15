@@ -7,7 +7,7 @@ export const setDataToStore = async (store, setterName, data) => {
 }
 
 export const fetchAll = async (cb, ...rest) => {
-    // rest - id, sortBy, sortDirection, limit, page, searchBy, searchPrase, brandId, typeId
+    // rest - id, sortBy, sortDirection, limit, page, searchBy, searchPhrase, brandId, typeId
     const fetchedData = await cb(...rest);
     return fetchedData;
 }

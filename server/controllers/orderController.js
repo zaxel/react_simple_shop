@@ -18,8 +18,8 @@ class orderController {
     }
     async getAll(req, res, next){
         try {
-            let { sortBy, sortDirection, limit, page, searchBy, searchPrase } = req.query;
-            const orders = await orderService.getAll(sortBy, sortDirection, limit, page, searchBy, searchPrase);
+            let { sortBy, sortDirection, limit, page, searchBy, searchPhrase } = req.query;
+            const orders = await orderService.getAll(sortBy, sortDirection, limit, page, searchBy, searchPhrase);
             return res.json(orders);
         } catch (e) {
             next(ApiError.forbidden(e.message));

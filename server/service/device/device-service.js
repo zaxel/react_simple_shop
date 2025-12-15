@@ -210,8 +210,8 @@ class DeviceService {
     sortBy,
     sortDirection = "ASC",
     searchBy,
-    searchPraseAdmin,
-    searchPraseMain
+    searchPhraseAdmin,
+    searchPhraseMain
   ) => {
     let offset = page * limit - limit;
     let where = searchDevicesOptions(
@@ -219,10 +219,10 @@ class DeviceService {
       brandId,
       typeId,
       searchBy,
-      searchPraseAdmin
+      searchPhraseAdmin
     );
     let order = orderDevicesOptions(sortBy, sortDirection);
-    let devices = !searchPraseMain
+    let devices = !searchPhraseMain
       ? await Device.findAndCountAll({ where, order, limit, offset })
       : await this.getAllMainSearch({
           brandId,
@@ -232,7 +232,7 @@ class DeviceService {
           offset,
           where,
           order,
-          searchPhrase: searchPraseMain,
+          searchPhrase: searchPhraseMain,
         });
     return devices;
   };

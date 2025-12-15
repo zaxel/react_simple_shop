@@ -16,13 +16,13 @@ class OrderService {
         return orderDevice;
     }
 
-    getAll = async (sortBy, sortDirection = 'ASC', limit, page, searchBy, searchPrase) => {
+    getAll = async (sortBy, sortDirection = 'ASC', limit, page, searchBy, searchPhrase) => {
         const startPage = process.env.START_ADMIN_ORDER_PAGE;
         const defaultLimit = process.env.DEFAULT_ADMIN_ORDER_LIMIT;
         page = page || startPage;
         limit = limit || defaultLimit;
         let offset = page * limit - limit;
-        let where = searchOrdersOptions(searchBy, searchPrase);
+        let where = searchOrdersOptions(searchBy, searchPhrase);
         let ordersGeneral = await Order.findAndCountAll({
             where,
             order: [

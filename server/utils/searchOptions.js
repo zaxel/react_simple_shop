@@ -2,47 +2,49 @@
 const { Op, where } = require("sequelize");
 const ApiError = require('../error/ApiError');
 
-exports.searchUsersOptions = (searchBy, searchPrase) => {
+exports.searchUsersOptions = (searchBy, searchPhrase) => {
     let where = {};
     if (searchBy) {
-        if (isNumeric(searchPrase)&&searchBy==='id') {
-            where[searchBy] = searchPrase;
-        } else if (searchPrase === '') {
+        if (isNumeric(searchPhrase)&&searchBy==='id') {
+            where[searchBy] = searchPhrase;
+        } else if (searchPhrase === '') {
             where = null;
-        }else if (searchPrase === 'true') {
+        }else if (searchPhrase === 'true') {
             where[searchBy] = true;
 
-        } else if (searchPrase === 'false') {
+        } else if (searchPhrase === 'false') {
             where[searchBy] = false;
 
         } else {
-            where[searchBy] = { [Op.iLike]: `%${searchPrase}%` };
+            where[searchBy] = { [Op.iLike]: `%${searchPhrase}%` };
         }
     }
     return where;
 }
-exports.searchOrdersOptions = (searchBy, searchPrase) => {
+exports.searchOrdersOptions = (searchBy, searchPhrase) => {
     let where = {};
     if (!searchBy) return where;
-    if (!isNumeric(searchPrase) && searchPrase !== '') throw ApiError.badRequest('request must be a number!');
-    if (searchPrase === '') {
+    if (!isNumeric(searchPhrase) && searchPhrase !== ''){
+        throw ApiError.badRequest('request must be a number in string format!');
+    } 
+    if (searchPhrase === '') {
         where = null;
     }else{
-        where[searchBy] = searchPrase;
+        where[searchBy] = searchPhrase;
     }
     return where;
 }
-exports.searchDevicesOptions = (id, brandId, typeId, searchBy, searchPrase) => {
+exports.searchDevicesOptions = (id, brandId, typeId, searchBy, searchPhrase) => {
     let where = {};
     if (searchBy) {
-        const isNumber = isNumeric(searchPrase); 
-        if ((searchBy==='id' || searchBy==='price') && !isNumeric(searchPrase)) throw ApiError.badRequest('request must be a number!');
+        const isNumber = isNumeric(searchPhrase); 
+        if ((searchBy==='id' || searchBy==='price') && !isNumeric(searchPhrase)) throw ApiError.badRequest('request must be a number!');
         if (isNumber && searchBy==='id' || isNumber && searchBy==='price') {
-            where[searchBy] = searchPrase;
-        } else if (searchPrase === '') {
+            where[searchBy] = searchPhrase;
+        } else if (searchPhrase === '') {
             where = null;
         } else {
-            where[searchBy] = { [Op.iLike]: `%${searchPrase}%` };
+            where[searchBy] = { [Op.iLike]: `%${searchPhrase}%` };
         }
         return where;
     }

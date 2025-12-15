@@ -75,13 +75,13 @@ class UserService {
         return { ...tokens, user: userDto };
     }
 
-    getAll = async (sortBy, sortDirection = 'ASC', limit, page, searchBy, searchPrase) => {
+    getAll = async (sortBy, sortDirection = 'ASC', limit, page, searchBy, searchPhrase) => {
         const startPage = process.env.START_ADMIN_USER_PAGE;
         const defaultLimit = process.env.DEFAULT_ADMIN_USER_LIMIT;
         page = page || startPage;
         limit = limit || defaultLimit;
         let offset = page * limit - limit;
-        let where = searchUsersOptions(searchBy, searchPrase);
+        let where = searchUsersOptions(searchBy, searchPhrase);
         let users = await User.findAndCountAll({where,
           order: [
             [sortBy, sortDirection],
