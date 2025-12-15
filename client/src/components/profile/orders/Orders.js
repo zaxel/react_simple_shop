@@ -4,6 +4,7 @@ import { columnsOrders, columnsDetails } from './columns';
 import { Button } from '../../../shadcn/button';
 import useFetch from '../../../utils/http/useFetch';
 import { Context } from '../../..';
+import ErrorBox from '../../ErrorBox';
 
 
 const ordersUrl = "api/order/";
@@ -65,7 +66,7 @@ const Orders = () => {
 
     if (!userId) return null;
     if (error)
-        return <div className='flex items-center justify-center text-lg text-red-500'>Unexpected error.</div>
+        return <ErrorBox error={error}/>
 
     return (
         <div className=''>
