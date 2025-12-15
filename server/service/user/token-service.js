@@ -63,6 +63,10 @@ class TokenService {
         });
         return tokenData;
     }
+
+    readTokenData = (token) => {
+        return jwt.decode(token);
+    }
 }
 
 module.exports = new TokenService();
