@@ -1,4 +1,4 @@
-﻿const {Brand} = require('../../models/models');
+﻿const { Brand } = require('../../models/models');
 const BrandDto = require('../../dtos/brand-dto');
 
 class BrandService {
@@ -7,26 +7,34 @@ class BrandService {
             ignoreDuplicates: true,
         });
         //bulkCreate returns id===null if type already exist in db.
-        return data.filter(brand=> brand.id);
+        return data.filter(brand => brand.id);
     }
     getAll = async (sortBy = 'id', sortDirection = 'ASC') => {
-        let brands = await Brand.findAll({order: [
-            [sortBy, sortDirection],
-        ]});
-        brands = brands.map(el=>new BrandDto(el))
+        let brands = await Brand.findAll({
+            order: [
+                [sortBy, sortDirection],
+            ]
+        });
+        brands = brands.map(el => new BrandDto(el))
         return brands;
+    }
+    get = async ({ id }) => {
+        let brand = await Brand.findOne({
+            where: { id }
+        });
+        return brand;
     }
     update = async (id, name) => {
         const updatedData = await Brand.update({ name }, {
             where: { id }
-          });
-        return {updatedData};
+        });
+        return { updatedData };
     }
     delete = async (id) => {
         const updatedData = await Brand.destroy({
             where: { id }
-          });
-        return {updatedData};
+        });
+        return { updatedData };
     }
 }
 
