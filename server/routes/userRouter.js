@@ -4,6 +4,8 @@ const router = new Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
 const checkRole = require('../middleware/checkRoleMiddleware');
+const correctUserAddressMiddleware = require('../middleware/correctUserAddressMiddleware');
+const addressController = require('../controllers/addressController');
 
 router.post('/registration',
     body('email').isEmail(),
@@ -24,4 +26,14 @@ router.put('/',
 router.delete('/',
     checkRole('ADMIN'),
     userController.delete);
+
+router.get('/:userId/addresses', authMiddleware, correctUserAddressMiddleware, addressController.get);
+router.post('/:userId/addresses', authMiddleware, correctUserAddressMiddleware, addressController.add);
+router.patch('/:userId/addresses/:addressId', authMiddleware, addressController.update);
+router.delete('/:userId/addresses/:addressId', authMiddleware, addressController.delete);
+router.patch('/:userId/addresses/:addressId/default', authMiddleware, addressController.setDefault);
+
+
+
+
 module.exports = router;
