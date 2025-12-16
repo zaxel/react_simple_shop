@@ -27,6 +27,9 @@ router.delete('/',
     checkRole('ADMIN'),
     userController.delete);
 
+router.get('/info/:userId', authMiddleware, correctUserAddressMiddleware, userController.getUser);
+router.patch('/info/:userId', authMiddleware, correctUserAddressMiddleware, userController.updateUser);
+
 router.get('/:userId/addresses', authMiddleware, correctUserAddressMiddleware, addressController.get);
 router.post('/:userId/addresses', authMiddleware, correctUserAddressMiddleware, addressController.add);
 router.patch('/:userId/addresses/:addressId', authMiddleware, addressController.update);
