@@ -17,6 +17,9 @@ export default class UserStore{
     setUser(user){
         this._user = user;
     }
+    updateUser(data){
+        this._user = {...this._user, ...data};
+    }
     get isAuth(){
         return this._isAuth;
     }

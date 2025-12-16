@@ -80,3 +80,13 @@ export const setDefaultAddress = async (userId, addressId) => {
         return null;
     }
 }
+
+export const updateUserData = async (userId, data) => {
+    try{
+        const resp = await $authHost.patch(`api/user/info/${userId}`, data); 
+        return resp.data;
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}

@@ -4,6 +4,8 @@ import { Clipboard, Handbag, Heart, Home, } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PROFILE_ADDRESS_ROUTE, PROFILE_INFO_ROUTE, PROFILE_ORDERS_ROUTE, PROFILE_WISHLIST_ROUTE } from '../../../utils/consts/routes';
 import DropDownMenu from './DropDownMenu';
+import { useContext } from 'react';
+import { Context } from '../../..';
 
 const items = [
     {
@@ -29,7 +31,13 @@ const items = [
 ]
 
 const ProfileSidebar = () => {
-   
+    const { user } = useContext(Context);
+    
+    const firstName = user.user?.name || "";
+    const surName = user.user?.surname || "";   
+    const userFullName =  (!firstName && !surName) ? "User" : `${firstName} ${surName}`;
+    const initials = `${firstName[0] || ''}${surName[0] || ''}` || 'U';
+
     return (
         <Sidebar collapsible="icon" side="left" variant="sidebar">
             <SidebarHeader className='px-0'>
@@ -38,9 +46,9 @@ const ProfileSidebar = () => {
                         <SidebarMenuButton inactive="true">
                             <Avatar className='size-6'>
                                 <AvatarImage src="https://github.com/shadcn.png" />
-                                <AvatarFallback>CN</AvatarFallback>
+                                <AvatarFallback>{initials}</AvatarFallback>
                             </Avatar>
-                            <span>Michael Brown</span>
+                            <span>{userFullName || "UR"}</span>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

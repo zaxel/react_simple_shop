@@ -6,6 +6,7 @@ import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../../shadcn/form';
 import { Input } from '../../../shadcn/input';
 import { Button } from '../../../shadcn/button';
+import { useEffect } from 'react';
 
 const formFieldNames = ['name', 'surname', 'email', 'phone'];
 
@@ -27,25 +28,42 @@ const formSchema = z.object({
     phone: z
         .string({ message: "Must be a string." })
         .regex(/^\+?[0-9\s\-()]+$/, { message: "Invalid phone number format." })
-        .min(8, { message: "Phone number must be at least 8 characters." })
-        .max(15, { message: "Phone number must be less than 15 characters." }),
+        .min(4, { message: "Phone number must be at least 4 characters." })
+        .max(25, { message: "Phone number must be less than 25 characters." }),
 });
 
 
-const InfoSheetContent = () => {
+const InfoSheetContent = ({user, editUser, onClose}) => {
+
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "Michael",
-            surname: "Brown",
-            email: "brown@gmail.com",
-            phone: "+1 234 56789"
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            phone: user.phone
         },
          mode: 'onChange'
     })
 
-    const onSubmitHandler = e => {
-        e.preventDefault();
+
+    useEffect(() => {
+  if (user) {
+    form.reset({
+      name: user.name ?? "",
+      surname: user.surname ?? "",
+      email: user.email ?? "",
+      phone: user.phone ?? "",
+    });
+  }
+}, [user, form]);
+
+
+    const onSubmitHandler = async(data) => {
+        await editUser(data);
+        form.reset(data);
+        onClose();
     }
     return (
         <SheetContent className="!gap-0 overflow-y-auto">
@@ -56,7 +74,7 @@ const InfoSheetContent = () => {
                 </SheetDescription>
             </SheetHeader>
             <Form {...form} asChild>
-                <form onSubmit={onSubmitHandler} className='p-6'>
+                <form onSubmit={form.handleSubmit(onSubmitHandler)} className='p-6'>
                     {formFieldNames.map(fieldName => {
 
                         return <FormField                            
