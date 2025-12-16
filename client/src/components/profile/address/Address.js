@@ -2,7 +2,7 @@
 import { Sheet, SheetTrigger } from '../../../shadcn/sheet';
 import { Button } from '../../../shadcn/button';
 import { ClipboardPaste } from 'lucide-react';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../../../shadcn/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../../../shadcn/select';
 import AddressSheetContent from './AddressSheetContent';
 import { useContext } from 'react';
 import { Context } from '../../..';
@@ -51,7 +51,6 @@ const Address = () => {
 
     const handleAdd = async (address) => {
         const created = await addAddress(userId, address);
-        console.log(created);
         if (!created) return;
         setAddresses(prev => [...prev, created]);
     }
