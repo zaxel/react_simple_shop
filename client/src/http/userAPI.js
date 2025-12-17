@@ -90,3 +90,47 @@ export const updateUserData = async (userId, data) => {
         return null;
     }
 }
+
+
+
+export const addWishItem = async (userId, deviceId) => {
+    try{
+        const resp = await $authHost.post(`api/user/${userId}/wishlist/${deviceId}`);
+        return resp.data; 
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}
+export const getWishItems = async (userId) => {
+    try{ 
+        const resp = await $authHost.get(`api/user/${userId}/wishlist`);
+        return resp.data;
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}
+
+export const getWishItemsList = async (userId) => {
+    try{ 
+        const resp = await $authHost.get(`api/user/${userId}/wishitems`);
+        return resp.data;
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}
+export const deleteWishItem = async (userId, deviceId) => {
+    try{
+        const resp = await $authHost.delete(`api/user/${userId}/wishlist/${deviceId}`);
+        return resp.data;
+
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+}
