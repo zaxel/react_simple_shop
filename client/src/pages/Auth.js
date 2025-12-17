@@ -1,14 +1,16 @@
 ﻿import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
-import { registration, login } from '../http/userAPI';
+import { registration, login, getWishItems } from '../http/userAPI';
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts/routes';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
-import { setUserIfAuth } from '../utils/setUserIfAuth';
+import { checkAuth, setUserIfAuth } from '../utils/checkAuth';
 import { fetchCartOnAuth, setCartId } from '../utils/cart/fetchSetCart';
 import { setLocalStoreCart } from '../utils/cart/setLocalStoreCart';
 import { isActivated } from '../utils/check/isActivated';
+import { setUserData } from '../utils/setUserData';
+import setWishList from '../utils/setWishList';
 
 const Auth = observer(() => {
     const { user, history, cart } = useContext(Context);
@@ -31,15 +33,16 @@ const Auth = observer(() => {
 
     const auth = async (e) => {
         try {
-            let data;
             if (isLogin) {
                 e.preventDefault();
-                data = await login(email, password);
+                await login(email, password);
             } else {
                 e.preventDefault();
-                data = await registration(email, password);
+                await registration(email, password);
             }
-            await setUserIfAuth(user);
+            const authUser = await checkAuth(user);
+            await setUserData(user, authUser);
+            await setWishList(user, history);
             cart.setCart(JSON.parse(localStorage.getItem('cart'))|| []);
             await setCartId(cart);
             await fetchCartOnAuth(user, cart);

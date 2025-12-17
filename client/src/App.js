@@ -5,23 +5,27 @@ import { observer } from "mobx-react-lite";
 import { useState, useContext, useEffect } from "react";
 import { Context } from ".";
 import { Spinner } from "react-bootstrap";
-import { setUserIfAuth } from "./utils/setUserIfAuth";
+import { checkAuth, setUserIfAuth } from "./utils/checkAuth";
 import { fetchSetCart, setCartId } from "./utils/cart/fetchSetCart";
 import { setCartFromLocalStore } from "./utils/cart/setLocalStoreCart";
 import Footer from "./components/Footer";
 import ShopToolTip from "./components/ShopToolTip";
 import { isActivated } from "./utils/check/isActivated";
+import { setUserData } from "./utils/setUserData";
+import setWishList from "./utils/setWishList";
 
 
 const App = observer(() => {
-  const { user, cart } = useContext(Context);
+  const { user, cart, history } = useContext(Context);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
         !user.isAuth && setCartFromLocalStore(cart);
-        await setUserIfAuth(user);
+        const authUser = await checkAuth(user); //err if no auth
+        await setUserData(user, authUser);
+        await setWishList(user, history);
         await setCartId(cart, user);
         await fetchSetCart(user, cart);
         cart.setCartTotal();
