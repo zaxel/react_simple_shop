@@ -22,7 +22,6 @@ const DevicePage = () => {
 			})
 			.catch((err) => {
 				console.log(err.message);
-				setDevice('error');
 			});
 	}, []);
 
@@ -78,7 +77,7 @@ const DevicePage = () => {
 							</table>
 						</div>
 					</div>
-					<DeviceBuyCont device={device}/>
+					<DeviceBuyCont device={device} />
 				</div>
 				<SellerDescription device={device} />
 			</div>
