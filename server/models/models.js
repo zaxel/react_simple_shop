@@ -75,6 +75,15 @@ const Rate = sequelize.define('rate', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     rate: {type: DataTypes.INTEGER, allowNull: false},
 })
+const WishList = sequelize.define('wishlist_items', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true,},
+  },
+  {
+    indexes: [{
+        unique: true,
+        fields: ['userId', 'deviceId'],
+      },],
+  })
 const TypeBrand = sequelize.define('type_brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
 })
@@ -168,6 +177,12 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   User.hasMany(Rate)
   Rate.belongsTo(User)
 
+  User.hasMany(WishList);
+  WishList.belongsTo(User);
+
+  Device.hasMany(WishList);
+  WishList.belongsTo(Device);
+
   Basket.hasMany(BasketDevice)
   BasketDevice.belongsTo(Basket)
 
@@ -244,6 +259,7 @@ const InfoAppCards = sequelize.define('info_app_cards', {
       Type,
       Brand,
       Rate,
+      WishList,
       TypeBrand,
       DeviceInfo,
 
