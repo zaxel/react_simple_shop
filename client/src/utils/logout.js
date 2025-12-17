@@ -2,9 +2,7 @@
 import { logout as logoutAPI } from "../http/userAPI";
 
 export const logoutOnClient = async(cartStore, userStore) => {
-    userStore.setUser({});
-    userStore.setIsAuth(false);
-    userStore.setIsSuperUser(false);
+    userStore.reset();
 
     cartStore.setCartDevices([]);
     cartStore.setCart([]);
