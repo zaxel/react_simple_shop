@@ -6,6 +6,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const checkRole = require('../middleware/checkRoleMiddleware');
 const correctUserAddressMiddleware = require('../middleware/correctUserAddressMiddleware');
 const addressController = require('../controllers/addressController');
+const wishlistController = require('../controllers/wishlistController');
 
 router.post('/registration',
     body('email').isEmail(),
@@ -36,7 +37,9 @@ router.patch('/:userId/addresses/:addressId', authMiddleware, addressController.
 router.delete('/:userId/addresses/:addressId', authMiddleware, addressController.delete);
 router.patch('/:userId/addresses/:addressId/default', authMiddleware, addressController.setDefault);
 
-
-
+router.post('/:userId/wishlist/:deviceId', authMiddleware, wishlistController.add); 
+router.delete('/:userId/wishlist/:deviceId', authMiddleware, wishlistController.delete);
+router.get('/:userId/wishlist', authMiddleware, wishlistController.get);
+router.get('/:userId/wishitems', authMiddleware, wishlistController.getItems);
 
 module.exports = router;

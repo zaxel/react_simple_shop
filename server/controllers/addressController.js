@@ -2,7 +2,7 @@
 const addressService = require('../service/user/address-service');
 const { validationResult } = require('express-validator');
 
-class UserController {
+class AddressController {
     async get(req, res, next){
         try {
             const { userId } = req.params;
@@ -57,4 +57,4 @@ class UserController {
     
 }
 
-module.exports = new UserController();
+module.exports = new AddressController();

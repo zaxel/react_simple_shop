@@ -20,7 +20,6 @@ class AddressService {
     }
 
     delete = async ({ id }) => {
-        console.log(11, id);
         const updatedData = await Address.destroy({
             where: { id }
         });
