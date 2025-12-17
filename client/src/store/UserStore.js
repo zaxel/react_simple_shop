@@ -5,6 +5,7 @@ export default class UserStore{
         this._isAuth = false;
         this._isSuperUser = false;
         this._user = {};
+        this._wishlist = new Set();
         this._mainStoreFieldName = 'user';
         makeAutoObservable(this);
     }
@@ -20,6 +21,23 @@ export default class UserStore{
     updateUser(data){
         this._user = {...this._user, ...data};
     }
+    setWishList(listArr = []){
+        this._wishlist = new Set(listArr);
+    }
+    addWishlistItem(item){
+        this._wishlist.add(item);
+    }
+    deleteWishlistItem(item){
+        this._wishlist.delete(item);
+    }
+    reset(){
+        this.setUser({});
+        this.setIsAuth(false);
+        this.setIsSuperUser(false);
+        this._wishlist.clear();
+    }
+
+
     get isAuth(){
         return this._isAuth;
     }
@@ -31,5 +49,8 @@ export default class UserStore{
     }
     get mainStoreFieldName(){
         return this._mainStoreFieldName;
+    }
+    get wishlist(){
+        return this._wishlist;
     }
 }
