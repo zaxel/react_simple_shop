@@ -9,6 +9,8 @@ import {
     PROFILE_ROUTE
 } from '../utils/consts/routes';
 import { logoutOnClient, logoutOnServer } from "../utils/logout";
+import { ShoppingCart } from "lucide-react";
+import ShoppingCartIcon from "./cart/ShoppingCartIcon";
 
 const NavBar = observer(() => {
     const { cart, user, device } = useContext(Context);
@@ -48,12 +50,15 @@ const NavBar = observer(() => {
                         <Link className="nav-link" to={HELP_ROUTE}>Help</Link>
                     </li>
                 </ul>
-                    <ul className="navbar-nav navbar-user-data-cont flex-row">
+                    <ul className="navbar-nav navbar-user-data-cont flex-row justify-center items-center gap-2 md:gap-10">
                         {user.isSuperUser && <li className="nav-item">
                             <button onClick={() => navigate(ADMIN_ROUTE)} className='btn btn-outline-secondary'>Admin panel</button>
                         </li>}
                         <li className="nav-item">
                             <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>{cart.itemsCount} Cart</button>
+                        </li>
+                        <li className="nav-item">
+                           <ShoppingCartIcon />
                         </li>
                         <li className="nav-item">
                             <button onClick={() => navigate(user.isAuth ? ACCOUNT_ROUTE : LOGIN_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? `User ${user.user.id}` : 'Login'}</button>
