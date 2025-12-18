@@ -5,6 +5,7 @@ export const PROTECTED_ROUTE = BASE_ROUTE+'/protect';
 export const REGISTRATION_ROUTE = BASE_ROUTE+'/registration';
 export const SHOP_ROUTE = BASE_ROUTE+'/';
 export const BASKET_ROUTE = BASE_ROUTE+'/basket';
+export const CART_ROUTE = BASE_ROUTE+'/cart';
 export const DEVICE_ROUTE = BASE_ROUTE+'/device';
 
 export const HELP_ROUTE = BASE_ROUTE+'/help';

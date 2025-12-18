@@ -1,6 +1,7 @@
 ﻿import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Basket from "./pages/Basket";
+import Cart from "./pages/Cart";
 import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
 import ErrorPage from "./pages/ErrorPage";
@@ -58,7 +59,8 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         ABOUT_LEFT_CARD_ROUTE, ABOUT_MIDDLE_CARD_ROUTE, ABOUT_RIGHT_CARD_ROUTE, ADMIN_HELP_FAQ_ROUTE, 
         ADMIN_HELP_CAT_ROUTE, HELP_CAT_ROUTE, PROFILE_ROUTE, PROFILE_INFO_ROUTE, PROFILE_ORDERS_ROUTE,
         PROFILE_ADDRESS_ROUTE,
-        PROFILE_WISHLIST_ROUTE} from "./utils/consts/routes";
+        PROFILE_WISHLIST_ROUTE,
+        CART_ROUTE} from "./utils/consts/routes";
 
 import ProfileAddress from "./components/profile/address/Address";
 import ProfileInfo from "./components/profile/info/Info";
@@ -259,6 +261,10 @@ export const publicRoutes = [
     {
         path: BASKET_ROUTE,
         Component: Basket
+    },
+    {
+        path: CART_ROUTE,
+        Component: Cart
     },
     {
         path: HELP_ROUTE,
