@@ -17,6 +17,15 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
 
+        navbar: {
+          text: "hsl(var(--navbar-text))",
+          icon: {
+            DEFAULT:
+            "hsl(var(--navbar-icon))",
+            count: "hsl(var(--navbar-icon-count))",
+          }
+        },
+
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
