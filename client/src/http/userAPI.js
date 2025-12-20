@@ -12,7 +12,7 @@ export const login = async (email, password) => {
     return jwtDecode(data.accessToken);
 }
 export const logout = async () => {
-    const {data} = await $host.post('api/user/logout');
+    const {data} = await $authHost.post('api/user/logout'); 
     return data;
 }
 
