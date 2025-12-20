@@ -13,7 +13,7 @@ router.post('/registration',
     body('password').isLength({min: 4, max: 32}),
     userController.registration);
 router.post('/login', userController.login);
-router.post('/logout', userController.logout);
+router.post('/logout', authMiddleware, userController.logout);
 router.get('/activate/:link', userController.activate);
 router.get('/check', authMiddleware, userController.refresh);
 router.get('/refresh', userController.refresh);
