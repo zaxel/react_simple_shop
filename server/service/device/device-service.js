@@ -1,8 +1,8 @@
 ﻿const fileService = require("../file/file-service");
-const { Device, DeviceInfo } = require("../../models/models");
+const { Device, DeviceInfo, Type, Brand } = require("../../models/models");
 const { Op, Sequelize, QueryTypes } = require("sequelize");
 const sequelize = require("../../db");
-const acceptedFileType = "string";
+
 const {
   searchDevicesOptions,
   orderDevicesOptions,
@@ -223,7 +223,13 @@ class DeviceService {
     );
     let order = orderDevicesOptions(sortBy, sortDirection);
     let devices = !searchPhraseMain
-      ? await Device.findAndCountAll({ where, order, limit, offset })
+      ? await Device.findAndCountAll({ where, order, limit, offset, 
+        include: [
+        { model: Type, as: "type" },
+        { model: Brand, as: "brand" },
+      ], 
+
+      })
       : await this.getAllMainSearch({
           brandId,
           typeId,
@@ -239,7 +245,11 @@ class DeviceService {
   getSingle = async (id) => {
     const device = await Device.findOne({
       where: { id },
-      include: [{ model: DeviceInfo, as: "info" }],
+      include: [
+        { model: DeviceInfo, as: "info" },
+        { model: Type, as: "type" },
+        { model: Brand, as: "brand" },
+      ],
     });
     return device;
   };
@@ -251,7 +261,7 @@ class DeviceService {
     return devices;
   };
   update = async (id, field, newData) => {
-    const updatedData = await Device.update(
+    const updatedData = await Device.update( 
       { [field]: newData },
       {
         where: { id },
