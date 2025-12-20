@@ -19,7 +19,9 @@ import HelpPageStore from "./staticPages/HelpPageStore";
 import HelpAdminStore from "./staticPages/HelpAdminStore";
 
 export default class RootStore {
-    constructor() {
+    root;
+    constructor(root) {
+      this.root = root;
       this.user = new UserStore(this);
       this.device = new DeviceStore(this);
       this.history = new HistoryStore(this);

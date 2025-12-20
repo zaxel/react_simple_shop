@@ -12,8 +12,8 @@ export default class DeviceStore{
     _itemsPerPage = 15;
     _searchKey = "";
     _loading = true;
-    constructor(){
-        
+    constructor(root){
+        this._root = root;
         makeAutoObservable(this);
     }
     setTypes(types){
