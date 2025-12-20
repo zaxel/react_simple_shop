@@ -3,54 +3,45 @@ import { removeEmptyParams } from '../utils/http/requestInterceptorServ';
 
 const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
-    withCredentials: true 
-})
+    withCredentials: true
+});
+
 const $authHost = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
-    withCredentials: true 
-})
-const requestInterceptor = config => {
+    withCredentials: true
+});
+
+$host.interceptors.request.use(config => {
     removeEmptyParams(config);
     return config;
-}
-const authRequestInterceptor = config => {
+});
+
+$authHost.interceptors.request.use(config => {
     config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
     removeEmptyParams(config);
     return config;
-}
+});
 
-const authResponseInterceptor = config => {
-    return config;
-}
-
-const authResponseErrorCb = async (error) => {
-    const originalRequest = error.config;
-    if(error.response.status === 401 && error.config && !error.config._isRetry){
-        originalRequest._isRetry = true;
-        try{
-            const {data} = await axios.get('api/user/refresh', {
-                baseURL: process.env.REACT_APP_API_URL,
-                withCredentials: true 
-            });
-            localStorage.setItem('token', data.accessToken);
-            return await $authHost.request(originalRequest);
-        }catch(e){
-            console.log(e.message);
+$authHost.interceptors.response.use(
+    null, 
+    async (error) => {
+        const originalRequest = error.config;
+        if(error.response?.status === 401 && !originalRequest?._isRetry) {
+            originalRequest._isRetry = true;
+            try {
+                const { data } = await $host.get('api/user/refresh');
+                localStorage.setItem('token', data.accessToken);
+                originalRequest.headers.authorization = `Bearer ${data.accessToken}`;
+                return $authHost.request(originalRequest);
+            } catch (e) {
+                console.error('Refresh token failed', e);
+                throw e; 
+            }
         }
+        if(error.response?.status === 403) {
+            throw new Error(error.response?.data?.message || 'Forbidden');
+        }
+        throw error;
     }
-    if(error.response.status === 403){
-        console.log(error?.response?.data?.message || 'unknown error');
-        return 'error';
-    }
-   throw error;
-}
-
-$host.interceptors.request.use(requestInterceptor);
-
-$authHost.interceptors.request.use(authRequestInterceptor);
-$authHost.interceptors.response.use(authResponseInterceptor, authResponseErrorCb);
-
-export {
-    $host,
-    $authHost
-}
+);
+export { $host, $authHost };
