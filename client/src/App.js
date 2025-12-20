@@ -5,9 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useState, useContext, useEffect } from "react";
 import { Context } from ".";
 import { Spinner } from "react-bootstrap";
-import { checkAuth, setUserIfAuth } from "./utils/checkAuth";
-import { fetchSetCart, setCartId } from "./utils/cart/fetchSetCart";
-import { setCartFromLocalStore } from "./utils/cart/setLocalStoreCart";
+import { checkAuth } from "./utils/checkAuth";
 import Footer from "./components/Footer";
 import ShopToolTip from "./components/ShopToolTip";
 import { isActivated } from "./utils/check/isActivated";
@@ -22,13 +20,10 @@ const App = observer(() => {
   useEffect(() => {
     (async () => {
       try {
-        !user.isAuth && setCartFromLocalStore(cart);
+        await cart.setCart();  
         const authUser = await checkAuth(user); //err if no auth
         await setUserData(user, authUser);
         await setWishList(user, history);
-        await setCartId(cart, user);
-        await fetchSetCart(user, cart);
-        cart.setCartTotal();
         isActivated(user);
       } catch (e) {
         console.log(e.message)

@@ -1,19 +1,17 @@
 ﻿import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
-import { registration, login, getWishItems } from '../http/userAPI';
+import { registration, login } from '../http/userAPI';
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts/routes';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
-import { checkAuth, setUserIfAuth } from '../utils/checkAuth';
-import { fetchCartOnAuth, setCartId } from '../utils/cart/fetchSetCart';
-import { setLocalStoreCart } from '../utils/cart/setLocalStoreCart';
+import { checkAuth } from '../utils/checkAuth';
 import { isActivated } from '../utils/check/isActivated';
 import { setUserData } from '../utils/setUserData';
 import setWishList from '../utils/setWishList';
 
 const Auth = observer(() => {
-    const { user, history, cart } = useContext(Context);
+    const { user, history } = useContext(Context);
     const params = useLocation();
     const authFromPath = history.authFrom;
 
@@ -42,12 +40,7 @@ const Auth = observer(() => {
             }
             const authUser = await checkAuth(user);
             await setUserData(user, authUser);
-            await setWishList(user, history);
-            cart.setCart(JSON.parse(localStorage.getItem('cart'))|| []);
-            await setCartId(cart);
-            await fetchCartOnAuth(user, cart);
-            cart.setCartTotal();
-            setLocalStoreCart(cart);
+            await setWishList(user, history); 
             isActivated(user);
             navigate(from);
         } catch (e) {
