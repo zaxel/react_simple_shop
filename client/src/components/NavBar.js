@@ -9,7 +9,6 @@ import {
     PROFILE_ROUTE
 } from '../utils/consts/routes';
 import { logoutOnClient, logoutOnServer } from "../utils/logout";
-import { ShoppingCart } from "lucide-react";
 import ShoppingCartIcon from "./cart/ShoppingCartIcon";
 
 const NavBar = observer(() => {
@@ -17,8 +16,8 @@ const NavBar = observer(() => {
     const navigate = useNavigate();
 
     const onLogoutPressed = () => {
-        logoutOnClient(cart, user);
-        logoutOnServer();
+        logoutOnClient(cart, user); 
+        logoutOnServer(cart); 
         navigate(LOGIN_ROUTE);
     }
 
@@ -58,7 +57,7 @@ const NavBar = observer(() => {
                             <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>{cart.itemsCount} Cart</button>
                         </li>
                         <li className="nav-item">
-                           <ShoppingCartIcon />
+                           <ShoppingCartIcon itemsCount={cart.itemsCount}/>
                         </li>
                         <li className="nav-item">
                             <button onClick={() => navigate(user.isAuth ? ACCOUNT_ROUTE : LOGIN_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? `User ${user.user.id}` : 'Login'}</button>

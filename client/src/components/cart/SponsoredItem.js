@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from "react";
 import { Context } from "../..";
-import { addToCart } from "../../utils/cart/addToCart";
+// import { addToCart } from "../../utils/cart/cartMutation";
 import no_image from "../../assets/no-image.jpg";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ const SponsoredItem = ({ el }) => {
   const navigate = useNavigate();
 
   const onAddToCartPressed = () => {
+    /*
     addToCart(
       cart,
       user,
@@ -23,6 +24,7 @@ const SponsoredItem = ({ el }) => {
       device_amount,
       user.user.id
     );
+    */
   };
   return (
     <div className="basket-sponsored">

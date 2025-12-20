@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import {
   HELP_ROUTE, SHOP_ROUTE,
   ABOUT_CARD1_ROUTE,
@@ -7,14 +7,12 @@ import { Link } from "react-router-dom";
 import location_pointer from "../../assets/location-pointer.svg";
 import { formatGbCurrency } from "../../utils/dataFormat/currencies";
 import { deviceBuyContainerFormatDate } from "../../utils/dataFormat/formatDate";
-import { addToCart } from "../../utils/cart/addToCart";
 import { Context } from "../..";
 
 
-
 const DeviceBuy = ({device}) => {
-    const { user, cart } = useContext(Context);
-    const device_amount = 1;
+    const { cart } = useContext(Context);
+    let quantity = 1;
 
   return (
     <div className="device__buy">
@@ -47,7 +45,7 @@ const DeviceBuy = ({device}) => {
       </div>
       <div className="dev-buy__buy-button">
         <button
-          onClick={() => addToCart(cart, user, user.isAuth, cart.cartId, device.id, device_amount, user.user.id)}
+          onClick={() => cart.addDevice(device, quantity)}  
           className="btn btn-warning device__button"
         >
           add to basket

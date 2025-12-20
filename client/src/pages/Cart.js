@@ -1,10 +1,12 @@
 ﻿import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { CART_ROUTE } from '../utils/consts/routes';
 import ShippingForm from '../components/cart/ShippingForm';
 import PaymentForm from '../components/cart/PaymentForm';
 import CartProducts from '../components/cart/CartProducts';
+import { Context } from '..';
+import { observer } from 'mobx-react-lite';
 
 const steps = [
     {
@@ -20,77 +22,28 @@ const steps = [
         title: "Payment Method",
     },
 ];
-const items = [
-    {
-        "id": 28,
-        "name": "JVC DLA-NP5B 4K Projector",
-        "price": 6500,
-        "rate": 4.5,
-        "img": "https://ik.imagekit.io/hzqqkwz0t/blob_afe76uSCi-",
-        "type": "projectors",
-        "brand": "JVC",
-        "createdAt": 1765936269000,
-        "updatedAt": 1765936269000,
-        "deviceId": 1590,
-
-        "quantity": 2,
-
-    },
-    {
-        "id": 27,
-        "name": "Handheld Mite Remover Home Bed Mattress Vacuum Sofa Cleaner USB UV-C Cleaner",
-        "price": 19.99,
-        "rate": 4.3,
-        "img": "https://ik.imagekit.io/hzqqkwz0t/blob_wVk8OjaUHH",
-        "type": "hoovers",
-        "brand": "JVC",
-        "createdAt": 1765936180000,
-        "updatedAt": 1765936180000,
-        "deviceId": 1572,
-
-        "quantity": 1,
-    },
-    {
-        "id": 26,
-        "name": "Home & Office -Air Conditioning - Heating",
-        "price": 999,
-        "rate": 5,
-        "img": "https://ik.imagekit.io/hzqqkwz0t/blob_FbU4u1RIxQ",
-        "type": "air conditioners",
-        "brand": "Beko",
-        "createdAt": 1765921537000,
-        "updatedAt": 1765921537000,
-        "deviceId": 1563,
-
-        "quantity": 1,
-    },
-    {
-        "id": 16,
-        "name": "Beko VRT50225VB Cordless Vacuum Cleaner - Black",
-        "price": 157.77,
-        "rate": 3,
-        "img": "https://ik.imagekit.io/hzqqkwz0t/blob_5YmEKFIOj",
-        "type": "hoovers",
-        "brand": "Beko",
-        "createdAt": 1765913347000,
-        "updatedAt": 1765913347000,
-        "deviceId": 1505,
-
-        "quantity": 3,
-    }
-]
 
 const Cart = () => {
+    let {pathname} = useLocation();
+        const {cart, history } = useContext(Context);
+
+
     const [searchParams, setSearchParams] = useSearchParams();
     const [shippingForm, setShippingForm] = useState(null);
-    const [cartItems, setCartItems] = useState(()=>items);
+    const {cart: cartItems, updateQuantity, removeDevice } = cart;
     const navigate = useNavigate();
 
     const activeStep = parseInt(searchParams.get("step")) || 1;
-    const subtotal = cartItems.reduce((acc, { price, quantity }) => acc + price * quantity, 0);
+    const subtotal = cartItems.reduce((acc, { device_amount: quantity, device:{price}}) => acc + price * quantity, 0);
     const shipping = 10;
     const discount = 10;
-    const total = subtotal + shipping + discount;
+    const total = subtotal - (subtotal * discount/100) + shipping;
+
+
+    useEffect(()=>{
+          history.setAuthFrom(pathname);
+        
+    },[])
 
     return (
         <div className='w-full lg:w-4/5 m-auto flex-1 flex flex-col justify-center items-center py-12 gap-16 '>
@@ -107,7 +60,7 @@ const Cart = () => {
             </div>
             <div className='w-full flex flex-col lg:flex-row gap-16'>
                     {activeStep === 1
-                        ? <CartProducts items={cartItems} setItems={setCartItems}/>
+                        ? <CartProducts items={cartItems} updateQuantity={updateQuantity} deleteItem={removeDevice}/>
                         : activeStep === 2
                             ? <ShippingForm setShippingForm={setShippingForm}/>
                             : activeStep === 3 && shippingForm
@@ -130,12 +83,12 @@ const Cart = () => {
                         </div>
                         <div className='flex justify-between text-sm'>
                             <p className='text-gray-500'>Shipping fee</p>
-                            <p className='font-medium'>£{shipping.toFixed(2)}</p>
+                            <p className='font-medium'>£{subtotal ? shipping.toFixed(2) : 0..toFixed(2)}</p>
                         </div>
                         <hr className='border-gray-200' />
                         <div className='flex justify-between'>
                             <p className='text-gray-800 font-semibold'>Total</p>
-                            <p className='font-medium'>£{total.toFixed(2)}</p>
+                            <p className='font-medium'>£{subtotal ? total.toFixed(2) : 0..toFixed(2)}</p>
                         </div>
                     </div>
                     {activeStep === 1 && <button onClick={() => navigate({
@@ -151,4 +104,4 @@ const Cart = () => {
     );
 };
 
-export default Cart;
+export default observer(Cart);
