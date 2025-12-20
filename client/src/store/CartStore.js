@@ -1,96 +1,277 @@
-﻿import {makeAutoObservable} from "mobx";
+﻿import { makeAutoObservable, reaction, runInAction } from "mobx";
+import { addCartDeviceReq, clearCartReq, deleteItemReq, getCartReq, mergeGuestCart, resolveGuestCartReq, updateQuantityReq } from "../http/cartAPI";
+import { clearLocalStoreCartSnapshot, getLocalStoreCartSnapshot, setLocalStoreCartSnapshot } from "../utils/cart/localStoreCartSnapshot";
 
-export default class CartStore{
-    _cart = [];          //{id, deviceId, basketId, device_amount}
-    _cartDevices = [];   //{id, brandId, createdAt, img, info, name, price, rate, typeId, updatedAt}
+export default class CartStore {
+    _items = [];
+    _pendingItems = new Set();
     _mainStoreFieldName = 'cart';
-    _itemsCount = 0;
-    _cartId = 0;
-    _cartTotal = 0;
-    constructor(){
-        makeAutoObservable(this);
+    _root = null;
+    constructor(root) {
+        this._root = root;
+        makeAutoObservable(this, {}, { autoBind: true });
+
+        reaction(
+            () => this._root.user.isAuth
+                ? null
+                : this._items.map(i => [i.deviceId, i.device_amount]),
+            snapshot => {
+                if (!snapshot) return;
+                setLocalStoreCartSnapshot(
+                    snapshot.map(([deviceId, device_amount]) => ({ deviceId, device_amount }))
+                );
+            },
+            { delay: 300 }
+        );
+
+
+        reaction(
+            () => this._root.user.isAuth,
+            async isAuth => {
+                if (!isAuth) {
+                    await this.setCart();
+                    return;
+                }
+
+                const snapshot = getLocalStoreCartSnapshot();
+                if (snapshot.length) {
+                    await mergeGuestCart(snapshot);
+                    clearLocalStoreCartSnapshot();
+                }
+                
+                await this.setCart();
+            }
+        );
     }
 
-    setCart(data){
-        this._cart = data;
-    }
-    updateCart(devices){
-        this._cart = [...this._cart, ...devices];
-    }
+    async setCart() {
+        const { isAuth } = this._root.user;
+        try {
+            let items = [];
 
-    addDevice(basketId, deviceId, device_amount, id = 0){
-        const exist = this._cart.find(el=>el.deviceId === deviceId);
-        if(exist){
-            exist.device_amount++;
-        }else{
-            this._cart.push({basketId, deviceId, device_amount, id});
+            if (isAuth) {
+                const data = await getCartReq();
+                items = data.items;
+            } else {
+
+                const snapshot = getLocalStoreCartSnapshot();
+
+                if (!snapshot.length) {
+                    runInAction(() => this._items = []);
+                    return;
+                }
+
+                const data = await resolveGuestCartReq(snapshot);
+                items = data;
+            }
+
+            runInAction(() => {
+                this._items = items ?? [];
+            });
+        } catch (error) {
+            console.error('Failed to set cart:', error);
         }
     }
 
+    async addDevice(storedDevice, quantity) {
+        const { isAuth } = this._root.user;
+        const deviceId = storedDevice.id;
 
-    calcItemsCount(){
-        const count = this._cart.reduce((prev, next)=>{
-            return prev + next.device_amount
-        },0)
-        this._itemsCount = count;
+        if (!deviceId) {
+            console.error('Invalid device: missing ID');
+            return;
+        }
+
+        if (isAuth) {
+
+            if (this._pendingItems.has(deviceId)) {
+                console.log('Request already pending for device:', deviceId);
+                return;
+            }
+
+            this._pendingItems.add(deviceId);
+
+            const existingItemIndex = this._items.findIndex(i => i?.deviceId === deviceId);
+            const existingItem = existingItemIndex !== -1 ? this._items[existingItemIndex] : null;
+            const previousQuantity = existingItem?.device_amount || 0;
+
+            if (existingItem) {
+                existingItem.device_amount += quantity;
+            } else {
+                this._items.push({
+                    deviceId,
+                    device_amount: quantity,
+                    device: storedDevice,
+                });
+            }
+
+            try {
+                const data = await addCartDeviceReq(deviceId, quantity);
+                runInAction(() => {
+                    const index = this._items.findIndex(i => i?.deviceId === deviceId);
+                    if (index !== -1) {
+                        this._items[index] = {
+                            ...data,
+                            device: data.device || storedDevice
+                        };
+                    }
+                })
+            } catch (error) {
+                runInAction(() => {
+                    const index = this._items.findIndex(i => i?.deviceId === deviceId);
+
+                    if (index !== -1) {
+                        if (previousQuantity > 0) {
+                            this._items[index].device_amount = previousQuantity;
+                        } else {
+                            this._items.splice(index, 1);
+                        }
+                    }
+                })
+                console.error('Failed to add to cart:', error);
+                throw error;
+
+            } finally {
+                runInAction(() => {
+                    this._pendingItems.delete(deviceId);
+                })
+            }
+        } else {
+            runInAction(() => {
+                const item = this._items.find(i => i.deviceId === deviceId);
+                if (item) {
+                    item.device_amount += quantity;
+                } else {
+                    this._items.push({
+                        device: storedDevice,
+                        deviceId,
+                        device_amount: quantity,
+                    })
+                }
+            })
+        }
+
     }
-    setItemsCount(count){
-        this._itemsCount = count;
+
+    async updateQuantity(deviceId, newQuantity) {
+        const { isAuth } = this._root.user;
+
+        if (this._pendingItems.has(deviceId) || newQuantity <= 0)
+            return;
+
+        const item = this._items.find(i => i?.deviceId === deviceId);
+        if (!item) return;
+
+        if (isAuth) {
+            this._pendingItems.add(deviceId);
+
+            const previousQuantity = item.device_amount;
+            item.device_amount = newQuantity;
+
+            try {
+                const res = await updateQuantityReq({ itemId: deviceId, quantity: newQuantity })
+            } catch (error) {
+                runInAction(() => {
+                    item.device_amount = previousQuantity;
+                });
+                console.error('Failed to update quantity:', error);
+                throw error;
+            } finally {
+                runInAction(() => {
+                    this._pendingItems.delete(deviceId);
+                });
+            }
+        } else {
+            runInAction(() => {
+                item.device_amount = newQuantity;
+            });
+        }
+
     }
-    decreaseItemsCount(){
-        this._itemsCount--;
+
+    async removeDevice(deviceId) {
+        const { isAuth } = this._root.user;
+        if (this._pendingItems.has(deviceId))
+            return;
+
+        const itemIndex = this._items.findIndex(i => i?.deviceId === deviceId);
+        const removedItem = itemIndex !== -1 ? { ...this._items[itemIndex] } : null;
+        if (!removedItem)
+            return;
+
+        if (isAuth) {
+            runInAction(() => {
+                this._pendingItems.add(deviceId);
+                this._items.splice(itemIndex, 1);
+            });
+            try {
+                await deleteItemReq(deviceId);
+            } catch (error) {
+                runInAction(() => {
+                    this._items.splice(itemIndex, 0, removedItem);
+                });
+                console.error('Failed to remove item:', error);
+                throw error;
+            } finally {
+                runInAction(() => {
+                    this._pendingItems.delete(deviceId);
+                });
+            }
+        } else {
+            runInAction(() => {
+                this._items.splice(itemIndex, 1);
+            });
+        }
     }
-    increaseItemsCount(){
-        this._itemsCount++;
-    }
-    setCartDevices(devices){
-        this._cartDevices = devices;
-    }
-    setDeviceAmount(amount, deviceId){
-        this._cart = this._cart.map(el=>{
-            return el.deviceId===deviceId 
-            ? {basketId: el.basketId, deviceId: el.deviceId, device_amount: amount}
-            : el
+
+    async clearCart(frontOnly = false) {
+        if (frontOnly) {
+            runInAction(() => {
+                this._items = [];
+            });
+            return;
+        }
+
+        if (this._pendingItems.has('clear-cart')) return;
+
+        const previousItems = [...this._items];
+
+        runInAction(() => {
+            this._pendingItems.add('clear-cart');
+            this._items = [];
         });
+
+        try {
+            await clearCartReq();
+        } catch (error) {
+            runInAction(() => {
+                this._items = previousItems;
+            });
+            console.error('Failed to clear cart:', error);
+            throw error;
+        } finally {
+            runInAction(() => {
+                this._pendingItems.delete('clear-cart');
+            });
+        }
     }
-    deleteCart(deviceId){
-        this._cart = this._cart.filter(el=>el.deviceId!==deviceId);
+
+    get cart() {
+        return this._items;
     }
-    deleteCartDevices(deviceId){
-        this._cartDevices = this._cartDevices.filter(el=>el.id!==deviceId);
+
+    get itemsCount() {
+        return this._items.reduce((sum, item) => sum + (item.device_amount || 0), 0);
     }
-    setCartId(id){
-        this._cartId = id;
+
+    get cartTotal() {
+        return this._items.reduce((sum, item) => {
+            const price = item.device?.price || 0;
+            const amount = item.device_amount || 0;
+            return sum + (price * amount);
+        }, 0);
     }
-    setCartTotal(){
-        this._cartTotal = this._cart.reduce((prev, next)=>{
-            const device = this._cartDevices.find(el=>el.id===next.deviceId);
-            
-            return prev+device.price*next.device_amount;
-        }, 0)
-    }
-    clearCart(){
-        this._cart = [];          
-        this._cartDevices = [];   
-        this._itemsCount = 0;
-        this._cartTotal = 0;
-    }
-    get cart(){
-        return this._cart;
-    }
-    get itemsCount(){
-        return this._itemsCount;
-    }
-    get cartDevices(){
-        return this._cartDevices;
-    }
-    get cartId(){
-        return this._cartId;
-    }
-    get cartTotal(){
-        return this._cartTotal;
-    }
-    get mainStoreFieldName(){
+    get mainStoreFieldName() {
         return this._mainStoreFieldName;
     }
 }
