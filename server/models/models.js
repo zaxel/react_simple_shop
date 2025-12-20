@@ -183,8 +183,14 @@ const InfoAppCards = sequelize.define('info_app_cards', {
   Device.hasMany(WishList);
   WishList.belongsTo(Device);
 
-  Basket.hasMany(BasketDevice)
-  BasketDevice.belongsTo(Basket)
+  Basket.hasMany(BasketDevice,{
+    foreignKey: 'basketId',
+    as: 'items'
+  })
+  BasketDevice.belongsTo(Basket, {
+    foreignKey: 'basketId',
+    as: 'basket'
+  })
 
   Order.hasMany(OrderDevice)
   OrderDevice.belongsTo(Order)
