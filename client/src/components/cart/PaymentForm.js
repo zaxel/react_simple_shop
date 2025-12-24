@@ -3,24 +3,19 @@ import { useForm } from 'react-hook-form';
 import { formPaymentSchema } from './cartFormsSchemas';
 import { ShoppingCart } from 'lucide-react';
 
-const PaymentForm = () => {
+const PaymentForm = ({user, checkoutHandler}) => {
+    console.log(user)
         const { reset, register, handleSubmit, formState: { errors }} = useForm({
             resolver: zodResolver(formPaymentSchema),
+            defaultValues: {
+                cardHolder: `${user?.name ?? ""} ${user?.surname ?? ""}`,
+            },
             mode: 'onChange',
         })
     
         const onSubmitHandler = async data => {
-            console.log('checkout')
-            // await addNewAddress(data);
-            // reset();
-            // onClose();
-            // setShippingForm(data);
-    
-            // navigate({
-            //     pathname: CART_ROUTE,
-            //     search: "?step=3",
-            //     preventScrollReset: true
-            // })
+            // console.log('checkout', data)
+            checkoutHandler(data);
         }
     
         return (
@@ -28,7 +23,7 @@ const PaymentForm = () => {
                 <form onSubmit={handleSubmit(onSubmitHandler)} className='flex flex-col gap-4'>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor='cardHolder' className='text-xs text-gray-500 font-medium'>Name on card</label>
-                        <input className='border-b border-grey-200 py-2 outline-0 text-sm' type='text' id='cardHolder' placeholder='Mark Brown' {...register("cardHolder")}></input>
+                        <input className='border-b border-grey-200 py-2 outline-0 text-sm' type='text' id='cardHolder' placeholder='Cardholder Name' {...register("cardHolder")}></input>
                         {errors.cardHolder && <p className='text-xs text-red-500'>{errors.cardHolder.message}</p>}
                     </div>
                     <div className='flex flex-col gap-1'>

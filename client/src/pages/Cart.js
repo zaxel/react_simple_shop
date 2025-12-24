@@ -1,12 +1,20 @@
 ﻿import { ArrowRight } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import {  useNavigate, useSearchParams } from 'react-router-dom';
 import { CART_ROUTE } from '../utils/consts/routes';
 import ShippingForm from '../components/cart/ShippingForm';
-import PaymentForm from '../components/cart/PaymentForm';
 import CartProducts from '../components/cart/CartProducts';
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
+import useFetch from '../utils/http/useFetch';
+import { checkout } from '../http/orderAPI';
+import { loadStripe } from '@stripe/stripe-js';
+import PaymentStripeForm from '../components/cart/PaymentStripeForm';
+
+import { CheckoutProvider } from '@stripe/react-stripe-js/checkout';
+import PaymentFormSkeleton from '../components/cart/PaymentFormSkeleton';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_API_KE);
 
 const steps = [
     {
@@ -24,26 +32,40 @@ const steps = [
 ];
 
 const Cart = () => {
-    let {pathname} = useLocation();
-        const {cart, history } = useContext(Context);
-
+    const { cart, user } = useContext(Context);
+    const [clientSecret, setClientSecret] = useState(null);
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [shippingForm, setShippingForm] = useState(null);
-    const {cart: cartItems, updateQuantity, removeDevice } = cart;
+    const [defaultAddress, setDefaultAddress] = useState(null);
+    const { cart: cartItems, updateQuantity, removeDevice } = cart;
     const navigate = useNavigate();
-
     const activeStep = parseInt(searchParams.get("step")) || 1;
-    const subtotal = cartItems.reduce((acc, { device_amount: quantity, device:{price}}) => acc + price * quantity, 0);
+    const subtotal = cartItems.reduce((acc, { device_amount: quantity, device: { price } }) => acc + price * quantity, 0);
     const shipping = 10;
     const discount = 10;
-    const total = subtotal - (subtotal * discount/100) + shipping;
+    const total = subtotal - (subtotal * discount / 100) + shipping;
 
 
-    useEffect(()=>{
-          history.setAuthFrom(pathname);
-        
-    },[])
+    const handleProceedPay = async (shippingData) => {
+        const cartInfo = cartItems.map(({ device_amount, deviceId }) => ({ device_amount, deviceId }));
+        const order = { items: cartInfo, address: { country: "US", ...shippingData } };
+
+        const { orderId: receivedOrderId, clientSecret: receivedClientSecret } = await checkout({ order });
+        if(!receivedClientSecret) return;
+        setClientSecret(receivedClientSecret);
+    }
+   
+
+    const { data, error, isLoading } = useFetch(`api/user/${user.user?.id}/addresses`, null, true);
+    useEffect(() => {
+
+        if (!data || error) return;
+        const { count, rows } = data;
+        if (!count) return;
+        const address = rows.find(el => el.is_default) ?? rows[0];
+        setDefaultAddress(address)
+    }, [data])
 
     return (
         <div className='w-full lg:w-4/5 m-auto flex-1 flex flex-col justify-center items-center py-12 gap-16 '>
@@ -59,16 +81,23 @@ const Cart = () => {
                 })}
             </div>
             <div className='w-full flex flex-col lg:flex-row gap-16'>
-                    {activeStep === 1
-                        ? <CartProducts items={cartItems} updateQuantity={updateQuantity} deleteItem={removeDevice}/>
-                        : activeStep === 2
-                            ? <ShippingForm setShippingForm={setShippingForm}/>
-                            : activeStep === 3 && shippingForm
-                                ? <PaymentForm /> 
-                                : <div className='w-full lg:w-7/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8'>
-                                    <p className='text-sm text-gray-500'>Please fill in the shipping form to proceed.</p>
-                                  </div>
-                    }
+                {activeStep === 1
+                    ? <CartProducts items={cartItems} updateQuantity={updateQuantity} deleteItem={removeDevice} />
+                    : activeStep === 2
+                        ? <ShippingForm handleProceedPay={handleProceedPay} setShippingForm={setShippingForm} defaultAddress={defaultAddress} user={user.user} />
+                        : activeStep === 3 && shippingForm
+                            ? (clientSecret ? <div className='w-full lg:w-7/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8'><CheckoutProvider
+                                stripe={stripePromise}
+                                options={{
+                                    clientSecret,
+                                }}
+                            >
+                                <PaymentStripeForm email={user.user?.email}/>
+                            </CheckoutProvider></div> : <PaymentFormSkeleton />)
+                            : <div className='w-full lg:w-7/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8'>
+                                <p className='text-sm text-gray-500'>Please fill in the shipping form to proceed.</p>
+                            </div>
+                }
 
                 <div className='w-full lg:w-5/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8 h-max'>
                     <h3 className='text-semibold'>Cart Details</h3>
@@ -91,7 +120,7 @@ const Cart = () => {
                             <p className='font-medium'>£{subtotal ? total.toFixed(2) : 0..toFixed(2)}</p>
                         </div>
                     </div>
-                    {activeStep === 1 && <button onClick={() => navigate({
+                    {activeStep === 1 && <button disabled={!cartItems.length} onClick={() => navigate({
                         pathname: CART_ROUTE,
                         search: "?step=2",
                         preventScrollReset: true

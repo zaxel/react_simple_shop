@@ -17,15 +17,25 @@ export const formShippingSchema = z.object({
         .min(4, { message: "Phone number must be at least 4 characters." })
         .max(25, { message: "Phone number must be less than 25 characters." }),
 
-    address: z
+    street: z
         .string({ message: "Must be a string." })
-        .min(4, { message: "Address must be at least 4 characters." })
-        .max(250, { message: "Address must be less than 250 characters." }),
+        .min(4, { message: "Street name must be at least 4 characters." })
+        .max(250, { message: "Street name must be less than 250 characters." }),
+    
+    house: z
+        .string({ message: "Must be a string." })
+        .min(1, { message: "House must be at least 1 characters." })
+        .max(150, { message: "house must be less than 150 characters." }),
 
     city: z
         .string({ message: "Must be a string." })
         .min(4, { message: "City must be at least 4 characters." })
         .max(250, { message: "City must be less than 250 characters." }),
+    
+    postal_code: z
+        .string({ message: "Must be a string." })
+        .min(2, { message: "Postal code must be at least 2 characters." })
+        .max(250, { message: "Postal code must be less than 250 characters." }),
 });
 
 export const formPaymentSchema = z.object({
