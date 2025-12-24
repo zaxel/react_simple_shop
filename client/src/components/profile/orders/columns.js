@@ -4,9 +4,10 @@ import { cn } from "../../../utils/cn"
 import RateItem from "../../device/RateItem";
 
 const statusColors = {
-    "in progress": "bg-yellow-400",
-    completed: "bg-green-400",
-    failed: "bg-red-400",
+    PENDING: "bg-yellow-400",
+    PAID: "bg-green-400",
+    CANCELED: "bg-red-400",
+    PAYMENT_FAILED: "bg-red-500",
 };
 
 export const columnsOrders = [
@@ -46,7 +47,7 @@ export const columnsOrders = [
         },
     },
     {
-        accessorKey: "amountOrdered",
+        accessorKey: "amount",
         meta: { className: "hidden lg:table-cell" },
         header: () => {
             return (
@@ -56,7 +57,7 @@ export const columnsOrders = [
             )
         },
         cell: ({ row }) => {
-            const amount = row.getValue("amountOrdered");
+            const amount = row.getValue("total");
             return <div className="text-center">{amount}</div>
         },
     },

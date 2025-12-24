@@ -20,7 +20,7 @@ export function DataTable({
     setPagination, 
     sorting, 
     setSorting,
-    isLoading // ✅ Add loading prop
+    isLoading
 }) {
     const table = useReactTable({
         data,
@@ -44,13 +44,6 @@ export function DataTable({
 
     return (
         <div className="overflow-hidden rounded-md border">
-            {/* Loading Overlay */}
-            {/* {isLoading && (
-                <div className="flex items-center justify-center p-8 bg-gray-50">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                </div>
-            )} */}
-            
             <div className={cn(isLoading && "opacity-50 pointer-events-none")}>
                 <Table>
                     <TableHeader className="bg-gray-100 border-b">
