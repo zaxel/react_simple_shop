@@ -2,7 +2,7 @@
 import TdModalLink from './TdModalLink';
 import TdDelete from './TdDelete';
 import { adminPageFormatDate } from '../../../../utils/dataFormat/formatDate';
-import { formatGbCurrency } from '../../../../utils/dataFormat/currencies';
+import { formatUSCurrency } from '../../../../utils/dataFormat/currencies';
 import { makeInnerRefs } from '../../../../utils/toolTipServing/makeInnerRefs';
 
 const TrOrders = ({ data }) => {
@@ -17,7 +17,7 @@ const TrOrders = ({ data }) => {
             <td>{data.amountOrdered}</td>
             <td>{data.userId}</td>
             <td>{data.email}</td>
-            <td>{formatGbCurrency(data.total)}</td>
+            <td>{formatUSCurrency(data.total)}</td>
             <TdModalLink {...tipsRefs[0]} showOrderModal={data.onOrderClickHandler.bind(this, data.id)}/>
             <TdDelete {...tipsRefs[1]} data={{id: data.id}}/>
         </tr>

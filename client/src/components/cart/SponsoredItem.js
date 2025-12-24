@@ -5,7 +5,7 @@ import no_image from "../../assets/no-image.jpg";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { DEVICE_ROUTE } from "../../utils/consts/routes";
-import { formatGbCurrency } from "../../utils/dataFormat/currencies";
+import { formatUSCurrency } from "../../utils/dataFormat/currencies";
 import RateItem from "../device/RateItem";
 
 const SponsoredItem = ({ el }) => {
@@ -40,7 +40,7 @@ const SponsoredItem = ({ el }) => {
         <div className="basket-sponsored__star">
           <RateItem rate={el.rate} />
         </div>
-        <h5>{formatGbCurrency(el.price)}</h5>
+        <h5>{formatUSCurrency(el.price)}</h5>
         <Button
           onClick={onAddToCartPressed}
           variant="warning"

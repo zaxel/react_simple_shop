@@ -3,7 +3,7 @@ import star from '../../assets/rating_star.png';
 import { useNavigate } from "react-router-dom";
 import { DEVICE_ROUTE } from '../../utils/consts/routes';
 import no_image from '../../assets/no-image.jpg';
-import { formatGbCurrency } from '../../utils/dataFormat/currencies';
+import { formatUSCurrency } from '../../utils/dataFormat/currencies';
 import RateItem from './RateItem';
 
 const DeviceItem = ({device}) => {
@@ -15,7 +15,7 @@ const DeviceItem = ({device}) => {
             </div> 
             <div className='deviceItem__info-cont'>
                 <h4 className = 'deviceItem__title' onClick={()=>navigate(DEVICE_ROUTE + '/' + device.id)} >{device.name}</h4> 
-                <h3 className = 'deviceItem__price'>{formatGbCurrency(device.price)}</h3>
+                <h3 className = 'deviceItem__price'>{formatUSCurrency(device.price)}</h3>
                 <div className = 'deviceItem__rating-cont'>
                     <RateItem rate={device.rate}/>
                 </div>

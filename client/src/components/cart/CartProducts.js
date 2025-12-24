@@ -34,7 +34,7 @@ const CartProducts = ({ items, updateQuantity, deleteItem }) => {
                                     </div>
                                 </div>
                             </div>
-                            <p className='font-medium'>£{(price * quantity).toFixed(2)}</p>
+                            <p className='font-medium'>${(price * quantity).toFixed(2)}</p>
                         </div>
                     </div> 
                     <button onClick={()=>deleteItem(id)} className='w-8 h-8 shrink-0 flex justify-center items-center rounded-full bg-red-100 text-red-400 cursor-pointer'><Trash2 className='w-3 h-3' /></button>

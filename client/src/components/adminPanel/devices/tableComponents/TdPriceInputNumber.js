@@ -3,7 +3,7 @@ import { Context } from '../../../..';
 import { changeDeviceData } from '../../../../utils/administration/adminDevices';
 import { correctPriceRange } from '../../../../utils/dataFormat/correctInputNumbers';
 import TdInputNumberCommon from '../../../commonTable/TdInputNumberCommon';
-import { formatGbCurrency } from '../../../../utils/dataFormat/currencies';
+import { formatUSCurrency } from '../../../../utils/dataFormat/currencies';
 
 const TdPriceInputNumber = ({ data, ...rest }) => {
 
@@ -12,7 +12,7 @@ const TdPriceInputNumber = ({ data, ...rest }) => {
     data.inputCb = changeDeviceData;
     data.numberInputAttributes = {step: '1'};
     data.inpNumFormat = correctPriceRange;
-    data.outNumFormat = formatGbCurrency;
+    data.outNumFormat = formatUSCurrency;
 
     return (
         <TdInputNumberCommon data={data} {...rest}/>

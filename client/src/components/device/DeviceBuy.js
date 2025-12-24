@@ -5,7 +5,7 @@ import {
 } from "../../utils/consts/routes";
 import { Link } from "react-router-dom";
 import location_pointer from "../../assets/location-pointer.svg";
-import { formatGbCurrency } from "../../utils/dataFormat/currencies";
+import { formatUSCurrency } from "../../utils/dataFormat/currencies";
 import { deviceBuyContainerFormatDate } from "../../utils/dataFormat/formatDate";
 import { Context } from "../..";
 
@@ -17,7 +17,7 @@ const DeviceBuy = ({device}) => {
   return (
     <div className="device__buy">
       <h4 className="dev-buy__price">
-        Buy new <span>{formatGbCurrency(device.price || 0)}</span>
+        Buy new <span>{formatUSCurrency(device.price || 0)}</span>
       </h4>
       <div className="dev-buy__delivery">
         <Link to={HELP_ROUTE}>FREE delivery</Link>{" "}

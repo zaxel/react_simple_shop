@@ -9,3 +9,6 @@
 export const formatGbCurrency = (price = 0) => {
   return new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(price);
 }
+export const formatUSCurrency = (price = 0) => {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
+}

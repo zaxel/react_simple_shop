@@ -1,6 +1,6 @@
 ﻿import React, { useRef } from 'react';
 import NavigationLink from './NavigationLink';
-import { formatGbCurrency} from '../../../../../utils/dataFormat/currencies';
+import { formatUSCurrency} from '../../../../../utils/dataFormat/currencies';
 import { makeInnerRefs } from '../../../../../utils/toolTipServing/makeInnerRefs';
 
 const TrOrderDetails = ({ data }) => {
@@ -14,7 +14,7 @@ const TrOrderDetails = ({ data }) => {
             <NavigationLink {...tipsRefs[1]} data={{linkText: data.name, deviceId: data.deviceId}}/>
             <td>{data.device_amount}</td>
             <td>{data.rate}</td>
-            <td>{formatGbCurrency(data.price)}</td>
+            <td>{formatUSCurrency(data.price)}</td>
         </tr>
 
     );

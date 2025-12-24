@@ -104,20 +104,20 @@ const Cart = () => {
                     <div className='flex flex-col gap-4'>
                         <div className='flex justify-between text-sm'>
                             <p className='text-gray-500'>Subtotal</p>
-                            <p className='font-medium'>£{subtotal.toFixed(2)}</p>
+                            <p className='font-medium'>${subtotal.toFixed(2)}</p>
                         </div>
                         <div className='flex justify-between text-sm'>
                             <p className='text-gray-500'>Discount({discount}%)</p>
-                            <p className='font-medium text-gray-500'>£{(subtotal * discount / 100).toFixed(2)}</p>
+                            <p className='font-medium text-gray-500'>${(subtotal * discount / 100).toFixed(2)}</p>
                         </div>
                         <div className='flex justify-between text-sm'>
                             <p className='text-gray-500'>Shipping fee</p>
-                            <p className='font-medium'>£{subtotal ? shipping.toFixed(2) : 0..toFixed(2)}</p>
+                            <p className='font-medium'>${subtotal ? shipping.toFixed(2) : 0..toFixed(2)}</p>
                         </div>
                         <hr className='border-gray-200' />
                         <div className='flex justify-between'>
                             <p className='text-gray-800 font-semibold'>Total</p>
-                            <p className='font-medium'>£{subtotal ? total.toFixed(2) : 0..toFixed(2)}</p>
+                            <p className='font-medium'>${subtotal ? total.toFixed(2) : 0..toFixed(2)}</p>
                         </div>
                     </div>
                     {activeStep === 1 && <button disabled={!cartItems.length} onClick={() => navigate({

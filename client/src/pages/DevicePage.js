@@ -8,7 +8,7 @@ import DeviceGallery from '../components/device/DeviceGallery';
 import RateItem from '../components/device/RateItem';
 import { SHOP_ROUTE } from '../utils/consts/routes';
 import DeviceBuyCont from '../components/device/DeviceBuyCont';
-import { formatGbCurrency } from '../utils/dataFormat/currencies';
+import { formatUSCurrency } from '../utils/dataFormat/currencies';
 import SellerDescription from '../components/device/SellerDescription';
 
 const DevicePage = () => {
@@ -58,7 +58,7 @@ const DevicePage = () => {
 							</div>
 						</div>
 						<div className="device__price-cont">
-							<h2 className='device__price'>{formatGbCurrency(device.price)}</h2>
+							<h2 className='device__price'>{formatUSCurrency(device.price)}</h2>
 							<p className="device__price-lower">
 								Available at a lower price from <Link to={SHOP_ROUTE}>other sellers</Link> that may not offer free Prime delivery.
 							</p>

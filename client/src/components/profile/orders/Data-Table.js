@@ -41,7 +41,7 @@ export function DataTable({
             setOrderDetailsId, 
         },
     });
-
+    
     return (
         <div className="overflow-hidden rounded-md border">
             <div className={cn(isLoading && "opacity-50 pointer-events-none")}>

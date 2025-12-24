@@ -114,7 +114,7 @@ const WishList = () => {
                             </div>
                             <div className="flex items-center justify-between mt-auto">
                                 <div>
-                                    <p>£{price.toFixed(2)}</p>
+                                    <p>${price.toFixed(2)}</p>
                                     <p className='text-sm text-muted-foreground'>Added {getDate(createdAt)}</p>
                                 </div>
                                 <Button onClick={() => handleDelete(deviceId)} className='!rounded-full !w-10 !h-10 p-0' variant="destructive"><ClipboardPaste /> </Button>

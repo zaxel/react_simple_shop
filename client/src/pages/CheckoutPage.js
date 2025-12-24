@@ -5,7 +5,7 @@ import card1 from '../assets/card_example1.png';
 import card2 from '../assets/card_example2.jpg';
 import card3 from '../assets/card_example3.jpg';
 import { makeOrder, makeItems } from '../utils/order';
-import { formatGbCurrency } from '../utils/dataFormat/currencies';
+import { formatUSCurrency } from '../utils/dataFormat/currencies';
 
 const CheckoutPage = () => {
     const {cart, user} = useContext(Context);
@@ -45,7 +45,7 @@ const CheckoutPage = () => {
                             </button>
                         </div>
                         <div className='checkout__total'>
-                            <h2>Total: <span>{formatGbCurrency(cart.cartTotal)}</span></h2>
+                            <h2>Total: <span>{formatUSCurrency(cart.cartTotal)}</span></h2>
                         </div>
                         <div className='checkout__button-cont'>
                             <Button onClick={makeOrder.bind(this, setPayed, cart, user)} variant="warning" className='checkout__button'>Pay</Button>

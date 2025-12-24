@@ -107,9 +107,9 @@ export const columnsOrders = [
         },
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("total"))
-            const formatted = new Intl.NumberFormat("en-GB", {
+            const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: "GBP",
+                currency: "USD",
             }).format(amount)
 
             return <div className="text-right font-medium mr-4">{formatted}</div>
@@ -214,8 +214,8 @@ export const columnsDetails = [
         },
         cell: ({ row }) => {
             const dateObj = new Date(row.getValue("createdAt"));
-            const date = dateObj.toLocaleDateString("en-GB");
-            const time = dateObj.toLocaleTimeString("en-GB");
+            const date = dateObj.toLocaleDateString("en-US");
+            const time = dateObj.toLocaleTimeString("en-US");
 
             return <div className="text-center">{date} {time}</div>
         },
@@ -236,9 +236,9 @@ export const columnsDetails = [
         },
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("price"))
-            const formatted = new Intl.NumberFormat("en-GB", {
+            const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: "GBP",
+                currency: "USD",
             }).format(amount)
 
             return <div className="text-right font-medium mr-4">{formatted}</div>
