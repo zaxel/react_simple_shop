@@ -2,283 +2,295 @@
 const DataTypes = require('sequelize');
 
 const User = sequelize.define('user', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  email: {type: DataTypes.STRING, unique: true},
-  name: {type: DataTypes.STRING(100)},
-  surname: {type: DataTypes.STRING(150)},
-  phone: {type: DataTypes.STRING(20)},
-  password: {type: DataTypes.STRING},
-  role: {type: DataTypes.STRING, defaultValue: "USER"},
-  is_activated: {type: DataTypes.BOOLEAN, defaultValue: false},
-  activation_link: {type: DataTypes.STRING},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  email: { type: DataTypes.STRING, unique: true },
+  name: { type: DataTypes.STRING(100) },
+  surname: { type: DataTypes.STRING(150) },
+  phone: { type: DataTypes.STRING(20) },
+  password: { type: DataTypes.STRING },
+  role: { type: DataTypes.STRING, defaultValue: "USER" },
+  is_activated: { type: DataTypes.BOOLEAN, defaultValue: false },
+  activation_link: { type: DataTypes.STRING },
 })
-
 
 const Address = sequelize.define('address', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  street: {type: DataTypes.STRING(150)},
-  house: {type: DataTypes.STRING(50)},
-  apartment: {type: DataTypes.STRING(50)},
-  city: {type: DataTypes.STRING(200)},
-  postal_code: {type: DataTypes.STRING(50)},
-  country: {type: DataTypes.STRING(100)},
-  county: {type: DataTypes.STRING(100)},
-  is_default: {type: DataTypes.BOOLEAN, defaultValue: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  street: { type: DataTypes.STRING(150) },
+  house: { type: DataTypes.STRING(50) },
+  apartment: { type: DataTypes.STRING(50) },
+  city: { type: DataTypes.STRING(200) },
+  postal_code: { type: DataTypes.STRING(50) },
+  country: { type: DataTypes.STRING(100) },
+  county: { type: DataTypes.STRING(100) },
+  is_default: { type: DataTypes.BOOLEAN, defaultValue: false },
 })
-
-
 
 const Token = sequelize.define('token', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  refresh_token: {type: DataTypes.STRING(1024), allowNull: true},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  refresh_token: { type: DataTypes.STRING(1024), allowNull: true },
 })
 const Basket = sequelize.define('basket', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 })
 const BasketDevice = sequelize.define('basket_device', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  device_amount: {type: DataTypes.INTEGER, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  device_amount: { type: DataTypes.INTEGER, allowNull: false },
 })
-
 
 const Order = sequelize.define('order', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true,},
+  status: {type: DataTypes.ENUM('PENDING', 'PAID', 'CANCELLED', 'PAYMENT_FAILED'), allowNull: false, defaultValue: 'PENDING',},
+  total: {type: DataTypes.DECIMAL(10, 2), allowNull: false, defaultValue: 0,},
+  stripeSessionId: {type: DataTypes.STRING(255), allowNull: true, unique: true,},
+});
+
+const OrderAddress = sequelize.define('order_address', {
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true,},
+  name: {type: DataTypes.STRING(150), allowNull: false,},
+  email: {type: DataTypes.STRING(150), allowNull: false,},
+  phone: {type: DataTypes.STRING(40), allowNull: true,},
+  street: { type: DataTypes.STRING(150), allowNull: false,},
+  house: { type: DataTypes.STRING(50), allowNull: true,},
+  apartment: {type: DataTypes.STRING(50), allowNull: true,},
+  city: {type: DataTypes.STRING(200), allowNull: false,},
+  county: {type: DataTypes.STRING(100), allowNull: true,},
+  postal_code: {type: DataTypes.STRING(50), allowNull: true,},
+  country: {type: DataTypes.STRING(100), allowNull: false,},
+});
+
 const OrderDevice = sequelize.define('order_device', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  device_amount: {type: DataTypes.INTEGER, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  device_amount: { type: DataTypes.INTEGER, allowNull: false },
 })
+
 const Device = sequelize.define('device', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  name: {type: DataTypes.STRING, unique: true, allowNull: false},
-  seller_dscr: {type: DataTypes.STRING(20000), allowNull: false},
-  price: {type: DataTypes.FLOAT, allowNull: false},
-  rate: {type: DataTypes.FLOAT, defaultValue: 0.0},
-  img: {type: DataTypes.JSON, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  seller_dscr: { type: DataTypes.STRING(20000), allowNull: false },
+  price: { type: DataTypes.FLOAT, allowNull: false },
+  rate: { type: DataTypes.FLOAT, defaultValue: 0.0 },
+  img: { type: DataTypes.JSON, allowNull: false },
   searchable: { type: DataTypes.TSVECTOR },
 })
 const Type = sequelize.define('type', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  name: {type: DataTypes.STRING, unique: true, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
 })
 const Brand = sequelize.define('brand', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  name: {type: DataTypes.STRING, unique: true, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
 })
 const DeviceInfo = sequelize.define('device_info', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, allowNull: false},
-  description: {type: DataTypes.STRING(10000), allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  description: { type: DataTypes.STRING(10000), allowNull: false },
   searchable: { type: DataTypes.TSVECTOR },
 })
 const Rate = sequelize.define('rate', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    rate: {type: DataTypes.INTEGER, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  rate: { type: DataTypes.INTEGER, allowNull: false },
 })
 const WishList = sequelize.define('wishlist_items', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true,},
-  },
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, },
+},
   {
     indexes: [{
-        unique: true,
-        fields: ['userId', 'deviceId'],
-      },],
+      unique: true,
+      fields: ['userId', 'deviceId'],
+    },],
   })
 const TypeBrand = sequelize.define('type_brand', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
 })
-
 
 const InfoPages = sequelize.define('info_pages', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, unique: true, allowNull: false},
-    title: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
-    img: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
-    text: {type: DataTypes.ARRAY(DataTypes.STRING(1024)), allowNull: true},
-    link: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
-    button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  title: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
+  img: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true },
+  text: { type: DataTypes.ARRAY(DataTypes.STRING(1024)), allowNull: true },
+  link: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true },
+  button_id: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true },
 })
 const InfoHelpPopular = sequelize.define('info_help_popular', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 })
 const InfoHelpCategories = sequelize.define('info_help_categories', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    order_id: {type: DataTypes.INTEGER, allowNull: true},
-    title: {type: DataTypes.STRING, allowNull: true},
-    banner: {type: DataTypes.STRING, allowNull: true},
-    icon: {type: DataTypes.STRING, allowNull: true},
-    link: {type: DataTypes.STRING, allowNull: true},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  order_id: { type: DataTypes.INTEGER, allowNull: true },
+  title: { type: DataTypes.STRING, allowNull: true },
+  banner: { type: DataTypes.STRING, allowNull: true },
+  icon: { type: DataTypes.STRING, allowNull: true },
+  link: { type: DataTypes.STRING, allowNull: true },
 })
 const InfoHelpQuestions = sequelize.define('info_help_questions', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    order_id: {type: DataTypes.INTEGER, allowNull: true},
-    question: {type: DataTypes.STRING, allowNull: true},
-  })
-  const InfoHelpAnswers = sequelize.define('info_help_answers', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title: {type: DataTypes.STRING, allowNull: false},
-    text: {type: DataTypes.STRING(20000), allowNull: false},
-    searchable: { type: DataTypes.TSVECTOR },
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  order_id: { type: DataTypes.INTEGER, allowNull: true },
+  question: { type: DataTypes.STRING, allowNull: true },
+})
+const InfoHelpAnswers = sequelize.define('info_help_answers', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  text: { type: DataTypes.STRING(20000), allowNull: false },
+  searchable: { type: DataTypes.TSVECTOR },
 })
 const InfoHelpRelatedQuestions = sequelize.define('info_help_related_questions', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    faq_id: {type: DataTypes.INTEGER, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  faq_id: { type: DataTypes.INTEGER, allowNull: false },
 })
-
 
 const InfoAboutCards = sequelize.define('info_about_cards', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, allowNull: true},
-  card_text: {type: DataTypes.STRING(1024), allowNull: true},
-  card_prev_text: {type: DataTypes.STRING(1024), allowNull: true},
-  hero: {type: DataTypes.STRING, allowNull: true},
-  button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: true },
+  card_text: { type: DataTypes.STRING(1024), allowNull: true },
+  card_prev_text: { type: DataTypes.STRING(1024), allowNull: true },
+  hero: { type: DataTypes.STRING, allowNull: true },
+  button_id: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true },
 })
 const InfoAboutBlocks = sequelize.define('info_about_blocks', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, allowNull: true},
-  text: {type: DataTypes.STRING(1024), allowNull: true},
-  hero: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true},
-  position: {type: DataTypes.INTEGER, allowNull: true},
-  button_id: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: true },
+  text: { type: DataTypes.STRING(1024), allowNull: true },
+  hero: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true },
+  position: { type: DataTypes.INTEGER, allowNull: true },
+  button_id: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true },
 })
 const ButtonLink = sequelize.define('button_link', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  text: {type: DataTypes.STRING, allowNull: false},
-  link: {type: DataTypes.STRING, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  text: { type: DataTypes.STRING, allowNull: false },
+  link: { type: DataTypes.STRING, allowNull: false },
 })
 const ButtonMediator = sequelize.define('button_mediator', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
 })
-
 
 const InfoAppCards = sequelize.define('info_app_cards', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  title: {type: DataTypes.STRING, allowNull: false},
-  hero: {type: DataTypes.STRING, allowNull: false},
-  link: {type: DataTypes.STRING, allowNull: false},
-  app_button_img: {type: DataTypes.STRING, allowNull: false},
-  app_button_dark_img: {type: DataTypes.STRING, allowNull: false},
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  hero: { type: DataTypes.STRING, allowNull: false },
+  link: { type: DataTypes.STRING, allowNull: false },
+  app_button_img: { type: DataTypes.STRING, allowNull: false },
+  app_button_dark_img: { type: DataTypes.STRING, allowNull: false },
 })
 
+User.hasOne(Token)
+Token.belongsTo(User)
 
-  User.hasOne(Token)
-  Token.belongsTo(User)
-  
-  User.hasMany(Address, { foreignKey: 'user_id' })
-  Address.belongsTo(User, { foreignKey: 'user_id' })
-  
-  User.hasOne(Basket)
-  Basket.belongsTo(User)
-  
-  User.hasMany(Order)
-  Order.belongsTo(User)
+User.hasMany(Address, { foreignKey: 'user_id' })
+Address.belongsTo(User, { foreignKey: 'user_id' })
 
-  User.hasMany(Rate)
-  Rate.belongsTo(User)
+User.hasOne(Basket)
+Basket.belongsTo(User)
 
-  User.hasMany(WishList);
-  WishList.belongsTo(User);
+User.hasMany(Order)
+Order.belongsTo(User)
 
-  Device.hasMany(WishList);
-  WishList.belongsTo(Device);
+User.hasMany(Rate)
+Rate.belongsTo(User)
 
-  Basket.hasMany(BasketDevice,{
-    foreignKey: 'basketId',
-    as: 'items'
-  })
-  BasketDevice.belongsTo(Basket, {
-    foreignKey: 'basketId',
-    as: 'basket'
-  })
+User.hasMany(WishList);
+WishList.belongsTo(User);
 
-  Order.hasMany(OrderDevice)
-  OrderDevice.belongsTo(Order)
+Device.hasMany(WishList);
+WishList.belongsTo(Device);
 
-  Device.hasMany(DeviceInfo, {as: 'info'})
-  DeviceInfo.belongsTo(Device)
+Basket.hasMany(BasketDevice, {
+  foreignKey: 'basketId',
+  as: 'items'
+})
+BasketDevice.belongsTo(Basket, {
+  foreignKey: 'basketId',
+  as: 'basket'
+})
 
-  Type.hasMany(Device)
-  Device.belongsTo(Type)
-  
-  Brand.hasMany(Device)
-  Device.belongsTo(Brand)
+Order.hasMany(OrderDevice)
+OrderDevice.belongsTo(Order)
 
-  Device.hasMany(Rate)
-  Rate.belongsTo(Device)
+Order.hasOne(OrderAddress, { foreignKey: 'orderId' });
+OrderAddress.belongsTo(Order, { foreignKey: 'orderId' });
 
-  Device.hasOne(BasketDevice)
-  BasketDevice.belongsTo(Device)
-  
-  Device.hasOne(OrderDevice)
-  OrderDevice.belongsTo(Device)
+Device.hasMany(DeviceInfo, { as: 'info' })
+DeviceInfo.belongsTo(Device)
 
-  Type.belongsToMany(Brand, {through: TypeBrand})
-  Brand.belongsToMany(Type, {through: TypeBrand})
+Type.hasMany(Device)
+Device.belongsTo(Type)
 
+Brand.hasMany(Device)
+Device.belongsTo(Brand)
 
-  InfoPages.hasMany(InfoHelpCategories)
-  InfoHelpCategories.belongsTo(InfoPages)
-  
-  InfoHelpCategories.hasMany(InfoHelpQuestions)
-  InfoHelpQuestions.belongsTo(InfoHelpCategories)
-  
-  InfoHelpQuestions.hasOne(InfoHelpPopular)
-  InfoHelpPopular.belongsTo(InfoHelpQuestions)
-  
-  InfoHelpAnswers.hasOne(InfoHelpQuestions)
-  InfoHelpQuestions.belongsTo(InfoHelpAnswers)
-  
-  InfoHelpQuestions.hasMany(InfoHelpRelatedQuestions)
-  InfoHelpRelatedQuestions.belongsTo(InfoHelpQuestions)
+Device.hasMany(Rate)
+Rate.belongsTo(Device)
+
+Device.hasOne(BasketDevice)
+BasketDevice.belongsTo(Device)
+
+Device.hasOne(OrderDevice)
+OrderDevice.belongsTo(Device)
+
+Type.belongsToMany(Brand, { through: TypeBrand })
+Brand.belongsToMany(Type, { through: TypeBrand })
 
 
-  InfoPages.hasMany(InfoAboutCards)
-  InfoAboutCards.belongsTo(InfoPages)
+InfoPages.hasMany(InfoHelpCategories)
+InfoHelpCategories.belongsTo(InfoPages)
 
-  InfoAboutCards.hasMany(InfoAboutBlocks)
-  InfoAboutBlocks.belongsTo(InfoAboutCards)
-  
-  InfoAboutBlocks.belongsToMany(ButtonLink, {through: ButtonMediator})
-  ButtonLink.belongsToMany(InfoAboutBlocks, {through: ButtonMediator})
-  
-  InfoAboutCards.belongsToMany(ButtonLink, {through: ButtonMediator})
-  ButtonLink.belongsToMany(InfoAboutCards, {through: ButtonMediator})
-  
+InfoHelpCategories.hasMany(InfoHelpQuestions)
+InfoHelpQuestions.belongsTo(InfoHelpCategories)
 
-  InfoPages.belongsToMany(ButtonLink, {through: ButtonMediator})
-  ButtonLink.belongsToMany(InfoPages, {through: ButtonMediator})
+InfoHelpQuestions.hasOne(InfoHelpPopular)
+InfoHelpPopular.belongsTo(InfoHelpQuestions)
 
+InfoHelpAnswers.hasOne(InfoHelpQuestions)
+InfoHelpQuestions.belongsTo(InfoHelpAnswers)
 
-  InfoPages.hasMany(InfoAppCards)
-  InfoAppCards.belongsTo(InfoPages)
+InfoHelpQuestions.hasMany(InfoHelpRelatedQuestions)
+InfoHelpRelatedQuestions.belongsTo(InfoHelpQuestions)
 
-  module.exports = {
-      Token,
-      User,
-      Address,
-      Basket,
-      BasketDevice,
-      Order,
-      OrderDevice,
-      Device,
-      Type,
-      Brand,
-      Rate,
-      WishList,
-      TypeBrand,
-      DeviceInfo,
+InfoPages.hasMany(InfoAboutCards)
+InfoAboutCards.belongsTo(InfoPages)
 
-      InfoPages,
-      InfoHelpPopular,
-      InfoHelpCategories,
-      InfoHelpQuestions,
-      InfoHelpAnswers,
-      InfoHelpRelatedQuestions,
-      
-      InfoAboutCards,
-      InfoAboutBlocks,
-      ButtonLink,
+InfoAboutCards.hasMany(InfoAboutBlocks)
+InfoAboutBlocks.belongsTo(InfoAboutCards)
 
-      InfoAppCards,
-  }
+InfoAboutBlocks.belongsToMany(ButtonLink, { through: ButtonMediator })
+ButtonLink.belongsToMany(InfoAboutBlocks, { through: ButtonMediator })
+
+InfoAboutCards.belongsToMany(ButtonLink, { through: ButtonMediator })
+ButtonLink.belongsToMany(InfoAboutCards, { through: ButtonMediator })
+
+InfoPages.belongsToMany(ButtonLink, { through: ButtonMediator })
+ButtonLink.belongsToMany(InfoPages, { through: ButtonMediator })
+
+InfoPages.hasMany(InfoAppCards)
+InfoAppCards.belongsTo(InfoPages)
+
+module.exports = {
+  Token,
+  User,
+  Address,
+  Basket,
+  BasketDevice,
+  Order,
+  OrderDevice,
+  OrderAddress,
+  Device,
+  Type,
+  Brand,
+  Rate,
+  WishList,
+  TypeBrand,
+  DeviceInfo,
+
+  InfoPages,
+  InfoHelpPopular,
+  InfoHelpCategories,
+  InfoHelpQuestions,
+  InfoHelpAnswers,
+  InfoHelpRelatedQuestions,
+
+  InfoAboutCards,
+  InfoAboutBlocks,
+  ButtonLink,
+
+  InfoAppCards,
+}
