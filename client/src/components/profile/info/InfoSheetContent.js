@@ -32,10 +32,7 @@ const formSchema = z.object({
         .max(25, { message: "Phone number must be less than 25 characters." }),
 });
 
-
 const InfoSheetContent = ({user, editUser, onClose}) => {
-
-
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -47,7 +44,6 @@ const InfoSheetContent = ({user, editUser, onClose}) => {
          mode: 'onChange'
     })
 
-
     useEffect(() => {
   if (user) {
     form.reset({
@@ -58,7 +54,6 @@ const InfoSheetContent = ({user, editUser, onClose}) => {
     });
   }
 }, [user, form]);
-
 
     const onSubmitHandler = async(data) => {
         await editUser(data);
@@ -76,7 +71,6 @@ const InfoSheetContent = ({user, editUser, onClose}) => {
             <Form {...form} asChild>
                 <form onSubmit={form.handleSubmit(onSubmitHandler)} className='p-6'>
                     {formFieldNames.map(fieldName => {
-
                         return <FormField                            
                             key={fieldName}
                             control={form.control}
@@ -99,7 +93,6 @@ const InfoSheetContent = ({user, editUser, onClose}) => {
                 </form>
             </Form>
         </SheetContent>
-
     );
 };
 
