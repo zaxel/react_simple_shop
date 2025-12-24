@@ -4,7 +4,6 @@ export const LOGIN_ROUTE = BASE_ROUTE+'/login';
 export const PROTECTED_ROUTE = BASE_ROUTE+'/protect';
 export const REGISTRATION_ROUTE = BASE_ROUTE+'/registration';
 export const SHOP_ROUTE = BASE_ROUTE+'/';
-export const BASKET_ROUTE = BASE_ROUTE+'/basket';
 export const CART_ROUTE = BASE_ROUTE+'/cart';
 export const DEVICE_ROUTE = BASE_ROUTE+'/device';
 
@@ -55,6 +54,7 @@ export const ABOUT_RIGHT_CARD_ROUTE = BASE_ROUTE+'/admin/page/about/r-card';
 
 export const SAMPLE_ROUTE = BASE_ROUTE+'/sample';
 export const CHECKOUT_ROUTE = BASE_ROUTE+'/checkout';
+export const ORDER_COMPLETE_ROUTE = BASE_ROUTE+'/order/complete';
 export const ERROR_ROUTE = BASE_ROUTE+'*';
 export const NAVBAR_HEIGHT = 60;
 export const RANDOM_DEVICES_COUNT = 6;

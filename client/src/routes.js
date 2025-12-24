@@ -1,6 +1,5 @@
 ﻿import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
-import Basket from "./pages/Basket";
 import Cart from "./pages/Cart";
 import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
@@ -49,7 +48,7 @@ import LeftCard from "./components/adminPanel/pages/about/LeftCard";
 import MiddleCard from "./components/adminPanel/pages/about/MiddleCard";
 import RightCard from "./components/adminPanel/pages/about/RightCard";
 
-import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
+import { ADMIN_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
         ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
         ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE,
@@ -60,13 +59,15 @@ import { ADMIN_ROUTE, BASKET_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         ADMIN_HELP_CAT_ROUTE, HELP_CAT_ROUTE, PROFILE_ROUTE, PROFILE_INFO_ROUTE, PROFILE_ORDERS_ROUTE,
         PROFILE_ADDRESS_ROUTE,
         PROFILE_WISHLIST_ROUTE,
-        CART_ROUTE} from "./utils/consts/routes";
+        CART_ROUTE,
+        ORDER_COMPLETE_ROUTE} from "./utils/consts/routes";
 
 import ProfileAddress from "./components/profile/address/Address";
 import ProfileInfo from "./components/profile/info/Info";
 import ProfileOrders from "./components/profile/orders/Orders";
 import ProfileRouter from "./components/profile/ProfileRouter";
 import WishList from "./components/profile/wishlist/WishList";
+import OrderCompletePage from "./pages/OrderCompletePage";
         
 
 export const userNavRoutes = [
@@ -210,6 +211,10 @@ export const authRoutes = [
         path: PROTECTED_ROUTE,
         Component: Protected
     },
+    {
+        path: ORDER_COMPLETE_ROUTE,
+        Component: OrderCompletePage
+    },
 ];
 export let helpRoutes = [
     {
@@ -257,10 +262,6 @@ export const publicRoutes = [
     {
         path: ERROR_ROUTE,
         Component: ErrorPage
-    },
-    {
-        path: BASKET_ROUTE,
-        Component: Basket
     },
     {
         path: CART_ROUTE,
