@@ -28,3 +28,26 @@ export const fetchOrderDetailsReq = async (id, sortBy, sortDirection) => {
     }});
     return data;
 }
+
+
+export const checkout = async ({order}) => {
+    try{
+        const resp = await $authHost.post(`api/order/checkout`, {order});
+        return resp.data;
+
+    }catch(err){
+        console.error(err);
+        return null;
+    }
+}
+
+export const resolveBySession = async ({sessionId}) => {
+    try{
+        const resp = await $authHost.get(`api/order/resolve-by-session/${sessionId}`);
+        return resp.data;
+
+    }catch(err){
+        console.error(err);
+        return null;
+    }
+}
