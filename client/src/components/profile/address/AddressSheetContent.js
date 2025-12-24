@@ -21,14 +21,13 @@ const getFormSchemaFields = z => {
     formFieldNames.forEach(field =>
         formSchemaFields[field] = z
             .string({ message: "Must be a string." })
-            .min(2, { message: "Must be at least 2 characters." })
+            .min(1, { message: "Must be at least 1 characters." })
             .max(40, { message: "Must be less than 40 characters." }),
     )
     return formSchemaFields;
 }
 
 const formSchema = z.object(getFormSchemaFields(z));
-
 
 const AddressSheetContent = ({addNewAddress, onClose}) => {
     const form = useForm({
