@@ -2,23 +2,25 @@
 
 export default class HistoryStore{
     constructor(){
-        this._authFrom = '';
+        this._lastPath = "/";
         this._pendingWish = null;
         makeAutoObservable(this);
     }
-    get authFrom(){
-        return this._authFrom;
-    }
+    
     get pendingWish(){
         return this._pendingWish;
     }
-    setAuthFrom(path){
-        this._authFrom = path;
+    get lastPath(){
+        return this._lastPath;
     }
+   
     setPendingWish(deviceId){
         this._pendingWish = deviceId;
     }
     clearPendingWish() {
         this._pendingWish = null;  
+    }
+    setLastPath(path) {
+        this._lastPath = path;   
     }
 }

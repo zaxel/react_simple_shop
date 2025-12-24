@@ -1,21 +1,11 @@
-﻿import React, { useContext, useEffect } from "react"
-import { Navigate, useLocation } from "react-router-dom"
+﻿import React, { useContext } from "react" 
+import { Navigate } from "react-router-dom"
 import { Context } from "..";
 import { LOGIN_ROUTE } from "./consts/routes";
 
-/**
- * An element wrapper which checks if the user is authenticated
- * If authenticated, renders the passed element
- * If not authenticated, redirects the user to Login page.
- */
-const PrivateElement = ({ children }) => {
-  let {pathname} = useLocation();
-  const {user, history} = useContext(Context);
 
-  useEffect(()=>{
-    history.setAuthFrom(pathname);
-  },[])
-  // return children
+const PrivateElement = ({ children }) => {
+  const {user } = useContext(Context);
   
   return user.isAuth ? (
     children

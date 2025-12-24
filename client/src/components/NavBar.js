@@ -3,21 +3,19 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
 import {
-    SHOP_ROUTE, REGISTRATION_ROUTE, BASKET_ROUTE,
-    ADMIN_ROUTE, ABOUT_ROUTE, HELP_ROUTE, LOGIN_ROUTE, ACCOUNT_ROUTE,
-    PROTECTED_ROUTE,
-    PROFILE_ROUTE
+    SHOP_ROUTE, REGISTRATION_ROUTE, ADMIN_ROUTE, ABOUT_ROUTE, HELP_ROUTE, LOGIN_ROUTE, 
+    ACCOUNT_ROUTE, PROTECTED_ROUTE, PROFILE_ROUTE
 } from '../utils/consts/routes';
 import { logoutOnClient, logoutOnServer } from "../utils/logout";
 import ShoppingCartIcon from "./cart/ShoppingCartIcon";
 
 const NavBar = observer(() => {
-    const { cart, user, device } = useContext(Context);
+    const { cart, user, device, history } = useContext(Context);
     const navigate = useNavigate();
 
     const onLogoutPressed = () => {
-        logoutOnClient(cart, user); 
         logoutOnServer(cart); 
+        logoutOnClient(cart, user); 
         navigate(LOGIN_ROUTE);
     }
 
@@ -54,10 +52,7 @@ const NavBar = observer(() => {
                             <button onClick={() => navigate(ADMIN_ROUTE)} className='btn btn-outline-secondary'>Admin panel</button>
                         </li>}
                         <li className="nav-item">
-                            <button onClick={() => navigate(BASKET_ROUTE)} className='btn btn-outline-secondary'>{cart.itemsCount} Cart</button>
-                        </li>
-                        <li className="nav-item">
-                           <ShoppingCartIcon itemsCount={cart.itemsCount}/>
+                           <ShoppingCartIcon history={history} isAuth={user.isAuth} itemsCount={cart.itemsCount}/>
                         </li>
                         <li className="nav-item">
                             <button onClick={() => navigate(user.isAuth ? ACCOUNT_ROUTE : LOGIN_ROUTE)} className='btn btn-outline-secondary'>{user.isAuth ? `User ${user.user.id}` : 'Login'}</button>

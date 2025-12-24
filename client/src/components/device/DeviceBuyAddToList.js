@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Context } from '../..';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addWishItem, deleteWishItem } from '../../http/userAPI';
 import { observer } from 'mobx-react-lite';
 import { Spinner } from '../../shadcn/spinner';
@@ -9,7 +9,6 @@ import { LOGIN_ROUTE } from '../../utils/consts/routes';
 
 const DeviceBuyAddToList = () => {
     const { user, history } = useContext(Context);
-    const { pathname } = useLocation();
     const navigate = useNavigate();
     const { id } = useParams();
     
@@ -21,9 +20,7 @@ const DeviceBuyAddToList = () => {
 
     const handleToggleWish = async () => {
         if (!deviceId || loading) return;
-
         if (!user.isAuth) {
-            history.setAuthFrom(pathname);
             history.setPendingWish(deviceId); 
             navigate(LOGIN_ROUTE);
             return;

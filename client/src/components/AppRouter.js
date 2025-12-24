@@ -1,14 +1,22 @@
 ﻿import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
-import { Routes, Route } from "react-router-dom";
+import React, { useContext, useEffect } from 'react';
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Context } from '..';
 import { authRoutes, publicRoutes, adminRoutes } from '../routes';
 import PrivateRouteWrapper from '../utils/PrivateRouteWrapper';
+import { LOGIN_ROUTE } from '../utils/consts/routes';
 
 
 const AppRouter = observer(() => {
-    const { user } = useContext(Context);
-    
+    const { user, history } = useContext(Context);
+    let {pathname} = useLocation();
+
+    useEffect(() => {
+        if (pathname !== LOGIN_ROUTE) {
+            history.setLastPath(pathname);
+        }
+    }, [pathname, history]);
+
     return (
         <Routes>
             {authRoutes.map(({ path, Component, NestedComponent }) => {

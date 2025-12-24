@@ -2,7 +2,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
 import { registration, login } from '../http/userAPI';
-import { REGISTRATION_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts/routes';
+import { REGISTRATION_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASE_ROUTE } from '../utils/consts/routes';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { checkAuth } from '../utils/checkAuth';
@@ -13,21 +13,15 @@ import setWishList from '../utils/setWishList';
 const Auth = observer(() => {
     const { user, history } = useContext(Context);
     const params = useLocation();
-    const authFromPath = history.authFrom;
+    const fromPath = history.lastPath + BASE_ROUTE;
+
 
     let isLogin = params.pathname === LOGIN_ROUTE;
     const authForm = useRef(null);
-    const [width, height] = useWindowSize();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    let from = { pathname: authFromPath || "/" }
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        return () => {
-            history.setAuthFrom(SHOP_ROUTE);
-        }
-    }, [width, height])
+    const navigate = useNavigate();
 
     const auth = async (e) => {
         try {
@@ -41,8 +35,8 @@ const Auth = observer(() => {
             const authUser = await checkAuth(user);
             await setUserData(user, authUser);
             await setWishList(user, history); 
-            isActivated(user);
-            navigate(from);
+            isActivated(user); 
+            navigate(BASE_ROUTE+fromPath);
         } catch (e) {
             console.log(e)
             alert(e.message);
