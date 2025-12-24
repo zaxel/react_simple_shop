@@ -39,6 +39,16 @@ export const deleteUserReq = async (id) => {
     return deletedUser.data;
 }
 
+export const getAddress = async (userId) => {
+    try{
+        const resp = await $authHost.get(`api/user/${userId}/addresses`);
+        return resp.data;
+
+    }catch(err){
+        console.error(err);
+        return null;
+    }
+}
 
 export const addAddress = async (userId, newAddress) => {
     try{
@@ -46,7 +56,7 @@ export const addAddress = async (userId, newAddress) => {
         return resp.data;
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
@@ -56,7 +66,7 @@ export const updateAddress = async (userId, addressId, addressInfo) => {
         return resp.data;
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
@@ -66,7 +76,7 @@ export const deleteAddress = async (userId, addressId) => {
         return resp.data;
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
@@ -76,7 +86,7 @@ export const setDefaultAddress = async (userId, addressId) => {
         return resp.data;
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
@@ -86,12 +96,10 @@ export const updateUserData = async (userId, data) => {
         const resp = await $authHost.patch(`api/user/info/${userId}`, data); 
         return resp.data;
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
-
-
 
 export const addWishItem = async (userId, deviceId) => {
     try{
@@ -99,7 +107,7 @@ export const addWishItem = async (userId, deviceId) => {
         return resp.data; 
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
@@ -109,7 +117,7 @@ export const getWishItems = async (userId) => {
         return resp.data;
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
@@ -120,7 +128,7 @@ export const getWishItemsList = async (userId) => {
         return resp.data;
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }
@@ -130,7 +138,7 @@ export const deleteWishItem = async (userId, deviceId) => {
         return resp.data;
 
     }catch(err){
-        console.log(err);
+        console.error(err);
         return null;
     }
 }

@@ -7,7 +7,7 @@ import { Context } from '../../..';
 import ErrorBox from '../../ErrorBox';
 
 
-const ordersUrl = "api/order/";
+const ordersUrl = "api/order/history";
 const orderDetailsUrl = "api/order/details/";
 
 const Orders = () => {
@@ -48,7 +48,6 @@ const Orders = () => {
 
 
     const { data, error, isLoading } = useFetch(url, { params }, true);
-
     const setOrderDetailsHandler = (orderId) => {
         setOrders({
             "count": 0,
@@ -60,7 +59,7 @@ const Orders = () => {
     }
 
     useEffect(() => {
-        if (!data) return;
+        if (!data) return; 
         setOrders(data);
     }, [data]);
 
