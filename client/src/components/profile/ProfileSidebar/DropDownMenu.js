@@ -2,11 +2,17 @@
 import { Context } from '../../..';
 import { Link, useNavigate } from 'react-router-dom';
 import { logoutOnClient, logoutOnServer } from '../../../utils/logout';
-import { HELP_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../../../utils/consts/routes';
+import { ADMIN_ROUTE, HELP_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../../../utils/consts/routes';
 import { SimpleDropdown, SimpleDropdownItem, SimpleDropdownSeparator } from '../../../shadcn/simpledropdown';
 import { SidebarMenuButton, useSidebar } from '../../../shadcn/sidebar';
-import { ChevronUp, HelpCircle, LogOut, ShoppingBag, User2 } from 'lucide-react';
+import { ChevronUp, HelpCircle, LogOut, ShoppingBag, User2, Settings } from 'lucide-react';
 const dropMenuItems = [
+    {
+        title: "Admin Panel",
+        icon: Settings,
+        route: ADMIN_ROUTE,
+        adminOnly: true
+    },
     {
         title: "Back To Shopping",
         icon: ShoppingBag,
@@ -21,13 +27,16 @@ const dropMenuItems = [
 
 
 const DropDownMenu = () => {
-    const { cart, user, device } = useContext(Context);
+    const { cart, user } = useContext(Context);
     const navigate = useNavigate();
     const { open } = useSidebar();
+    const firstName = user.user?.name || "";
+    const surName = user.user?.surname || "";   
+    const userFullName =  (!firstName && !surName) ? "User" : `${firstName} ${surName}`;
 
     const onLogoutPressed = () => {
-        logoutOnClient(cart, user);
         logoutOnServer();
+        logoutOnClient(cart, user);
         navigate(LOGIN_ROUTE);
     }
     return (
@@ -37,13 +46,15 @@ const DropDownMenu = () => {
             trigger={
                 <SidebarMenuButton>
                     <User2 />
-                    <span>Michael Brown</span>
+                    <span>{userFullName}</span>
                     <ChevronUp className='ml-auto' />
                 </SidebarMenuButton>
             }
         >
             {dropMenuItems.map((item) => {
-                return <SimpleDropdownItem key={item.title} className='size-6'>
+                return !user.isSuperUser && item.adminOnly
+                ? null
+                : <SimpleDropdownItem key={item.title} className='size-6'>
                     <Link to={item.route} className='hover:text-gray-700'>
                         <div className='flex items-center gap-2'>
                             <item.icon className='w-5 h-5' /> <span>{item.title}</span>
