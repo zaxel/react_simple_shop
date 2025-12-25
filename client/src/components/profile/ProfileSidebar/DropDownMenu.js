@@ -6,6 +6,8 @@ import { ADMIN_ROUTE, HELP_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../../../utils
 import { SimpleDropdown, SimpleDropdownItem, SimpleDropdownSeparator } from '../../../shadcn/simpledropdown';
 import { SidebarMenuButton, useSidebar } from '../../../shadcn/sidebar';
 import { ChevronUp, HelpCircle, LogOut, ShoppingBag, User2, Settings } from 'lucide-react';
+
+
 const dropMenuItems = [
     {
         title: "Admin Panel",

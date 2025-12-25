@@ -45,7 +45,7 @@ const ProfileSidebar = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton inactive="true">
                             <Avatar className='size-6'>
-                                <AvatarImage src="https://github.com/shadcn.png" />
+                                <AvatarImage src="https://github.com/zaxel.png" />
                                 <AvatarFallback>{initials}</AvatarFallback>
                             </Avatar>
                             <span>{userFullName || "UR"}</span>
