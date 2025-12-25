@@ -19,7 +19,7 @@ const About = observer(() => {
     const cards = aboutPage.pageCards.slice().sort((a,b)=>a.id-b.id).map(card=>isContainBtns(aboutPage, card.button_id) && <Card key={card.id} {...card} />);
 
     if (aboutPage.loading) {
-        return <div className="flex-auto w-full h-full min-h-[80vh] flex justify-center items-center">
+        return <div className="flex-auto w-full h-[92dvh] flex justify-center items-center">
             <Spinner  className="w-8 h-8"/>
         </div>
     }

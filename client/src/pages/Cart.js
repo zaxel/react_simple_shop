@@ -68,7 +68,7 @@ const Cart = () => {
     }, [data])
 
     return (
-        <div className='w-full lg:w-4/5 m-auto flex-1 flex flex-col justify-center items-center py-12 gap-16 '>
+        <div className='w-full min-h-[92dvh] lg:w-4/5 m-auto flex-1 flex flex-col justify-center items-center py-12 gap-16 '>
             <h2 className='text-2xl font-medium'>Your Shopping Cart</h2>
             <div className='flex flex-col items-center lg:flex-row lg:gap-8 gap-16'>
                 {steps.map(({ id, title }) => {

@@ -66,7 +66,7 @@ const WishList = () => {
         return <ErrorBox error={error} />
 
     if (isLoading)
-        return <div className="flex justify-center items-center h-[75vh]"> <Spinner /></div>
+        return <div className="flex justify-center items-center h-full"> <Spinner className="size-6"/></div>
 
     return (
         <div className='sm:min-w-[30rem] w-full p-4 flex flex-col gap-4'>

@@ -39,7 +39,7 @@ const Address = () => {
         return <ErrorBox error={error}/>
     
     if(isLoading)
-        return <div className="flex justify-center items-center h-[75vh]"> <Spinner /></div>
+        return <div className="flex justify-center items-center h-full"> <Spinner className="size-6"/></div>
 
     const handleDelete = async (addressId) => {
         const result = await deleteAddress(userId, addressId);

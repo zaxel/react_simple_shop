@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 const Admin = () => {
     return (
-        <div className='account'>
+        <div className='account min-h-[92dvh]'>
             <AdminPanelNavbar />
             <Outlet />
         </div>

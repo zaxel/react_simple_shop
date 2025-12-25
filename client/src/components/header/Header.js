@@ -21,7 +21,7 @@ const Header = observer(() => {
     }
 
     return (
-        <header className="navbar navbar-dark bg-dark navbar-expand-lg z-10">
+        <header className="navbar navbar-dark bg-dark navbar-expand-lg z-10 flex-[1_0_8dvh]">
             <div className="container-fluid flex justify-between items-center flex-wrap gap-3">
                 <Link onClick={resetPageOptions} className="navbar-brand" to={SHOP_ROUTE}>Arazone</Link>
                 <nav>

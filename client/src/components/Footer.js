@@ -1,7 +1,8 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
 import { HELP_ROUTE, SHOP_ROUTE } from '../utils/consts/routes';
 import { Link } from 'react-router-dom';
 import { Globe } from 'lucide-react';
+import { observer } from 'mobx-react-lite';
 
 const Footer = () => {
     const scrollTop = () => {
@@ -10,7 +11,7 @@ const Footer = () => {
             behavior: 'smooth'
         })
     }
-
+    
     return (
         <footer className='text-navbar-text bg-dark'>
             <section className='h-14 bg-navbar-background px-4'>
@@ -125,11 +126,11 @@ const Footer = () => {
                 <div className='flex justify-center items-center gap-4'>
                     <div className="flex justify-center flex-grow-0 items-center gap-4 p-2 border border-white rounded-md"><Globe /> <span>English</span></div>
                     <div className="p-2 border border-white rounded-md">$ USD - U.S. Dollar</div>
-                    <div className="flex justify-center flex-grow-0 items-center gap-4 p-2 border border-white rounded-md"><img className='w-6 h-6' src="./usflag.png" alt="usa flag" /> <span>United States</span></div>
+                    <div className="flex justify-center flex-grow-0 items-center gap-4 p-2 border border-white rounded-md"><img className='w-6 h-6' src="/usflag.png" alt="usa flag" /> <span>United States</span></div>
                 </div>
             </section>
         </footer>
     );
 };
 
-export default Footer;
+export default observer(Footer);

@@ -13,19 +13,29 @@ import SellerDescription from '../components/device/SellerDescription';
 
 const DevicePage = () => {
 	const [device, setDevice] = useState({});
+	const [loading, setLoading] = useState(false);
 
 	let { id } = useParams();
 	useEffect(() => {
+		setLoading(true);
+		console.log('fetch')
 		fetchSingleDevice(id)
 			.then((data) => {
 				setDevice(data);
 			})
 			.catch((err) => {
 				console.log(err.message);
-			});
-	}, []);
+			})
+			.finally(()=>setLoading(false));
+	}, [id]);
 
 	if (device === null || device === 'error') return <ErrorPage />;
+	if(loading){
+		return <div className="flex-auto w-full h-[92dvh] flex justify-center items-center">
+					<Spinner  className="w-8 h-8"/>
+				</div>
+	}
+
 
 	return (
 		<div className="device">

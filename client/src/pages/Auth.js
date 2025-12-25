@@ -43,7 +43,7 @@ const Auth = observer(() => {
         }
     }
     return (
-        <div ref={authForm} className='auth h-full min-h-[80vh]'>
+        <div ref={authForm} className='auth h-[98dvh]'>
             <form className='auth__form'>
                 <h3 className='auth__title'>
                     {isLogin ? 'Login' : 'Sign Up'}

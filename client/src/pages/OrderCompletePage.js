@@ -44,7 +44,7 @@ function OrderCompletePage() {
     return () => clearTimeout(timeoutId);
   }, [sessionId, navigate]);
 
-  return <div className="flex-auto flex justify-center items-center text-xl font-medium">
+  return <div className="flex-auto flex justify-center items-center text-xl font-medium h-[92dvh]">
     {(status === 'LOADING')
       ? <div className="flex justify-center items-center gap-4"><Spinner className="w-5 h-5"/> <div>Checking payment status…</div></div>
       : (status === 'PAID')
