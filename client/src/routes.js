@@ -6,7 +6,6 @@ import Shop from "./pages/Shop";
 import ErrorPage from "./pages/ErrorPage";
 import About from "./pages/about/About";
 import Protected from "./pages/Protected";
-import AccountPage from "./pages/AccountPage";
 import Profile from "./pages/Profile";
 import Sample from "./pages/Sample";
 import CheckoutPage from "./pages/CheckoutPage";
@@ -19,12 +18,6 @@ import HelpFaq from "./components/help/FaqContainer";
 import WhoWe from "./pages/about/WhoWe";
 import Experience from "./pages/about/Experience";
 import TheBrands from "./pages/about/TheBrands";
-
-import Delivery from "./components/userProfile/Delivery";
-import Info from "./components/userProfile/Info";
-import Payment from "./components/userProfile/Payment";
-import Orders from "./components/userProfile/Orders";
-import AccountRouter from "./components/userProfile/AccountRouter";
 
 import OrdersAdminPanel from "./components/adminPanel/orders/OrdersAdminPanel";
 import UsersAdminPanel from "./components/adminPanel/users/UsersAdminPanel";
@@ -50,8 +43,7 @@ import RightCard from "./components/adminPanel/pages/about/RightCard";
 
 import { ADMIN_ROUTE, SHOP_ROUTE, ABOUT_ROUTE, HELP_ROUTE,
         LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE, ERROR_ROUTE, 
-        ACCOUNT_ROUTE, PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
-        ACCOUNT_INFO_ROUTE, ACCOUNT_DELIVERY_ROUTE, ACCOUNT_PAYMENT_ROUTE, ACCOUNT_ORDERS_ROUTE,
+        PROTECTED_ROUTE, SAMPLE_ROUTE, CHECKOUT_ROUTE,
         ADMIN_USER_ROUTE, ADMIN_ORDERS_ROUTE, ADMIN_DEVICES_ROUTE, ADMIN_TYPES_ROUTE, ADMIN_BRANDS_ROUTE, 
         ABOUT_CARD1_ROUTE, ABOUT_CARD2_ROUTE, ABOUT_CARD3_ROUTE, HELP_FAQ_ROUTE, ADMIN_PAGES_ROUTE, 
         ADMIN_APP_ROUTE, ADMIN_HELP_ROUTE, ADMIN_ABOUT_ROUTE, ABOUT_BUTTONS_ROUTE, ABOUT_BLOCKS_ROUTE, 
@@ -69,26 +61,6 @@ import ProfileRouter from "./components/profile/ProfileRouter";
 import WishList from "./components/profile/wishlist/WishList";
 import OrderCompletePage from "./pages/OrderCompletePage";
         
-
-export const userNavRoutes = [
-    {
-        path: ACCOUNT_INFO_ROUTE,
-        Component: Info
-    },
-    {
-        path: ACCOUNT_DELIVERY_ROUTE,
-        Component: Delivery
-    },
-    {
-        path: ACCOUNT_PAYMENT_ROUTE,
-        Component: Payment
-    },
-    {
-        path: ACCOUNT_ORDERS_ROUTE,
-        Component: Orders
-    },
-    
-];
 export const profileRoutes = [
     {
         path: PROFILE_INFO_ROUTE,
@@ -196,11 +168,6 @@ export const authRoutes = [
     {
         path: CHECKOUT_ROUTE,
         Component: CheckoutPage
-    },
-    {
-        path: ACCOUNT_ROUTE,
-        Component: AccountPage,
-        NestedComponent: AccountRouter
     },
     {
         path: PROFILE_ROUTE,
