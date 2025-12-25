@@ -46,7 +46,7 @@ const Shop = observer(() => {
                 <TypeBar />
                 <div className='shop__devices-cont'>
                     <BrandBar />
-                    <SearchBar setSearchParams={setSearchParams}/>
+                    {/* <SearchBar setSearchParams={setSearchParams}/> */}
                     <DeviceItems />
                     <PaginationCont currentStore={device} />
                 </div>
