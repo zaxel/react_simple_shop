@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
-import NavBar from "./components/NavBar";
+import Header from "./components/header/Header";
 import { observer } from "mobx-react-lite";
 import { useState, useContext, useEffect } from "react";
 import { Context } from ".";
@@ -43,7 +43,7 @@ const App = observer(() => {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <Header />
       <AppRouter />
       <Footer />
       <ShopToolTip />

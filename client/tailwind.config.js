@@ -18,12 +18,18 @@ module.exports = {
         },
 
         navbar: {
-          text: "hsl(var(--navbar-text))",
+          background: "hsl(var(--navbar-background))", 
+          text: {
+            DEFAULT:"hsl(var(--navbar-text))",
+            hover: "hsl(var(--navbar-text-hover))"
+          },
+
           icon: {
             DEFAULT:
             "hsl(var(--navbar-icon))",
             count: "hsl(var(--navbar-icon-count))",
-          }
+          },
+           
         },
 
         popover: {
