@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/react_simple_shop/static/css/main.b86fa739.css",
-    "main.js": "/react_simple_shop/static/js/main.fcc48dd9.js",
-    "static/media/card_example1.png": "/react_simple_shop/static/media/card_example1.2f760370ba94dff31765.png",
-    "static/media/card_example3.jpg": "/react_simple_shop/static/media/card_example3.8c3b46488630c51f83e3.jpg",
-    "static/media/card_example2.jpg": "/react_simple_shop/static/media/card_example2.d54728d2bd102e001c87.jpg",
-    "static/media/shop-hot.svg": "/react_simple_shop/static/media/shop-hot.5e6df3eb4e32a777c4f5d71b7ebb37ef.svg",
-    "static/media/star-fill-yellow-icon.svg": "/react_simple_shop/static/media/star-fill-yellow-icon.17e5fa5fbc45ef36b6d9.svg",
-    "static/media/shop-timer.svg": "/react_simple_shop/static/media/shop-timer.2c5b58dedf9c746e276b79a8a35c8ae8.svg",
-    "static/media/star-line-yellow-icon.svg": "/react_simple_shop/static/media/star-line-yellow-icon.f52d4e196b9839cde16c.svg",
-    "static/media/location-pointer.svg": "/react_simple_shop/static/media/location-pointer.39cdbacf0f2a401f54811e83f3aa965c.svg",
-    "index.html": "/react_simple_shop/index.html",
-    "static/media/shop-search.svg": "/react_simple_shop/static/media/shop-search.abae8212f6a13de17c8d9844fb266d7e.svg",
-    "static/media/search.svg": "/react_simple_shop/static/media/search.e5eb24b0703bcef3c116.svg",
-    "static/media/arrow-right.svg": "/react_simple_shop/static/media/arrow-right.b7104ff3b1c44dba050e802ca0703dbf.svg",
-    "main.b86fa739.css.map": "/react_simple_shop/static/css/main.b86fa739.css.map",
-    "main.fcc48dd9.js.map": "/react_simple_shop/static/js/main.fcc48dd9.js.map"
+    "main.css": "/static/css/main.72c93a04.css",
+    "main.js": "/static/js/main.c5b70c9b.js",
+    "static/media/card_example1.png": "/static/media/card_example1.2f760370ba94dff31765.png",
+    "static/media/card_example3.jpg": "/static/media/card_example3.8c3b46488630c51f83e3.jpg",
+    "static/media/card_example2.jpg": "/static/media/card_example2.d54728d2bd102e001c87.jpg",
+    "static/media/shop-hot.svg": "/static/media/shop-hot.5e6df3eb4e32a777c4f5d71b7ebb37ef.svg",
+    "static/media/star-fill-yellow-icon.svg": "/static/media/star-fill-yellow-icon.e6203608bcd4107f5e4d.svg",
+    "static/media/shop-timer.svg": "/static/media/shop-timer.2c5b58dedf9c746e276b79a8a35c8ae8.svg",
+    "static/media/star-line-yellow-icon.svg": "/static/media/star-line-yellow-icon.f52d4e196b9839cde16c.svg",
+    "static/media/location-pointer.svg": "/static/media/location-pointer.39cdbacf0f2a401f54811e83f3aa965c.svg",
+    "index.html": "/index.html",
+    "static/media/shop-search.svg": "/static/media/shop-search.abae8212f6a13de17c8d9844fb266d7e.svg",
+    "static/media/search.svg": "/static/media/search.e5eb24b0703bcef3c116.svg",
+    "static/media/arrow-right.svg": "/static/media/arrow-right.b7104ff3b1c44dba050e802ca0703dbf.svg",
+    "main.72c93a04.css.map": "/static/css/main.72c93a04.css.map",
+    "main.c5b70c9b.js.map": "/static/js/main.c5b70c9b.js.map"
   },
   "entrypoints": [
-    "static/css/main.b86fa739.css",
-    "static/js/main.fcc48dd9.js"
+    "static/css/main.72c93a04.css",
+    "static/js/main.c5b70c9b.js"
   ]
 }
