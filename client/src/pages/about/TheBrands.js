@@ -1,4 +1,4 @@
-﻿import React, {useEffect ,useContext} from 'react';
+﻿import React, { useEffect, useContext } from 'react';
 import AboutSubPage from '../../components/about/AboutSubPage';
 import AboutBlocks from '../../components/about/AboutBlocks';
 import { fetchCard } from '../../utils/staticPages/aboutPage';
@@ -12,20 +12,20 @@ const TheBrands = observer(() => {
     const card = aboutPage.currentCard;
     const cardId = 2;
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchCard(aboutPage, cardId);
 
     }, [])
     if (aboutPage.loading) {
-        return( <div className="spinner">
-            <Spinner animation="border" />
-        </div>)
+        return <div className="flex-auto w-full h-full min-h-[80vh] flex justify-center items-center">
+            <Spinner className="w-8 h-8" />
+        </div>
     }
     return (
         <div className='sub-about'>
             <div className='sub-about__container'>
                 <AboutSubPage {...card}>
-                    <AboutBlocks blocksData={aboutPage.cardBlocks}/>
+                    <AboutBlocks blocksData={aboutPage.cardBlocks} />
                 </AboutSubPage>
             </div>
         </div>

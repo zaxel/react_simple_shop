@@ -33,12 +33,10 @@ const Shop = observer(() => {
         fetchPage(device);
     }, [device.activePage, device.brandActive, device.typeActive, device.searchKey])
 
-    if (device.loading) {
-        return (
-            <div className="spinner spinner__shop">
-                <Spinner animation="border" />
-            </div>
-        )
+    if (device.loading) {   
+        return <div className="flex-auto w-full h-full min-h-[80vh] flex justify-center items-center">
+            <Spinner className="w-8 h-8" />
+        </div>
     }
     return (
         <div className='shop'>

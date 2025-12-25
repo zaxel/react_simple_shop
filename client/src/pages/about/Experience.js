@@ -15,9 +15,9 @@ const Experience = observer(() => {
         fetchCard(aboutPage, cardId);
     }, [])
     if (aboutPage.loading) {
-        return( <div className="spinner">
-            <Spinner animation="border" />
-        </div>)
+        return <div className="flex-auto w-full h-full min-h-[80vh] flex justify-center items-center">
+                    <Spinner  className="w-8 h-8"/>
+                </div>
     }
     return (
         <div className='sub-about'>
