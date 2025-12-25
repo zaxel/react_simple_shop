@@ -78,11 +78,9 @@ const TypesAdminPanel = observer(() => {
     })
 
     if (types.loading) {
-        return (
-            <div className="spinner">
-                <Spinner animation="border" />
-            </div>
-        )
+        return <div className="flex-auto w-full h-[92dvh] flex justify-center items-center">
+                    <Spinner  className="w-8 h-8"/> 
+                </div>
     }
     return (
         <div className='user-admin__main account__orders acc-orders'>
