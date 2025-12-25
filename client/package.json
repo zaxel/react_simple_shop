@@ -2,7 +2,7 @@
   "name": "client_store_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://localhost:3000/",
+  "homepage": "",
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@popperjs/core": "^2.11.4",
