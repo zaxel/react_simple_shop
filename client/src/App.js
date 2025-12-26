@@ -11,7 +11,7 @@ import ShopToolTip from "./components/ShopToolTip";
 import { isActivated } from "./utils/check/isActivated";
 import { setUserData } from "./utils/setUserData";
 import setWishList from "./utils/setWishList";
-
+const basename = process.env.PUBLIC_URL;
 
 const App = observer(() => {
   const { user, cart, history } = useContext(Context);
@@ -42,7 +42,7 @@ const App = observer(() => {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Header />
       <AppRouter />
       <Footer />
