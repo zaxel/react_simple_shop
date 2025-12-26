@@ -11,7 +11,12 @@ class UserController {
             }
             const { email, password, role } = req.body;
             const userData = await userService.registration(email, password, role);
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true });
+            res.cookie('refreshToken', userData.refreshToken, {
+                httpOnly: true,
+                maxAge: process.env.AUTH_COOKIE_MAX_AGE,
+                sameSite: 'none',                  // allow cross-site requests
+                secure: process.env.NODE_ENV === 'production',
+            });
             return res.json(userData);
         } catch (e) {
             next(ApiError.badRequest(e.message + ': could not complete registration.'));
@@ -21,7 +26,12 @@ class UserController {
         try {
             const { email, password } = req.body;
             const userData = await userService.login(email, password);
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true });
+            res.cookie('refreshToken', userData.refreshToken, {
+                httpOnly: true,
+                maxAge: process.env.AUTH_COOKIE_MAX_AGE,
+                sameSite: 'none',                  // allow cross-site requests
+                secure: process.env.NODE_ENV === 'production',
+            });
             return res.json(userData);
         } catch (e) {
             next(ApiError.badRequest(e.message + ': could not complete login.'));
@@ -52,7 +62,12 @@ class UserController {
         try {
             const { refreshToken } = req.cookies;
             const userData = await userService.refresh(refreshToken);
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: process.env.AUTH_COOKIE_MAX_AGE, httpOnly: true });
+            res.cookie('refreshToken', userData.refreshToken, {
+                httpOnly: true,
+                maxAge: process.env.AUTH_COOKIE_MAX_AGE,
+                sameSite: 'none',                  // allow cross-site requests
+                secure: process.env.NODE_ENV === 'production',
+            });
             return res.json(userData);
         } catch (e) {
             next(ApiError.badRequest(e.message + ': could not refresh tokens.'));
