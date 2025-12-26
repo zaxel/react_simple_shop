@@ -5,6 +5,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "start": "npm start --prefix server"
+    "start": "npm start --prefix server",
+    "heroku-postbuild": "npm install --prefix server"
   }
 }
