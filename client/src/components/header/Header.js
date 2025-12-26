@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../..';
-import { SHOP_ROUTE, REGISTRATION_ROUTE, ADMIN_ROUTE, ABOUT_ROUTE, HELP_ROUTE, PROTECTED_ROUTE } from '../../utils/consts/routes';
+import { SHOP_ROUTE, ADMIN_ROUTE, ABOUT_ROUTE, HELP_ROUTE, PROTECTED_ROUTE, LOGIN_ROUTE } from '../../utils/consts/routes';
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import WishListIcon from "./WishListIcon";
 import NotificationIcon from "./NotificationIcon";
@@ -59,7 +59,7 @@ const Header = observer(() => {
                     </li>}
 
                     {!user.isAuth && <li className="nav-item">
-                        <button onClick={() => navigate(REGISTRATION_ROUTE)} className='btn btn-outline-secondary'>Sigh In</button>
+                        <button onClick={() => navigate(LOGIN_ROUTE)} className='btn btn-outline-secondary'>Sigh In</button>
                     </li>}
                     {user.isSuperUser && <li className="nav-item">
                         <button onClick={() => navigate(ADMIN_ROUTE)} className='btn btn-outline-secondary'>Admin panel</button>

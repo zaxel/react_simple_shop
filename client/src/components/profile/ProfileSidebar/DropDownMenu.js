@@ -36,8 +36,8 @@ const DropDownMenu = () => {
     const surName = user.user?.surname || "";   
     const userFullName =  (!firstName && !surName) ? "User" : `${firstName} ${surName}`;
 
-    const onLogoutPressed = () => {
-        logoutOnServer();
+    const onLogoutPressed = async() => {
+        await logoutOnServer();
         logoutOnClient(cart, user);
         navigate(LOGIN_ROUTE);
     }

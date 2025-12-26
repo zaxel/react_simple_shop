@@ -15,7 +15,6 @@ const Auth = observer(() => {
     const params = useLocation();
     const fromPath = history.lastPath + BASE_ROUTE;
 
-
     let isLogin = params.pathname === LOGIN_ROUTE;
     const authForm = useRef(null);
     const [email, setEmail] = useState('');
@@ -36,7 +35,7 @@ const Auth = observer(() => {
             await setUserData(user, authUser);
             await setWishList(user, history); 
             isActivated(user); 
-            navigate(BASE_ROUTE+fromPath);
+            navigate(BASE_ROUTE+(fromPath==="/login" ? "/" : fromPath));
         } catch (e) {
             console.log(e)
             alert(e.message);

@@ -40,8 +40,8 @@ const ProfileIcon = () => {
         },
     ]
 
-    const onLogoutPressed = () => {
-        logoutOnServer();
+    const onLogoutPressed = async () => {
+        await logoutOnServer();
         logoutOnClient(cart, user);
         navigate(LOGIN_ROUTE);
     }
