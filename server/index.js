@@ -1,4 +1,7 @@
 ﻿require('dotenv').config();
+console.log('Stripe key is', process.env.STRIPE_SECRET_KEY ? 'secret FOUND' : 'secret MISSING');
+console.log('Stripe key is', process.env.CLIENT_URL ? 'CLIENT_URL FOUND' : 'CLIENT_URL MISSING');
+console.log('Stripe key is', process.env.SMTP_HOST ? 'SMTP_HOST FOUND' : 'SMTP_HOST MISSING');
 const searchable = require('./migrations/search/searchable');
 const express = require('express');
 const sequelize = require('./db');
@@ -32,7 +35,6 @@ app.use(errorHandler);
 
 
 const start = async()=>{
-    console.log('Stripe key is', process.env.STRIPE_SECRET_KEY ? 'FOUND' : 'MISSING');
     try{
         await sequelize.authenticate();
         if (process.env.DB_SYNC === 'true')
