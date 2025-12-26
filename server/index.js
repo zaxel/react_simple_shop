@@ -21,7 +21,7 @@ const webhooksRouter = require('./routes/webhooksRouter');
 const app = express();
 app.use(cookieParser());
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_CORS_URL, 
     credentials: true,
 }));
 app.use(express.static(path.resolve(__dirname, 'static')));
