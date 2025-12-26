@@ -15,7 +15,7 @@ class UserController {
                 httpOnly: true,
                 maxAge: process.env.AUTH_COOKIE_MAX_AGE,
                 sameSite: 'none',                  // allow cross-site requests
-                secure: process.env.NODE_ENV === 'production',
+                secure: true,
             });
             return res.json(userData);
         } catch (e) {
@@ -30,7 +30,7 @@ class UserController {
                 httpOnly: true,
                 maxAge: process.env.AUTH_COOKIE_MAX_AGE,
                 sameSite: 'none',                  // allow cross-site requests
-                secure: process.env.NODE_ENV === 'production',
+                secure: true,
             });
             return res.json(userData);
         } catch (e) {
@@ -66,7 +66,7 @@ class UserController {
                 httpOnly: true,
                 maxAge: process.env.AUTH_COOKIE_MAX_AGE,
                 sameSite: 'none',                  // allow cross-site requests
-                secure: process.env.NODE_ENV === 'production',
+                secure: true,
             });
             return res.json(userData);
         } catch (e) {
