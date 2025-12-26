@@ -32,6 +32,7 @@ app.use(errorHandler);
 
 
 const start = async()=>{
+    console.log('Stripe key is', process.env.STRIPE_SECRET_KEY ? 'FOUND' : 'MISSING');
     try{
         await sequelize.authenticate();
         if (process.env.DB_SYNC === 'true')
