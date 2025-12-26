@@ -1,0 +1,10 @@
+﻿{
+  "name": "react-simple-shop-root",
+  "private": true,
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "npm start --prefix server"
+  }
+}
