@@ -202,7 +202,7 @@ class OrderService {
                             coupon: couponId,
                         },
                     ],
-                    return_url: `${process.env.CLIENT_URL}/order/complete?session_id={CHECKOUT_SESSION_ID}`,
+                    return_url: `${process.env.CLIENT_URL}/#/order/complete?session_id={CHECKOUT_SESSION_ID}`,
 
                     payment_intent_data: {
                         metadata: {

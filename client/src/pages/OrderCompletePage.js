@@ -1,10 +1,13 @@
-﻿import { useEffect, useState } from "react";
+﻿import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { resolveBySession } from "../http/orderAPI";
 import { Spinner } from "../shadcn/spinner";
 import { PROFILE_ORDERS_ROUTE } from "../utils/consts/routes";
+import { Context } from "..";
+import { clearLocalStoreCartSnapshot } from "../utils/cart/localStoreCartSnapshot";
 
 function OrderCompletePage() {
+  const { cart } = useContext(Context);
   const MAX_ATTEMPTS = 6;
   const POLL_INTERVAL = 1500;
   const [status, setStatus] = useState('LOADING');
@@ -23,6 +26,8 @@ function OrderCompletePage() {
         setStatus(res.status);
 
         if (res.status === 'PAID') {
+          cart.clearCart(true);
+          clearLocalStoreCartSnapshot();
           setTimeout(() => navigate(PROFILE_ORDERS_ROUTE), 2000);
           return;
         }

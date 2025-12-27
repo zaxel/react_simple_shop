@@ -18,7 +18,6 @@ const DevicePage = () => {
 	let { id } = useParams();
 	useEffect(() => {
 		setLoading(true);
-		console.log('fetch')
 		fetchSingleDevice(id)
 			.then((data) => {
 				setDevice(data);

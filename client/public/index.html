@@ -15,16 +15,6 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script type="text/javascript">
-      (function () {
-        const redirect = sessionStorage.redirect;
-        if (redirect) {
-          delete sessionStorage.redirect;
-          const url = new URL(redirect);
-          window.history.replaceState(null, null, url.pathname);
-        }
-      })();
-    </script>
     <div id="app"></div>
   </body>
 </html>

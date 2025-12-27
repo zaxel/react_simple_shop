@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Header from "./components/header/Header";
 import { observer } from "mobx-react-lite";
@@ -42,12 +42,12 @@ const App = observer(() => {
   }
 
   return (
-    <BrowserRouter basename={basename}>
+    <HashRouter>
       <Header />
       <AppRouter />
       <Footer />
       <ShopToolTip />
-    </BrowserRouter>
+    </HashRouter>
   );
 });
 
