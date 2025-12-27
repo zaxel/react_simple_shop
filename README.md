@@ -1,17 +1,19 @@
 # React and Express.js Device Shop
 
-#### **This is not a commercial project, but a fully functional one.**
-A simple e-commerce shop built with **React** (frontend) and **Node.js + Express.js** (backend). Data is stored in a **PostgreSQL database**.
+#### **A portfolio project showcasing various e-commerce features and integrations.**
+A full-stack e-commerce application built with **React** (frontend) and **Node.js + Express.js** (backend), using **PostgreSQL** for data storage and **Stripe** for payment processing.
 
 While not all features are fully polished, the project provides the core functionality needed for online selling: 
 - product listings,
-- administration panel with full control over users, goods, orders, and static content, etc.
+- administration panel with full control over users, products, orders, and static content.
+- user profile with full account management: orders, addresses, personal info, and more.
+- payments processed via Stripe, including full order lifecycle handling.
 
 The project is deployed on **GitHub Pages** (frontend) and **Heroku** (backend). Images are stored externally (ImageDB / ImageKit).
 
 It also includes **powerful fuzzy search** (handles misspelled queries). Item search and FAQ search are implemented with slightly different approaches.
 
-Additionally, a **configurable eBay item parser** has been implemented. It is designed to be clever enough to bypass eBay’s anti-scraping mechanisms and avoid blocking during item parsing.
+Additionally, a **configurable eBay item parser** has been implemented with rate limiting and adaptive parsing.
 #### **Coded just for fun to experiment with different features and libraries.**
 *************************************************
 
@@ -20,15 +22,16 @@ Additionally, a **configurable eBay item parser** has been implemented. It is de
 
 - [x] **React** (class + functional components)
 - [x] **MobX**, JWT authorization, custom hooks
-- [x] **React Router** (BrowserRouter, Route, Switch)
+- [x] **React Router** (BrowserRouter, HashRouter, Route)
 - [x] **REST** API, Axios, localStorage, cookies
 - [x] **Node.js**, Express.js
 - [x] **PostgreSQL** + Sequelize
+- [x] **Stripe** Payment Processor
 - [x] **eBay items parser**
-- [x] **Admin panel** (users, goods, orders, etc.)
+- [x] **Admin panel, user profile** (users, products, orders, etc.)
 - [x] **Product listing, fuzzy search**, filtering, cart, CRUD operations
 - [x] **Static content pages** with admin constructor (includes drag-and-drop support)
-- [x] **Bootstrap**
+- [x] **Bootstrap, Shadcn/ui, Tailwind**
 - [x] **React Beautiful DnD** (drag-and-drop)
 - [x] and more...
 
@@ -39,6 +42,6 @@ Additionally, a **configurable eBay item parser** has been implemented. It is de
 
 **🔑 Sandbox account:**
 
-Email: ViewOnlyAdmin@gmail.com
+Email: sam@mail.com
 
 Password: 1111 
