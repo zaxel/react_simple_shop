@@ -1,8 +1,8 @@
 ﻿import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Context } from '..';
+import { Context } from '../..';
 
-const TypeBar = observer(() => {
+const TypeBarLg = observer(() => {
     const {device} = useContext(Context);
     return (
         <div className='typebar'>
@@ -28,4 +28,4 @@ const TypeBar = observer(() => {
     );
 });
 
-export default TypeBar;
+export default TypeBarLg;
