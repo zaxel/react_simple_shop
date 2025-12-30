@@ -5,6 +5,8 @@ import { Button } from '../../../shadcn/button';
 import useFetch from '../../../utils/http/useFetch';
 import { Context } from '../../..';
 import ErrorBox from '../../ErrorBox';
+import { useNavigate } from 'react-router-dom';
+import { DEVICE_ROUTE } from '../../../utils/consts/routes';
 
 
 const ordersUrl = "api/order/history";
@@ -14,6 +16,7 @@ const Orders = () => {
     const [orderDetailsId, setOrderDetailsId] = useState(null);
     const { user } = useContext(Context);
     const userId = user.user?.id;
+    const navigate = useNavigate();
 
     const [orders, setOrders] = useState({
         "count": 0,
@@ -80,6 +83,7 @@ const Orders = () => {
                 setOrderDetailsId={setOrderDetailsHandler} totalCount={orders.count}
                 limit={pagination.pageSize} pagination={pagination} setPagination={setPagination}
                 sorting={sorting} setSorting={setSorting} isLoading={isLoading}
+                onRowClick={(device) => navigate(DEVICE_ROUTE + '/' + device.deviceId)}
             />
         </div>
     );

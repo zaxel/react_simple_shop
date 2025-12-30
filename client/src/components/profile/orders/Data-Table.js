@@ -16,6 +16,7 @@ export function DataTable({
     setOrderDetailsId, 
     totalCount, 
     limit,
+    onRowClick,
     pagination, 
     setPagination, 
     sorting, 
@@ -73,8 +74,10 @@ export function DataTable({
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
+                                    className={orderDetailsId && "cursor-pointer"}
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
+                                    onClick={orderDetailsId ? () => onRowClick?.(row.original) : null}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell
