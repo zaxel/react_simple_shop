@@ -44,7 +44,7 @@ const Header = observer(() => {
                     </ul>
                 </nav>
 
-                <ul className="navbar-nav navbar-user-data-cont flex-row justify-center items-center gap-8 xl:order-3">
+                <ul className="navbar-nav navbar-user-data-cont flex-row justify-center items-center z-10 gap-8 xl:order-3">
                     <li className="nav-item">
                         <ShoppingCartIcon history={history} isAuth={user.isAuth} itemsCount={cart.itemsCount} />
                     </li>
