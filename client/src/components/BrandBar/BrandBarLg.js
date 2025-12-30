@@ -1,8 +1,8 @@
 ﻿import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
-import { Context } from '..';
+import { Context } from '../..';
 
-const BrandBar = observer(() => {
+const BrandBarLg = observer(() => {
     const {device} = useContext(Context);
     return (
         <div className='brandBar'>
@@ -27,4 +27,4 @@ const BrandBar = observer(() => {
     );
 });
 
-export default BrandBar;
+export default BrandBarLg;

@@ -1,6 +1,4 @@
 ﻿import React, { useContext, useEffect } from 'react';
-import TypeBar from '../components/TypeBar';
-import BrandBar from '../components/BrandBar';
 import DeviceItems from '../components/device/DeviceItems';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
@@ -11,6 +9,10 @@ import { Spinner } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 import { getQueryParamsString, setQueryParamsString } from '../utils/http/queryParams';
 import SearchBar from '../components/SearchBar';
+import TypeBarLg from '../components/TypeBar/TypeBarLg';
+import TypeBarSm from '../components/TypeBar/TypeBarSm';
+import BrandBarLg from '../components/BrandBar/BrandBarLg';
+import BrandBarSm from '../components/BrandBar/BrandBarSm';
 
 const Shop = observer(() => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -41,9 +43,21 @@ const Shop = observer(() => {
     return (
         <div className='shop'>
             {device.devices.rows && <div className='shop__container'>
-                <TypeBar />
+                <div className='hidden lg:block'>
+                    <TypeBarLg />
+                </div> 
                 <div className='shop__devices-cont'>
-                    <BrandBar />
+                    <div className='flex justify-start items-center gap-6'>
+                        <div className='lg:hidden'>
+                            <TypeBarSm />
+                        </div>
+                        <div className='hidden lg:block'>
+                            <BrandBarLg />
+                        </div>
+                        <div className='lg:hidden'>
+                            <BrandBarSm />
+                        </div>
+                    </div>
                     {/* <SearchBar setSearchParams={setSearchParams}/> */}
                     <DeviceItems />
                     <PaginationCont currentStore={device} />
