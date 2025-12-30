@@ -10,6 +10,8 @@ import { deleteWishItem } from "../../../http/userAPI";
 import useFetch from "../../../utils/http/useFetch";
 import { Spinner } from "../../../shadcn/spinner";
 import ErrorBox from "../../ErrorBox";
+import { useNavigate } from "react-router-dom";
+import { DEVICE_ROUTE } from "../../../utils/consts/routes";
 
 const WishList = () => {
     const [sortBy, setSortBy] = useState("date");
@@ -17,6 +19,7 @@ const WishList = () => {
     const { user } = useContext(Context);
     const userId = user.user?.id;
     const url = userId ? `api/user/${userId}/wishitems` : null;
+    const navigate = useNavigate();
 
     const { data, error, isLoading } = useFetch(url, null, true);
 
@@ -102,7 +105,8 @@ const WishList = () => {
                     </p>
                 )}
                 {sortedWishItems.map(({ id, img, name, price, rate, brand, createdAt, deviceId }) => {
-                    return <div key={id} className='bg-card sm:w-60 w-full h-[340px] p-2 rounded-lg'>
+                    return <div key={id} className='bg-card sm:w-60 w-full h-[340px] p-2 rounded-lg cursor-pointer hover:bg-gray-100'
+                                onClick={()=>navigate(DEVICE_ROUTE + '/' + deviceId)}>
                         <img className="h-auto max-w-full w-full aspect-video mb-3 object-cover" src={img} alt={`${brand} ${name}`} />
                         <div className="flex flex-col h-44">
                             <div>
